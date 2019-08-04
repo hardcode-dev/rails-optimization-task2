@@ -1,6 +1,5 @@
 require 'benchmark/ips'
-
-require_relative '../../task-1'
+require_relative '../../task-2'
 
 Benchmark.ips do |x|
   # The default is :stats => :sd, which doesn't have a configurable confidence

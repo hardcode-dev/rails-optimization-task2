@@ -1,6 +1,6 @@
 require 'benchmark'
 
-require_relative '../../task-1'
+require_relative '../../task-2'
 
 time = Benchmark.realtime do |x|
   work('../../data_large.txt')

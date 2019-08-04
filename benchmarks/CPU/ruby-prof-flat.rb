@@ -1,5 +1,5 @@
 require 'ruby-prof'
-require_relative '../../task-1'
+require_relative '../../task-2'
 
 RubyProf.measure_mode = RubyProf::WALL_TIME
 

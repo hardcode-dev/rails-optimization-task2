@@ -9,4 +9,4 @@ result = RubyProf.profile do
 end
 
 printer = RubyProf::FlatPrinter.new(result)
-printer.print(File.open("flat-100000.txt", "w+"))
+printer.print(File.open("reports/flat.txt", "w+"))

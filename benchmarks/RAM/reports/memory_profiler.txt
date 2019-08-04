@@ -1,0 +1,801 @@
+Total allocated: 1270143 bytes (16825 objects)
+Total retained:  162245 bytes (1271 objects)
+
+allocated memory by gem
+-----------------------------------
+    567934  other
+    472672  rubygems
+    135196  multi_json-1.13.1
+     54317  json
+     21144  set
+     14240  x86_64-linux
+      2536  singleton
+      2104  ostruct
+
+allocated memory by file
+-----------------------------------
+    567894  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+    212445  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb
+    206100  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+    129196  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb
+     49309  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb
+     26079  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
+     21144  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+     13120  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/json/ext/generator.so
+      9424  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+      5520  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/util.rb
+      3392  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+      3360  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+      2808  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/version.rb
+      2536  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb
+      2296  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapter.rb
+      2104  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/ostruct.rb
+      2016  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+      1736  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb
+      1496  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/generic_object.rb
+      1280  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_gem.rb
+      1232  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_gem.rb
+      1120  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/json/ext/parser.so
+      1088  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb
+       920  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json.rb
+       880  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+       704  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/ext.rb
+       464  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/options.rb
+       240  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+       200  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/defaults.rb
+        40  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/benchmarks/RAM/memory_profiler.rb
+
+allocated memory by location
+-----------------------------------
+    236880  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+    203080  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+    127212  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:19
+    107883  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:322
+     52560  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:321
+     47046  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:9
+     35200  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:61
+     33760  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:29
+     27999  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:327
+     25224  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:18
+     21256  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:34
+     20000  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:11
+     19344  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:61
+     19344  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+     16960  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+     16880  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:42
+     16880  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+     16512  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:62
+     14968  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:64
+     13120  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/json/ext/generator.so:0
+     12939  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:71
+     11600  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:37
+     11600  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:40
+     10608  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:326
+      9045  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:118
+      8640  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:49
+      8544  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:5
+      8264  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:263
+      7264  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:94
+      6920  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:349
+      6880  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:338
+      6240  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:35
+      6240  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:36
+      6084  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:72
+      4696  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:60
+      4098  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/util.rb:111
+      3696  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:6
+      3120  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:12
+      3120  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
+      2676  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:91
+      2208  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/version.rb:2
+      2112  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:96
+      2024  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/ostruct.rb:75
+      2016  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:147
+      1680  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:99
+      1600  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:387
+      1480  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:6
+      1456  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb:123
+      1336  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/generic_object.rb:71
+      1248  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:24
+
+allocated memory by class
+-----------------------------------
+    862083  String
+    205968  Array
+     94056  File
+     40576  Hash
+     26600  MatchData
+     15344  Class
+     11232  Module
+      9471  Regexp
+      1392  Thread::Backtrace
+       765  JSON::Ext::Generator::State
+       640  Gem::Dependency
+       512  Enumerator
+       480  Gem::Requirement
+       320  Proc
+       288  Thread::Mutex
+       216  LoadError
+       120  Float
+        40  MultiJson::Adapters::JsonGem
+        40  Set
+
+allocated objects by gem
+-----------------------------------
+      8487  other
+      4679  rubygems
+      2202  multi_json-1.13.1
+      1002  json
+       347  set
+        95  x86_64-linux
+         9  singleton
+         4  ostruct
+
+allocated objects by file
+-----------------------------------
+      8486  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+      2242  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+      2160  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb
+      1964  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb
+       980  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb
+       347  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+       151  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
+        79  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/json/ext/generator.so
+        60  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+        60  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+        60  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/util.rb
+        52  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+        24  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_gem.rb
+        22  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+        21  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb
+        16  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/json/ext/parser.so
+        15  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json.rb
+        13  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapter.rb
+        12  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+        10  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/version.rb
+         9  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb
+         7  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/generic_object.rb
+         7  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb
+         6  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+         5  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/ext.rb
+         5  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_gem.rb
+         5  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/defaults.rb
+         4  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/ostruct.rb
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/options.rb
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/benchmarks/RAM/memory_profiler.rb
+
+allocated objects by location
+-----------------------------------
+      3922  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+      2153  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:19
+      1905  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+      1314  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:322
+       880  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:61
+       844  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:29
+       502  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:9
+       500  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:11
+       438  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:321
+       422  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:42
+       422  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+       306  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:327
+       303  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:62
+       234  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:61
+       234  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+       225  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:64
+       173  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:349
+       172  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:338
+       157  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:34
+       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:35
+       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:36
+       106  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+       102  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:326
+        79  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/json/ext/generator.so:0
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:12
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:37
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:40
+        54  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:49
+        51  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:118
+        49  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:71
+        39  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:263
+        36  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/util.rb:111
+        28  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:91
+        27  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:37
+        24  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:46
+        24  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:96
+        16  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/json/ext/parser.so:0
+        16  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_gem.rb:59
+        16  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:59
+        16  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:387
+        14  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:99
+        14  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb:123
+        14  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:318
+        12  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:24
+        12  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:72
+        12  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:73
+        12  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:83
+        12  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:124
+        12  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:147
+        12  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/util.rb:109
+
+allocated objects by class
+-----------------------------------
+     14687  String
+      1824  Array
+       104  Hash
+        95  MatchData
+        24  Class
+        17  File
+        17  Module
+        12  Gem::Requirement
+        10  Regexp
+         8  Gem::Dependency
+         4  Enumerator
+         4  JSON::Ext::Generator::State
+         4  Proc
+         4  Thread::Mutex
+         3  Float
+         3  LoadError
+         3  Thread::Backtrace
+         1  MultiJson::Adapters::JsonGem
+         1  Set
+
+retained memory by gem
+-----------------------------------
+    103824  other
+     20142  multi_json-1.13.1
+     11636  x86_64-linux
+     11045  json
+     10998  rubygems
+      2536  singleton
+      2064  ostruct
+
+retained memory by file
+-----------------------------------
+    103824  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+     15390  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb
+     10876  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/json/ext/generator.so
+      9200  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb
+      6797  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb
+      2536  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb
+      2288  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/version.rb
+      2064  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/ostruct.rb
+      1976  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapter.rb
+      1376  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/generic_object.rb
+      1152  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_gem.rb
+      1078  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+       928  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb
+       760  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/json/ext/parser.so
+       584  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/ext.rb
+       464  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/options.rb
+       400  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+       232  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json.rb
+       160  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+       160  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+
+retained memory by location
+-----------------------------------
+     25152  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:18
+     21216  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:34
+     16880  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+     13446  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:19
+     13104  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:61
+     13104  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+     10876  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/json/ext/generator.so:0
+      9200  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+      6104  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:64
+      4528  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:62
+      3656  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:6
+      2208  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/version.rb:2
+      2024  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/ostruct.rb:75
+      1480  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:6
+      1336  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/generic_object.rb:71
+      1208  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapter.rb:49
+      1152  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_gem.rb:10
+      1128  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:22
+      1016  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:107
+       940  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:91
+       760  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/json/ext/parser.so:0
+       632  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb:112
+       608  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb:96
+       584  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/ext.rb:6
+       584  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb:172
+       584  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:23
+       544  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:123
+       544  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:133
+       496  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:116
+       496  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:120
+       496  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:127
+       464  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/options.rb:26
+       456  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb:133
+       456  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapter.rb:6
+       280  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:263
+       232  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:303
+       232  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:365
+       232  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json.rb:138
+       232  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapter.rb:38
+       232  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:6
+       232  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb:12
+       232  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb:26
+       232  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb:6
+       232  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb:7
+       216  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb:135
+       185  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:76
+       180  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:69
+       176  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:68
+       138  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:84
+       120  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:300
+
+retained memory by class
+-----------------------------------
+    101600  String
+     24304  Hash
+     15344  Class
+     11232  Module
+      7144  Array
+      1544  Regexp
+       541  JSON::Ext::Generator::State
+       216  Thread::Mutex
+       120  Float
+        80  Gem::Requirement
+        80  Proc
+        40  MultiJson::Adapters::JsonGem
+
+retained objects by gem
+-----------------------------------
+       895  other
+       178  rubygems
+        89  multi_json-1.13.1
+        51  x86_64-linux
+        46  json
+         9  singleton
+         3  ostruct
+
+retained objects by file
+-----------------------------------
+       895  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+       157  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb
+        73  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb
+        44  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/json/ext/generator.so
+        37  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb
+         9  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb
+         8  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+         7  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/json/ext/parser.so
+         6  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapter.rb
+         5  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+         4  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/generic_object.rb
+         4  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb
+         4  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+         4  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+         3  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/version.rb
+         3  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/ostruct.rb
+         3  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_gem.rb
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/ext.rb
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/options.rb
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json.rb
+
+retained objects by location
+-----------------------------------
+       422  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+       157  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:34
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:61
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:62
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:64
+        67  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:19
+        44  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/json/ext/generator.so:0
+         7  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/json/ext/parser.so:0
+         7  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:91
+         3  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:107
+         3  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:300
+         3  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:362
+         3  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:92
+         3  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:96
+         3  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/generic_object.rb:71
+         3  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb:135
+         3  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapter.rb:49
+         3  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:22
+         3  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_gem.rb:10
+         3  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1035
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:6
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:116
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:120
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:123
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:127
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:133
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/ext.rb:6
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/ostruct.rb:75
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb:112
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:23
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/options.rb:26
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:124
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:64
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:263
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:372
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:387
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:12
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:18
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:100
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:102
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:104
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:23
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:303
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:365
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:6
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:68
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:69
+
+retained objects by class
+-----------------------------------
+      1024  String
+        99  Array
+        91  Hash
+        24  Class
+        17  Module
+         3  Float
+         3  JSON::Ext::Generator::State
+         3  Regexp
+         3  Thread::Mutex
+         2  Gem::Requirement
+         1  MultiJson::Adapters::JsonGem
+         1  Proc
+
+
+Allocated String Report
+-----------------------------------
+       844  "session"
+       422  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+       422  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:42
+
+       578  "user"
+       500  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:11
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+
+       502  ","
+       500  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+
+       444  "to_json"
+       440  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:61
+         4  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+
+       159  " "
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:61
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:78
+
+       156  "alwaysUsedChrome"
+       156  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:19
+
+       156  "browsers"
+       156  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:19
+
+       156  "dates"
+       156  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:19
+
+       156  "longestSession"
+       156  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:19
+
+       156  "min."
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:35
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:36
+
+       156  "sessionsCount"
+       156  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:19
+
+       156  "totalTime"
+       156  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:19
+
+       156  "usedIE"
+       156  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:19
+
+       109  "\n"
+       107  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:79
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:80
+
+       108  "0"
+        95  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+         4  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:104
+         3  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:387
+         3  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:388
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:61
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/version.rb:5
+
+        86  "1"
+        81  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:387
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:388
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/version.rb:5
+
+        78  ", "
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:62
+
+        78  "2"
+        75  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/version.rb:5
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:387
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:388
+
+        69  "3"
+        69  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+
+        67  "  #\n"
+        67  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+
+        59  "4"
+        59  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+
+        52  "#\n"
+        52  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+
+        46  "  end\n"
+        46  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+
+        46  "5"
+        46  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+
+        45  "6"
+        45  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+
+        42  "    end\n"
+        42  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+
+        42  "/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/benchmarks/RAM"
+        24  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/util.rb:111
+        12  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/util.rb:109
+         6  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:80
+
+        37  "7"
+        37  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+
+        27  "      end\n"
+        27  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+
+        25  "\\n\\nBUNDLED WITH\\n\\s{2,}([0-9]+(?>\\.[0-9a-zA-Z]+)*(-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?)\\n"
+        25  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:71
+
+        24  "/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/Gemfile.lock"
+         6  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:91
+         6  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:92
+         6  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:94
+         6  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:96
+
+        22  "8"
+        22  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+
+        21  "113 min."
+        14  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:19
+         7  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+        18  "/usr"
+        18  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+
+        18  "/usr/share"
+        18  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+
+        18  "/usr/share/rvm"
+        18  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+
+        18  "/usr/share/rvm/rubies"
+        18  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+
+        18  "/usr/share/rvm/rubies/ruby-2.6.3"
+        18  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+
+        18  "/usr/share/rvm/rubies/ruby-2.6.3/lib"
+        18  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+
+        18  "/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby"
+        18  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+
+        18  "72"
+        18  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+
+        17  ""
+         9  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:62
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:7
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:70
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:71
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:72
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/json/common.rb:73
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json.rb:158
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:19
+
+        17  "14"
+        16  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+        17  "INTERNET EXPLORER 23"
+        12  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:29
+         2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/gems/2.6.0/gems/multi_json-1.13.1/lib/multi_json/adapters/json_common.rb:19
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:62
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:338
+         1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:349
+
+        16  "52"
+        16  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+
+        16  "60"
+        12  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:61
+
+        15  "113"
+         8  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+         7  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+        15  "18"
+        15  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+
+        15  "37"
+        15  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+
+        15  "51"
+        15  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:10
+
+
+Retained String Report
+-----------------------------------
+         7  "113 min."
+         7  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+         5  "92 min."
+         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:61
+
+         4  "117 min."
+         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+         4  "118 min."
+         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+         4  "2017-05-31"
+         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         4  "60 min."
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:61
+
+         3  "103 min."
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+         3  "111 min."
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:61
+
+         3  "119 min."
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+         3  "2016-10-19"
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         3  "2017-05-07"
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         3  "2017-08-27"
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         3  "2017-12-08"
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         3  "2018-04-24"
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         3  "2018-05-03"
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         3  "2018-10-24"
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         3  "2018-10-31"
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         3  "90 min."
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:61
+
+         3  "98 min."
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+         2  "0 min."
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:61
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+         2  "100 min."
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:61
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+         2  "101 min."
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+         2  "106 min."
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+         2  "11 min."
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:61
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+         2  "114 min."
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+         2  "115 min."
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+         2  "116 min."
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+         2  "12 min."
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:61
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+
+         2  "143 min."
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:61
+
+         2  "2016-05-22"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-05-24"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-06-13"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-08-02"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-08-03"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-08-22"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-09-01"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-09-05"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-09-17"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-09-26"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-10-02"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-10-05"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-10-24"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-11-07"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-11-08"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-11-29"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-12-11"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-12-20"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2016-12-27"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2017-01-06"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50
+
+         2  "2017-02-06"
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:50

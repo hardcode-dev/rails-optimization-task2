@@ -1,0 +1,39 @@
+Measure Mode: memory
+Thread ID: 47251694836060
+Fiber ID: 47251695981440
+Total: 1176.000000
+Sort by: self_time
+
+ %self      total      self      wait     child     calls  name                           location
+ 49.66   1136.000   584.000     0.000   552.000        1   Object#work                    /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:4
+ 23.13    272.000   272.000     0.000     0.000        2  *Class#new                      
+ 13.61    200.000   160.000     0.000    40.000        1   <Class::IO>#foreach            
+  3.40     40.000    40.000     0.000     0.000        1   SystemCallError#initialize     
+  3.40     40.000    40.000     0.000     0.000        1   File#initialize                
+  3.40     80.000    40.000     0.000    40.000        1   <Class::IO>#new                
+  3.40   1176.000    40.000     0.000  1136.000        1   [global]#                      ./ruby-prof.rb:7
+  0.00      0.000     0.000     0.000     0.000        1   Exception#backtrace            
+  0.00      0.000     0.000     0.000     0.000        1   Exception#exception            
+  0.00      0.000     0.000     0.000     0.000        1   Exception#initialize           
+  0.00      0.000     0.000     0.000     0.000        1   NilClass#nil?                  
+  0.00      0.000     0.000     0.000     0.000        1   Hash#initialize                
+  0.00    232.000     0.000     0.000   232.000        1   Set#initialize                 /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:93
+  0.00      0.000     0.000     0.000     0.000        1   <Module::GC>#disable           
+
+* recursively called methods
+
+Columns are:
+
+  %self     - The percentage of time spent in this method, derived from self_time/total_time.
+  total     - The time spent in this method and its children.
+  self      - The time spent in this method.
+  wait      - The amount of time this method waited for other threads.
+  child     - The time spent in this method's children.
+  calls     - The number of times this method was called.
+  name      - The name of the method.
+  location  - The location of the method.
+
+The interpretation of method names is:
+
+  * MyObject#test - An instance method "test" of the class "MyObject"
+  * <Object:MyObject>#test - The <> characters indicate a method on a singleton class.

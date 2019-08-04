@@ -1,7 +1,4 @@
 data_large.txt
 .idea
-flat*
 result.json*
-benchmarks/data*
-benchmarks/**/flat*
 benchmarks/**/result*

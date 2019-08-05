@@ -4,18 +4,20 @@ require_relative '../../task-2'
 RubyProf.measure_mode = RubyProf::MEMORY
 
 result = RubyProf.profile do
-  GC.disable
   work('../../data-500.txt')
 end
 
 # printer = RubyProf::FlatPrinter.new(result)
-# printer.print(File.open("reports/flat.txt", "w+"))
-
-# printer = RubyProf::GraphPrinter.new(result)
-# printer.print(STDOUT, :min_percent => 2)
+# printer.print(File.open('report/flat.txt', 'w+'))
 #
-# printer = RubyProf::MultiPrinter.new(result)
+# printer = RubyProf::DotPrinter.new(result)
+# printer.print(File.open('report/graphviz.dot', 'w+'))
+#
+# printer = RubyProf::GraphHtmlPrinter.new(result)
+# printer.print(File.open('report/graph.html', 'w+'))
 
-printer = RubyProf::CallTreePrinter(result) #dont work  undefined method `CallTreePrinter' for RubyProf:Module
+# printer = RubyProf::CallStackPrinter.new(result)
+# printer.print(File.open('reports/profile.graph.html', 'w+'))
 
-printer.print(:path => ".", :profile => "profile")
+printer = RubyProf::CallTreePrinter.new(result)
+printer.print(path: 'reports', profile: 'profile')

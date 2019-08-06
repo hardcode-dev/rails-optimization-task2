@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'multi_json'
 require 'set'
 
-USER = 'user'.freeze
-SPLIT = ','.freeze
-MIN = 'min.'.freeze
-WS = ' '.freeze
-COMMA = ', '.freeze
-IE = /Internet Explorer/.freeze
-CHROME = /Chrome/.freeze
+USER = 'user'
+SPLIT = ','
+MIN = 'min.'
+WS = ' '
+COMMA = ', '
+IE = 'Internet Explorer'
+CHROME = 'Chrome'
 
 def work(file)
   filer   = File.new('result.json', 'w')
@@ -21,7 +23,7 @@ def work(file)
   end
 
   prepare_report
-  filer.write"#{MultiJson.dump(@report)}\n"
+  filer.write "#{MultiJson.dump(@report)}\n"
   filer.close
 end
 
@@ -37,13 +39,13 @@ end
 
 def make_report(line, user, is_user = false)
   if is_user
-    @report[:usersStats][user] = {sessionsCount:    0,
-                                 totalTime:        [0, MIN],
-                                 longestSession:   [0, MIN],
-                                 browsers:         [],
-                                 usedIE:           false,
-                                 alwaysUsedChrome: true,
-                                 dates:  []}
+    @report[:usersStats][user] = { sessionsCount: 0,
+                                   totalTime: [0, MIN],
+                                   longestSession: [0, MIN],
+                                   browsers: [],
+                                   usedIE: false,
+                                   alwaysUsedChrome: true,
+                                   dates: [] }
     @report[:totalUsers] += 1
   else
     cols = line.split(SPLIT).last(3)
@@ -52,8 +54,8 @@ def make_report(line, user, is_user = false)
 
     @report[:usersStats][user][:sessionsCount] += 1
     @report[:usersStats][user][:browsers] << browser(cols[0])
-    @report[:usersStats][user][:usedIE] = true if @report[:usersStats][user][:usedIE] || cols[0] =~ IE
-    @report[:usersStats][user][:alwaysUsedChrome] = false if !@report[:usersStats][user][:alwaysUsedChrome] || cols[0] !~ CHROME
+    @report[:usersStats][user][:usedIE] = true if @report[:usersStats][user][:usedIE] || cols[0].include?(IE)
+    @report[:usersStats][user][:alwaysUsedChrome] = false if !@report[:usersStats][user][:alwaysUsedChrome] || cols[0].include?(CHROME)
     @report[:usersStats][user][:dates] << cols[2].chomp
     @report[:usersStats][user][:totalTime][0] += cols[1].to_i
     @report[:usersStats][user][:longestSession][0] = cols[1].to_i if @report[:usersStats][user][:longestSession][0] < cols[1].to_i
@@ -71,6 +73,3 @@ def prepare_report
     user[:dates]          = user[:dates].sort.reverse
   end
 end
-
-# work('data_large.txt')
-# puts "MEMORY USAGE: #{`ps -o rss= -p #{Process.pid}`.to_i / 1024}"

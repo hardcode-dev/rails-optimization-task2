@@ -1,54 +1,53 @@
 Measure Mode: memory
-Thread ID: 47349879535980
-Fiber ID: 47349881685560
-Total: 670848.000000
+Thread ID: 47064279357800
+Fiber ID: 47064280592700
+Total: 630128.000000
 Sort by: self_time
 
  %self      total      self      wait     child     calls  name                           location
- 36.92  276224.000 247688.000     0.000 28536.000       22  *Kernel#gem_original_require    
- 20.46  137280.000 137280.000     0.000     0.000      505   String#split                   
-  6.08  40800.000 40800.000     0.000     0.000     1020   String#upcase                  
-  5.16  34600.000 34600.000     0.000     0.000        1   <Module::Oj>#dump              
-  5.03  226336.000 33736.000     0.000 192600.000      500   Object#make_report             /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:40
-  3.46  271416.000 23240.000     0.000 248176.000        1   <Class::IO>#foreach            
-  2.52  16880.000 16880.000     0.000     0.000      422   String#chomp                   
-  2.52  16880.000 16880.000     0.000     0.000      435   Array#last                     
-  1.97  324336.000 13224.000     0.000 311112.000       21  *Kernel#require                 /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:34
-  1.87  18800.000 12560.000     0.000  6240.000      314   Array#join                     
-  1.81  12120.000 12120.000     0.000     0.000      161   Array#sort                     
-  1.75  21368.000 11712.000     0.000  9656.000        1   Kernel#eval                    
-  1.03   6920.000  6920.000     0.000     0.000      424   Set#add                        /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:348
-  0.99   6640.000  6640.000     0.000     0.000      189   <Class::File>#file?            
-  0.98  16680.000  6560.000     0.000 10120.000      112  *Array#any?                     
-  0.93   6240.000  6240.000     0.000     0.000      156   Integer#to_s                   
-  0.87   5840.000  5840.000     0.000     0.000       73   <Class::File>#join             
-  0.54   3600.000  3600.000     0.000     0.000       90   Array#reverse                  
-  0.44  14440.000  2984.000     0.000 11456.000       40  *Class#new                      
-  0.31   2080.000  2080.000     0.000     0.000       26   Array#flatten                  
-  0.27   1840.000  1840.000     0.000     0.000        6   String#scan                    
-  0.25   3600.000  1680.000     0.000  1920.000       14   <Class::Gem::Requirement>#parse /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:97
-  0.21   1440.000  1440.000     0.000     0.000       12   Enumerable#drop_while          
-  0.21   1440.000  1440.000     0.000     0.000       15   Regexp#=~                      
-  0.21   9616.000  1432.000     0.000  8184.000        1   Gem::Specification#initialize  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2046
-  0.18   2040.000  1240.000     0.000   800.000       15   Array#map                      
-  0.16   1760.000  1040.000     0.000   720.000        6   <Class::Dir>#chdir             
-  0.14   4040.000   920.000     0.000  3120.000        2   <Module::Gem::BundlerVersionFinder>#lockfile_version /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:67
-  0.13    856.000   856.000     0.000     0.000        4   Array#uniq                     
-  0.12  23160.000   800.000     0.000 22360.000       10  *Enumerable#find                
-  0.12    800.000   800.000     0.000     0.000       19   Kernel#dup                     
-  0.12    912.000   792.000     0.000   120.000        1   Gem::Specification#set_not_nil_attributes_to_default_values /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2035
-  0.11  670808.000   736.000     0.000 670072.000        1   Object#work                    /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:14
-  0.09    600.000   600.000     0.000     0.000        3   Enumerable#partition           
-  0.08    552.000   552.000     0.000     0.000        3   <Class::IO>#read               
+ 39.31  276224.000 247688.000     0.000 28536.000       22  *Kernel#gem_original_require    
+ 21.79  137280.000 137280.000     0.000     0.000      505   String#split                   
+  5.49  34600.000 34600.000     0.000     0.000        1   <Module::Oj>#dump              
+  5.35  192576.000 33736.000     0.000 158840.000      500   Object#make_report             /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
+  3.69  237656.000 23240.000     0.000 214416.000        1   <Class::IO>#foreach            
+  2.68  16880.000 16880.000     0.000     0.000      422   String#chomp                   
+  2.68  16880.000 16880.000     0.000     0.000      435   Array#last                     
+  2.10  324296.000 13224.000     0.000 311072.000       21  *Kernel#require                 /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:34
+  1.99  18800.000 12560.000     0.000  6240.000      314   Array#join                     
+  1.91  12040.000 12040.000     0.000     0.000      160   Array#sort                     
+  1.85  21328.000 11672.000     0.000  9656.000        1   Kernel#eval                    
+  1.10   6920.000  6920.000     0.000     0.000      424   Set#add                        /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:348
+  1.05   6640.000  6640.000     0.000     0.000      189   <Class::File>#file?            
+  1.04  16680.000  6560.000     0.000 10120.000      112  *Array#any?                     
+  0.99   6240.000  6240.000     0.000     0.000      156   Integer#to_s                   
+  0.93   5840.000  5840.000     0.000     0.000       73   <Class::File>#join             
+  0.57   3600.000  3600.000     0.000     0.000       90   Array#reverse                  
+  0.47  14440.000  2984.000     0.000 11456.000       40  *Class#new                      
+  0.33   2080.000  2080.000     0.000     0.000       26   Array#flatten                  
+  0.29   1840.000  1840.000     0.000     0.000        6   String#scan                    
+  0.27   3600.000  1680.000     0.000  1920.000       14   <Class::Gem::Requirement>#parse /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:97
+  0.23   1440.000  1440.000     0.000     0.000       12   Enumerable#drop_while          
+  0.23   1440.000  1440.000     0.000     0.000       15   Regexp#=~                      
+  0.23   9616.000  1432.000     0.000  8184.000        1   Gem::Specification#initialize  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2046
+  0.20   2040.000  1240.000     0.000   800.000       15   Array#map                      
+  0.17   1760.000  1040.000     0.000   720.000        6   <Class::Dir>#chdir             
+  0.15   4040.000   920.000     0.000  3120.000        2   <Module::Gem::BundlerVersionFinder>#lockfile_version /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:67
+  0.14    856.000   856.000     0.000     0.000        4   Array#uniq                     
+  0.13  23160.000   800.000     0.000 22360.000       10  *Enumerable#find                
+  0.13    800.000   800.000     0.000     0.000       19   Kernel#dup                     
+  0.13    912.000   792.000     0.000   120.000        1   Gem::Specification#set_not_nil_attributes_to_default_values /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2035
+  0.12  630088.000   736.000     0.000 629352.000        1   Object#work                    /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:14
+  0.10    600.000   600.000     0.000     0.000        3   Enumerable#partition           
+  0.09    552.000   552.000     0.000     0.000        3   <Class::IO>#read               
   0.08    520.000   520.000     0.000     0.000        9   <Class::File>#expand_path      
-  0.07    480.000   480.000     0.000     0.000        6   Enumerable#reduce              
-  0.07    480.000   480.000     0.000     0.000       24   Array#reverse_each             
-  0.07    480.000   480.000     0.000     0.000        4   String#=~                      
+  0.08    480.000   480.000     0.000     0.000        6   Enumerable#reduce              
+  0.08    480.000   480.000     0.000     0.000       24   Array#reverse_each             
+  0.08    480.000   480.000     0.000     0.000        4   String#=~                      
   0.07    464.000   464.000     0.000     0.000        1   MultiJson::OptionsCache#reset  /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb:5
   0.07    440.000   440.000     0.000     0.000        8   <Class::File>#dirname          
   0.06    400.000   400.000     0.000     0.000        2   Module#define_method           
   0.06    896.000   392.000     0.000   504.000        1   MultiJson::OptionsCache#write  /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb:24
-  0.05    920.000   360.000     0.000   560.000        4   BasicObject#instance_eval      
+  0.06    920.000   360.000     0.000   560.000        4   BasicObject#instance_eval      
   0.05    320.000   320.000     0.000     0.000        8   Array#compact                  
   0.05   1960.000   320.000     0.000  1640.000        7   <Module::Gem>#env_requirement  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:915
   0.05   5752.000   320.000     0.000  5432.000        8   Gem::Dependency#initialize     /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb:39
@@ -60,21 +59,22 @@ Sort by: self_time
   0.04   3600.000   240.000     0.000  3360.000        6   Gem::Version#_split_segments   /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:392
   0.04    240.000   240.000     0.000     0.000        6   <Module::Gem>#default_dir      /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/defaults.rb:30
   0.04    240.000   240.000     0.000     0.000        2   <Class::Dir>#pwd               
-  0.03    232.000   232.000     0.000     0.000        1   Hash#merge                     
-  0.03    232.000   232.000     0.000     0.000        1   MultiJson::Options#default_dump_options /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options.rb:25
-  0.03    232.000   232.000     0.000     0.000        1   Hash#key?                      
-  0.03    232.000   232.000     0.000     0.000       17   Array#uniq!                    
-  0.03  22072.000   232.000     0.000 21840.000        4   <Class::Gem::Specification>#load /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1149
+  0.04    232.000   232.000     0.000     0.000        1   Hash#merge                     
+  0.04    232.000   232.000     0.000     0.000        1   MultiJson::Options#default_dump_options /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options.rb:25
+  0.04    232.000   232.000     0.000     0.000        1   Hash#key?                      
+  0.04    232.000   232.000     0.000     0.000       17   Array#uniq!                    
+  0.04  22032.000   232.000     0.000 21800.000        4   <Class::Gem::Specification>#load /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1149
   0.03    200.000   200.000     0.000     0.000        5   Class#initialize               
   0.03    200.000   200.000     0.000     0.000        4   String#gsub                    
   0.03    200.000   200.000     0.000     0.000        5   <Class::File>#exist?           
-  0.02    160.000   160.000     0.000     0.000        4   Symbol#to_s                    
-  0.02   6912.000   160.000     0.000  6752.000       14   <Class::Gem::Requirement>#create /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:50
-  0.02   7432.000   160.000     0.000  7272.000       17   Gem::Requirement#initialize    /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:123
-  0.02   2880.000   160.000     0.000  2720.000        2   <Module::Gem::BundlerVersionFinder>#lockfile_contents /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:77
-  0.02    160.000   160.000     0.000     0.000        2   <Class::File>#basename         
-  0.02   4360.000   160.000     0.000  4200.000        2   <Module::Gem::BundlerVersionFinder>#bundler_version_with_reason /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:14
-  0.02  360384.000   160.000     0.000 360224.000       34  *Array#each                     
+  0.03    160.000   160.000     0.000     0.000        4   Symbol#to_s                    
+  0.03    160.000   160.000     0.000     0.000        4   String#upcase                  
+  0.03   6912.000   160.000     0.000  6752.000       14   <Class::Gem::Requirement>#create /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:50
+  0.03   7432.000   160.000     0.000  7272.000       17   Gem::Requirement#initialize    /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:123
+  0.03   2880.000   160.000     0.000  2720.000        2   <Module::Gem::BundlerVersionFinder>#lockfile_contents /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:77
+  0.03    160.000   160.000     0.000     0.000        2   <Class::File>#basename         
+  0.03   4360.000   160.000     0.000  4200.000        2   <Module::Gem::BundlerVersionFinder>#bundler_version_with_reason /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:14
+  0.03  360344.000   160.000     0.000 360184.000       34  *Array#each                     
   0.02   1368.000   120.000     0.000  1248.000        1   MultiJson::OptionsCache#fetch  /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb:10
   0.02    160.000   120.000     0.000    40.000        1   Set#do_with_enum               /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:122
   0.02    120.000   120.000     0.000     0.000        2   Module#extend_object           
@@ -84,7 +84,8 @@ Sort by: self_time
   0.02    120.000   120.000     0.000     0.000        3   String#strip                   
   0.02    280.000   120.000     0.000   160.000        1   Gem::Specification#date=       /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1742
   0.02    120.000   120.000     0.000     0.000        1   Enumerable#grep                
-  0.02  360504.000   120.000     0.000 360384.000        2  *MultiJson#load_adapter         /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:98
+  0.02  360464.000   120.000     0.000 360344.000        2  *MultiJson#load_adapter         /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:98
+  0.02    200.000   120.000     0.000    80.000        1   Enumerable#sort                
   0.01     80.000    80.000     0.000     0.000        1   <Class::Proc>#new              
   0.01     80.000    80.000     0.000     0.000        1   String#capitalize              
   0.01    800.000    80.000     0.000   720.000        2   <Class::MultiJson::Adapter>#defaults /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapter.rb:10
@@ -94,8 +95,7 @@ Sort by: self_time
   0.01    480.000    80.000     0.000   400.000        2   Gem::Version#initialize        /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:210
   0.01     80.000    80.000     0.000     0.000        7   Gem::Version#prerelease?       /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:292
   0.01     80.000    80.000     0.000     0.000        1   Kernel#binding                 
-  0.01   6960.000    80.000     0.000  6880.000        1   Set#each                       /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:336
-  0.01   7040.000    80.000     0.000  6960.000        1   Enumerable#map                 
+  0.01     80.000    80.000     0.000     0.000        1   Set#each                       /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:336
   0.01     40.000    40.000     0.000     0.000        1   IO#write                       
   0.01    272.000    40.000     0.000   232.000        2   MultiJson::Options#dump_options /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options.rb:17
   0.01   1408.000    40.000     0.000  1368.000        1   <Class::MultiJson::Adapter>#cached_dump_options /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapter.rb:36
@@ -118,14 +118,14 @@ Sort by: self_time
   0.01   2760.000    40.000     0.000  2720.000       40   Gem::Version#_segments         /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:382
   0.01    480.000    40.000     0.000   440.000       10   Gem::Version#segments          /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:317
   0.01    600.000    40.000     0.000   560.000       12   <Class::Gem::Version>#new      /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:200
-  0.01  360464.000    40.000     0.000 360424.000        1   MultiJson#default_adapter      /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:46
-  0.01  360544.000    40.000     0.000 360504.000        1   MultiJson#use                  /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:90
-  0.01  360584.000    40.000     0.000 360544.000        1   MultiJson#adapter              /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:70
-  0.01  360624.000    40.000     0.000 360584.000        1   MultiJson#current_adapter      /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:129
-  0.01  360664.000    40.000     0.000 360624.000        1   MultiJson#dump                 /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:138
-  0.01   7200.000    40.000     0.000  7160.000        1   Object#browser_decoration      /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
+  0.01  360424.000    40.000     0.000 360384.000        1   MultiJson#default_adapter      /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:46
+  0.01  360504.000    40.000     0.000 360464.000        1   MultiJson#use                  /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:90
+  0.01  360544.000    40.000     0.000 360504.000        1   MultiJson#adapter              /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:70
+  0.01  360584.000    40.000     0.000 360544.000        1   MultiJson#current_adapter      /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:129
+  0.01  360624.000    40.000     0.000 360584.000        1   MultiJson#dump                 /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:138
+  0.01  30760.000    40.000     0.000 30720.000        1   Object#prepare_report          /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:58
   0.01     40.000    40.000     0.000     0.000        1   <Class::IO>#new                
-  0.01  670848.000    40.000     0.000 670808.000        1   [global]#                      ./ruby-prof.rb:8
+  0.01  630128.000    40.000     0.000 630088.000        1   [global]#                      ./ruby-prof.rb:8
   0.00      0.000     0.000     0.000     0.000        1   IO#close                       
   0.00      0.000     0.000     0.000     0.000       29   Hash#has_key?                  
   0.00  34600.000     0.000     0.000 34600.000        1   MultiJson::Adapters::Oj#dump   /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapters/oj.rb:37
@@ -241,7 +241,7 @@ Sort by: self_time
   0.00      0.000     0.000     0.000     0.000        1   Gem::BasicSpecification#internal_init /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:197
   0.00      0.000     0.000     0.000     0.000        1   Gem::Specification#internal_init /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2147
   0.00      0.000     0.000     0.000     0.000        1   Gem::BasicSpecification#initialize /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:33
-  0.00  22072.000     0.000     0.000 22072.000        4   Gem::StubSpecification#to_spec /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:187
+  0.00  22032.000     0.000     0.000 22032.000        4   Gem::StubSpecification#to_spec /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:187
   0.00    120.000     0.000     0.000   120.000        3   Gem::Specification#full_name   /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1968
   0.00    360.000     0.000     0.000   360.000        2   Gem::Specification#gems_dir    /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1979
   0.00      0.000     0.000     0.000     0.000        2   Gem::Specification#raw_require_paths /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2742
@@ -278,8 +278,8 @@ Sort by: self_time
   0.00      0.000     0.000     0.000     0.000        1   String#freeze                  
   0.00      0.000     0.000     0.000     0.000        6   String#initialize_copy         
   0.00      0.000     0.000     0.000     0.000       19   Kernel#initialize_dup          
-  0.00  45032.000     0.000     0.000 45032.000        1   <Class::Gem::Specification>#find_by_path /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1034
-  0.00  48112.000     0.000     0.000 48112.000        1   <Module::Gem>#try_activate     /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:206
+  0.00  44992.000     0.000     0.000 44992.000        1   <Class::Gem::Specification>#find_by_path /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1034
+  0.00  48072.000     0.000     0.000 48072.000        1   <Module::Gem>#try_activate     /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:206
   0.00      0.000     0.000     0.000     0.000        1   String#end_with?               
   0.00      0.000     0.000     0.000     0.000        1   String#start_with?             
   0.00      0.000     0.000     0.000     0.000        2   Exception#to_s                 
@@ -298,12 +298,11 @@ Sort by: self_time
   0.00      0.000     0.000     0.000     0.000       22   MonitorMixin#enter             /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb:187
   0.00      0.000     0.000     0.000     0.000      139   Module#===                     
   0.00  30480.000     0.000     0.000 30480.000        1   Hash#each_value                
-  0.00   6880.000     0.000     0.000  6880.000        1   Hash#each_key                  
+  0.00      0.000     0.000     0.000     0.000        1   Hash#each_key                  
   0.00      0.000     0.000     0.000     0.000        1   Set#length                     /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:161
-  0.00  37680.000     0.000     0.000 37680.000        1   Object#prepare_report          /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
   0.00      0.000     0.000     0.000     0.000     1033   String#to_i                    
-  0.00  33760.000     0.000     0.000 33760.000      844   Object#browser                 /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:36
-  0.00      0.000     0.000     0.000     0.000      925   String#include?                
+  0.00      0.000     0.000     0.000     0.000      422   String#upcase!                 
+  0.00      0.000     0.000     0.000     0.000      806   String#include?                
   0.00      0.000     0.000     0.000     0.000        1   NilClass#nil?                  
   0.00      0.000     0.000     0.000     0.000        2   Hash#initialize                
   0.00    624.000     0.000     0.000   624.000        2   Set#initialize                 /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:93

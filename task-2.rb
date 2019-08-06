@@ -8,8 +8,8 @@ SPLIT = ','
 MIN = 'min.'
 WS = ' '
 COMMA = ', '
-IE = 'Internet Explorer'
-CHROME = 'Chrome'
+IE = 'INTERNET EXPLORER'
+CHROME = 'CHROME'
 
 def work(file)
   filer   = File.new('result.json', 'w')
@@ -30,11 +30,7 @@ end
 private
 
 def browser_decoration(browsers)
-  browsers.map(&:upcase).sort.join(SPLIT)
-end
-
-def browser(name)
-  name.upcase
+  browsers.sort.join(SPLIT)
 end
 
 def make_report(line, user, is_user = false)
@@ -48,14 +44,15 @@ def make_report(line, user, is_user = false)
                                    dates: [] }
     @report[:totalUsers] += 1
   else
+    line.upcase!
     cols = line.split(SPLIT).last(3)
     @report[:totalSessions] += 1
-    @report[:allBrowsers].add(browser(cols[0]))
+    @report[:allBrowsers].add(cols[0])
 
     @report[:usersStats][user][:sessionsCount] += 1
-    @report[:usersStats][user][:browsers] << browser(cols[0])
+    @report[:usersStats][user][:browsers] << cols[0]
     @report[:usersStats][user][:usedIE] = true if @report[:usersStats][user][:usedIE] || cols[0].include?(IE)
-    @report[:usersStats][user][:alwaysUsedChrome] = false if !@report[:usersStats][user][:alwaysUsedChrome] || cols[0].include?(CHROME)
+    @report[:usersStats][user][:alwaysUsedChrome] = false if !@report[:usersStats][user][:alwaysUsedChrome] || !cols[0].include?(CHROME)
     @report[:usersStats][user][:dates] << cols[2].chomp
     @report[:usersStats][user][:totalTime][0] += cols[1].to_i
     @report[:usersStats][user][:longestSession][0] = cols[1].to_i if @report[:usersStats][user][:longestSession][0] < cols[1].to_i

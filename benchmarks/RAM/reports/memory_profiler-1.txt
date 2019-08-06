@@ -1,14 +1,20 @@
 Total allocated: 1085212 bytes (12578 objects)
 Total retained:  197770 bytes (1637 objects)
 
+Total allocated: 1127154 bytes (13595 objects)
+Total retained:  197748 bytes (1637 objects)
+
+Total allocated: 1195494 bytes (15072 objects)
+Total retained:  197642 bytes (1637 objects)
+
 allocated memory by gem
 -----------------------------------
-    475228  other
-    371833  rubygems
+    510382  other
+    371763  rubygems
     125563  oj-3.8.1
-     68014  multi_json-1.13.1
+     67992  multi_json-1.13.1
+     21496  set
      20118  x86_64-linux
-     14616  set
       2464  singleton
       2432  time
       2248  ruby-2.6.3
@@ -18,16 +24,16 @@ allocated memory by gem
 
 allocated memory by file
 -----------------------------------
-    475188  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+    510342  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
     275147  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb
     115275  /home/pavel/.rvm/gems/ruby-2.6.3/gems/oj-3.8.1/lib/oj/oj.so
-     63358  /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapters/oj.rb
+     63336  /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapters/oj.rb
      43660  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+     21496  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
      19975  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
-     14616  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
      10912  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/date_core.so
       9696  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
-      9451  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
+      9381  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
       9206  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/bigdecimal.so
       8160  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
       2536  /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapter.rb
@@ -60,38 +66,40 @@ allocated memory by file
 allocated memory by location
 -----------------------------------
     239471  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
-    202560  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+    202560  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
     115275  /home/pavel/.rvm/gems/ruby-2.6.3/gems/oj-3.8.1/lib/oj/oj.so:0
-     59710  /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapters/oj.rb:40
+     59688  /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapters/oj.rb:40
      47424  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:21
      47046  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:19
      35516  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:130
-     25224  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:26
-     21971  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:64
-     21256  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:34
+     33760  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:37
+     25202  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:26
+     21971  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:71
+     21256  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:42
      20572  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:322
-     16880  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
-     16224  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
-     16224  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
-     14968  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:66
+     16880  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
+     16224  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:70
+     16224  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
+     14968  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:73
      13776  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1163
-     11600  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:37
-     11600  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:40
+     11600  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:45
+     11600  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
      10912  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/date_core.so:0
      10560  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:321
       9206  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/bigdecimal.so:0
       8424  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:15
       7496  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:94
       6920  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:349
+      6880  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:338
       5931  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:327
+      5267  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:33
       4720  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:387
       4399  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:71
       4120  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:100
-      3851  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:60
       3696  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:16
-      3120  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:35
-      3120  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:36
-      2620  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:72
+      3120  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:43
+      3120  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+      2550  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:72
       2496  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:372
       2288  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:326
       2016  /home/pavel/.rvm/gems/ruby-2.6.3/gems/oj-3.8.1/lib/oj.rb:2
@@ -107,13 +115,11 @@ allocated memory by location
       1144  /home/pavel/.rvm/gems/ruby-2.6.3/gems/oj-3.8.1/lib/oj/bag.rb:88
       1072  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2036
       1008  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/date.rb:61
-       960  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:104
-       875  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:84
 
 allocated memory by class
 -----------------------------------
-    631093  String
-    191640  Array
+    671619  String
+    193056  Array
     143904  File
      56920  Hash
      27720  Class
@@ -140,12 +146,12 @@ allocated memory by class
 
 allocated objects by gem
 -----------------------------------
-      6165  other
+      7010  other
       3625  rubygems
       1363  oj-3.8.1
        919  multi_json-1.13.1
+       350  set
        272  x86_64-linux
-       178  set
         36  ruby-2.6.3
          8  singleton
          6  time
@@ -155,13 +161,13 @@ allocated objects by gem
 
 allocated objects by file
 -----------------------------------
-      6164  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+      7009  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
       2464  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb
       1328  /home/pavel/.rvm/gems/ruby-2.6.3/gems/oj-3.8.1/lib/oj/oj.so
        882  /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapters/oj.rb
        489  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+       350  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
        277  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
-       178  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
        173  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/date_core.so
        132  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
        120  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
@@ -196,29 +202,31 @@ allocated objects by file
 
 allocated objects by location
 -----------------------------------
-      3376  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+      3376  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
       2133  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
       1328  /home/pavel/.rvm/gems/ruby-2.6.3/gems/oj-3.8.1/lib/oj/oj.so:0
        865  /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapters/oj.rb:40
+       844  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:37
        624  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:21
        502  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:19
-       422  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+       422  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
        327  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:130
        262  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:322
-       225  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:64
-       225  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:66
+       225  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:71
+       225  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:73
        191  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1163
        173  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:349
        173  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/date_core.so:0
-       157  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:34
-       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
-       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+       172  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:338
+       157  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:42
+       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:70
+       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
         99  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/bigdecimal.so:0
         88  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:321
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:35
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:36
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:37
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:40
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:43
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:45
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
         66  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:327
         46  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:387
         36  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:372
@@ -244,13 +252,11 @@ allocated objects by location
          8  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:84
          8  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:91
          8  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:96
-         8  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_gem.rb:59
-         8  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb:60
 
 allocated objects by class
 -----------------------------------
-     10259  String
-      2021  Array
+     11275  String
+      2022  Array
        128  Hash
         34  Class
         31  MatchData
@@ -277,7 +283,7 @@ allocated objects by class
 
 retained memory by gem
 -----------------------------------
-    114718  other
+    114696  other
      36025  oj-3.8.1
      15718  x86_64-linux
      15261  rubygems
@@ -291,7 +297,7 @@ retained memory by gem
 
 retained memory by file
 -----------------------------------
-    114718  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+    114696  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
      26177  /home/pavel/.rvm/gems/ruby-2.6.3/gems/oj-3.8.1/lib/oj/oj.so
       9866  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb
       8392  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/date_core.so
@@ -323,18 +329,18 @@ retained memory by file
 retained memory by location
 -----------------------------------
      26177  /home/pavel/.rvm/gems/ruby-2.6.3/gems/oj-3.8.1/lib/oj/oj.so:0
-     25152  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:26
-     21216  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:34
-     16880  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
-     13107  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:64
-     13104  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
-     13104  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+     25130  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:26
+     21216  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:42
+     16880  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
+     13107  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:71
+     13104  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:70
+     13104  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
       9566  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
       8392  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/date_core.so:0
       7326  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/bigdecimal.so:0
-      6104  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:66
+      6104  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:73
       3656  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:16
-      2227  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:60
+      2227  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:33
       2016  /home/pavel/.rvm/gems/ruby-2.6.3/gems/oj-3.8.1/lib/oj.rb:2
       1760  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/time.rb:35
       1568  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/ostruct.rb:75
@@ -375,7 +381,7 @@ retained memory by location
 
 retained memory by class
 -----------------------------------
-    115049  String
+    115027  String
      27720  Class
      26576  Hash
      12339  Regexp
@@ -442,15 +448,15 @@ retained objects by file
 
 retained objects by location
 -----------------------------------
-       422  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+       422  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
        219  /home/pavel/.rvm/gems/ruby-2.6.3/gems/oj-3.8.1/lib/oj/oj.so:0
        173  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
-       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:34
+       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:42
        110  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/date_core.so:0
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:64
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:66
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:70
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:71
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:73
         52  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/bigdecimal.so:0
         26  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1163
         12  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:107
@@ -518,8 +524,8 @@ retained objects by class
 
 Allocated String Report
 -----------------------------------
-       422  "SESSION"
-       422  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+       422  "session"
+       422  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
 
        176  "\n"
        117  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
@@ -528,14 +534,14 @@ Allocated String Report
          4  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:130
 
        121  "0"
-        94  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+        94  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
          8  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:104
          6  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:387
          6  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:388
          2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:218
          1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:21
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:70
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:107
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:177
 
@@ -544,13 +550,13 @@ Allocated String Report
         24  /home/pavel/.rvm/gems/ruby-2.6.3/gems/oj-3.8.1/lib/oj/oj.so:0
 
         89  "1"
-        80  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+        80  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
          4  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:387
          4  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:388
          1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:21
 
         79  "2"
-        74  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+        74  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
          2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:387
          2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:388
          1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:21
@@ -585,7 +591,7 @@ Allocated String Report
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1163
 
         71  "3"
-        68  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+        68  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
          1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:21
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:387
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:388
@@ -598,7 +604,7 @@ Allocated String Report
         18  /home/pavel/.rvm/gems/ruby-2.6.3/gems/oj-3.8.1/lib/oj/oj.so:0
 
         61  "4"
-        58  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+        58  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
          1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:21
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:387
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:388
@@ -608,16 +614,16 @@ Allocated String Report
          4  /home/pavel/.rvm/gems/ruby-2.6.3/gems/oj-3.8.1/lib/oj/oj.so:0
 
         47  "5"
-        45  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+        45  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
          1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:21
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:107
 
         45  "6"
-        44  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+        44  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
          1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:21
 
         37  "7"
-        36  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+        36  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
          1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:21
 
         35  "        end\n"
@@ -696,7 +702,7 @@ Allocated String Report
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1981
 
         24  "8"
-        21  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+        21  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
          1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:21
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:387
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:388
@@ -708,7 +714,7 @@ Allocated String Report
 
         21  "113 min."
         14  /home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapters/oj.rb:40
-         7  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         7  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
         20  "/home/pavel/.rvm/gems/ruby-2.6.3/gems/oj-3.8.1/lib"
         14  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
@@ -716,7 +722,7 @@ Allocated String Report
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:142
 
         18  "72"
-        17  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+        17  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
          1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:21
 
         17  "-"
@@ -730,19 +736,19 @@ Allocated String Report
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:321
 
         17  "14"
-        15  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+        15  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
          1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:21
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
         16  "52"
-        15  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+        15  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
          1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:21
 
         16  "60"
-        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
          1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:21
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:70
 
         16  "block in mimic_loaded"
         16  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54
@@ -751,69 +757,69 @@ Allocated String Report
 Retained String Report
 -----------------------------------
          7  "113 min."
-         7  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         7  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
          5  "92 min."
-         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:70
 
          4  "117 min."
-         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
          4  "118 min."
-         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
          4  "2017-05-31"
-         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          4  "60 min."
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:70
 
          3  "/home/pavel/.rvm/gems/ruby-2.6.3/extensions/x86_64-linux/2.6.0/oj-3.8.1"
          2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:91
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:130
 
          3  "103 min."
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
          3  "111 min."
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:70
 
          3  "119 min."
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
          3  "2016-10-19"
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          3  "2017-05-07"
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          3  "2017-08-27"
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          3  "2017-12-08"
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          3  "2018-04-24"
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          3  "2018-05-03"
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          3  "2018-10-24"
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          3  "2018-10-31"
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          3  "90 min."
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:70
 
          3  "98 min."
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
          3  "May"
          2  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/x86_64-linux/date_core.so:0
@@ -831,85 +837,85 @@ Retained String Report
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1166
 
          2  "0 min."
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:70
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
          2  "100 min."
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:70
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
          2  "101 min."
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
          2  "106 min."
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
          2  "11 min."
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:70
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
          2  "114 min."
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
          2  "115 min."
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
          2  "116 min."
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
          2  "12 min."
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:70
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:72
 
          2  "143 min."
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:63
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:70
 
          2  "2.3"
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:203
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:218
 
          2  "2016-05-22"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          2  "2016-05-24"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          2  "2016-06-13"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          2  "2016-08-02"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          2  "2016-08-03"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          2  "2016-08-22"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          2  "2016-09-01"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          2  "2016-09-05"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          2  "2016-09-17"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          2  "2016-09-26"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          2  "2016-10-02"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          2  "2016-10-05"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          2  "2016-10-24"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          2  "2016-11-07"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 
          2  "2016-11-08"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:52
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:59
 

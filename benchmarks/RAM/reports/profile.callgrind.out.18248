@@ -6,7 +6,7 @@ fn=IO::close
 
 fl=
 fn=IO::write
-0 80
+0 40
 
 fl=
 fn=Hash::has_key?
@@ -386,7 +386,7 @@ calls=1 157
 cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb
 cfn=Kernel::require
 calls=1 157
-157 33560
+157 33600
 cfl=
 cfn=String::to_s
 calls=1 158
@@ -1272,10 +1272,6 @@ fl=
 fn=Array::pop
 0 0
 
-fl=
-fn=Array::last
-0 0
-
 fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
 fn=Gem/Dependency::initialize
 39 320
@@ -2105,6 +2101,10 @@ calls=5 46
 46 400
 
 fl=
+fn=Array::first
+0 0
+
+fl=
 fn=Array::initialize_copy
 0 0
 
@@ -2151,6 +2151,10 @@ cfl=
 cfn=Class::new
 calls=2 203
 203 560
+
+fl=
+fn=String::=~
+0 480
 
 fl=
 fn=IO::read^
@@ -2642,7 +2646,7 @@ fn=Exception::initialize
 
 fl=
 fn=Kernel::gem_original_require
-0 247648
+0 247688
 cfl=
 cfn=Exception::initialize
 calls=1 0
@@ -2698,7 +2702,7 @@ calls=2 10
 cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
 cfn=MultiJson::load_adapter
 calls=1 8
-8 34544
+8 34584
 cfl=
 cfn=Module::undef_method
 calls=1 151
@@ -2806,7 +2810,7 @@ calls=18 53
 cfl=
 cfn=Kernel::gem_original_require
 calls=18 54
-54 276184
+54 276224
 cfl=
 cfn=Module::===
 calls=1 54
@@ -2858,7 +2862,7 @@ fn=Array::each
 cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb
 cfn=Kernel::require
 calls=1 55
-55 324296
+55 324336
 cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
 cfn=Gem/BundlerVersionFinder::compatible?^
 calls=45 1037
@@ -2922,15 +2926,15 @@ fn=MultiJson::default_adapter
 cfl=
 cfn=Array::each
 calls=1 53
-53 360344
+53 360384
 cfl=
 cfn=IO::write
 calls=1 53
-53 80
+53 40
 cfl=
 cfn=IO::close
-calls=1 19
-19 0
+calls=1 27
+27 0
 
 fl=
 fn=Module::===
@@ -2954,7 +2958,7 @@ calls=1 101
 cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
 cfn=MultiJson::load_adapter_from_string_name
 calls=1 101
-101 33960
+101 34000
 cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb
 cfn=MultiJson/OptionsCache::reset
 calls=1 93
@@ -3002,27 +3006,19 @@ fn=Integer::to_s
 
 fl=
 fn=Hash::each_value
-0 9360
+0 0
 cfl=
 cfn=Array::join
-calls=234 61
-61 15600
+calls=234 70
+70 15600
 cfl=
 cfn=Array::sort
-calls=156 62
-62 11760
+calls=156 71
+71 11760
 cfl=
 cfn=Array::reverse
-calls=78 64
-64 3120
-
-fl=
-fn=Array::join
-0 9440
-cfl=
-cfn=Integer::to_s
-calls=156 0
-0 6240
+calls=78 73
+73 3120
 
 fl=
 fn=Array::sort
@@ -3054,19 +3050,19 @@ calls=1 0
 
 fl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
 fn=Object::browser_decoration
-24 80
+32 40
 cfl=
 cfn=Enumerable::map
-calls=1 25
-25 7040
+calls=1 33
+33 7040
 cfl=
 cfn=Array::sort
-calls=1 25
-25 80
+calls=1 33
+33 80
 cfl=
 cfn=Array::join
-calls=1 25
-25 40
+calls=1 33
+33 40
 
 fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
 fn=Set::length
@@ -3074,19 +3070,19 @@ fn=Set::length
 
 fl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
 fn=Object::prepare_report
-56 0
+65 0
 cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
 cfn=Set::length
-calls=1 57
-57 0
+calls=1 66
+66 0
 cfl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
 cfn=Object::browser_decoration
-calls=1 58
-58 7240
+calls=1 67
+67 7200
 cfl=
 cfn=Hash::each_value
-calls=1 60
-60 39840
+calls=1 69
+69 30480
 
 fl=
 fn=String::to_i
@@ -3095,18 +3091,6 @@ fn=String::to_i
 fl=
 fn=String::chomp
 0 16880
-
-fl=
-fn=String::=~
-0 2640
-
-fl=
-fn=Kernel::!~
-0 0
-cfl=
-cfn=String::=~
-calls=102 0
-0 2160
 
 fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
 fn=Set::add
@@ -3118,75 +3102,83 @@ fn=String::upcase
 
 fl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
 fn=Object::browser
-28 0
+36 0
 cfl=
 cfn=String::upcase
-calls=844 29
-29 33760
+calls=844 37
+37 33760
+
+fl=
+fn=Array::last
+0 16880
 
 fl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
 fn=Object::make_report
-32 69296
+40 33736
 cfl=
-cfn=Array::first
-calls=422 42
-42 0
+cfn=String::split
+calls=422 51
+51 118160
 cfl=
-cfn=String::eql?
-calls=422 42
-42 0
+cfn=Array::last
+calls=422 51
+51 16880
 cfl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
 cfn=Object::browser
-calls=844 44
-44 33760
+calls=844 53
+53 33760
 cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
 cfn=Set::add
-calls=422 44
-44 6920
+calls=422 53
+53 6920
 cfl=
-cfn=Kernel::!~
-calls=102 49
-49 2160
+cfn=String::include?
+calls=425 57
+57 0
 cfl=
 cfn=String::chomp
-calls=422 50
-50 16880
+calls=422 59
+59 16880
 cfl=
 cfn=String::to_i
-calls=1014 51
-51 0
+calls=1014 60
+60 0
 
 fl=
-fn=String::eql?
-0 0
-
-fl=
-fn=Array::first
-0 0
+fn=Array::join
+0 12560
+cfl=
+cfn=Integer::to_s
+calls=156 0
+0 6240
 
 fl=
 fn=String::split
 0 137280
 
 fl=
+fn=String::include?
+0 0
+
+fl=
 fn=IO::foreach^
-0 63240
+0 23240
+cfl=
+cfn=String::include?
+calls=500 20
+20 0
 cfl=
 cfn=String::split
-calls=500 10
-10 136880
+calls=78 21
+21 18720
 cfl=
-cfn=Array::first
-calls=500 11
-11 0
-cfl=
-cfn=String::eql?
-calls=500 11
-11 0
+cfn=Array::join
+calls=78 21
+21 3120
 cfl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
 cfn=Object::make_report
-calls=500 14
-14 129016
+calls=500 22
+22 226336
 
 fl=
 fn=NilClass::nil?
@@ -3258,7 +3250,7 @@ calls=1 0
 
 fl=
 fn=File::initialize
-0 40
+0 0
 
 fl=
 fn=IO::new^
@@ -3266,37 +3258,37 @@ fn=IO::new^
 cfl=
 cfn=File::initialize
 calls=1 0
-0 40
+0 0
 
 fl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
 fn=Object::work
-4 856
+14 736
 cfl=
 cfn=IO::new^
-calls=1 5
-5 80
+calls=1 15
+15 40
 cfl=
 cfn=Class::new
-calls=1 6
-6 272
+calls=1 16
+16 272
 cfl=
 cfn=IO::foreach^
-calls=1 9
-9 329136
+calls=1 19
+19 271416
 cfl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
 cfn=Object::prepare_report
-calls=1 17
-17 47080
+calls=1 25
+25 37680
 cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
 cfn=MultiJson::dump
-calls=1 18
-18 360664
+calls=1 26
+26 360664
 
 fl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/benchmarks/RAM/ruby-prof.rb
 fn=[global]::
-7 40
+8 40
 cfl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
 cfn=Object::work
-calls=1 7
-7 738088
+calls=1 8
+8 670808
 

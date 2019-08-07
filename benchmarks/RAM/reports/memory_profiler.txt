@@ -1,51 +1,51 @@
-Total allocated: 589058 bytes (8071 objects)
-Total retained:  117398 bytes (962 objects)
+Total allocated: 589.06 kB (8071 objects)
+Total retained:  117.40 kB (962 objects)
 
 allocated memory by gem
 -----------------------------------
-    574794  other
-     14264  set
+ 574.79 kB  other
+  14.26 kB  set
 
 allocated memory by file
 -----------------------------------
-    574754  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
-     14264  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
-        40  ./memory_profiler.rb
+ 574.75 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+  14.26 kB  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+   40.00 B  ./memory_profiler.rb
 
 allocated memory by location
 -----------------------------------
-    185680  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:47
-    152436  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
-     47424  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:20
-     47046  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:18
-     21256  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:37
-     16880  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:64
-     16224  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:86
-     16224  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:88
-     14968  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:89
-     13392  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:87
-     11600  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:40
-     11600  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:43
-      8424  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:14
-      7264  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:94
-      6920  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:349
-      3696  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:15
-      3120  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:38
-      3120  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:39
-      1664  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
-        80  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:337
-        40  ./memory_profiler.rb:5
+ 185.68 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:47
+ 152.44 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
+  47.42 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:20
+  47.05 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:18
+  21.26 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:37
+  16.88 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:64
+  16.22 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:86
+  16.22 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:88
+  14.97 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:89
+  13.39 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:87
+  11.60 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:40
+  11.60 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:43
+   8.42 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:14
+   7.26 kB  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:94
+   6.92 kB  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:349
+   3.70 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:15
+   3.12 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:38
+   3.12 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:39
+   1.66 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
+   80.00 B  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:337
+   40.00 B  ./memory_profiler.rb:5
 
 allocated memory by class
 -----------------------------------
-    376530  String
-    166248  Array
-     29016  Hash
-     16848  File
-       224  JSON::Ext::Generator::State
-        80  Proc
-        72  Thread::Mutex
-        40  Set
+ 376.53 kB  String
+ 166.25 kB  Array
+  29.02 kB  Hash
+  16.85 kB  File
+  224.00 B  JSON::Ext::Generator::State
+   80.00 B  Proc
+   72.00 B  Thread::Mutex
+   40.00 B  Set
 
 allocated objects by gem
 -----------------------------------
@@ -95,30 +95,30 @@ allocated objects by class
 
 retained memory by gem
 -----------------------------------
-    117398  other
+ 117.40 kB  other
 
 retained memory by file
 -----------------------------------
-    117398  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+ 117.40 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
 
 retained memory by location
 -----------------------------------
-     38598  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
-     21216  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:37
-     16880  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:64
-     13104  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:86
-     13104  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:88
-      6104  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:89
-      4528  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:87
-      3656  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:15
-       168  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:20
-        40  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
+  38.60 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
+  21.22 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:37
+  16.88 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:64
+  13.10 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:86
+  13.10 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:88
+   6.10 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:89
+   4.53 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:87
+   3.66 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:15
+  168.00 B  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:20
+   40.00 B  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
 retained memory by class
 -----------------------------------
-     89542  String
-     21752  Hash
-      6104  Array
+  89.54 kB  String
+  21.75 kB  Hash
+   6.10 kB  Array
 
 retained objects by gem
 -----------------------------------

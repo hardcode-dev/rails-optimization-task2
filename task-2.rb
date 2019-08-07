@@ -89,3 +89,11 @@ def prepare_report
     user[:dates]          = user[:dates].sort.reverse
   end
 end
+
+def print_memory_usage
+  "%d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+end
+
+# work('data_large.txt')
+
+# p print_memory_usage

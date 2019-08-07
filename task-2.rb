@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
-require 'multi_json'
 require 'set'
+require 'json'
 
 USER = 'user'
 SPLIT = ','
 MIN = 'min.'
 WS = ' '
 COMMA = ', '
+BROWSERS = %w[CHROME INTERNET\ EXPLORER FIREFOX SAFARI].freeze
 
 def work(file)
   filer   = File.new('result.json', 'w')
@@ -21,7 +22,7 @@ def work(file)
   end
 
   prepare_report
-  filer.write "#{MultiJson.dump(@report)}\n"
+  filer.write "#{@report.to_json}\n"
   filer.close
 end
 
@@ -68,6 +69,14 @@ def make_report(line, user, is_user = false)
     @report[:usersStats][user][:sessionsCount] += 1
   end
 end
+
+# def b_index(line)
+#   BROWSERS.rindex(BROWSERS.find{|v| line.upcase.include? v})
+# end
+#
+# def fetch_browser(line)
+#     BROWSERS.detected
+# end
 
 def prepare_report
   @report[:uniqueBrowsersCount] = @report[:allBrowsers].length

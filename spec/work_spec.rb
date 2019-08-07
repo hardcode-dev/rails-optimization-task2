@@ -12,6 +12,6 @@ end
 
 describe 'parser large file' do
   it 'should perform under 30 s' do
-    expect{ work('data_large.txt') }.to perform_under(25).sec
+    expect{ work('data_large.txt') }.to perform_under(30).sec
   end
 end

@@ -33,12 +33,13 @@
 
 * Профилирование данных по потребелению памяти.
   * Для сбора данных я собрал тестовый файл с данными в 500 строк. 
+  * Чтобы в лезть в бюджет на данный должно потратиться не более 200Кб памяти 
 * Поиск точки роста
 * Оптимизация проблемного кода
 * Тестирование профилировщиками результата
 
 Для того, чтобы найти "точки роста" для оптимизации я воспользовался инструментами:
-- ruby-prof - Модуль Memory
+- ruby-prof - Модуль Memory и ALLOCATIONS
 - memory_profile
 
 Вот какие проблемы удалось найти и решить
@@ -79,6 +80,8 @@
 
 #####Точка роста.
 По данным ruby-prof Split спустился на 3 позицию. 
+![point](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task2/task-2-optimaiz-ram/benchmarks/RAM/reports/img/point-2.png)
+
 
 memory_profile указывает, что львинная доля памяти уходит на сроки.
 Кол-во массивов снизилось с 191640 до 174760
@@ -93,6 +96,23 @@ allocated memory by class
 ```
   
 ####Ваша находка №3
+Пора заняться Главной точкой роста. MultiJson
+
+Вернул я старый добрый to_json. Запустил rspec. Тесты зеленные. Значит за рамки 30 секунд еще не выпал.
+
+**Кол-во создаваемый алокаций и потребление памяти упало в 2 раза!**
+
+
+```
+Total allocated: 589058 bytes (8071 objects)
+Total retained:  117398 bytes (962 objects)
+``` 
+
+![point](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task2/task-2-optimaiz-ram/benchmarks/RAM/reports/img/point-3.png)
+
+Общее потребление памяти 330.7 Кб.
+
+
 
 
 Результаты

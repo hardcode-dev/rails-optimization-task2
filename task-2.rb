@@ -8,8 +8,6 @@ SPLIT = ','
 MIN = 'min.'
 WS = ' '
 COMMA = ', '
-IE = 'INTERNET EXPLORER'
-CHROME = 'CHROME'
 
 def work(file)
   filer   = File.new('result.json', 'w')
@@ -45,17 +43,29 @@ def make_report(line, user, is_user = false)
     @report[:totalUsers] += 1
   else
     line.upcase!
-    cols = line.split(SPLIT).last(3)
-    @report[:totalSessions] += 1
-    @report[:allBrowsers].add(cols[0])
+    cols = line.split(SPLIT)
+    i = 0
 
+    while i < 6
+      i += 1
+      data = cols.shift
+
+      case i
+      when 4
+        @report[:allBrowsers] << data
+        @report[:usersStats][user][:alwaysUsedChrome] = false if !@report[:usersStats][user][:alwaysUsedChrome] || !data.include?(BROWSERS[0])
+        @report[:usersStats][user][:usedIE] = true if @report[:usersStats][user][:usedIE] || data.include?(BROWSERS[1])
+        @report[:usersStats][user][:browsers] << data
+      when 5
+        @report[:usersStats][user][:totalTime][0] += data.to_i
+        @report[:usersStats][user][:longestSession][0] = data.to_i if i == 5 && @report[:usersStats][user][:longestSession][0] < data.to_i
+      when 6
+        @report[:usersStats][user][:dates] << data.chomp if i == 6
+      end
+    end
+
+    @report[:totalSessions] += 1
     @report[:usersStats][user][:sessionsCount] += 1
-    @report[:usersStats][user][:browsers] << cols[0]
-    @report[:usersStats][user][:usedIE] = true if @report[:usersStats][user][:usedIE] || cols[0].include?(IE)
-    @report[:usersStats][user][:alwaysUsedChrome] = false if !@report[:usersStats][user][:alwaysUsedChrome] || !cols[0].include?(CHROME)
-    @report[:usersStats][user][:dates] << cols[2].chomp
-    @report[:usersStats][user][:totalTime][0] += cols[1].to_i
-    @report[:usersStats][user][:longestSession][0] = cols[1].to_i if @report[:usersStats][user][:longestSession][0] < cols[1].to_i
   end
 end
 

@@ -1,0 +1,3286 @@
+events: memory
+
+fl=
+fn=IO::close
+0 0
+
+fl=
+fn=IO::write
+0 40
+
+fl=
+fn=Hash::has_key?
+0 0
+
+fl=
+fn=Oj::dump^
+0 34600
+cfl=
+cfn=Hash::has_key?
+calls=29 0
+0 0
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapters/oj.rb
+fn=MultiJson/Adapters/Oj::dump
+37 0
+cfl=
+cfn=Oj::dump^
+calls=1 40
+40 34600
+
+fl=
+fn=Hash::merge!
+0 0
+
+fl=
+fn=Hash::merge
+0 232
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options.rb
+fn=MultiJson/Options::default_dump_options
+25 232
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapter.rb
+fn=MultiJson/Adapters/Oj::default_dump_options^
+14 0
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options.rb
+fn=MultiJson/Options::dump_options
+17 40
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapter.rb
+cfn=MultiJson/Adapters/Oj::default_dump_options^
+calls=1 18
+18 0
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options.rb
+cfn=MultiJson/Options::default_dump_options
+calls=1 18
+18 232
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb
+fn=MultiJson/OptionsCache::write
+24 392
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options.rb
+cfn=MultiJson/Options::dump_options
+calls=2 38
+38 272
+cfl=
+cfn=Hash::merge
+calls=1 38
+38 232
+cfl=
+cfn=Hash::merge!
+calls=1 38
+38 0
+cfl=
+cfn=Hash::hash
+calls=1 38
+38 0
+
+fl=
+fn=Proc::new^
+0 80
+cfl=
+cfn=BasicObject::initialize
+calls=1 0
+0 0
+
+fl=
+fn=Hash::hash
+0 0
+
+fl=
+fn=Hash::key?
+0 232
+cfl=
+cfn=Hash::hash
+calls=1 0
+0 0
+
+fl=
+fn=Kernel::instance_variable_get
+0 0
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb
+fn=MultiJson/OptionsCache::fetch
+10 120
+cfl=
+cfn=Symbol::to_s
+calls=1 11
+11 40
+cfl=
+cfn=Kernel::instance_variable_get
+calls=1 11
+11 0
+cfl=
+cfn=Hash::key?
+calls=1 12
+12 232
+cfl=
+cfn=Proc::new^
+calls=1 12
+12 80
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb
+cfn=MultiJson/OptionsCache::write
+calls=1 12
+12 896
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapter.rb
+fn=MultiJson/Adapter::cached_dump_options^
+36 40
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb
+cfn=MultiJson/OptionsCache::fetch
+calls=1 37
+37 1368
+
+fl=
+fn=BasicObject::initialize
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb
+fn=MultiJson/Adapters/Oj::instance^
+137 0
+cfl=
+cfn=Thread/Mutex::synchronize
+calls=1 139
+139 40
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapter.rb
+fn=MultiJson/Adapter::dump^
+24 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb
+cfn=MultiJson/Adapters/Oj::instance^
+calls=1 25
+25 40
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapter.rb
+cfn=MultiJson/Adapter::cached_dump_options^
+calls=1 25
+25 1408
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapters/oj.rb
+cfn=MultiJson/Adapters/Oj::dump
+calls=1 25
+25 34600
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb
+fn=MultiJson/OptionsCache::reset
+5 464
+
+fl=
+fn=Module::const_get
+0 0
+
+fl=
+fn=Array::*
+0 40
+
+fl=
+fn=String::capitalize
+0 80
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::freeze
+145 0
+cfl=
+cfn=Kernel::freeze
+calls=2 146
+146 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::add
+348 0
+
+fl=
+fn=Enumerable::each_entry
+0 40
+cfl=
+cfn=Array::each
+calls=1 0
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::do_with_enum
+122 120
+cfl=
+cfn=Kernel::respond_to?
+calls=1 123
+123 0
+cfl=
+cfn=Enumerable::each_entry
+calls=1 124
+124 40
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::merge
+432 0
+cfl=
+cfn=Kernel::class
+calls=1 433
+433 0
+cfl=
+cfn=Kernel::instance_of?
+calls=1 433
+433 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::do_with_enum
+calls=1 436
+436 160
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Enumerable::to_set
+814 0
+cfl=
+cfn=Class::new
+calls=1 815
+815 432
+
+fl=
+fn=Module::define_method
+0 400
+cfl=
+cfn=BasicObject::singleton_method_added
+calls=2 0
+0 0
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapter.rb
+fn=MultiJson/Adapter::defaults^
+10 80
+cfl=
+cfn=BasicObject::instance_eval
+calls=2 13
+13 720
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb
+fn=Singleton/SingletonClassMethods::inherited
+125 0
+cfl=
+cfn=Class::inherited
+calls=1 126
+126 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb
+cfn=Singleton::__init__^
+calls=1 127
+127 160
+
+fl=
+fn=Thread/Mutex::initialize
+0 0
+
+fl=
+fn=BasicObject::instance_eval
+0 360
+cfl=
+cfn=Class::new
+calls=2 135
+135 80
+cfl=
+cfn=Symbol::to_s
+calls=2 14
+14 80
+cfl=
+cfn=Module::define_method
+calls=2 14
+14 400
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb
+fn=Singleton::__init__^
+132 80
+cfl=
+cfn=BasicObject::instance_eval
+calls=2 133
+133 200
+cfl=
+cfn=BasicObject::singleton_method_added
+calls=2 137
+137 0
+
+fl=
+fn=Module::private_class_method
+0 80
+cfl=
+cfn=BasicObject::singleton_method_added
+calls=2 0
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb
+fn=Singleton::included^
+161 0
+cfl=
+cfn=Module::included
+calls=1 162
+162 0
+cfl=
+cfn=Module::private_class_method
+calls=1 163
+163 80
+cfl=
+cfn=Kernel::extend
+calls=1 164
+164 40
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb
+cfn=Singleton::__init__^
+calls=1 165
+165 120
+
+fl=
+fn=Kernel::instance_of?
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb
+fn=Singleton::append_features^
+153 40
+cfl=
+cfn=Kernel::instance_of?
+calls=1 155
+155 0
+cfl=
+cfn=Module::append_features
+calls=1 158
+158 40
+
+fl=
+fn=Module::extended
+0 0
+
+fl=
+fn=Module::extend_object
+0 120
+
+fl=
+fn=Kernel::extend
+0 0
+cfl=
+cfn=Module::extend_object
+calls=2 0
+0 120
+cfl=
+cfn=Module::extended
+calls=2 0
+0 0
+
+fl=
+fn=BasicObject::singleton_method_undefined
+0 0
+
+fl=
+fn=Module::undef_method
+0 40
+cfl=
+cfn=BasicObject::singleton_method_undefined
+calls=1 0
+0 0
+
+fl=
+fn=String::downcase
+0 40
+
+fl=
+fn=Hash::fetch
+0 0
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
+fn=MultiJson::load_adapter_from_string_name
+155 120
+cfl=
+cfn=Hash::fetch
+calls=1 156
+156 0
+cfl=
+cfn=String::downcase
+calls=1 157
+157 40
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb
+cfn=Kernel::require
+calls=1 157
+157 33600
+cfl=
+cfn=String::to_s
+calls=1 158
+158 0
+cfl=
+cfn=String::split
+calls=1 158
+158 80
+cfl=
+cfn=Array::map
+calls=1 158
+158 120
+cfl=
+cfn=Array::*
+calls=1 158
+158 40
+cfl=
+cfn=Module::const_get
+calls=1 159
+159 0
+
+fl=
+fn=Symbol::to_s
+0 160
+
+fl=
+fn=Module::included
+0 0
+
+fl=
+fn=Module::append_features
+0 40
+
+fl=
+fn=Module::include
+0 0
+cfl=
+cfn=Module::append_features
+calls=1 0
+0 0
+cfl=
+cfn=Module::included
+calls=1 0
+0 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb
+cfn=Singleton::append_features^
+calls=1 0
+0 80
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb
+cfn=Singleton::included^
+calls=1 0
+0 240
+
+fl=
+fn=Module::attr_reader
+0 120
+cfl=
+cfn=Module::method_added
+calls=1 0
+0 0
+
+fl=
+fn=Module::protected
+0 0
+
+fl=
+fn=Module::private
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+fn=Gem/Requirement::none?
+167 0
+cfl=
+cfn=Array::==
+calls=1 169
+169 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+fn=Gem/Dependency::matches_spec?
+252 0
+cfl=
+cfn=String::===
+calls=1 253
+253 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+cfn=Gem/Dependency::requirement
+calls=1 254
+254 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+cfn=Gem/Requirement::none?
+calls=1 254
+254 0
+
+fl=
+fn=Class::initialize
+0 200
+cfl=
+cfn=Class::inherited
+calls=5 0
+0 0
+
+fl=
+fn=BasicObject::singleton_method_added
+0 0
+
+fl=
+fn=Module::method_added
+0 0
+
+fl=
+fn=Class::inherited
+0 0
+
+fl=
+fn=Thread/Mutex::synchronize
+0 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::activate
+calls=3 68
+68 640
+cfl=
+cfn=Class::new
+calls=1 141
+141 40
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+fn=Gem/Requirement::_tilde_requirements
+280 0
+cfl=
+cfn=Array::select
+calls=3 281
+281 120
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+fn=Gem/Requirement::==
+264 0
+cfl=
+cfn=Module::===
+calls=3 265
+265 0
+cfl=
+cfn=Array::==
+calls=3 268
+268 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+cfn=Gem/Requirement::_tilde_requirements
+calls=3 271
+271 120
+cfl=
+cfn=Array::any?
+calls=3 271
+271 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+fn=Gem/Requirement::default^
+74 0
+cfl=
+cfn=Class::new
+calls=3 75
+75 960
+
+fl=
+fn=Enumerable::partition
+0 600
+cfl=
+cfn=Array::each
+calls=3 0
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+fn=Gem/Requirement::prerelease?
+228 0
+cfl=
+cfn=Array::any?
+calls=3 229
+229 40
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+fn=Gem/Dependency::prerelease?
+91 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+cfn=Gem/Dependency::requirement
+calls=3 92
+92 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+cfn=Gem/Requirement::prerelease?
+calls=3 92
+92 40
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+fn=Gem::platforms^
+751 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb
+fn=Gem/Platform::match^
+25 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+cfn=Gem::platforms^
+calls=3 26
+26 0
+cfl=
+cfn=Array::any?
+calls=3 26
+26 0
+
+fl=
+fn=Array::reject!
+0 0
+cfl=
+cfn=Kernel::nil?
+calls=3 288
+288 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::platform
+calls=3 288
+288 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb
+cfn=Gem/Platform::match^
+calls=3 288
+288 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+fn=Gem/Dependency::requirement
+121 0
+
+fl=
+fn=Enumerable::find_all
+0 240
+cfl=
+cfn=Array::each
+calls=3 0
+0 3400
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::stubs_for^
+837 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+fn=Gem/Dependency::matching_specs
+278 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+cfn=Gem::env_requirement^
+calls=3 279
+279 1480
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::stubs_for^
+calls=3 280
+280 0
+cfl=
+cfn=Enumerable::find_all
+calls=3 280
+280 3640
+cfl=
+cfn=Array::map
+calls=3 280
+280 120
+cfl=
+cfn=Array::reject!
+calls=3 287
+287 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+fn=Gem/Dependency::to_specs
+302 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+cfn=Gem/Dependency::matching_specs
+calls=3 303
+303 5240
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+fn=Gem/Dependency::to_spec
+322 120
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+cfn=Gem/Dependency::to_specs
+calls=3 323
+323 5240
+cfl=
+cfn=Array::compact
+calls=3 323
+323 120
+cfl=
+cfn=Enumerable::find
+calls=3 325
+325 240
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+cfn=Gem/Dependency::prerelease?
+calls=3 328
+328 40
+cfl=
+cfn=Enumerable::partition
+calls=3 331
+331 600
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+cfn=Gem/Dependency::requirement
+calls=3 332
+332 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+cfn=Gem/Requirement::default^
+calls=3 332
+332 960
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+cfn=Gem/Requirement::==
+calls=3 332
+332 120
+cfl=
+cfn=Array::first
+calls=3 334
+334 0
+
+fl=
+fn=Kernel::kind_of?
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_gem.rb
+fn=Kernel::gem
+44 40
+cfl=
+cfn=Object::[]*
+calls=4 45
+45 0
+cfl=
+cfn=String::split
+calls=4 45
+45 320
+cfl=
+cfn=Array::include?
+calls=4 46
+46 0
+cfl=
+cfn=Kernel::kind_of?
+calls=4 48
+48 0
+cfl=
+cfn=Class::new
+calls=4 59
+59 1280
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+cfn=Gem/Dependency::to_spec
+calls=3 65
+65 7440
+cfl=
+cfn=Thread/Mutex::synchronize
+calls=3 67
+67 640
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+cfn=Gem/Dependency::matches_spec?
+calls=1 63
+63 0
+
+fl=
+fn=Array::uniq
+0 856
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::add_bindir
+1507 240
+cfl=
+cfn=Kernel::nil?
+calls=4 1508
+1508 0
+cfl=
+cfn=Kernel::Array
+calls=4 1511
+1511 0
+cfl=
+cfn=Array::map
+calls=4 1511
+1511 160
+cfl=
+cfn=Array::flatten
+calls=4 1511
+1511 320
+cfl=
+cfn=Array::compact
+calls=4 1511
+1511 160
+cfl=
+cfn=Array::uniq
+calls=4 1511
+1511 856
+cfl=
+cfn=Array::sort
+calls=4 1511
+1511 280
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::files
+255 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::add_bindir
+calls=4 258
+258 2016
+cfl=
+cfn=Array::each
+calls=4 258
+258 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+fn=Gem::remove_unresolved_default_spec^
+1284 240
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::files
+calls=4 1285
+1285 2016
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_gem.rb
+cfn=Kernel::gem
+calls=4 42
+42 9720
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::unresolved_deps^
+calls=4 52
+52 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb
+cfn=MonitorMixin::exit
+calls=4 53
+53 0
+cfl=
+cfn=Kernel::gem_original_require
+calls=4 54
+54 39728
+
+fl=
+fn=IO::set_encoding
+0 0
+
+fl=
+fn=Array::insert
+0 0
+
+fl=
+fn=Enumerable::each_with_index
+0 80
+cfl=
+cfn=Array::each
+calls=1 0
+0 40
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+fn=Gem::load_path_insert_index^
+660 0
+cfl=
+cfn=Enumerable::each_with_index
+calls=1 661
+661 120
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+fn=Gem::ruby_api_version^
+911 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+fn=Gem::extension_api_version^
+485 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+cfn=Gem::ruby_api_version^
+calls=1 489
+489 0
+
+fl=
+fn=Array::compact
+0 320
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb
+fn=Gem/Platform::to_a
+118 40
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb
+fn=Gem/Platform::to_s
+122 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb
+cfn=Gem/Platform::to_a
+calls=1 123
+123 40
+cfl=
+cfn=Array::compact
+calls=1 123
+123 40
+cfl=
+cfn=Array::join
+calls=1 123
+123 40
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb
+fn=Gem/Platform::local^
+19 40
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/defaults.rb
+fn=Gem::default_ext_dir_for^
+62 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+fn=Gem/BasicSpecification::extensions_dir
+97 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::base_dir
+calls=2 98
+98 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/defaults.rb
+cfn=Gem::default_ext_dir_for^
+calls=1 98
+98 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb
+cfn=Gem/Platform::local^
+calls=1 98
+98 40
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb
+cfn=Gem/Platform::to_s
+calls=1 98
+98 120
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+cfn=Gem::extension_api_version^
+calls=1 98
+98 0
+cfl=
+cfn=File::join^
+calls=1 98
+98 80
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+fn=Gem/Version::to_s
+163 0
+cfl=
+cfn=Kernel::dup
+calls=1 164
+164 40
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::platform
+2239 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+fn=Gem/BasicSpecification::full_name
+126 40
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::platform
+calls=1 127
+127 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::to_s
+calls=1 128
+128 40
+cfl=
+cfn=Kernel::dup
+calls=1 128
+128 40
+cfl=
+cfn=Kernel::untaint
+calls=1 128
+128 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::base_dir
+2092 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::default_gem?
+calls=1 2094
+2094 160
+cfl=
+cfn=File::dirname^
+calls=2 2097
+2097 120
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+fn=Gem/BasicSpecification::find_full_gem_path
+103 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::gems_dir
+calls=1 105
+105 360
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::full_name
+calls=1 105
+105 120
+cfl=
+cfn=File::join^
+calls=1 105
+105 80
+cfl=
+cfn=File::expand_path^
+calls=1 105
+105 80
+cfl=
+cfn=Kernel::untaint
+calls=1 106
+106 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+fn=Gem/BasicSpecification::full_gem_path
+115 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::find_full_gem_path
+calls=1 118
+118 640
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+fn=Gem/BasicSpecification::full_require_paths
+138 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::raw_require_paths
+calls=1 141
+141 0
+cfl=
+cfn=Array::map
+calls=1 141
+141 760
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::have_extensions?
+calls=1 145
+145 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::extension_dir
+calls=1 145
+145 400
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::add_self_to_load_path
+1546 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::default_gem?
+calls=4 1547
+1547 720
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::full_require_paths
+calls=1 1549
+1549 1160
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+cfn=Gem::load_path_insert_index^
+calls=1 1552
+1552 120
+cfl=
+cfn=Array::insert
+calls=1 1556
+1556 0
+
+fl=
+fn=Hash::delete
+0 0
+
+fl=
+fn=Array::select
+0 280
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+cfn=Gem/Dependency::runtime?
+calls=12 0
+0 0
+cfl=
+cfn=Array::first
+calls=3 281
+281 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::runtime_dependencies
+2375 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::dependencies
+calls=4 2376
+2376 0
+cfl=
+cfn=Array::select
+calls=4 2376
+2376 160
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::activate_dependencies
+1432 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::unresolved_deps^
+calls=4 1433
+1433 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::runtime_dependencies
+calls=4 1435
+1435 160
+cfl=
+cfn=Array::each
+calls=4 1435
+1435 0
+cfl=
+cfn=Hash::delete
+calls=4 1456
+1456 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+fn=Gem/Dependency::runtime?
+169 0
+
+fl=
+fn=Array::all?
+0 0
+cfl=
+cfn=Comparable::>=
+calls=10 18
+18 4480
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+fn=Gem/Requirement::satisfied_by?
+241 0
+cfl=
+cfn=Module::===
+calls=10 243
+243 0
+cfl=
+cfn=Array::all?
+calls=10 245
+245 4480
+
+fl=
+fn=String::to_str
+0 0
+
+fl=
+fn=String::===
+0 0
+
+fl=
+fn=String::upcase
+0 160
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+fn=Gem::env_requirement^
+915 320
+cfl=
+cfn=String::upcase
+calls=4 918
+918 160
+cfl=
+cfn=Object::[]*
+calls=4 918
+918 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+cfn=Gem/Requirement::create^
+calls=4 919
+919 1480
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::has_conflicts?
+1702 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+cfn=Gem::env_requirement^
+calls=4 1703
+1703 480
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+cfn=Gem/Requirement::satisfied_by?
+calls=4 1703
+1703 1080
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::dependencies
+calls=4 1704
+1704 0
+cfl=
+cfn=Array::any?
+calls=4 1704
+1704 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::raise_if_conflicts
+2297 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::has_conflicts?
+calls=4 2298
+2298 1560
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::activate
+1408 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::raise_if_conflicts
+calls=4 1415
+1415 1560
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::activate_dependencies
+calls=4 1417
+1417 160
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::add_self_to_load_path
+calls=4 1418
+1418 2000
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::dependencies
+1798 0
+
+fl=
+fn=Array::concat
+0 0
+
+fl=
+fn=Enumerable::reduce
+0 480
+cfl=
+cfn=Array::each
+calls=6 0
+0 0
+
+fl=
+fn=Enumerator::each
+0 0
+cfl=
+cfn=Array::reverse_each
+calls=12 0
+0 0
+
+fl=
+fn=Enumerable::drop_while
+0 1440
+cfl=
+cfn=Enumerator::each
+calls=12 0
+0 0
+
+fl=
+fn=Array::reverse_each
+0 480
+
+fl=
+fn=Array::slice!
+0 240
+
+fl=
+fn=Array::index
+0 40
+cfl=
+cfn=Kernel::is_a?
+calls=16 393
+393 0
+
+fl=
+fn=Kernel::freeze
+0 0
+
+fl=
+fn=Array::map
+0 1240
+cfl=
+cfn=String::to_i
+calls=16 388
+388 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::full_gem_path
+calls=1 142
+142 640
+cfl=
+cfn=Kernel::untaint
+calls=1 142
+142 0
+cfl=
+cfn=File::join^
+calls=1 142
+142 80
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::to_spec
+calls=3 0
+0 0
+cfl=
+cfn=String::capitalize
+calls=1 0
+0 80
+
+fl=
+fn=String::scan
+0 1840
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+fn=Gem/Version::_split_segments
+392 240
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::_segments
+calls=6 393
+393 2760
+cfl=
+cfn=Array::index
+calls=6 393
+393 40
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::segments
+calls=6 394
+394 320
+cfl=
+cfn=Array::slice!
+calls=6 395
+395 240
+
+fl=
+fn=Array::include?
+0 0
+
+fl=
+fn=Array::pop
+0 0
+
+fl=
+fn=Array::last
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+fn=Gem/Dependency::initialize
+39 320
+cfl=
+cfn=Module::===
+calls=16 40
+40 0
+cfl=
+cfn=Array::last
+calls=8 51
+51 0
+cfl=
+cfn=Array::pop
+calls=4 51
+51 0
+cfl=
+cfn=Array::first
+calls=4 52
+52 0
+cfl=
+cfn=Array::include?
+calls=8 54
+54 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+cfn=Gem/Requirement::create^
+calls=8 60
+60 5432
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::add_dependency_with_type
+1524 0
+cfl=
+cfn=Array::flatten
+calls=4 1528
+1528 320
+cfl=
+cfn=Kernel::respond_to?
+calls=4 1531
+1531 0
+cfl=
+cfn=String::to_s
+calls=4 1533
+1533 0
+cfl=
+cfn=Class::new
+calls=4 1533
+1533 5112
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::dependencies
+calls=4 1536
+1536 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::add_development_dependency
+546 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::add_dependency_with_type
+calls=4 547
+547 5432
+
+fl=
+fn=Integer::<=>
+0 0
+
+fl=
+fn=Array::==
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+fn=Gem/Version::canonical_segments
+369 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::_split_segments
+calls=6 370
+370 3600
+cfl=
+cfn=Array::map!
+calls=6 370
+370 2400
+cfl=
+cfn=Enumerable::reduce
+calls=6 370
+370 480
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+fn=Gem/Version::_version
+378 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+fn=Gem/Version::<=>
+342 0
+cfl=
+cfn=Module::===
+calls=48 343
+343 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::_version
+calls=12 344
+344 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::canonical_segments
+calls=24 344
+344 6480
+cfl=
+cfn=Array::==
+calls=12 344
+344 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::_segments
+calls=24 346
+346 0
+cfl=
+cfn=Integer::<=>
+calls=12 363
+363 0
+
+fl=
+fn=Comparable::>=
+0 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::<=>
+calls=11 0
+0 4480
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::installed_by_version=
+626 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::new^
+calls=1 627
+627 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::summary=
+2438 0
+cfl=
+cfn=String::to_s
+calls=1 2439
+2439 0
+cfl=
+cfn=String::strip
+calls=1 2439
+2439 40
+cfl=
+cfn=String::gsub
+calls=2 2439
+2439 120
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::required_ruby_version=
+664 40
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+cfn=Gem/Requirement::create^
+calls=1 665
+665 0
+
+fl=
+fn=String::gsub
+0 200
+
+fl=
+fn=String::strip
+0 120
+
+fl=
+fn=Kernel::is_a?
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/deprecate.rb
+fn=Gem/Deprecate::skip^
+26 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+fn=Gem/Version::correct?^
+172 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/deprecate.rb
+cfn=Gem/Deprecate::skip^
+calls=2 173
+173 0
+cfl=
+cfn=Kernel::nil?
+calls=2 174
+174 0
+cfl=
+cfn=String::to_s
+calls=2 177
+177 0
+cfl=
+cfn=String::=~
+calls=2 177
+177 240
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+fn=Gem/Version::initialize
+210 80
+cfl=
+cfn=Kernel::class
+calls=2 211
+211 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::correct?^
+calls=2 211
+211 240
+cfl=
+cfn=Kernel::is_a?
+calls=2 216
+216 0
+cfl=
+cfn=String::to_s
+calls=2 218
+218 0
+cfl=
+cfn=String::strip
+calls=2 218
+218 80
+cfl=
+cfn=String::gsub
+calls=2 218
+218 80
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::rdoc_options=
+2307 0
+cfl=
+cfn=Kernel::Array
+calls=1 2309
+2309 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::licenses=
+361 0
+cfl=
+cfn=Kernel::Array
+calls=1 362
+362 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::files=
+1941 0
+cfl=
+cfn=Kernel::Array
+calls=1 1942
+1942 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::extra_rdoc_files=
+1924 0
+cfl=
+cfn=Kernel::Array
+calls=1 1926
+1926 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::extensions=
+1915 0
+cfl=
+cfn=Kernel::Array
+calls=1 1917
+1917 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::description=
+1834 0
+cfl=
+cfn=String::to_s
+calls=1 1835
+1835 0
+
+fl=
+fn=Time::utc^
+0 40
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::date=
+1742 120
+cfl=
+cfn=Module::===
+calls=1 1746
+1746 0
+cfl=
+cfn=Regexp::=~
+calls=1 1748
+1748 120
+cfl=
+cfn=String::to_i
+calls=3 1749
+1749 0
+cfl=
+cfn=Time::utc^
+calls=1 1749
+1749 40
+
+fl=
+fn=Enumerable::grep
+0 120
+cfl=
+cfn=Array::each
+calls=1 0
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::authors=
+276 0
+cfl=
+cfn=Kernel::Array
+calls=1 277
+277 0
+cfl=
+cfn=Array::flatten
+calls=1 277
+277 80
+cfl=
+cfn=Enumerable::grep
+calls=1 277
+277 120
+
+fl=
+fn=Kernel::Array
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::require_paths=
+509 0
+cfl=
+cfn=Kernel::Array
+calls=1 510
+510 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+fn=Gem/Requirement::create^
+50 160
+cfl=
+cfn=Array::shift
+calls=14 53
+53 0
+cfl=
+cfn=Module::===
+calls=38 55
+55 0
+cfl=
+cfn=Class::new
+calls=12 59
+59 6752
+cfl=
+cfn=String::===
+calls=4 55
+55 0
+cfl=
+cfn=Kernel::respond_to?
+calls=4 63
+63 0
+cfl=
+cfn=String::to_str
+calls=4 64
+64 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::required_rubygems_version=
+671 40
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+cfn=Gem/Requirement::create^
+calls=1 672
+672 0
+
+fl=
+fn=Array::sort!
+0 40
+cfl=
+cfn=Array::last
+calls=2 299
+299 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::<=>
+calls=1 299
+299 2000
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+fn=Gem/Requirement::sort_requirements!
+297 0
+cfl=
+cfn=Array::sort!
+calls=13 298
+298 2040
+
+fl=
+fn=Regexp::=~
+0 1440
+
+fl=
+fn=String::to_s
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+fn=Gem/Requirement::parse^
+97 1680
+cfl=
+cfn=Module::===
+calls=14 98
+98 0
+cfl=
+cfn=String::to_s
+calls=14 100
+100 0
+cfl=
+cfn=Regexp::=~
+calls=14 100
+100 1320
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::new^
+calls=6 107
+107 600
+
+fl=
+fn=Array::map!
+0 40
+cfl=
+cfn=Kernel::class
+calls=14 131
+131 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+cfn=Gem/Requirement::parse^
+calls=14 131
+131 3600
+cfl=
+cfn=Array::reverse_each
+calls=12 372
+372 480
+cfl=
+cfn=Enumerable::drop_while
+calls=12 372
+372 1440
+cfl=
+cfn=Array::reverse
+calls=12 372
+372 480
+
+fl=
+fn=Array::uniq!
+0 232
+
+fl=
+fn=Array::compact!
+0 0
+
+fl=
+fn=Array::flatten
+0 2080
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+fn=Gem/Requirement::initialize
+123 160
+cfl=
+cfn=Array::flatten
+calls=17 124
+124 1360
+cfl=
+cfn=Array::compact!
+calls=17 125
+125 0
+cfl=
+cfn=Array::uniq!
+calls=17 126
+126 232
+cfl=
+cfn=Array::map!
+calls=13 131
+131 3640
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+cfn=Gem/Requirement::sort_requirements!
+calls=13 132
+132 2040
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::invalidate_memoized_attributes
+2105 0
+
+fl=
+fn=Kernel::instance_variable_defined?
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+fn=Gem/Version::prerelease?
+292 80
+cfl=
+cfn=Kernel::instance_variable_defined?
+calls=7 293
+293 0
+
+fl=
+fn=Kernel::nil?
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+fn=Gem/Version::create^
+188 0
+cfl=
+cfn=Module::===
+calls=1 189
+189 0
+cfl=
+cfn=Kernel::nil?
+calls=1 191
+191 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::new^
+calls=1 194
+194 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::version=
+2689 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::create^
+calls=1 2690
+2690 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::prerelease?
+calls=1 2693
+2693 40
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::invalidate_memoized_attributes
+calls=1 2696
+2696 0
+
+fl=
+fn=Kernel::initialize_copy
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::default_value
+1788 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::set_not_nil_attributes_to_default_values
+2035 792
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::default_value
+calls=3 2036
+2036 0
+cfl=
+cfn=Kernel::dup
+calls=3 2036
+2036 120
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::set_nil_attributes_to_nil
+2030 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+fn=Gem/BasicSpecification::internal_init
+197 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::internal_init
+2147 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::internal_init
+calls=1 2148
+2148 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+fn=Gem/BasicSpecification::initialize
+33 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::internal_init
+calls=1 34
+34 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::initialize
+2046 1432
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::initialize
+calls=1 2047
+2047 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::set_nil_attributes_to_nil
+calls=1 2056
+2056 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::set_not_nil_attributes_to_default_values
+calls=1 2057
+2057 912
+cfl=
+cfn=Kernel::block_given?
+calls=1 2064
+2064 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::version=
+calls=1 7
+7 40
+cfl=
+cfn=Kernel::respond_to?
+calls=4 9
+9 0
+cfl=
+cfn=Class::new
+calls=2 9
+9 1080
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::required_rubygems_version=
+calls=1 9
+9 40
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::require_paths=
+calls=1 11
+11 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::authors=
+calls=1 12
+12 200
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::date=
+calls=1 13
+13 280
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::description=
+calls=1 14
+14 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::extensions=
+calls=1 16
+16 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::extra_rdoc_files=
+calls=1 17
+17 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::files=
+calls=1 18
+18 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::licenses=
+calls=1 20
+20 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::rdoc_options=
+calls=1 21
+21 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::required_ruby_version=
+calls=1 22
+22 40
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::summary=
+calls=1 24
+24 160
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::installed_by_version=
+calls=1 26
+26 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::new^
+calls=2 31
+31 0
+cfl=
+cfn=Comparable::>=
+calls=1 31
+31 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::add_development_dependency
+calls=4 32
+32 5432
+
+fl=
+fn=Kernel::eval
+0 11712
+cfl=
+cfn=Class::new
+calls=1 5
+5 9656
+
+fl=
+fn=Kernel::binding
+0 80
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::load^
+1149 232
+cfl=
+cfn=Kernel::dup
+calls=1 1155
+1155 40
+cfl=
+cfn=Kernel::untaint
+calls=2 1155
+1155 0
+cfl=
+cfn=File::file?^
+calls=1 1156
+1156 0
+cfl=
+cfn=IO::read^
+calls=1 1158
+1158 312
+cfl=
+cfn=Kernel::binding
+calls=1 1163
+1163 80
+cfl=
+cfn=Kernel::eval
+calls=1 1163
+1163 21368
+cfl=
+cfn=Module::===
+calls=1 1165
+1165 0
+cfl=
+cfn=String::to_s
+calls=1 1166
+1166 0
+cfl=
+cfn=File::expand_path^
+calls=1 1166
+1166 40
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+fn=Gem/StubSpecification::to_spec
+187 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::name
+calls=4 189
+189 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::load^
+calls=4 193
+193 22072
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::full_name
+1968 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::full_name
+calls=1 1969
+1969 120
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::gems_dir
+1979 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::base_dir
+calls=1 1981
+1981 280
+cfl=
+cfn=File::join^
+calls=1 1981
+1981 80
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::raw_require_paths
+2742 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::extensions
+593 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/defaults.rb
+fn=Gem::default_dir^
+30 240
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+fn=Gem/BasicSpecification::default_specifications_dir^
+37 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/defaults.rb
+cfn=Gem::default_dir^
+calls=6 38
+38 240
+cfl=
+cfn=File::join^
+calls=6 38
+38 480
+
+fl=
+fn=Kernel::class
+0 0
+
+fl=
+fn=File::dirname^
+0 440
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+fn=Gem/BasicSpecification::default_gem?
+82 0
+cfl=
+cfn=File::dirname^
+calls=6 83
+83 320
+cfl=
+cfn=Kernel::class
+calls=6 83
+83 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::default_specifications_dir^
+calls=6 83
+83 720
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::missing_extensions?
+2181 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::default_gem?
+calls=1 2182
+2182 160
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::extensions
+calls=1 2183
+2183 0
+
+fl=
+fn=File::exist?^
+0 200
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+fn=Gem/BasicSpecification::gem_build_complete_path
+45 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::extension_dir
+calls=5 46
+46 0
+cfl=
+cfn=File::join^
+calls=5 46
+46 400
+
+fl=
+fn=Array::first
+0 0
+
+fl=
+fn=Array::initialize_copy
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+fn=Gem/Version::_segments
+382 40
+cfl=
+cfn=String::scan
+calls=6 387
+387 1840
+cfl=
+cfn=Array::map
+calls=6 387
+387 880
+cfl=
+cfn=Kernel::freeze
+calls=6 387
+387 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+fn=Gem/Version::segments
+317 40
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::_segments
+calls=10 318
+318 0
+cfl=
+cfn=Kernel::dup
+calls=10 318
+318 440
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+fn=Gem/StubSpecification::version
+176 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::data
+calls=8 177
+177 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+fn=Gem/Version::new^
+200 40
+cfl=
+cfn=Class::new
+calls=2 203
+203 560
+
+fl=
+fn=String::=~
+0 480
+
+fl=
+fn=IO::read^
+0 552
+
+fl=
+fn=Dir::chdir^
+0 1040
+cfl=
+cfn=Enumerable::find
+calls=6 81
+81 560
+cfl=
+cfn=File::join^
+calls=2 83
+83 160
+
+fl=
+fn=Kernel::loop
+0 0
+cfl=
+cfn=Dir::chdir^
+calls=6 111
+111 1760
+cfl=
+cfn=File::expand_path^
+calls=4 113
+113 160
+
+fl=
+fn=File::expand_path^
+0 520
+
+fl=
+fn=Kernel::block_given?
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/util.rb
+fn=Gem/Util::traverse_parents^
+106 0
+cfl=
+cfn=Kernel::block_given?
+calls=2 107
+107 0
+cfl=
+cfn=File::expand_path^
+calls=2 109
+109 160
+cfl=
+cfn=Kernel::loop
+calls=2 110
+110 1920
+
+fl=
+fn=Dir::pwd^
+0 240
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
+fn=Gem/BundlerVersionFinder::lockfile_contents^
+77 160
+cfl=
+cfn=Object::[]*
+calls=2 78
+78 0
+cfl=
+cfn=Dir::pwd^
+calls=2 85
+85 240
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/util.rb
+cfn=Gem/Util::traverse_parents^
+calls=2 85
+85 2080
+cfl=
+cfn=Kernel::dup
+calls=2 91
+91 80
+cfl=
+cfn=Kernel::untaint
+calls=2 91
+91 0
+cfl=
+cfn=File::file?^
+calls=2 94
+94 80
+cfl=
+cfn=IO::read^
+calls=2 96
+96 240
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
+fn=Gem/BundlerVersionFinder::lockfile_version^
+67 920
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
+cfn=Gem/BundlerVersionFinder::lockfile_contents^
+calls=2 68
+68 2880
+cfl=
+cfn=String::=~
+calls=2 72
+72 240
+
+fl=
+fn=File::basename^
+0 160
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
+fn=Gem/BundlerVersionFinder::bundle_update_bundler_version^
+50 0
+cfl=
+cfn=File::basename^
+calls=2 51
+51 160
+
+fl=
+fn=Object::[]*
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
+fn=Gem/BundlerVersionFinder::bundler_version_with_reason^
+14 160
+cfl=
+cfn=Object::[]*
+calls=2 15
+15 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
+cfn=Gem/BundlerVersionFinder::bundle_update_bundler_version^
+calls=2 18
+18 160
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
+cfn=Gem/BundlerVersionFinder::lockfile_version^
+calls=2 22
+22 4040
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
+fn=Gem/BundlerVersionFinder::bundler_version^
+6 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
+cfn=Gem/BundlerVersionFinder::bundler_version_with_reason^
+calls=2 7
+7 4360
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::new^
+calls=2 11
+11 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+fn=Gem/BasicSpecification::extension_dir
+90 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::extensions_dir
+calls=1 91
+91 240
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::full_name
+calls=1 91
+91 0
+cfl=
+cfn=File::join^
+calls=1 91
+91 80
+cfl=
+cfn=File::expand_path^
+calls=1 91
+91 80
+cfl=
+cfn=Kernel::untaint
+calls=1 91
+91 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+fn=Gem/BasicSpecification::have_extensions?
+317 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::extensions
+calls=42 317
+317 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::extensions
+calls=2 317
+317 0
+
+fl=
+fn=File::file?^
+0 6640
+
+fl=
+fn=File::join^
+0 5840
+
+fl=
+fn=Kernel::untaint
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+fn=Gem/StubSpecification::full_name
+180 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::data
+calls=43 181
+181 0
+
+fl=
+fn=Array::any?
+0 6560
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::full_name
+calls=43 321
+321 0
+cfl=
+cfn=Kernel::untaint
+calls=88 321
+321 0
+cfl=
+cfn=File::join^
+calls=44 321
+321 3520
+cfl=
+cfn=Array::any?
+calls=44 322
+322 10480
+cfl=
+cfn=File::file?^
+calls=164 322
+322 6560
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::gems_dir
+calls=1 321
+321 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::full_name
+calls=1 321
+321 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+cfn=Gem/Dependency::runtime?
+calls=12 1705
+1705 0
+cfl=
+cfn=Kernel::nil?
+calls=3 27
+27 0
+cfl=
+cfn=Array::last
+calls=3 229
+229 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::prerelease?
+calls=3 229
+229 40
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+fn=Gem/StubSpecification::raw_require_paths
+140 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::data
+calls=43 141
+141 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+fn=Gem/BasicSpecification::have_file?
+319 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::raw_require_paths
+calls=43 320
+320 0
+cfl=
+cfn=Array::any?
+calls=55 320
+320 16640
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::have_extensions?
+calls=43 325
+325 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::extension_dir
+calls=11 326
+326 0
+cfl=
+cfn=File::join^
+calls=11 326
+326 880
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::raw_require_paths
+calls=1 320
+320 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+fn=Gem::suffixes^
+1016 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+fn=Gem/StubSpecification::extensions
+169 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::data
+calls=66 170
+170 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+fn=Gem/StubSpecification::default_gem?
+93 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+fn=Gem/StubSpecification::missing_extensions?
+144 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::default_gem?
+calls=43 145
+145 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::extensions
+calls=24 146
+146 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::gem_build_complete_path
+calls=5 147
+147 400
+cfl=
+cfn=File::exist?^
+calls=5 147
+147 200
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+fn=Gem/BasicSpecification::contains_requirable_file?
+68 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::missing_extensions?
+calls=43 71
+71 600
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+cfn=Gem::suffixes^
+calls=44 79
+79 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::have_file?
+calls=44 79
+79 17520
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::missing_extensions?
+calls=1 71
+71 160
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+fn=Gem/StubSpecification::data
+108 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+fn=Gem/StubSpecification::name
+155 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::data
+calls=48 156
+156 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
+fn=Gem/BundlerVersionFinder::compatible?^
+37 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::name
+calls=44 38
+38 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
+cfn=Gem/BundlerVersionFinder::bundler_version^
+calls=2 39
+39 4360
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::version
+calls=2 41
+41 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::segments
+calls=4 41
+41 160
+cfl=
+cfn=Array::first
+calls=4 41
+41 0
+
+fl=
+fn=Enumerable::find
+0 800
+cfl=
+cfn=Array::each
+calls=10 0
+0 22840
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::stubs^
+819 0
+
+fl=
+fn=String::freeze
+0 0
+
+fl=
+fn=String::initialize_copy
+0 0
+
+fl=
+fn=Kernel::initialize_dup
+0 0
+cfl=
+cfn=String::initialize_copy
+calls=6 0
+0 0
+cfl=
+cfn=Array::initialize_copy
+calls=11 0
+0 0
+cfl=
+cfn=Kernel::initialize_copy
+calls=2 0
+0 0
+
+fl=
+fn=Kernel::dup
+0 800
+cfl=
+cfn=Kernel::initialize_dup
+calls=19 0
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::find_by_path^
+1034 0
+cfl=
+cfn=Kernel::dup
+calls=1 1035
+1035 40
+cfl=
+cfn=String::freeze
+calls=1 1035
+1035 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::stubs^
+calls=1 1036
+1036 0
+cfl=
+cfn=Enumerable::find
+calls=1 1036
+1036 22920
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::to_spec
+calls=1 1040
+1040 22072
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+fn=Gem::try_activate^
+206 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::find_by_path^
+calls=1 213
+213 45032
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::activate
+calls=1 218
+218 3080
+
+fl=
+fn=String::end_with?
+0 0
+
+fl=
+fn=String::start_with?
+0 0
+
+fl=
+fn=Exception::to_s
+0 0
+
+fl=
+fn=Exception::message
+0 0
+cfl=
+cfn=Exception::to_s
+calls=2 0
+0 0
+
+fl=
+fn=Exception::backtrace
+0 0
+
+fl=
+fn=Exception::exception
+0 0
+
+fl=
+fn=Exception::initialize
+0 0
+
+fl=
+fn=Kernel::gem_original_require
+0 247688
+cfl=
+cfn=Exception::initialize
+calls=1 0
+0 0
+cfl=
+cfn=Exception::exception
+calls=1 0
+0 0
+cfl=
+cfn=Exception::backtrace
+calls=1 0
+0 0
+cfl=
+cfn=IO::set_encoding
+calls=30 0
+0 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb
+cfn=Kernel::require
+calls=13 8
+8 245704
+cfl=
+cfn=Class::inherited
+calls=14 0
+0 0
+cfl=
+cfn=Module::method_added
+calls=241 0
+0 0
+cfl=
+cfn=BasicObject::singleton_method_added
+calls=72 0
+0 0
+cfl=
+cfn=Class::new
+calls=5 5
+5 400
+cfl=
+cfn=Module::private
+calls=7 177
+177 0
+cfl=
+cfn=Module::protected
+calls=4 181
+181 0
+cfl=
+cfn=Module::attr_reader
+calls=1 342
+342 120
+cfl=
+cfn=Module::include
+calls=2 10
+10 320
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
+cfn=MultiJson::load_adapter
+calls=1 8
+8 34584
+cfl=
+cfn=Module::undef_method
+calls=1 151
+151 40
+cfl=
+cfn=Kernel::extend
+calls=1 6
+6 80
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb
+cfn=Singleton/SingletonClassMethods::inherited
+calls=1 8
+8 160
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapter.rb
+cfn=MultiJson/Adapter::defaults^
+calls=2 9
+9 800
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Enumerable::to_set
+calls=1 20
+20 432
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::freeze
+calls=1 20
+20 0
+
+fl=
+fn=Thread/Mutex::unlock
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb
+fn=MonitorMixin::mon_check_owner
+267 0
+cfl=
+cfn=Thread::current^
+calls=22 268
+268 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb
+fn=MonitorMixin::exit
+199 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb
+cfn=MonitorMixin::mon_check_owner
+calls=22 200
+200 0
+cfl=
+cfn=Thread/Mutex::unlock
+calls=22 204
+204 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+fn=Gem/Specification::unresolved_deps^
+1301 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+fn=Gem::find_unresolved_default_spec^
+1276 0
+
+fl=
+fn=Kernel::respond_to?
+0 0
+
+fl=
+fn=Thread/Mutex::lock
+0 0
+
+fl=
+fn=Thread::current^
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb
+fn=MonitorMixin::enter
+187 0
+cfl=
+cfn=Thread::current^
+calls=44 188
+188 0
+cfl=
+cfn=Thread/Mutex::lock
+calls=22 189
+189 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb
+fn=Kernel::require
+34 13224
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb
+cfn=MonitorMixin::enter
+calls=22 35
+35 0
+cfl=
+cfn=Kernel::respond_to?
+calls=21 37
+37 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+cfn=Gem::find_unresolved_default_spec^
+calls=21 39
+39 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::unresolved_deps^
+calls=17 52
+52 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb
+cfn=MonitorMixin::exit
+calls=18 53
+53 0
+cfl=
+cfn=Kernel::gem_original_require
+calls=18 54
+54 276224
+cfl=
+cfn=Module::===
+calls=1 54
+54 0
+cfl=
+cfn=Exception::message
+calls=2 122
+122 0
+cfl=
+cfn=String::start_with?
+calls=1 122
+122 0
+cfl=
+cfn=String::end_with?
+calls=1 122
+122 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+cfn=Gem::try_activate^
+calls=1 122
+122 48112
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb
+cfn=Gem::remove_unresolved_default_spec^
+calls=4 40
+40 51704
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb
+cfn=Kernel::require
+calls=6 13
+13 207720
+cfl=
+cfn=Class::inherited
+calls=3 14
+14 0
+cfl=
+cfn=Module::method_added
+calls=58 15
+15 0
+cfl=
+cfn=BasicObject::singleton_method_added
+calls=49 35
+35 0
+cfl=
+cfn=Module::private
+calls=5 117
+117 0
+
+fl=
+fn=Array::each
+0 160
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb
+cfn=Kernel::require
+calls=1 55
+55 324336
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb
+cfn=Gem/BundlerVersionFinder::compatible?^
+calls=45 1037
+1037 4520
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb
+cfn=Gem/BasicSpecification::contains_requirable_file?
+calls=44 1038
+1038 18280
+cfl=
+cfn=Kernel::untaint
+calls=22 81
+81 0
+cfl=
+cfn=File::file?^
+calls=22 81
+81 0
+cfl=
+cfn=Module::===
+calls=1 0
+0 0
+cfl=
+cfn=Array::concat
+calls=6 0
+0 0
+cfl=
+cfn=Kernel::instance_variable_defined?
+calls=6 662
+662 0
+cfl=
+cfn=Hash::delete
+calls=23 1286
+1286 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+cfn=Gem/Dependency::requirement
+calls=3 281
+281 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb
+cfn=Gem/StubSpecification::version
+calls=6 281
+281 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+cfn=Gem/Requirement::satisfied_by?
+calls=6 281
+281 3400
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::prerelease?
+calls=3 331
+331 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::add
+calls=2 436
+436 0
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapter.rb
+cfn=MultiJson/Adapter::dump^
+calls=1 55
+55 36048
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
+fn=MultiJson::default_adapter
+46 40
+cfl=
+cfn=Array::each
+calls=1 53
+53 360384
+cfl=
+cfn=IO::write
+calls=1 53
+53 40
+cfl=
+cfn=IO::close
+calls=1 26
+26 0
+
+fl=
+fn=Module::===
+0 0
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
+fn=MultiJson::load_adapter
+98 120
+cfl=
+cfn=Module::===
+calls=5 99
+99 0
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
+cfn=MultiJson::default_adapter
+calls=1 103
+103 360464
+cfl=
+cfn=Symbol::to_s
+calls=1 101
+101 40
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
+cfn=MultiJson::load_adapter_from_string_name
+calls=1 101
+101 34000
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb
+cfn=MultiJson/OptionsCache::reset
+calls=1 93
+93 464
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
+fn=MultiJson::use
+90 40
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
+cfn=MultiJson::load_adapter
+calls=1 91
+91 360504
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
+fn=MultiJson::adapter
+70 40
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
+cfn=MultiJson::use
+calls=1 73
+73 360544
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
+fn=MultiJson::current_adapter
+129 40
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
+cfn=MultiJson::adapter
+calls=1 133
+133 360584
+
+fl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
+fn=MultiJson::dump
+138 40
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
+cfn=MultiJson::current_adapter
+calls=1 139
+139 360624
+
+fl=
+fn=Array::reverse
+0 3600
+
+fl=
+fn=Array::sort
+0 12040
+
+fl=
+fn=Integer::to_s
+0 6240
+
+fl=
+fn=Hash::each_value
+0 0
+cfl=
+cfn=Array::join
+calls=234 99
+99 15600
+cfl=
+cfn=Array::sort
+calls=156 100
+100 11760
+cfl=
+cfn=Array::reverse
+calls=78 102
+102 3120
+
+fl=
+fn=Hash::each_key
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::each
+336 80
+cfl=
+cfn=Hash::each_key
+calls=1 338
+338 0
+
+fl=
+fn=Enumerable::sort
+0 120
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::each
+calls=1 0
+0 80
+
+fl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+fn=Object::browser_decoration
+31 40
+cfl=
+cfn=Enumerable::sort
+calls=1 32
+32 200
+cfl=
+cfn=Array::join
+calls=1 32
+32 40
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::length
+161 0
+
+fl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+fn=Object::prepare_report
+94 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::length
+calls=1 95
+95 0
+cfl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+cfn=Object::browser_decoration
+calls=1 96
+96 280
+cfl=
+cfn=Hash::each_value
+calls=1 98
+98 30480
+
+fl=
+fn=String::chomp
+0 16880
+
+fl=
+fn=String::to_i
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::<<
+348 6920
+
+fl=
+fn=Array::shift
+0 0
+
+fl=
+fn=String::upcase!
+0 0
+
+fl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+fn=Object::make_report
+35 33736
+cfl=
+cfn=String::upcase!
+calls=422 46
+46 0
+cfl=
+cfn=String::split
+calls=422 47
+47 118160
+cfl=
+cfn=Array::shift
+calls=2532 52
+52 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::<<
+calls=422 56
+56 6920
+cfl=
+cfn=String::include?
+calls=306 57
+57 0
+cfl=
+cfn=String::to_i
+calls=1014 61
+61 0
+cfl=
+cfn=String::chomp
+calls=422 64
+64 16880
+
+fl=
+fn=Array::join
+0 12560
+cfl=
+cfn=Integer::to_s
+calls=156 0
+0 6240
+
+fl=
+fn=String::split
+0 137280
+
+fl=
+fn=String::include?
+0 0
+
+fl=
+fn=IO::foreach^
+0 23240
+cfl=
+cfn=String::include?
+calls=500 19
+19 0
+cfl=
+cfn=String::split
+calls=78 20
+20 18720
+cfl=
+cfn=Array::join
+calls=78 20
+20 3120
+cfl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+cfn=Object::make_report
+calls=500 21
+21 175696
+
+fl=
+fn=NilClass::nil?
+0 0
+
+fl=
+fn=Hash::initialize
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::initialize
+93 0
+cfl=
+cfn=Class::new
+calls=2 94
+94 464
+cfl=
+cfn=NilClass::nil?
+calls=1 96
+96 0
+cfl=
+cfn=Kernel::nil?
+calls=1 96
+96 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::merge
+calls=1 101
+101 160
+
+fl=
+fn=Class::new
+0 2984
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::initialize
+calls=2 0
+0 624
+cfl=
+cfn=Hash::initialize
+calls=2 0
+0 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb
+cfn=Gem/Specification::initialize
+calls=1 0
+0 9616
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb
+cfn=Gem/Requirement::initialize
+calls=17 0
+0 7432
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb
+cfn=Gem/Version::initialize
+calls=2 0
+0 480
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb
+cfn=Gem/Dependency::initialize
+calls=8 0
+0 5752
+cfl=
+cfn=Class::initialize
+calls=5 0
+0 200
+cfl=
+cfn=Thread/Mutex::initialize
+calls=2 0
+0 0
+cfl=
+cfn=BasicObject::initialize
+calls=1 0
+0 0
+
+fl=
+fn=File::initialize
+0 0
+
+fl=
+fn=IO::new^
+0 40
+cfl=
+cfn=File::initialize
+calls=1 0
+0 0
+
+fl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+fn=Object::work
+13 736
+cfl=
+cfn=IO::new^
+calls=1 14
+14 40
+cfl=
+cfn=Class::new
+calls=1 15
+15 272
+cfl=
+cfn=IO::foreach^
+calls=1 18
+18 220776
+cfl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+cfn=Object::prepare_report
+calls=1 24
+24 30760
+cfl=/home/pavel/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb
+cfn=MultiJson::dump
+calls=1 25
+25 360664
+
+fl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/benchmarks/RAM/ruby-prof.rb
+fn=[global]::
+8 40
+cfl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+cfn=Object::work
+calls=1 8
+8 613248
+

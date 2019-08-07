@@ -8,6 +8,7 @@ SPLIT = ','
 MIN = 'min.'
 WS = ' '
 COMMA = ', '
+DIGIT = /[\d-]{1,}/.freeze
 BROWSERS = %w[CHROME INTERNET\ EXPLORER FIREFOX SAFARI].freeze
 
 def work(file)
@@ -44,39 +45,45 @@ def make_report(line, user, is_user = false)
     @report[:totalUsers] += 1
   else
     line.upcase!
-    cols = line.split(SPLIT)
-    i = 0
 
-    while i < 6
-      i += 1
-      data = cols.shift
-
-      case i
-      when 4
-        @report[:allBrowsers] << data
-        @report[:usersStats][user][:alwaysUsedChrome] = false if !@report[:usersStats][user][:alwaysUsedChrome] || !data.include?(BROWSERS[0])
-        @report[:usersStats][user][:usedIE] = true if @report[:usersStats][user][:usedIE] || data.include?(BROWSERS[1])
-        @report[:usersStats][user][:browsers] << data
-      when 5
-        @report[:usersStats][user][:totalTime][0] += data.to_i
-        @report[:usersStats][user][:longestSession][0] = data.to_i if i == 5 && @report[:usersStats][user][:longestSession][0] < data.to_i
-      when 6
-        @report[:usersStats][user][:dates] << data.chomp if i == 6
-      end
-    end
-
-    @report[:totalSessions] += 1
-    @report[:usersStats][user][:sessionsCount] += 1
+    report_by_session(user, line)
   end
 end
 
-# def b_index(line)
-#   BROWSERS.rindex(BROWSERS.find{|v| line.upcase.include? v})
-# end
-#
-# def fetch_browser(line)
-#     BROWSERS.detected
-# end
+def report_by_session(user, line)
+  @report[:allBrowsers] << "#{fetch_browser(line)} #{fetch_version(line)}"
+  @report[:totalSessions] += 1
+
+  @report[:usersStats][user][:sessionsCount] += 1
+  @report[:usersStats][user][:alwaysUsedChrome] = false if !@report[:usersStats][user][:alwaysUsedChrome] || !line.include?(BROWSERS[0])
+  @report[:usersStats][user][:usedIE] = true if @report[:usersStats][user][:usedIE] || line.include?(BROWSERS[1])
+  @report[:usersStats][user][:browsers] << "#{fetch_browser(line)} #{fetch_version(line)}"
+
+  cols = line.scan(DIGIT)
+  @report[:usersStats][user][:totalTime][0] += cols[3].to_i
+  @report[:usersStats][user][:longestSession][0] = cols[3].to_i if @report[:usersStats][user][:longestSession][0] < cols[3].to_i
+  @report[:usersStats][user][:dates] << cols[4]
+end
+
+def fetch_date(line)
+  line.scan(DIGIT)[4]
+end
+
+def fetch_time(line)
+  line.scan(DIGIT)[3].to_i
+end
+
+def fetch_version(line)
+  /(#{fetch_browser(line)})\s(\d{1,})/.match(line)[2]
+end
+
+def fetch_browser(line)
+  BROWSERS.find{|v| line.include? v}
+end
+
+def br_index(line)
+  BROWSERS.rindex(fetch_browser(line))
+end
 
 def prepare_report
   @report[:uniqueBrowsersCount] = @report[:allBrowsers].length

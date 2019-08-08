@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'set'
 require 'json'
 
@@ -6,16 +8,15 @@ SPLIT = ','
 MIN = 'min.'
 WS = ' '
 COMMA = ', '
-BROWSERS = %w[CHROME INTERNET\ EXPLORER FIREFOX SAFARI].freeze
+BROWSERS = %w[CHROME INTERNET\ EXPLORER].freeze
 
 def work(file)
   filer   = File.new('result.json', 'w')
   @report = { totalUsers: 0, uniqueBrowsersCount: 0, totalSessions: 0, allBrowsers: Set.new, usersStats: {} }
-  @user   = ''
 
   File.foreach(file) do |line|
     is_user = line.include?(USER)
-    @user = is_user ? line.split(SPLIT)[2..3].join(WS) : @user
+    @user = is_user ? user_name(line) : @user
     make_report(line, @user, is_user)
   end
 
@@ -25,6 +26,11 @@ def work(file)
 end
 
 private
+
+def user_name(line)
+  n = line.split(SPLIT)
+  "#{n[2]} #{n[3]}"
+end
 
 def browser_decoration(browsers)
   browsers.sort.join(SPLIT)
@@ -74,9 +80,10 @@ def prepare_report
 
   @report[:usersStats].each_value do |user|
     user[:totalTime]      = user[:totalTime].join(WS)
-    user[:browsers]       = user[:browsers].sort.join(COMMA)
+    user[:browsers].sort!
+    user[:browsers]       = user[:browsers].join(COMMA)
     user[:longestSession] = user[:longestSession].join(WS)
-    user[:dates]          = user[:dates].sort.reverse
+    user[:dates]          = user[:dates].sort {|a,b| b<=>a}
   end
 end
 

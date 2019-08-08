@@ -1,0 +1,334 @@
+events: memory
+
+fl=
+fn=IO::close
+0 0
+
+fl=
+fn=IO::write
+0 40
+
+fl=
+fn=String::to_s
+0 0
+
+fl=
+fn=String::encode
+0 54560
+
+fl=
+fn=Symbol::to_s
+0 22040
+
+fl=
+fn=Hash::keys
+0 3200
+
+fl=
+fn=JSON/Ext/Generator/State::initialize_copy
+0 0
+
+fl=
+fn=JSON/Ext/Generator/GeneratorMethods/Hash::to_json
+0 40
+cfl=
+cfn=Kernel::dup
+calls=1 0
+0 40
+cfl=
+cfn=Hash::keys
+calls=80 0
+0 3200
+cfl=
+cfn=Symbol::to_s
+calls=551 0
+0 22040
+cfl=
+cfn=String::encode
+calls=1286 0
+0 54560
+cfl=
+cfn=String::to_s
+calls=78 0
+0 0
+
+fl=
+fn=Array::reverse
+0 3120
+
+fl=
+fn=Array::sort!
+0 5520
+
+fl=
+fn=Integer::to_s
+0 6240
+
+fl=
+fn=Hash::each_value
+0 6320
+cfl=
+cfn=Integer::to_s
+calls=156 79
+79 6240
+cfl=
+cfn=Array::sort!
+calls=156 80
+80 5520
+cfl=
+cfn=Array::join
+calls=78 81
+81 3120
+cfl=
+cfn=String::split
+calls=78 83
+83 20000
+cfl=
+cfn=Array::reverse
+calls=78 83
+83 3120
+
+fl=
+fn=Array::join
+0 3160
+
+fl=
+fn=Hash::each_key
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::each
+336 80
+cfl=
+cfn=Hash::each_key
+calls=1 338
+338 0
+
+fl=
+fn=Enumerable::sort
+0 120
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::each
+calls=1 0
+0 80
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::length
+161 0
+
+fl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+fn=Object::prepare_report
+74 40
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::length
+calls=1 75
+75 0
+cfl=
+cfn=Enumerable::sort
+calls=1 76
+76 200
+cfl=
+cfn=Array::join
+calls=1 76
+76 40
+cfl=
+cfn=Hash::each_value
+calls=1 78
+78 44320
+
+fl=
+fn=String::chomp
+0 16880
+
+fl=
+fn=String::to_i
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::<<
+348 6920
+
+fl=
+fn=Array::shift
+0 0
+
+fl=
+fn=String::upcase!
+0 0
+
+fl=
+fn=String::initialize_copy
+0 0
+
+fl=
+fn=Kernel::initialize_dup
+0 0
+cfl=
+cfn=String::initialize_copy
+calls=78 0
+0 0
+cfl=
+cfn=JSON/Ext/Generator/State::initialize_copy
+calls=1 0
+0 0
+
+fl=
+fn=Kernel::dup
+0 3160
+cfl=
+cfn=Kernel::initialize_dup
+calls=79 0
+0 0
+
+fl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+fn=Object::make_report
+36 38096
+cfl=
+cfn=Kernel::dup
+calls=78 38
+38 3120
+cfl=
+cfn=String::upcase!
+calls=422 47
+47 0
+cfl=
+cfn=String::split
+calls=422 48
+48 118160
+cfl=
+cfn=Array::shift
+calls=2532 53
+53 0
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::<<
+calls=422 57
+57 6920
+cfl=
+cfn=String::include?
+calls=306 58
+58 0
+cfl=
+cfn=String::to_i
+calls=1014 62
+62 0
+cfl=
+cfn=String::chomp
+calls=422 65
+65 16880
+
+fl=
+fn=String::split
+0 156880
+
+fl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+fn=Object::user_name
+31 3120
+cfl=
+cfn=String::split
+calls=78 32
+32 18720
+
+fl=
+fn=String::include?
+0 0
+
+fl=
+fn=IO::foreach^
+0 40120
+cfl=
+cfn=String::include?
+calls=500 19
+19 0
+cfl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+cfn=Object::user_name
+calls=78 20
+20 21840
+cfl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+cfn=Object::make_report
+calls=500 21
+21 183176
+
+fl=
+fn=NilClass::nil?
+0 0
+
+fl=
+fn=Hash::initialize
+0 0
+
+fl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::initialize
+93 0
+cfl=
+cfn=Class::new
+calls=1 94
+94 232
+cfl=
+cfn=NilClass::nil?
+calls=1 96
+96 0
+
+fl=
+fn=Class::new
+0 272
+cfl=/usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::initialize
+calls=1 0
+0 232
+cfl=
+cfn=Hash::initialize
+calls=1 0
+0 0
+
+fl=
+fn=File::initialize
+0 0
+
+fl=
+fn=IO::new^
+0 40
+cfl=
+cfn=File::initialize
+calls=1 0
+0 0
+
+fl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+fn=Object::work
+14 544
+cfl=
+cfn=IO::new^
+calls=1 15
+15 40
+cfl=
+cfn=Class::new
+calls=1 16
+16 272
+cfl=
+cfn=IO::foreach^
+calls=1 18
+18 245136
+cfl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+cfn=Object::prepare_report
+calls=1 24
+24 44600
+cfl=
+cfn=JSON/Ext/Generator/GeneratorMethods/Hash::to_json
+calls=1 25
+25 79880
+cfl=
+cfn=IO::write
+calls=1 25
+25 40
+cfl=
+cfn=IO::close
+calls=1 26
+26 0
+
+fl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/benchmarks/RAM/ruby-prof.rb
+fn=[global]::
+8 40
+cfl=/media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+cfn=Object::work
+calls=1 8
+8 370512
+

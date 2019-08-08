@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'set'
 require 'json'
 
@@ -8,14 +6,7 @@ SPLIT = ','
 MIN = 'min.'
 WS = ' '
 COMMA = ', '
-DIGIT = /[\d-]{1,}/.freeze
-REG_BROWSERS = {
-    'CHROME'            => /(CHROME)\s(\d{1,})/m,
-    'INTERNET EXPLORER' => /(INTERNET EXPLORER)\s(\d{1,})/m,
-    'FIREFOX'           => /(FIREFOX)\s(\d{1,})/m,
-    'SAFARI'            => /(SAFARI)\s(\d{1,})/m
-}.freeze
-
+BROWSERS = %w[CHROME INTERNET\ EXPLORER FIREFOX SAFARI].freeze
 
 def work(file)
   filer   = File.new('result.json', 'w')
@@ -51,40 +42,30 @@ def make_report(line, user, is_user = false)
     @report[:totalUsers] += 1
   else
     line.upcase!
+    cols = line.split(SPLIT)
+    i = 0
 
-    report_by_session(user, line)
+    while i < 6
+      i += 1
+      data = cols.shift
+
+      case i
+      when 4
+        @report[:allBrowsers] << data
+        @report[:usersStats][user][:alwaysUsedChrome] = false if !@report[:usersStats][user][:alwaysUsedChrome] || !data.include?(BROWSERS[0])
+        @report[:usersStats][user][:usedIE] = true if @report[:usersStats][user][:usedIE] || data.include?(BROWSERS[1])
+        @report[:usersStats][user][:browsers] << data
+      when 5
+        @report[:usersStats][user][:totalTime][0] += data.to_i
+        @report[:usersStats][user][:longestSession][0] = data.to_i if @report[:usersStats][user][:longestSession][0] < data.to_i
+      when 6
+        @report[:usersStats][user][:dates] << data.chomp
+      end
+    end
+
+    @report[:totalSessions] += 1
+    @report[:usersStats][user][:sessionsCount] += 1
   end
-end
-
-def report_by_session(user, line)
-  @report[:allBrowsers] << "#{fetch_browser(line)} #{fetch_version(line)}"
-  @report[:totalSessions] += 1
-
-  @report[:usersStats][user][:sessionsCount] += 1
-  @report[:usersStats][user][:alwaysUsedChrome] = false if !@report[:usersStats][user][:alwaysUsedChrome] || !line.include?(REG_BROWSERS.keys[0])
-  @report[:usersStats][user][:usedIE] = true if @report[:usersStats][user][:usedIE] || line.include?(REG_BROWSERS.keys[1])
-  @report[:usersStats][user][:browsers] << "#{fetch_browser(line)} #{fetch_version(line)}"
-
-  cols = line.scan(DIGIT)
-  @report[:usersStats][user][:totalTime][0] += cols[3].to_i
-  @report[:usersStats][user][:longestSession][0] = cols[3].to_i if @report[:usersStats][user][:longestSession][0] < cols[3].to_i
-  @report[:usersStats][user][:dates] << cols[4]
-end
-
-def fetch_date(line)
-  line.scan(DIGIT)[4]
-end
-
-def fetch_time(line)
-  line.scan(DIGIT)[3].to_i
-end
-
-def fetch_version(line)
-  REG_BROWSERS[fetch_browser(line)].match(line)[2]
-end
-
-def fetch_browser(line)
-  REG_BROWSERS.keys.find{|b| line.include? b}
 end
 
 def prepare_report
@@ -103,7 +84,6 @@ def print_memory_usage
   "%d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
-work('data-500.txt')
+# work('data_large.txt')
 
-sleep 15
-p print_memory_usage
+# p print_memory_usage

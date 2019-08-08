@@ -9,7 +9,13 @@ MIN = 'min.'
 WS = ' '
 COMMA = ', '
 DIGIT = /[\d-]{1,}/.freeze
-BROWSERS = %w[CHROME INTERNET\ EXPLORER FIREFOX SAFARI].freeze
+REG_BROWSERS = {
+    'CHROME'            => /(CHROME)\s(\d{1,})/m,
+    'INTERNET EXPLORER' => /(INTERNET EXPLORER)\s(\d{1,})/m,
+    'FIREFOX'           => /(FIREFOX)\s(\d{1,})/m,
+    'SAFARI'            => /(SAFARI)\s(\d{1,})/m
+}.freeze
+
 
 def work(file)
   filer   = File.new('result.json', 'w')
@@ -55,8 +61,8 @@ def report_by_session(user, line)
   @report[:totalSessions] += 1
 
   @report[:usersStats][user][:sessionsCount] += 1
-  @report[:usersStats][user][:alwaysUsedChrome] = false if !@report[:usersStats][user][:alwaysUsedChrome] || !line.include?(BROWSERS[0])
-  @report[:usersStats][user][:usedIE] = true if @report[:usersStats][user][:usedIE] || line.include?(BROWSERS[1])
+  @report[:usersStats][user][:alwaysUsedChrome] = false if !@report[:usersStats][user][:alwaysUsedChrome] || !line.include?(REG_BROWSERS.keys[0])
+  @report[:usersStats][user][:usedIE] = true if @report[:usersStats][user][:usedIE] || line.include?(REG_BROWSERS.keys[1])
   @report[:usersStats][user][:browsers] << "#{fetch_browser(line)} #{fetch_version(line)}"
 
   cols = line.scan(DIGIT)
@@ -74,15 +80,11 @@ def fetch_time(line)
 end
 
 def fetch_version(line)
-  /(#{fetch_browser(line)})\s(\d{1,})/.match(line)[2]
+  REG_BROWSERS[fetch_browser(line)].match(line)[2]
 end
 
 def fetch_browser(line)
-  BROWSERS.find{|v| line.include? v}
-end
-
-def br_index(line)
-  BROWSERS.rindex(fetch_browser(line))
+  REG_BROWSERS.keys.find{|b| line.include? b}
 end
 
 def prepare_report
@@ -101,6 +103,7 @@ def print_memory_usage
   "%d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
-# work('data_large.txt')
+work('data-500.txt')
 
-# p print_memory_usage
+sleep 15
+p print_memory_usage

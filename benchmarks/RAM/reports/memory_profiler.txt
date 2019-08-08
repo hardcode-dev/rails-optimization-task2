@@ -1,44 +1,44 @@
-Total allocated: 528.22 kB (7448 objects)
+Total allocated: 571.63 kB (8370 objects)
 Total retained:  97.26 kB (961 objects)
 
 allocated memory by gem
 -----------------------------------
- 513.95 kB  other
+ 557.36 kB  other
   14.26 kB  set
 
 allocated memory by file
 -----------------------------------
- 513.91 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+ 557.32 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
   14.26 kB  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
    40.00 B  ./memory_profiler.rb
 
 allocated memory by location
 -----------------------------------
- 185.68 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
- 146.20 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:24
-  47.05 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:17
-  31.20 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
-  18.10 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:41
-  16.88 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
-  11.60 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
-  11.60 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:47
-   8.86 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:86
-   8.42 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:14
+ 185.68 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+ 146.20 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
+  47.05 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:18
+  37.34 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
+  33.76 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+  31.20 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
+  18.10 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:38
+  11.60 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:41
+   9.65 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
+   8.42 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:15
    7.26 kB  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:94
    6.92 kB  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:349
+   6.28 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
    6.28 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
-   6.28 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-   4.53 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:84
-   3.70 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:15
-   3.12 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
-   2.76 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
-   1.66 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:36
+   4.53 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:81
+   3.70 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:16
+   3.12 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:33
+   2.76 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:80
+   1.66 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:76
    80.00 B  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:337
    40.00 B  ./memory_profiler.rb:5
 
 allocated memory by class
 -----------------------------------
- 337.26 kB  String
+ 380.67 kB  String
  144.68 kB  Array
   29.02 kB  Hash
   16.85 kB  File
@@ -49,42 +49,42 @@ allocated memory by class
 
 allocated objects by gem
 -----------------------------------
-      7273  other
+      8195  other
        175  set
 
 allocated objects by file
 -----------------------------------
-      7272  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
+      8194  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb
        175  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
          1  ./memory_profiler.rb
 
 allocated objects by location
 -----------------------------------
-      2954  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-      1999  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:24
-       502  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:17
-       468  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
-       422  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+      2954  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+      1999  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
+       844  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+       647  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
+       502  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:18
+       468  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
        173  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:349
+       157  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
        157  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
-       157  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-       147  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:86
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:33
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:38
         78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:41
         78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:44
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:47
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:84
-        69  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:15
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:36
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:81
+        69  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:80
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:16
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:76
          1  ./memory_profiler.rb:5
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:14
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:15
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:337
          1  /usr/share/rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:94
 
 allocated objects by class
 -----------------------------------
-      6407  String
+      7329  String
        954  Array
         81  Hash
          2  File
@@ -103,16 +103,15 @@ retained memory by file
 
 retained memory by location
 -----------------------------------
-  38.60 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:24
-  18.10 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:41
-  16.88 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
-   6.10 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:86
-   4.53 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:84
-   3.66 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:15
-   3.12 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
+  38.60 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
+  22.98 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
+  18.10 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:38
+   4.53 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:81
+   3.66 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:16
+   3.12 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:33
+   3.12 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
    3.12 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
-   3.12 kB  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-   40.00 B  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:36
+   40.00 B  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:76
 
 retained memory by class
 -----------------------------------
@@ -130,16 +129,15 @@ retained objects by file
 
 retained objects by location
 -----------------------------------
-       422  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:41
+       500  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:33
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:38
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:81
         78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:84
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:86
-        68  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:24
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:15
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:36
+        68  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:16
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:76
 
 retained objects by class
 -----------------------------------
@@ -151,367 +149,368 @@ retained objects by class
 Allocated String Report
 -----------------------------------
        422  "SESSION"
-       422  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
+       422  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
 
        156  "alwaysUsedChrome"
-       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:24
+       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
 
        156  "browsers"
-       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:24
+       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
 
        156  "dates"
-       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:24
+       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
 
        156  "longestSession"
-       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:24
+       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
 
        156  "sessionsCount"
-       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:24
+       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
 
        156  "totalTime"
-       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:24
+       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
 
        156  "usedIE"
-       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:24
+       156  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
 
         99  "0"
-        94  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
+        94  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
          2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         81  "1"
-        80  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        80  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         78  "user"
-        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        78  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         75  "2"
-        74  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        74  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         69  "3"
-        68  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        68  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         59  "4"
-        58  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        58  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         46  "5"
-        45  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        45  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         45  "6"
-        44  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        44  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         37  "7"
-        36  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        36  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         22  "8"
-        21  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        21  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         18  "72"
-        17  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        17  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         17  "14"
-        15  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
+        15  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
 
         16  "52"
-        15  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        15  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         16  "60"
-        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
 
         15  "113"
-         8  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         7  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
+         8  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         7  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
 
         15  "18"
-        14  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        14  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         15  "37"
-        14  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        14  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         15  "51"
-        14  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        14  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         14  "113 min."
-         7  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:24
-         7  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
+         7  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
+         7  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
 
         14  "13"
-        12  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
+        12  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
 
         14  "29"
-        13  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        13  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         14  "47"
-        12  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
+        12  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
 
         13  "17"
-        12  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        12  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         13  "45"
-        12  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        12  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         13  "70"
-        12  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        12  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         13  "73"
-        12  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        12  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         13  "92"
-         8  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+         8  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
+
+        12  "2017-05-31"
+         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
+         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:65
+         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
         12  "21"
-        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         12  "27"
-        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         12  "30"
-        10  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+        10  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
 
         12  "31"
-        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         12  "35"
-        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         12  "46"
-        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         12  "49"
-        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         12  "59"
-        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         12  "64"
-        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        11  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         12  "67"
-        10  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
+        10  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
 
         12  "71"
-        10  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
+        10  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
 
         11  "12"
-         8  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+         8  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
          1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
 
         11  "26"
-        10  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        10  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
         11  "36"
-        10  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
-
-        11  "41"
-        10  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:51
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:31
+        10  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:48
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:32
 
 
 Retained String Report
 -----------------------------------
          7  "113 min."
-         7  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
+         7  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
 
          5  "92 min."
-         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
 
          4  "117 min."
-         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
+         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
 
          4  "118 min."
-         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
+         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
 
          4  "2017-05-31"
-         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         4  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          4  "60 min."
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
 
          3  "103 min."
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
 
          3  "111 min."
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
 
          3  "119 min."
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
 
          3  "2016-10-19"
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          3  "2017-05-07"
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          3  "2017-08-27"
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          3  "2017-12-08"
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          3  "2018-04-24"
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          3  "2018-05-03"
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          3  "2018-10-24"
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          3  "2018-10-31"
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          3  "90 min."
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
 
          3  "98 min."
-         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
+         3  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
 
          2  "0 min."
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
          1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
 
          2  "100 min."
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
          1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
 
          2  "101 min."
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-
-         2  "106 min."
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-
-         2  "11 min."
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-
-         2  "114 min."
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-
-         2  "115 min."
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-
-         2  "116 min."
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-
-         2  "12 min."
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
-         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:85
-
-         2  "143 min."
          2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
 
+         2  "106 min."
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+
+         2  "11 min."
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+
+         2  "114 min."
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+
+         2  "115 min."
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+
+         2  "116 min."
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+
+         2  "12 min."
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:82
+
+         2  "143 min."
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:79
+
          2  "2016-05-22"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-05-24"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-06-13"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-08-02"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-08-03"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-08-22"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-09-01"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-09-05"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-09-17"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-09-26"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-10-02"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-10-05"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-10-24"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-11-07"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-11-08"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-11-29"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-12-11"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-12-20"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2016-12-27"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2017-01-06"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 
          2  "2017-02-06"
-         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:68
+         2  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:83
 

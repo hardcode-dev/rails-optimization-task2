@@ -2,6 +2,7 @@
 
 require 'set'
 require 'json'
+require 'date'
 
 USER = 'user'
 SPLIT = ','
@@ -32,10 +33,6 @@ def user_name(line)
   "#{n[2]} #{n[3]}"
 end
 
-def browser_decoration(browsers)
-  browsers.sort.join(SPLIT)
-end
-
 def make_report(line, user, is_user = false)
   if is_user
     @report[:usersStats][user] = { sessionsCount: 0,
@@ -44,7 +41,7 @@ def make_report(line, user, is_user = false)
                                    browsers: [],
                                    usedIE: false,
                                    alwaysUsedChrome: true,
-                                   dates: [] }
+                                   dates: ''.dup }
     @report[:totalUsers] += 1
   else
     line.upcase!
@@ -65,7 +62,7 @@ def make_report(line, user, is_user = false)
         @report[:usersStats][user][:totalTime] += data.to_i
         @report[:usersStats][user][:longestSession] = data.to_i if @report[:usersStats][user][:longestSession] < data.to_i
       when 6
-        @report[:usersStats][user][:dates] << data.chomp
+        @report[:usersStats][user][:dates] << " #{data.chomp}"
       end
     end
 
@@ -76,14 +73,14 @@ end
 
 def prepare_report
   @report[:uniqueBrowsersCount] = @report[:allBrowsers].length
-  @report[:allBrowsers]         = browser_decoration(@report[:allBrowsers])
+  @report[:allBrowsers]         = @report[:allBrowsers].sort.join(SPLIT)
 
   @report[:usersStats].each_value do |user|
     user[:totalTime]      = "#{user[:totalTime]} #{MIN}"
     user[:browsers].sort!
     user[:browsers]       = user[:browsers].join(COMMA)
     user[:longestSession] = "#{user[:longestSession]} #{MIN}"
-    user[:dates]          = user[:dates].sort {|a,b| b<=>a}
+    user[:dates]          = user[:dates].split(WS).sort!.reverse
   end
 end
 

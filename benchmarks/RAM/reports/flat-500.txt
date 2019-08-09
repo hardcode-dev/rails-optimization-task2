@@ -1,6 +1,6 @@
 Measure Mode: memory
-Thread ID: 47077642811760
-Fiber ID: 47077644893980
+Thread ID: 47307832334700
+Fiber ID: 47307834417540
 Total: 370552.000000
 Sort by: self_time
 

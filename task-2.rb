@@ -89,5 +89,5 @@ def print_memory_usage
 end
 
 # work('data_large.txt')
-
-# p print_memory_usage
+#
+# p print_memory_usage       # 959 MB

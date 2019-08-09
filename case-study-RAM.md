@@ -164,15 +164,17 @@ memory_profiler
 ```
 Total allocated: 591.63 kB (8870 objects)
 Total retained:  25.19 kB (2 objects)
+
+Retained String Report
+-----------------------------------
+         1  "Lazaro Raven"
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:33
+
+         1  "{\"totalUsers\":78,\"uniqueBrowsersCount\":172,\"totalSessions\":422,\"allBrowsers\":\"CHROME 1,CHROME 10,CHROME 11,CHROME 12,CHROME 13,CHROME 14,CHROME 16,CHROME 17,CHROME 18,CHROME 2,CHROME 20,CHROME 21,CHRO"
+         1  /media/pavel/5404A02704A00DD4/Code/rails-optimization-2-task2/task-2.rb:25
+
 ``` 
 
 
-У меня получилось не много уменьшить кол-во объектов 
-
 Результаты
-В результате проделанной оптимизации наконец удалось обработать файл с данными. Удалось улучшить метрику системы с того, что у вас было в начале, до того, что получилось в конце и уложиться в заданный бюджет.
-
-Какими ещё результатами можете поделиться
-
-Защита от регрессии производительности
-Для защиты от потери достигнутого прогресса при дальнейших изменениях программы о performance-тестах, которые вы написали
+В результате проделанной оптимизации наконец удалось обработать файл с данными. Удалось улучшить метрику системы с 2560Mb , до 959 Mb.

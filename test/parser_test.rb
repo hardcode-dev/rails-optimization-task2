@@ -1,4 +1,4 @@
-require_relative 'task-2'
+require_relative '../task-2'
 require 'minitest/autorun'
 
 class TestMe < Minitest::Test

@@ -1,2 +1,4 @@
 .idea
 result.json
+.DS_Store
+test/100000.txt

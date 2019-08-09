@@ -1,102 +1,136 @@
+# frozen_string_literal: true
+
 require 'set'
 require 'oj'
-# require 'pry'
 
 class Parser
+  SESSIONS_COUNT_KEY     = 'sessionsCount'
+  TOTAL_TIME_KEY         = 'totalTime'
+  LONGEST_SESSION_KEY    = 'longestSession'
+  BROWSERS_KEY           = 'browsers'
+  USED_IE_KEY            = 'usedIE'
+  ALWAYS_USED_CHROME_KEY = 'alwaysUsedChrome'
+  DATES_KEY              = 'dates'
+  DELIMITER              = ','
+  TEMP_FILE              = 'temp.txt'
+
   def work(file_path)
-    # Didn't use IO.foreach(file_path) here to have access to lines.size for Progressbar
-    lines = File.readlines(file_path)
-
-    users = []
-    sessions = {}
-    total_sessions_count = 0
+    total_users_count = 0
     unique_browsers = Set.new
+    total_sessions_count = 0
+    user_key = nil
+    user_stats = {
+      SESSIONS_COUNT_KEY => 0,
+      TOTAL_TIME_KEY => 0,
+      LONGEST_SESSION_KEY => 0,
+      BROWSERS_KEY => [],
+      USED_IE_KEY => false,
+      ALWAYS_USED_CHROME_KEY => true,
+      DATES_KEY => []
+    }
+    temp_file = File.open(TEMP_FILE, 'w')
 
-    lines.each do |line|
-      cols = line.split(',')
+    IO.foreach(file_path) do |line|
+      cols = line.split(DELIMITER)
 
-      if cols[0] == 'user'
-        users << parse_user(cols)
-      elsif cols[0] == 'session'
-        session = parse_session(cols)
-        sessions[session[:user_id]] ||= []
-        sessions[session[:user_id]] << session
+      if cols.size == 5 # User line contains 5 elements
+        total_users_count += 1
+        finalize_user_report(user_stats, user_key, temp_file, delimiter: true) if user_key
+        user_key = build_user_key(cols)
+      else
         total_sessions_count += 1
-        unique_browsers << session[:browser]
+        date, time, browser = extract_session_data(cols)
+        unique_browsers << browser
+        update_user_stats(user_stats, date, time, browser)
       end
     end
 
-    report = {
-      'totalUsers' => users.size,
+    finalize_last_user_report(user_stats, user_key, temp_file)
+    temp_file.close
+
+    report_root = {
+      'totalUsers' => total_users_count,
       'uniqueBrowsersCount' => unique_browsers.size,
       'totalSessions' => total_sessions_count,
       'allBrowsers' => unique_browsers.to_a.sort!.join(',').upcase,
-      'usersStats' => collect_stats_from_users(users, sessions)
+      'usersStats' => {}
     }
 
-    json = Oj.dump(report) << "\n"
+    create_result_file(report_root)
 
-    File.write('result.json', json)
+    File.delete(TEMP_FILE)
   end
 
-  def parse_user(user)
-    {
-      id: user[1],
-      first_name: user[2],
-      last_name: user[3],
-      age: user[4]
-    }
+  private
+
+  def build_user_key(cols)
+    cols.pop
+    second_name = cols.pop
+    first_name = cols.pop
+
+    "#{first_name} #{second_name}"
   end
 
-  def parse_session(session)
-    {
-      user_id: session[1],
-      session_id: session[2],
-      browser: session[3],
-      time: session[4].to_i,
-      date: session[5]
-    }
+  def extract_session_data(cols)
+    date = cols.pop.chomp!
+    time = cols.pop.to_i
+    browser = cols.pop
+
+    [date, time, browser]
   end
 
-  def collect_stats_from_users(users, sessions)
-    users_report = {}
+  def update_user_stats(user_stats, date, time, browser)
+    user_stats[SESSIONS_COUNT_KEY] += 1
+    user_stats[TOTAL_TIME_KEY] += time
+    user_stats[LONGEST_SESSION_KEY] = time if time > user_stats[LONGEST_SESSION_KEY]
+    user_stats[BROWSERS_KEY] << browser
+    user_stats[USED_IE_KEY] = true if !user_stats[USED_IE_KEY] && browser.match?(/INTERNET EXPLORER/i)
+    user_stats[ALWAYS_USED_CHROME_KEY] = false if user_stats[ALWAYS_USED_CHROME_KEY] && !browser.match?(/CHROME/i)
+    user_stats[DATES_KEY] << date
+  end
 
-    users.each do |user|
-      user_sessions = sessions[user[:id]] || []
+  def create_result_file(report_root)
+    report_root_json = Oj.dump(report_root).delete_suffix('}}')
 
-      total_sessions_time = 0
-      longest_session = 0
-      browsers = []
-      used_ie = false
-      used_chrome_only = true
-      dates = []
+    File.open('result.json', 'w') do |file|
+      file.write(report_root_json)
 
-      user_sessions.each do |session|
-        session_time = session[:time]
-        session_browser = session[:browser]
-
-        total_sessions_time += session_time
-        browsers << session_browser
-        longest_session = session_time if session_time > longest_session
-        used_ie = true if !used_ie && session_browser.match?(/INTERNET EXPLORER/i)
-        used_chrome_only = false if used_chrome_only && !session_browser.match?(/CHROME/i)
-        dates << session[:date].chomp
+      IO.foreach(TEMP_FILE, ']}') do |user_stat|
+        file.write(user_stat)
       end
 
-      user_report = {
-        'sessionsCount' => user_sessions.size,
-        'totalTime' => "#{total_sessions_time} min.",
-        'longestSession' => "#{longest_session} min.",
-        'browsers' => browsers.sort!.join(', ').upcase,
-        'usedIE' => used_ie,
-        'alwaysUsedChrome' => used_chrome_only,
-        'dates' => dates.sort!.reverse!
-      }
-
-      user_key = "#{user[:first_name]} #{user[:last_name]}"
-      users_report[user_key] = user_report
+      file.write("}}\n")
     end
+  end
 
-    users_report
+  def finalize_user_report(user_stats, user_key, temp_file, delimiter: false)
+    complete_user_stats(user_stats)
+    write_user_stats_to_temp_file(user_stats, user_key, temp_file, delimiter)
+    clean_user_stats(user_stats)
+  end
+  alias_method :finalize_last_user_report, :finalize_user_report
+
+  def complete_user_stats(user_stats)
+    user_stats[TOTAL_TIME_KEY] = "#{user_stats[TOTAL_TIME_KEY]} min."
+    user_stats[LONGEST_SESSION_KEY] = "#{user_stats[LONGEST_SESSION_KEY]} min."
+    user_stats[BROWSERS_KEY] = user_stats[BROWSERS_KEY].sort!.join(', ').upcase
+    user_stats[DATES_KEY] = user_stats[DATES_KEY].sort!.reverse!
+  end
+
+  def write_user_stats_to_temp_file(user_stats, user_key, temp_file, delimiter)
+    json = Oj.dump(user_stats)
+    str = "\"#{user_key}\":" + json
+    str << DELIMITER if delimiter
+    temp_file.write(str)
+  end
+
+  def clean_user_stats(user_stats)
+    user_stats[SESSIONS_COUNT_KEY] = 0
+    user_stats[TOTAL_TIME_KEY] = 0
+    user_stats[LONGEST_SESSION_KEY] = 0
+    user_stats[BROWSERS_KEY] = []
+    user_stats[USED_IE_KEY] = false
+    user_stats[ALWAYS_USED_CHROME_KEY] = true
+    user_stats[DATES_KEY] = []
   end
 end

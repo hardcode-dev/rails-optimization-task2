@@ -175,6 +175,10 @@ Retained String Report
 
 ``` 
 
+Stackprof 
+Не густо информации.
+![point](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task2/task-2-optimaiz-ram/benchmarks/RAM/reports/img/point-5.png)
+![point](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task2/task-2-optimaiz-ram/benchmarks/RAM/reports/img/point-6.png)
 
 Результаты
 В результате проделанной оптимизации наконец удалось обработать файл с данными. Удалось улучшить метрику системы с 2560Mb , до 959 Mb.

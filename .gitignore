@@ -1,5 +1,6 @@
 data_large.txt
 .idea
 result.json*
+.result.tmp
 benchmarks/**/result*
 result_large.json

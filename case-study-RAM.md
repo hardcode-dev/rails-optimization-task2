@@ -177,13 +177,26 @@ Retained String Report
 
 Stackprof 
 Не густо информации.
-![point](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task2/task-2-optimaiz-ram/benchmarks/RAM/reports/img/point-5.png)
-![point](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task2/task-2-optimaiz-ram/benchmarks/RAM/reports/img/point-6.png)
+![point](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task2/master/benchmarks/RAM/reports/img/point-5.png)
+
+![point](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task2/master/benchmarks/RAM/reports/img/point-6.png)
 
 Ruby-prof
-![point](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task2/task-2-optimaiz-ram/benchmarks/RAM/reports/img/point-7.png)
+![point](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task2/master/benchmarks/RAM/reports/img/point-7.png)
 Результаты
 В результате проделанной оптимизации наконец удалось обработать файл с данными. Удалось улучшить метрику системы с 2560Mb , до 959 Mb.
+
+####Ваша находка №6
+
+Протестировав гем Oj, как оказалось он потребляет не много меньше памяти чем json. Но чтобы он корректно работал пришлось все ключи сделать строками. Благо frozen_string_literal не даёт плодить лишние алокации.
+
+```
+Total allocated: 506.57 kB (6874 objects)
+Total retained:  25.19 kB (2 objects)
+```
+
+
+
 
 Так же выявил, что при работе с сортировкой не всегда хорощо работают bang! методы. 
 

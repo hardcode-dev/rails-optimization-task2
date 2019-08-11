@@ -497,4 +497,3 @@ session,76,2,Safari 1,71,2017-03-08
 session,76,3,Chrome 43,3,2018-03-31
 session,76,4,Chrome 35,22,2017-04-26
 session,76,5,Firefox 37,21,2016-11-01
-user,77,Lazaro,Raven,33

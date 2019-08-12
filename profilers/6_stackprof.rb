@@ -5,8 +5,10 @@
 # stackprof stackprof.dump --method Object#work
 require_relative '../config/environment'
 
+GC.disable
+
 StackProf.run(mode: :wall, out: 'profilers/stackprof_reports/stackprof.dump', interval: 1000) do
-  Task.new(data_file_path: './spec/fixtures/data_10k.txt').work
+  Task.new(data_file_path: './spec/fixtures/data_100k.txt').work
 end
 
 result_file_path = 'data/result.json'

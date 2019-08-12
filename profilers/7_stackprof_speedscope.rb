@@ -4,8 +4,10 @@
 
 require_relative '../config/environment'
 
+GC.disable
+
 profile = StackProf.run(mode: :wall, raw: true) do
-  Task.new(data_file_path: './spec/fixtures/data_10k.txt').work
+  Task.new(data_file_path: './spec/fixtures/data_100k.txt').work
 end
 
 File.write('profilers/stackprof_reports/stackprof.json', JSON.generate(profile))

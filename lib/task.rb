@@ -1,6 +1,5 @@
 class Task
-  def initialize(result_file_path: nil, data_file_path: nil, dasable_gc: true)
-    GC.disable if dasable_gc
+  def initialize(result_file_path: nil, data_file_path: nil)
     @result_file_path = result_file_path || 'data/result.json'
     @data_file_path = data_file_path || 'data/data_large.txt'
   end
@@ -29,39 +28,30 @@ class Task
   end
 
   def work
-    user_objects = []
-    sessions = []
     uniqueBrowsers = Set.new
+    report = { totalUsers: 0, uniqueBrowsersCount: 0, totalSessions: 0, allBrowsers: 0, usersStats: {} }
 
-    File.foreach(data_file_path) do |line|
+    File.foreach(data_file_path).with_index do |line, index|
       cols = line.split(',')
+
       if cols[0] == 'user'
+        prepare_stats(report, @user) unless  @user.nil?
         @user = User.new(attributes: parse_user(cols), sessions: [])
-        user_objects << @user
+        report[:totalUsers] += 1
       end
 
       if cols[0] == 'session'
         session = parse_session(cols)
         uniqueBrowsers << session[:browser]
-        sessions << session
         @user.sessions << session
+        report[:totalSessions] += 1
       end
     end
 
-    report = {}
-
-    report[:totalUsers] = user_objects.count
-    progress_bar = ProgressBar.create(total: user_objects.count, format: '%a, %J, %E %B')
+    prepare_stats(report, @user)
 
     report[:uniqueBrowsersCount] = uniqueBrowsers.count
-    report[:totalSessions] = sessions.count
     report[:allBrowsers] = uniqueBrowsers.sort.join(',')
-    report[:usersStats] = {}
-
-    user_objects.each do |user_object|
-      prepare_stats(report, user_object)
-      progress_bar.increment
-    end
 
     File.write(result_file_path, "#{Oj.dump(report, mode: :compat)}\n")
     puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)

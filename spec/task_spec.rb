@@ -25,74 +25,18 @@ describe Task do
     end
 
     describe "performnce test" do
-      context "when 20k rows" do
-        let(:data_file_path) { 'spec/fixtures/data_20k.txt' }
+      context "when 100k rows" do
+        let(:data_file_path) { 'spec/fixtures/data_100k.txt' }
 
-        it 'executes faster than 0.2 seconds' do
-          expect { task.work }.to perform_under(0.1).sec.warmup(2).times.sample(10).times
-        end
-      end
-
-      context "when 18 rows" do
-        it "executes at least 5_300 times in second" do
-          allow(File).to receive(:write).and_return(true)
-          expect { task.work }.to perform_at_least(6_000).within(1).warmup(0.2).ips
+        it 'executes faster than 0.6 seconds' do
+          expect { task.work }.to perform_under(0.6).sec.warmup(2).times.sample(10).times
         end
       end
     end
   end
 end
-# Изначально
-# 1_000 ~ 0.46
-# 5_000 ~ 0.72
-# 10_000 ~ 3.2
-# 20_000 ~ 13.7
-# 100_000 ~ 303
+# Begin
+# 100_000 ~ 0.670
 
-# После 1го исправления
-# 10_000 ~ 0.335
-# 20_000 ~ 1.48
-
-# После второго исправления
-# 10_000 ~ 0.315
-# 20_000 ~ 1.29
-
-# После третьего исправления
-# 10_000 ~ 0.272
-# 20_000 ~ 1.11
-
-# После четвёртого исправления
-# 10_000 ~ 0.264
-# 20_000 ~ 0.920
-
-# После пятого исправления
-# 10_000 ~ 0.258
-# 20_000 ~ 0.850
-
-# После шестого исправления
-# 10_000 ~ 0.218
-# 20_000 ~ 0.804
-
-# После седьмого исправления
-# 10_000 ~ 0.217
-# 20_000 ~ 0.770
-
-# После восьмого исправления
-# 10_000 ~ 0.201
-# 20_000 ~ 0.750
-
-# После девятого исправления
-# 10_000 ~ 0.198
-# 20_000 ~ 0.731
-
-# После десятого исправления
-# 10_000 ~ 0.187
-# 20_000 ~ 0.716
-
-# После одинацатого исправления
-# 10_000 ~ 0.075
-# 20_000 ~ 0.136
-
-# После двенадцатого исправления
-# 10_000 ~ 0.034
-# 20_000 ~ 0.064
+# 1 fix
+# 100_000 ~ 0.515

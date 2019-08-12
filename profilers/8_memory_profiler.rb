@@ -1,5 +1,7 @@
 require_relative '../config/environment'
 
+GC.disable
+
 MemoryProfiler.start
 
 Task.new(data_file_path: './spec/fixtures/data_10k.txt').work

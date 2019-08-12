@@ -1,5 +1,5 @@
 # Stackprof report
-# ruby profilers/6_stackprof.rb
+# ruby profilers/06_stackprof.rb
 # cd profilers/stackprof_reports/
 # stackprof stackprof.dump
 # stackprof stackprof.dump --method Object#work
@@ -13,3 +13,7 @@ end
 
 result_file_path = 'data/result.json'
 File.delete(result_file_path) if File.exist?(result_file_path)
+
+# stackprof --graphviz profilers/stackprof_reports/stackprof.dump > bla.dot
+# dot -Tpng bla.dot > bla.png
+# open bla.png

@@ -4,7 +4,7 @@
 # sudo rbspy record ruby my-script.rb # постоение flamegraph
 
 # sudo su
-# rbspy record ruby profilers/1_ruby_spy.rb
+# rbspy record ruby profilers/01_ruby_spy.rb
 
 require_relative '../config/environment'
 

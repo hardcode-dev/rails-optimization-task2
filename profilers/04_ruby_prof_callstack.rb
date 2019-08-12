@@ -1,6 +1,6 @@
-# RubyProf Graph report
-# ruby profilers/3_ruby_prof_graf.rb
-# open profilers/ruby_prof_reports/graph.html
+# RubyProf CallStack report
+# ruby profilers/04_ruby_prof_callstack.rb
+# open profilers/ruby_prof_reports/callstack.html
 require_relative '../config/environment'
 
 RubyProf.measure_mode = RubyProf::WALL_TIME
@@ -11,8 +11,9 @@ result = RubyProf.profile do
   Task.new(data_file_path: './spec/fixtures/data_100k.txt').work
 end
 
-printer = RubyProf::GraphHtmlPrinter.new(result)
-printer.print(File.open('profilers/ruby_prof_reports/graph.html', "w+"))
+printer = RubyProf::CallStackPrinter.new(result)
+printer.print(File.open('profilers/ruby_prof_reports/callstack.html', 'w+'))
 
 result_file_path = 'data/result.json'
 File.delete(result_file_path) if File.exist?(result_file_path)
+

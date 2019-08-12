@@ -1,5 +1,5 @@
 # Stackprof report -> flamegraph in speedscope
-# ruby profilers/7_stackprof_speedscope.rb
+# ruby profilers/07_stackprof_speedscope.rb
 # Open via browser speedscope.app
 
 require_relative '../config/environment'

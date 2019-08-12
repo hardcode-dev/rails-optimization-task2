@@ -1,5 +1,6 @@
-# ruby profilers/2_ruby_prof_flat.rb
-# cat profilers/ruby_prof_reports/flat.txt
+# RubyProf Graph report
+# ruby profilers/03_ruby_prof_graf.rb
+# open profilers/ruby_prof_reports/graph.html
 require_relative '../config/environment'
 
 RubyProf.measure_mode = RubyProf::WALL_TIME
@@ -10,8 +11,8 @@ result = RubyProf.profile do
   Task.new(data_file_path: './spec/fixtures/data_100k.txt').work
 end
 
-printer = RubyProf::FlatPrinter.new(result)
-printer.print(File.open("profilers/ruby_prof_reports/flat.txt", "w+"))
+printer = RubyProf::GraphHtmlPrinter.new(result)
+printer.print(File.open('profilers/ruby_prof_reports/graph.html', "w+"))
 
 result_file_path = 'data/result.json'
 File.delete(result_file_path) if File.exist?(result_file_path)

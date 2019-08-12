@@ -1,4 +1,11 @@
+# frozen_string_literal: true
+
 class Task
+  COMMA = ','.freeze
+  COMMA_WITH_INDENT = ', '.freeze
+  USER = 'user'.freeze
+  SESSION = 'session'.freeze
+
   def initialize(result_file_path: nil, data_file_path: nil)
     @result_file_path = result_file_path || 'data/result.json'
     @data_file_path = data_file_path || 'data/data_large.txt'
@@ -32,15 +39,15 @@ class Task
     report = { totalUsers: 0, uniqueBrowsersCount: 0, totalSessions: 0, allBrowsers: 0, usersStats: {} }
 
     File.foreach(data_file_path).with_index do |line, index|
-      cols = line.split(',')
+      cols = line.split(COMMA)
 
-      if cols[0] == 'user'
+      if cols[0] == USER
         prepare_stats(report, @user) unless  @user.nil?
         @user = User.new(attributes: parse_user(cols), sessions: [])
         report[:totalUsers] += 1
       end
 
-      if cols[0] == 'session'
+      if cols[0] == SESSION
         session = parse_session(cols)
         uniqueBrowsers << session[:browser]
         @user.sessions << session
@@ -51,7 +58,7 @@ class Task
     prepare_stats(report, @user)
 
     report[:uniqueBrowsersCount] = uniqueBrowsers.count
-    report[:allBrowsers] = uniqueBrowsers.sort.join(',')
+    report[:allBrowsers] = uniqueBrowsers.sort.join(COMMA)
 
     File.write(result_file_path, "#{Oj.dump(report, mode: :compat)}\n")
     puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
@@ -71,7 +78,7 @@ class Task
         sessionsCount: user.sessions.count,
         totalTime:  "#{user_times.sum} min.",
         longestSession:  "#{user_times.max} min.",
-        browsers: user_browsers.sort.join(', '),
+        browsers: user_browsers.sort.join(COMMA_WITH_INDENT),
         usedIE: user_browsers.any? { |b| b.match? /INTERNET EXPLORER/ },
         alwaysUsedChrome: user_browsers.all? { |b| b.match? /CHROME/ },
         dates: user_dates.sort { |a, b| b <=> a }

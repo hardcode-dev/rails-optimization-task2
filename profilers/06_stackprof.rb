@@ -4,6 +4,7 @@
 # stackprof stackprof.dump
 # stackprof stackprof.dump --method Object#work
 require_relative '../config/environment'
+require 'stackprof'
 
 GC.disable
 

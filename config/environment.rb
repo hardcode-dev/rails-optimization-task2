@@ -1,11 +1,10 @@
-require 'bundler'
+# require 'bundler'
 
-Bundler.require(:default)
+# Bundler.require(:default)
 
+require 'set'
+require 'oj'
 require 'benchmark'
-require 'json'
-require 'pry'
-require 'date'
 
 $LOAD_PATH << File.expand_path('lib', __dir__)
 

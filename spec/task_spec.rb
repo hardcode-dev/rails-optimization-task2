@@ -27,22 +27,23 @@ describe Task do
     describe "performnce test" do
       context "when 100k rows" do
         let(:data_file_path) { 'spec/fixtures/data_100k.txt' }
+        let(:task_work_time) { Benchmark.measure { task.work }.real }
+        let(:task_memory_usage) do
+          usage_before = `ps -o rss= -p #{Process.pid}`.to_i / 1024
+          task.work
+          usage_after = `ps -o rss= -p #{Process.pid}`.to_i / 1024
+
+          usage_after - usage_before
+        end
 
         it 'executes faster than 0.6 seconds' do
-          expect { task.work }.to perform_under(0.6).sec.warmup(2).times.sample(10).times
+          expect(task_work_time).to be < 0.6
+        end
+
+        it 'uses less then 6 megabyte' do
+          expect(task_memory_usage).to be < 6
         end
       end
     end
   end
 end
-# Begin
-# 100_000 ~ 0.670
-
-# 1 fix
-# 100_000 ~ 0.515
-
-# 2 fix
-# 100_000 ~ 0.515, 387
-
-# 3 fix
-

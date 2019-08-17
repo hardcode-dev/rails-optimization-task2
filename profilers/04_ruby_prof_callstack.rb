@@ -2,6 +2,7 @@
 # ruby profilers/04_ruby_prof_callstack.rb
 # open profilers/ruby_prof_reports/callstack.html
 require_relative '../config/environment'
+require 'ruby-prof'
 
 RubyProf.measure_mode = RubyProf::WALL_TIME
 

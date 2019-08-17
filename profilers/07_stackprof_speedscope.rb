@@ -3,6 +3,7 @@
 # Open via browser speedscope.app
 
 require_relative '../config/environment'
+require 'stackprof'
 
 GC.disable
 

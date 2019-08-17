@@ -3,6 +3,8 @@
 # open profilers/ruby_prof_reports/graph.html
 require_relative '../config/environment'
 
+require 'ruby-prof'
+
 RubyProf.measure_mode = RubyProf::WALL_TIME
 
 GC.disable

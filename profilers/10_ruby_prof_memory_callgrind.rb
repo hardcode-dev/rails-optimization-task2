@@ -4,6 +4,7 @@
 # qcachegrind profilers/ruby_prof_reports/...
 
 require_relative '../config/environment'
+require 'ruby-prof'
 
 # На этот раз профилируем не allocations, а объём памяти!
 RubyProf.measure_mode = RubyProf::MEMORY

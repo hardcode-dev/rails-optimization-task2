@@ -5,7 +5,7 @@
 # qcachegrind profilers/ruby_prof_reports/...
 
 require_relative '../config/environment'
-
+require 'ruby-prof'
 RubyProf.measure_mode = RubyProf::WALL_TIME
 
 GC.disable

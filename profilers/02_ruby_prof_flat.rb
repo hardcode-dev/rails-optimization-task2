@@ -2,6 +2,8 @@
 # cat profilers/ruby_prof_reports/flat.txt
 require_relative '../config/environment'
 
+require 'ruby-prof'
+
 RubyProf.measure_mode = RubyProf::WALL_TIME
 
 GC.disable

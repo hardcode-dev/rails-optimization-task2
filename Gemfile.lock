@@ -12,6 +12,9 @@ GEM
     fasterer (0.6.0)
       colorize (~> 0.7)
       ruby_parser (>= 3.13.0)
+    ffi (1.11.1)
+    get_process_mem (0.2.4)
+      ffi (~> 1.0)
     jaro_winkler (1.5.3)
     memory_profiler (0.9.14)
     method_source (0.9.2)
@@ -66,6 +69,7 @@ PLATFORMS
 
 DEPENDENCIES
   fasterer
+  get_process_mem
   memory_profiler
   oj
   pry-byebug

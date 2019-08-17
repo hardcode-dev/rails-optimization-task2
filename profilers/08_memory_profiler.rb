@@ -1,7 +1,7 @@
 # ruby profilers/08_memory_profiler.rb
 require_relative '../config/environment'
 
-GC.disable
+# GC.disable
 
 MemoryProfiler.start
 

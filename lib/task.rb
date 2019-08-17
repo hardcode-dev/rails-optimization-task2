@@ -4,85 +4,101 @@ class Task
   COMMA = ','.freeze
   COMMA_WITH_INDENT = ', '.freeze
   USER = 'user'.freeze
-  SESSION = 'session'.freeze
+  TOTAL_TIME = 'totalTime'
+  SESSIONS_COUNT = 'sessionsCount'
+  USED_IE = 'usedIE'
+  ALWAYS_USED_CHROME = 'alwaysUsedChrome'
+  BROWSERS = 'browsers'
+  DATES = 'dates'
+  LONGEST_SESSION = 'longestSession'
+  TIME = 'time'
+  DATE = 'date'
+  BROWSER = 'browser'
 
   def initialize(result_file_path: nil, data_file_path: nil)
     @result_file_path = result_file_path || 'data/result.json'
     @data_file_path = data_file_path || 'data/data_large.txt'
   end
 
-  def parse_user(fields)
-    {
-      id: fields[1],
-      full_name: "#{fields[2]} #{fields[3]}"
-    }
+  def parse_full_name(cols)
+    cols.pop
+    second_name = cols.pop
+    first_name = cols.pop
+
+    "#{first_name} #{second_name}"
   end
 
-  def parse_session(fields)
-    {
-      user_id: fields[1],
-      session_id: fields[2],
-      browser: fields[3].upcase,
-      time: fields[4].to_i,
-      date: fields[5].chomp,
-    }
-  end
+  def parse_session(cols)
+    date = cols.pop.chomp
+    time = cols.pop.to_i
+    browser = cols.pop
 
-  def collect_stats_from_user(report, user)
-    user_key = user.attributes[:full_name]
-    report[:usersStats][user_key] ||= {}
-    report[:usersStats][user_key] = report[:usersStats][user_key].merge(yield(user))
+    [date, time, browser]
   end
 
   def work
     uniqueBrowsers = Set.new
     report = { totalUsers: 0, uniqueBrowsersCount: 0, totalSessions: 0, allBrowsers: 0, usersStats: {} }
+    user_full_name = nil
 
-    File.foreach(data_file_path).with_index do |line, index|
+    user_stats = init_user_stats
+
+    File.foreach(data_file_path) do |line|
       cols = line.split(COMMA)
 
-      if cols[0] == USER
-        prepare_stats(report, @user) unless  @user.nil?
-        @user = User.new(attributes: parse_user(cols), sessions: [])
+      if line.start_with?(USER)
+        finalize_user_stats(user_stats, report, user_full_name) unless  user_full_name.nil?
+        user_full_name = parse_full_name(cols)
         report[:totalUsers] += 1
-      end
-
-      if cols[0] == SESSION
-        session = parse_session(cols)
-        uniqueBrowsers << session[:browser]
-        @user.sessions << session
+      else
+        date, time, browser = parse_session(cols)
+        uniqueBrowsers << browser
+        update_user_stats(user_stats, date, time, browser)
         report[:totalSessions] += 1
       end
     end
 
-    prepare_stats(report, @user)
+    finalize_user_stats(user_stats, report, user_full_name)
 
     report[:uniqueBrowsersCount] = uniqueBrowsers.count
     report[:allBrowsers] = uniqueBrowsers.sort.join(COMMA)
 
     File.write(result_file_path, "#{Oj.dump(report, mode: :compat)}\n")
-    puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
   end
 
   private
 
   attr_reader :result_file_path, :data_file_path
 
-  def prepare_stats(report, user_object)
-    collect_stats_from_user(report, user_object) do |user|
-      user_times = user.sessions.map { |session| session[:time] }
-      user_browsers = user.sessions.map { |session| session[:browser] }
-      user_dates = user.sessions.map { |session| session[:date] }
+  def finalize_user_stats(user_stats, report, user_full_name)
+    user_stats[LONGEST_SESSION] = "#{user_stats[LONGEST_SESSION]} min."
+    user_stats[TOTAL_TIME] = "#{user_stats[TOTAL_TIME]} min."
+    user_stats[BROWSERS] = user_stats[BROWSERS].sort.join(COMMA_WITH_INDENT)
+    user_stats[DATES] = user_stats[DATES].sort { |a, b| b <=> a }
 
-      {
-        sessionsCount: user.sessions.count,
-        totalTime:  "#{user_times.sum} min.",
-        longestSession:  "#{user_times.max} min.",
-        browsers: user_browsers.sort.join(COMMA_WITH_INDENT),
-        usedIE: user_browsers.any? { |b| b.match? /INTERNET EXPLORER/ },
-        alwaysUsedChrome: user_browsers.all? { |b| b.match? /CHROME/ },
-        dates: user_dates.sort { |a, b| b <=> a }
-      }
-    end
+    report[:usersStats][user_full_name] = user_stats.clone
+    init_user_stats(user_stats)
+  end
+
+  def update_user_stats(user_stats, date, time, browser)
+    user_stats[SESSIONS_COUNT] += 1
+    user_stats[TOTAL_TIME] += time
+    user_stats[LONGEST_SESSION] = time > user_stats[LONGEST_SESSION] ? time : user_stats[LONGEST_SESSION]
+    user_stats[USED_IE] = browser.match?(/INTERNET EXPLORER/) unless user_stats[USED_IE]
+    user_stats[ALWAYS_USED_CHROME] = user_stats[ALWAYS_USED_CHROME] && browser.match?(/CHROME/)
+    user_stats[BROWSERS] << browser
+    user_stats[DATES] << date
+  end
+
+  def init_user_stats(stats = {})
+    stats[SESSIONS_COUNT] = 0
+    stats[TOTAL_TIME] = 0
+    stats[LONGEST_SESSION] = 0
+    stats[BROWSERS] = []
+    stats[USED_IE] = false
+    stats[ALWAYS_USED_CHROME] = true
+    stats[DATES] = []
+
+    stats
   end
 end

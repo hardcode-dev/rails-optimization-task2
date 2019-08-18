@@ -1,0 +1,22 @@
+digraph "callgraph" {
+  F7f817c8842a0 [label="MultiJson/Adapter::dump^\n1 994 800"];
+  F7f817c885940 [label="MultiJson::dump\n1 994 800"];
+  F7f817c889130 [label="String::upcase\n2 204 480"];
+  F7f817c889540 [label="Array::map!\n8 605 512"];
+  F7f817c88a0f0 [label="Array::map\n9 112 080"];
+  F7f817c88a450 [label="String::split\n9 311 560"];
+  F7f817c88a9a0 [label="IO::each\n32 525 880"];
+  F7f817c88b2e0 [label="Array::each\n2 204 480"];
+  F7f817c891230 [label="Object::work\n32 525 880"];
+  F7f817c8936c0 [label="[global]::\n32 525 880"];
+  F7f817c885940 -> F7f817c8842a0 [weight=2,label="1 994 800 (4 987x)"];
+  F7f817c889540 -> F7f817c889130 [weight=2,label="2 204 480 (55 112x)"];
+  F7f817c88a0f0 -> F7f817c88a450 [weight=2,label="7 610 880 (32 543x)"];
+  F7f817c88a9a0 -> F7f817c885940 [weight=2,label="1 994 800 (4 987x)"];
+  F7f817c88a9a0 -> F7f817c889540 [weight=2,label="8 605 512 (4 987x)"];
+  F7f817c88a9a0 -> F7f817c88a0f0 [weight=2,label="9 112 080 (4 987x)"];
+  F7f817c88a9a0 -> F7f817c88a450 [weight=2,label="1 700 680 (4 987x)"];
+  F7f817c88a9a0 -> F7f817c88b2e0 [weight=2,label="2 204 480 (4 987x)"];
+  F7f817c891230 -> F7f817c88a9a0 [weight=2,label="32 525 880 (1x)"];
+  F7f817c8936c0 -> F7f817c891230 [weight=2,label="32 525 880 (1x)"];
+}

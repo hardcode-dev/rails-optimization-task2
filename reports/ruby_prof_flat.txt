@@ -1,0 +1,340 @@
+Measure Mode: allocations
+Thread ID: 70269398073360
+Fiber ID: 70269394022600
+Total: 657733.000000
+Sort by: self_time
+
+ %self      total      self      wait     child     calls  name                           location
+ 35.39  232799.000 232799.000     0.000     0.000    37535   String#split                   
+ 11.37  642527.000 74800.000     0.000 567727.000        1   MultiJson#default_adapter      /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:46
+  8.38  55116.000 55116.000     0.000     0.000    55116   String#upcase                  
+  6.07  39901.000 39901.000     0.000     0.000     4988   <Module::Oj>#dump              
+  5.71  227837.000 37545.000     0.000 190292.000     4998   Array#map                      
+  4.65  30593.000 30593.000     0.000     0.000    30593   String#[]                      
+  4.19  64797.000 27558.000     0.000 37239.000     5024  *Array#each                     
+  4.19  82972.000 27557.000     0.000 55415.000     5002   Array#map!                     
+  4.19  27556.000 27556.000     0.000     0.000    27556   String#delete                  
+  3.00  40094.000 19737.000     0.000 20357.000     5479  *Array#any?                     
+  1.77  23270.000 11635.000     0.000 11635.000     4997   Array#all?                     
+  1.52   9982.000  9982.000     0.000     0.000     9979   IO#write                       
+  1.52   9976.000  9976.000     0.000     0.000     9976   Array#join                     
+  1.52   9975.000  9975.000     0.000     0.000     9975   Integer#to_s                   
+  1.36   8965.000  8915.000     0.000    50.000     9987   Array#sort!                    
+  0.91   6598.000  6011.000     0.000   587.000       22  *Kernel#gem_original_require    
+  0.76   4991.000  4991.000     0.000     0.000     4991   Array#reverse                  
+  0.76   9990.000  4991.000     0.000  4999.000     4988   MultiJson::OptionsCache#fetch  /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb:10
+  0.76   4991.000  4991.000     0.000     0.000     4991   Symbol#to_s                    
+  0.76  14965.000  4990.000     0.000  9975.000        1   <Class::IO>#foreach            
+  0.76   4987.000  4987.000     0.000     0.000     4987   String#chomp                   
+  0.14    951.000   951.000     0.000     0.000      828   <Class::File>#file?            
+  0.09    600.000   600.000     0.000     0.000      300   <Class::File>#join             
+  0.05   9660.000   316.000     0.000  9344.000       21  *Kernel#require                 /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:34
+  0.04    507.000   288.000     0.000   219.000        1   Kernel#eval                    
+  0.03    201.000   201.000     0.000     0.000    27558   Set#add                        /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:348
+  0.01    333.000    64.000     0.000   269.000       39  *Class#new                      
+  0.01     84.000    60.000     0.000    24.000       12   <Class::Dir>#chdir             
+  0.01     58.000    58.000     0.000     0.000       29   <Class::File>#exist?           
+  0.01     52.000    52.000     0.000     0.000       26   Array#flatten                  
+  0.01     82.000    42.000     0.000    40.000       14   <Class::Gem::Requirement>#parse /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:97
+  0.01     36.000    36.000     0.000     0.000       15   Regexp#=~                      
+  0.00   2500.000    32.000     0.000  2468.000       16  *Enumerable#find                
+  0.00     31.000    31.000     0.000     0.000       17   <Class::File>#expand_path      
+  0.00    218.000    31.000     0.000   187.000        1   Gem::Specification#initialize  /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2046
+  0.00     24.000    24.000     0.000     0.000        1   Kernel#`                       
+  0.00  657556.000    16.000     0.000 657540.000        2  *MultiJson#load_adapter         /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:98
+  0.00     18.000    15.000     0.000     3.000        1   Gem::Specification#set_not_nil_attributes_to_default_values /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2035
+  0.00     15.000    15.000     0.000     0.000        3   Enumerable#partition           
+  0.00     14.000    14.000     0.000     0.000        2   String#scan                    
+  0.00  657713.000    12.000     0.000 657701.000        1   IO#each                        
+  0.00     12.000    12.000     0.000     0.000        4   Enumerable#drop_while          
+  0.00     11.000    11.000     0.000     0.000        8   <Class::File>#dirname          
+  0.00     10.000    10.000     0.000     0.000        2   Module#define_method           
+  0.00      9.000     9.000     0.000     0.000        9   Kernel#dup                     
+  0.00     23.000     9.000     0.000    14.000        4   BasicObject#instance_eval      
+  0.00    139.000     8.000     0.000   131.000        8   Gem::Dependency#initialize     /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb:39
+  0.00     49.000     8.000     0.000    41.000        7   <Module::Gem>#env_requirement  /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:915
+  0.00      8.000     8.000     0.000     0.000        8   Array#compact                  
+  0.00      7.000     7.000     0.000     0.000        4   Array#uniq                     
+  0.00      7.000     7.000     0.000     0.000        4   Array#sort                     
+  0.00      7.000     7.000     0.000     0.000        7   Array#select                   
+  0.00   1179.000     7.000     0.000  1172.000        4   <Module::Gem>#remove_unresolved_default_spec /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:1284
+  0.00      6.000     6.000     0.000     0.000        3   Enumerable#find_all            
+  0.00      6.000     6.000     0.000     0.000        6   <Module::Gem>#default_dir      /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/defaults.rb:30
+  0.00     36.000     6.000     0.000    30.000        4   Gem::Specification#add_bindir  /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1507
+  0.00      6.000     6.000     0.000     0.000        2   <Class::Dir>#pwd               
+  0.00      5.000     5.000     0.000     0.000        5   Class#initialize               
+  0.00  657732.000     5.000     0.000 657727.000        1   Object#work                    task-2.rb:8
+  0.00      7.000     5.000     0.000     2.000        2   Set#do_with_enum               /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:122
+  0.00      8.000     5.000     0.000     3.000        1   MultiJson::OptionsCache#write  /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb:24
+  0.00    173.000     4.000     0.000   169.000       17   Gem::Requirement#initialize    /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:123
+  0.00    168.000     4.000     0.000   164.000       14   <Class::Gem::Requirement>#create /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:50
+  0.00      4.000     4.000     0.000     0.000        1   <Class::IO>#read               
+  0.00      4.000     4.000     0.000     0.000        8   Array#reverse_each             
+  0.00      4.000     4.000     0.000     0.000        2   Enumerable#reduce              
+  0.00      4.000     4.000     0.000     0.000        2   <Class::File>#basename         
+  0.00      4.000     4.000     0.000     0.000        3   String#gsub                    
+  0.00      3.000     3.000     0.000     0.000        2   Module#extend_object           
+  0.00    802.000     3.000     0.000   799.000        1   MultiJson#load_adapter_from_string_name /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:155
+  0.00      5.000     3.000     0.000     2.000        1   Enumerable#sort                
+  0.00      6.000     3.000     0.000     3.000        3   <Class::IO>#open               
+  0.00      3.000     3.000     0.000     0.000        1   String#=~                      
+  0.00      3.000     3.000     0.000     0.000        3   File#initialize                
+  0.00      3.000     3.000     0.000     0.000        1   Enumerable#grep                
+  0.00      7.000     3.000     0.000     4.000        1   Gem::Specification#date=       /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1742
+  0.00    101.000     3.000     0.000    98.000        3   Gem::Dependency#to_spec        /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb:322
+  0.00      3.000     3.000     0.000     0.000        1   Module#attr_reader             
+  0.00      2.000     2.000     0.000     0.000        1   String#capitalize              
+  0.00      3.000     2.000     0.000     1.000        1   Enumerable#each_with_index     
+  0.00      2.000     2.000     0.000     0.000        7   Gem::Version#prerelease?       /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:292
+  0.00      2.000     2.000     0.000     0.000        2   <Class::Time>#now              
+  0.00     26.000     2.000     0.000    24.000        2   Gem::Version#_split_segments   /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:392
+  0.00      2.000     2.000     0.000     0.000        1   <Class::Proc>#new              
+  0.00      2.000     2.000     0.000     0.000        1   String#%                       
+  0.00      2.000     2.000     0.000     0.000        1   MultiJson::OptionsCache#reset  /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options_cache.rb:5
+  0.00      2.000     2.000     0.000     0.000        1   Module#private_class_method    
+  0.00      7.000     2.000     0.000     5.000        2   <Module::Singleton>#__init__   /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb:132
+  0.00      2.000     2.000     0.000     0.000        2   Enumerable#each_entry          
+  0.00     20.000     2.000     0.000    18.000        2   <Class::MultiJson::Adapter>#defaults /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapter.rb:10
+  0.00      2.000     2.000     0.000     0.000        2   String#strip                   
+  0.00    159.000     2.000     0.000   157.000        4   Kernel#gem                     /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_gem.rb:44
+  0.00      2.000     2.000     0.000     0.000        1   Set#each                       /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:336
+  0.00      2.000     2.000     0.000     0.000        1   Kernel#binding                 
+  0.00    108.000     2.000     0.000   106.000        2   Kernel#loop                    
+  0.00      2.000     2.000     0.000     0.000        2   Array#slice!                   
+  0.00      1.000     1.000     0.000     0.000        1   Float#to_s                     
+  0.00      1.000     1.000     0.000     0.000        1   File#to_path                   
+  0.00      1.000     1.000     0.000     0.000        1   Hash#merge                     
+  0.00      1.000     1.000     0.000     0.000        1   MultiJson::Options#default_dump_options /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options.rb:25
+  0.00      2.000     1.000     0.000     1.000        2   MultiJson::Options#dump_options /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/options.rb:17
+  0.00      1.000     1.000     0.000     0.000     4988   Hash#key?                      
+  0.00   9991.000     1.000     0.000  9990.000     4988   <Class::MultiJson::Adapter>#cached_dump_options /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapter.rb:36
+  0.00      1.000     1.000     0.000     0.000        1   Array#*                        
+  0.00      1.000     1.000     0.000     0.000        1   Set#freeze                     /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:145
+  0.00      2.000     1.000     0.000     1.000        1   <Module::Singleton>#append_features /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb:153
+  0.00      1.000     1.000     0.000     0.000        1   Module#undef_method            
+  0.00      1.000     1.000     0.000     0.000        1   String#downcase                
+  0.00      1.000     1.000     0.000     0.000        2   Module#append_features         
+  0.00      1.000     1.000     0.000     0.000        1   Gem::Platform#to_a             /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb:118
+  0.00      1.000     1.000     0.000     0.000        1   <Class::Gem::Platform>#local   /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb:19
+  0.00      3.000     1.000     0.000     2.000        1   Gem::BasicSpecification#full_name /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:126
+  0.00      6.000     1.000     0.000     5.000        1   Gem::Version#initialize        /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:210
+  0.00      1.000     1.000     0.000     0.000        1   Gem::Specification#required_ruby_version= /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:664
+  0.00      1.000     1.000     0.000     0.000        1   <Class::Time>#utc              
+  0.00      1.000     1.000     0.000     0.000        1   Gem::Specification#required_rubygems_version= /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:671
+  0.00      1.000     1.000     0.000     0.000       17   Array#uniq!                    
+  0.00    517.000     1.000     0.000   516.000        4   <Class::Gem::Specification>#load /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1149
+  0.00  657733.000     1.000     0.000 657732.000        1   [global]#                      task-2.rb:70
+  0.00  657558.000     1.000     0.000 657557.000     4988  *MultiJson#adapter              /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:70
+  0.00  657559.000     1.000     0.000 657558.000     4988  *MultiJson#current_adapter      /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:129
+  0.00  657560.000     1.000     0.000 657559.000     4988  *MultiJson#dump                 /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:138
+  0.00      8.000     1.000     0.000     7.000        2   Set#merge                      /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:432
+  0.00  657557.000     1.000     0.000 657556.000        1   MultiJson#use                  /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json.rb:90
+  0.00      0.000     0.000     0.000     0.000        4   String#to_str                  
+  0.00      1.000     0.000     0.000     1.000        1   Gem::Version#to_s              /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:163
+  0.00     12.000     0.000     0.000    12.000        4   Gem::Specification#has_conflicts? /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1702
+  0.00     12.000     0.000     0.000    12.000        4   Gem::Specification#raise_if_conflicts /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2297
+  0.00     66.000     0.000     0.000    66.000        4   Gem::Specification#activate    /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1408
+  0.00      6.000     0.000     0.000     6.000        1   Gem::BasicSpecification#extensions_dir /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:97
+  0.00      0.000     0.000     0.000     0.000        1   <Module::Gem::Deprecate>#skip  /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/deprecate.rb:26
+  0.00      3.000     0.000     0.000     3.000        1   <Class::Gem::Version>#correct? /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:172
+  0.00      3.000     0.000     0.000     3.000        2   Kernel#puts                    
+  0.00      0.000     0.000     0.000     0.000       12   Gem::Specification#dependencies /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1798
+  0.00      0.000     0.000     0.000     0.000        2   Array#concat                   
+  0.00      0.000     0.000     0.000     0.000        1   <Module::Gem>#default_ext_dir_for /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/defaults.rb:62
+  0.00      0.000     0.000     0.000     0.000        4   Enumerator#each                
+  0.00      3.000     0.000     0.000     3.000        1   Gem::Platform#to_s             /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb:122
+  0.00      0.000     0.000     0.000     0.000        1   <Module::Gem>#extension_api_version /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:485
+  0.00      0.000     0.000     0.000     0.000        1   <Module::Gem>#ruby_api_version /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:911
+  0.00      2.000     0.000     0.000     2.000        2   Gem::Version#segments          /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:317
+  0.00      0.000     0.000     0.000     0.000        5   Kernel#is_a?                   
+  0.00      0.000     0.000     0.000     0.000        2   Array#index                    
+  0.00      0.000     0.000     0.000     0.000        4   Kernel#freeze                  
+  0.00      3.000     0.000     0.000     3.000        1   <Module::Gem>#load_path_insert_index /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:660
+  0.00      0.000     0.000     0.000     0.000        1   Array#insert                   
+  0.00      0.000     0.000     0.000     0.000       12   Array#include?                 
+  0.00      0.000     0.000     0.000     0.000       10   Array#first                    
+  0.00      0.000     0.000     0.000     0.000        4   Array#pop                      
+  0.00      0.000     0.000     0.000     0.000     5000   Array#last                     
+  0.00      0.000     0.000     0.000     0.000       30   IO#set_encoding                
+  0.00    131.000     0.000     0.000   131.000        4   Gem::Specification#add_dependency_with_type /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1524
+  0.00    131.000     0.000     0.000   131.000        4   Gem::Specification#add_development_dependency /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:546
+  0.00      0.000     0.000     0.000     0.000       12   Integer#<=>                    
+  0.00     20.000     0.000     0.000    20.000       28   Gem::Version#_segments         /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:382
+  0.00      0.000     0.000     0.000     0.000       16   Array#==                       
+  0.00     50.000     0.000     0.000    50.000       24   Gem::Version#canonical_segments /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:369
+  0.00      0.000     0.000     0.000     0.000       12   Gem::Version#_version          /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:378
+  0.00     50.000     0.000     0.000    50.000       12   Gem::Version#<=>               /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:342
+  0.00      0.000     0.000     0.000     0.000       11   Comparable#>=                  
+  0.00      0.000     0.000     0.000     0.000        1   Gem::Specification#installed_by_version= /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:626
+  0.00     36.000     0.000     0.000    36.000        4   Gem::Specification#files       /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:255
+  0.00      0.000     0.000     0.000     0.000        4   Kernel#kind_of?                
+  0.00      4.000     0.000     0.000     4.000        1   Gem::Specification#summary=    /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2438
+  0.00      0.000     0.000     0.000     0.000        3   Kernel#instance_of?            
+  0.00      0.000     0.000     0.000     0.000        1   Gem::Specification#rdoc_options= /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2307
+  0.00      0.000     0.000     0.000     0.000        1   Gem::Specification#licenses=   /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:361
+  0.00      0.000     0.000     0.000     0.000        1   Gem::Specification#files=      /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1941
+  0.00      0.000     0.000     0.000     0.000        1   Gem::Specification#extra_rdoc_files= /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1924
+  0.00      0.000     0.000     0.000     0.000        1   Gem::Specification#extensions= /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1915
+  0.00      0.000     0.000     0.000     0.000        1   Gem::Specification#description= /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1834
+  0.00      0.000     0.000     0.000     0.000       23   Kernel#class                   
+  0.00     46.000     0.000     0.000    46.000        3   Gem::Dependency#to_specs       /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb:302
+  0.00     46.000     0.000     0.000    46.000        3   Gem::Dependency#matching_specs /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb:278
+  0.00      5.000     0.000     0.000     5.000        1   Gem::Specification#authors=    /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:276
+  0.00      0.000     0.000     0.000     0.000       11   Kernel#Array                   
+  0.00      0.000     0.000     0.000     0.000        1   Gem::Specification#require_paths= /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:509
+  0.00      0.000     0.000     0.000     0.000        3   <Class::Gem::Specification>#stubs_for /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:837
+  0.00      0.000     0.000     0.000     0.000        1   Integer#fdiv                   
+  0.00     51.000     0.000     0.000    51.000       13   Gem::Requirement#sort_requirements! /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:297
+  0.00      0.000     0.000     0.000     0.000       10   Gem::Dependency#requirement    /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb:121
+  0.00      0.000     0.000     0.000     0.000       24   String#to_s                    
+  0.00      0.000     0.000     0.000     0.000        6   Gem::StubSpecification#version /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:176
+  0.00      0.000     0.000     0.000     0.000       14   Kernel#nil?                    
+  0.00      0.000     0.000     0.000     0.000       17   Array#compact!                 
+  0.00      0.000     0.000     0.000     0.000        3   Array#reject!                  
+  0.00      0.000     0.000     0.000     0.000        3   <Class::Gem::Platform>#match   /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb:25
+  0.00      0.000     0.000     0.000     0.000        1   Gem::Specification#invalidate_memoized_attributes /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2105
+  0.00      0.000     0.000     0.000     0.000       16   Kernel#instance_variable_defined? 
+  0.00      0.000     0.000     0.000     0.000        3   <Module::Gem>#platforms        /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:751
+  0.00      7.000     0.000     0.000     7.000       10   <Class::Gem::Version>#new      /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:200
+  0.00      0.000     0.000     0.000     0.000        1   <Class::Gem::Version>#create   /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:188
+  0.00      1.000     0.000     0.000     1.000        1   Gem::Specification#version=    /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2689
+  0.00      0.000     0.000     0.000     0.000        2   Kernel#initialize_copy         
+  0.00      0.000     0.000     0.000     0.000        3   Array#initialize_copy          
+  0.00      0.000     0.000     0.000     0.000        3   Gem::Specification#default_value /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1788
+  0.00      1.000     0.000     0.000     1.000        3   Gem::Dependency#prerelease?    /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb:91
+  0.00      0.000     0.000     0.000     0.000        1   Gem::Specification#set_nil_attributes_to_nil /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2030
+  0.00      0.000     0.000     0.000     0.000        1   Gem::BasicSpecification#internal_init /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:197
+  0.00      0.000     0.000     0.000     0.000        1   Gem::Specification#internal_init /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2147
+  0.00      0.000     0.000     0.000     0.000        1   Gem::BasicSpecification#initialize /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:33
+  0.00      1.000     0.000     0.000     1.000        3   Gem::Requirement#prerelease?   /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:228
+  0.00     24.000     0.000     0.000    24.000        3   <Class::Gem::Requirement>#default /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:74
+  0.00      3.000     0.000     0.000     3.000        3   Gem::Requirement#==            /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:264
+  0.00      3.000     0.000     0.000     3.000        3   Gem::Requirement#_tilde_requirements /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:280
+  0.00      0.000     0.000     0.000     0.000        2   Hash#initialize                
+  0.00    517.000     0.000     0.000   517.000        4   Gem::StubSpecification#to_spec /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:187
+  0.00      3.000     0.000     0.000     3.000        3   Gem::Specification#full_name   /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1968
+  0.00      9.000     0.000     0.000     9.000        2   Gem::Specification#gems_dir    /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1979
+  0.00      0.000     0.000     0.000     0.000        2   Gem::Specification#raw_require_paths /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2742
+  0.00      0.000     0.000     0.000     0.000        3   Gem::Specification#extensions  /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:593
+  0.00     17.000     0.000     0.000    17.000        4   Thread::Mutex#synchronize      
+  0.00     18.000     0.000     0.000    18.000        6   <Class::Gem::BasicSpecification>#default_specifications_dir /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:37
+  0.00      0.000     0.000     0.000     0.000       23   Class#inherited                
+  0.00     26.000     0.000     0.000    26.000        6   Gem::BasicSpecification#default_gem? /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:82
+  0.00      4.000     0.000     0.000     4.000        1   Gem::Specification#missing_extensions? /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2181
+  0.00      0.000     0.000     0.000     0.000      298   Module#method_added            
+  0.00      0.000     0.000     0.000     0.000      127   BasicObject#singleton_method_added 
+  0.00      0.000     0.000     0.000     0.000        1   Gem::Dependency#matches_spec?  /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb:252
+  0.00      0.000     0.000     0.000     0.000        3   Kernel#block_given?            
+  0.00    112.000     0.000     0.000   112.000        2   <Module::Gem::Util>#traverse_parents /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/util.rb:106
+  0.00      0.000     0.000     0.000     0.000        1   Gem::Requirement#none?         /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:167
+  0.00    118.000     0.000     0.000   118.000        2   <Module::Gem::BundlerVersionFinder>#lockfile_contents /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:77
+  0.00    118.000     0.000     0.000   118.000        2   <Module::Gem::BundlerVersionFinder>#lockfile_version /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:67
+  0.00      0.000     0.000     0.000     0.000       12   Module#private                 
+  0.00      4.000     0.000     0.000     4.000        2   <Module::Gem::BundlerVersionFinder>#bundle_update_bundler_version /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:50
+  0.00      0.000     0.000     0.000     0.000       12   <Object::Object>#[]            
+  0.00    122.000     0.000     0.000   122.000        2   <Module::Gem::BundlerVersionFinder>#bundler_version_with_reason /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:14
+  0.00    122.000     0.000     0.000   122.000        2   <Module::Gem::BundlerVersionFinder>#bundler_version /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:6
+  0.00      0.000     0.000     0.000     0.000        4   Module#protected               
+  0.00     10.000     0.000     0.000    10.000       66   Gem::BasicSpecification#extension_dir /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:90
+  0.00     58.000     0.000     0.000    58.000       29   Gem::BasicSpecification#gem_build_complete_path /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:45
+  0.00      0.000     0.000     0.000     0.000      219   Gem::BasicSpecification#have_extensions? /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:317
+  0.00      8.000     0.000     0.000     8.000        2   Module#include                 
+  0.00      0.000     0.000     0.000     0.000        2   Module#included                
+  0.00      0.000     0.000     0.000     0.000      502   Kernel#untaint                 
+  0.00      0.000     0.000     0.000     0.000      223   Gem::StubSpecification#full_name /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:180
+  0.00      0.000     0.000     0.000     0.000      218   Gem::StubSpecification#raw_require_paths /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:140
+  0.00   2249.000     0.000     0.000  2249.000      219   Gem::BasicSpecification#have_file? /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:319
+  0.00      0.000     0.000     0.000     0.000      219   <Module::Gem>#suffixes         /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:1016
+  0.00      0.000     0.000     0.000     0.000      415   Gem::StubSpecification#extensions /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:169
+  0.00      0.000     0.000     0.000     0.000      218   Gem::StubSpecification#default_gem? /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:93
+  0.00    116.000     0.000     0.000   116.000      218   Gem::StubSpecification#missing_extensions? /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:144
+  0.00   2369.000     0.000     0.000  2369.000      219   Gem::BasicSpecification#contains_requirable_file? /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:68
+  0.00      0.000     0.000     0.000     0.000     1084   Gem::StubSpecification#data    /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:108
+  0.00      0.000     0.000     0.000     0.000      222   Gem::StubSpecification#name    /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:155
+  0.00    122.000     0.000     0.000   122.000      219   <Module::Gem::BundlerVersionFinder>#compatible? /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:37
+  0.00      0.000     0.000     0.000     0.000        1   Hash#fetch                     
+  0.00      0.000     0.000     0.000     0.000        1   <Class::Gem::Specification>#stubs /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:819
+  0.00      0.000     0.000     0.000     0.000        1   String#freeze                  
+  0.00      0.000     0.000     0.000     0.000        4   String#initialize_copy         
+  0.00      0.000     0.000     0.000     0.000        9   Kernel#initialize_dup          
+  0.00      0.000     0.000     0.000     0.000        1   BasicObject#singleton_method_undefined 
+  0.00   3012.000     0.000     0.000  3012.000        1   <Class::Gem::Specification>#find_by_path /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1034
+  0.00   3062.000     0.000     0.000  3062.000        1   <Module::Gem>#try_activate     /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:206
+  0.00      0.000     0.000     0.000     0.000        1   String#end_with?               
+  0.00      0.000     0.000     0.000     0.000        1   String#start_with?             
+  0.00      0.000     0.000     0.000     0.000        2   Exception#to_s                 
+  0.00      0.000     0.000     0.000     0.000        2   Exception#message              
+  0.00      0.000     0.000     0.000     0.000        1   Exception#backtrace            
+  0.00      0.000     0.000     0.000     0.000        1   Exception#exception            
+  0.00      0.000     0.000     0.000     0.000        1   Exception#initialize           
+  0.00      3.000     0.000     0.000     3.000        2   Kernel#extend                  
+  0.00      0.000     0.000     0.000     0.000       22   Thread::Mutex#unlock           
+  0.00      0.000     0.000     0.000     0.000       22   MonitorMixin#mon_check_owner   /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb:267
+  0.00      0.000     0.000     0.000     0.000       22   MonitorMixin#exit              /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb:199
+  0.00      0.000     0.000     0.000     0.000       25   <Class::Gem::Specification>#unresolved_deps /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1301
+  0.00      0.000     0.000     0.000     0.000       21   <Module::Gem>#find_unresolved_default_spec /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:1276
+  0.00      0.000     0.000     0.000     0.000       22   Thread::Mutex#lock             
+  0.00      0.000     0.000     0.000     0.000       66   <Class::Thread>#current        
+  0.00      0.000     0.000     0.000     0.000       22   MonitorMixin#enter             /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb:187
+  0.00      0.000     0.000     0.000     0.000        2   Module#extended                
+  0.00      6.000     0.000     0.000     6.000        1   <Module::Singleton>#included   /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb:161
+  0.00      0.000     0.000     0.000     0.000      139   Module#===                     
+  0.00      0.000     0.000     0.000     0.000        2   Thread::Mutex#initialize       
+  0.00     10.000     0.000     0.000    10.000        2   Set#initialize                 /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:93
+  0.00      3.000     0.000     0.000     3.000        2   IO#puts                        
+  0.00      0.000     0.000     0.000     0.000        2   Time#initialize                
+  0.00      0.000     0.000     0.000     0.000        1   Time#-                         
+  0.00      4.000     0.000     0.000     4.000        1   Singleton::SingletonClassMethods#inherited /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb:125
+  0.00      5.000     0.000     0.000     5.000        1   Enumerable#to_set              /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:814
+  0.00      0.000     0.000     0.000     0.000        1   Module#const_get               
+  0.00  49893.000     0.000     0.000 49893.000     4988   <Class::MultiJson::Adapter>#dump /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapter.rb:24
+  0.00      1.000     0.000     0.000     1.000     4988   <Class::MultiJson::Adapters::Oj>#instance /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/singleton.rb:137
+  0.00      0.000     0.000     0.000     0.000        2   BasicObject#initialize         
+  0.00      0.000     0.000     0.000     0.000     4987   Array#max                      
+  0.00      0.000     0.000     0.000     0.000     4988   Kernel#instance_variable_get   
+  0.00      0.000     0.000     0.000     0.000     4987   Array#sum                      
+  0.00      0.000     0.000     0.000     0.000     9976   Hash#hash                      
+  0.00      0.000     0.000     0.000     0.000    27564   String#to_i                    
+  0.00      0.000     0.000     0.000     0.000        1   <Class::MultiJson::Adapters::Oj>#default_dump_options /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapter.rb:14
+  0.00      0.000     0.000     0.000     0.000        1   Hash#merge!                    
+  0.00  39901.000     0.000     0.000 39901.000     4988   MultiJson::Adapters::Oj#dump   /Users/dpro/.rvm/gems/ruby-2.6.3/gems/multi_json-1.13.1/lib/multi_json/adapters/oj.rb:37
+  0.00      0.000     0.000     0.000     0.000     5002   Array#shift                    
+  0.00      0.000     0.000     0.000     0.000   134676   Hash#has_key?                  
+  0.00      0.000     0.000     0.000     0.000     9974   Hash#eql?                      
+  0.00      0.000     0.000     0.000     0.000        2   IO#close                       
+  0.00      0.000     0.000     0.000     0.000        1   Set#length                     /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:161
+  0.00      0.000     0.000     0.000     0.000        1   Hash#each_key                  
+  0.00      0.000     0.000     0.000     0.000        1   String#[]=                     
+  0.00   4990.000     0.000     0.000  4990.000     4989   IO#<<                          
+  0.00      0.000     0.000     0.000     0.000        1   <Module::Process>#pid          
+  0.00      0.000     0.000     0.000     0.000       35   Kernel#respond_to?             
+  0.00      7.000     0.000     0.000     7.000        3   Gem::Specification#base_dir    /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2092
+  0.00     16.000     0.000     0.000    16.000        1   Gem::BasicSpecification#find_full_gem_path /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:103
+  0.00     16.000     0.000     0.000    16.000        1   Gem::BasicSpecification#full_gem_path /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:115
+  0.00     29.000     0.000     0.000    29.000        1   Gem::BasicSpecification#full_require_paths /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:138
+  0.00     50.000     0.000     0.000    50.000        4   Gem::Specification#add_self_to_load_path /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1546
+  0.00      0.000     0.000     0.000     0.000       27   Hash#delete                    
+  0.00      0.000     0.000     0.000     0.000        4   Gem::Specification#platform    /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2239
+  0.00      4.000     0.000     0.000     4.000        4   Gem::Specification#runtime_dependencies /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2375
+  0.00      4.000     0.000     0.000     4.000        4   Gem::Specification#activate_dependencies /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1432
+  0.00      0.000     0.000     0.000     0.000       24   Gem::Dependency#runtime?       /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/dependency.rb:169
+  0.00      0.000     0.000     0.000     0.000       10   Gem::Requirement#satisfied_by? /Users/dpro/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/requirement.rb:241
+  0.00      0.000     0.000     0.000     0.000        5   String#===                     
+
+* recursively called methods
+
+Columns are:
+
+  %self     - The percentage of time spent in this method, derived from self_time/total_time.
+  total     - The time spent in this method and its children.
+  self      - The time spent in this method.
+  wait      - The amount of time this method waited for other threads.
+  child     - The time spent in this method's children.
+  calls     - The number of times this method was called.
+  name      - The name of the method.
+  location  - The location of the method.
+
+The interpretation of method names is:
+
+  * MyObject#test - An instance method "test" of the class "MyObject"
+  * <Object:MyObject>#test - The <> characters indicate a method on a singleton class.

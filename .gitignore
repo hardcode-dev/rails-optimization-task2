@@ -1,0 +1,5 @@
+.DS_Store
+.byebug_history
+.idea/
+tmp.txt
+data_large.txt

@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 # Deoptimized version of homework task
 require 'json'
 require 'pry'
@@ -38,8 +37,28 @@ def parse_file(file)
   report['allBrowsers'] = {}
   report['usersStats'] = {}
 
+  line_index = 0
+  cols_index = 0
+  cols = ['','','','','','','']
+
   File.foreach(file) do |line|
-    cols = line.split(',')
+    line_index = 0
+    cols_index = 0
+    cols = ['','','','','','','']
+
+    while line_index < line.length do
+      char = ''
+      char = line.slice(line_index)
+      if char == ','
+        cols_index += 1
+      else
+        cols[cols_index] << char
+      end
+      line_index += 1
+    end
+
+    # puts cols.inspect
+
     if cols[0] == 'user'
       user = parse_user(cols)
       report['totalUsers'] += 1

@@ -3,6 +3,11 @@ require 'json'
 require 'pry'
 require 'oj'
 
+COMMA = ','
+EMPTY = ''
+SESSION = 'session'
+USER = 'user'
+
 def print_memory_usage
   "%d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
@@ -21,7 +26,7 @@ def parse_session(fields)
       user_id: fields[1],
       session_id: fields[2],
       browser: fields[3],
-      browser_upcase: fields[3].upcase,
+      browser_upcase: fields[3]&.upcase,
       time: fields[4],
       time_to_i: fields[4].to_i,
       date: fields[5].chomp!
@@ -37,19 +42,34 @@ def parse_file(file)
   report['allBrowsers'] = {}
   report['usersStats'] = {}
 
+  char = ''
   line_index = 0
   cols_index = 0
-  cols = ['','','','','','','']
+  cols = []
+  cols[0] = ''
+  cols[1] = ''
+  cols[2] = ''
+  cols[3] = ''
+  cols[4] = ''
+  cols[5] = ''
+  cols[6] = ''
 
   File.foreach(file) do |line|
+    char.clear
     line_index = 0
     cols_index = 0
-    cols = ['','','','','','','']
+    cols[0].clear
+    cols[1].clear
+    cols[2] = ''
+    cols[3] = ''
+    cols[4] = ''
+    cols[5] = ''
+    cols[6].clear
 
     while line_index < line.length do
-      char = ''
+      char.clear
       char = line.slice(line_index)
-      if char == ','
+      if char == COMMA
         cols_index += 1
       else
         cols[cols_index] << char
@@ -57,9 +77,7 @@ def parse_file(file)
       line_index += 1
     end
 
-    # puts cols.inspect
-
-    if cols[0] == 'user'
+    if cols[0] == USER
       user = parse_user(cols)
       report['totalUsers'] += 1
       users[user[:id]] = user
@@ -75,7 +93,7 @@ def parse_file(file)
       report['usersStats'][user_key]['dates'] = []
     end
 
-    if cols[0] == 'session'
+    if cols[0] == SESSION
       session = parse_session(cols)
 
       report['totalSessions'] += 1

@@ -36,7 +36,7 @@ session,2,3,Chrome 20,84,2016-11-25
       work('data5mb.txt')
     end
 
-    assert(time < 3 && expected_result == File.read('result.json'))
+    assert(time < 8 && expected_result == File.read('result.json'))
     # assert(time < 3)
     # assert(expected_result == File.read('result.json'))
   end

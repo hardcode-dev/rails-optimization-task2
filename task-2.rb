@@ -3,6 +3,8 @@ require 'json'
 require 'pry'
 require 'oj'
 
+# GC.disable
+
 COMMA = ','
 EMPTY = ''
 SESSION = 'session'
@@ -12,28 +14,29 @@ def print_memory_usage
   "%d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
-def parse_user(fields)
+def parse_user(cols0, cols1, cols2, cols3, cols4)
   {
-      id: fields[1],
-      first_name: fields[2],
-      last_name: fields[3],
-      age: fields[4],
+      id: cols1.dup,
+      first_name: cols2.dup,
+      last_name: cols3.dup,
+      age: cols4.dup,
   }
 end
 
-def parse_session(fields)
+def parse_session(cols0, cols1, cols2, cols3, cols4, cols5)
   {
-      user_id: fields[1],
-      session_id: fields[2],
-      browser: fields[3],
-      browser_upcase: fields[3]&.upcase,
-      time: fields[4],
-      time_to_i: fields[4].to_i,
-      date: fields[5].chomp!
+      user_id: cols1,
+      session_id: cols2,
+      browser: cols3,
+      browser_upcase: cols3&.upcase,
+      time: cols4,
+      time_to_i: cols4.to_i,
+      date: cols5.chomp
   }
 end
 
 def parse_file(file)
+  puts file
   report = {}
   users = {}
   report['totalUsers'] = 0
@@ -43,42 +46,54 @@ def parse_file(file)
   report['usersStats'] = {}
 
   char = ''
-  line_index = 0
-  cols_index = 0
-  cols = []
-  cols[0] = ''
-  cols[1] = ''
-  cols[2] = ''
-  cols[3] = ''
-  cols[4] = ''
-  cols[5] = ''
-  cols[6] = ''
+  line_i = 0
+  cols_i = 0
+  cols0 = ''
+  cols1 = ''
+  cols2 = ''
+  cols3 = ''
+  cols4 = ''
+  cols5 = ''
+  cols6 = ''
 
   File.foreach(file) do |line|
     char.clear
-    line_index = 0
-    cols_index = 0
-    cols[0].clear
-    cols[1].clear
-    cols[2] = ''
-    cols[3] = ''
-    cols[4] = ''
-    cols[5] = ''
-    cols[6].clear
+    line_i = 0
+    cols_i = 0
+    cols0.clear
+    cols1.clear
+    cols2.clear
+    cols3.clear
+    cols4.clear
+    cols5.clear
+    cols6.clear
 
-    while line_index < line.length do
-      char.clear
-      char = line.slice(line_index)
+    while line_i < line.length do
+      char = line.slice(line_i)
       if char == COMMA
-        cols_index += 1
+        cols_i += 1
       else
-        cols[cols_index] << char
+        if cols_i == 0
+          cols0 << char
+        elsif cols_i == 1
+          cols1 << char
+        elsif cols_i == 2
+          cols2 << char
+        elsif cols_i == 3
+          cols3 << char
+        elsif cols_i == 4
+          cols4 << char
+        elsif cols_i == 5
+          cols5 << char
+        elsif cols_i == 6
+          cols6 << char
+        end
       end
-      line_index += 1
+      line_i += 1
     end
 
-    if cols[0] == USER
-      user = parse_user(cols)
+    if cols0 == USER
+      user = parse_user(cols0, cols1, cols2, cols3, cols4)
       report['totalUsers'] += 1
       users[user[:id]] = user
       user_key = "#{user[:first_name]} #{user[:last_name]}"
@@ -93,8 +108,8 @@ def parse_file(file)
       report['usersStats'][user_key]['dates'] = []
     end
 
-    if cols[0] == SESSION
-      session = parse_session(cols)
+    if cols0 == SESSION
+      session = parse_session(cols0, cols1, cols2, cols3, cols4, cols5)
 
       report['totalSessions'] += 1
       report['uniqueBrowsersCount'][session[:browser]] = true

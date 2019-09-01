@@ -393,3 +393,10 @@ Rbspy все так же показывает в топе c function - unknown. 
 > a, b, c = line.split(',')
 
 Метрика стала явно хуже, пока slice остается самым быстрым вариантом, возвращаю как было.
+
+## RubyProf::ALLOCATIONS - top: slice, parse_session, parse_user
+
+Решил попробовать RubyProf в режиме ALLOCATIONS, сгенерировал три отчета: Flat,  GraphHtml, CallStack
+Все три отчета показывают топ 3 метода по аллокациям - slice, parse_session, parse_user.
+Судя по всему от slice избавиться не удастся, а parse_session и parse_user в отчетах занимают менее
+2%, что не дает повода пытаться их оптимизировать. 

@@ -1,0 +1,56 @@
+Measure Mode: allocations
+Thread ID: 70190033444820
+Fiber ID: 70190030036420
+Total: 1484918.000000
+Sort by: self_time
+
+ %self      total      self      wait     child     calls  name                           location
+ 79.42  1179285.000 1179285.000     0.000     0.000  1179285   String#slice                   
+ 10.55  1435156.000 156687.000     0.000 1278469.000        1   <Class::IO>#foreach            
+  1.71  25408.000 25408.000     0.000     0.000    25408   String#upcase                  
+  1.71  76224.000 25408.000     0.000 50816.000    25408   Object#parse_session           /Users/ineedjet/Projects/rails-optimization-2-task2/task-2.rb:26
+  1.71  25408.000 25408.000     0.000     0.000    25408   String#chomp                   
+  1.55  49532.000 22960.000     0.000 26572.000        1   Array#each                     
+  1.24  18368.000 18368.000     0.000     0.000    18368   Kernel#dup                     
+  0.62   9184.000  9184.000     0.000     0.000     9184   Integer#to_s                   
+  0.59   8696.000  8696.000     0.000     0.000     4593   Array#sort                     
+  0.31   4593.000  4593.000     0.000     0.000     4593   Array#join                     
+  0.31  22960.000  4592.000     0.000 18368.000     4592   Object#parse_user              /Users/ineedjet/Projects/rails-optimization-2-task2/task-2.rb:17
+  0.28   4102.000  4102.000     0.000     0.000     4592   Array#sort!                    
+  0.01    200.000   200.000     0.000     0.000        1   Hash#each                      
+  0.00  1484909.000    14.000     0.000 1484895.000        1   Object#parse_file              /Users/ineedjet/Projects/rails-optimization-2-task2/task-2.rb:38
+  0.00      5.000     5.000     0.000     0.000        1   <Class::IO>#write              
+  0.00  1484918.000     3.000     0.000 1484915.000        1   Object#work                    /Users/ineedjet/Projects/rails-optimization-2-task2/task-2.rb:151
+  0.00      2.000     2.000     0.000     0.000        2   Hash#keys                      
+  0.00    202.000     2.000     0.000   200.000        1   Enumerable#count               
+  0.00      1.000     1.000     0.000     0.000        1   <Module::Oj>#dump              
+  0.00      0.000     0.000     0.000     0.000     4592   Array#reverse!                 
+  0.00      0.000     0.000     0.000     0.000   240000   String#clear                   
+  0.00      0.000     0.000     0.000     0.000        1   IO#write                       
+  0.00      0.000     0.000     0.000     0.000        1   IO#puts                        
+  0.00      0.000     0.000     0.000     0.000        1   Kernel#puts                    
+  0.00  1484918.000     0.000     0.000 1484918.000        1   [global]#                      prof.rb:13
+  0.00      0.000     0.000     0.000     0.000    18368   String#initialize_copy         
+  0.00      0.000     0.000     0.000     0.000    18368   Kernel#initialize_dup          
+  0.00      0.000     0.000     0.000     0.000     4592   Array#sum                      
+  0.00      0.000     0.000     0.000     0.000     4592   Array#max                      
+  0.00      0.000     0.000     0.000     0.000        1   Array#first                    
+  0.00      0.000     0.000     0.000     0.000    25408   String#to_i                    
+
+* recursively called methods
+
+Columns are:
+
+  %self     - The percentage of time spent in this method, derived from self_time/total_time.
+  total     - The time spent in this method and its children.
+  self      - The time spent in this method.
+  wait      - The amount of time this method waited for other threads.
+  child     - The time spent in this method's children.
+  calls     - The number of times this method was called.
+  name      - The name of the method.
+  location  - The location of the method.
+
+The interpretation of method names is:
+
+  * MyObject#test - An instance method "test" of the class "MyObject"
+  * <Object:MyObject>#test - The <> characters indicate a method on a singleton class.

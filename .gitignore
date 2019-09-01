@@ -6,3 +6,4 @@ users_stats.json
 ruby_prof_reports/*
 stackprof_reports/*
 graphviz.png
+massif.out.1

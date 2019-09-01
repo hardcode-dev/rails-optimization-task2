@@ -1,6 +1,6 @@
+# frozen_string_literal: true
 require 'json'
 require 'pry'
-require 'date'
 require 'set'
 require 'oj'
 require './user.rb'
@@ -14,14 +14,32 @@ class Report
   end
 
   def work
+    File.write('users_stats.json', '')
     parse_file
     generate_result
+    GC.start(full_mark: true, immediate_sweep: true)
   end
 
   private
 
   def generate_result
-    File.write('result.json', "#{Oj.dump(@summary)}\n")
+    result = 'result.json'
+    stats = 'users_stats.json'
+    counter = 0
+
+    File.write(result, Oj.dump(@summary)[0..-3])
+
+    counter = 0
+    total_users = @summary['totalUsers']
+
+    IO.foreach(stats) do |line|
+      counter += 1
+      File.open(result, 'a') do |f|
+        f << "#{Oj.dump(Oj.load(line))[1..-2]}#{counter < total_users ? ',' : ''}"
+      end
+    end
+
+    File.open(result, 'a') { |f| f << "}}\n" }
   end
 
   def parse_file
@@ -31,7 +49,7 @@ class Report
     total_users = 0
 
     IO.foreach(file) do |line|
-      cols = line.split(',')
+      cols = line.split(",")
 
       if cols[0] == 'user'
         collect_stats_from_user(user)
@@ -55,6 +73,32 @@ class Report
     @summary['allBrowsers'] = unique_browsers.map { |b| b.upcase }.sort.join(',')
   end
 
+
+  def collect_stats_from_user(user)
+    generate_users_stats_json(user.key => user_data(user)) if user
+  end
+
+
+  def generate_users_stats_json(user)
+    File.open('users_stats.json', 'a') { |f| f.puts "#{Oj.dump(user)}\n" }
+  end
+
+  def user_data(user)
+    sessions_time = user.sessions.map {|s| s['time'].to_i }
+    browsers = user.sessions.map{ |s| s['browser'].upcase }
+    browsers_string = browsers.sort.join(', ')
+
+    {
+      'sessionsCount'    => user.sessions.count,
+      'totalTime'        => "#{sessions_time.sum.to_s} min.",
+      'longestSession'   => "#{sessions_time.max.to_s} min.",
+      'browsers'         => browsers_string,
+      'usedIE'           => browsers_string.match?('INTERNET'),
+      'alwaysUsedChrome' => !browsers.any? { |b| !b.include?('CHROME') },
+      'dates'            => user.sessions.map{|s| s['date'] }.sort!.reverse!
+    }
+  end
+
   def parse_user(user)
     {
       'id' => user[1],
@@ -71,26 +115,6 @@ class Report
       'browser' => session[3],
       'time' => session[4],
       'date' => session[5].strip
-    }
-  end
-
-  def collect_stats_from_user(user)
-    @summary['usersStats'][user.key] = user_data(user) if user
-  end
-
-  def user_data(user)
-    sessions_time = user.sessions.map {|s| s['time'].to_i }
-    browsers = user.sessions.map{ |s| s['browser'].upcase }
-    browsers_string = browsers.sort.join(', ')
-
-    {
-      'sessionsCount'    => user.sessions.count,
-      'totalTime'        => "#{sessions_time.sum.to_s} min.",
-      'longestSession'   => "#{sessions_time.max.to_s} min.",
-      'browsers'         => browsers_string,
-      'usedIE'           => browsers_string.match?('INTERNET'),
-      'alwaysUsedChrome' => !browsers.any? { |b| !b.include?('CHROME') },
-      'dates'            => user.sessions.map{|s| s['date'] }.sort!.reverse!
     }
   end
 end

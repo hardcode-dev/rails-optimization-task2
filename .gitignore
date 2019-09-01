@@ -1,4 +1,8 @@
 data/data*.txt
 reports/
 result.json
-
+.DS_Store
+users_stats.json
+ruby_prof_reports/*
+stackprof_reports/*
+graphviz.png

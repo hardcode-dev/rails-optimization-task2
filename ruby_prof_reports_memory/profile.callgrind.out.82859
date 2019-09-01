@@ -1,0 +1,214 @@
+events: memory
+
+fl=
+fn=IO::write^
+0 312
+
+fl=
+fn=Oj::dump^
+0 40
+
+fl=
+fn=Array::reverse!
+0 0
+
+fl=
+fn=Array::sort!
+0 1654640
+
+fl=
+fn=Array::max
+0 0
+
+fl=
+fn=Integer::to_s
+0 3683920
+
+fl=
+fn=Array::sum
+0 0
+
+fl=
+fn=Array::each
+0 3683920
+cfl=
+cfn=Array::sum
+calls=46049 95
+95 0
+cfl=
+cfn=Integer::to_s
+calls=92098 95
+95 3683920
+cfl=
+cfn=Array::max
+calls=46049 97
+97 0
+cfl=
+cfn=Array::sort
+calls=46049 99
+99 3496600
+cfl=
+cfn=Array::join
+calls=46049 99
+99 1841960
+cfl=
+cfn=Array::sort!
+calls=46049 101
+101 1654640
+cfl=
+cfn=Array::reverse!
+calls=46049 101
+101 0
+
+fl=
+fn=Array::join
+0 1842000
+
+fl=
+fn=Array::sort
+0 3496680
+
+fl=
+fn=Hash::keys
+0 80
+
+fl=
+fn=Hash::each
+0 8000
+
+fl=
+fn=Enumerable::count
+0 80
+cfl=
+cfn=Hash::each
+calls=1 0
+0 8000
+
+fl=
+fn=String::chomp
+0 10155360
+
+fl=
+fn=String::to_i
+0 0
+
+fl=
+fn=String::upcase
+0 10155360
+
+fl=/Users/ineedjet/Projects/rails-optimization-2-task2/task-2.rb
+fn=Object::parse_user
+18 10698912
+
+fl=
+fn=String::split
+0 82155360
+
+fl=
+fn=IO::foreach^
+0 47443272
+cfl=
+cfn=String::split
+calls=300000 38
+38 82155360
+cfl=/Users/ineedjet/Projects/rails-optimization-2-task2/task-2.rb
+cfn=Object::parse_user
+calls=46116 41
+41 10698912
+cfl=
+cfn=String::upcase
+calls=253884 72
+72 10155360
+cfl=
+cfn=String::to_i
+calls=507768 76
+76 0
+cfl=
+cfn=String::chomp
+calls=253884 85
+85 10155360
+
+fl=
+fn=IO::write
+0 0
+
+fl=
+fn=IO::puts
+0 0
+cfl=
+cfn=IO::write
+calls=1 0
+0 0
+
+fl=
+fn=Kernel::puts
+0 0
+cfl=
+cfn=IO::puts
+calls=1 0
+0 0
+
+fl=/Users/ineedjet/Projects/rails-optimization-2-task2/task-2.rb
+fn=Object::parse_file
+27 1160
+cfl=
+cfn=Kernel::puts
+calls=1 28
+28 0
+cfl=
+cfn=IO::foreach^
+calls=1 37
+37 160608264
+cfl=
+cfn=Enumerable::count
+calls=1 90
+90 8080
+cfl=
+cfn=Hash::keys
+calls=2 91
+91 80
+cfl=
+cfn=Array::sort
+calls=1 91
+91 80
+cfl=
+cfn=Array::join
+calls=1 91
+91 40
+cfl=
+cfn=Array::each
+calls=1 93
+93 14361040
+
+fl=/Users/ineedjet/Projects/rails-optimization-2-task2/task-2.rb
+fn=Object::work
+107 80
+cfl=/Users/ineedjet/Projects/rails-optimization-2-task2/task-2.rb
+cfn=Object::parse_file
+calls=1 108
+108 174978744
+cfl=
+cfn=Oj::dump^
+calls=1 110
+110 40
+cfl=
+cfn=IO::write^
+calls=1 110
+110 312
+
+fl=
+fn=Array::first
+0 0
+
+fl=/Users/ineedjet/Projects/rails-optimization-2-task2/prof.rb
+fn=[global]::
+13 0
+cfl=
+cfn=Array::first
+calls=1 13
+13 0
+cfl=/Users/ineedjet/Projects/rails-optimization-2-task2/task-2.rb
+cfn=Object::work
+calls=1 13
+13 174979176
+

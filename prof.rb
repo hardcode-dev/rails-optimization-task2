@@ -1,5 +1,5 @@
 require 'ruby-prof'
-RubyProf.measure_mode = RubyProf::ALLOCATIONS
+RubyProf.measure_mode = RubyProf::MEMORY
 # GC.disable
 # require 'memory_profiler'
 
@@ -13,14 +13,17 @@ if ARGV.any?
     work(ARGV.first)
   end
 
-  printer = RubyProf::FlatPrinter.new(result)
-  printer.print(File.open('ruby_prof_reports/flat.txt', 'w+'))
+  printer = RubyProf::CallTreePrinter.new(result)
+  printer.print(path: 'ruby_prof_reports_memory', profile: 'profile')
 
-  printer = RubyProf::GraphHtmlPrinter.new(result)
-  printer.print(File.open('ruby_prof_reports/graph.html', 'w+'))
-
-  printer = RubyProf::CallStackPrinter.new(result)
-  printer.print(File.open('ruby_prof_reports/call_stack.html', 'w+'))
+  # printer = RubyProf::FlatPrinter.new(result)
+  # printer.print(File.open('ruby_prof_reports/flat.txt', 'w+'))
+  #
+  # printer = RubyProf::GraphHtmlPrinter.new(result)
+  # printer.print(File.open('ruby_prof_reports/graph.html', 'w+'))
+  #
+  # printer = RubyProf::CallStackPrinter.new(result)
+  # printer.print(File.open('ruby_prof_reports/call_stack.html', 'w+'))
 
   puts "... processed #{ARGV.first} by profile"
 

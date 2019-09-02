@@ -36,15 +36,34 @@ def parse_session(cols)
   }
 end
 
+def print_to_temp_file(tempfile, user_key, report_users_stats_user_key, last_line)
+  # Собираем количество времени по пользователям
+  report_users_stats_user_key['totalTime'] = report_users_stats_user_key['totalTime'].sum.to_s + ' min.'
+  # Выбираем самую длинную сессию пользователя
+  report_users_stats_user_key['longestSession'] = report_users_stats_user_key['longestSession'].max.to_s + ' min.'
+  # Браузеры пользователя через запятую
+  report_users_stats_user_key['browsers'] = report_users_stats_user_key['browsers'].sort.join(', ')
+  # Даты сессий через запятую в обратном порядке в формате iso8601
+  report_users_stats_user_key['dates'] = report_users_stats_user_key['dates'].sort!.reverse!
+
+  if last_line
+    tempfile.write "\"#{user_key}\":#{Oj.dump(report_users_stats_user_key, mode: :compat)}"
+  else
+    tempfile.write "\"#{user_key}\":#{Oj.dump(report_users_stats_user_key, mode: :compat)},\n"
+  end
+end
+
 def parse_file(file)
   puts file
   report = {}
-  users = {}
   report['totalUsers'] = 0
   report['uniqueBrowsersCount'] = {}
   report['totalSessions'] = 0
   report['allBrowsers'] = {}
-  report['usersStats'] = {}
+
+  tempfile = File.open("tempfile","w")
+  report_users_stats_user_key = {}
+  user_key = nil
 
   File.foreach(file) do |line|
     cols = line.split(COMMA)
@@ -52,17 +71,25 @@ def parse_file(file)
     if cols[0] == USER
       user = parse_user(cols)
       report['totalUsers'] += 1
-      users[user[:id]] = user
-      user_key = "#{user[:first_name]} #{user[:last_name]}"
-      report['usersStats'][user_key] = {}
 
-      report['usersStats'][user_key]['sessionsCount'] = 0
-      report['usersStats'][user_key]['totalTime'] = []
-      report['usersStats'][user_key]['longestSession'] = []
-      report['usersStats'][user_key]['browsers'] = []
-      report['usersStats'][user_key]['usedIE'] = false
-      report['usersStats'][user_key]['alwaysUsedChrome'] = true
-      report['usersStats'][user_key]['dates'] = []
+      # Если User, значит прошлый  User обсчитан. Проверяем что прошлый юзер есть (этот не первый)
+      if report_users_stats_user_key.any?
+        # Если прошлый юзер есть, подбиваем по нему статистику и сбрасываем на диск
+        print_to_temp_file(tempfile, user_key, report_users_stats_user_key, false)
+      end
+
+      # Обуляем user key и hash для обсчета следующего пользователя
+      user_key = "#{user[:first_name]} #{user[:last_name]}"
+      report_users_stats_user_key = {}
+
+      # Подготавливаем шаблон отчета
+      report_users_stats_user_key['sessionsCount'] = 0
+      report_users_stats_user_key['totalTime'] = []
+      report_users_stats_user_key['longestSession'] = []
+      report_users_stats_user_key['browsers'] = []
+      report_users_stats_user_key['usedIE'] = false
+      report_users_stats_user_key['alwaysUsedChrome'] = true
+      report_users_stats_user_key['dates'] = []
     end
 
     if cols[0] == SESSION
@@ -72,43 +99,45 @@ def parse_file(file)
       report['uniqueBrowsersCount'][session[:browser]] = true
       report['allBrowsers'][session[:browser_upcase]] = true
 
-      user_key = "#{users[session[:user_id]][:first_name]} #{users[session[:user_id]][:last_name]}"
-      report['usersStats'][user_key]['sessionsCount'] += 1
-      report['usersStats'][user_key]['totalTime'] << session[:time_to_i]
-      report['usersStats'][user_key]['longestSession'] << session[:time_to_i]
-      report['usersStats'][user_key]['browsers'] << session[:browser_upcase]
-      unless report['usersStats'][user_key]['usedIE']
-        report['usersStats'][user_key]['usedIE'] = (session[:browser_upcase] =~ /INTERNET EXPLORER/) ? true : false
+      report_users_stats_user_key['sessionsCount'] += 1
+      report_users_stats_user_key['totalTime'] << session[:time_to_i]
+      report_users_stats_user_key['longestSession'] << session[:time_to_i]
+      report_users_stats_user_key['browsers'] << session[:browser_upcase]
+      unless report_users_stats_user_key['usedIE']
+        report_users_stats_user_key['usedIE'] = (session[:browser_upcase] =~ /INTERNET EXPLORER/) ? true : false
       end
-      if report['usersStats'][user_key]['alwaysUsedChrome']
-        report['usersStats'][user_key]['alwaysUsedChrome'] = (session[:browser_upcase] =~ /CHROME/) ? true : false
+      if report_users_stats_user_key['alwaysUsedChrome']
+        report_users_stats_user_key['alwaysUsedChrome'] = (session[:browser_upcase] =~ /CHROME/) ? true : false
       end
-      report['usersStats'][user_key]['dates'] << session[:date]
+      report_users_stats_user_key['dates'] << session[:date]
 
     end
   end
 
+  # Сохраняем последнего пользователя
+  print_to_temp_file(tempfile, user_key, report_users_stats_user_key, true)
+  tempfile.close
+
   report['uniqueBrowsersCount'] = report['uniqueBrowsersCount'].count
   report['allBrowsers'] = report['allBrowsers'].keys.sort.join(',')
-
-  report['usersStats'].keys.each do |user_key|
-    # Собираем количество времени по пользователям
-    report['usersStats'][user_key]['totalTime'] = report['usersStats'][user_key]['totalTime'].sum.to_s + ' min.'
-    # Выбираем самую длинную сессию пользователя
-    report['usersStats'][user_key]['longestSession'] = report['usersStats'][user_key]['longestSession'].max.to_s + ' min.'
-    # Браузеры пользователя через запятую
-    report['usersStats'][user_key]['browsers'] = report['usersStats'][user_key]['browsers'].sort.join(', ')
-    # Даты сессий через запятую в обратном порядке в формате iso8601
-    report['usersStats'][user_key]['dates'] = report['usersStats'][user_key]['dates'].sort!.reverse!
-  end
-
   report
 end
 
 def work(file = 'data.txt')
   report = parse_file(file)
   result_file_name = file == 'data.txt' ? 'result.json' : "#{file}.json"
-  File.write(result_file_name,  "#{Oj.dump(report)}\n")
+
+  File.open(result_file_name,"w") do |f|
+    st = Oj.dump(report, mode: :compat)
+    f.write st.delete_suffix('}')
+    f.write ",\"usersStats\":{"
+    File.open("tempfile").each do |line|
+      f.write line.chomp
+    end
+    f.write "}}"
+    f.write "\n"
+  end
+  File.delete('tempfile')
 end
 
 

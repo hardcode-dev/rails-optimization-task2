@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-require 'json'
-require 'pry'
 require 'set'
 require 'oj'
 require './user.rb'

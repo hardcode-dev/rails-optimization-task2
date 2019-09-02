@@ -92,3 +92,22 @@ rss after #work: 36 MB
 
 Дальше настроил valgrind под мак. Программа сначала потребляет 34.5mb. Пик нагрузки 42.6mb (см скриншот)
 [Screenshot](valgrind_screenshot.jpg)
+
+
+
+*** UPDATE 1 ***
+Сегодня решил еще посмотреть какой прирост даст jmalloc. у меня стояла
+версия ruby 2.6.1, обновился до 2.6.5 с jmalloc. Результат стал гораздо
+лучше:
+
+rss before #work: 22 MB
+rss after #work: 24 MB
+
+*** UPDATE 2 ***
+Потом я подумал я что будет если использовать последний пре-релиз руби 2.7.0-preview1. Поставил его с jmalloc. Результат стал еще лучше!
+
+Start
+rss before array allocation: 17 MB
+rss before #work: 17 MB
+
+rss after #work: 18 MB

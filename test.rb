@@ -2,6 +2,10 @@ require 'minitest/autorun'
 require 'benchmark'
 require './task-2.rb'
 
+def rss
+  (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+end
+
 class TestMe < Minitest::Test
   def setup
     File.write('result.json', '')
@@ -36,7 +40,7 @@ session,2,3,Chrome 20,84,2016-11-25
       work('data5mb.txt')
     end
 
-    assert(time < 2 && expected_result == File.read('result.json'))
+    assert(time < 2 && expected_result == File.read('result.json') && rss < 30 )
     # assert(time < 2)
     # assert(expected_result == File.read('result.json'))
   end

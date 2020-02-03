@@ -11,14 +11,14 @@ class Report
     @dates = []
   end
 
-  def process(session)
+  def process(browser, time, date)
     @sessions_count +=1
-    @total_time += session.time
+    @total_time += time
 
-    @longest_session = session.time > longest_session ? session.time : longest_session
-    @browsers << session.browser
+    @longest_session = time > longest_session ? time : longest_session
+    @browsers << browser
 
-    if !@usedIE && session.browser.start_with?('INTERNET EXPLORER')
+    if !@usedIE && browser.start_with?('INTERNET EXPLORER')
       @usedIE = true
     end
 
@@ -26,6 +26,6 @@ class Report
       @always_used_chrome = false
     end
 
-    @dates << session.date
+    @dates << date
   end
 end

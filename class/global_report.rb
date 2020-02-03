@@ -7,10 +7,10 @@ class GlobalReport
     @total_time = 0
   end
 
-  def process(session)
-    @unique_browsers << session.browser
+  def process(fields)
+    @unique_browsers << fields[3]
 
-    @total_sessions +=1
-    @total_time += session.time
+    @total_sessions += 1
+    @total_time += fields[4].to_i
   end
 end

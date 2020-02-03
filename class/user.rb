@@ -6,7 +6,7 @@ class User
     @id = id
     @name = name
     @age = age
-    @sessions = []
+    @sessions = 0
     @report = Report.new
   end
 end

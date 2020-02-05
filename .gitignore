@@ -1,0 +1,9 @@
+# RubyMine
+.idea/
+
+# Ruby gemset and version
+.ruby-version
+.ruby-gemset
+
+# Reports from profilers
+optimization_reports/

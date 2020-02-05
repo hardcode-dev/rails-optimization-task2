@@ -28,16 +28,6 @@ def parse_user(fields)
   }
 end
 
-def parse_session(fields)
-  {
-    user_id: fields[1],
-    session_id: fields[2],
-    browser: fields[3].upcase,
-    time: fields[4].to_i,
-    date: fields[5].chomp
-  }
-end
-
 def sessionsCount(user)
   user.sessions.count
 end
@@ -102,7 +92,13 @@ def work(file)
         next
       end
 
-      user.add_session(parse_session(cols))
+      user.add_session( {
+        user_id: cols[1],
+        session_id: cols[2],
+        browser: cols[3].upcase,
+        time: cols[4].to_i,
+        date: cols[5].chomp
+      })
 
       uniqueBrowsers << cols[3].upcase
       totalSessions += 1

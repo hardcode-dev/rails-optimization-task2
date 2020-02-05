@@ -86,61 +86,39 @@ def work(file)
   uniqueBrowsers = Set.new
   totalSessions = 0
 
-  File.open(file_json, 'w') { |f| f.write('{"usersStats":{') }
+  File.open(file_json, 'w') do |f|
+    f.write('{"usersStats":{')
 
-  File.foreach(file) do |line|
-    cols = line.split(',')
-    if cols[0] == 'user'
-      unless user.nil?
-        users_stats = usersStats(user)
-        str = "\"#{user.attributes[:first_name]} #{user.attributes[:last_name]}\":#{users_stats.to_json},"
-        File.open(file_json, 'a') { |f| f.write(str) }
+    File.foreach(file) do |line|
+      cols = line.split(',')
+      if cols[0] == 'user'
+        unless user.nil?
+          users_stats = usersStats(user)
+          str = "\"#{user.attributes[:first_name]} #{user.attributes[:last_name]}\":#{users_stats.to_json},"
+          f.write(str)
+        end
+        user = User.new(parse_user(cols))
+        totalUsers += 1
+        next
       end
-      user = User.new(parse_user(cols))
 
-      totalUsers += 1
+      user.add_session(parse_session(cols))
 
-      next
+      uniqueBrowsers << cols[3].upcase
+      totalSessions += 1
     end
 
-    user.add_session(parse_session(cols))
+    users_stats = usersStats(user)
+    str = "\"#{user.attributes[:first_name]} #{user.attributes[:last_name]}\":#{users_stats.to_json}"
+    f.write("#{str}},")
 
-    uniqueBrowsers << cols[3].upcase
-    totalSessions += 1
+    report = {}
+    report['totalUsers'] = totalUsers
+    report['uniqueBrowsersCount'] = uniqueBrowsers.count
+    report['totalSessions'] = totalSessions
+    report['allBrowsers'] = uniqueBrowsers.to_a.join(',')
+    f.write("#{report.to_json.gsub('{', '').gsub('}', '')}}\n")
   end
-
-  users_stats = usersStats(user)
-  str = "\"#{user.attributes[:first_name]} #{user.attributes[:last_name]}\":#{users_stats.to_json}"
-  File.open(file_json, 'a') { |f| f.write(str) }
-
-  File.open(file_json, 'a') { |f| f.write('},') }
-
-  # Отчёт в json
-  #   - Сколько всего юзеров +
-  #   - Сколько всего уникальных браузеров +
-  #   - Сколько всего сессий +
-  #   - Перечислить уникальные браузеры в алфавитном порядке через запятую и капсом +
-  #
-  #   - По каждому пользователю
-  #     - сколько всего сессий +
-  #     - сколько всего времени +
-  #     - самая длинная сессия +
-  #     - браузеры через запятую +
-  #     - Хоть раз использовал IE? +
-  #     - Всегда использовал только Хром? +
-  #     - даты сессий в порядке убывания через запятую +
-
-  report = {}
-
-  report['totalUsers'] = totalUsers
-
-  report['uniqueBrowsersCount'] = uniqueBrowsers.count
-
-  report['totalSessions'] = totalSessions
-
-  report['allBrowsers'] = uniqueBrowsers.to_a.join(',')
-
-  File.open(file_json, 'a') { |f| f.write("#{report.to_json.gsub('{', '').gsub('}', '')}}\n") }
 
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end

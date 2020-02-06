@@ -1,3 +1,6 @@
+# MacOS related files
+.DS_Store
+
 # RubyMine
 .idea/
 
@@ -7,3 +10,9 @@
 
 # Reports from profilers
 optimization_reports/
+
+# Data files
+data_*.txt
+
+# JSON files
+*.json

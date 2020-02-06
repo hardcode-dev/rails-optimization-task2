@@ -1,0 +1,4 @@
+result.json
+.DS_Store
+reports/*
+spec/fixtures/data/data_large.txt

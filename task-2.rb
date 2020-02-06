@@ -43,7 +43,9 @@ def collect_stats_from_users(report, users_objects, &block)
   end
 end
 
-def work(filename)
+def work(filename, gc_disable: false)
+  GC.disable if gc_disable
+
   file_lines = File.read(filename).split("\n")
 
   users = []

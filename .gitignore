@@ -1,0 +1,7 @@
+data_large.txt
+data.txt
+result.json
+data/*
+test/support/result.json
+test/support/data.txt
+Gemfile.lock

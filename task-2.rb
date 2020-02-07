@@ -104,7 +104,8 @@ def work(filename = 'data_large.txt', disable_gc: false)
   json = Oj.dump(report)
   File.write('result.json', "#{json}\n")
 
-  puts Time.now - start_time
+  puts "#{Time.now - start_time} sec"
+  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
 work

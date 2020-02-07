@@ -7,6 +7,6 @@ require 'benchmark'
 require 'memory_profiler'
 
 report = MemoryProfiler.report do
-  work('data50000.txt')
+  work('data_large.txt')
 end
 report.pretty_print(scale_bytes: true)

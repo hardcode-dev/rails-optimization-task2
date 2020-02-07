@@ -1,0 +1,149 @@
+Measure Mode: memory
+Thread ID: 70232437891140
+Fiber ID: 70232458766320
+Total: 37182720.000000
+Sort by: self_time
+
+ %self      total      self      wait     child     calls  name                           location
+ 36.82  13692200.000 13692200.000     0.000     0.000    50000   String#split                   
+ 12.09  6890600.000 4494360.000     0.000 2396240.000     7695   Object#send_to_report          /Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb:83
+  9.10  3384400.000 3384400.000     0.000     0.000    84610   String#upcase                  
+  9.06  8510240.000 3368440.000     0.000 5141800.000    42305   Object#sessions_action         /Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb:64
+  7.28  12922576.000 2708640.000     0.000 10213936.000     7695   Object#user_action             /Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb:48
+  6.46  3377584.000 2401152.000     0.000 976432.000    15392  *Class#new                      
+  5.38  37125016.000 2000000.000     0.000 35125016.000        1   IO#each                        
+  4.73  1757400.000 1757400.000     0.000     0.000    84610   Set#add                        /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:348
+  1.66  615800.000 615800.000     0.000     0.000    15395   Integer#to_s                   
+  1.66  923560.000 615720.000     0.000 307840.000     7696   Set#do_with_enum               /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:122
+  1.48  549480.000 549480.000     0.000     0.000    15391   Array#sort!                    
+  0.83  307840.000 307840.000     0.000     0.000     7696   Hash#keys                      
+  0.83  307840.000 307840.000     0.000     0.000     7696   Enumerable#each_entry          
+  0.83  307840.000 307840.000     0.000     0.000     7696   Array#join                     
+  0.83  307800.000 307800.000     0.000     0.000     7695   Array#reverse                  
+  0.83  307800.000 307800.000     0.000     0.000     7695   <Module::Oj>#dump              
+  0.05  19440.000 19440.000     0.000     0.000      342   <Class::File>#file?            
+  0.03  39160.000 12760.000     0.000 26400.000      193  *Array#any?                     
+  0.02   9040.000  9040.000     0.000     0.000      113   <Class::File>#join             
+  0.02   7312.000  7312.000     0.000     0.000        1   Module#module_eval             
+  0.01   1904.000  1904.000     0.000     0.000        2   Kernel#`                       
+  0.00   1680.000  1200.000     0.000   480.000        6   <Class::Dir>#chdir             
+  0.00    600.000   600.000     0.000     0.000        2   Exception#backtrace            
+  0.00  44360.000   560.000     0.000 43800.000        7  *Enumerable#find                
+  0.00    480.000   480.000     0.000     0.000        7   <Class::File>#expand_path      
+  0.00    480.000   480.000     0.000     0.000        6   <Class::File>#exist?           
+  0.00  37182680.000   400.000     0.000 37182280.000        1   Object#work                    /Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb:8
+  0.00    280.000   280.000     0.000     0.000        1   Kernel#gem_original_require    
+  0.00  53656.000   272.000     0.000 53384.000        1   Object#default_settings        /Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb:39
+  0.00    160.000   160.000     0.000     0.000     7702   IO#write                       
+  0.00    120.000   120.000     0.000     0.000        1   <Class::Dir>#pwd               
+  0.00    120.000    80.000     0.000    40.000        2   <Class::IO>#open               
+  0.00    160.000    80.000     0.000    80.000        1   SortedSet#each                 /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:775
+  0.00   2280.000    80.000     0.000  2200.000        1   <Module::Gem::Util>#traverse_parents /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/util.rb:106
+  0.00    240.000    80.000     0.000   160.000        1   Enumerable#count               
+  0.00     80.000    80.000     0.000     0.000        1   Kernel#dup                     
+  0.00     80.000    80.000     0.000     0.000        2   Kernel#format                  
+  0.00  45400.000    40.000     0.000 45360.000        1   Kernel#require                 /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:34
+  0.00  2709112.000    40.000     0.000 2709072.000     7696   Set#initialize                 /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:93
+  0.00     40.000    40.000     0.000     0.000        1   Module#alias_method            
+  0.00     40.000    40.000     0.000     0.000        1   <Class::File>#dirname          
+  0.00     40.000    40.000     0.000     0.000        1   <Class::File>#basename         
+  0.00  2761904.000    40.000     0.000 2761864.000     7697  *SortedSet#initialize           /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:805
+  0.00  37182720.000    40.000     0.000 37182680.000        1   [global]#                      memory_usage_benchmark.rb:7
+  0.00     40.000    40.000     0.000     0.000        2   File#initialize                
+  0.00    200.000    40.000     0.000   160.000        1   Gem::BasicSpecification#default_gem? /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:82
+  0.00  923600.000    40.000     0.000 923560.000     7696   Set#merge                      /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:432
+  0.00     40.000    40.000     0.000     0.000        1   <Module::Gem>#default_dir      /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/defaults.rb:30
+  0.00   2120.000    40.000     0.000  2080.000        1   Kernel#loop                    
+  0.00  44480.000    40.000     0.000 44440.000        1   <Class::Gem::Specification>#find_by_path /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1034
+  0.00  1749360.000     0.000     0.000 1749360.000    42305   SortedSet#<<                   /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:741
+  0.00      0.000     0.000     0.000     0.000      198   Kernel#untaint                 
+  0.00      0.000     0.000     0.000     0.000       86   Gem::StubSpecification#full_name /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:179
+  0.00   8040.000     0.000     0.000  8040.000    42305   SortedSet#add                  /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:741
+  0.00      0.000     0.000     0.000     0.000       86   Gem::StubSpecification#raw_require_paths /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:139
+  0.00  40680.000     0.000     0.000 40680.000       87   Gem::BasicSpecification#have_file? /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:319
+  0.00      0.000     0.000     0.000     0.000       87   <Module::Gem>#suffixes         /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:1012
+  0.00      0.000     0.000     0.000     0.000      136   Gem::StubSpecification#extensions /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:168
+  0.00      0.000     0.000     0.000     0.000       86   Gem::StubSpecification#default_gem? /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:93
+  0.00    960.000     0.000     0.000   960.000       86   Gem::StubSpecification#missing_extensions? /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:143
+  0.00  41840.000     0.000     0.000 41840.000       87   Gem::BasicSpecification#contains_requirable_file? /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:68
+  0.00      0.000     0.000     0.000     0.000      394   Gem::StubSpecification#data    /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:108
+  0.00      0.000     0.000     0.000     0.000       86   Gem::StubSpecification#name    /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:154
+  0.00   2440.000     0.000     0.000  2440.000       87   <Module::Gem::BundlerVersionFinder>#compatible? /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:37
+  0.00  44280.000     0.000     0.000 44280.000     7704  *Array#each                     
+  0.00      0.000     0.000     0.000     0.000        1   <Class::Gem::Specification>#stubs /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:819
+  0.00      0.000     0.000     0.000     0.000        1   String#freeze                  
+  0.00      0.000     0.000     0.000     0.000        1   String#initialize_copy         
+  0.00      0.000     0.000     0.000     0.000        1   Kernel#initialize_dup          
+  0.00  44480.000     0.000     0.000 44480.000        1   <Module::Gem>#try_activate     /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:206
+  0.00      0.000     0.000     0.000     0.000        1   String#end_with?               
+  0.00      0.000     0.000     0.000     0.000        1   String#start_with?             
+  0.00      0.000     0.000     0.000     0.000        2   Exception#to_s                 
+  0.00      0.000     0.000     0.000     0.000        2   Exception#message              
+  0.00      0.000     0.000     0.000     0.000        2   Module#===                     
+  0.00  582600.000     0.000     0.000 582600.000     7697   SortedSet#to_a                 /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:781
+  0.00      0.000     0.000     0.000     0.000        2   Exception#exception            
+  0.00      0.000     0.000     0.000     0.000        1   Exception#initialize           
+  0.00      0.000     0.000     0.000     0.000        2   Thread::Mutex#unlock           
+  0.00      0.000     0.000     0.000     0.000        2   MonitorMixin#mon_check_owner   /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb:267
+  0.00      0.000     0.000     0.000     0.000        2   MonitorMixin#exit              /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb:199
+  0.00      0.000     0.000     0.000     0.000        1   <Class::Gem::Specification>#unresolved_deps /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1301
+  0.00      0.000     0.000     0.000     0.000        1   <Module::Gem>#find_unresolved_default_spec /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:1272
+  0.00      0.000     0.000     0.000     0.000    92307   Kernel#respond_to?             
+  0.00      0.000     0.000     0.000     0.000        2   Thread::Mutex#lock             
+  0.00      0.000     0.000     0.000     0.000        6   <Class::Thread>#current        
+  0.00      0.000     0.000     0.000     0.000        2   MonitorMixin#enter             /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb:187
+  0.00      0.000     0.000     0.000     0.000       14   Module#method_added            
+  0.00  52752.000     0.000     0.000 52752.000        1   Thread::Mutex#synchronize      
+  0.00  52752.000     0.000     0.000 52752.000        1   <Class::SortedSet>#setup       /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:702
+  0.00  3377584.000     0.000     0.000 3377584.000     7696   <Class::SortedSet>#[]          /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:698
+  0.00    120.000     0.000     0.000   120.000        2   IO#puts                        
+  0.00    120.000     0.000     0.000   120.000        2   Kernel#puts                    
+  0.00      0.000     0.000     0.000     0.000    42307   String#to_i                    
+  0.00      0.000     0.000     0.000     0.000        1   IO#close                       
+  0.00      0.000     0.000     0.000     0.000        2   <Module::Process>#pid          
+  0.00      0.000     0.000     0.000     0.000        1   <Module::GC>#enable            
+  0.00      0.000     0.000     0.000     0.000     7696   Kernel#nil?                    
+  0.00      0.000     0.000     0.000     0.000     7696   Hash#initialize                
+  0.00      0.000     0.000     0.000     0.000        1   Module#method_removed          
+  0.00      0.000     0.000     0.000     0.000        1   Module#remove_method           
+  0.00      0.000     0.000     0.000     0.000     7696   Kernel#instance_of?            
+  0.00      0.000     0.000     0.000     0.000        1   Kernel#raise                   
+  0.00      0.000     0.000     0.000     0.000        1   #<Class:0x00007fc088843348>#to_spec 
+  0.00    480.000     0.000     0.000   480.000        6   Gem::BasicSpecification#gem_build_complete_path /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:45
+  0.00      0.000     0.000     0.000     0.000        1   Gem::Specification#full_name   /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1968
+  0.00      0.000     0.000     0.000     0.000        1   Gem::Specification#gems_dir    /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1979
+  0.00      0.000     0.000     0.000     0.000        1   Gem::Specification#raw_require_paths /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2741
+  0.00      0.000     0.000     0.000     0.000        2   Gem::Specification#extensions  /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:593
+  0.00    120.000     0.000     0.000   120.000        1   <Class::Gem::BasicSpecification>#default_specifications_dir /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:37
+  0.00      0.000     0.000     0.000     0.000     7697   Kernel#class                   
+  0.00    200.000     0.000     0.000   200.000        1   Gem::Specification#missing_extensions? /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2181
+  0.00     40.000     0.000     0.000    40.000     7700   Object#add_to_report           /Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb:103
+  0.00      0.000     0.000     0.000     0.000        1   Kernel#block_given?            
+  0.00   2400.000     0.000     0.000  2400.000        1   <Module::Gem::BundlerVersionFinder>#lockfile_contents /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:77
+  0.00   2400.000     0.000     0.000  2400.000        1   <Module::Gem::BundlerVersionFinder>#lockfile_version /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:67
+  0.00     40.000     0.000     0.000    40.000        1   <Module::Gem::BundlerVersionFinder>#bundle_update_bundler_version /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:50
+  0.00      0.000     0.000     0.000     0.000        2   <Object::Object>#[]            
+  0.00   2440.000     0.000     0.000  2440.000        1   <Module::Gem::BundlerVersionFinder>#bundler_version_with_reason /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:14
+  0.00   2440.000     0.000     0.000  2440.000        1   <Module::Gem::BundlerVersionFinder>#bundler_version /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:6
+  0.00      0.000     0.000     0.000     0.000       25   Gem::BasicSpecification#extension_dir /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:90
+  0.00      0.000     0.000     0.000     0.000       87   Gem::BasicSpecification#have_extensions? /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:317
+  0.00      0.000     0.000     0.000     0.000    42305   String#delete!                 
+  0.00  923600.000     0.000     0.000 923600.000     7696   SortedSet#merge                /Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:770
+
+* recursively called methods
+
+Columns are:
+
+  %self     - The percentage of time spent in this method, derived from self_time/total_time.
+  total     - The time spent in this method and its children.
+  self      - The time spent in this method.
+  wait      - The amount of time this method waited for other threads.
+  child     - The time spent in this method's children.
+  calls     - The number of times this method was called.
+  name      - The name of the method.
+  location  - The location of the method.
+
+The interpretation of method names is:
+
+  * MyObject#test - An instance method "test" of the class "MyObject"
+  * <Object:MyObject>#test - The <> characters indicate a method on a singleton class.

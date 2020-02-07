@@ -662,7 +662,7 @@
   <body>
     <div style="display: inline-block;">
       <div id="titlebar">
-        Call tree for application <strong>memory_usage_benchmark.rb </strong><br/> Generated on 2020-02-07 09:16:16 +0300
+        Call tree for application <strong>memory_usage_benchmark.rb </strong><br/> Generated on 2020-02-07 14:50:43 +0300
         with options {}<br/>
       </div>
       <div id="commands">
@@ -692,7 +692,7 @@
       
         
         <div class="thread">
-          <span>Thread: 70118369599580, Fiber: 70118321046800 (100.00% ~ 38699376.0)</span>
+          <span>Thread: 70232437891140, Fiber: 70232458766320 (100.00% ~ 37182720.0)</span>
           <ul name="thread">
             
             <li class="color9" style="display:block">
@@ -701,167 +701,317 @@
 <ul>
 <li class="color9" style="display:block">
 <a href="#" class="toggle minus" ></a>
-<span>100.00% (100.00%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#104">Object#work</a> [1 calls, 1 total]</span>
+<span>100.00% (100.00%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#8">Object#work</a> [1 calls, 1 total]</span>
 <ul>
 <li class="color9" style="display:block">
 <a href="#" class="toggle minus" ></a>
-<span>99.97% (99.97%) IO#each [1 calls, 1 total]</span>
+<span>99.84% (99.84%) IO#each [1 calls, 1 total]</span>
 <ul>
 <li class="color3" style="display:block">
 <a href="#" class="toggle empty" ></a>
-<span>35.38% (35.39%) String#split [50000 calls, 50000 total]</span>
+<span>36.82% (36.88%) String#split [50000 calls, 50000 total]</span>
 </li>
 <li class="color3" style="display:block">
 <a href="#" class="toggle minus" ></a>
-<span>34.07% (34.08%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#61">Object#sessions_action</a> [42305 calls, 42305 total]</span>
-<ul>
-<li class="color2" style="display:block">
-<a href="#" class="toggle empty" ></a>
-<span>25.36% (74.45%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#35">Object#parse_session</a> [42305 calls, 42305 total]</span>
-<ul>
-</ul>
-</li>
-</ul>
-</li>
-<li class="color2" style="display:block">
-<a href="#" class="toggle minus" ></a>
-<span>25.36% (25.36%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#53">Object#user_action</a> [7695 calls, 7695 total]</span>
+<span>34.75% (34.81%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#48">Object#user_action</a> [7695 calls, 7695 total]</span>
 <ul>
 <li class="color1" style="display:block">
 <a href="#" class="toggle minus" ></a>
-<span>15.97% (62.99%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#80">Object#send_to_report</a> [7694 calls, 7695 total]</span>
+<span>18.53% (53.32%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#83">Object#send_to_report</a> [7694 calls, 7695 total]</span>
 <ul>
-<li class="color1" style="display:block">
+<li class="color01" style="display:block">
+<a href="#" class="toggle empty" ></a>
+<span>1.66% (8.93%) Integer#to_s [15388 calls, 15395 total]</span>
+</li>
+<li class="color01" style="display:block">
+<a href="#" class="toggle empty" ></a>
+<span>1.57% (8.45%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#781">SortedSet#to_a</a> [7694 calls, 7697 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.83% (52.84%) Hash#keys [7694 calls, 7696 total]</span>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.74% (47.16%) Array#sort! [7694 calls, 15391 total]</span>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.83% (4.47%) Array#join [7694 calls, 7696 total]</span>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.83% (4.47%) Array#reverse [7694 calls, 7695 total]</span>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.83% (4.47%) &lt;Module::Oj&gt;#dump [7694 calls, 7695 total]</span>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.74% (3.99%) Array#sort! [7694 calls, 15391 total]</span>
+</li>
+</ul>
+</li>
+<li class="color05" style="display:block">
+<a href="#" class="toggle plus" ></a>
+<span>8.94% (25.72%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#698">&lt;Class::SortedSet&gt;#[]</a> [7695 calls, 7696 total]</span>
+<ul style="display:none">
+<li class="color05" style="display:block">
+<a href="#" class="toggle plus" ></a>
+<span>8.94% (100.00%) Class#new [7695 calls, 15392 total]</span>
+<ul style="display:none">
+<li class="color05" style="display:block">
+<a href="#" class="toggle plus" ></a>
+<span>7.28% (81.48%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#805">SortedSet#initialize</a> [7695 calls, 7697 total]</span>
+<ul style="display:none">
+<li class="color05" style="display:block">
+<a href="#" class="toggle plus" ></a>
+<span>7.28% (100.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#93">Set#initialize</a> [7695 calls, 7696 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:block">
+<a href="#" class="toggle empty" ></a>
+<span>4.80% (65.91%) Class#new [7695 calls, 15392 total]</span>
+<ul style="display:none">
+</ul>
+</li>
+<li class="color01" style="display:block">
+<a href="#" class="toggle plus" ></a>
+<span>2.48% (34.09%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#770">SortedSet#merge</a> [7695 calls, 7696 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:block">
+<a href="#" class="toggle plus" ></a>
+<span>2.48% (100.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#432">Set#merge</a> [7695 calls, 7696 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:block">
+<a href="#" class="toggle empty" ></a>
+<span>2.48% (100.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#122">Set#do_with_enum</a> [7695 calls, 7696 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.83% (33.33%) Enumerable#each_entry [7695 calls, 7696 total]</span>
+<ul style="display:none">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="color2" style="display:block">
 <a href="#" class="toggle minus" ></a>
-<span>14.38% (90.04%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#90">Object#serialized_to_report</a> [7694 calls, 7695 total]</span>
+<span>22.89% (22.92%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#64">Object#sessions_action</a> [42305 calls, 42305 total]</span>
 <ul>
-<li class="color01" style="display:block">
-<a href="#" class="toggle plus" ></a>
-<span>4.37% (30.40%) Array#map! [7694 calls, 7696 total]</span>
-<ul style="display:none">
-<li class="color01" style="display:block">
+<li class="color05" style="display:block">
 <a href="#" class="toggle empty" ></a>
-<span>4.37% (100.00%) String#upcase [42300 calls, 42505 total]</span>
-</li>
-</ul>
-</li>
-<li class="color01" style="display:block">
-<a href="#" class="toggle empty" ></a>
-<span>1.59% (11.06%) Integer#to_s [15388 calls, 15394 total]</span>
-</li>
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
-<span>0.80% (5.53%) Array#join [7694 calls, 7696 total]</span>
-</li>
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
-<span>0.71% (4.94%) Array#sort! [7694 calls, 15391 total]</span>
-</li>
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
-<span>0.71% (4.94%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#23">User#formated_dates</a> [7694 calls, 7695 total]</span>
-<ul style="display:none">
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
-<span>0.71% (100.00%) Array#sort! [7694 calls, 15391 total]</span>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
-<span>0.80% (4.98%) &lt;Module::Oj&gt;#dump [7694 calls, 7695 total]</span>
-</li>
-</ul>
-</li>
-<li class="color01" style="display:block">
-<a href="#" class="toggle empty" ></a>
-<span>5.41% (21.33%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#28">Object#parse_user</a> [7695 calls, 7695 total]</span>
+<span>9.10% (39.77%) String#upcase [84610 calls, 84610 total]</span>
 </li>
 <li class="color01" style="display:block">
 <a href="#" class="toggle plus" ></a>
-<span>3.98% (15.68%) Class#new [7695 calls, 7695 total]</span>
+<span>4.70% (20.56%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#741">SortedSet#&lt;&lt;</a> [42305 calls, 42305 total]</span>
 <ul style="display:none">
 <li class="color01" style="display:block">
 <a href="#" class="toggle empty" ></a>
-<span>1.59% (40.00%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#11">User#initialize</a> [7695 calls, 7695 total]</span>
-</li>
-</ul>
-</li>
-</ul>
+<span>4.70% (100.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#348">Set#add</a> [42305 calls, 84610 total]</span>
 </li>
 </ul>
 </li>
 <li class="color01" style="display:none">
 <a href="#" class="toggle empty" ></a>
-<span>0.02% (0.02%) Array#map! [1 calls, 7696 total]</span>
+<span>0.02% (0.09%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#741">SortedSet#add</a> [42305 calls, 42305 total]</span>
 <ul style="display:none">
 <li class="color01" style="display:none">
 <a href="#" class="toggle empty" ></a>
-<span>0.02% (100.00%) String#upcase [200 calls, 42505 total]</span>
+<span>0.02% (100.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#348">Set#add</a> [42305 calls, 84610 total]</span>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 </li>
 <li class="color01" style="display:none">
 <a href="#" class="toggle empty" ></a>
-<span>0.00% (0.00%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#80">Object#send_to_report</a> [1 calls, 7695 total]</span>
+<span>0.14% (0.14%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#39">Object#default_settings</a> [1 calls, 1 total]</span>
 <ul style="display:none">
 <li class="color01" style="display:none">
 <a href="#" class="toggle empty" ></a>
-<span>0.00% (89.90%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#90">Object#serialized_to_report</a> [1 calls, 7695 total]</span>
+<span>0.14% (99.42%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#698">&lt;Class::SortedSet&gt;#[]</a> [1 calls, 7696 total]</span>
 <ul style="display:none">
 <li class="color01" style="display:none">
 <a href="#" class="toggle empty" ></a>
-<span>0.00% (28.09%) Array#map! [1 calls, 7696 total]</span>
+<span>0.14% (100.00%) Class#new [1 calls, 15392 total]</span>
 <ul style="display:none">
 <li class="color01" style="display:none">
 <a href="#" class="toggle empty" ></a>
-<span>0.00% (100.00%) String#upcase [5 calls, 42505 total]</span>
-</li>
-</ul>
-</li>
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
-<span>0.00% (11.24%) Integer#to_s [2 calls, 15394 total]</span>
-</li>
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
-<span>0.00% (5.62%) Array#sort! [1 calls, 15391 total]</span>
-</li>
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
-<span>0.00% (5.62%) Array#join [1 calls, 7696 total]</span>
-</li>
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
-<span>0.00% (5.62%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#23">User#formated_dates</a> [1 calls, 7695 total]</span>
+<span>0.14% (99.85%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#805">SortedSet#initialize</a> [1 calls, 7697 total]</span>
 <ul style="display:none">
 <li class="color01" style="display:none">
 <a href="#" class="toggle empty" ></a>
-<span>0.00% (100.00%) Array#sort! [1 calls, 15391 total]</span>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
-<span>0.00% (5.05%) &lt;Module::Oj&gt;#dump [1 calls, 7695 total]</span>
-</li>
-</ul>
-</li>
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
-<span>0.00% (0.00%) Kernel#` [1 calls, 1 total]</span>
-</li>
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
-<span>0.00% (0.00%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#43">Object#default_settings</a> [1 calls, 1 total]</span>
+<span>0.14% (99.04%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#702">&lt;Class::SortedSet&gt;#setup</a> [1 calls, 1 total]</span>
 <ul style="display:none">
 <li class="color01" style="display:none">
 <a href="#" class="toggle empty" ></a>
-<span>0.00% (12.82%) &lt;Class::IO&gt;#open [1 calls, 2 total]</span>
+<span>0.14% (100.00%) Thread::Mutex#synchronize [1 calls, 1 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.12% (86.06%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb#34">Kernel#require</a> [1 calls, 1 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.12% (97.97%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb#206">&lt;Module::Gem&gt;#try_activate</a> [1 calls, 1 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.12% (100.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb#1034">&lt;Class::Gem::Specification&gt;#find_by_path</a> [1 calls, 1 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.12% (99.73%) Enumerable#find [1 calls, 7 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.12% (99.82%) Array#each [1 calls, 7704 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.11% (94.49%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb#68">Gem::BasicSpecification#contains_requirable_file?</a> [87 calls, 87 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.11% (97.23%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb#319">Gem::BasicSpecification#have_file?</a> [87 calls, 87 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.11% (96.26%) Array#any? [106 calls, 193 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.07% (64.66%) Array#any? [87 calls, 193 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.04% (58.77%) &lt;Class::File&gt;#file? [261 calls, 342 total]</span>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.02% (17.77%) &lt;Class::File&gt;#join [87 calls, 113 total]</span>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.01% (11.64%) &lt;Class::File&gt;#file? [57 calls, 342 total]</span>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (3.74%) &lt;Class::File&gt;#join [19 calls, 113 total]</span>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (2.29%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb#143">Gem::StubSpecification#missing_extensions?</a> [86 calls, 86 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (50.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb#45">Gem::BasicSpecification#gem_build_complete_path</a> [6 calls, 6 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (100.00%) &lt;Class::File&gt;#join [6 calls, 113 total]</span>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (50.00%) &lt;Class::File&gt;#exist? [6 calls, 6 total]</span>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (0.48%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb#2181">Gem::Specification#missing_extensions?</a> [1 calls, 1 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (100.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb#82">Gem::BasicSpecification#default_gem?</a> [1 calls, 1 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (60.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb#37">&lt;Class::Gem::BasicSpecification&gt;#default_specifications_dir</a> [1 calls, 1 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (66.67%) &lt;Class::File&gt;#join [1 calls, 113 total]</span>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (33.33%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/defaults.rb#30">&lt;Module::Gem&gt;#default_dir</a> [1 calls, 1 total]</span>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (20.00%) &lt;Class::File&gt;#dirname [1 calls, 1 total]</span>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.01% (5.51%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb#37">&lt;Module::Gem::BundlerVersionFinder&gt;#compatible?</a> [87 calls, 87 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.01% (100.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb#6">&lt;Module::Gem::BundlerVersionFinder&gt;#bundler_version</a> [1 calls, 1 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.01% (100.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb#14">&lt;Module::Gem::BundlerVersionFinder&gt;#bundler_version_with_reason</a> [1 calls, 1 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.01% (98.36%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb#67">&lt;Module::Gem::BundlerVersionFinder&gt;#lockfile_version</a> [1 calls, 1 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.01% (100.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb#77">&lt;Module::Gem::BundlerVersionFinder&gt;#lockfile_contents</a> [1 calls, 1 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.01% (95.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/util.rb#106">&lt;Module::Gem::Util&gt;#traverse_parents</a> [1 calls, 1 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.01% (92.98%) Kernel#loop [1 calls, 1 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (79.25%) &lt;Class::Dir&gt;#chdir [6 calls, 6 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (28.57%) Enumerable#find [6 calls, 7 total]</span>
 <ul style="display:none">
 </ul>
 </li>
@@ -869,11 +1019,231 @@
 </li>
 <li class="color01" style="display:none">
 <a href="#" class="toggle empty" ></a>
-<span>0.00% (0.00%) Array#uniq! [1 calls, 1 total]</span>
+<span>0.00% (18.87%) &lt;Class::File&gt;#expand_path [6 calls, 7 total]</span>
+</li>
+</ul>
 </li>
 <li class="color01" style="display:none">
 <a href="#" class="toggle empty" ></a>
-<span>0.00% (0.00%) Integer#to_s [4 calls, 15394 total]</span>
+<span>0.00% (3.51%) &lt;Class::File&gt;#expand_path [1 calls, 7 total]</span>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (5.00%) &lt;Class::Dir&gt;#pwd [1 calls, 1 total]</span>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (1.64%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb#50">&lt;Module::Gem::BundlerVersionFinder&gt;#bundle_update_bundler_version</a> [1 calls, 1 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (100.00%) &lt;Class::File&gt;#basename [1 calls, 1 total]</span>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (0.18%) Kernel#dup [1 calls, 1 total]</span>
+<ul style="display:none">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (1.32%) Exception#backtrace [1 calls, 2 total]</span>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (0.62%) Kernel#gem_original_require [1 calls, 1 total]</span>
+<ul style="display:none">
+</ul>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.02% (13.86%) Module#module_eval [1 calls, 1 total]</span>
+<ul style="display:none">
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (0.08%) Module#alias_method [1 calls, 1 total]</span>
+<ul style="display:none">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (0.89%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#805">SortedSet#initialize</a> [1 calls, 7697 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (100.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#93">Set#initialize</a> [1 calls, 7696 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (49.15%) Class#new [1 calls, 15392 total]</span>
+<ul style="display:none">
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (42.37%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#770">SortedSet#merge</a> [1 calls, 7696 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (100.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#432">Set#merge</a> [1 calls, 7696 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (80.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#122">Set#do_with_enum</a> [1 calls, 7696 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (25.00%) Enumerable#each_entry [1 calls, 7696 total]</span>
+<ul style="display:none">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (0.07%) &lt;Class::IO&gt;#open [1 calls, 2 total]</span>
+<ul style="display:none">
+</ul>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.01% (0.01%) Kernel#` [2 calls, 2 total]</span>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (0.00%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#83">Object#send_to_report</a> [1 calls, 7695 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (8.85%) Integer#to_s [2 calls, 15395 total]</span>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (8.85%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#781">SortedSet#to_a</a> [1 calls, 7697 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (50.00%) Hash#keys [1 calls, 7696 total]</span>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (50.00%) Array#sort! [1 calls, 15391 total]</span>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (4.42%) Array#sort! [1 calls, 15391 total]</span>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (4.42%) Array#join [1 calls, 7696 total]</span>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (4.42%) Array#reverse [1 calls, 7695 total]</span>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (4.42%) &lt;Module::Oj&gt;#dump [1 calls, 7695 total]</span>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (0.00%) Enumerable#count [1 calls, 1 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (66.67%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#775">SortedSet#each</a> [1 calls, 1 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (50.00%) <a href="file:///Users/k.bludov/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb#781">SortedSet#to_a</a> [1 calls, 7697 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (50.00%) Hash#keys [1 calls, 7696 total]</span>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (50.00%) Array#sort! [1 calls, 15391 total]</span>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (0.00%) Integer#to_s [5 calls, 15395 total]</span>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (0.00%) Kernel#puts [2 calls, 2 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (100.00%) IO#puts [2 calls, 2 total]</span>
+<ul style="display:none">
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (100.00%) IO#write [2 calls, 7702 total]</span>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="color01" style="display:none">
+<a href="#" class="toggle empty" ></a>
+<span>0.00% (0.00%) Kernel#format [2 calls, 2 total]</span>
 </li>
 <li class="color01" style="display:none">
 <a href="#" class="toggle empty" ></a>
@@ -887,39 +1257,15 @@
 </li>
 <li class="color01" style="display:none">
 <a href="#" class="toggle empty" ></a>
-<span>0.00% (0.00%) Array#sort! [1 calls, 15391 total]</span>
-</li>
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
 <span>0.00% (0.00%) Array#join [1 calls, 7696 total]</span>
 </li>
 <li class="color01" style="display:none">
 <a href="#" class="toggle empty" ></a>
-<span>0.00% (0.00%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#100">Object#add_to_report</a> [5 calls, 7700 total]</span>
+<span>0.00% (0.00%) <a href="file:///Users/k.bludov/work/teach/rails-optimization-task2/task-2.rb#103">Object#add_to_report</a> [5 calls, 7700 total]</span>
 <ul style="display:none">
 <li class="color01" style="display:none">
 <a href="#" class="toggle empty" ></a>
-<span>0.00% (100.00%) IO#write [5 calls, 7701 total]</span>
-</li>
-</ul>
-</li>
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
-<span>0.00% (0.00%) String#% [1 calls, 1 total]</span>
-</li>
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
-<span>0.00% (0.00%) Kernel#puts [1 calls, 1 total]</span>
-<ul style="display:none">
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
-<span>0.00% (100.00%) IO#puts [1 calls, 1 total]</span>
-<ul style="display:none">
-<li class="color01" style="display:none">
-<a href="#" class="toggle empty" ></a>
-<span>0.00% (100.00%) IO#write [1 calls, 7701 total]</span>
-</li>
-</ul>
+<span>0.00% (100.00%) IO#write [5 calls, 7702 total]</span>
 </li>
 </ul>
 </li>

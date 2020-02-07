@@ -3,94 +3,14 @@
 require 'json'
 require 'oj'
 require 'minitest/autorun'
-
-def open_struct_user(cols)
-  {
-    "user_key" => "#{cols[2]} #{cols[3]}",
-    "sessionsCount" => 0,
-    "longestSession" => 0,
-    "totalTime" => 0,
-    "browsers" => [],
-    "dates" => [],
-    "usedIE" => false,
-    "alwaysUsedChrome" => true
-  }
-end
-
-def parse_session(fields)
-  {
-    'browser' => fields[3],
-    'time' => fields[4].to_i,
-    'date' => fields[5].delete!("\n")
-  }
-end
-
-def default_settings
-  @report_file = File.open("result.json", "w")
-  @report = {}
-  @report['totalUsers'] = 0
-  @report['uniqueBrowsersCount'] = 0
-  @report['totalSessions'] = 0
-  @report['allBrowsers'] = []
-  @temp_user = nil
-end
-
-def user_action(cols)
-  send_to_report if @temp_user
-  @temp_user = open_struct_user(cols)
-
-  @report['totalUsers'] += 1
-end
-
-def sessions_action(cols)
-  session = parse_session(cols)
-  @temp_user["sessionsCount"] += 1
-
-  @temp_user["totalTime"] += session['time']
-  if @temp_user["longestSession"] <= session['time']
-    @temp_user["longestSession"] = session['time']
-  end
-  @temp_user["dates"] << session['date']
-  @temp_user["browsers"] << session['browser']
-
-  @temp_user["usedIE"] = true if session['browser'] =~ /Internet Explorer/
-  @temp_user["alwaysUsedChrome"] = false unless session['browser'] =~ /Chrome/
-
-  @report['allBrowsers'] << session['browser']
-
-  @report['totalSessions'] += 1
-end
-
-def send_to_report
-  user_key = @temp_user["user_key"]
-  if @user_is_first
-    text = "\"#{user_key}\":#{Oj.dump(serialized_to_report(@temp_user))}"
-  else
-    text = ",\"#{user_key}\":#{Oj.dump(serialized_to_report(@temp_user))}"
-  end
-  @user_is_first = false
-  add_to_report(text)
-end
-
-def serialized_to_report(user)
-   { 'sessionsCount' => user["sessionsCount"],
-                       'totalTime' => "#{user["totalTime"]} min.",
-                       'longestSession' => "#{user["longestSession"]} min.",
-                       'browsers' => user["browsers"].map!(&:upcase).sort!.join(', '),
-                       'usedIE' => user["usedIE"],
-                       'alwaysUsedChrome' => user["alwaysUsedChrome"],
-                       'dates' => user["dates"].sort!.reverse! }
-end
-
-def add_to_report(text)
-  @report_file.write(text)
-end
+require 'set'
 
 def work(file_name)
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  GC.enable
+  puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))
   @user_is_first = true
   default_settings
-  add_to_report("{\"usersStats\":{")
+  add_to_report('{"usersStats":{')
 
   File.open(file_name, 'r').each do |line|
     cols = line.split(',')
@@ -103,50 +23,83 @@ def work(file_name)
 
   send_to_report
 
-  @report['allBrowsers'].sort!.uniq!
+  @report['allBrowsers']
   @report['uniqueBrowsersCount'] = @report['allBrowsers'].count
-  @report['allBrowsers'] = @report['allBrowsers'].map!(&:upcase).join(',')
+  @report['allBrowsers'] = @report['allBrowsers'].to_a.join(',')
 
   add_to_report("},\"totalUsers\":#{@report['totalUsers']},")
   add_to_report("\"totalSessions\":#{@report['totalSessions']},")
   add_to_report("\"uniqueBrowsersCount\":#{@report['uniqueBrowsersCount']},")
   add_to_report("\"allBrowsers\":\"#{@report['allBrowsers']}\"}")
-
   @report_file.close
 
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))
 end
 
-#work('data_large.txt')
+def default_settings
+  @report_file = File.open('result.json', 'a')
+  @report = {}
+  @report['totalUsers'] = 0
+  @report['uniqueBrowsersCount'] = 0
+  @report['totalSessions'] = 0
+  @report['allBrowsers'] = SortedSet[]
+end
 
-# class TestMe < Minitest::Test
-#   def setup
-#     File.write('result.json', '')
-#     File.write('data.txt',
-# 'user,0,Leida,Cira,0
-# session,0,0,Safari 29,87,2016-10-23
-# session,0,1,Firefox 12,118,2017-02-27
-# session,0,2,Internet Explorer 28,31,2017-03-28
-# session,0,3,Internet Explorer 28,109,2016-09-15
-# session,0,4,Safari 39,104,2017-09-27
-# session,0,5,Internet Explorer 35,6,2016-09-01
-# user,1,Palmer,Katrina,65
-# session,1,0,Safari 17,12,2016-10-21
-# session,1,1,Firefox 32,3,2016-12-20
-# session,1,2,Chrome 6,59,2016-11-11
-# session,1,3,Internet Explorer 10,28,2017-04-29
-# session,1,4,Chrome 13,116,2016-12-28
-# user,2,Gregory,Santos,86
-# session,2,0,Chrome 35,6,2018-09-21
-# session,2,1,Safari 49,85,2017-05-22
-# session,2,2,Firefox 47,17,2018-02-02
-# session,2,3,Chrome 20,84,2016-11-25
-# ')
-#   end
+def user_action(cols)
+  send_to_report if @temp_user
+  @temp_user = {
+    'user_key' => "#{cols[2]} #{cols[3]}",
+    'sessionsCount' => 0,
+    'longestSession' => 0,
+    'totalTime' => 0,
+    'browsers' => [],
+    'dates' => SortedSet[],
+    'usedIE' => false,
+    'alwaysUsedChrome' => true
+  }
 
-#   def test_result
-#     work('data.txt')
-#     expected_result = JSON.parse('{"totalUsers":3,"uniqueBrowsersCount":14,"totalSessions":15,"allBrowsers":"CHROME 13,CHROME 20,CHROME 35,CHROME 6,FIREFOX 12,FIREFOX 32,FIREFOX 47,INTERNET EXPLORER 10,INTERNET EXPLORER 28,INTERNET EXPLORER 35,SAFARI 17,SAFARI 29,SAFARI 39,SAFARI 49","usersStats":{"Leida Cira":{"sessionsCount":6,"totalTime":"455 min.","longestSession":"118 min.","browsers":"FIREFOX 12, INTERNET EXPLORER 28, INTERNET EXPLORER 28, INTERNET EXPLORER 35, SAFARI 29, SAFARI 39","usedIE":true,"alwaysUsedChrome":false,"dates":["2017-09-27","2017-03-28","2017-02-27","2016-10-23","2016-09-15","2016-09-01"]},"Palmer Katrina":{"sessionsCount":5,"totalTime":"218 min.","longestSession":"116 min.","browsers":"CHROME 13, CHROME 6, FIREFOX 32, INTERNET EXPLORER 10, SAFARI 17","usedIE":true,"alwaysUsedChrome":false,"dates":["2017-04-29","2016-12-28","2016-12-20","2016-11-11","2016-10-21"]},"Gregory Santos":{"sessionsCount":4,"totalTime":"192 min.","longestSession":"85 min.","browsers":"CHROME 20, CHROME 35, FIREFOX 47, SAFARI 49","usedIE":false,"alwaysUsedChrome":false,"dates":["2018-09-21","2018-02-02","2017-05-22","2016-11-25"]}}}')
-#     assert_equal expected_result, JSON.parse(File.read('result.json'))
-#   end
-# end
+  @report['totalUsers'] += 1
+end
+
+def sessions_action(cols)
+  @temp_user['sessionsCount'] += 1
+  time = cols[4].to_i
+  browser = cols[3]
+  @temp_user['totalTime'] += time
+  @temp_user['longestSession'] = time if @temp_user['longestSession'] <= time
+
+  @temp_user['dates'] << cols[5].delete!("\n")
+
+  @temp_user['browsers'] << browser.upcase
+
+  @temp_user['usedIE'] = true if browser =~ /Internet Explorer/
+  @temp_user['alwaysUsedChrome'] = false unless browser =~ /Chrome/
+
+  @report['allBrowsers'].add(browser.upcase)
+
+  @report['totalSessions'] += 1
+end
+
+def send_to_report
+  user_key = @temp_user['user_key']
+  user_report = { 'sessionsCount' => @temp_user['sessionsCount'],
+                  'totalTime' => "#{@temp_user['totalTime']} min.",
+                  'longestSession' => "#{@temp_user['longestSession']} min.",
+                  'browsers' => @temp_user['browsers'].sort!.join(', '),
+                  'usedIE' => @temp_user['usedIE'],
+                  'alwaysUsedChrome' => @temp_user['alwaysUsedChrome'],
+                  'dates' => @temp_user['dates'].to_a.reverse }
+
+  text = if @user_is_first
+           "\"#{user_key}\":#{Oj.dump(user_report)}"
+         else
+           ",\"#{user_key}\":#{Oj.dump(user_report)}"
+         end
+  @temp_user = {}
+  @user_is_first = false
+  add_to_report(text)
+end
+
+def add_to_report(text)
+  @report_file.write(text)
+end

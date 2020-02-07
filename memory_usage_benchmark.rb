@@ -4,7 +4,7 @@ require_relative 'task-2.rb'
 RubyProf.measure_mode = RubyProf::MEMORY
 
 result = RubyProf.profile do
-  work('data50000.txt')
+  work('data_large.txt')
 end
 
 printer = RubyProf::FlatPrinter.new(result)

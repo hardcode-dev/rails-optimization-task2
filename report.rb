@@ -1,28 +1,38 @@
+# frozen_string_literal: true
 require 'set'
+require 'oj'
+Oj.mimic_JSON
 
 class Report
-  attr_reader :sessions_stats
+  attr_reader :sessions_stats, :file
+
   def initialize
-    @users_stats = {}
+    @file = File.open('./result.json', 'w+')
+    @file.write('{ "usersStats": {')
     @sessions_stats = init_session_stats
   end
 
-  def commit_user
+  def commit_user(is_last = false)
     return unless cur_user_stats
 
-    cur_user_stats[:totalTime] = "#{cur_user_stats[:totalTime]} min."
-    cur_user_stats[:longestSession] = "#{cur_user_stats[:longestSession]} min."
-    cur_user_stats[:browsers] = cur_user_stats[:browsers].sort.join(', ')
-    cur_user_stats[:dates] = cur_user_stats[:dates].to_a.sort { |d1, d2| d2 <=> d1 }
+    finalize_user_stats
+    file.write(cur_user_stats.to_json)
+    file.write(',') unless is_last
   end
 
   def commit_session
     sessions_stats[:allBrowsers] = sessions_stats[:allBrowsers].to_a.join(',')
+
+    sessions_stats.each_with_index do |(key, value), index|
+      file.write(', ') if index > 0
+      file.write("\"#{key}\": ")
+      value.is_a?(String) ? file.write("\"#{value}\"") : file.write("#{value}")
+    end
   end
 
   def add_user(attributes)
     @cur_user_stats = init_user_stats
-    users_stats[:"#{attributes[2]} #{attributes[3]}"] = cur_user_stats
+    file.write("\"#{"#{attributes[2]} #{attributes[3]}"}\": ")
     sessions_stats[:totalUsers] += 1
   end
 
@@ -46,8 +56,12 @@ class Report
     cur_user_stats[:dates] << date
   end
 
-  def commit_stats
-    commit_user.then { commit_session }
+  def commit
+    commit_user(true)
+    file.write('}, ')
+    commit_session
+    file.write('}')
+    file.close
   end
 
   private
@@ -59,8 +73,7 @@ class Report
       totalUsers: 0,
       uniqueBrowsersCount: 0,
       totalSessions: 0,
-      allBrowsers: SortedSet.new,
-      usersStats: users_stats
+      allBrowsers: SortedSet.new
     }
   end
 
@@ -74,5 +87,12 @@ class Report
       alwaysUsedChrome: true,
       dates: Set.new
     }
+  end
+
+  def finalize_user_stats
+    cur_user_stats[:totalTime] = "#{cur_user_stats[:totalTime]} min."
+    cur_user_stats[:longestSession] = "#{cur_user_stats[:longestSession]} min."
+    cur_user_stats[:browsers] = cur_user_stats[:browsers].sort.join(', ')
+    cur_user_stats[:dates] = cur_user_stats[:dates].to_a.sort { |d1, d2| d2 <=> d1 }
   end
 end

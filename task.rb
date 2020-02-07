@@ -1,7 +1,7 @@
-require 'oj'
+# frozen_string_literal: true
+
 require './report'
 
-Oj.mimic_JSON
 
 class Task
   attr_reader :file_path
@@ -12,6 +12,7 @@ class Task
 
   def generate_report
     report = Report.new
+
     IO.foreach(file_path) do |line|
       cols = line.split(',')
       if cols[0] == 'user'
@@ -22,10 +23,8 @@ class Task
         report.update_user_stat(cols)
       end
     end
-    report.commit_stats
-    stats = report.sessions_stats
+    report.commit
 
-    File.write('result.json', "#{Oj.dump(stats)}\n")
     puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
   end
 end

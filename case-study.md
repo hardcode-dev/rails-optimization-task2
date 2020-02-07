@@ -60,6 +60,7 @@
 - Время выполнения программы скратилось до `~15 sec`
 
 [Скриншот с результатами](http://joxi.ru/gmvlbJNUvBRVvA)
+[Скриншот с результатами Visualizer](http://joxi.ru/bmoJ0ZXH9oqb0r)
 
 
 ## Результаты

@@ -3,46 +3,17 @@
 require 'json'
 require 'oj'
 require 'minitest/autorun'
-require 'ostruct'
-
-class User
-  attr_accessor :id, :user_key, :sessionsCount, :longestSession, :totalTime,
-                :browsers, :dates, :use_ie, :only_chrome
-
-  def initialize(id, user_key, _sessionsCount = 0, _longestSession = 0, _totalTime = 0, _browsers = [], _dates = [], _use_ie = false, _only_chrome = true)
-    @id = id
-    @user_key = user_key
-    @sessionsCount = 0
-    @longestSession = 0
-    @totalTime = 0
-    @browsers = []
-    @dates = []
-    @use_ie = false
-    @only_chrome = true
-  end
-
-  def formated_dates
-    dates.sort!.reverse!
-  end
-end
 
 def open_struct_user(cols)
-  @temp_user = OpenStruct.new
-    @temp_user.user_key = "#{cols[2]} #{cols[3]}"
-    @temp_user.sessionsCount = 0
-    @temp_user.longestSession = 0
-    @temp_user.totalTime = 0
-    @temp_user.browsers = []
-    @temp_user.dates = []
-   @temp_user.use_ie = false
-   @temp_user.only_chrome = true
-   @temp_user
-end
-
-def parse_user(fields)
   {
-    'id' => fields[1],
-    'user_key' => "#{fields[2]} #{fields[3]}"
+    "user_key" => "#{cols[2]} #{cols[3]}",
+    "sessionsCount" => 0,
+    "longestSession" => 0,
+    "totalTime" => 0,
+    "browsers" => [],
+    "dates" => [],
+    "usedIE" => false,
+    "alwaysUsedChrome" => true
   }
 end
 
@@ -68,24 +39,22 @@ def user_action(cols)
   send_to_report if @temp_user
   @temp_user = open_struct_user(cols)
 
-  #user_params = parse_user(cols)
-  #@temp_user = User.new(user_params['id'], user_params['user_key'])
   @report['totalUsers'] += 1
 end
 
 def sessions_action(cols)
   session = parse_session(cols)
-  @temp_user.sessionsCount += 1
+  @temp_user["sessionsCount"] += 1
 
-  @temp_user.totalTime += session['time']
-  if @temp_user.longestSession <= session['time']
-    @temp_user.longestSession = session['time']
+  @temp_user["totalTime"] += session['time']
+  if @temp_user["longestSession"] <= session['time']
+    @temp_user["longestSession"] = session['time']
   end
-  @temp_user.dates << session['date']
-  @temp_user.browsers << session['browser']
+  @temp_user["dates"] << session['date']
+  @temp_user["browsers"] << session['browser']
 
-  @temp_user.use_ie = true if session['browser'] =~ /Internet Explorer/
-  @temp_user.only_chrome = false unless session['browser'] =~ /Chrome/
+  @temp_user["usedIE"] = true if session['browser'] =~ /Internet Explorer/
+  @temp_user["alwaysUsedChrome"] = false unless session['browser'] =~ /Chrome/
 
   @report['allBrowsers'] << session['browser']
 
@@ -93,23 +62,24 @@ def sessions_action(cols)
 end
 
 def send_to_report
+  user_key = @temp_user["user_key"]
   if @user_is_first
-    text = "\"#{@temp_user.user_key}\":#{Oj.dump(serialized_to_report(@temp_user))}"
+    text = "\"#{user_key}\":#{Oj.dump(serialized_to_report(@temp_user))}"
   else
-    text = ",\"#{@temp_user.user_key}\":#{Oj.dump(serialized_to_report(@temp_user))}"
+    text = ",\"#{user_key}\":#{Oj.dump(serialized_to_report(@temp_user))}"
   end
   @user_is_first = false
   add_to_report(text)
 end
 
 def serialized_to_report(user)
-   { 'sessionsCount' => user.sessionsCount,
-                       'totalTime' => "#{user.totalTime} min.",
-                       'longestSession' => "#{user.longestSession} min.",
-                       'browsers' => user.browsers.map!(&:upcase).sort!.join(', '),
-                       'usedIE' => user.use_ie,
-                       'alwaysUsedChrome' => user.only_chrome,
-                       'dates' => user.dates.sort!.reverse! }
+   { 'sessionsCount' => user["sessionsCount"],
+                       'totalTime' => "#{user["totalTime"]} min.",
+                       'longestSession' => "#{user["longestSession"]} min.",
+                       'browsers' => user["browsers"].map!(&:upcase).sort!.join(', '),
+                       'usedIE' => user["usedIE"],
+                       'alwaysUsedChrome' => user["alwaysUsedChrome"],
+                       'dates' => user["dates"].sort!.reverse! }
 end
 
 def add_to_report(text)
@@ -147,7 +117,7 @@ def work(file_name)
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
-# work('data_large.txt')
+#work('data_large.txt')
 
 # class TestMe < Minitest::Test
 #   def setup

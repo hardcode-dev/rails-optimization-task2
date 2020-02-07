@@ -17,25 +17,24 @@ def browser
   @line_split[3]
 end
 
-def save_user_sessions
-  return if @user_sessions.empty?
+def save_user_sessions(user_sessions)
+  return if user_sessions.empty?
 
   user_stat = {}
 
-  user_stat['sessionsCount'] = @user_sessions.size
-  times = @user_sessions.map { |s| s[4].to_i }
+  user_stat['sessionsCount'] = user_sessions.size
+  times = user_sessions.map { |s| s[4].to_i }
   user_stat['totalTime'] = "#{times.sum} min."
   user_stat['longestSession'] = "#{times.max} min."
 
-  user_browsers = @user_sessions.map { |s| s[3] }
+  user_browsers = user_sessions.map { |s| s[3] }
   user_browsers_uniq = user_browsers.uniq
   user_stat['browsers'] = user_browsers.sort.join(', ').upcase
   user_stat['usedIE'] = !!user_browsers_uniq.find { |b| b =~ /Internet Explorer/ }
   user_stat['alwaysUsedChrome'] = user_browsers_uniq.all? { |b| b.upcase =~ /Chrome/ }
 
-  user_stat['dates'] = @user_sessions.map { |s| s[5][0..9] }.sort!.reverse!
+  user_stat['dates'] = user_sessions.map { |s| s[5][0..9] }.sort!.reverse!
 
-  @user_sessions = []
   user_stat
 end
 
@@ -46,41 +45,50 @@ def work(filename = 'data_large.txt', disable_gc: false)
   GC.disable if disable_gc
 
   total_users = 0
-  tatal_sessions = 0
+  total_sessions = 0
   unique_browsers = []
-  @user_sessions = []
+  user_sessions = []
 
   report = {}
   user_stats = {}
   user_name = nil
+
+  File.write('result.json', '')
+  report_file = File.open('result.json', "a")
+  report_file.puts '"usersStats":{'
 
   IO.foreach(filename) do |line|
     @line_split = line.split(',')
 
     if user_line?
       total_users += 1
-      user_stats[user_name] = save_user_sessions unless user_name.nil?
+      report_file.puts save_user_sessions(user_sessions) unless user_name.nil?
       user_name = "#{@line_split[2]} #{@line_split[3]}"
+      user_sessions = []
     end
 
     if session_line?
-      tatal_sessions += 1
+      total_sessions += 1
       unique_browsers << browser unless unique_browsers.include?(browser)
-      @user_sessions << @line_split
+      user_sessions << @line_split
     end
   end
 
-  user_stats[user_name] = save_user_sessions # save last user
+  # user_stats[user_name] = save_user_sessions # save last user
+  report_file.puts '}'
 
   report['totalUsers'] = total_users
   report['uniqueBrowsersCount'] = unique_browsers.count
-  report['totalSessions'] = tatal_sessions
+  report['totalSessions'] = total_sessions
   report['allBrowsers'] = unique_browsers.sort.join(',').upcase
 
   report['usersStats'] = user_stats
 
   json = Oj.dump(report)
-  File.write('result.json', "#{json}\n")
+  # File.write('result.json', "#{json}\n")
+
+  report_file.puts json
+  report_file.close
 
   puts "#{Time.now - start_time} sec"
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)

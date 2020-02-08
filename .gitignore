@@ -16,3 +16,6 @@ data_*.txt
 
 # JSON files
 *.json
+
+# valgrind output
+massif.out.*

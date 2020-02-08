@@ -2,7 +2,7 @@ require 'benchmark'
 require_relative 'task-2'
 
 time = Benchmark.realtime do
-  Report.new.call('data100000.txt')
+  Report.new.call('data_large.txt')
 end
 
 puts "Finish in #{time.round(2)}"

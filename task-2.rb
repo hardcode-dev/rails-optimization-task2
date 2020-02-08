@@ -56,7 +56,7 @@ class Report
   end
 
   def call(file_path = 'data.txt', disable_gc = false)
-    File.open(file_path,'r').each do |line|
+    File.open(file_path, 'r').each do |line|
       parse_line(line)
     end
     write_user

@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 # Deoptimized version of homework task
 
 require 'json'
 require 'pry'
+require 'pry-byebug'
 require 'date'
+require 'json-write-stream'
 require 'minitest/autorun'
 
 class User
@@ -20,7 +24,7 @@ def parse_user(user)
     'id' => fields[1],
     'first_name' => fields[2],
     'last_name' => fields[3],
-    'age' => fields[4],
+    'age' => fields[4]
   }
 end
 
@@ -29,126 +33,103 @@ def parse_session(session)
   {
     'user_id' => fields[1],
     'session_id' => fields[2],
-    'browser' => fields[3],
-    'time' => fields[4],
-    'date' => fields[5],
+    'browser' => fields[3].upcase,
+    'time' => fields[4].to_i,
+    'date' => Date.parse(fields[5]).iso8601
   }
 end
 
-def collect_stats_from_users(report, users_objects, &block)
-  users_objects.each do |user|
-    user_key = "#{user.attributes['first_name']}" + ' ' + "#{user.attributes['last_name']}"
-    report['usersStats'][user_key] ||= {}
-    report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
+def process_user_info(user_info, global_counter)
+  sessions_count = user_info[:sessions].count
+  browsers = user_info[:sessions].map { |session| session['browser'] }
+  user_name = "#{user_info[:profile]['first_name']} #{user_info[:profile]['last_name']}"
+
+  global_counter[:total_users] += 1
+  global_counter[:all_browsers] += browsers
+  global_counter[:unique_browsers_count] = global_counter[:all_browsers].count
+  global_counter[:total_sessions] += sessions_count
+
+  json_structure = {
+    'sessionsCount' => sessions_count,
+    'totalTime' => "#{user_info[:sessions].sum { |session| session['time'] }} min.",
+    'longestSession' => "#{user_info[:sessions].max_by { |session| session['time'] }['time']} min.",
+    'browsers' => browsers.sort.join(', '),
+    'usedIE' => user_info[:sessions].map { |session| session['browser'] }.any? { |b| b =~ /INTERNET EXPLORER/ },
+    'alwaysUsedChrome' => user_info[:sessions].map { |s| s['browser'] }.all? { |b| b =~ /CHROME/ },
+    'dates' => user_info[:sessions].map { |session| session['date'] }.sort { |left, right| right <=> left }
+  }
+
+  stream = StringIO.new
+  writer = JsonWriteStream.from_stream(stream)
+  writer.write_object
+  writer.write_key_value('sessionsCount', json_structure['sessionsCount'])
+  writer.write_key_value('totalTime', json_structure['totalTime'])
+  writer.write_key_value('longestSession', json_structure['longestSession'])
+  writer.write_key_value('browsers', json_structure['browsers'])
+  writer.write_key_value('usedIE', json_structure['usedIE'])
+  writer.write_key_value('alwaysUsedChrome', json_structure['alwaysUsedChrome'])
+  writer.write_key_value('dates', json_structure['dates'])
+  writer.close
+
+  File.open('result.json', 'a') do |file|
+    file << "\"#{user_name}\":#{stream.string},"
   end
 end
 
 def work(filename, gc_disable: false)
   GC.disable if gc_disable
 
-  file_lines = File.read(filename).split("\n")
+  global_counter = { total_users: 0, unique_browsers_count: 0, total_sessions: 0,
+                     all_browsers: SortedSet.new }
+  user_info = {}
 
-  users = []
-  sessions = []
+  File.delete('result.json') if File.exist?('result.json')
 
-  file_lines.each do |line|
-    line.start_with?('user') ? users << parse_user(line) : sessions << parse_session(line)
+  File.open('result.json', 'a') do |file|
+    file << '{"usersStats":{'
   end
 
-  # Отчёт в json
-  #   - Сколько всего юзеров +
-  #   - Сколько всего уникальных браузеров +
-  #   - Сколько всего сессий +
-  #   - Перечислить уникальные браузеры в алфавитном порядке через запятую и капсом +
-  #
-  #   - По каждому пользователю
-  #     - сколько всего сессий +
-  #     - сколько всего времени +
-  #     - самая длинная сессия +
-  #     - браузеры через запятую +
-  #     - Хоть раз использовал IE? +
-  #     - Всегда использовал только Хром? +
-  #     - даты сессий в порядке убывания через запятую +
-
-  report = {}
-
-  report[:totalUsers] = users.count
-
-  # Подсчёт количества уникальных браузеров
-  uniqueBrowsers = []
-  sessions.each do |session|
-    browser = session['browser']
-    uniqueBrowsers += [browser] if uniqueBrowsers.all? { |b| b != browser }
+  IO.foreach(filename) do |line|
+    line.chomp!
+    if line.start_with?('user')
+      process_user_info(user_info, global_counter) unless user_info.empty?
+      user_info = { profile: {}, sessions: [] }
+      user_info[:profile] = parse_user(line)
+    else
+      user_info[:sessions] << parse_session(line)
+    end
   end
 
-  report['uniqueBrowsersCount'] = uniqueBrowsers.count
+  process_user_info(user_info, global_counter)
 
-  report['totalSessions'] = sessions.count
+  File.truncate('result.json', File.size('result.json') - 1)
 
-  report['allBrowsers'] =
-    sessions
-      .map { |s| s['browser'] }
-      .map { |b| b.upcase }
-      .sort
-      .uniq
-      .join(',')
-
-  # Статистика по пользователям
-  users_objects = []
-
-  users.each do |user|
-    attributes = user
-    user_sessions = sessions.select { |session| session['user_id'] == user['id'] }
-    user_object = User.new(attributes: attributes, sessions: user_sessions)
-    users_objects = users_objects + [user_object]
+  File.open('result.json', 'a') do |file|
+    file << '},'
   end
 
-  report['usersStats'] = {}
+  general_stats_json = {
+    'totalUsers' => global_counter[:total_users],
+    'uniqueBrowsersCount' => global_counter[:unique_browsers_count],
+    'totalSessions' => global_counter[:total_sessions],
+    'allBrowsers' => global_counter[:all_browsers].to_a.join(',')
+  }.to_json
 
-  # Собираем количество сессий по пользователям
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'sessionsCount' => user.sessions.count }
+  stream = StringIO.new
+  stream.write(general_stats_json)
+
+  File.open('result.json', 'a') do |file|
+    file << stream.string[1..-1]
   end
 
-  # Собираем количество времени по пользователям
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'totalTime' => user.sessions.map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.' }
-  end
-
-  # Выбираем самую длинную сессию пользователя
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'longestSession' => user.sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.' }
-  end
-
-  # Браузеры пользователя через запятую
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'browsers' => user.sessions.map {|s| s['browser']}.map {|b| b.upcase}.sort.join(', ') }
-  end
-
-  # Хоть раз использовал IE?
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'usedIE' => user.sessions.map{|s| s['browser']}.any? { |b| b.upcase =~ /INTERNET EXPLORER/ } }
-  end
-
-  # Всегда использовал только Chrome?
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'alwaysUsedChrome' => user.sessions.map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ } }
-  end
-
-  # Даты сессий через запятую в обратном порядке в формате iso8601
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }
-  end
-
-  File.write('result.json', "#{report.to_json}\n")
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))
 end
 
 class TestMe < Minitest::Test
   def setup
     File.write('result.json', '')
     File.write('data.txt',
-'user,0,Leida,Cira,0
+               'user,0,Leida,Cira,0
 session,0,0,Safari 29,87,2016-10-23
 session,0,1,Firefox 12,118,2017-02-27
 session,0,2,Internet Explorer 28,31,2017-03-28
@@ -171,7 +152,7 @@ session,2,3,Chrome 20,84,2016-11-25
 
   def test_result
     work('data.txt')
-    expected_result = JSON.parse('{"totalUsers":3,"uniqueBrowsersCount":14,"totalSessions":15,"allBrowsers":"CHROME 13,CHROME 20,CHROME 35,CHROME 6,FIREFOX 12,FIREFOX 32,FIREFOX 47,INTERNET EXPLORER 10,INTERNET EXPLORER 28,INTERNET EXPLORER 35,SAFARI 17,SAFARI 29,SAFARI 39,SAFARI 49","usersStats":{"Leida Cira":{"sessionsCount":6,"totalTime":"455 min.","longestSession":"118 min.","browsers":"FIREFOX 12, INTERNET EXPLORER 28, INTERNET EXPLORER 28, INTERNET EXPLORER 35, SAFARI 29, SAFARI 39","usedIE":true,"alwaysUsedChrome":false,"dates":["2017-09-27","2017-03-28","2017-02-27","2016-10-23","2016-09-15","2016-09-01"]},"Palmer Katrina":{"sessionsCount":5,"totalTime":"218 min.","longestSession":"116 min.","browsers":"CHROME 13, CHROME 6, FIREFOX 32, INTERNET EXPLORER 10, SAFARI 17","usedIE":true,"alwaysUsedChrome":false,"dates":["2017-04-29","2016-12-28","2016-12-20","2016-11-11","2016-10-21"]},"Gregory Santos":{"sessionsCount":4,"totalTime":"192 min.","longestSession":"85 min.","browsers":"CHROME 20, CHROME 35, FIREFOX 47, SAFARI 49","usedIE":false,"alwaysUsedChrome":false,"dates":["2018-09-21","2018-02-02","2017-05-22","2016-11-25"]}}}')
+    expected_result = JSON.parse('{"totalUsers":3,"uniqueBrowsersCount":14,"totalSessions":15,"allBrowsers":"CHROME 13,CHROME 20,CHROME 35,CHROME 6,FIREFOX 12,FIREFOX 32,FIREFOX 47,INTERNET EXPLORER 10,INTERNET EXPLORER 28,INTERNET EXPLORER 35,SAFARI 17,SAFARI 29,SAFARI 39,SAFARI 49", "usersStats":{"Leida Cira":{"sessionsCount":6,"totalTime":"455 min.","longestSession":"118 min.","browsers":"FIREFOX 12, INTERNET EXPLORER 28, INTERNET EXPLORER 28, INTERNET EXPLORER 35, SAFARI 29, SAFARI 39","usedIE":true,"alwaysUsedChrome":false,"dates":["2017-09-27","2017-03-28","2017-02-27","2016-10-23","2016-09-15","2016-09-01"]},"Palmer Katrina":{"sessionsCount":5,"totalTime":"218 min.","longestSession":"116 min.","browsers":"CHROME 13, CHROME 6, FIREFOX 32, INTERNET EXPLORER 10, SAFARI 17","usedIE":true,"alwaysUsedChrome":false,"dates":["2017-04-29","2016-12-28","2016-12-20","2016-11-11","2016-10-21"]},"Gregory Santos":{"sessionsCount":4,"totalTime":"192 min.","longestSession":"85 min.","browsers":"CHROME 20, CHROME 35, FIREFOX 47, SAFARI 49","usedIE":false,"alwaysUsedChrome":false,"dates":["2018-09-21","2018-02-02","2017-05-22","2016-11-25"]}}}')
     assert_equal expected_result, JSON.parse(File.read('result.json'))
   end
 end

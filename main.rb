@@ -1,5 +1,5 @@
 # Deoptimized version of homework task
-
+#frozen_string_literal: true
 require 'oj'
 require 'pry'
 require 'date'
@@ -11,121 +11,86 @@ require 'ruby-progressbar'
 Dir[File.join(__dir__, 'class', '*.rb')].each { |file| require file }
 
 
-COMMA = ','.freeze
-SPACE = ' '.freeze
-USER  = 'user'.freeze
-COMMA_SPACE = ', '.freeze
-SAPCE_MIN = ' min.'.freeze
-EMPTY = ''.freeze
-NEW_LINE =  "\n".freeze
+COMMA = ','
+SPACE = ' '
+USER  = 'user'
+COMMA_SPACE = ', '
+SAPCE_MIN = ' min.'
+EMPTY = ''
+NEW_LINE =  "\n"
+FILE_TO_WRITE = 'result.json'
 
 def work(file)
-  start = Time.now
+  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 
-  users = {}
-  global_report = GlobalReport.new
+  @user_count = 0
+  @unique_browsers = []
+  @total_sessions = 0
+  @total_time = 0
   user = nil
+  sessions =[]
 
-  File.open('result.json', 'w') do |result_file|
+  File.open(FILE_TO_WRITE, 'w') do |f|
+    f << ('{"usersStats":{')
 
-    result_file.write('{"usersStats":{')
-
-    File.readlines(file).each do |line|
-      # fields = form_fields(line)
+    File.foreach(file).each do |line|
 
       fields = line.split(COMMA)
 
       if line.start_with?(USER)
-        write_user_info(result_file, user, true) if user
+        write_user_info(user, sessions, true, f) if user
+        sessions = []
         user = parse_user(fields)
-        users[user.id] = user
+        @user_count += 1
       else
-        parse_session(users, fields)
-        global_report.process(fields)
+        browser = fields[3].upcase
+
+        sessions << {
+          browser: browser,
+          time: fields[4].to_i,
+          date: fields[5].chomp
+        }
+        @unique_browsers << browser
+
+        @total_sessions += 1
+        @total_time += fields[4].to_i
       end
     end
 
-    write_user_info(result_file, user, false)
-    result_file.write('},')
-    write_general_info(result_file, users, global_report)
-    puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
-    finish = Time.now
+    write_user_info(user, sessions, false, f)
 
-    diff = finish - start
-    p diff
+    sessions = []
+
+    f << ('},')
+    f << (Oj.dump({
+      'totalUsers'=> @user_count,
+      'uniqueBrowsersCount'=> @unique_browsers.uniq.count,
+      'totalSessions'=> @total_sessions,
+      'allBrowsers'=> @unique_browsers.uniq!.sort!.join(COMMA)
+    })[1..])
   end
-end
-
-def form_fields(line)
-  test = []
-  i = 0
-  line_size = line.size
-  end_size = line_size - 1
-  start = 0
-  while i <= line_size
-
-    if line[i] == COMMA || i == end_size
-      test << line[start..i - 1]
-      start = i + 1
-    end
-    i += 1
-  end
-
-  test
-
-  # array = []
-  # word = ''
-  # line.each_char do |sym|
-
-  #   word << sym if sym != COMMA
-  #   if sym == COMMA || sym == NEW_LINE
-  #     array << word
-  #     word = ''
-  #   end
-  # end
-  # array
+  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
 def parse_user(fields)
-  User.new(
-    fields[1],
-    fields[2] << SPACE << fields[3],
-    fields[4]
-  )
-end
-
-def parse_session(users, fields)
-  user_id = fields[1]
-  user = users[user_id]
-  user.sessions += 1
-  user.report.process(fields[3].upcase!, fields[4].to_i, fields[5].strip)
-end
-
-def write_user_info(result_file, user, need_separator)
-  result_file.write("\"#{user.name}\":")
-
-  hash_report = {
-    'sessionsCount'=> user.sessions,
-    'totalTime'=> user.report.total_time.to_s << SAPCE_MIN,
-    'longestSession'=> user.report.longest_session.to_s << SAPCE_MIN,
-    'browsers'=> user.report.browsers.sort.join(COMMA_SPACE),
-    'usedIE'=>  user.report.usedIE,
-    'alwaysUsedChrome'=>  user.report.always_used_chrome,
-    'dates'=> user.report.dates.sort!.reverse!
+  {
+    first_name: fields[2],
+    last_name: fields[3]
   }
-
-  result_file.write(Oj.dump(hash_report))
-
-  result_file.write(COMMA) if need_separator
 end
 
-def write_general_info(result_file, users, global_report)
-  hash_report = {
-    'totalUsers'=> users.count,
-    'uniqueBrowsersCount'=> global_report.unique_browsers.count,
-    'totalSessions'=> global_report.total_sessions,
-    'allBrowsers'=> global_report.unique_browsers.sort.join(COMMA)
-  }
+def write_user_info(user, sessions, need_separator, f)
+  f << ("\"#{user[:first_name]} {#{user[:last_name]}\":")
 
-  result_file.write(Oj.dump(hash_report)[1..])
+  f << (Oj.dump({
+    'sessionsCount'=> sessions.count,
+    'totalTime'=> sessions.map { |s| s[:time] }.sum.to_s << SAPCE_MIN,
+    'longestSession'=>  sessions.map { |s| s[:time] }.max.to_s << SAPCE_MIN,
+    'browsers'=> sessions.map { |s| s[:browser] }.sort!.join(COMMA_SPACE),
+    'usedIE'=>  sessions.map { |s| s[:browser] }.any? { |b| b =~ /INTERNET EXPLORER/ },
+    'alwaysUsedChrome'=>  sessions.map { |s| s[:browser] }.all? { |b| b =~ /CHROME/ },
+    'dates'=> sessions.map { |s| s[:date] }.sort!.reverse!
+  }))
+
+  f << (COMMA) if need_separator
 end

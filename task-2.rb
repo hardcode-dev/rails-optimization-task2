@@ -1,7 +1,6 @@
 # Deoptimized version of homework task
 
 require 'json'
-require 'pry'
 require 'date'
 require 'minitest/autorun'
 
@@ -43,8 +42,8 @@ def collect_stats_from_users(report, users_objects, &block)
   end
 end
 
-def work
-  file_lines = File.read('data.txt').split("\n")
+def work(file_name = 'data_small.txt')
+  file_lines = File.read(file_name).split("\n")
 
   users = []
   sessions = []

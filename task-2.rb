@@ -5,110 +5,117 @@ require 'pry'
 require 'oj'
 # require 'minitest/autorun'
 
-def parse_user(user)
-  fields = user.split(',')
-  "#{fields[1]} #{fields[2]}"
+def user_line?
+  @line_split[0] == 'user'
 end
 
-def _user_with_session_lines(data)
-  data.map { |line| line.split(',') }
+def session_line?
+  @line_split[0] == 'session'
 end
 
-def _user_with_session(data)
-  data.split("\n")
+def browser
+  @line_split[3]
 end
 
-def _times(data)
-  data.map { |s| s[4].to_i }
+def save_user_sessions(user_sessions)
+  return if user_sessions.empty?
+
+  user_stat = {}
+
+  user_stat['sessionsCount'] = user_sessions.size
+  times = user_sessions.map { |s| s[4].to_i }
+  user_stat['totalTime'] = "#{times.sum} min."
+  user_stat['longestSession'] = "#{times.max} min."
+
+  user_browsers = user_sessions.map { |s| s[3] }
+  user_browsers_uniq = user_browsers.uniq
+  user_stat['browsers'] = user_browsers.sort.join(', ').upcase!
+  user_stat['usedIE'] = !!user_browsers_uniq.find { |b| b =~ /Internet Explorer/ }
+  user_stat['alwaysUsedChrome'] = user_browsers_uniq.all? { |b| b.upcase! =~ /Chrome/ }
+
+  user_stat['dates'] = user_sessions.map { |s| s[5][0..9] }.sort!.reverse!
+
+  user_stat
 end
 
-def _user_browsers(data)
-  data.map { |s| s[3] }
-end
-
-def _browsers(data)
-  data.map { |line| line.split(',')[3] }
-end
-
-def _session_lines(data)
-  data.split('session')
-end
-
-def work(filename = 'data_large.txt', disable_gc: false)
+def work(filename = 'data.txt', disable_gc: false)
   start_time = Time.now
 
   # puts 'Start work'
   GC.disable if disable_gc
 
-  file = File.read(filename)
+  total_users = 0
+  total_sessions = 0
+  unique_browsers = []
+  user_sessions = []
+  user_name = nil
 
-  split_by_users = file.split('user,')
-  split_by_users.delete_at(0)
+  File.write('result.json', '')
+  report_file = File.open('result.json', "a")
+  report_file.puts '{'
+  report_file.puts '"usersStats":{'
 
-  # Отчёт в json
-  #   - Сколько всего юзеров +
-  #   - Сколько всего уникальных браузеров +
-  #   - Сколько всего сессий +
-  #   - Перечислить уникальные браузеры в алфавитном порядке через запятую и капсом +
-  #
-  #   - По каждому пользователю
-  #     - сколько всего сессий +
-  #     - сколько всего времени +
-  #     - самая длинная сессия +
-  #     - браузеры через запятую +
-  #     - Хоть раз использовал IE? +
-  #     - Всегда использовал только Хром? +
-  #     - даты сессий в порядке убывания через запятую +
+  IO.foreach(filename) do |line|
+    @line_split = line.split(',')
 
-  report = {}
+    if user_line?
+      total_users += 1
 
-  report['totalUsers'] = split_by_users.size
+      unless user_name.nil?
+        json = Oj.dump(save_user_sessions(user_sessions))
+        report_file.puts "\"#{user_name}\": #{json},"
+      end
 
-  session_lines = _session_lines(file)
-  session_lines.delete_at(0)
+      user_name = "#{@line_split[2]} #{@line_split[3]}"
+      user_sessions = []
+    end
 
-  browsers = _browsers(session_lines)
-  browsers_uniq = browsers.uniq
-
-  report['uniqueBrowsersCount'] = browsers_uniq.size
-  report['totalSessions'] = session_lines.size
-  report['allBrowsers'] = browsers_uniq.sort.join(',').upcase
-
-  # Статистика по пользователям
-  user_stats = {}
-
-  split_by_users.each do |user_with_session|
-    user_stat = {}
-    user_with_session_lines = _user_with_session(user_with_session)
-    user = parse_user(user_with_session_lines.delete_at(0))
-
-    user_sessions = _user_with_session_lines(user_with_session_lines)
-    user_stat['sessionsCount'] = user_sessions.size
-
-    times = _times(user_sessions)
-    user_stat['totalTime'] = "#{times.sum} min."
-    user_stat['longestSession'] = "#{times.max} min."
-
-    user_browsers = _user_browsers(user_sessions)
-    user_browsers_uniq = user_browsers.uniq
-    user_stat['browsers'] = user_browsers.sort.join(', ').upcase
-    user_stat['usedIE'] = !!user_browsers_uniq.find { |b| b =~ /Internet Explorer/ }
-    user_stat['alwaysUsedChrome'] = user_browsers_uniq.all? { |b| b.upcase =~ /Chrome/ }
-
-    user_stat['dates'] = user_sessions.map { |s| s[5] }.sort.reverse!
-    user_stats[user] = user_stat
+    if session_line?
+      total_sessions += 1
+      unique_browsers << browser unless unique_browsers.include?(browser)
+      user_sessions << @line_split
+    end
   end
 
-  report['usersStats'] = user_stats
+  json = Oj.dump(save_user_sessions(user_sessions))
+  report_file.puts "\"#{user_name}\": #{json}"
+
+  report_file.puts '},'
+
+  # total stats
+  report = {}
+  report['totalUsers'] = total_users
+  report['uniqueBrowsersCount'] = unique_browsers.count
+  report['totalSessions'] = total_sessions
+  report['allBrowsers'] = unique_browsers.sort.join(',').upcase
 
   json = Oj.dump(report)
-  File.write('result.json', "#{json}\n")
+  json[0] = '' # remove first {
+
+  report_file.puts json
+  report_file.close
 
   puts "#{Time.now - start_time} sec"
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
 work
+
+# Отчёт в json
+#   - Сколько всего юзеров +
+#   - Сколько всего уникальных браузеров +
+#   - Сколько всего сессий +
+#   - Перечислить уникальные браузеры в алфавитном порядке через запятую и капсом +
+#
+#   - По каждому пользователю
+#     - сколько всего сессий +
+#     - сколько всего времени +
+#     - самая длинная сессия +
+#     - браузеры через запятую +
+#     - Хоть раз использовал IE? +
+#     - Всегда использовал только Хром? +
+#     - даты сессий в порядке убывания через запятую +
+
 
 # class TestMe < Minitest::Test
 #   def setup

@@ -7,6 +7,7 @@ require_relative 'task-2'
 
 module Optimization
   include Optimization::TaskOne
+  include Optimization::TaskTwo
 
   module_function
 

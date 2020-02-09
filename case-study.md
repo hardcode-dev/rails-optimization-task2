@@ -27,3 +27,5 @@
   Результаты
   22.811699791 sec
   MEMORY USAGE: 24 MB
+
+7. [valgrind massif visualier](https://monosnap.com/direct/csQnUEjdhFHvjEMIIGa3mxrOuaaGF0)

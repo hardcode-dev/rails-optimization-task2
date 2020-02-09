@@ -3,6 +3,7 @@
 *.txt
 0*.rb
 1*.rb
+massif.out.*
 .byebug_history
 result.json
 stackprof_reports/*

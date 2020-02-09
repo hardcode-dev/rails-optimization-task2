@@ -1,2 +1,4 @@
+ruby_prof_reports
+stackprof_reports
 *.txt
 *.json

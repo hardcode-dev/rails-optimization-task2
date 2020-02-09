@@ -1,21 +1,6 @@
-# Deoptimized version of homework task
-
-require 'json'
 require 'pry'
 require 'oj'
 # require 'minitest/autorun'
-
-# def user_line?
-#   @line_split[0] == 'user'
-# end
-
-# def session_line?
-#   @line_split[0] == 'session'
-# end
-
-# def browser
-#   @line_split[3]
-# end
 
 def save_user_sessions(user_sessions)
   return if user_sessions.empty?
@@ -51,7 +36,7 @@ def work(filename = 'data_large.txt', disable_gc: false)
   user_name = nil
 
   File.write('result.json', '')
-  report_file = File.open('result.json', "a")
+  report_file = File.open('result.json', 'a')
   report_file.puts '{'
   report_file.puts '"usersStats":{'
 
@@ -91,7 +76,7 @@ def work(filename = 'data_large.txt', disable_gc: false)
   report['allBrowsers'] = unique_browsers.sort.join(',').upcase
 
   json = Oj.dump(report)
-  json[0] = '' # remove first {
+  json[0] = '' # remove first { for total stats
 
   report_file.puts json
   report_file.close

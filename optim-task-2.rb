@@ -48,13 +48,11 @@ def work(filename = 'data_large.txt', disable_gc: false)
   total_sessions = 0
   unique_browsers = []
   user_sessions = []
-
-  report = {}
-  user_stats = {}
   user_name = nil
 
   File.write('result.json', '')
   report_file = File.open('result.json', "a")
+  report_file.puts '{'
   report_file.puts '"usersStats":{'
 
   IO.foreach(filename) do |line|
@@ -62,7 +60,12 @@ def work(filename = 'data_large.txt', disable_gc: false)
 
     if user_line?
       total_users += 1
-      report_file.puts save_user_sessions(user_sessions) unless user_name.nil?
+
+      unless user_name.nil?
+        json = Oj.dump(save_user_sessions(user_sessions))
+        report_file.puts "\"#{user_name}\": #{json},"
+      end
+
       user_name = "#{@line_split[2]} #{@line_split[3]}"
       user_sessions = []
     end
@@ -74,18 +77,20 @@ def work(filename = 'data_large.txt', disable_gc: false)
     end
   end
 
-  # user_stats[user_name] = save_user_sessions # save last user
-  report_file.puts '}'
+  json = Oj.dump(save_user_sessions(user_sessions))
+  report_file.puts "\"#{user_name}\": #{json}"
 
+  report_file.puts '},'
+
+  # total stats
+  report = {}
   report['totalUsers'] = total_users
   report['uniqueBrowsersCount'] = unique_browsers.count
   report['totalSessions'] = total_sessions
   report['allBrowsers'] = unique_browsers.sort.join(',').upcase
 
-  report['usersStats'] = user_stats
-
   json = Oj.dump(report)
-  # File.write('result.json', "#{json}\n")
+  json[0] = '' # remove first {
 
   report_file.puts json
   report_file.close

@@ -19,6 +19,7 @@
 
 # Optimized version of homework task
 # task1 - $ruby -r "./lib/optimization.rb" -e "Optimization.call" 'Optimization::TaskOne' 'work' 'true,data/data.txt'
+require 'oj'
 
 module Optimization
   module TaskOne

@@ -1,14 +1,9 @@
-require 'json'
 require 'pry'
-require 'oj'
 require 'benchmark'
 require_relative 'task-1'
 require_relative 'task-2'
 
 module Optimization
-  include Optimization::TaskOne
-  include Optimization::TaskTwo
-
   module_function
 
   class User
@@ -29,7 +24,6 @@ module Optimization
     time = Benchmark.measure do
       class_name.split('::').reduce(Module, :const_get).send(method_name.to_sym, arguments[1])
     end
-    puts "Runtime: #{time.real.round(2)} seconds"
-    puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+    puts "Runtime: #{time.real.round(2)} seconds | MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
   end
 end

@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 require 'pry'
-require_relative '../lib/task-1'
+require_relative '../lib/optimization'
 
 def linear_work(size)
   a = []

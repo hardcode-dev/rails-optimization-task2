@@ -5,7 +5,7 @@ require_relative 'helper'
 RubyProf.measure_mode = RubyProf::ALLOCATIONS
 
 result = RubyProf.profile do
-  Optimization::TaskTwo.work("#{@root}data/dataN.txt", true)
+  Optimization::TaskTwo.work("#{@root}data/dataN.txt", false)
 end
 
 printer = RubyProf::FlatPrinter.new(result)

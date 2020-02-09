@@ -1,0 +1,530 @@
+events: memory
+
+fl=
+fn=IO::puts
+0 0
+cfl=
+cfn=IO::write
+calls=1 0
+0 80
+
+fl=
+fn=Kernel::puts
+0 0
+cfl=
+cfn=IO::puts
+calls=1 0
+0 80
+
+fl=
+fn=String::%
+0 80
+
+fl=
+fn=Kernel::`
+0 1632
+
+fl=
+fn=Process::pid^
+0 0
+
+fl=
+fn=IO::close
+0 0
+
+fl=
+fn=IO::closed?
+0 0
+
+fl=
+fn=String::gsub
+0 200
+
+fl=
+fn=String::to_s
+0 0
+
+fl=/home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::to_a
+202 0
+cfl=
+cfn=Hash::keys
+calls=1 203
+203 40
+
+fl=
+fn=Hash::each_key
+0 0
+
+fl=/home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::each
+336 80
+cfl=
+cfn=Hash::each_key
+calls=1 338
+338 0
+
+fl=
+fn=Enumerable::count
+0 80
+cfl=/home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::each
+calls=1 0
+0 80
+
+fl=
+fn=String::encode
+0 330037840
+
+fl=
+fn=Symbol::to_s
+0 140000000
+
+fl=
+fn=Hash::keys
+0 20000080
+
+fl=
+fn=JSON/Ext/Generator/State::initialize_copy
+0 0
+
+fl=
+fn=Kernel::initialize_dup
+0 0
+cfl=
+cfn=JSON/Ext/Generator/State::initialize_copy
+calls=500001 0
+0 0
+
+fl=
+fn=Kernel::dup
+0 20000080
+cfl=
+cfn=Kernel::initialize_dup
+calls=500001 0
+0 0
+
+fl=
+fn=JSON/Ext/Generator/GeneratorMethods/Hash::to_json
+0 20000080
+cfl=
+cfn=Kernel::dup
+calls=500001 0
+0 20000080
+cfl=
+cfn=Hash::keys
+calls=500001 0
+0 20000040
+cfl=
+cfn=Symbol::to_s
+calls=3500000 0
+0 140000000
+cfl=
+cfn=String::encode
+calls=7750945 0
+0 330037840
+cfl=
+cfn=String::to_s
+calls=4 0
+0 0
+
+fl=
+fn=Array::reverse
+0 20000000
+
+fl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+fn=Object::dates
+55 0
+cfl=
+cfn=Array::map
+calls=500000 56
+56 20000000
+cfl=
+cfn=Array::sort
+calls=500000 56
+56 37989720
+cfl=
+cfn=Array::reverse
+calls=500000 56
+56 20000000
+
+fl=
+fn=Array::all?
+0 31403880
+
+fl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+fn=Object::alwaysUsedChrome
+51 0
+cfl=
+cfn=Array::map
+calls=500000 52
+52 20000000
+cfl=
+cfn=Array::all?
+calls=500000 52
+52 31403880
+
+fl=
+fn=Array::any?
+0 48704080
+
+fl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+fn=Object::usedIE
+47 0
+cfl=
+cfn=Array::map
+calls=500000 48
+48 20000000
+cfl=
+cfn=Array::any?
+calls=500000 48
+48 48704080
+
+fl=
+fn=Array::join
+0 20000040
+
+fl=
+fn=Array::sort
+0 75979440
+
+fl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+fn=Object::browsers
+43 20000000
+cfl=
+cfn=Array::map
+calls=500000 44
+44 20000000
+cfl=
+cfn=Array::sort
+calls=500000 44
+44 37989720
+cfl=
+cfn=Array::join
+calls=500000 44
+44 20000000
+
+fl=
+fn=Array::max
+0 0
+
+fl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+fn=Object::longestSession
+39 40000000
+cfl=
+cfn=Array::map
+calls=500000 40
+40 20000000
+cfl=
+cfn=Array::max
+calls=500000 40
+40 0
+cfl=
+cfn=Integer::to_s
+calls=500000 40
+40 20000000
+
+fl=
+fn=Integer::to_s
+0 40000040
+
+fl=
+fn=Array::sum
+0 0
+
+fl=
+fn=Array::map
+0 120000000
+
+fl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+fn=Object::totalTime
+35 40000000
+cfl=
+cfn=Array::map
+calls=500000 36
+36 20000000
+cfl=
+cfn=Array::sum
+calls=500000 36
+36 0
+cfl=
+cfn=Integer::to_s
+calls=500000 36
+36 20000000
+
+fl=
+fn=Array::count
+0 0
+
+fl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+fn=Object::sessionsCount
+31 0
+cfl=
+cfn=Array::count
+calls=500000 32
+32 0
+
+fl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+fn=Object::usersStats
+59 116000000
+cfl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+cfn=Object::sessionsCount
+calls=500000 61
+61 0
+cfl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+cfn=Object::totalTime
+calls=500000 61
+61 80000000
+cfl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+cfn=Object::longestSession
+calls=500000 61
+61 80000000
+cfl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+cfn=Object::browsers
+calls=500000 61
+61 97989720
+cfl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+cfn=Object::usedIE
+calls=500000 61
+61 68704080
+cfl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+cfn=Object::alwaysUsedChrome
+calls=500000 61
+61 51403880
+cfl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+cfn=Object::dates
+calls=500000 61
+61 77989720
+
+fl=
+fn=Kernel::nil?
+0 0
+
+fl=/home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::<<
+348 8040
+
+fl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+fn=User::add_session
+17 0
+
+fl=
+fn=String::to_i
+0 0
+
+fl=
+fn=String::upcase
+0 220075200
+
+fl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+fn=User::initialize
+12 20000000
+
+fl=
+fn=String::chomp
+0 130037600
+
+fl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+fn=Object::parse_user
+22 116000000
+cfl=
+cfn=String::chomp
+calls=500000 24
+24 20000000
+
+fl=
+fn=String::split
+0 890263200
+
+fl=
+fn=IO::foreach^
+0 1048331040
+cfl=
+cfn=String::split
+calls=3250940 83
+83 890263200
+cfl=
+cfn=NilClass::nil?
+calls=1 85
+85 0
+cfl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+cfn=Object::parse_user
+calls=500000 90
+90 136000000
+cfl=
+cfn=Class::new
+calls=500000 90
+90 40000000
+cfl=
+cfn=String::upcase
+calls=5501880 95
+95 220075200
+cfl=
+cfn=String::to_i
+calls=2750940 95
+95 0
+cfl=
+cfn=String::chomp
+calls=2750940 95
+95 110037600
+cfl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+cfn=User::add_session
+calls=2750940 95
+95 0
+cfl=/home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::<<
+calls=2750940 103
+103 8040
+cfl=
+cfn=Kernel::nil?
+calls=499999 85
+85 0
+cfl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+cfn=Object::usersStats
+calls=499999 86
+86 572086208
+cfl=
+cfn=JSON/Ext/Generator/GeneratorMethods/Hash::to_json
+calls=499999 87
+87 530036520
+cfl=
+cfn=IO::write
+calls=499999 88
+88 19999960
+
+fl=
+fn=IO::write
+0 20000200
+
+fl=
+fn=File::initialize
+0 40
+
+fl=
+fn=IO::open^
+0 672
+cfl=
+cfn=File::initialize
+calls=1 0
+0 40
+cfl=
+cfn=IO::write
+calls=3 80
+80 160
+cfl=
+cfn=IO::foreach^
+calls=1 82
+82 3566837768
+cfl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+cfn=Object::usersStats
+calls=1 107
+107 1192
+cfl=
+cfn=JSON/Ext/Generator/GeneratorMethods/Hash::to_json
+calls=2 108
+108 1520
+cfl=
+cfn=Enumerable::count
+calls=1 113
+113 160
+cfl=/home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::to_a
+calls=1 115
+115 40
+cfl=
+cfn=Array::join
+calls=1 115
+115 40
+cfl=
+cfn=String::gsub
+calls=2 116
+116 200
+cfl=
+cfn=IO::closed?
+calls=1 116
+116 0
+cfl=
+cfn=IO::close
+calls=1 116
+116 0
+
+fl=
+fn=NilClass::nil?
+0 0
+
+fl=
+fn=Hash::initialize
+0 0
+
+fl=/home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::initialize
+93 0
+cfl=
+cfn=Class::new
+calls=1 94
+94 232
+cfl=
+cfn=NilClass::nil?
+calls=1 96
+96 0
+
+fl=
+fn=Class::new
+0 20000272
+cfl=/home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::initialize
+calls=1 0
+0 232
+cfl=
+cfn=Hash::initialize
+calls=1 0
+0 0
+cfl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+cfn=User::initialize
+calls=500000 0
+0 20000000
+
+fl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+fn=Object::work
+71 240
+cfl=
+cfn=Class::new
+calls=1 76
+76 272
+cfl=
+cfn=IO::open^
+calls=1 79
+79 3566841792
+cfl=
+cfn=Process::pid^
+calls=1 119
+119 0
+cfl=
+cfn=Integer::to_s
+calls=1 119
+119 40
+cfl=
+cfn=Kernel::`
+calls=1 119
+119 1632
+cfl=
+cfn=String::to_i
+calls=1 119
+119 0
+cfl=
+cfn=String::%
+calls=1 119
+119 80
+cfl=
+cfn=Kernel::puts
+calls=1 119
+119 80
+
+fl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/tt.rb
+fn=[global]::
+7 40
+cfl=/home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/test.rb
+cfn=Object::work
+calls=1 7
+7 3566844136
+

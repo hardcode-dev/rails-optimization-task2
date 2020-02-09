@@ -72,7 +72,7 @@ def work
 
   report = {}
 
-  report[:totalUsers] = users.count
+  report[:users] = users.count
 
   # Подсчёт количества уникальных браузеров
   uniqueBrowsers = []

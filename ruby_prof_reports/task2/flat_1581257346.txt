@@ -1,0 +1,193 @@
+Measure Mode: allocations
+Thread ID: 47422080538980
+Fiber ID: 47422085734920
+Total: 195697.000000
+Sort by: self_time
+
+ %self      total      self      wait     child     calls  name                           location
+ 34.98  68464.000 68464.000     0.000     0.000    10000   String#split                   
+ 12.96  25366.000 25366.000     0.000     0.000    23829   String#encode                  
+  8.65  16928.000 16928.000     0.000     0.000    16928   String#upcase                  
+  7.47  194058.000 14613.000     0.000 179445.000        1   <Class::IO>#foreach            
+  5.49  10752.000 10752.000     0.000     0.000    10752   Symbol#to_s                    
+  4.71   9222.000  9222.000     0.000     0.000     9217   Array#map                      
+  4.33   8464.000  8464.000     0.000     0.000     8464   String#[]                      
+  4.33  25392.000  8464.000     0.000 16928.000     8464   Optimization::TaskTwo#parse_session /home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/lib/task-2.rb:91
+  2.97   5804.000  5804.000     0.000     0.000     3072   Array#sort                     
+  2.35  30105.000  4608.000     0.000 25497.000     1536   Optimization::TaskTwo#collect_stats_from_user /home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/lib/task-2.rb:101
+  2.10   4782.000  4109.000     0.000   673.000     1794  *Array#any?                     
+  1.57   4630.000  3076.000     0.000  1554.000     1539  *Class#new                      
+  1.57   3072.000  3072.000     0.000     0.000     3072   Integer#to_s                   
+  0.79   1543.000  1543.000     0.000     0.000     1542   Kernel#dup                     
+  0.79   1541.000  1541.000     0.000     0.000     1541   Array#join                     
+  0.79   1538.000  1538.000     0.000     0.000     1538   Hash#keys                      
+  0.79  72363.000  1538.000     0.000 70825.000     1536   Optimization::TaskTwo#user_stats /home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/lib/task-2.rb:78
+  0.79   1538.000  1538.000     0.000     0.000     1538   Array#reverse                  
+  0.79  40729.000  1537.000     0.000 39192.000     1537   JSON::Ext::Generator::GeneratorMethods::Hash#to_json 
+  0.78   1536.000  1536.000     0.000     0.000     1536   Optimization::TaskTwo#parse_user /home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/lib/task-2.rb:82
+  0.33    645.000   645.000     0.000     0.000     1536   Array#all?                     
+  0.22    421.000   421.000     0.000     0.000      424   <Class::File>#file?            
+  0.18    356.000   356.000     0.000     0.000      178   <Class::File>#join             
+  0.10    201.000   201.000     0.000     0.000     8464   Set#add                        /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:348
+  0.09    178.000   178.000     0.000     0.000        1   Module#module_eval             
+  0.01     21.000    21.000     0.000     0.000       19   <Class::File>#dirname          
+  0.01     16.000    16.000     0.000     0.000       16   <Module::Gem>#default_dir      /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/defaults.rb:30
+  0.01     13.000    13.000     0.000     0.000        2   Exception#backtrace            
+  0.01     39.000    12.000     0.000    27.000        1   <Module::Gem::BundlerVersionFinder>#lockfile_version /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:67
+  0.01     10.000    10.000     0.000     0.000        1   String#scan                    
+  0.01     10.000    10.000     0.000     0.000        5   <Class::File>#expand_path      
+  0.00      9.000     9.000     0.000     0.000        9   <Class::File>#exist?           
+  0.00      7.000     7.000     0.000     0.000        3   String#gsub                    
+  0.00      7.000     7.000     0.000     0.000        1   Kernel#gem_original_require    
+  0.00      6.000     6.000     0.000     0.000        2   Enumerable#drop_while          
+  0.00  194135.000     5.000     0.000 194130.000        1   <Class::IO>#open               
+  0.00      5.000     5.000     0.000     0.000        2   String#=~                      
+  0.00     10.000     5.000     0.000     5.000        1   <Class::Dir>#chdir             
+  0.00      4.000     4.000     0.000     0.000        4   Array#compact                  
+  0.00      4.000     4.000     0.000     0.000        4   Gem::Platform#to_a             /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb:118
+  0.00      4.000     4.000     0.000     0.000        4   <Class::Gem::Platform>#local   /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb:19
+  0.00   1351.000     4.000     0.000  1347.000        2  *Enumerable#find                
+  0.00      3.000     3.000     0.000     0.000        1   <Class::IO>#read               
+  0.00      3.000     3.000     0.000     0.000        1   <Class::Dir>#pwd               
+  0.00      4.000     2.000     0.000     2.000        1   SortedSet#each                 /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:775
+  0.00      6.000     2.000     0.000     4.000        1   Enumerable#count               
+  0.00      9.000     2.000     0.000     7.000        1   Optimization::TaskTwo#collect_stats_for_users /home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/lib/task-2.rb:69
+  0.00      2.000     2.000     0.000     0.000        1   Enumerable#reduce              
+  0.00      2.000     2.000     0.000     0.000        4   Array#reverse_each             
+  0.00      6.000     2.000     0.000     4.000        1   Gem::Version#initialize        /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:210
+  0.00     14.000     2.000     0.000    12.000        1   <Module::Gem::Util>#traverse_parents /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/util.rb:106
+  0.00     24.000     2.000     0.000    22.000        1   <Module::Gem::BundlerVersionFinder>#lockfile_contents /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:77
+  0.00      2.000     2.000     0.000     0.000        1   <Class::File>#basename         
+  0.00     43.000     2.000     0.000    41.000        1   <Module::Gem::BundlerVersionFinder>#bundler_version_with_reason /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:14
+  0.00  195697.000     2.000     0.000 195695.000        1   [global]#                      profilers/task2/prof.rb:8
+  0.00      1.000     1.000     0.000     0.000        1   Array#sort!                    
+  0.00      1.000     1.000     0.000     0.000     1538   IO#write                       
+  0.00      1.000     1.000     0.000     0.000        1   Array#slice!                   
+  0.00     20.000     1.000     0.000    19.000        1   Gem::Version#_split_segments   /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:392
+  0.00      1.000     1.000     0.000     0.000        1   String#strip                   
+  0.00     17.000     1.000     0.000    16.000        8   Gem::Version#_segments         /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:382
+  0.00   1349.000     1.000     0.000  1348.000        4  *Array#each                     
+  0.00   1354.000     1.000     0.000  1353.000        1   <Class::Gem::Specification>#find_by_path /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1034
+  0.00   1375.000     1.000     0.000  1374.000        1   Kernel#require                 /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:34
+  0.00      1.000     1.000     0.000     0.000        1   Module#alias_method            
+  0.00   1556.000     1.000     0.000  1555.000        2  *SortedSet#initialize           /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:805
+  0.00  195694.000     1.000     0.000 195693.000        1   Optimization::TaskTwo#work     /home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/lib/task-2.rb:29
+  0.00      1.000     1.000     0.000     0.000        1   NilClass#to_s                  
+  0.00      0.000     0.000     0.000     0.000        1   IO#close                       
+  0.00      0.000     0.000     0.000     0.000        1   IO#closed?                     
+  0.00      2.000     0.000     0.000     2.000        2   SortedSet#to_a                 /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:781
+  0.00      0.000     0.000     0.000     0.000     1537   JSON::Ext::Generator::State#initialize_copy 
+  0.00      0.000     0.000     0.000     0.000     1536   Array#max                      
+  0.00      0.000     0.000     0.000     0.000     1536   Array#sum                      
+  0.00      0.000     0.000     0.000     0.000     1536   Array#count                    
+  0.00    201.000     0.000     0.000   201.000     8464   SortedSet#<<                   /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:741
+  0.00      0.000     0.000     0.000     0.000     1536   Optimization::User#initialize  /home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/lib/optimization.rb:15
+  0.00  194058.000     0.000     0.000 194058.000        1   Optimization::TaskTwo#file_read /home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/lib/task-2.rb:51
+  0.00      0.000     0.000     0.000     0.000        1   File#initialize                
+  0.00  194135.000     0.000     0.000 194135.000        1   Optimization::TaskTwo#file_write /home/btg/ruby_app/tinknetica/optimization/rails-optimization-task2/lib/task-2.rb:40
+  0.00      0.000     0.000     0.000     0.000        2   NilClass#nil?                  
+  0.00      0.000     0.000     0.000     0.000        1   Hash#initialize                
+  0.00      1.000     0.000     0.000     1.000        1   Set#initialize                 /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:93
+  0.00      0.000     0.000     0.000     0.000        1   Module#method_removed          
+  0.00      0.000     0.000     0.000     0.000        1   Module#remove_method           
+  0.00      0.000     0.000     0.000     0.000        1   Kernel#raise                   
+  0.00      0.000     0.000     0.000     0.000        1   #<Class:0x00005642a0ad7378>#to_spec 
+  0.00      0.000     0.000     0.000     0.000        2   Integer#<=>                    
+  0.00      0.000     0.000     0.000     0.000        2   Array#==                       
+  0.00      0.000     0.000     0.000     0.000        1   Array#concat                   
+  0.00      0.000     0.000     0.000     0.000        2   Enumerator#each                
+  0.00     10.000     0.000     0.000    10.000        1   Array#map!                     
+  0.00      0.000     0.000     0.000     0.000        1   Array#index                    
+  0.00      0.000     0.000     0.000     0.000        1   Kernel#freeze                  
+  0.00      0.000     0.000     0.000     0.000     8468   String#to_i                    
+  0.00     32.000     0.000     0.000    32.000        4   Gem::Version#canonical_segments /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:369
+  0.00      0.000     0.000     0.000     0.000        2   Gem::Version#_version          /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:378
+  0.00     32.000     0.000     0.000    32.000        2   Gem::Version#<=>               /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:342
+  0.00     32.000     0.000     0.000    32.000        2   Comparable#<                   
+  0.00      0.000     0.000     0.000     0.000        5   Kernel#is_a?                   
+  0.00      0.000     0.000     0.000     0.000        6   String#to_s                    
+  0.00      0.000     0.000     0.000     0.000     1536   Kernel#nil?                    
+  0.00      0.000     0.000     0.000     0.000        1   <Module::Gem::Deprecate>#skip  /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/deprecate.rb:26
+  0.00      2.000     0.000     0.000     2.000        1   <Class::Gem::Version>#correct? /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:172
+  0.00      0.000     0.000     0.000     0.000        2   Gem::Specification#installed_by_version /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:618
+  0.00      9.000     0.000     0.000     9.000        4   Gem::Specification#base_dir    /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2092
+  0.00      0.000     0.000     0.000     0.000        4   <Module::Gem>#ruby_api_version /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:907
+  0.00      0.000     0.000     0.000     0.000        4   <Module::Gem>#extension_api_version /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:485
+  0.00     12.000     0.000     0.000    12.000        4   Gem::Platform#to_s             /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/platform.rb:122
+  0.00      0.000     0.000     0.000     0.000        4   <Module::Gem>#default_ext_dir_for /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/defaults.rb:62
+  0.00     24.000     0.000     0.000    24.000        4   Gem::BasicSpecification#extensions_dir /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:97
+  0.00     28.000     0.000     0.000    28.000        9   Gem::BasicSpecification#gem_build_complete_path /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:45
+  0.00      0.000     0.000     0.000     0.000       15   Gem::Specification#full_name   /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1968
+  0.00     17.000     0.000     0.000    17.000       15   Gem::Specification#gems_dir    /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1979
+  0.00      0.000     0.000     0.000     0.000       15   Gem::Specification#raw_require_paths /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2741
+  0.00      0.000     0.000     0.000     0.000       22   Gem::Specification#extensions  /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:593
+  0.00     48.000     0.000     0.000    48.000       16   <Class::Gem::BasicSpecification>#default_specifications_dir /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:37
+  0.00      0.000     0.000     0.000     0.000       17   Kernel#class                   
+  0.00     64.000     0.000     0.000    64.000       16   Gem::BasicSpecification#default_gem? /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:82
+  0.00    105.000     0.000     0.000   105.000       15   Gem::Specification#missing_extensions? /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:2181
+  0.00      0.000     0.000     0.000     0.000        2   Array#first                    
+  0.00      0.000     0.000     0.000     0.000        3   Array#initialize_copy          
+  0.00      3.000     0.000     0.000     3.000        3   Gem::Version#segments          /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:317
+  0.00      0.000     0.000     0.000     0.000        1   Gem::StubSpecification#version /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:175
+  0.00      7.000     0.000     0.000     7.000        3   <Class::Gem::Version>#new      /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/version.rb:200
+  0.00     10.000     0.000     0.000    10.000        1   Kernel#loop                    
+  0.00      0.000     0.000     0.000     0.000        1   Kernel#block_given?            
+  0.00      2.000     0.000     0.000     2.000        1   <Module::Gem::BundlerVersionFinder>#bundle_update_bundler_version /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:50
+  0.00      0.000     0.000     0.000     0.000        2   <Object::Object>#[]            
+  0.00     43.000     0.000     0.000    43.000        1   <Module::Gem::BundlerVersionFinder>#bundler_version /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:6
+  0.00     40.000     0.000     0.000    40.000       31   Gem::BasicSpecification#extension_dir /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:90
+  0.00      0.000     0.000     0.000     0.000      118   Gem::BasicSpecification#have_extensions? /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:317
+  0.00      0.000     0.000     0.000     0.000      244   Kernel#untaint                 
+  0.00      0.000     0.000     0.000     0.000      107   Gem::StubSpecification#full_name /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:179
+  0.00      0.000     0.000     0.000     0.000      103   Gem::StubSpecification#raw_require_paths /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:139
+  0.00   1168.000     0.000     0.000  1168.000      118   Gem::BasicSpecification#have_file? /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:319
+  0.00      0.000     0.000     0.000     0.000      118   <Module::Gem>#suffixes         /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:1012
+  0.00      0.000     0.000     0.000     0.000      178   Gem::StubSpecification#extensions /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:168
+  0.00      0.000     0.000     0.000     0.000      103   Gem::StubSpecification#default_gem? /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:93
+  0.00     31.000     0.000     0.000    31.000      103   Gem::StubSpecification#missing_extensions? /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:143
+  0.00   1304.000     0.000     0.000  1304.000      118   Gem::BasicSpecification#contains_requirable_file? /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/basic_specification.rb:68
+  0.00      0.000     0.000     0.000     0.000      492   Gem::StubSpecification#data    /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:108
+  0.00      0.000     0.000     0.000     0.000      103   Gem::StubSpecification#name    /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/stub_specification.rb:154
+  0.00     45.000     0.000     0.000    45.000      118   <Module::Gem::BundlerVersionFinder>#compatible? /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/bundler_version_finder.rb:37
+  0.00      0.000     0.000     0.000     0.000        1   <Class::Gem::Specification>#stubs /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:819
+  0.00      0.000     0.000     0.000     0.000        1   String#freeze                  
+  0.00      0.000     0.000     0.000     0.000        2   String#initialize_copy         
+  0.00      0.000     0.000     0.000     0.000     1542   Kernel#initialize_dup          
+  0.00   1354.000     0.000     0.000  1354.000        1   <Module::Gem>#try_activate     /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:206
+  0.00      0.000     0.000     0.000     0.000        1   String#end_with?               
+  0.00      0.000     0.000     0.000     0.000        1   String#start_with?             
+  0.00      0.000     0.000     0.000     0.000        2   Exception#to_s                 
+  0.00      0.000     0.000     0.000     0.000        2   Exception#message              
+  0.00      0.000     0.000     0.000     0.000       10   Module#===                     
+  0.00      0.000     0.000     0.000     0.000        2   Exception#exception            
+  0.00      0.000     0.000     0.000     0.000        1   Exception#initialize           
+  0.00      0.000     0.000     0.000     0.000        2   Thread::Mutex#unlock           
+  0.00      0.000     0.000     0.000     0.000        2   MonitorMixin#mon_check_owner   /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb:267
+  0.00      0.000     0.000     0.000     0.000        2   MonitorMixin#exit              /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb:199
+  0.00      0.000     0.000     0.000     0.000        1   <Class::Gem::Specification>#unresolved_deps /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems/specification.rb:1301
+  0.00      0.000     0.000     0.000     0.000        1   <Module::Gem>#find_unresolved_default_spec /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0/rubygems.rb:1272
+  0.00      0.000     0.000     0.000     0.000     8465   Kernel#respond_to?             
+  0.00      0.000     0.000     0.000     0.000        2   Thread::Mutex#lock             
+  0.00      0.000     0.000     0.000     0.000        6   <Class::Thread>#current        
+  0.00      0.000     0.000     0.000     0.000        2   MonitorMixin#enter             /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/monitor.rb:187
+  0.00      0.000     0.000     0.000     0.000       14   Module#method_added            
+  0.00   1554.000     0.000     0.000  1554.000        1   Thread::Mutex#synchronize      
+  0.00   1554.000     0.000     0.000  1554.000        1   <Class::SortedSet>#setup       /home/btg/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/set.rb:702
+
+* recursively called methods
+
+Columns are:
+
+  %self     - The percentage of time spent in this method, derived from self_time/total_time.
+  total     - The time spent in this method and its children.
+  self      - The time spent in this method.
+  wait      - The amount of time this method waited for other threads.
+  child     - The time spent in this method's children.
+  calls     - The number of times this method was called.
+  name      - The name of the method.
+  location  - The location of the method.
+
+The interpretation of method names is:
+
+  * MyObject#test - An instance method "test" of the class "MyObject"
+  * <Object:MyObject>#test - The <> characters indicate a method on a singleton class.

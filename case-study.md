@@ -29,3 +29,5 @@
   MEMORY USAGE: 24 MB
 
 7. [screen: valgrind massif visualier](https://monosnap.com/direct/csQnUEjdhFHvjEMIIGa3mxrOuaaGF0)
+
+8. Построил и проанализировал отчёт гемом `memory_profiler`

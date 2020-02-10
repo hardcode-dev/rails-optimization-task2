@@ -44,12 +44,11 @@ end
 
 def work(filename='data.txt', disable_gc=false)
   GC.disable if disable_gc
-  file_lines = File.read(filename).split("\n")
 
   users = []
   sessions = []
 
-  file_lines.each do |line|
+  File.foreach(filename) do |line|
     cols = line.split(',')
     users = users + [parse_user(line)] if cols[0] == 'user'
     sessions = sessions + [parse_session(line)] if cols[0] == 'session'
@@ -125,6 +124,6 @@ def work(filename='data.txt', disable_gc=false)
     { 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }
   end
 
-  File.write('result.json', "#{report.to_json}\n")
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  # File.write('result.json', "#{report.to_json}\n")
+  # puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end

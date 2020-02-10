@@ -1,0 +1,25 @@
+digraph profile {
+Legend [shape=box,fontsize=24,shape=plaintext,label="
+Total samples: 82150\lShowing top 120 nodes\lDropped nodes with < 411 samples\l"];
+  "70205258975340" [size=2.5] [fontsize=10.0] [penwidth="2.5"] [shape=box] [label="<main>\n0 (0.0%)\rof 82150 (100.0%)\r"];
+  "70205254639740" [size=2.5] [fontsize=10.0] [penwidth="2.5"] [shape=box] [label="<main>\n0 (0.0%)\rof 82150 (100.0%)\r"];
+  "70205258975160" [size=2.5] [fontsize=10.00125862495224] [penwidth="2.5"] [shape=box] [label="block in <main>\n2 (0.0%)\rof 82150 (100.0%)\r"];
+  "70205267257520" [size=2.4997321972002435] [fontsize=14.864585440406355] [penwidth="2.4997321972002435"] [shape=box] [label="Report#call\n7730 (9.4%)\rof 82139 (100.0%)\r"];
+  "70205267257460" [size=1.978149726110773] [fontsize=38.0] [penwidth="1.978149726110773"] [shape=box] [label="Report#parse_line\n44493 (54.2%)\rof 60715 (73.9%)\r"];
+  "70205267257440" [size=0.833292757151552] [fontsize=18.615287798080598] [penwidth="0.833292757151552"] [shape=box] [label="Report#user_stats\n13690 (16.7%)\r"];
+  "70205267257500" [size=0.7723554473524041] [fontsize=13.456813431326276] [penwidth="0.7723554473524041"] [shape=box] [label="Report#parse_session\n5493 (6.7%)\rof 11187 (13.6%)\r"];
+  "70205267257620" [size=0.63373097991479] [fontsize=13.456813431326276] [penwidth="0.63373097991479"] [shape=box] [label="User#session=\n5493 (6.7%)\r"];
+  "70205267257480" [size=0.6225806451612903] [fontsize=10.633717663452678] [penwidth="0.6225806451612903"] [shape=box] [label="Report#parse_user\n1007 (1.2%)\rof 5035 (6.1%)\r"];
+  "70205267257640" [size=0.5980645161290322] [fontsize=12.534870653810712] [penwidth="0.5980645161290322"] [shape=box] [label="User#initialize\n4028 (4.9%)\r"];
+  "70205258975340" -> "70205258975160" [label="82150"] [weight="82150"] [penwidth="2.5"];
+  "70205254639740" -> "70205258975340" [label="82150"] [weight="82150"] [penwidth="2.5"];
+  "70205258975160" -> "70205267257520" [label="82139"] [weight="82139"] [penwidth="2.4997321972002435"];
+  "70205267257520" -> "70205267257460" [label="60715"] [weight="60715"] [penwidth="1.978149726110773"];
+  "70205267257520" -> "70205267257520" [label="60715"] [weight="60715"] [penwidth="1.978149726110773"];
+  "70205267257520" -> "70205267257440" [label="13690"] [weight="13690"] [penwidth="0.833292757151552"];
+  "70205267257460" -> "70205267257480" [label="5035"] [weight="5035"] [penwidth="0.6225806451612903"];
+  "70205267257460" -> "70205267257500" [label="11187"] [weight="11187"] [penwidth="0.7723554473524041"];
+  "70205267257440" -> "70205267257440" [label="15511"] [weight="15511"] [penwidth="0.8776262933657943"];
+  "70205267257500" -> "70205267257620" [label="5493"] [weight="5493"] [penwidth="0.63373097991479"];
+  "70205267257480" -> "70205267257640" [label="4028"] [weight="4028"] [penwidth="0.5980645161290322"];
+}

@@ -2,13 +2,12 @@
 # allocated - total memory allocated during profiler run
 # retained - survived after MemoryProfiler finished
 
-# require_relative 'task-1.rb'
-require_relative 'flow-task-2.rb'
+require_relative 'task-2.rb'
 require 'benchmark'
 require 'memory_profiler'
 
 report = MemoryProfiler.report do
-  work('data_large.txt')
+  work('data_small.txt')
 end
 
 report.pretty_print(scale_bytes: true)

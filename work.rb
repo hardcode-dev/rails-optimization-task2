@@ -1,3 +1,3 @@
 require_relative 'task-2.rb'
 
-work('data500000.txt', disable_gc: false)
+work('data_large.txt', disable_gc: false)

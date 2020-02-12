@@ -6,11 +6,9 @@ RSpec.configure do |config|
 end
 
 describe 'Performance' do
-  describe 'file handler' do
-    it 'works under 30s' do
-      expect {
-        work('data100000.txt', disable_gc: false)
-      }.to perform_under(30000).ms.warmup(2).times.sample(10).times
-    end
+  it 'allocates less than 40Mb' do
+    expect {
+      work('data100000.txt', disable_gc: false)
+    }.to perform_allocation(50 * 1024 * 1024).bytes
   end
 end

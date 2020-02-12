@@ -5,9 +5,9 @@
 # stackprof stackprof.dump --method Object#work
 #
 # Graphviz:
-# stackprof --graphviz stackprof_reports/stackprof.dump > graphviz.dot
-# dot -Tpng graphviz.dot > graphviz.png
-# imgcat graphviz.png
+# stackprof --graphviz stackprof_reports/stackprof.dump > stackprof_reports/graphviz.dot
+# dot -Tpng stackprof_reports/graphviz.dot > stackprof_reports/graphviz.png
+# imgcat stackprof_reports/graphviz.png
 
 require 'stackprof'
 require_relative 'task-2.rb'

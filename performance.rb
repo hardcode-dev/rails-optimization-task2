@@ -9,7 +9,7 @@ describe 'Performance' do
   describe 'file handler' do
     it 'works under 30s' do
       expect {
-        work('data10000.txt', disable_gc: false)
+        work('data100000.txt', disable_gc: false)
       }.to perform_under(30000).ms.warmup(2).times.sample(10).times
     end
   end

@@ -1,11 +1,11 @@
 # Deoptimized version of homework task
 
 require 'json'
-require 'pry'
+# require 'pry'
 
-def work(filename='data.txt', disable_gc=false)
+def work(filename='data.txt', disable_gc: false)
   GC.disable if disable_gc
-
+  input_file = ENV['DATA_FILE'] || filename
   @total_users = 0
   @total_sessions = 0
   @all_browsers = []
@@ -13,7 +13,7 @@ def work(filename='data.txt', disable_gc=false)
 
   File.write('result.json', '{"usersStats":{')
 
-  File.foreach(filename) do |line|
+  File.foreach(input_file) do |line|
     fields = line.split(',')
     case fields[0]
     when 'user'

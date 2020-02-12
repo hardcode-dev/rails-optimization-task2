@@ -7,7 +7,7 @@ require_relative 'task-2.rb'
 RubyProf.measure_mode = RubyProf::ALLOCATIONS
 
 result = RubyProf.profile do
-  work('data100000.txt', disable_gc: true)
+  work('data5000000.txt', disable_gc: true)
 end
 
 printer = RubyProf::FlatPrinter.new(result)

@@ -12,8 +12,9 @@ def work(filename='data.txt', disable_gc: false)
   @unique_browsers_count = 0
 
   File.write('result.json', '{"usersStats":{')
+  @report_file = File.open('result.json', 'a')
 
-  File.foreach(ENV['DATA_FILE'] || filename) do |line|
+  File.foreach(filename) do |line|
     fields = line.split(',')
     case fields[0]
     when 'user'
@@ -48,23 +49,22 @@ def parse_session(fields)
   current_browser = fields[3].upcase
   @user_browsers << current_browser
   @all_browsers << current_browser unless @all_browsers.include?(current_browser)
-  @session_dates << fields[5].gsub(/\n/,"")
+  @session_dates << fields[5].chomp
   @used_ie = @user_browsers.map{|s| s.match?(/INTERNET EXPLORER/) }.any?
   @always_chrome = @used_ie ? false : @user_browsers.all?{|s| s.match?(/CHROME/)}
 end
 
 def write_user_data(last=false)
-  user_stats = {}
-  user_stats[@full_name] = {}
-  user_stats[@full_name]["sessionsCount"] = @user_sessions_count
-  user_stats[@full_name]["totalTime"] = "#{@user_total_time} min."
-  user_stats[@full_name]["longestSession"] = "#{@user_max_time} min."
-  user_stats[@full_name]["browsers"] = @user_browsers.sort.join(', ')
-  user_stats[@full_name]["usedIE"] = @used_ie
-  user_stats[@full_name]["alwaysUsedChrome"] = @always_chrome
-  user_stats[@full_name]["dates"] = @session_dates.sort.reverse
+  @user_stats = {}
+  @user_stats["sessionsCount"] = @user_sessions_count
+  @user_stats["totalTime"] = "#{@user_total_time} min."
+  @user_stats["longestSession"] = "#{@user_max_time} min."
+  @user_stats["browsers"] = @user_browsers.sort.join(', ')
+  @user_stats["usedIE"] = @used_ie
+  @user_stats["alwaysUsedChrome"] = @always_chrome
+  @user_stats["dates"] = @session_dates.sort.reverse
   closing_char = last ? "}," : ","
-  File.write('result.json', "\"#{@full_name}\":#{Oj.dump(user_stats[@full_name])}#{closing_char}", mode: 'a')
+  @report_file.puts "\"#{@full_name}\":#{Oj.dump(@user_stats)}#{closing_char}"
 end
 
 def add_stats
@@ -73,5 +73,6 @@ def add_stats
   stats["totalSessions"] = @total_sessions
   stats["allBrowsers"] = @all_browsers.sort.join(',')
   stats["uniqueBrowsersCount"] = @all_browsers.count
-  File.write('result.json', "#{Oj.dump(stats).gsub('}', '').gsub('{', '')}}", mode: 'a')
+  @report_file.puts "#{Oj.dump(stats).gsub('}', '').gsub('{', '')}}"
+  @report_file.close
 end

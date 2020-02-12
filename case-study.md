@@ -46,3 +46,10 @@
 - [+/-] Построить график потребления памяти в `valgrind massif visualier` и включить скриншот в описание вашего `PR`;
 - [+] Написать тест, на то что программа укладывается в бюджет по памяти
 
+Отчёт valgrind для `ruby-2.6.4` c `jemalloc`:
+
+![valgrind report on ruby-2.6.4](valgrind-ruby-2.6.4.png)
+
+Отчёт valgrind для `ruby-2.7.0` c `jemalloc`:
+
+![valgrind report on ruby-2.7.0](valgrind-ruby-2.7.0.png)

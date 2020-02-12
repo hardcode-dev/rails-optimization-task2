@@ -1,11 +1,11 @@
 # Deoptimized version of homework task
 
-require 'json'
+require 'oj'
 # require 'pry'
 
 def work(filename='data.txt', disable_gc: false)
   GC.disable if disable_gc
-  input_file = ENV['DATA_FILE'] || filename
+
   @total_users = 0
   @total_sessions = 0
   @all_browsers = []
@@ -13,7 +13,7 @@ def work(filename='data.txt', disable_gc: false)
 
   File.write('result.json', '{"usersStats":{')
 
-  File.foreach(input_file) do |line|
+  File.foreach(ENV['DATA_FILE'] || filename) do |line|
     fields = line.split(',')
     case fields[0]
     when 'user'
@@ -64,7 +64,7 @@ def write_user_data(last=false)
   user_stats[@full_name]["alwaysUsedChrome"] = @always_chrome
   user_stats[@full_name]["dates"] = @session_dates.sort.reverse
   closing_char = last ? "}," : ","
-  File.write('result.json', "\"#{@full_name}\":#{user_stats[@full_name].to_json}#{closing_char}", mode: 'a')
+  File.write('result.json', "\"#{@full_name}\":#{Oj.dump(user_stats[@full_name])}#{closing_char}", mode: 'a')
 end
 
 def add_stats
@@ -73,5 +73,5 @@ def add_stats
   stats["totalSessions"] = @total_sessions
   stats["allBrowsers"] = @all_browsers.sort.join(',')
   stats["uniqueBrowsersCount"] = @all_browsers.count
-  File.write('result.json', "#{stats.to_json.gsub('}', '').gsub('{', '')}}", mode: 'a')
+  File.write('result.json', "#{Oj.dump(stats).gsub('}', '').gsub('{', '')}}", mode: 'a')
 end

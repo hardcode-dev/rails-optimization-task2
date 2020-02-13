@@ -6,9 +6,9 @@ RSpec.configure do |config|
 end
 
 describe 'Performance' do
-  it 'allocates less than 40Mb' do
+  it 'requests less than 50 MB RAM' do
     expect {
-      work('data100000.txt', disable_gc: false)
+      work('data10000.txt', disable_gc: false)
     }.to perform_allocation(50 * 1024 * 1024).bytes
   end
 end

@@ -2,6 +2,9 @@ data_large.txt
 data.txt
 result.json
 data/*
+!data/.gitkeep
 test/support/result.json
 test/support/data.txt
 Gemfile.lock
+test/ruby_prof_reports/*
+!test/ruby_prof_reports/.gitkeep

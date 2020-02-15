@@ -1,0 +1,174 @@
+events: memory
+
+fl=
+fn=IO::write^
+0 312
+
+fl=
+fn=String::encode
+0 240
+
+fl=
+fn=Symbol::to_s
+0 200
+
+fl=
+fn=Hash::keys
+0 80
+
+fl=
+fn=JSON/Ext/Generator/State::initialize_copy
+0 0
+
+fl=
+fn=Kernel::initialize_dup
+0 0
+cfl=
+cfn=JSON/Ext/Generator/State::initialize_copy
+calls=1 0
+0 0
+
+fl=
+fn=Kernel::dup
+0 80
+cfl=
+cfn=Kernel::initialize_dup
+calls=1 0
+0 0
+
+fl=
+fn=JSON/Ext/Generator/GeneratorMethods/Hash::to_json
+0 80
+cfl=
+cfn=Kernel::dup
+calls=1 0
+0 80
+cfl=
+cfn=Hash::keys
+calls=2 0
+0 80
+cfl=
+cfn=Symbol::to_s
+calls=5 0
+0 200
+cfl=
+cfn=String::encode
+calls=6 0
+0 240
+
+fl=
+fn=Array::each
+0 0
+
+fl=
+fn=Enumerable::each_with_object
+0 40
+cfl=
+cfn=Array::each
+calls=1 0
+0 0
+
+fl=/Users/ruslan/thinknetica/rails-optimization-task1/task-1.rb
+fn=Object::prepare_user_statistic
+71 272
+cfl=
+cfn=Enumerable::each_with_object
+calls=1 72
+72 40
+
+fl=
+fn=Array::join
+0 40
+
+fl=
+fn=Array::sort
+0 40
+
+fl=
+fn=Array::uniq
+0 80
+
+fl=
+fn=Array::shift
+0 0
+
+fl=
+fn=Array::count
+0 0
+
+fl=
+fn=Array::first
+0 80
+
+fl=
+fn=String::split
+0 130037640
+
+fl=
+fn=IO::read^
+0 80
+
+fl=/Users/ruslan/thinknetica/rails-optimization-task1/task-1.rb
+fn=Object::parse_file
+30 0
+cfl=
+cfn=IO::read^
+calls=1 31
+31 80
+cfl=
+cfn=String::split
+calls=1 31
+31 130037640
+cfl=
+cfn=Array::first
+calls=1 31
+31 80
+
+fl=/Users/ruslan/thinknetica/rails-optimization-task1/task-1.rb
+fn=Object::work
+5 392
+cfl=/Users/ruslan/thinknetica/rails-optimization-task1/task-1.rb
+cfn=Object::parse_file
+calls=1 12
+12 130037800
+cfl=
+cfn=Array::count
+calls=10002 13
+13 0
+cfl=
+cfn=Array::shift
+calls=10000 13
+13 0
+cfl=
+cfn=Array::uniq
+calls=2 20
+20 80
+cfl=
+cfn=Array::sort
+calls=1 20
+20 40
+cfl=
+cfn=Array::join
+calls=1 20
+20 40
+cfl=/Users/ruslan/thinknetica/rails-optimization-task1/task-1.rb
+cfn=Object::prepare_user_statistic
+calls=1 20
+20 312
+cfl=
+cfn=JSON/Ext/Generator/GeneratorMethods/Hash::to_json
+calls=1 27
+27 680
+cfl=
+cfn=IO::write^
+calls=1 27
+27 312
+
+fl=/Users/ruslan/thinknetica/rails-optimization-task1/profilizers/memory_callgrind_profilizer.rb
+fn=[global]::
+11 0
+cfl=/Users/ruslan/thinknetica/rails-optimization-task1/task-1.rb
+cfn=Object::work
+calls=1 11
+11 130039656
+

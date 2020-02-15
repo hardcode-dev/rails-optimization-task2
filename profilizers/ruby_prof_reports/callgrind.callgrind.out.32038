@@ -1,0 +1,170 @@
+events: memory
+
+fl=
+fn=Exception::backtrace
+0 0
+
+fl=
+fn=Exception::exception
+0 0
+
+fl=
+fn=Exception::initialize
+0 0
+
+fl=
+fn=Kernel::open
+0 120
+cfl=
+cfn=Exception::initialize
+calls=1 0
+0 0
+cfl=
+cfn=Exception::exception
+calls=1 0
+0 0
+cfl=
+cfn=Exception::backtrace
+calls=1 0
+0 0
+
+fl=
+fn=IO::print
+0 0
+cfl=
+cfn=IO::write
+calls=1 0
+0 40
+
+fl=
+fn=File::initialize
+0 0
+
+fl=
+fn=IO::new^
+0 40
+cfl=
+cfn=File::initialize
+calls=1 0
+0 0
+
+fl=
+fn=File::delete^
+0 0
+
+fl=
+fn=IO::write
+0 80
+
+fl=
+fn=IO::puts
+0 0
+cfl=
+cfn=IO::write
+calls=1 0
+0 40
+
+fl=
+fn=Kernel::puts
+0 0
+cfl=
+cfn=IO::puts
+calls=1 0
+0 40
+
+fl=
+fn=String::%
+0 40
+
+fl=
+fn=String::to_i
+0 0
+
+fl=
+fn=Kernel::`
+0 1312
+
+fl=
+fn=Integer::to_s
+0 40
+
+fl=
+fn=Process::pid^
+0 0
+
+fl=/Users/ruslan/thinknetica/rails-optimization-task1/task-2.rb
+fn=Object::print_memory_usage
+75 80
+cfl=
+cfn=Process::pid^
+calls=1 76
+76 0
+cfl=
+cfn=Integer::to_s
+calls=1 76
+76 40
+cfl=
+cfn=Kernel::`
+calls=1 76
+76 1312
+cfl=
+cfn=String::to_i
+calls=1 76
+76 0
+cfl=
+cfn=String::%
+calls=1 76
+76 40
+
+fl=
+fn=Process::clock_gettime^
+0 0
+
+fl=/Users/ruslan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/benchmark.rb
+fn=Benchmark::realtime^
+306 160
+cfl=
+cfn=Process::clock_gettime^
+calls=1 307
+307 0
+cfl=/Users/ruslan/thinknetica/rails-optimization-task1/task-2.rb
+cfn=Object::print_memory_usage
+calls=1 8
+8 1472
+cfl=
+cfn=Kernel::puts
+calls=1 8
+8 40
+cfl=
+cfn=File::delete^
+calls=1 10
+10 0
+cfl=
+cfn=IO::new^
+calls=1 11
+11 40
+cfl=
+cfn=IO::print
+calls=1 12
+12 40
+cfl=
+cfn=Kernel::open
+calls=1 17
+17 120
+
+fl=/Users/ruslan/thinknetica/rails-optimization-task1/task-2.rb
+fn=Object::work
+6 0
+cfl=/Users/ruslan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/benchmark.rb
+cfn=Benchmark::realtime^
+calls=1 7
+7 1872
+
+fl=/Users/ruslan/thinknetica/rails-optimization-task1/profilizers/memory_callgrind_profilizer.rb
+fn=[global]::
+11 0
+cfl=/Users/ruslan/thinknetica/rails-optimization-task1/task-2.rb
+cfn=Object::work
+calls=1 11
+11 1872
+

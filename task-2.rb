@@ -1,40 +1,38 @@
 # optimized version of homework task
 
 require 'set'
+require 'oj'
 
 class Report
-  attr_reader :report, :user, :user_name, :result_file
+  attr_reader :result_file
 
   IE = /INTERNET EXPLORER/.freeze
   CHROME = /CHROME/.freeze
   DATA_SPLITTER = ','.freeze
   SESSION_STRING = 'session'.freeze
-  RESULT_FILE_NAME = 'result.json'.freeze
+  JOINER = ', '.freeze
+  MIN = ' min.'.freeze
 
   def initialize
-    @report = {
-      totalUsers: 0,
-      totalSessions: 0,
-      allBrowsers: SortedSet.new
-    }
-    @user_name = nil
-    @user = nil
-    @result_file = File.open(RESULT_FILE_NAME, 'a')
+    @report_total_users = 0
+    @report_total_sessions = 0
+    @report_all_browsers = SortedSet.new
+    @result_file = File.open('result.json', 'a')
   end
 
   def work(filename: 'data.txt')
     save_to_file("{\"usersStats\":{")
 
     IO.foreach(filename) do |line|
-      cols = line.split(DATA_SPLITTER)
+      cols = line.split(DATA_SPLITTER)[2..5]
 
-      next parse_session(cols[3].upcase!, cols[4].to_i, cols[5].chomp!) if cols[0] == SESSION_STRING
+      next parse_session(cols[1].upcase!, cols[2].to_i, cols[3].chomp!) unless cols[3].nil?
 
-      save_not_last_user_to_file unless user.nil?
+      save_not_last_user_to_file unless @userSessionsCount.nil?
 
-      @user_name = "#{cols[2]} #{cols[3]}"
+      save_to_file("\"#{cols[0]} #{cols[1]}\":")
       refresh_user_instance
-      report[:totalUsers] += 1
+      @report_total_users += 1
     end
 
     save_user_to_file
@@ -43,32 +41,30 @@ class Report
   end
 
   def refresh_user_instance
-    @user = {
-      sessionsCount: 0,
-      totalTime: 0,
-      longestSession: 0,
-      browsers: [],
-      usedIE: false,
-      alwaysUsedChrome: true,
-      dates: []
-    }
+    @userSessionsCount = 0
+    @userTotalTime = 0
+    @userLongestSession = 0
+    @userBrowsers = []
+    @userUsedIE = false
+    @userAlwaysUsedChrome = true
+    @userDates = []
   end
 
   def parse_session(browser, session_time, date)
-    user[:sessionsCount] += 1
-    user[:totalTime] += session_time
-    user[:longestSession] = session_time if session_time > user[:longestSession]
-    user[:browsers] << browser
-    user[:usedIE] = true if !user[:usedIE] && browser.match?(IE)
-    user[:alwaysUsedChrome] = false if user[:alwaysUsedChrome] && !(browser.match?(CHROME))
-    user[:dates] << date
+    @userSessionsCount += 1
+    @userTotalTime += session_time
+    @userLongestSession = session_time if session_time > @userLongestSession
+    @userBrowsers << browser
+    @userUsedIE = true if !@userUsedIE && browser.match?(IE)
+    @userAlwaysUsedChrome = false if @userAlwaysUsedChrome && !(browser.match?(CHROME))
+    @userDates << date
 
-    report[:totalSessions] += 1
-    report[:allBrowsers] << browser
+    @report_total_sessions += 1
+    @report_all_browsers << browser
   end
 
   def save_to_file(value)
-    result_file.puts value
+    result_file.write value
   end
 
   def save_not_last_user_to_file
@@ -77,14 +73,21 @@ class Report
   end
 
   def save_user_to_file
-    save_to_file(
-      "\"#{user_name}\":{\"sessionsCount\":#{user[:sessionsCount]},\"totalTime\":\"#{user[:totalTime]} min.\",\"longestSession\":\"#{user[:longestSession]} min.\",\"browsers\":\"#{user[:browsers].sort!.join(', ')}\",\"usedIE\":#{user[:usedIE]},\"alwaysUsedChrome\":#{user[:alwaysUsedChrome]},\"dates\":#{user[:dates].sort!.reverse!}}"
-    )
+    user_stats = {}
+    user_stats["sessionsCount"] = @userSessionsCount
+    user_stats['totalTime'] = @userTotalTime.to_s << MIN
+    user_stats['longestSession'] = @userLongestSession.to_s << MIN
+    user_stats['browsers'] = @userBrowsers.sort!.join(JOINER)
+    user_stats["usedIE"] = @userUsedIE
+    user_stats["alwaysUsedChrome"] = @userAlwaysUsedChrome
+    user_stats['dates'] = @userDates.sort!.reverse!
+
+    save_to_file Oj.dump(user_stats)
   end
 
   def save_result_to_file
     save_to_file(
-      "},\"totalUsers\":#{report[:totalUsers]},\"uniqueBrowsersCount\":#{report[:allBrowsers].count},\"totalSessions\":#{report[:totalSessions]},\"allBrowsers\":\"#{report[:allBrowsers].to_a.join(',')}\"}"
+      "},\"totalUsers\":#{@report_total_users},\"uniqueBrowsersCount\":#{@report_all_browsers.count},\"totalSessions\":#{@report_total_sessions},\"allBrowsers\":\"#{@report_all_browsers.to_a.join(DATA_SPLITTER)}\"}"
     )
   end
 end

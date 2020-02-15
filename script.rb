@@ -1,4 +1,4 @@
-# require 'memory_profiler'
+require 'memory_profiler'
 require 'ruby-prof'
 require_relative 'task-2.rb'
 
@@ -23,19 +23,26 @@ def profile_gc
   puts "Objects Freed: #{after - before}"
 end
 
+def memory_profile
+  report = MemoryProfiler.report do
+    Report.new.work(filename: 'data_large_100000.txt')
+  end
+  report.pretty_print(scale_bytes: true)
+end
+
 def profile
   profile_memory do
     profile_gc do
-      Report.new.work(filename: 'data_large.txt')
+      Report.new.work(filename: 'data_large_100000.txt')
     end
   end
 end
 
 def report
-  RubyProf.measure_mode = RubyProf::ALLOCATIONS
+  RubyProf.measure_mode = RubyProf::MEMORY
 
   report = RubyProf.profile do
-    Report.new.work(filename: 'data_large.txt')
+    Report.new.work(filename: 'data_large_100000.txt')
   end
 
   printer = RubyProf::FlatPrinter.new(report)
@@ -61,6 +68,8 @@ end
 
 profile
 
+memory_profile
+
 report
 
-speed_test
+# speed_test

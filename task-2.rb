@@ -1,5 +1,4 @@
 # optimized version of homework task
-# frozen_string_literal: true
 
 require 'set'
 
@@ -20,7 +19,7 @@ class Report
     }
     @user_name = nil
     @user = nil
-    @result_file = File.new(RESULT_FILE_NAME, 'w')
+    @result_file = File.open(RESULT_FILE_NAME, 'a')
   end
 
   def work(filename: 'data.txt')
@@ -29,7 +28,7 @@ class Report
     IO.foreach(filename) do |line|
       cols = line.split(DATA_SPLITTER)
 
-      next parse_session(cols[3].upcase!, cols[4].to_i, cols[5][0..-2]) if cols[0] == SESSION_STRING
+      next parse_session(cols[3].upcase!, cols[4].to_i, cols[5].chomp!) if cols[0] == SESSION_STRING
 
       save_not_last_user_to_file unless user.nil?
 
@@ -69,7 +68,7 @@ class Report
   end
 
   def save_to_file(value)
-    result_file.write value
+    result_file.puts value
   end
 
   def save_not_last_user_to_file

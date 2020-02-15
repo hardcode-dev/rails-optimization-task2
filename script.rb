@@ -48,6 +48,19 @@ def report
   printer.print(File.open('ruby_prof_reports/callstack.html', 'w+'))
 end
 
+def speed_test
+  RubyProf.measure_mode = RubyProf::WALL_TIME 
+
+  result = RubyProf.profile do  
+    Report.new.work(filename: 'data_large.txt')  
+  end 
+
+  printer = RubyProf::CallStackPrinter.new(result) 
+  printer.print(File.open('ruby_prof_reports/callstack.html', 'w+'))
+end
+
 profile
 
 report
+
+speed_test

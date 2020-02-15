@@ -1,0 +1,66 @@
+Measure Mode: allocations
+Thread ID: 70349530344960
+Fiber ID: 70349530183560
+Total: 37909108.000000
+Sort by: self_time
+
+ %self      total      self      wait     child     calls  name                           location
+ 58.71  22256580.000 22256580.000     0.000     0.000  3250940   String#split                   
+  9.89  37909071.000 3750943.000     0.000 34158128.000        1   <Class::IO>#foreach            
+  7.26  2750940.000 2750940.000     0.000     0.000  2750940   String#inspect                 
+  7.26  2750940.000 2750940.000     0.000     0.000  2750940   String#[]                      
+  3.96  1500003.000 1500003.000     0.000     0.000  1500003   Integer#to_s                   
+  3.96  1500000.000 1500000.000     0.000     0.000   500000   Report#refresh_user_instance   /web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:46
+  2.37  899487.000 899487.000     0.000     0.000  1000001   Array#sort!                    
+  1.65  624399.000 624399.000     0.000     0.000   624399   FalseClass#to_s                
+  1.32  500001.000 500001.000     0.000     0.000   500001   Array#join                     
+  1.32  7650426.000 500000.000     0.000 7150426.000   500000   Report#save_user_to_file       /web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:80
+  1.32  3250940.000 500000.000     0.000 2750940.000   500000   Array#to_s                     
+  0.99  375601.000 375601.000     0.000     0.000   375601   TrueClass#to_s                 
+  0.00    200.000   200.000     0.000     0.000  2750940   Set#add                        /Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:348
+  0.00      6.000     4.000     0.000     2.000        3  *Class#new                      
+  0.00      4.000     2.000     0.000     2.000        1   SortedSet#each                 /Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:772
+  0.00      6.000     2.000     0.000     4.000        1   Enumerable#count               
+  0.00      1.000     1.000     0.000     0.000  1000001   IO#write                       
+  0.00      1.000     1.000     0.000     0.000        1   Hash#keys                      
+  0.00      5.000     1.000     0.000     4.000        1   Report#initialize              /web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:15
+  0.00     11.000     1.000     0.000    10.000        1   Report#save_result_to_file     /web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:86
+  0.00  37909108.000     1.000     0.000 37909107.000        1   Object#report                  script.rb:38
+  0.00      1.000     1.000     0.000     0.000        1   <Class::IO>#new                
+  0.00      0.000     0.000     0.000     0.000        1   IO#close                       
+  0.00      0.000     0.000     0.000     0.000        1   Array#each                     
+  0.00      2.000     0.000     0.000     2.000        2   SortedSet#to_a                 /Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:778
+  0.00      0.000     0.000     0.000     0.000   500000   Array#reverse!                 
+  0.00  7650408.000     0.000     0.000 7650408.000   499999   Report#save_not_last_user_to_file /web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:75
+  0.00      0.000     0.000     0.000     0.000   499999   Kernel#nil?                    
+  0.00      0.000     0.000     0.000     0.000  2750940   Kernel#respond_to?             
+  0.00    200.000     0.000     0.000   200.000  2750940   SortedSet#<<                   /Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:738
+  0.00      0.000     0.000     0.000     0.000  2075737   String#match?                  
+  0.00    200.000     0.000     0.000   200.000  2750940   Report#parse_session           /web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:58
+  0.00      0.000     0.000     0.000     0.000  2750940   String#to_i                    
+  0.00      0.000     0.000     0.000     0.000  2750940   String#upcase!                 
+  0.00  37909101.000     0.000     0.000 37909101.000        1   Report#work                    /web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:26
+  0.00      0.000     0.000     0.000     0.000        1   File#initialize                
+  0.00      0.000     0.000     0.000     0.000        2   NilClass#nil?                  
+  0.00      0.000     0.000     0.000     0.000        1   Hash#initialize                
+  0.00      1.000     0.000     0.000     1.000        1   Set#initialize                 /Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:93
+  0.00      1.000     0.000     0.000     1.000        1   SortedSet#initialize           /Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:723
+  0.00      1.000     0.000     0.000     1.000  1000001   Report#save_to_file            /web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:71
+
+* recursively called methods
+
+Columns are:
+
+  %self     - The percentage of time spent in this method, derived from self_time/total_time.
+  total     - The time spent in this method and its children.
+  self      - The time spent in this method.
+  wait      - The amount of time this method waited for other threads.
+  child     - The time spent in this method's children.
+  calls     - The number of times this method was called.
+  name      - The name of the method.
+  location  - The location of the method.
+
+The interpretation of method names is:
+
+  * MyObject#test - An instance method "test" of the class "MyObject"
+  * <Object:MyObject>#test - The <> characters indicate a method on a singleton class.

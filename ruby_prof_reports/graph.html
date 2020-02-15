@@ -1,0 +1,2881 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style media="all" type="text/css">
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background-color: #F5F7FB;
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+    }
+
+    table {
+      border-collapse: collapse;
+      /* border: 1px solid #E1E3E7; */
+      border: 1px solid #F3F9FE;
+      font-size: 14px;
+      line-height: normal;
+      width: 100%;
+    }
+
+    table:empty {
+      display: none;
+    }
+
+    th:first-child {
+      border-left: 0;
+    }
+
+    th {
+      text-align: center;
+      background: #F3F9FE;
+      padding: 1rem;
+      /* border-left: 1px solid #E1E3E7; */
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    tr.break td {
+      border: 0;
+      border-top: 1px solid #BDC3DD;
+      padding: 0;
+      margin: 0;
+    }
+
+    tr.method td {
+      font-weight: bold;
+    }
+
+    td {
+      padding: 0.5em;
+    }
+
+    td:first-child {
+      width: 190px;
+    }
+
+    tr > td > table {
+      box-shadow: 0px -2px 1px #F9FAFB, 0px 1px 1px #E4EEEE, 0px 1px 2px #EEF3F8;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    tr.break + tr > td.method_name {
+      font-weight: bold;
+    }
+
+    td {
+      /* I'm removing this border because I think it looks way cleaner without it but feel free to add it if you feel it's necessary */
+      /* border-left: 1px solid #E1E3E7; */
+      text-align: center;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .method_name {
+      text-align: left;
+    }
+
+    tfoot td {
+      text-align: left;
+    }
+
+    .report-header {
+      background-color: #0D2483;
+      color: white;
+      padding: 1.5rem 2rem;
+    }
+
+    .report-header > div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .report-header h1 {
+      margin-bottom: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    h6 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .table-header {
+      padding: 3rem 0 1rem;
+    }
+
+    .table-wrapper {
+      margin: 1rem auto;
+      max-width: 1440px;
+      padding: 4rem 5rem;
+      background: white;
+      border-radius: 0.5rem;
+    }
+
+    .center {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .layout-right {
+      margin-left: auto;
+    }
+
+    .text-right {
+      display: flex;
+      align-items: flex-end;
+      flex-direction: column;
+    }
+
+    .timestamp {
+      font-size: 12px;
+      margin-bottom: 1rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .logo {
+      width: 140px;
+      height: 30px;
+      opacity: 0.5;
+      background-repeat: no-repeat;
+      background-image: url("data:image/svg+xml,%3Csvg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 190 41'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:%23fff%7D%3C/style%3E%3C/defs%3E%3Cpath class='cls-1' d='M63.49 16.74c0-1.37-.91-2-2.26-2h-3.38v3.93h3.58c1.24.01 2.06-.56 2.06-1.93zM110.43 14.75h-3.6v5h3.6a2.32 2.32 0 0 0 2.5-2.49 2.34 2.34 0 0 0-2.5-2.51zM128.77 14.75h-3.53v4.94h3.53a2.28 2.28 0 0 0 2.47-2.45 2.3 2.3 0 0 0-2.47-2.49zM61.81 21.83h-4v4.32h3.91c1.44 0 2.45-.62 2.45-2.14s-.99-2.18-2.36-2.18zM21 14.75h-3.57v4.94H21a2.28 2.28 0 0 0 2.47-2.45A2.3 2.3 0 0 0 21 14.75z'/%3E%3Cpath class='cls-1' d='M184 .44H5.87A4.93 4.93 0 0 0 .94 5.37V35.5a4.94 4.94 0 0 0 4.93 4.94H184a4.94 4.94 0 0 0 4.94-4.94V5.37A4.94 4.94 0 0 0 184 .44zm-34.38 10.78c4.79 0 8.46 2.89 9.18 7.54h-3.86a5.48 5.48 0 0 0-10.68 0h-3.83c.71-4.65 4.36-7.54 9.19-7.54zM24 29.44L20.46 23h-3v6.46h-3.72v-18h7.68c3.41 0 5.78 2.07 5.78 5.76a5.34 5.34 0 0 1-2.88 5.14l3.82 7.06zm24.31-7.3c0 4.8-2.92 7.56-7.63 7.56S33 26.94 33 22.14V11.48h3.69v10.61c0 2.81 1.37 4.32 4 4.32s3.94-1.51 3.94-4.32V11.48h3.69zm13.92 7.3h-8v-18h7.52c3.24 0 5.59 1.61 5.59 5A4 4 0 0 1 65.51 20 4.22 4.22 0 0 1 68 24.21c0 3.43-2.4 5.23-5.81 5.23zm19.66-6.92v6.92h-3.7v-6.92l-6.81-11h4.29L80 18.85l4.34-7.37h4.32zm16-.5h-7.62v-3.26h7.59zm13 1h-4v6.39h-3.72v-18h7.77c3.41 0 5.79 2.09 5.79 5.79s-2.41 5.85-5.82 5.85zm20.86 6.39L128.26 23h-3v6.46h-3.72v-18h7.69c3.4 0 5.78 2.07 5.78 5.76a5.34 5.34 0 0 1-2.88 5.14l3.87 7.08zm17.85.26c-4.88 0-8.55-2.95-9.21-7.68h3.81A5.49 5.49 0 0 0 155 22h3.84c-.69 4.75-4.38 7.7-9.22 7.7zm18.4-.23h-3.72v-3.7H168zm6.36-7.54h-10.05v-3.26h10.08zm1.44-7.16h-11.49v-3.26h11.52z'/%3E%3C/svg%3E");
+    }
+  </style>
+</head>
+<body>
+<div class="report-header">
+  <div class="center">
+    <div class="layout-left">
+      <h6>Profile Report</h6>
+      <h1>Allocations</h1>
+    </div>
+    <div class="layout-right text-right">
+      <div class="timestamp">Saturday, February 15 at  5:58:30 PM (MSK)</div>
+      <div class="logo"></div>
+    </div>
+  </div>
+</div>
+<div class="table-wrapper">
+  <table>
+    <tr>
+      <th>Thread ID</th>
+      <th>Fiber ID</th>
+      <th>Total</th>
+    </tr>
+    
+      <tr>
+        <td>70349530344960</td>
+        <td><a href="#70349530183560">70349530183560</a></td>
+        <td>37909108.0</td>
+      </tr>
+    
+  </table>
+
+  <!-- Methods Tables -->
+  
+    <h2><a name="70349530183560">Thread 70349530344960, Fiber: 70349530183560</a></h2>
+    <table>
+      <thead>
+      <tr>
+        <th>%Total</th>
+        <th>%Self</th>
+        <th>Total</th>
+        <th>Self</th>
+        <th>Wait</th>
+        <th>Child</th>
+        <th>Calls</th>
+        <th class="method_name">Name</th>
+        
+        <th>Line</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+
+        <!-- Parents -->
+        
+        <tr class="method">
+          <td>100.00%</td>
+          <td>0.00%</td>
+          <td>37909108.00</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>37909107.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Object_report_70349530183560">
+               Object#report
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/script.rb#38" title="/web/_thinknetica/optimisation/rails-optimization-task2/script.rb:38">38</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>37909101.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>37909101.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Report_work_70349530183560">Report#work</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/script.rb#38" title="/web/_thinknetica/optimisation/rails-optimization-task2/script.rb:38">38</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>6.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>5.00</td>
+            <td>1/3</td>
+            <td class="method_name"><a href="#Class_new_70349530183560">Class#new</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/script.rb#38" title="/web/_thinknetica/optimisation/rails-optimization-task2/script.rb:38">38</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>37909101.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>37909101.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Object_report_70349530183560">Object#report</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/script.rb#38" title="/web/_thinknetica/optimisation/rails-optimization-task2/script.rb:38">38</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>100.00%</td>
+          <td>0.00%</td>
+          <td>37909101.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>37909101.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Report_work_70349530183560">
+               Report#work
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#26" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:26">26</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>37909071.00</td>
+            <td>3750943.00</td>
+            <td>0.00</td>
+            <td>34158128.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70349530183560">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#29" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:29">29</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>18.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>17.00</td>
+            <td>1/500000</td>
+            <td class="method_name"><a href="#Report_save_user_to_file_70349530183560">Report#save_user_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#41" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:41">41</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>11.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>10.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Report_save_result_to_file_70349530183560">Report#save_result_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#42" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:42">42</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/1000001</td>
+            <td class="method_name"><a href="#Report_save_to_file_70349530183560">Report#save_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#27" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:27">27</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#IO_close_70349530183560">IO#close</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#43" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:43">43</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>37909071.00</td>
+            <td>3750943.00</td>
+            <td>0.00</td>
+            <td>34158128.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Report_work_70349530183560">Report#work</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#29" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:29">29</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>100.00%</td>
+          <td>9.89%</td>
+          <td>37909071.00</td>
+          <td>3750943.00</td>
+          <td>0.00</td>
+          <td>34158128.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="_Class__IO__foreach_70349530183560">
+               &lt;Class::IO&gt;#foreach
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>22256580.00</td>
+            <td>22256580.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>3250940/3250940</td>
+            <td class="method_name"><a href="#String_split_70349530183560">String#split</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#30" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:30">30</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>7650408.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>7650408.00</td>
+            <td>499999/499999</td>
+            <td class="method_name"><a href="#Report_save_not_last_user_to_file_70349530183560">Report#save_not_last_user_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#34" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:34">34</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2750940.00</td>
+            <td>2750940.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2750940/2750940</td>
+            <td class="method_name"><a href="#String_[]_70349530183560">String#[]</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#32" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:32">32</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1500000.00</td>
+            <td>1500000.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>500000/500000</td>
+            <td class="method_name"><a href="#Report_refresh_user_instance_70349530183560">Report#refresh_user_instance</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#37" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:37">37</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>200.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>200.00</td>
+            <td>2750940/2750940</td>
+            <td class="method_name"><a href="#Report_parse_session_70349530183560">Report#parse_session</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#32" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:32">32</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2750940/2750940</td>
+            <td class="method_name"><a href="#String_to_i_70349530183560">String#to_i</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#32" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:32">32</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2750940/2750940</td>
+            <td class="method_name"><a href="#String_upcase!_70349530183560">String#upcase!</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#32" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:32">32</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2</td>
+            <td class="method_name"><a href="#NilClass_nil__70349530183560">NilClass#nil?</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#34" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:34">34</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>499999/499999</td>
+            <td class="method_name"><a href="#Kernel_nil__70349530183560">Kernel#nil?</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#34" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:34">34</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>22256580.00</td>
+            <td>22256580.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>3250940/3250940</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70349530183560">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>58.71%</td>
+          <td>58.71%</td>
+          <td>22256580.00</td>
+          <td>22256580.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>3250940</td>
+          <td class="method_name">
+            <a name="String_split_70349530183560">
+               String#split
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>18.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>17.00</td>
+            <td>1/500000</td>
+            <td class="method_name"><a href="#Report_work_70349530183560">Report#work</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#41" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:41">41</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>7650408.00</td>
+            <td>499999.00</td>
+            <td>0.00</td>
+            <td>7150409.00</td>
+            <td>499999/500000</td>
+            <td class="method_name"><a href="#Report_save_not_last_user_to_file_70349530183560">Report#save_not_last_user_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#76" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:76">76</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>20.18%</td>
+          <td>1.32%</td>
+          <td>7650426.00</td>
+          <td>500000.00</td>
+          <td>0.00</td>
+          <td>7150426.00</td>
+          <td>500000</td>
+          <td class="method_name">
+            <a name="Report_save_user_to_file_70349530183560">
+               Report#save_user_to_file
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#80" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:80">80</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3250940.00</td>
+            <td>500000.00</td>
+            <td>0.00</td>
+            <td>2750940.00</td>
+            <td>500000/500000</td>
+            <td class="method_name"><a href="#Array_to_s_70349530183560">Array#to_s</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#81" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:81">81</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1500000.00</td>
+            <td>1500000.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1500000/1500003</td>
+            <td class="method_name"><a href="#Integer_to_s_70349530183560">Integer#to_s</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#81" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:81">81</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>899486.00</td>
+            <td>899486.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1000000/1000001</td>
+            <td class="method_name"><a href="#Array_sort!_70349530183560">Array#sort!</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#81" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:81">81</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>624399.00</td>
+            <td>624399.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>624399/624399</td>
+            <td class="method_name"><a href="#FalseClass_to_s_70349530183560">FalseClass#to_s</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#81" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:81">81</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>500000.00</td>
+            <td>500000.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>500000/500001</td>
+            <td class="method_name"><a href="#Array_join_70349530183560">Array#join</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#81" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:81">81</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>375601.00</td>
+            <td>375601.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>375601/375601</td>
+            <td class="method_name"><a href="#TrueClass_to_s_70349530183560">TrueClass#to_s</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#81" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:81">81</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>500000/1000001</td>
+            <td class="method_name"><a href="#Report_save_to_file_70349530183560">Report#save_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#81" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:81">81</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>500000/500000</td>
+            <td class="method_name"><a href="#Array_reverse!_70349530183560">Array#reverse!</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#81" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:81">81</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>7650408.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>7650408.00</td>
+            <td>499999/499999</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70349530183560">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>20.18%</td>
+          <td>0.00%</td>
+          <td>7650408.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>7650408.00</td>
+          <td>499999</td>
+          <td class="method_name">
+            <a name="Report_save_not_last_user_to_file_70349530183560">
+               Report#save_not_last_user_to_file
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#75" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:75">75</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>7650408.00</td>
+            <td>499999.00</td>
+            <td>0.00</td>
+            <td>7150409.00</td>
+            <td>499999/500000</td>
+            <td class="method_name"><a href="#Report_save_user_to_file_70349530183560">Report#save_user_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#76" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:76">76</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>499999/1000001</td>
+            <td class="method_name"><a href="#Report_save_to_file_70349530183560">Report#save_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#77" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:77">77</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3250940.00</td>
+            <td>500000.00</td>
+            <td>0.00</td>
+            <td>2750940.00</td>
+            <td>500000/500000</td>
+            <td class="method_name"><a href="#Report_save_user_to_file_70349530183560">Report#save_user_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#81" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:81">81</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>8.58%</td>
+          <td>1.32%</td>
+          <td>3250940.00</td>
+          <td>500000.00</td>
+          <td>0.00</td>
+          <td>2750940.00</td>
+          <td>500000</td>
+          <td class="method_name">
+            <a name="Array_to_s_70349530183560">
+               Array#to_s
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2750940.00</td>
+            <td>2750940.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2750940/2750940</td>
+            <td class="method_name"><a href="#String_inspect_70349530183560">String#inspect</a></td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2750940.00</td>
+            <td>2750940.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2750940/2750940</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70349530183560">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>7.26%</td>
+          <td>7.26%</td>
+          <td>2750940.00</td>
+          <td>2750940.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2750940</td>
+          <td class="method_name">
+            <a name="String_[]_70349530183560">
+               String#[]
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2750940.00</td>
+            <td>2750940.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2750940/2750940</td>
+            <td class="method_name"><a href="#Array_to_s_70349530183560">Array#to_s</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>7.26%</td>
+          <td>7.26%</td>
+          <td>2750940.00</td>
+          <td>2750940.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2750940</td>
+          <td class="method_name">
+            <a name="String_inspect_70349530183560">
+               String#inspect
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>3.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>3/1500003</td>
+            <td class="method_name"><a href="#Report_save_result_to_file_70349530183560">Report#save_result_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#87" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:87">87</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1500000.00</td>
+            <td>1500000.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1500000/1500003</td>
+            <td class="method_name"><a href="#Report_save_user_to_file_70349530183560">Report#save_user_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#81" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:81">81</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>3.96%</td>
+          <td>3.96%</td>
+          <td>1500003.00</td>
+          <td>1500003.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1500003</td>
+          <td class="method_name">
+            <a name="Integer_to_s_70349530183560">
+               Integer#to_s
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1500000.00</td>
+            <td>1500000.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>500000/500000</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70349530183560">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>3.96%</td>
+          <td>3.96%</td>
+          <td>1500000.00</td>
+          <td>1500000.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>500000</td>
+          <td class="method_name">
+            <a name="Report_refresh_user_instance_70349530183560">
+               Report#refresh_user_instance
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#46" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:46">46</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1000001</td>
+            <td class="method_name"><a href="#SortedSet_to_a_70349530183560">SortedSet#to_a</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#779" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:779">779</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>899486.00</td>
+            <td>899486.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1000000/1000001</td>
+            <td class="method_name"><a href="#Report_save_user_to_file_70349530183560">Report#save_user_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#81" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:81">81</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>2.37%</td>
+          <td>2.37%</td>
+          <td>899487.00</td>
+          <td>899487.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1000001</td>
+          <td class="method_name">
+            <a name="Array_sort!_70349530183560">
+               Array#sort!
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>624399.00</td>
+            <td>624399.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>624399/624399</td>
+            <td class="method_name"><a href="#Report_save_user_to_file_70349530183560">Report#save_user_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#81" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:81">81</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>1.65%</td>
+          <td>1.65%</td>
+          <td>624399.00</td>
+          <td>624399.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>624399</td>
+          <td class="method_name">
+            <a name="FalseClass_to_s_70349530183560">
+               FalseClass#to_s
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/500001</td>
+            <td class="method_name"><a href="#Report_save_result_to_file_70349530183560">Report#save_result_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#87" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:87">87</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>500000.00</td>
+            <td>500000.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>500000/500001</td>
+            <td class="method_name"><a href="#Report_save_user_to_file_70349530183560">Report#save_user_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#81" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:81">81</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>1.32%</td>
+          <td>1.32%</td>
+          <td>500001.00</td>
+          <td>500001.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>500001</td>
+          <td class="method_name">
+            <a name="Array_join_70349530183560">
+               Array#join
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>375601.00</td>
+            <td>375601.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>375601/375601</td>
+            <td class="method_name"><a href="#Report_save_user_to_file_70349530183560">Report#save_user_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#81" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:81">81</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.99%</td>
+          <td>0.99%</td>
+          <td>375601.00</td>
+          <td>375601.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>375601</td>
+          <td class="method_name">
+            <a name="TrueClass_to_s_70349530183560">
+               TrueClass#to_s
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>200.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>200.00</td>
+            <td>2750940/2750940</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70349530183560">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>200.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>200.00</td>
+          <td>2750940</td>
+          <td class="method_name">
+            <a name="Report_parse_session_70349530183560">
+               Report#parse_session
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#58" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:58">58</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>200.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>200.00</td>
+            <td>2750940/2750940</td>
+            <td class="method_name"><a href="#SortedSet____70349530183560">SortedSet#&lt;&lt;</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#68" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:68">68</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2075737/2075737</td>
+            <td class="method_name"><a href="#String_match__70349530183560">String#match?</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#63" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:63">63</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>200.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>200.00</td>
+            <td>2750940/2750940</td>
+            <td class="method_name"><a href="#Report_parse_session_70349530183560">Report#parse_session</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#68" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:68">68</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>200.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>200.00</td>
+          <td>2750940</td>
+          <td class="method_name">
+            <a name="SortedSet____70349530183560">
+               SortedSet#&lt;&lt;
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#738" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:738">738</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>200.00</td>
+            <td>200.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2750940/2750940</td>
+            <td class="method_name"><a href="#Set_add_70349530183560">Set#add</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#741" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:741">741</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2750940/2750940</td>
+            <td class="method_name"><a href="#Kernel_respond_to__70349530183560">Kernel#respond_to?</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#739" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:739">739</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>200.00</td>
+            <td>200.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2750940/2750940</td>
+            <td class="method_name"><a href="#SortedSet____70349530183560">SortedSet#&lt;&lt;</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#741" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:741">741</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>200.00</td>
+          <td>200.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2750940</td>
+          <td class="method_name">
+            <a name="Set_add_70349530183560">
+               Set#add
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#348" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:348">348</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>11.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>10.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Report_work_70349530183560">Report#work</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#42" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:42">42</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>11.00</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>10.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Report_save_result_to_file_70349530183560">
+               Report#save_result_to_file
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#86" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:86">86</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>6.00</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>4.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Enumerable_count_70349530183560">Enumerable#count</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#87" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:87">87</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>3.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>3/1500003</td>
+            <td class="method_name"><a href="#Integer_to_s_70349530183560">Integer#to_s</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#87" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:87">87</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/500001</td>
+            <td class="method_name"><a href="#Array_join_70349530183560">Array#join</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#87" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:87">87</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1000001</td>
+            <td class="method_name"><a href="#Report_save_to_file_70349530183560">Report#save_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#87" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:87">87</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2</td>
+            <td class="method_name"><a href="#SortedSet_to_a_70349530183560">SortedSet#to_a</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#87" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:87">87</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/3</td>
+            <td class="method_name"><a href="#Set_initialize_70349530183560">Set#initialize</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#94" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:94">94</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/3</td>
+            <td class="method_name"><a href="#Report_initialize_70349530183560">Report#initialize</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#17" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:17">17</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>6.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>5.00</td>
+            <td>1/3</td>
+            <td class="method_name"><a href="#Object_report_70349530183560">Object#report</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/script.rb#38" title="/web/_thinknetica/optimisation/rails-optimization-task2/script.rb:38">38</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>6.00</td>
+          <td>4.00</td>
+          <td>0.00</td>
+          <td>2.00</td>
+          <td>3</td>
+          <td class="method_name">
+            <a name="Class_new_70349530183560">
+              *Class#new
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>5.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>4.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Report_initialize_70349530183560">Report#initialize</a></td>
+            
+            <td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#SortedSet_initialize_70349530183560">SortedSet#initialize</a></td>
+            
+            <td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Hash_initialize_70349530183560">Hash#initialize</a></td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>6.00</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>4.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Report_save_result_to_file_70349530183560">Report#save_result_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#87" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:87">87</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>6.00</td>
+          <td>2.00</td>
+          <td>0.00</td>
+          <td>4.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Enumerable_count_70349530183560">
+               Enumerable#count
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>4.00</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>2.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#SortedSet_each_70349530183560">SortedSet#each</a></td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>5.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>4.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Class_new_70349530183560">Class#new</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>5.00</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>4.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Report_initialize_70349530183560">
+               Report#initialize
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#15" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:15">15</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/3</td>
+            <td class="method_name"><a href="#Class_new_70349530183560">Class#new</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#17" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:17">17</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__new_70349530183560">&lt;Class::IO&gt;#new</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#23" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:23">23</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>4.00</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>2.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Enumerable_count_70349530183560">Enumerable#count</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>4.00</td>
+          <td>2.00</td>
+          <td>0.00</td>
+          <td>2.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="SortedSet_each_70349530183560">
+               SortedSet#each
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#772" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:772">772</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2.00</td>
+            <td>1/2</td>
+            <td class="method_name"><a href="#SortedSet_to_a_70349530183560">SortedSet#to_a</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#774" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:774">774</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Array_each_70349530183560">Array#each</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#774" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:774">774</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2</td>
+            <td class="method_name"><a href="#Report_save_result_to_file_70349530183560">Report#save_result_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#87" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:87">87</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2.00</td>
+            <td>1/2</td>
+            <td class="method_name"><a href="#SortedSet_each_70349530183560">SortedSet#each</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#774" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:774">774</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>2.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2.00</td>
+          <td>2</td>
+          <td class="method_name">
+            <a name="SortedSet_to_a_70349530183560">
+               SortedSet#to_a
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#778" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:778">778</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1000001</td>
+            <td class="method_name"><a href="#Array_sort!_70349530183560">Array#sort!</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#779" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:779">779</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Hash_keys_70349530183560">Hash#keys</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#779" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:779">779</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>500000/1000001</td>
+            <td class="method_name"><a href="#Report_save_user_to_file_70349530183560">Report#save_user_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#81" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:81">81</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>499999/1000001</td>
+            <td class="method_name"><a href="#Report_save_not_last_user_to_file_70349530183560">Report#save_not_last_user_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#77" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:77">77</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1000001</td>
+            <td class="method_name"><a href="#Report_save_result_to_file_70349530183560">Report#save_result_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#87" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:87">87</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/1000001</td>
+            <td class="method_name"><a href="#Report_work_70349530183560">Report#work</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#27" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:27">27</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1.00</td>
+          <td>1000001</td>
+          <td class="method_name">
+            <a name="Report_save_to_file_70349530183560">
+               Report#save_to_file
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#71" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:71">71</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1000001/1000001</td>
+            <td class="method_name"><a href="#IO_write_70349530183560">IO#write</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#72" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:72">72</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1000001/1000001</td>
+            <td class="method_name"><a href="#Report_save_to_file_70349530183560">Report#save_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#72" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:72">72</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>1.00</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1000001</td>
+          <td class="method_name">
+            <a name="IO_write_70349530183560">
+               IO#write
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Report_initialize_70349530183560">Report#initialize</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#23" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:23">23</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>1.00</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="_Class__IO__new_70349530183560">
+               &lt;Class::IO&gt;#new
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#File_initialize_70349530183560">File#initialize</a></td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Class_new_70349530183560">Class#new</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="SortedSet_initialize_70349530183560">
+               SortedSet#initialize
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#723" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:723">723</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Set_initialize_70349530183560">Set#initialize</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#725" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:725">725</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#SortedSet_initialize_70349530183560">SortedSet#initialize</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#725" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:725">725</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Set_initialize_70349530183560">
+               Set#initialize
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#93" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:93">93</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/3</td>
+            <td class="method_name"><a href="#Class_new_70349530183560">Class#new</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#94" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:94">94</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2</td>
+            <td class="method_name"><a href="#NilClass_nil__70349530183560">NilClass#nil?</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#96" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:96">96</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#SortedSet_to_a_70349530183560">SortedSet#to_a</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#779" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:779">779</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>1.00</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Hash_keys_70349530183560">
+               Hash#keys
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Report_work_70349530183560">Report#work</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#43" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:43">43</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="IO_close_70349530183560">
+               IO#close
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2750940/2750940</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70349530183560">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2750940</td>
+          <td class="method_name">
+            <a name="String_upcase!_70349530183560">
+               String#upcase!
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2750940/2750940</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70349530183560">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2750940</td>
+          <td class="method_name">
+            <a name="String_to_i_70349530183560">
+               String#to_i
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2</td>
+            <td class="method_name"><a href="#Set_initialize_70349530183560">Set#initialize</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#96" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:96">96</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70349530183560">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2</td>
+          <td class="method_name">
+            <a name="NilClass_nil__70349530183560">
+               NilClass#nil?
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>499999/499999</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70349530183560">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>499999</td>
+          <td class="method_name">
+            <a name="Kernel_nil__70349530183560">
+               Kernel#nil?
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>500000/500000</td>
+            <td class="method_name"><a href="#Report_save_user_to_file_70349530183560">Report#save_user_to_file</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#81" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:81">81</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>500000</td>
+          <td class="method_name">
+            <a name="Array_reverse!_70349530183560">
+               Array#reverse!
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2075737/2075737</td>
+            <td class="method_name"><a href="#Report_parse_session_70349530183560">Report#parse_session</a></td>
+            
+            <td><a href="file:///web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb#63" title="/web/_thinknetica/optimisation/rails-optimization-task2/task-2.rb:63">63</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2075737</td>
+          <td class="method_name">
+            <a name="String_match__70349530183560">
+               String#match?
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__new_70349530183560">&lt;Class::IO&gt;#new</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="File_initialize_70349530183560">
+               File#initialize
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2750940/2750940</td>
+            <td class="method_name"><a href="#SortedSet____70349530183560">SortedSet#&lt;&lt;</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#739" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:739">739</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2750940</td>
+          <td class="method_name">
+            <a name="Kernel_respond_to__70349530183560">
+               Kernel#respond_to?
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#SortedSet_each_70349530183560">SortedSet#each</a></td>
+            
+            <td><a href="file:///Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb#774" title="/Users/kortirso/.rvm/rubies/ruby-2.5.3/lib/ruby/2.5.0/set.rb:774">774</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Array_each_70349530183560">
+               Array#each
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Class_new_70349530183560">Class#new</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Hash_initialize_70349530183560">
+               Hash#initialize
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="9">* indicates recursively called methods</td>
+      </tr>
+      </tfoot>
+    </table>
+  
+</div>
+
+<script type="application/javascript">
+  function toggleAllocations(element)
+  {
+    if (element.style.display == 'none')
+      element.style.display = 'block'
+    else
+      element.style.display = 'none'
+  }
+
+  function onClick(event)
+  {
+    if (event.target.tagName == 'A' && event.target.classList.contains('allocations'))
+    {
+      var url = new URL(event.target.href)
+      var element = document.querySelector(url.hash)
+      toggleAllocations(element)
+      event.preventDefault()
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', function(event)
+  {
+    document.addEventListener('click', onClick)
+  })
+
+</script>
+</body>
+</html>

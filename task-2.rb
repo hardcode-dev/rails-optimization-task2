@@ -1,79 +1,91 @@
 # optimized version of homework task
-require 'oj'
+# frozen_string_literal: true
+
+require 'set'
 
 class Report
-  attr_reader :report, :last_user_name
+  attr_reader :report, :user, :user_name, :result_file
+
+  IE = /INTERNET EXPLORER/.freeze
+  CHROME = /CHROME/.freeze
+  DATA_SPLITTER = ','.freeze
+  SESSION_STRING = 'session'.freeze
+  RESULT_FILE_NAME = 'result.json'.freeze
 
   def initialize
     @report = {
-      'totalUsers' => 0,
-      'uniqueBrowsersCount' => 0,
-      'totalSessions' => 0,
-      'allBrowsers' => [],
-      'usersStats' => {}
+      totalUsers: 0,
+      totalSessions: 0,
+      allBrowsers: SortedSet.new
     }
-    @last_user_name = nil
+    @user_name = nil
+    @user = nil
+    @result_file = File.new(RESULT_FILE_NAME, 'w')
   end
 
   def work(filename: 'data.txt')
-    file_lines = File.read(filename).split("\n")
+    save_to_file("{\"usersStats\":{")
 
-    while file_lines.size > 0
-      cols = file_lines.shift.split(',')
-      case cols[0]
-        when 'user' then
-          user_key = "#{cols[2]} #{cols[3]}"
-          parse_user(user_key)
-          @last_user_name = user_key
-        when 'session' then
-          parse_session(cols[3].upcase, cols[4].to_i, cols[5])
-      end
+    IO.foreach(filename) do |line|
+      cols = line.split(DATA_SPLITTER)
+
+      next parse_session(cols[3].upcase!, cols[4].to_i, cols[5][0..-2]) if cols[0] == SESSION_STRING
+
+      save_not_last_user_to_file unless user.nil?
+
+      @user_name = "#{cols[2]} #{cols[3]}"
+      refresh_user_instance
+      report[:totalUsers] += 1
     end
 
-    collect_stats_from_users
-
-    uniq_browsers = report['allBrowsers'].flatten.uniq
-    report['uniqueBrowsersCount'] = uniq_browsers.length
-    report['allBrowsers'] = uniq_browsers.sort.join(',')
-
-    File.write('result.json', "#{Oj.dump(report)}\n")
+    save_user_to_file
+    save_result_to_file
+    result_file.close
   end
 
-  def parse_user(user_key)
-    report['usersStats'][user_key] = {
-      'sessionsCount' => 0,
-      'totalTime' => 0,
-      'longestSession' => 0,
-      'browsers' => [],
-      'usedIE' => false,
-      'alwaysUsedChrome' => true,
-      'dates' => []
+  def refresh_user_instance
+    @user = {
+      sessionsCount: 0,
+      totalTime: 0,
+      longestSession: 0,
+      browsers: [],
+      usedIE: false,
+      alwaysUsedChrome: true,
+      dates: []
     }
   end
 
   def parse_session(browser, session_time, date)
-    user_data = report['usersStats'][last_user_name]
+    user[:sessionsCount] += 1
+    user[:totalTime] += session_time
+    user[:longestSession] = session_time if session_time > user[:longestSession]
+    user[:browsers] << browser
+    user[:usedIE] = true if !user[:usedIE] && browser.match?(IE)
+    user[:alwaysUsedChrome] = false if user[:alwaysUsedChrome] && !(browser.match?(CHROME))
+    user[:dates] << date
 
-    user_data['sessionsCount'] += 1
-    user_data['totalTime'] += session_time
-    user_data['longestSession'] = session_time if session_time > user_data['longestSession']
-    user_data['browsers'] << browser
-    user_data['usedIE'] = true if !user_data['usedIE'] && browser.match?(/INTERNET EXPLORER/)
-    user_data['alwaysUsedChrome'] = false if user_data['alwaysUsedChrome'] && !(browser.match?(/CHROME/))
-    user_data['dates'] << date
+    report[:totalSessions] += 1
+    report[:allBrowsers] << browser
   end
 
-  def collect_stats_from_users
-    report['usersStats'].each do |user_key, value|
-      report['allBrowsers'] << value['browsers']
-      report['totalSessions'] += value['sessionsCount']
+  def save_to_file(value)
+    result_file.write value
+  end
 
-      value['totalTime'] = "#{value['totalTime']} min."
-      value['longestSession'] = "#{value['longestSession']} min."
-      value['browsers'] = value['browsers'].sort.join(', ')
-      value['dates'] = value['dates'].sort.reverse
-    end
+  def save_not_last_user_to_file
+    save_user_to_file
+    save_to_file(DATA_SPLITTER)
+  end
 
-    report['totalUsers'] = report['usersStats'].length
+  def save_user_to_file
+    save_to_file(
+      "\"#{user_name}\":{\"sessionsCount\":#{user[:sessionsCount]},\"totalTime\":\"#{user[:totalTime]} min.\",\"longestSession\":\"#{user[:longestSession]} min.\",\"browsers\":\"#{user[:browsers].sort!.join(', ')}\",\"usedIE\":#{user[:usedIE]},\"alwaysUsedChrome\":#{user[:alwaysUsedChrome]},\"dates\":#{user[:dates].sort!.reverse!}}"
+    )
+  end
+
+  def save_result_to_file
+    save_to_file(
+      "},\"totalUsers\":#{report[:totalUsers]},\"uniqueBrowsersCount\":#{report[:allBrowsers].count},\"totalSessions\":#{report[:totalSessions]},\"allBrowsers\":\"#{report[:allBrowsers].to_a.join(',')}\"}"
+    )
   end
 end

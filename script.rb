@@ -1,17 +1,53 @@
-require 'memory_profiler'
+# require 'memory_profiler'
+require 'ruby-prof'
 require_relative 'task-2.rb'
 
-def print_memory_usage
-  "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+def profile_memory
+  memory_usage_before = `ps -o rss= -p #{Process.pid}`.to_i
+
+  yield
+
+  memory_usage_after = `ps -o rss= -p #{Process.pid}`.to_i
+
+  used_memory = ((memory_usage_after - memory_usage_before) / 1024.0).round(2)
+  puts "Memory usage: #{used_memory} MB"
 end
 
-puts 'start'
-puts "RAM for process at the start of process - #{print_memory_usage}"
+def profile_gc
+  GC.start
+  before = GC.stat(:total_freed_objects)
+  yield
+  GC.start
+  after = GC.stat(:total_freed_objects)
 
-report = MemoryProfiler.report do
-  Report.new.work(filename: 'data_large_100000.txt')
+  puts "Objects Freed: #{after - before}"
 end
 
-puts "RAM for process at the end of process - #{print_memory_usage}"
+def profile
+  profile_memory do
+    profile_gc do
+      Report.new.work(filename: 'data_large.txt')
+    end
+  end
+end
 
-report.pretty_print(scale_bytes: true)
+def report
+  RubyProf.measure_mode = RubyProf::ALLOCATIONS
+
+  report = RubyProf.profile do
+    Report.new.work(filename: 'data_large.txt')
+  end
+
+  printer = RubyProf::FlatPrinter.new(report)
+  printer.print(File.open('ruby_prof_reports/flat.txt', 'w+'))
+
+  printer = RubyProf::GraphHtmlPrinter.new(report)
+  printer.print(File.open('ruby_prof_reports/graph.html', 'w+'))
+
+  printer = RubyProf::CallStackPrinter.new(report)
+  printer.print(File.open('ruby_prof_reports/callstack.html', 'w+'))
+end
+
+profile
+
+report

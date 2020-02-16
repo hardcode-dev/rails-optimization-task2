@@ -17,7 +17,7 @@ class Report
     @report_total_users = 0
     @report_total_sessions = 0
     @report_all_browsers = SortedSet.new
-    @result_file = File.open('result.json', 'a')
+    @result_file = File.open('result.json', 'w')
   end
 
   def work(filename: 'data.txt')

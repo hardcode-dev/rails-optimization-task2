@@ -33,7 +33,7 @@ end
 def profile
   profile_memory do
     profile_gc do
-      Report.new.work(filename: 'data_large_100000.txt')
+      Report.new.work(filename: 'data_large.txt')
     end
   end
 end

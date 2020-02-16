@@ -73,7 +73,8 @@ MEMORY USAGE: 315 MB - 'data100_000.txt'
 
 ## Сомнения
 memory-prifiler зависает на `data_large`, пробовала на `data100_000.txt`, результат:
-```Total allocated: 110.12 MB (1582805 objects)
+```
+Total allocated: 110.12 MB (1582805 objects)
 Total retained:  2.71 kB (1 objects)
 ...
 Allocated String Report

@@ -1,0 +1,322 @@
+events: memory
+
+fl=
+fn=IO::close
+0 0
+
+fl=
+fn=IO::closed?
+0 0
+
+fl=
+fn=Hash::has_key?
+0 0
+
+fl=
+fn=Oj::dump^
+0 5553240
+cfl=
+cfn=Hash::has_key?
+calls=30 0
+0 0
+
+fl=
+fn=File::initialize
+0 40
+
+fl=
+fn=IO::open^
+0 312
+cfl=
+cfn=File::initialize
+calls=1 0
+0 40
+cfl=
+cfn=Oj::dump^
+calls=1 124
+124 5553240
+cfl=
+cfn=IO::write
+calls=2 124
+124 120
+cfl=
+cfn=IO::closed?
+calls=1 125
+125 0
+cfl=
+cfn=IO::close
+calls=1 125
+125 0
+
+fl=
+fn=Hash::keys
+0 80
+
+fl=
+fn=Array::reverse!
+0 0
+
+fl=
+fn=Array::sort!
+0 552920
+
+fl=/home/val/projects/thinknetika/rails-optimization-task2/task-1.rb
+fn=Object::all_chrome?
+33 0
+cfl=
+cfn=Array::each
+calls=15431 34
+34 1562880
+
+fl=/home/val/projects/thinknetika/rails-optimization-task2/task-1.rb
+fn=Object::include_ie?
+28 0
+cfl=
+cfn=Array::each
+calls=15431 29
+29 1922000
+
+fl=
+fn=Array::join
+0 617280
+
+fl=
+fn=Array::sort
+0 1170120
+
+fl=
+fn=Integer::to_s
+0 1234480
+
+fl=
+fn=UserStruct::last_name
+0 0
+
+fl=
+fn=UserStruct::first_name
+0 0
+
+fl=
+fn=UserStruct::dates
+0 0
+
+fl=
+fn=String::upcase!
+0 0
+
+fl=
+fn=UserStruct::browsers
+0 0
+
+fl=
+fn=UserStruct::longest_session
+0 0
+
+fl=
+fn=UserStruct::total_time
+0 0
+
+fl=
+fn=UserStruct::sessions_count
+0 0
+
+fl=
+fn=Struct::initialize
+0 0
+
+fl=
+fn=UserStruct::new^
+0 617240
+cfl=
+cfn=Struct::initialize
+calls=15431 0
+0 0
+
+fl=/home/val/projects/thinknetika/rails-optimization-task2/task-1.rb
+fn=Object::parse_user
+14 1234480
+cfl=
+cfn=String::to_i
+calls=15431 15
+15 0
+cfl=
+cfn=UserStruct::new^
+calls=15431 15
+15 617240
+
+fl=
+fn=String::to_i
+0 0
+
+fl=
+fn=Array::each
+0 21243240
+cfl=
+cfn=String::split
+calls=100000 59
+59 27382760
+cfl=
+cfn=String::to_i
+calls=184569 61
+61 0
+cfl=/home/val/projects/thinknetika/rails-optimization-task2/task-1.rb
+cfn=Object::parse_user
+calls=15431 62
+62 1851720
+cfl=
+cfn=UserStruct::sessions_count
+calls=100000 76
+76 0
+cfl=
+cfn=UserStruct::total_time
+calls=100000 78
+78 0
+cfl=
+cfn=UserStruct::longest_session
+calls=100000 79
+79 0
+cfl=
+cfn=UserStruct::browsers
+calls=130862 80
+80 0
+cfl=
+cfn=String::upcase!
+calls=84569 80
+80 0
+cfl=
+cfn=UserStruct::dates
+calls=100000 81
+81 0
+cfl=
+cfn=UserStruct::first_name
+calls=15431 88
+88 0
+cfl=
+cfn=UserStruct::last_name
+calls=15431 88
+88 0
+cfl=
+cfn=Integer::to_s
+calls=30862 92
+92 1234480
+cfl=
+cfn=Array::sort
+calls=15431 96
+96 1170120
+cfl=
+cfn=Array::join
+calls=15431 96
+96 617240
+cfl=/home/val/projects/thinknetika/rails-optimization-task2/task-1.rb
+cfn=Object::include_ie?
+calls=15431 98
+98 1922000
+cfl=/home/val/projects/thinknetika/rails-optimization-task2/task-1.rb
+cfn=Object::all_chrome?
+calls=15431 100
+100 1562880
+cfl=
+cfn=Array::sort!
+calls=15431 102
+102 552880
+cfl=
+cfn=Array::reverse!
+calls=15431 102
+102 0
+
+fl=
+fn=String::split
+0 31382800
+
+fl=
+fn=Array::initialize
+0 0
+
+fl=
+fn=Class::new
+0 40
+cfl=
+cfn=Array::initialize
+calls=1 0
+0 0
+
+fl=
+fn=IO::read^
+0 240
+
+fl=
+fn=Object::[]*
+0 0
+
+fl=
+fn=IO::write
+0 200
+
+fl=
+fn=IO::puts
+0 0
+cfl=
+cfn=IO::write
+calls=1 0
+0 80
+
+fl=
+fn=Kernel::puts
+0 0
+cfl=
+cfn=IO::puts
+calls=1 0
+0 80
+
+fl=/home/val/projects/thinknetika/rails-optimization-task2/task-1.rb
+fn=Object::work
+38 1096
+cfl=
+cfn=Kernel::puts
+calls=1 39
+39 80
+cfl=
+cfn=Object::[]*
+calls=2 42
+42 0
+cfl=
+cfn=IO::read^
+calls=2 42
+42 240
+cfl=
+cfn=Class::new
+calls=1 43
+43 40
+cfl=
+cfn=String::split
+calls=1 44
+44 4000040
+cfl=
+cfn=Array::each
+calls=2 58
+58 54052440
+cfl=
+cfn=Hash::keys
+calls=2 105
+105 80
+cfl=
+cfn=Array::sort!
+calls=1 106
+106 40
+cfl=
+cfn=Array::join
+calls=1 106
+106 40
+cfl=
+cfn=IO::open^
+calls=1 123
+123 5553712
+
+fl=/home/val/projects/thinknetika/rails-optimization-task2/07-ruby-prof-memory-callgrind.rb
+fn=[global]::
+11 40
+cfl=/home/val/projects/thinknetika/rails-optimization-task2/task-1.rb
+cfn=Object::work
+calls=1 11
+11 63607808
+

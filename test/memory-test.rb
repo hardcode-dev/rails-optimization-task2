@@ -6,7 +6,7 @@ class TestMemoryUsage
       work(data_path('data_large.txt'))
     end
     loop do
-      sleep(0.3)
+      sleep(0.5)
       usage = check_memory_usage
       puts "#{usage}Mb"
       if usage > 70

@@ -37,20 +37,16 @@ def all_chrome?(browsers)
 end
 
 def write_user_stat user
-      "\"#{user.first_name} #{user.last_name}\":" +
-       {sessionsCount: user.sessions_count,
-        # Собираем количество времени по пользователям
-        totalTime: user.total_time.to_s + ' min.',
-        # Выбираем самую длинную сессию пользователя
-        longestSession: user.longest_session.to_s + ' min.',
-        # Браузеры пользователя через запятую
-        browsers: user.browsers.sort.join(', '),
-        # Хоть раз использовал IE?
-        usedIE: include_ie?(user.browsers),
-        # Всегда использовал только Chrome?
-        alwaysUsedChrome: all_chrome?(user.browsers),
-        # Даты сессий через запятую в обратном порядке в формате iso8601
-        dates: user.dates.sort!.reverse!}.to_json
+  "\"#{user.first_name} #{user.last_name}\":
+     {\"sessionsCount\":    #{user.sessions_count},
+      \"totalTime\":      \"#{user.total_time.to_s} min.\",
+      \"longestSession\": \"#{user.longest_session.to_s} min.\",
+      \"browsers\":       \"#{user.browsers.sort.join(', ')}\",
+      \"usedIE\":           #{include_ie?(user.browsers)},
+      \"alwaysUsedChrome\": #{all_chrome?(user.browsers)},
+      \"dates\":            #{user.dates.sort!.reverse!}
+     }"
+
 end
 
 def work(filename = '', disable_gc: false)
@@ -99,6 +95,8 @@ def work(filename = '', disable_gc: false)
              \"allBrowsers\":\"#{unique_browsers.keys.sort!.join(',')}\""
   result << '}'
   result.close
+
+  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
 class TestMe < Minitest::Test

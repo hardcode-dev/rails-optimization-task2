@@ -36,59 +36,44 @@ def all_chrome?(browsers)
   return true
 end
 
-def user_stat(user,report)
-  # binding.pry
-  user_key = "#{user.first_name} #{user.last_name}"
-
-  report[:usersStats][user_key] ||= {
-          sessionsCount: 0,
-          totalTime: 0,
-          longestSession: 0,
-          browsers: [],
-          usedIE: false,
-          alwaysUsedChrome: false,
-          dates: []
-      }
-
-    # report['usersStats'][user_key] ||= {}
-    report[:usersStats][user_key][:sessionsCount] = user.sessions_count
-    # Собираем количество времени по пользователям
-    report[:usersStats][user_key][:totalTime] = user.total_time.to_s + ' min.'
-    # Выбираем самую длинную сессию пользователя
-    report[:usersStats][user_key][:longestSession] = user.longest_session.to_s + ' min.'
-    # Браузеры пользователя через запятую
-    report[:usersStats][user_key][:browsers] = user.browsers.sort.join(', ')
-    # Хоть раз использовал IE?
-    report[:usersStats][user_key][:usedIE] = include_ie?(user.browsers)
-    # Всегда использовал только Chrome?
-    report[:usersStats][user_key][:alwaysUsedChrome] = all_chrome?(user.browsers)
-    # Даты сессий через запятую в обратном порядке в формате iso8601
-    report[:usersStats][user_key][:dates] = user.dates.sort!.reverse!
+def write_user_stat user
+      "\"#{user.first_name} #{user.last_name}\":" +
+       {sessionsCount: user.sessions_count,
+        # Собираем количество времени по пользователям
+        totalTime: user.total_time.to_s + ' min.',
+        # Выбираем самую длинную сессию пользователя
+        longestSession: user.longest_session.to_s + ' min.',
+        # Браузеры пользователя через запятую
+        browsers: user.browsers.sort.join(', '),
+        # Хоть раз использовал IE?
+        usedIE: include_ie?(user.browsers),
+        # Всегда использовал только Chrome?
+        alwaysUsedChrome: all_chrome?(user.browsers),
+        # Даты сессий через запятую в обратном порядке в формате iso8601
+        dates: user.dates.sort!.reverse!}.to_json
 end
 
 def work(filename = '', disable_gc: false)
   puts 'Start work'
   GC.disable if disable_gc
 
+  result = File.open("result.json","w")
+
+
   user = nil
+  total_sessions = 0
+  total_users = 0
   unique_browsers = {}
 
-  report = {
-      totalUsers: 0,
-      uniqueBrowsersCount: 0,
-      totalSessions: 0,
-      allBrowsers: nil,
-      usersStats: {}
-  }
-
+  result << '{"usersStats":{'
 
   File.open(ENV['DATA_FILE'] || filename).each do |line|
     fields = line.split(/[,\n]/)
 
     if fields[0] == 'user'
       if !user.nil?
-        report[:totalUsers] += 1
-        user_stat user,report
+        total_users += 1
+        result << (write_user_stat user) + ','
       end
       user =  parse_user(fields)
     else
@@ -98,23 +83,23 @@ def work(filename = '', disable_gc: false)
       user.longest_session = session_time if user.longest_session < session_time
       user.browsers << fields[3].upcase!
       user.dates << fields[5]
-      report[:totalSessions] += 1
+      total_sessions += 1
       unique_browsers[fields[3]] = nil
     end
   end
 
-  report[:totalUsers] += 1
-  user_stat(user,report)
+  total_users += 1
+  result << (write_user_stat  user)
 
-  report[:uniqueBrowsersCount] = unique_browsers.keys.size
-  report[:allBrowsers] = unique_browsers.keys.sort!.join(',')
+  result << '},'
 
-  File.open("result.json","w") do |f|
-    f.write Oj.dump(report, mode: :compat)
-    f.write "\n"
-  end
+  result << "\"totalUsers\":#{total_users},
+             \"uniqueBrowsersCount\":#{unique_browsers.keys.size},
+             \"totalSessions\":#{total_sessions},
+             \"allBrowsers\":\"#{unique_browsers.keys.sort!.join(',')}\""
+  result << '}'
+  result.close
 end
-
 
 class TestMe < Minitest::Test
   def setup

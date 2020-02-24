@@ -66,7 +66,8 @@ def work(filename = '', disable_gc: false)
   File.open(ENV['DATA_FILE'] || filename).each do |line|
     fields = line.split(/[,\n]/)
 
-    if fields[0] == 'user'
+    case fields[0]
+    when 'user'
       if !user.nil?
         total_users += 1
         result << (write_user_stat user) + ','

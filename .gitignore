@@ -1,0 +1,8 @@
+.idea/
+data*.txt
+result.json
+ruby_prof_reports/
+.ruby-version
+.rubocop.yml
+/docker-valgrind-massif/
+/stackprof_reports/

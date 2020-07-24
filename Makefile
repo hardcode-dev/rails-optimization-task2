@@ -12,5 +12,6 @@ bench:
 	ruby benchmark/ruby-prof.rb
 memory_bench:
 	ruby benchmark/memory_profiler.rb
+	ruby benchmark/ruby-prof-memory.rb
 valgrind:
 	./profile.sh && ./visualize.sh

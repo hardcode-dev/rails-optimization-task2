@@ -62,10 +62,14 @@ report = MemoryProfiler.report do
 end
 report.pretty_print(scale_bytes: true)
 ```
+
+Также удобно пользоваться отчетом `RubyProf::CallStackPrinter` в режиме `RubyProf.measure_mode = RubyProf::MEMORY`
+
 ```
 # Makefile
 memory_bench:
 	ruby benchmark/memory_profiler.rb
+	ruby benchmark/ruby-prof-memory.rb
 ```
 
 Для того, чтобы убедиться, что программа на использует памяти больше заданного бюджета на протяжении всей работы будем использовать инструмент `valgrind massif visualier` (см `Dockerfile`, `build-docker.sh`, `profile.sh`, `visualize.sh`)

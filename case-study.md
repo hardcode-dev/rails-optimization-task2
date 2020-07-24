@@ -67,3 +67,12 @@ report.pretty_print(scale_bytes: true)
 memory_bench:
 	ruby benchmark/memory_profiler.rb
 ```
+
+Для того, чтобы убедиться, что программа на использует памяти больше заданного бюджета на протяжении всей работы будем использовать инструмент `valgrind massif visualier` (см `Dockerfile`, `build-docker.sh`, `profile.sh`, `visualize.sh`)
+```
+# Makefile
+valgrind:
+	./profile.sh && ./visualize.sh
+```
+![img/1.png](img/1.png)
+**Рис 1.** Использование памяти в течение работы до оптимизации

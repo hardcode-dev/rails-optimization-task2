@@ -38,3 +38,32 @@ class TestMe < Minitest::Test
 end
 ```
 Для получения более точного значения этот тест лучше запускать отдельно, для чего очень удобно использовать `Makefile`.
+
+### Вывод memory usage  
+Для удобства добавим вывод информации о количестве используемой памяти при обработке основного файла:
+```ruby
+puts "MEMORY USAGE: #{`ps -o rss= -p #{Process.pid}`.to_i / 1024} MB"
+```
+
+### Пробуем профайлеры
+При профилировании памяти важно **не отключать GC!!!**
+Попробовал профилировать разными инструментами:
+
+* `memory_profiler`
+* `ruby-prof`
+* `stackprof`
+* `valgrind massif visualier`
+
+На мой взгляд, `memory_profiler` - наиболее удобный инструмент для нашей задачи, который дает исчерпывающую информацию об аллокации памяти.
+```ruby
+# benchmark/memory_profiler.rb
+report = MemoryProfiler.report do
+  work('tmp/data_80000.txt', disable_gc: false)
+end
+report.pretty_print(scale_bytes: true)
+```
+```
+# Makefile
+memory_bench:
+	ruby benchmark/memory_profiler.rb
+```

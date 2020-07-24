@@ -1,6 +1,6 @@
 .PHONY: test
 
-all: samples test bench
+all: samples test bench memory_bench
 samples:
 	ruby benchmark/data_samples.rb
 test:
@@ -10,3 +10,5 @@ test:
 bench:
 	ruby benchmark/benchmark_realtime.rb
 	ruby benchmark/ruby-prof.rb
+memory_bench:
+	ruby benchmark/memory_profiler.rb

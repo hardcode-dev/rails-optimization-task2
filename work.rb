@@ -8,3 +8,4 @@ time = Benchmark.realtime do
 end
 
 puts "data_large Finish in #{time.round(2)}"
+puts "MEMORY USAGE: #{`ps -o rss= -p #{Process.pid}`.to_i / 1024} MB"

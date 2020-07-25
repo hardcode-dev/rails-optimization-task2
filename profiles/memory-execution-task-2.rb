@@ -6,4 +6,3 @@ report = MemoryProfiler.report do
 end
 
 report.pretty_print(scale_bytes: true)
-

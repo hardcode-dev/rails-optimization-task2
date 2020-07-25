@@ -10,3 +10,4 @@ gem 'pry', '~> 0.13.1'
 
 gem 'rspec-benchmark', '~> 0.6.0'
 gem 'ruby-prof', '~> 1.4', '>= 1.4.1'
+gem 'oj', '~> 3.3', '>= 3.3.9'

@@ -114,3 +114,11 @@ MEMORY USAGE: 15 MB
 Метрики объем потребляемой памяти и время обработки уменьшились до `15 MB` и `10s` соответственно.
 
 Обновляем `memory_test`
+
+### Находка №3
+Добавил `frozen_string_literal: true` - уменьшилось время обработки ¯\_(ツ)_/¯
+```
+$ ruby work.rb
+data_large Finish in 8.74
+MEMORY USAGE: 15 MB
+```

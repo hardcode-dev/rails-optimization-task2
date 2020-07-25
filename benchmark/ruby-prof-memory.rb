@@ -19,7 +19,7 @@ printer.print(File.open('tmp/graph-memory.html', 'w+'))
 
 printer = RubyProf::CallStackPrinter.new(result)
 printer.print(File.open('tmp/callstack-memory.html', 'w+'))
-`open tmp/callstack-memory.html`
+# `open tmp/callstack-memory.html`
 
 printer = RubyProf::DotPrinter.new(result)
 printer.print(File.open('tmp/graphviz-memory.dot', 'w+'))

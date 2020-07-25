@@ -1,4 +1,5 @@
 require_relative '../lib/task-2'
+require 'json'
 
 RSpec.describe '.work' do
   it 'creates result.json file with content' do

@@ -14,6 +14,6 @@ class TestMe < Minitest::Test
     memory_usage_after = memory_usage
     mem_usage = memory_usage_after - memory_usage_before
     puts "mem_usage: #{mem_usage} MB"
-    assert_operator mem_usage, :<=, 45
+    assert_operator mem_usage, :<=, 20
   end
 end

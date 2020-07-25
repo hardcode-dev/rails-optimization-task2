@@ -103,3 +103,14 @@ data_large Finish in 15.62
 MEMORY USAGE: 1454 MB
 ```
 Обновляем `memory_test`
+
+### Находка №2
+Перепишем программу в "потоковом" стиле.
+```
+$ ruby work.rb
+data_large Finish in 9.18
+MEMORY USAGE: 15 MB
+```
+Метрики объем потребляемой памяти и время обработки уменьшились до `15 MB` и `10s` соответственно.
+
+Обновляем `memory_test`

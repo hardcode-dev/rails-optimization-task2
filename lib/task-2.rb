@@ -52,7 +52,9 @@ def collect_stats_from_users(user)
 
   while user.sessions.size > 0
     session = user.sessions.shift
-    browser = session['browser'].upcase
+    session['browser'].upcase!
+
+    browser = session['browser']
     session_times << session['time'].to_i
     session_browsers << browser
 
@@ -62,7 +64,7 @@ def collect_stats_from_users(user)
 
     all_times_use_chrome = false unless browser =~ /CHROME/
 
-    session_dates << session['date'].strip
+    session_dates << session['date'].strip!
     user_sessions_cn += 1
   end
 
@@ -76,7 +78,7 @@ def collect_stats_from_users(user)
   report[user_key]['longestSession'] = "#{session_times.max.to_s} min."
 
   # Браузеры пользователя через запятую
-  report[user_key]['browsers'] = session_browsers.sort.join(', ')
+  report[user_key]['browsers'] = session_browsers.sort!.join(', ')
 
   # Хоть раз использовал IE?
   report[user_key]['usedIE'] = use_ie
@@ -85,7 +87,7 @@ def collect_stats_from_users(user)
   report[user_key]['alwaysUsedChrome'] = all_times_use_chrome
 
   # Даты сессий через запятую в обратном порядке в формате iso8601
-  report[user_key]['dates'] = session_dates.sort.reverse
+  report[user_key]['dates'] = session_dates.sort!.reverse!
 
   report
 end

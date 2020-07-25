@@ -179,5 +179,5 @@ def work(file_path = 'data_large.txt')
   file_result.write(report[1..-1])
   file_result.close
 
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  `ps -o rss= -p #{Process.pid}`.to_i / 1024
 end

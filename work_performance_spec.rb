@@ -7,10 +7,10 @@ end
 
 RSpec.describe 'Performance' do
   describe 'work method' do
-    it 'generates probable number of objects' do
+    it 'performs under 15 MB memory size ' do
       expect do
-        work(file_path: 'data_samples/data.txt')
-      end.to  perform_allocation(74604)
+        work(file_path: 'data_samples/data1000.txt')
+      end.to  perform_allocation(15728640).bytes
     end
   end
 end

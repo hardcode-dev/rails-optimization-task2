@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-require 'json'
 require 'oj'
-require 'pry'
-require 'date'
 require 'set'
 
 LARGE_DATA_FILE = 'data_samples/data_large.txt'
@@ -55,12 +52,7 @@ class User
   end
 end
 
-def update_counters(user)
-  @all_browsers += user.browsers unless user.browsers.nil?
-  @total_sessions += user.sessions_count unless user.sessions_count.nil?
-end
-
-def work(file_path: DATA_FILE)
+def work(file_path: 'data_samples/data1000.txt')
   data_file = open(file_path, 'r')
   result_file = open(RESULT_FILE, 'a+')
 
@@ -69,8 +61,8 @@ def work(file_path: DATA_FILE)
   json_writer.push_object
   json_writer.push_object('usersStats')
 
-  @all_browsers = []
-  @total_sessions = 0
+  all_browsers = Set.new
+  total_sessions = 0
   total_users = 0
   user = User.new
 
@@ -82,18 +74,19 @@ def work(file_path: DATA_FILE)
         json_writer.push_value(user.data, user.full_name)
       end
       total_users += 1
-      update_counters(user)
       user.set_defaults!
       user.first_name = cols[2]
       user.last_name = cols[3]
     end
 
     if cols[0] == 'session'
+      total_sessions += 1
       user.sessions_count += 1
       user.total_time += cols[4].to_i
       user.longest_session = user.longest_session > cols[4].to_i ? user.longest_session : cols[4].to_i
       user.used_ie = (cols[3] =~ /internet explorer/i) == 0 unless user.used_ie
       user.browsers << cols[3]
+      all_browsers.add cols[3]
       user.dates << cols[5]
     end
 
@@ -101,15 +94,17 @@ def work(file_path: DATA_FILE)
       json_writer.push_value(user.data, user.full_name)
       json_writer.pop
 
-      update_counters(user)
-      uniq_browsers = @all_browsers.uniq
+      uniq_browsers = all_browsers.flatten.uniq
 
       json_writer.push_value(total_users, 'totalUsers')
       json_writer.push_value(uniq_browsers.size, 'uniqueBrowsersCount')
-      json_writer.push_value(@total_sessions, 'totalSessions')
+      json_writer.push_value(total_sessions, 'totalSessions')
       json_writer.push_value(uniq_browsers.map(&:upcase).sort.join(','), 'allBrowsers')
       json_writer.pop_all
       result_file.close
     end
   end
+  data_file.close
 end
+
+work

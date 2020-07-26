@@ -52,11 +52,10 @@ class User
   end
 end
 
-def work(file_path: 'data_samples/data1000.txt')
+def work(file_path: DATA_FILE)
   data_file = open(file_path, 'r')
   result_file = open(RESULT_FILE, 'a+')
 
-  # prepare json
   json_writer = Oj::StreamWriter.new(result_file, {})
   json_writer.push_object
   json_writer.push_object('usersStats')
@@ -106,5 +105,3 @@ def work(file_path: 'data_samples/data1000.txt')
   end
   data_file.close
 end
-
-work

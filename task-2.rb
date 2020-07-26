@@ -3,9 +3,9 @@
 require 'oj'
 require 'set'
 
-LARGE_DATA_FILE = 'data_samples/data_large.txt'
-DATA_FILE = 'data_samples/data.txt'
-RESULT_FILE = 'result.json'
+LARGE_DATA_FILE = 'data_samples/data_large.txt'.freeze
+DATA_FILE = 'data_samples/data.txt'.freeze
+RESULT_FILE = 'result.json'.freeze
 
 class User
   USER_ATTRS = %i[first_name last_name sessions_count total_time longest_session browsers dates used_ie].freeze
@@ -93,8 +93,7 @@ def work(file_path: DATA_FILE)
       json_writer.push_value(user.data, user.full_name)
       json_writer.pop
 
-      uniq_browsers = all_browsers.flatten.uniq
-
+      uniq_browsers = all_browsers.uniq
       json_writer.push_value(total_users, 'totalUsers')
       json_writer.push_value(uniq_browsers.size, 'uniqueBrowsersCount')
       json_writer.push_value(total_sessions, 'totalSessions')

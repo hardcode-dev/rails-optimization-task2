@@ -50,4 +50,4 @@ def benchmark_work(data_file, short: true)
   puts "### END ### \n\n"
 end
 
-benchmark_work('data_samples/data1000.txt', short: false)
+benchmark_work('data_samples/data_large.txt', short: true)

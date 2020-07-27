@@ -1,4 +1,5 @@
 # Deoptimized version of homework task
+# frozen_string_literal: true
 
 require 'json'
 require 'pry'
@@ -13,9 +14,8 @@ class User
   end
 end
 
-def parse_user(user)
-  fields = user.split(',')
-  parsed_result = {
+def parse_user(fields)
+  {
     'id' => fields[1],
     'first_name' => fields[2],
     'last_name' => fields[3],
@@ -23,14 +23,13 @@ def parse_user(user)
   }
 end
 
-def parse_session(session)
-  fields = session.split(',')
-  parsed_result = {
+def parse_session(fields)
+  {
     'user_id' => fields[1],
     'session_id' => fields[2],
     'browser' => fields[3].upcase,
     'time' => fields[4],
-    'date' => fields[5],
+    'date' => fields[5].chomp,
   }
 end
 
@@ -44,18 +43,18 @@ end
 
 def report_write_user(report_file, user, user_sessions)
   # Статистика по пользователям
-  attributes = user
-  user_object = User.new(attributes: attributes, sessions: user_sessions)
-  user_key = "#{user_object.attributes['first_name']}" + ' ' + "#{user_object.attributes['last_name']}"
+  user_key = "#{user['first_name']} #{user['last_name']}"
+  times = user_sessions.map {|s| s['time'].to_i }
+  browser = user_sessions.map {|s| s['browser']}
 
   report = {}
-  report['sessionsCount'] = user_object.sessions.count
-  report['totalTime'] = user_object.sessions.map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.'
-  report['longestSession'] = user_object.sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.'
-  report['browsers'] = user_object.sessions.map {|s| s['browser']}.map {|b| b.upcase}.sort.join(', ')
-  report['usedIE'] = user_object.sessions.map{|s| s['browser']}.any? { |b| b.upcase =~ /INTERNET EXPLORER/ }
-  report['alwaysUsedChrome'] = user_object.sessions.map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ }
-  report['dates'] = user_object.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 }
+  report['sessionsCount'] = user_sessions.count
+  report['totalTime'] = "#{times.sum} min."
+  report['longestSession'] = "#{times.max} min."
+  report['browsers'] = browser.sort.join(', ')
+  report['usedIE'] = browser.any? { |b| b =~ /INTERNET EXPLORER/ }
+  report['alwaysUsedChrome'] = browser.all? { |b| b =~ /CHROME/ }
+  report['dates'] = user_sessions.map{|s| s['date']}.sort.reverse
 
   report_file.write("\"#{user_key}\":#{report.to_json}")
 end
@@ -64,29 +63,27 @@ def work(file_path = 'data/data.txt')
   report_file = File.open('result.json', 'w')
   report_file.write('{"usersStats":{')
 
-  file_lines = File.read(file_path).split("\n")
-
   user = nil
   user_count = 0
   session_count = 0
   browser = []
   sessions = []
 
-  file_lines.each do |line|
+  IO.foreach(file_path) do |line|
     cols = line.split(',')
-    if cols[0] == 'session'
-      session = parse_session(line)
-      browser << session['browser']
-      sessions << session
-      session_count += 1
-    elsif cols[0] == 'user'
+    if cols[0] == 'user'
       unless user.nil?
         report_write_user(report_file, user, sessions)
         report_file.write(',')
       end
-      user = parse_user(line)
+      user = parse_user(cols)
       sessions = []
       user_count += 1
+    else
+      session = parse_session(cols)
+      browser << session['browser']
+      sessions << session
+      session_count += 1
     end
   end
 

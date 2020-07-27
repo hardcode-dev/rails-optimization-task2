@@ -1,6 +1,6 @@
 require 'stackprof'
 require_relative '../task-2.rb'
-file_path = "#{__dir__}/../data/data.txt"
+file_path = "#{__dir__}/../data/data1.txt"
 report_path = "#{__dir__}/../tmp/stackprof.dump"
 flamegraph_path = "#{__dir__}/../tmp/flamegraph"
 

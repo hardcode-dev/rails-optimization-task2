@@ -2,7 +2,7 @@ require 'ruby-prof'
 require 'stringio'
 require_relative '../task-2.rb'
 
-file_path = "#{__dir__}/../data/data.txt"
+file_path = "#{__dir__}/../data/data4.txt"
 
 GC.disable
 

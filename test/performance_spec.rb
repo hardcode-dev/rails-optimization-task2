@@ -11,8 +11,8 @@ describe 'Performance' do
 
     it '40000 rows works under 210ms' do
       expect do
-        work(file2_path)
-      end.to perform_under(0.21).sec.warmup(2).times.sample(10).times
+        work(file_path)
+      end.to perform_under(0.25).sec.warmup(2).times.sample(10).times
     end
 
     it 'uses no more than 70mb' do
@@ -22,7 +22,7 @@ describe 'Performance' do
       # считаем сколько имено наша программа съела памяти
       memory_used = memory_after - memory_before
 
-      expect(memory_used).to be < 70
+      expect(memory_used).to be < 10
     end
 
     # its bad (

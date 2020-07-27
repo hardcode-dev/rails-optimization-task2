@@ -57,14 +57,13 @@ def work(file_path = 'data/data.txt')
       user[:dates] << cols[5]
       user[:browsers] << browser
 
-      browsers << browser
+      browsers << browser unless browsers.include?(browser)
       session_count += 1
     end
   end
 
   report_write_user(report_file, user)
 
-  browsers.uniq!
   browsers.sort!
 
   report_file.write("},\"totalUsers\":#{user_count},")

@@ -1,0 +1,12 @@
+.byebug_history
+ruby_prof_reports/*
+
+data_files/*
+
+.idea
+
+memory_profiler.rb
+./ruby_mem.rb
+./ruby_prof.rb
+
+valgrind/*

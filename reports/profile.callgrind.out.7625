@@ -1,0 +1,190 @@
+events: memory
+
+fl=
+fn=IO::close
+0 0
+
+fl=
+fn=Oj::dump^
+0 120
+
+fl=
+fn=Array::reverse
+0 120
+
+fl=
+fn=Array::join
+0 160
+
+fl=
+fn=Array::sort
+0 560
+
+fl=
+fn=Integer::to_s
+0 360
+
+fl=
+fn=Kernel::nil?
+0 0
+
+fl=
+fn=Array::all?
+0 0
+
+fl=
+fn=Regexp::~
+0 0
+
+fl=
+fn=String::to_i
+0 0
+
+fl=
+fn=String::upcase
+0 600
+
+fl=/home/smalew/Projects/Lessons/Thinknetica/rails-optimization-task2/task/optimization.rb
+fn=Object::parse_session
+12 3480
+cfl=
+cfn=String::upcase
+calls=15 14
+14 600
+
+fl=/home/smalew/Projects/Lessons/Thinknetica/rails-optimization-task2/task/optimization.rb
+fn=Object::parse_user
+6 816
+
+fl=
+fn=NilClass::nil?
+0 0
+
+fl=
+fn=String::split
+0 4920
+
+fl=
+fn=IO::foreach^
+0 2376
+cfl=
+cfn=String::split
+calls=18 49
+49 4920
+cfl=
+cfn=NilClass::nil?
+calls=1 52
+52 0
+cfl=/home/smalew/Projects/Lessons/Thinknetica/rails-optimization-task2/task/optimization.rb
+cfn=Object::parse_user
+calls=3 76
+76 816
+cfl=
+cfn=IO::write
+calls=5 78
+78 0
+cfl=/home/smalew/Projects/Lessons/Thinknetica/rails-optimization-task2/task/optimization.rb
+cfn=Object::parse_session
+calls=15 82
+82 4080
+cfl=
+cfn=String::to_i
+calls=37 87
+87 0
+cfl=
+cfn=Regexp::~
+calls=3 95
+95 0
+cfl=
+cfn=Array::all?
+calls=15 98
+98 0
+cfl=
+cfn=Kernel::nil?
+calls=2 52
+52 0
+cfl=
+cfn=Integer::to_s
+calls=4 54
+54 160
+cfl=
+cfn=Array::sort
+calls=4 54
+54 320
+cfl=
+cfn=Array::join
+calls=2 54
+54 80
+cfl=
+cfn=Array::reverse
+calls=2 54
+54 80
+cfl=
+cfn=Oj::dump^
+calls=2 63
+63 80
+
+fl=
+fn=IO::write
+0 40
+
+fl=
+fn=File::initialize
+0 0
+
+fl=
+fn=IO::open^
+0 40
+cfl=
+cfn=File::initialize
+calls=1 0
+0 0
+
+fl=/home/smalew/Projects/Lessons/Thinknetica/rails-optimization-task2/task/optimization.rb
+fn=Object::work
+20 824
+cfl=
+cfn=IO::open^
+calls=1 21
+21 40
+cfl=
+cfn=IO::write
+calls=3 23
+23 40
+cfl=
+cfn=IO::foreach^
+calls=1 48
+48 12912
+cfl=
+cfn=Integer::to_s
+calls=5 108
+108 200
+cfl=
+cfn=Array::sort
+calls=3 108
+108 240
+cfl=
+cfn=Array::join
+calls=2 108
+108 80
+cfl=
+cfn=Array::reverse
+calls=1 108
+108 40
+cfl=
+cfn=Oj::dump^
+calls=1 117
+117 40
+cfl=
+cfn=IO::close
+calls=1 133
+133 0
+
+fl=/home/smalew/Projects/Lessons/Thinknetica/rails-optimization-task2/profilers/5.rubyprof_memory.rb
+fn=[global]::
+9 0
+cfl=/home/smalew/Projects/Lessons/Thinknetica/rails-optimization-task2/task/optimization.rb
+cfn=Object::work
+calls=1 9
+9 14416
+

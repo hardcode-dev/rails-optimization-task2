@@ -1,32 +1,12 @@
-# Deoptimized version of homework task
+# frozen_string_literal: true
 
-require 'json'
+require 'oj'
 require 'pry'
 
+def work(benchmark: false)
+  file = File.open('result.json', 'w')
 
-def parse_user(user)
-  fields = user.split(',')
-  parsed_result = {
-    'id' => fields[1],
-    'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4],
-  }
-end
-
-def parse_session(session)
-  fields = session.split(',')
-  parsed_result = {
-    'user_id' => fields[1],
-    'session_id' => fields[2],
-    'browser' => fields[3].upcase,
-    'time' => fields[4],
-    'date' => fields[5],
-  }
-end
-
-def work
-  File.write('result.json', "{\"usersStats\":{")
+  file.write("{\"usersStats\":{")
 
   total_users = 0
   unique_browsers = []
@@ -40,14 +20,34 @@ def work
   user_used_ie = false
   user_always_used_chrome = true
   user_dates = []
-  user_sessions = []
+  user_full_name = nil
 
-  user_attr = nil
+  if benchmark
+    puts 'ObjectSpace count objects: '
+    pp ObjectSpace.count_objects
+    puts GC.stat
+    puts "MEMORY USAGE before iteration: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  end
+
   File.foreach('data.txt', chomp: true) do |line|
-    cols = line.split(',')
+    fields = []
+    index = 0
 
-    if cols[0] == 'user'
-      unless user_attr.nil?
+    line_size = line.size
+    step = 0
+
+    while step < line_size
+      if line[step] == ','
+        index += 1
+      else
+        fields[index] ||= ''.dup
+        fields[index] << line[step]
+      end
+      step += 1
+    end
+
+    if fields[0] == 'user'
+      unless user_full_name.nil?
         report = {
           'sessionsCount' => user_session_count, # Собираем количество сессий по пользователям
           'totalTime' => user_total_time.to_s + ' min.', # Собираем количество времени по пользователям
@@ -58,7 +58,7 @@ def work
           'dates' => user_dates.sort.reverse
         }
 
-        File.write('result.json', "\"#{user_attr['first_name']} #{user_attr['last_name']}\":#{report.to_json},", mode: 'a')
+        file.write("#{Oj.dump(report)},")
       end
 
       total_users += 1
@@ -69,30 +69,28 @@ def work
       user_used_ie = false
       user_always_used_chrome = true
       user_dates = []
-      user_sessions = []
 
-      user_attr = parse_user(line)
+      user_full_name = fields[2] << ' ' << fields[3]
+
+      file.write("\"#{user_full_name}\":")
     end
 
-    if cols[0] == 'session'
-      session_attr = parse_session(line)
-
-      user_sessions = user_sessions + [session_attr]
-
+    if fields[0] == 'session'
       user_session_count += 1
-      user_total_time += session_attr['time'].to_i
-      user_longest_session = session_attr['time'].to_i if user_longest_session < session_attr['time'].to_i
+      session_time = fields[4].to_i
 
-      # Подсчёт количества уникальных браузеров
-      browser = session_attr['browser']
+      user_total_time += session_time
+      user_longest_session = session_time if user_longest_session < session_time
+
+      browser = fields[3].upcase!
 
       user_browsers << browser
       user_used_ie = true if !user_used_ie && browser =~ /INTERNET EXPLORER/
       user_always_used_chrome = false if user_always_used_chrome && browser != ~/CHROME/
-      user_dates << session_attr['date']
+      user_dates << fields[5]
 
       if unique_browsers.all? { |b| b != browser }
-        unique_browsers += [browser]
+        unique_browsers << browser
         unique_browsers_count += 1
       end
 
@@ -110,7 +108,14 @@ def work
     'dates' => user_dates.sort.reverse
   }
 
-  File.write('result.json', "\"#{user_attr['first_name']} #{user_attr['last_name']}\":#{report.to_json}", mode: 'a')
+  file.write("#{Oj.dump(report)}")
+
+  # if benchmark
+  #   puts 'ObjectSpace count objects: '
+  #   pp ObjectSpace.count_objects
+  #   puts GC.stat
+  #   puts "MEMORY USAGE after iteration: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  # end
 
   final_report = "}," \
     "\"totalUsers\": #{total_users}," \
@@ -118,7 +123,6 @@ def work
     "\"totalSessions\":#{total_sessions}," \
     "\"allBrowsers\":\"#{unique_browsers.sort.join(',')}\""
 
-  File.write('result.json', "#{final_report}}\n", mode: 'a')
-
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  file.write("#{final_report}}\n")
+  file.close
 end

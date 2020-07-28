@@ -51,7 +51,7 @@ def work(file_name)
   file_lines.each do |line|
     cols = line.split(',')
     users = users + [parse_user(line)] if cols[0] == 'user'
-    sessions = sessions + [parse_session(line)] if cols[0] == 'session'
+    sessions << parse_session(line) if cols[0] == 'session'
   end
 
   # Отчёт в json

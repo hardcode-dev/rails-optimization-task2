@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'task-2'
 
 require 'memory_profiler'

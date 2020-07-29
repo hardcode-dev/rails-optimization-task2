@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'json'
+# require 'json'
 require 'csv'
 require 'set'
+require 'oj'
 
-def collect_stats_from_users(report, users_objects, &block)
+def collect_stats_from_users(report, users_objects)
   users_objects.each do |user|
-
     report[user_key] ||= {}
     report[user_key] = report[user_key].merge(yield(user))
   end
@@ -14,15 +14,16 @@ end
 
 def write_user_info(report_file, user)
   report = {}
+  user_ie = user[:browsers].any? { |b| b =~ /INTERNET EXPLORER/ }
   report[:sessionsCount] = user[:times].count
   report[:totalTime] = "#{user[:times].sum} min."
   report[:longestSession] = "#{user[:times].max} min."
-  report[:browsers] = user[:browsers].sort.join(', ')
-  report[:usedIE] = user[:browsers].any? { |b| b =~ /INTERNET EXPLORER/ }
-  report[:alwaysUsedChrome] = user[:browsers].all? { |b| b =~ /CHROME/ }
+  report[:browsers] = user[:browsers].sort!.join(', ')
+  report[:usedIE] = user_ie
+  report[:alwaysUsedChrome] = user_ie ? false : user[:browsers].all? { |b| b =~ /CHROME/ }
   report[:dates] = user[:dates].sort!.reverse!
 
-  report_file.write("\"#{user[:first_name]} #{user[:last_name]}\":#{report.to_json}")
+  report_file.write("\"#{user[:first_name]} #{user[:last_name]}\":#{Oj.dump(report, mode: :compat)}")
 end
 
 def assign_initial_user_attributes(line)

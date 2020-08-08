@@ -42,8 +42,9 @@ def collect_stats_from_users(report, users_objects, &block)
   end
 end
 
-def work
-  file_lines = File.read('data.txt').split("\n")
+def work(filename: 'data.txt', gc: true)
+  GC.disable unless gc
+  file_lines = File.read(filename).split("\n")
 
   users = []
   sessions = []
@@ -141,4 +142,6 @@ def work
 
   File.write('result.json', "#{report.to_json}\n")
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+
+  GC.enable unless gc
 end

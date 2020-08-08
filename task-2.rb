@@ -49,7 +49,7 @@ def work(filename: 'data.txt', gc: true)
         report[:usersStats][user_key][:totalTime] = report[:usersStats][user_key][:totalTime].to_s + ' min.'
         report[:usersStats][user_key][:longestSession] = report[:usersStats][user_key][:longestSession].to_s + ' min.'
         report[:usersStats][user_key][:browsers] = report[:usersStats][user_key][:browsers].sort.join(', ')
-        report[:usersStats][user_key][:dates] = report[:usersStats][user_key][:dates].sort.reverse.map { |d| d.iso8601 }
+        report[:usersStats][user_key][:dates] = report[:usersStats][user_key][:dates].sort.reverse
       end
       user = parse_user(line)
       user_key = "#{user['first_name']}" + ' ' + "#{user['last_name']}"
@@ -76,7 +76,7 @@ def work(filename: 'data.txt', gc: true)
       report[:usersStats][user_key][:browsers] << session['browser'].upcase
       report[:usersStats][user_key][:usedIE] ||= session['browser'].upcase.match?(/INTERNET EXPLORER/)
       report[:usersStats][user_key][:alwaysUsedChrome] &&= session['browser'].upcase.match?(/CHROME/)
-      report[:usersStats][user_key][:dates] << Date.parse(session['date'])
+      report[:usersStats][user_key][:dates] << session['date'].strip
     end
   end
 
@@ -86,7 +86,7 @@ def work(filename: 'data.txt', gc: true)
     report[:usersStats][user_key][:totalTime] = report[:usersStats][user_key][:totalTime].to_s + ' min.'
     report[:usersStats][user_key][:longestSession] = report[:usersStats][user_key][:longestSession].to_s + ' min.'
     report[:usersStats][user_key][:browsers] = report[:usersStats][user_key][:browsers].sort.join(', ')
-    report[:usersStats][user_key][:dates] = report[:usersStats][user_key][:dates].sort.reverse.map { |d| d.iso8601 }
+    report[:usersStats][user_key][:dates] = report[:usersStats][user_key][:dates].sort.reverse
   end
 
   # Отчёт в json

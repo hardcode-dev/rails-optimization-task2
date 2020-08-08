@@ -1,17 +1,10 @@
+# frozen_string_literal: true
+
 # Deoptimized version of homework task
 
 require 'json'
 require 'pry'
 require 'date'
-
-class User
-  attr_reader :attributes, :sessions
-
-  def initialize(attributes:, sessions:)
-    @attributes = attributes
-    @sessions = sessions
-  end
-end
 
 def parse_user(user)
   fields = user.split(',')
@@ -34,25 +27,66 @@ def parse_session(session)
   }
 end
 
-def collect_stats_from_users(report, users_objects, &block)
-  users_objects.each do |user|
-    user_key = "#{user.attributes['first_name']}" + ' ' + "#{user.attributes['last_name']}"
-    report['usersStats'][user_key] ||= {}
-    report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
-  end
-end
-
 def work(filename: 'data.txt', gc: true)
   GC.disable unless gc
-  file_lines = File.read(filename).split("\n")
-
   users = []
   sessions = []
+  report = {
+    totalUsers: 0,
+    uniqueBrowsersCount: 0,
+    totalSessions: 0,
+    allBrowsers: [],
+    usersStats: {}
+  }
 
-  file_lines.each do |line|
+  user_key = nil
+
+  File.read(filename).split("\n") do |line|
     cols = line.split(',')
-    users = users + [parse_user(line)] if cols[0] == 'user'
-    sessions = sessions + [parse_session(line)] if cols[0] == 'session'
+    if cols[0] == 'user'
+      report[:totalUsers] += 1
+      if report[:usersStats][user_key]
+        report[:usersStats][user_key][:totalTime] = report[:usersStats][user_key][:totalTime].to_s + ' min.'
+        report[:usersStats][user_key][:longestSession] = report[:usersStats][user_key][:longestSession].to_s + ' min.'
+        report[:usersStats][user_key][:browsers] = report[:usersStats][user_key][:browsers].sort.join(', ')
+        report[:usersStats][user_key][:dates] = report[:usersStats][user_key][:dates].sort.reverse.map { |d| d.iso8601 }
+      end
+      user = parse_user(line)
+      user_key = "#{user['first_name']}" + ' ' + "#{user['last_name']}"
+      report[:usersStats][user_key] = {
+        sessionsCount: 0, # Собираем количество сессий по пользователям
+        totalTime: 0, # Собираем количество времени по пользователю
+        longestSession: 0, # Выбираем самую длинную сессию пользователя
+        browsers: [], # Браузеры пользователя через запятую
+        usedIE: false, # Хоть раз использовал IE?
+        alwaysUsedChrome: true, # Всегда использовал только Chrome?
+        dates: [], # Даты сессий через запятую в обратном порядке в формате iso8601
+      }
+
+    elsif cols[0] == 'session'
+      session = parse_session(line)
+      report[:totalSessions] += 1
+      unless report[:allBrowsers].include?(session['browser'].upcase)
+        report[:allBrowsers] << session['browser'].upcase
+        report[:uniqueBrowsersCount] += 1
+      end
+      report[:usersStats][user_key][:sessionsCount] += 1
+      report[:usersStats][user_key][:totalTime] += session['time'].to_i
+      report[:usersStats][user_key][:longestSession] = [report[:usersStats][user_key][:longestSession], session['time'].to_i].max
+      report[:usersStats][user_key][:browsers] << session['browser'].upcase
+      report[:usersStats][user_key][:usedIE] ||= session['browser'].upcase.match?(/INTERNET EXPLORER/)
+      report[:usersStats][user_key][:alwaysUsedChrome] &&= session['browser'].upcase.match?(/CHROME/)
+      report[:usersStats][user_key][:dates] << Date.parse(session['date'])
+    end
+  end
+
+  report[:allBrowsers] = report[:allBrowsers].sort.join(',')
+
+  if report[:usersStats][user_key]
+    report[:usersStats][user_key][:totalTime] = report[:usersStats][user_key][:totalTime].to_s + ' min.'
+    report[:usersStats][user_key][:longestSession] = report[:usersStats][user_key][:longestSession].to_s + ' min.'
+    report[:usersStats][user_key][:browsers] = report[:usersStats][user_key][:browsers].sort.join(', ')
+    report[:usersStats][user_key][:dates] = report[:usersStats][user_key][:dates].sort.reverse.map { |d| d.iso8601 }
   end
 
   # Отчёт в json
@@ -69,76 +103,6 @@ def work(filename: 'data.txt', gc: true)
   #     - Хоть раз использовал IE? +
   #     - Всегда использовал только Хром? +
   #     - даты сессий в порядке убывания через запятую +
-
-  report = {}
-
-  report[:totalUsers] = users.count
-
-  # Подсчёт количества уникальных браузеров
-  uniqueBrowsers = []
-  sessions.each do |session|
-    browser = session['browser']
-    uniqueBrowsers += [browser] if uniqueBrowsers.all? { |b| b != browser }
-  end
-
-  report['uniqueBrowsersCount'] = uniqueBrowsers.count
-
-  report['totalSessions'] = sessions.count
-
-  report['allBrowsers'] =
-    sessions
-      .map { |s| s['browser'] }
-      .map { |b| b.upcase }
-      .sort
-      .uniq
-      .join(',')
-
-  # Статистика по пользователям
-  users_objects = []
-
-  users.each do |user|
-    attributes = user
-    user_sessions = sessions.select { |session| session['user_id'] == user['id'] }
-    user_object = User.new(attributes: attributes, sessions: user_sessions)
-    users_objects = users_objects + [user_object]
-  end
-
-  report['usersStats'] = {}
-
-  # Собираем количество сессий по пользователям
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'sessionsCount' => user.sessions.count }
-  end
-
-  # Собираем количество времени по пользователям
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'totalTime' => user.sessions.map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.' }
-  end
-
-  # Выбираем самую длинную сессию пользователя
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'longestSession' => user.sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.' }
-  end
-
-  # Браузеры пользователя через запятую
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'browsers' => user.sessions.map {|s| s['browser']}.map {|b| b.upcase}.sort.join(', ') }
-  end
-
-  # Хоть раз использовал IE?
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'usedIE' => user.sessions.map{|s| s['browser']}.any? { |b| b.upcase =~ /INTERNET EXPLORER/ } }
-  end
-
-  # Всегда использовал только Chrome?
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'alwaysUsedChrome' => user.sessions.map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ } }
-  end
-
-  # Даты сессий через запятую в обратном порядке в формате iso8601
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }
-  end
 
   File.write('result.json', "#{report.to_json}\n")
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)

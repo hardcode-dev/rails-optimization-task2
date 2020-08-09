@@ -6,25 +6,13 @@ require 'json'
 require 'pry'
 require 'date'
 
-def parse_user(user)
-  fields = user.split(',')
-  parsed_result = {
-    'id' => fields[1],
-    'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4],
-  }
-end
+def format_user_stats(object)
+  return unless object
 
-def parse_session(session)
-  fields = session.split(',')
-  parsed_result = {
-    'user_id' => fields[1],
-    'session_id' => fields[2],
-    'browser' => fields[3],
-    'time' => fields[4],
-    'date' => fields[5],
-  }
+  object[:totalTime] = object[:totalTime].to_s + ' min.'
+  object[:longestSession] = object[:longestSession].to_s + ' min.'
+  object[:browsers] = object[:browsers].sort.join(', ')
+  object[:dates] = object[:dates].sort.reverse
 end
 
 def work(filename: 'data.txt', gc: true)
@@ -45,14 +33,8 @@ def work(filename: 'data.txt', gc: true)
     cols = line.split(',')
     if cols[0] == 'user'
       report[:totalUsers] += 1
-      if report[:usersStats][user_key]
-        report[:usersStats][user_key][:totalTime] = report[:usersStats][user_key][:totalTime].to_s + ' min.'
-        report[:usersStats][user_key][:longestSession] = report[:usersStats][user_key][:longestSession].to_s + ' min.'
-        report[:usersStats][user_key][:browsers] = report[:usersStats][user_key][:browsers].sort.join(', ')
-        report[:usersStats][user_key][:dates] = report[:usersStats][user_key][:dates].sort.reverse
-      end
-      user = parse_user(line)
-      user_key = "#{user['first_name']}" + ' ' + "#{user['last_name']}"
+      format_user_stats report[:usersStats][user_key]
+      user_key = "#{cols[2]} #{cols[3]}"
       report[:usersStats][user_key] = {
         sessionsCount: 0, # Собираем количество сессий по пользователям
         totalTime: 0, # Собираем количество времени по пользователю
@@ -64,30 +46,24 @@ def work(filename: 'data.txt', gc: true)
       }
 
     elsif cols[0] == 'session'
-      session = parse_session(line)
       report[:totalSessions] += 1
-      unless report[:allBrowsers].include?(session['browser'].upcase)
-        report[:allBrowsers] << session['browser'].upcase
+      unless report[:allBrowsers].include?(cols[3].upcase!)
+        report[:allBrowsers] << cols[3]
         report[:uniqueBrowsersCount] += 1
       end
       report[:usersStats][user_key][:sessionsCount] += 1
-      report[:usersStats][user_key][:totalTime] += session['time'].to_i
-      report[:usersStats][user_key][:longestSession] = [report[:usersStats][user_key][:longestSession], session['time'].to_i].max
-      report[:usersStats][user_key][:browsers] << session['browser'].upcase
-      report[:usersStats][user_key][:usedIE] ||= session['browser'].upcase.match?(/INTERNET EXPLORER/)
-      report[:usersStats][user_key][:alwaysUsedChrome] &&= session['browser'].upcase.match?(/CHROME/)
-      report[:usersStats][user_key][:dates] << session['date'].strip
+      report[:usersStats][user_key][:totalTime] += cols[4].to_i
+      report[:usersStats][user_key][:longestSession] = [report[:usersStats][user_key][:longestSession], cols[4].to_i].max
+      report[:usersStats][user_key][:browsers] << cols[3]
+      report[:usersStats][user_key][:usedIE] ||= cols[3].start_with?('INTERNET EXPLORER')
+      report[:usersStats][user_key][:alwaysUsedChrome] &&= cols[3].start_with?('CHROME')
+      report[:usersStats][user_key][:dates] << cols[5].strip
     end
   end
 
   report[:allBrowsers] = report[:allBrowsers].sort.join(',')
 
-  if report[:usersStats][user_key]
-    report[:usersStats][user_key][:totalTime] = report[:usersStats][user_key][:totalTime].to_s + ' min.'
-    report[:usersStats][user_key][:longestSession] = report[:usersStats][user_key][:longestSession].to_s + ' min.'
-    report[:usersStats][user_key][:browsers] = report[:usersStats][user_key][:browsers].sort.join(', ')
-    report[:usersStats][user_key][:dates] = report[:usersStats][user_key][:dates].sort.reverse
-  end
+  format_user_stats report[:usersStats][user_key]
 
   # Отчёт в json
   #   - Сколько всего юзеров +

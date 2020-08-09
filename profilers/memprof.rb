@@ -3,7 +3,7 @@
 require 'memory_profiler'
 require_relative '../task-2.rb'
 
-`head -n 12500 data_large.txt > data_small.txt`
+`head -n 2500000 data_large.txt > data_small.txt`
 
 report = MemoryProfiler.report do
   work(filename: 'data_small.txt', gc: false)

@@ -9,8 +9,8 @@ RSpec.describe 'Performance' do
     `ps -o rss= -p #{Process.pid}`.to_i / 1024
   end
 
-  before { `head -n 110000 data_large.txt > data_small.txt` }
+  before { `head -n 150000 data_large.txt > data_small.txt` }
   after { `rm data_small.txt` }
 
-  it { is_expected.to be <= 70 }
+  it { is_expected.to be <= 35 }
 end

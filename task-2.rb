@@ -19,7 +19,7 @@ def work(filename: 'data.txt')
   @file = File.open('result.json', 'w')
   @file.write('{"usersStats":{')
 
-  File.read(filename).split("\n") do |line|
+  File.open(filename, 'r').each do |line|
     parse_line(line)
   end
 

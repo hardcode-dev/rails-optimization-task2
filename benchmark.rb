@@ -9,7 +9,7 @@ require_relative 'task-2'
 #
 time = Time.now
 
-work(filename: 'data_large.txt', gc: true)
+work(filename: 'data_large.txt')
 
 puts `ps -o rss= -p #{Process.pid}`.to_i / 1024
 

@@ -11,7 +11,7 @@ RubyProf.measure_mode = RubyProf::MEMORY
 GC.disable
 
 result = RubyProf.profile do
-  work(filename: 'data_large12500.txt', gc: false)
+  work(filename: 'data_large12500.txt')
 end
 
 RubyProf::FlatPrinter.new(result).print(File.open('reports/rubyprof_flat.txt', 'w+'))

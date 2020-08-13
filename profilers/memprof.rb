@@ -7,7 +7,7 @@ require_relative '../task-2.rb'
 
 GC.disable
 report = MemoryProfiler.report do
-  work(filename: 'data_small.txt', gc: false)
+  work(filename: 'data_small.txt')
 end
 GC.enable
 

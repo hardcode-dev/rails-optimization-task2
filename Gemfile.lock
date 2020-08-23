@@ -8,6 +8,7 @@ GEM
     date (3.0.0)
     diff-lcs (1.4.4)
     json (2.3.0)
+    memory_profiler (0.9.14)
     method_source (1.0.0)
     minitest (5.14.1)
     pry (0.13.1)
@@ -40,6 +41,7 @@ PLATFORMS
 DEPENDENCIES
   date
   json
+  memory_profiler
   minitest
   pry
   rspec

@@ -39,7 +39,7 @@ def work(file, disable_gc: false)
     allBrowsers = []
     user = nil
 
-    File.readlines('data/' + file).each do |line|
+    File.open('data/' + file).each do |line|
       index = 0
       mode = nil
       attrs = {}

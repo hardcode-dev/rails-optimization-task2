@@ -18,20 +18,20 @@ def write_stats_from_user(result, user)
   browsers = sessions.map { |s| s[:browser].upcase }.sort
   time = sessions.map { |s| s[:time].to_i }
   report = {
-    'sessionsCount' => sessions.count,
-    'totalTime' => time.sum.to_s + ' min.',
-    'longestSession' => time.max.to_s + ' min.',
-    'browsers' => browsers.join(', '),
-    'usedIE' => browsers.any? { |b| b.start_with?('INTERNET EXPLORER') },
-    'alwaysUsedChrome' => browsers.all? { |b| b.start_with?('CHROME') },
-    'alwaysUsedChrome' => browsers.all? { |b| b.start_with?('CHROME') },
-    'dates' => sessions.map { |s| s[:date] }.sort.reverse
+    sessionsCount: sessions.count,
+    totalTime: time.sum.to_s + ' min.',
+    longestSession: time.max.to_s + ' min.',
+    browsers: browsers.join(', '),
+    usedIE: browsers.any? { |b| b.start_with?('INTERNET EXPLORER') },
+    alwaysUsedChrome: browsers.all? { |b| b.start_with?('CHROME') },
+    dates: sessions.map { |s| s[:date] }.sort.reverse
   }
   result.write("\"#{user.attributes[:first_name]} #{user.attributes[:last_name]}\":#{report.to_json}")
 end
 
 def work(file, disable_gc: false)
   GC.disable if disable_gc
+
   File.open('result.json', 'w') do |result|
     result.write('{"usersStats":{')
 

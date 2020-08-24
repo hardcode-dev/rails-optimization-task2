@@ -1,0 +1,11 @@
+
+# frozen_string_literal: true
+
+require 'memory_profiler'
+require_relative '../task-2.rb'
+
+report = MemoryProfiler.report do
+  work('data_100000.txt', disable_gc: false)
+end
+
+report.pretty_print(scale_bytes: true)

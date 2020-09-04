@@ -1,0 +1,190 @@
+digraph "Profile" {
+labelloc=t;
+labeljust=l;
+subgraph "Thread 4902720" {
+5873940 [label="puts\n(0%)"];
+5873940 -> 5873940 [label="1/1" fontsize=10 fontcolor="#666666"];
+5873960 [label="puts\n(0%)"];
+5873960 -> 5873960 [label="1/1" fontsize=10 fontcolor="#666666"];
+5873980 [label="%\n(0%)"];
+5873980 -> 5873980 [label="1/1" fontsize=10 fontcolor="#666666"];
+5874000 [label="`\n(0%)"];
+5874000 -> 5874000 [label="1/1" fontsize=10 fontcolor="#666666"];
+5874020 [label="pid\n(0%)"];
+5874020 -> 5874020 [label="1/1" fontsize=10 fontcolor="#666666"];
+5874040 [label="close\n(0%)"];
+5874040 -> 5874040 [label="1/1" fontsize=10 fontcolor="#666666"];
+5874060 [label="dump_end\n(0%)"];
+5874060 -> 5874060 [label="1/1" fontsize=10 fontcolor="#666666"];
+5874080 [label="map!\n(5%)"];
+5874080 -> 5874080 [label="15431/15431" fontsize=10 fontcolor="#666666"];
+5874100 [label="reverse\n(1%)"];
+5874100 -> 5874100 [label="15431/15431" fontsize=10 fontcolor="#666666"];
+5874120 [label="to_s\n(1%)"];
+5874120 -> 5874120 [label="19413/19413" fontsize=10 fontcolor="#666666"];
+5874140 [label="to_s\n(1%)"];
+5874140 -> 5874140 [label="11449/11449" fontsize=10 fontcolor="#666666"];
+5874160 [label="join\n(2%)"];
+5874160 -> 5874160 [label="30862/30863" fontsize=10 fontcolor="#666666"];
+5874160 -> 5874160 [label="1/30863" fontsize=10 fontcolor="#666666"];
+5874180 [label="sort\n(4%)"];
+5874180 -> 5874180 [label="30862/30863" fontsize=10 fontcolor="#666666"];
+5874180 -> 5874180 [label="1/30863" fontsize=10 fontcolor="#666666"];
+5874200 [label="to_s\n(3%)"];
+5874200 -> 5874200 [label="46293/46297" fontsize=10 fontcolor="#666666"];
+5874200 -> 5874200 [label="3/46297" fontsize=10 fontcolor="#666666"];
+5874200 -> 5874200 [label="1/46297" fontsize=10 fontcolor="#666666"];
+5874220 [label="include?\n(0%)"];
+5874220 -> 5874220 [label="64115/64115" fontsize=10 fontcolor="#666666"];
+5874240 [label="to_i\n(0%)"];
+5874240 -> 5874240 [label="1/202919" fontsize=10 fontcolor="#666666"];
+5874240 -> 5874240 [label="202918/202919" fontsize=10 fontcolor="#666666"];
+5874320 [label="include?\n(0%)"];
+5874320 -> 5874320 [label="84569/84569" fontsize=10 fontcolor="#666666"];
+5874400 [label="upcase!\n(0%)"];
+5874400 -> 5874400 [label="84569/84569" fontsize=10 fontcolor="#666666"];
+5874420 [label="collect_session\n(4%)"];
+5874420 -> 5874420 [label="84569/84569" fontsize=10 fontcolor="#666666"];
+5874440 [label="write\n(7%)"];
+5874440 -> 5874440 [label="123452/123454" fontsize=10 fontcolor="#666666"];
+5874440 -> 5874440 [label="2/123454" fontsize=10 fontcolor="#666666"];
+5874480 [label="<<\n(7%)"];
+5874480 -> 5874480 [label="123448/123452" fontsize=10 fontcolor="#666666"];
+5874480 -> 5874480 [label="4/123452" fontsize=10 fontcolor="#666666"];
+5874500 [label="dump_user\n(33%)"];
+5874500 -> 5874500 [label="15431/15432" fontsize=10 fontcolor="#666666"];
+5874500 -> 5874500 [label="1/15432" fontsize=10 fontcolor="#666666"];
+5874560 [label="collect_user\n(37%)"];
+5874560 -> 5874560 [label="15431/15431" fontsize=10 fontcolor="#666666"];
+5874580 [label="split\n(41%)"];
+5874580 -> 5874580 [label="100000/100000" fontsize=10 fontcolor="#666666"];
+5874600 [label="parse_line\n(94%)"];
+5874600 -> 5874600 [label="100000/100000" fontsize=10 fontcolor="#666666"];
+5874700 [label="chomp!\n(0%)"];
+5874700 -> 5874700 [label="100000/100000" fontsize=10 fontcolor="#666666"];
+5874720 [label="each\n(100%)"];
+5874720 -> 5874720 [label="1/1" fontsize=10 fontcolor="#666666"];
+5874740 [label="initialize\n(0%)"];
+5874740 -> 5874740 [label="2/2" fontsize=10 fontcolor="#666666"];
+5874780 [label="open\n(0%)"];
+5874780 -> 5874780 [label="2/2" fontsize=10 fontcolor="#666666"];
+5874800 [label="delete\n(0%)"];
+5874800 -> 5874800 [label="1/1" fontsize=10 fontcolor="#666666"];
+5874820 [label="exist?\n(0%)"];
+5874820 -> 5874820 [label="1/1" fontsize=10 fontcolor="#666666"];
+5874840 [label="work\n(100%)"];
+5874840 -> 5874840 [label="1/1" fontsize=10 fontcolor="#666666"];
+5874860 [label="initialize\n(0%)"];
+5874860 -> 5874860 [label="1/1" fontsize=10 fontcolor="#666666"];
+5874880 [label="new\n(0%)"];
+5874880 -> 5874880 [label="1/1" fontsize=10 fontcolor="#666666"];
+5874900 [label="[global]\n(100%)"];
+}
+subgraph cluster_5655160 {
+label = "[global]";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+5874900;
+}
+subgraph cluster_5655020 {
+label = "Class";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+5874880;
+}
+subgraph cluster_5654880 {
+label = "ReportGenerator";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+5874860;
+5874840;
+5874600;
+5874560;
+5874500;
+5874420;
+5874060;
+}
+subgraph cluster_5654760 {
+label = "File";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+5874820;
+5874800;
+5874740;
+}
+subgraph cluster_5654680 {
+label = "IO";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+5874780;
+5874720;
+5874480;
+5874440;
+5874040;
+5873940;
+}
+subgraph cluster_5654480 {
+label = "String";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+5874700;
+5874580;
+5874400;
+5874240;
+5874220;
+5873980;
+}
+subgraph cluster_5654020 {
+label = "Array";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+5874320;
+5874180;
+5874160;
+5874100;
+5874080;
+}
+subgraph cluster_5653780 {
+label = "Integer";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+5874200;
+}
+subgraph cluster_5653580 {
+label = "TrueClass";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+5874140;
+}
+subgraph cluster_5653380 {
+label = "FalseClass";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+5874120;
+}
+subgraph cluster_5653120 {
+label = "Process";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+5874020;
+}
+subgraph cluster_5652920 {
+label = "Kernel";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+5874000;
+5873960;
+}
+}

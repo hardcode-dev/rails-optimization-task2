@@ -1,0 +1,60 @@
+Measure Mode: allocations
+Thread ID: 4902720
+Fiber ID: 6954080
+Total: 1654762.000000
+Sort by: self_time
+
+ %self      total      self      wait     child     calls  name                           location
+ 41.37  684569.000 684569.000     0.000     0.000   100000   String#split                   
+ 12.09  1554655.000 200000.000     0.000 1354655.000   100000   ReportGenerator#parse_line     /home/vs/web/hardcodedev/rails-optimization-task2/task-2-improved.rb:19
+  9.33  544282.000 154310.000     0.000 389972.000    15432   ReportGenerator#dump_user      /home/vs/web/hardcodedev/rails-optimization-task2/task-2-improved.rb:60
+  7.46  123455.000 123455.000     0.000     0.000   123454   IO#write                       
+  6.04  1654655.000 100000.000     0.000 1554655.000        1   IO#each                        
+  5.11  84569.000 84569.000     0.000     0.000    15431   Array#map!                     
+  3.87  64115.000 64115.000     0.000     0.000    84569   ReportGenerator#collect_session /home/vs/web/hardcodedev/rails-optimization-task2/task-2-improved.rb:46
+  3.73  605971.000 61724.000     0.000 544247.000    15431   ReportGenerator#collect_user   /home/vs/web/hardcodedev/rails-optimization-task2/task-2-improved.rb:29
+  3.54  58508.000 58508.000     0.000     0.000    30863   Array#sort                     
+  2.80  46297.000 46297.000     0.000     0.000    46297   Integer#to_s                   
+  1.87  30863.000 30863.000     0.000     0.000    30863   Array#join                     
+  1.17  19413.000 19413.000     0.000     0.000    19413   FalseClass#to_s                
+  0.93  15431.000 15431.000     0.000     0.000    15431   Array#reverse                  
+  0.69  11449.000 11449.000     0.000     0.000    11449   TrueClass#to_s                 
+  0.00     32.000    32.000     0.000     0.000        1   Kernel#`                       
+  0.00  1654754.000     6.000     0.000 1654748.000        1   ReportGenerator#work           /home/vs/web/hardcodedev/rails-optimization-task2/task-2-improved.rb:83
+  0.00     15.000     5.000     0.000    10.000        1   ReportGenerator#dump_end       /home/vs/web/hardcodedev/rails-optimization-task2/task-2-improved.rb:76
+  0.00      3.000     3.000     0.000     0.000        1   ReportGenerator#initialize     /home/vs/web/hardcodedev/rails-optimization-task2/task-2-improved.rb:6
+  0.00  1654762.000     3.000     0.000 1654759.000        1   [global]#                      ./rubyprof.rb:7
+  0.00      2.000     2.000     0.000     0.000        1   String#%                       
+  0.00      2.000     2.000     0.000     0.000        2   File#initialize                
+  0.00      4.000     2.000     0.000     2.000        2   <Class::IO>#open               
+  0.00      5.000     2.000     0.000     3.000        1   Class#new                      
+  0.00      1.000     1.000     0.000     0.000        1   <Class::File>#delete           
+  0.00      1.000     1.000     0.000     0.000        1   <Class::File>#exist?           
+  0.00      2.000     0.000     0.000     2.000        1   IO#puts                        
+  0.00      2.000     0.000     0.000     2.000        1   Kernel#puts                    
+  0.00      0.000     0.000     0.000     0.000        1   <Module::Process>#pid          
+  0.00      0.000     0.000     0.000     0.000        1   IO#close                       
+  0.00      0.000     0.000     0.000     0.000    64115   String#include?                
+  0.00      0.000     0.000     0.000     0.000   202919   String#to_i                    
+  0.00      0.000     0.000     0.000     0.000    84569   Array#include?                 
+  0.00      0.000     0.000     0.000     0.000    84569   String#upcase!                 
+  0.00  123453.000     0.000     0.000 123453.000   123452   IO#<<                          
+  0.00      0.000     0.000     0.000     0.000   100000   String#chomp!                  
+
+* recursively called methods
+
+Columns are:
+
+  %self     - The percentage of time spent in this method, derived from self_time/total_time.
+  total     - The time spent in this method and its children.
+  self      - The time spent in this method.
+  wait      - The amount of time this method waited for other threads.
+  child     - The time spent in this method's children.
+  calls     - The number of times this method was called.
+  name      - The name of the method.
+  location  - The location of the method.
+
+The interpretation of method names is:
+
+  * MyObject#test - An instance method "test" of the class "MyObject"
+  * <Object:MyObject>#test - The <> characters indicate a method on a singleton class.

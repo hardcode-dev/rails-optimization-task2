@@ -72,7 +72,12 @@ $ ruby -e 'puts (341 * 3250940.0 / 100000).round'
 Пункты 3-4 реализованы в скрипте bin/feedback.
 
 ## Вникаем в детали системы, чтобы найти главные точки роста
-Для того, чтобы найти "точки роста" для оптимизации я воспользовался *инструментами, которыми вы воспользовались*
+Для того, чтобы найти "точки роста" для оптимизации я воспользовался следующими инструментами:
+
+- ruby-prof (`bin/ruby-prof`);
+- stackprof (`bin/stack-prof`);
+- memory profiler (`bin/memory-profiler`);
+- valgrind + massif + massif visualizer.
 
 Вот какие проблемы удалось найти и решить
 
@@ -123,9 +128,100 @@ $ ruby -e 'puts (341 * 3250940.0 / 100000).round'
 
 ## Результаты
 В результате проделанной оптимизации наконец удалось обработать файл с данными.
-Удалось улучшить метрику системы с *того, что у вас было в начале, до того, что получилось в конце* и уложиться в заданный бюджет.
 
-*Какими ещё результами можете поделиться*
+Удалось улучшить метрику системы для размера выборки 20000 с 135 MB до 25 MB, а для `large` файла - до 25 MB. При
+этом обработка `large`-файла теперь занимает всего 7.6678 секунд (т.е. за счёт оптимизации памяти удалось добиться
+почти трехкратного прироста производительностив по сравнению с 19.5225 секундами, полученнымими в результате
+выполнения первого ДЗ).
+
+При этом мы перешли от линейной зависимости занимаемой Ruby-процессом памяти от размера выборки к константному.
+Меня немного смущает, что после находки №1 объем используемой памяти, измеряемый скриптом `bin/bench`, больше не
+менялся, хотя memory profiler постоянно сообщал о снижении потреблении памяти. Я могу предположить, что это
+связано с фрагментацией памяти.
+
+В процессе оптимизации (находка №4) для улучшения производительности мне пришлось написать неидиоматический,
+очень плохо читаемый код. Для сравнения, было:
+
+``` rb
+    cols = line.split(',')
+
+    case cols[0]
+    when 'user'
+      if last_user_stats
+        last_user_stats.dump(out)
+      else
+        last_user_stats = UserStats.new
+      end
+
+      last_user_stats.full_name = cols[2] + ' ' + cols[3]
+
+      summary.on_user
+    when 'session'
+      browser = cols[3]
+      time = cols[4].to_i
+      date = cols[5]
+
+      browser.upcase!
+
+      last_user_stats.on_session(browser, time, date)
+      summary.on_session(browser)
+    end
+```
+
+Стало:
+
+``` rb
+    column_index = 0
+
+    type = nil
+    first_name = nil
+    browser = nil
+    time = nil
+    date = nil
+
+    line.split(',') do |column|
+      case type
+      when 'user'
+        case column_index
+        when 1
+          summary.on_user
+
+          if last_user_stats
+            last_user_stats.dump(out)
+          else
+            last_user_stats = UserStats.new
+          end
+        when 2 then first_name = column
+        when 3 then last_user_stats.full_name = first_name + ' ' + column
+        end
+
+      when 'session'
+        case column_index
+        when 3 then browser = column
+        when 4 then time = column.to_i
+        when 5 then
+          browser.upcase!
+
+          last_user_stats.on_session(browser, time, column)
+          summary.on_session(browser)
+        end
+      else
+        type = column
+      end
+
+      column_index += 1
+    end
+```
+
+В реальной жизни я бы такой код ради 4 MB скорее всего писать не стал.
+
+Далее я проанализировал выполнение скрипта для `large`-данных с помощью Valgrind & Massif & Massif Visualizer,
+которые показали пиковое потребление памяти в 47 MB:
+
+![Пиковое потребление](pics/massif.png)
+
+(почему-то valgrind не создавал файл massif, если вызывать скрипт как `bin/bench large`, но работал, если явно
+вызывать его как `ruby bin/bench large`).
 
 ## Защита от регрессии производительности
 Для защиты от потери достигнутого прогресса при дальнейших изменениях программы *о performance-тестах, которые вы написали*

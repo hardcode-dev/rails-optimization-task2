@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative '../boot'
+
+require 'optparse'
+require 'ruby-prof'
+require 'tempfile'
+
+RubyProf.measure_mode = RubyProf::MEMORY
+
+REPORTS_ROOT = ROOT / 'tmp'
+PRINTERS = %i(flat graph callstack callgrind).freeze
+
+opts = {
+  printer: :flat
+}
+
+options_parser = OptionParser.new do |parser|
+  parser.banner = "Usage: bin/ruby-prof [options] SAMPLE_SIZE"
+
+  parser.on('--printer [PRINTER]', PRINTERS,
+            "Printer used to present collected data (#{PRINTERS.join(', ')}) ",
+            "[default: #{opts[:printer]}]")
+  parser.on('-h', '--help', 'Display this message')
+end
+
+options_parser.parse!(into: opts)
+
+abort(options_parser.help) if ARGV.size != 1
+
+GC.disable
+
+sample_size = ARGV.first
+sample = ROOT / 'samples' / "data_#{sample_size}.txt"
+
+report = Tempfile.create do |result|
+  RubyProf.profile do
+    work(src: sample, dest: result.path)
+  end
+end
+
+case opts[:printer]
+when :flat
+  RubyProf::FlatPrinter.new(report).print(File.open(REPORTS_ROOT / 'flat.txt', 'w'))
+when :graph
+  RubyProf::GraphHtmlPrinter.new(report).print(File.open(REPORTS_ROOT / 'graph.html', 'w'))
+when :callstack
+  RubyProf::CallStackPrinter.new(report).print(File.open(REPORTS_ROOT / 'callstack.html', 'w'))
+when :callgrind
+  RubyProf::CallTreePrinter.new(report).print(path: REPORTS_ROOT, profile: 'callgrind')
+end

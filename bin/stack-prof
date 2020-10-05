@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative '../boot'
+
+require 'optparse'
+require 'stackprof'
+require 'tempfile'
+
+REPORTS_ROOT = Pathname(__dir__).dirname / 'tmp'
+PRINTERS = %i(flame dump).freeze
+
+opts = {
+  printer: :flame
+}
+
+options_parser = OptionParser.new do |parser|
+  parser.banner = "Usage: bin/stack-prof [options] SAMPLE_SIZE"
+
+  parser.on('--printer [PRINTER]', PRINTERS,
+            "Printer used to present collected data (#{PRINTERS.join(', ')}) ",
+            "[default: #{opts[:printer]}]")
+  parser.on('-h', '--help', 'Display this message')
+end
+
+options_parser.parse!(into: opts)
+
+abort(options_parser.help) if ARGV.size != 1
+
+sample_size = ARGV.first
+sample = ROOT / 'samples' / "data_#{sample_size}.txt"
+
+case opts[:printer]
+when :flame
+  report = StackProf.run(mode: :object, raw: true) do
+    Tempfile.create do |result|
+      work(src: sample, dest: result.path)
+    end
+  end
+
+  File.write(REPORTS_ROOT / 'stack-prof.json', report.to_json)
+when :dump
+  StackProf.run(mode: :object, out: REPORTS_ROOT / 'stack-prof.dump', raw: true) do
+    Tempfile.create do |result|
+      work(src: sample, dest: result.path)
+    end
+  end
+end

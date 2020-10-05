@@ -56,10 +56,12 @@ class UserStats
     @browsers << browser
     @used_ie ||= browser.start_with?('INTERNET EXPLORER')
     @always_used_chrome &&= browser.start_with?('CHROME')
-    @dates << Date.parse(date)
+    @dates << date
   end
 
   def dump(io)
+    @dates.sort! { |a, b| b <=> a }
+
     io << ',' unless @first
 
     io << '"' << @full_name << '":{"sessionsCount":' << @sessions << ','
@@ -68,7 +70,7 @@ class UserStats
     io << '"browsers":"' << @browsers.sort.join(', ') << '",'
     io << '"usedIE":' << @used_ie << ','
     io << '"alwaysUsedChrome":' << @always_used_chrome << ','
-    io << '"dates":' << @dates.sort.reverse.map(&:iso8601).to_json << '}'
+    io << '"dates":' << @dates.to_json << '}'
 
     reset(false)
   end
@@ -86,6 +88,8 @@ def work(src:, dest:)
   last_user_stats = nil
 
   File.open(src).each_line do |line|
+    line.rstrip!
+
     cols = line.split(',')
 
     case cols[0]

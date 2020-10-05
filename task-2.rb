@@ -90,28 +90,45 @@ def work(src:, dest:)
   File.open(src).each_line do |line|
     line.rstrip!
 
-    cols = line.split(',')
+    column_index = 0
 
-    case cols[0]
-    when 'user'
-      if last_user_stats
-        last_user_stats.dump(out)
+    type = nil
+    first_name = nil
+    browser = nil
+    time = nil
+    date = nil
+
+    line.split(',') do |column|
+      case type
+      when 'user'
+        case column_index
+        when 1
+          summary.on_user
+
+          if last_user_stats
+            last_user_stats.dump(out)
+          else
+            last_user_stats = UserStats.new
+          end
+        when 2 then first_name = column
+        when 3 then last_user_stats.full_name = first_name + ' ' + column
+        end
+
+      when 'session'
+        case column_index
+        when 3 then browser = column
+        when 4 then time = column.to_i
+        when 5 then
+          browser.upcase!
+
+          last_user_stats.on_session(browser, time, column)
+          summary.on_session(browser)
+        end
       else
-        last_user_stats = UserStats.new
+        type = column
       end
 
-      last_user_stats.full_name = cols[2] + ' ' + cols[3]
-
-      summary.on_user
-    when 'session'
-      browser = cols[3]
-      time = cols[4].to_i
-      date = cols[5]
-
-      browser.upcase!
-
-      last_user_stats.on_session(browser, time, date)
-      summary.on_session(browser)
+      column_index += 1
     end
   end
 

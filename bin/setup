@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+if [ -f samples/data_large.txt ]; then
+    echo "data_large.txt already exists, skipping..."
+else
+    echo "unpacking data_large.txt.gz..."
+    gunzip -c data_large.txt.gz > samples/data_large.txt
+fi
+
+for sample_size in 2500 5000 10000 20000 25000 50000 100000; do
+    sample_file="samples/data_${sample_size}.txt"
+
+    if [ -f "$sample_file" ]; then
+        echo "data_$sample_size already exists, skipping..."
+    else
+        echo "creating sample file data_$sample_size.txt..."
+        head -n "$sample_size" samples/data_large.txt > "$sample_file"
+    fi
+done

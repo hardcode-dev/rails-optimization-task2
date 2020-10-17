@@ -3,11 +3,13 @@
 require_relative '../task-2'
 
 describe 'Task2' do
-  subject { work('data.txt') }
+  let(:data_file_path) { 'tmp/data.txt' }
+  subject { work(data_file_path) }
+
   let(:result_file_path) { './result.json' }
   let!(:result) { File.write(result_file_path, '') }
   let!(:data_file) do
-    File.write('./tmp/data.txt',
+    File.write(data_file_path,
                'user,0,Leida,Cira,0
 session,0,0,Safari 29,87,2016-10-23
 session,0,1,Firefox 12,118,2017-02-27

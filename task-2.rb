@@ -45,14 +45,15 @@ def collect_stats_from_users(report, users_objects)
 end
 
 def work(file_path = './spec/fixtures/data_5000.txt')
-  file_lines = File.read(file_path).split("\n")
+  # file_lines = File.read(file_path).split("\n")
 
   users = []
   sessions = []
 
-  file_lines.each do |line|
+  File.readlines(file_path).each do |line|
+    line.chomp!
     cols = line.split(',')
-    users += [parse_user(line)] if cols[0] == 'user'
+    users << parse_user(line) if cols[0] == 'user'
     sessions << parse_session(line) if cols[0] == 'session'
   end
 
@@ -137,7 +138,7 @@ def work(file_path = './spec/fixtures/data_5000.txt')
 
   # Даты сессий через запятую в обратном порядке в формате iso8601
   collect_stats_from_users(report, users_objects) do |user|
-    { 'dates' => user.sessions.map { |s| s['date'] }.map { |d| Date.parse(d) }.sort.reverse.map(&:iso8601) }
+    { 'dates' => user.sessions.map { |s| s['date'] }.map.sort.reverse }
   end
 
   File.write('result.json', "#{report.to_json}\n")

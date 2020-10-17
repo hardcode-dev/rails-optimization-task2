@@ -3,7 +3,7 @@
 require_relative '../task-2'
 
 describe 'Task2' do
-  subject { work }
+  subject { work('data.txt') }
   let(:result_file_path) { './result.json' }
   let!(:result) { File.write(result_file_path, '') }
   let!(:data_file) do

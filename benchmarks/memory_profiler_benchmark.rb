@@ -1,10 +1,30 @@
 # frozen_string_literal: true
 
 require 'memory_profiler'
+require 'ruby-prof'
 require_relative '../task-2'
 
-report = MemoryProfiler.report do
+RubyProf.measure_mode = RubyProf::ALLOCATIONS
+
+rb_result = RubyProf.profile do
   work('./spec/fixtures/data_10000.txt')
 end
 
-report.pretty_print
+rb_printer = RubyProf::FlatPrinter.new(rb_result)
+rb_printer.print(File.open("reports/ruby_prof/alloc_flat_#{Time.now.to_i}.txt", 'w+'))
+
+RubyProf.measure_mode = RubyProf::MEMORY
+
+rb_result = RubyProf.profile do
+  work('./spec/fixtures/data_10000.txt')
+end
+
+rb_printer = RubyProf::CallTreePrinter.new(rb_result)
+rb_printer.print(path: 'reports/ruby_prof/', profile: 'profile')
+
+mp_report = MemoryProfiler.report do
+  work('./spec/fixtures/data_10000.txt')
+  # work('./data_large.txt')
+end
+
+mp_report.pretty_print

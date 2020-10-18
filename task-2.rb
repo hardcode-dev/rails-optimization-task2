@@ -3,6 +3,7 @@
 require 'oj'
 require 'csv'
 require 'set'
+require 'byebug'
 
 class User
   attr_reader :attributes, :sessions, :browsers
@@ -82,7 +83,7 @@ end
 def write_user(prev_user, result, user, users)
   if prev_user
     result.write(prev_user.to_string)
-    users.delete([prev_user.attributes[:id]])
+    users.delete(prev_user.attributes[:id])
     result.write ','
   else
     result.write('{"usersStats": {')
@@ -118,12 +119,11 @@ def work(file_path = 'data_large.txt')
     user.session_durations << fields[4].to_i
     user.session_dates << fields[5]
     sessions_count += 1
-    # GC.compact
   end
 
   result.write(prev_user.to_string)
   result.write('},')
-  result.write("\"totalUsers\": #{users.count},")
+  result.write("\"totalUsers\": #{users_count},")
   result.write("\"uniqueBrowsersCount\": #{browsers.count},")
   result.write("\"totalSessions\": #{sessions_count},")
   result.write("\"allBrowsers\": \"#{browsers.to_a.join(',')}\"")

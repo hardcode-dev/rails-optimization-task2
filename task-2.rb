@@ -61,7 +61,7 @@ class User
 end
 
 def parse_user(fields)
-  parsed_result = {
+  {
     'id' => fields[1],
     'first_name' => fields[2],
     'last_name' => fields[3],
@@ -70,7 +70,7 @@ def parse_user(fields)
 end
 
 def parse_session(fields)
-  parsed_result = {
+  {
     'user_id' => fields[1],
     'session_id' => fields[2],
     'browser' => fields[3],
@@ -94,7 +94,7 @@ end
 
 def work(file_path = 'data_large.txt')
   # file_lines = File.read(file_path).split("\n")
-  result_file = 'result.json'
+  # result_file = 'result.json'
   sessions_count = 0
   users_count = 0
   browsers = SortedSet.new

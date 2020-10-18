@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../task-2'
+require 'json'
 
 describe 'Task2' do
   let(:data_file_path) { 'tmp/data.txt' }

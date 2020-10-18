@@ -2,11 +2,9 @@
 
 # Deoptimized version of homework task
 
-require 'json'
-require 'date'
+require 'oj'
 require 'csv'
 require 'set'
-require 'byebug'
 
 class User
   attr_reader :attributes, :sessions, :browsers
@@ -58,6 +56,10 @@ class User
       'alwaysUsedChrome' => chrome_fan?,
       'dates' => session_dates.sort.reverse }
   end
+
+  def to_string
+    "\"#{key}\": " + Oj.dump(user_stats, mode: :compat)
+  end
 end
 
 def parse_user(fields)
@@ -79,59 +81,65 @@ def parse_session(fields)
   }
 end
 
-def collect_stats_from_users(report, users_objects)
-  users_objects.each do |user|
-    user_key = user.key
-    report['usersStats'][user_key] ||= {}
-    report['usersStats'][user_key] = report['usersStats'][user_key].merge(yield(user))
-  end
-end
-
-def report_user(prev_user, users_stats)
-  users_stats[prev_user.key] ||= {}
-  users_stats[prev_user.key] = users_stats[prev_user.key].merge(prev_user.user_stats)
-end
-
 def work(file_path = 'data_large.txt')
-  # file_lines = File.read(file_path).split("\n")
-  # result_file = 'result.json'
+  result_file = 'result.json'
   sessions_count = 0
   users_count = 0
   browsers = SortedSet.new
   browsers_count = 0
-  report = {}
   users = {}
-  users_stats = {}
   prev_user = nil
-  # File.open(result_file, 'a') do |result|
-  CSV.foreach(file_path).each do |fields|
-    if fields[0] == 'user'
-      user = User.new(attributes: parse_user(fields), sessions: [])
-      users[fields[1]] = user
-      users_count += 1
-      unless prev_user.eql?(user)
-        # form report for previously imported user
-        if prev_user
-          report_user(prev_user, users_stats)
-          users.delete([prev_user.attributes['id']])
+
+  File.open(result_file, 'a') do |result|
+    CSV.foreach(file_path).each do |fields|
+      if fields[0] == 'user'
+        user = User.new(attributes: parse_user(fields), sessions: [])
+        users[fields[1]] = user
+        users_count += 1
+        unless prev_user.eql?(user)
+          # form report for previously imported user
+          if prev_user
+            # report_user(prev_user, users_stats)
+            # result.write(Oj.dump(prev_user.key))
+            # result.write(Oj.dump(": "))
+            result.write(prev_user.to_string)
+            users.delete([prev_user.attributes['id']])
+            result.write ','
+            prev_user = user
+
+          else
+            result.write('{"usersStats": {')
+            prev_user = user
+          end
         end
-        prev_user = user
       end
+
+      next unless fields[0] == 'session'
+
+      user = users[fields[1]]
+      user.sessions << parse_session(fields)
+      user.browsers << fields[3].upcase
+      browsers << fields[3].upcase
+      browsers_count += 1
+      user.session_durations << fields[4].to_i
+      user.session_dates << fields[5]
+      sessions_count += 1
     end
 
-    next unless fields[0] == 'session'
+    result.write(prev_user.to_string)
 
-    user = users[fields[1]]
-    user.sessions << parse_session(fields)
-    user.browsers << fields[3].upcase
-    browsers << fields[3].upcase
-    browsers_count += 1
-    user.session_durations << fields[4].to_i
-    user.session_dates << fields[5]
-    sessions_count += 1
+    result.write('},')
+
+    result.write("\"totalUsers\": #{users.count},")
+
+    result.write("\"uniqueBrowsersCount\": #{browsers.count},")
+
+    result.write("\"totalSessions\": #{sessions_count},")
+
+    result.write("\"allBrowsers\": \"#{browsers.to_a.join(',')}\"")
+
+    result.write('}')
   end
-  report_user(prev_user, users_stats)
-  # end
   # sessions << parse_session(cols) if cols[0] == 'session'
 
   # Отчёт в json
@@ -149,7 +157,7 @@ def work(file_path = 'data_large.txt')
   #     - Всегда использовал только Хром? +
   #     - даты сессий в порядке убывания через запятую +
 
-  report[:totalUsers] = users.count
+  # report[:totalUsers] = users.count
 
   # Подсчёт количества уникальных браузеров
   # # uniqueBrowsers = []
@@ -158,11 +166,11 @@ def work(file_path = 'data_large.txt')
   #   uniqueBrowsers += [browser] if uniqueBrowsers.all? { |b| b != browser }
   # end
 
-  report['uniqueBrowsersCount'] = browsers.count
+  # report['uniqueBrowsersCount'] = browsers.count
 
-  report['totalSessions'] = sessions_count
+  # report['totalSessions'] = sessions_count
 
-  report['allBrowsers'] = browsers.to_a.join(',')
+  # report['allBrowsers'] = browsers.to_a.join(',')
 
   # Статистика по пользователям
   # users_objects = []
@@ -208,10 +216,10 @@ def work(file_path = 'data_large.txt')
   # collect_stats_from_users(report, users_objects) do |user|
   #   { 'dates' => user.sessions.map { |s| s['date'] }.map.sort.reverse }
   # end
-  report['usersStats'] = users_stats
+  # report['usersStats'] = users_stats
 
-  File.write('result.json', "#{report.to_json}\n")
+  # File.write('result.json', "#{report.to_json}\n")
   puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))
 end
 
-# work
+work

@@ -100,21 +100,20 @@ def work(file_path = 'data_large.txt')
   users = {}
   prev_user = nil
 
-  result = File.new(result_file, "w")
+  result = File.new(result_file, 'w')
   CSV.foreach(file_path).each do |fields|
     if fields[0] == 'user'
-      user = User.new(attributes: parse_user(fields), sessions: [])
-      users[fields[1]] = user
+      users[fields[1]] = User.new(attributes: parse_user(fields), sessions: [])
       users_count += 1
-      prev_user = write_user(prev_user, result, user, users) unless prev_user.eql?(user)
+      prev_user = write_user(prev_user, result, users[fields[1]], users) unless prev_user.eql?(users[fields[1]])
     end
 
     next unless fields[0] == 'session'
 
     user = users[fields[1]]
     user.sessions << parse_session(fields)
-    user.browsers << fields[3].upcase
-    browsers << fields[3].upcase
+    user.browsers << fields[3].upcase!
+    browsers << fields[3]
     browsers_count += 1
     user.session_durations << fields[4].to_i
     user.session_dates << fields[5]
@@ -129,7 +128,7 @@ def work(file_path = 'data_large.txt')
   result.write("\"allBrowsers\": \"#{browsers.to_a.join(',')}\"")
   result.write('}')
   result.close
-  puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))
+  # puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))
 end
 
 work if ARGV.length.positive?

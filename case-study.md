@@ -25,7 +25,7 @@
 ## Feedback-Loop
 Для того, чтобы иметь возможность быстро проверять гипотезы я выстроил эффективный `feedback-loop`, который позволил мне получать обратную связь по эффективности сделанных изменений за ~30 секунд, включающих запуск теста, прогон программы и изучения отчета в консоли.
 
-За основу фидбек-лупа был взял опыт предыдущего задания. В основу лег отчет `MemoryProfiler`, выводимый в консоль.
+При подготовке фидбек-лупа был учтен опыт предыдущего задания. В основу лег отчет `MemoryProfiler`, выводимый в консоль.
 Код первой версии профилировщика:
 ```ruby
 require 'memory_profiler'
@@ -51,123 +51,123 @@ report.pretty_print
 
 ```bash
 (base) theendcomplete@N10L:~/Documents/projects/my/rails-optimization-task2$ ruby benchmarks/memory_profiler_benchmark.rb 
-MEMORY USAGE: 21 MB
-Total allocated: 80240 bytes (948 objects)
-Total retained:  7263 bytes (45 objects)
+MEMORY USAGE: 135 MB
+Total allocated: 118338189 bytes (223632 objects)
+Total retained:  576151 bytes (8882 objects)
 
 allocated memory by gem
 -----------------------------------
-     80240  other
+ 118338189  other
 
 allocated memory by file
 -----------------------------------
-     80240  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb
+ 118338149  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb
+        40  benchmarks/memory_profiler_benchmark.rb
 
 allocated memory by location
 -----------------------------------
-     19396  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-     11282  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:142
-      8520  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
-      7200  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-      4200  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
-      4088  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:41
-      2832  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:54
-      2567  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:46
-      2520  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:28
-      1912  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:80
-      1891  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
-      1320  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
-      1096  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:129
-       960  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:53
-       840  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
-       840  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
-       760  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:90
-       624  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:101
-       608  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:134
-       504  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:108
-       504  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:113
-       504  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:118
-       504  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:123
-       504  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:128
-       504  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:133
-       504  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:138
-       504  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:18
+  71991240  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:54
+  26198352  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:100
+   3854988  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+   2661272  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:53
+   2461272  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:102
+   2369040  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+   2028480  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+    910224  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:41
+    709968  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:28
+    650160  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
+    637352  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:46
+    497910  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
+    468638  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:142
+    340560  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+    238984  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:129
+    215168  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+    215168  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+    202888  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:90
+    176752  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:80
+    160992  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:101
+    144960  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:134
+    130032  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:108
+    130032  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:113
+    130032  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:118
+    130032  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:123
+    130032  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:128
+    130032  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:133
+    130032  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:138
+    130032  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:18
+     61920  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:40
+     33888  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:91
+     33848  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:89
+     28768  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:105
+      2645  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:93
+      1640  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:92
        488  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:143
-       480  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:100
-       256  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:93
-       240  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:102
-       240  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:40
-       200  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:91
-       168  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:105
        168  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:72
-       160  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:89
-       152  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:92
-        40  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:45
         40  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:48
         40  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:49
         40  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:77
         40  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:96
+        40  benchmarks/memory_profiler_benchmark.rb:5
 
 allocated memory by class
 -----------------------------------
-     30675  String
-     16816  Array
-     13896  Hash
+ 106163384  Array
+   7185896  String
+   3560680  Hash
+   1079888  MatchData
+    304272  Date
+     30960  User
       8656  File
       4117  Regexp
-      3984  MatchData
-      1080  Date
-       560  Proc
        224  JSON::Ext::Generator::State
-       120  User
         72  Thread::Mutex
         40  Process::Status
 
 allocated objects by gem
 -----------------------------------
-       948  other
+    223632  other
 
 allocated objects by file
 -----------------------------------
-       948  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb
+    223631  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb
+         1  benchmarks/memory_profiler_benchmark.rb
 
 allocated objects by location
 -----------------------------------
-       214  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-       141  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
-       120  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-       105  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
-        48  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:54
-        33  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
-        28  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:41
-        28  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:80
-        24  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:53
-        23  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:46
-        21  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
-        18  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:129
-        16  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:90
-        15  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
-        15  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
-        15  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:28
-         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:134
+     55289  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+     39226  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+     33808  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+     16254  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
+     13452  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:54
+      8787  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
+      6548  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:53
+      5418  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+      5418  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:41
+      5004  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:46
+      4227  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:90
+      4226  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:28
+      3940  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:129
+      3870  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+      3870  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+      2255  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:134
+      1548  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:101
+      1548  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:102
+      1548  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:40
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:100
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:108
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:113
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:118
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:123
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:128
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:133
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:138
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:18
+       400  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:80
          9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:143
          8  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:142
-         6  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:101
-         6  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:102
-         6  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:40
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:100
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:108
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:113
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:118
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:123
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:128
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:133
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:138
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:18
          2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:91
          2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:93
          1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:105
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:45
          1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:48
          1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:49
          1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:72
@@ -175,17 +175,17 @@ allocated objects by location
          1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:89
          1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:92
          1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:96
+         1  benchmarks/memory_profiler_benchmark.rb:5
 
 allocated objects by class
 -----------------------------------
-       645  String
-       167  Array
-        85  Hash
-        18  MatchData
-        15  Date
-         7  Proc
+    157242  String
+     34950  Array
+     21614  Hash
+      4818  MatchData
+      4226  Date
+       774  User
          3  Regexp
-         3  User
          2  File
          1  JSON::Ext::Generator::State
          1  Process::Status
@@ -193,49 +193,49 @@ allocated objects by class
 
 retained memory by gem
 -----------------------------------
-      7263  other
+    576151  other
 
 retained memory by file
 -----------------------------------
-      7263  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb
+    576151  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb
 
 retained memory by location
 -----------------------------------
-      5476  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-       504  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:41
-       331  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
-       216  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:93
-       168  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:105
+    234820  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+    130032  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:41
+     86838  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
+     30960  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+     30960  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+     30960  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:40
+     28768  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:105
+      2605  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:93
        168  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:72
-       120  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
-       120  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
-       120  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:40
         40  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:143
 
 retained memory by class
 -----------------------------------
+    351882  String
+    158968  Hash
+     61144  Array
       4117  Regexp
-      2026  String
-       840  Hash
-       240  Array
         40  Process::Status
 
 retained objects by gem
 -----------------------------------
-        45  other
+      8882  other
 
 retained objects by file
 -----------------------------------
-        45  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb
+      8882  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb
 
 retained objects by location
 -----------------------------------
-        26  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:40
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:41
+      5008  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:40
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:41
          1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:105
          1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:143
          1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:72
@@ -243,350 +243,477 @@ retained objects by location
 
 retained objects by class
 -----------------------------------
-        33  String
-         5  Hash
-         3  Array
+      7328  String
+       776  Hash
+       774  Array
          3  Regexp
          1  Process::Status
 
 
 Allocated String Report
 -----------------------------------
-        81  " "
-        60  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-        21  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
+     22322  " "
+     16904  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+      5418  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
 
-        48  "session"
-        18  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:54
-        15  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-        15  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+     13452  "session"
+      5000  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:54
+      4226  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+      4226  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
 
-        37  ","
-        18  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
-        15  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+     10001  ","
+      5000  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+      4226  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
          1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:93
 
-        24  "user"
-        18  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:53
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+      6548  "user"
+      5000  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:53
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
 
-        22  "0"
-        11  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
-         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+      1652  "0"
+       825  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       818  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
 
-        18  "1"
-         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
-         8  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+      1579  "2017"
+      1579  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
 
-        16  "2"
-         8  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
-         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+      1548  " min."
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
 
-         9  "Cira"
-         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+      1524  "2018"
+      1524  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
 
-         9  "Gregory"
-         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+      1468  "1"
+       734  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       730  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         4  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
 
-         9  "Katrina"
-         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+      1352  "2"
+       675  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       665  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+        10  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
 
-         9  "Leida"
-         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+      1206  "3"
+       603  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       590  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+        13  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
 
-         9  "Palmer"
-         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       988  "4"
+       494  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       488  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         6  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
 
-         9  "Santos"
-         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       943  "2016"
+       943  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
 
-         8  "2016"
-         8  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+       858  "5"
+       429  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       417  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+        12  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
 
-         8  "3"
-         4  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         4  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       774  ", "
+       774  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
 
-         8  "Gregory Santos"
-         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:40
+       718  "6"
+       358  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       351  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
 
-         8  "Leida Cira"
-         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:40
+       618  "10"
+       508  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        55  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        44  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+        11  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
 
-         8  "Palmer Katrina"
-         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:40
-
-         7  "Gregory "
-         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
-
-         7  "Leida "
-         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
-
-         7  "Palmer "
-         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:39
-
-         6  " min."
-         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+       609  "12"
+       506  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        48  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        41  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         4  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
          3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
 
-         6  "INTERNET EXPLORER 28"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:129
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:90
+       603  "11"
+       519  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        41  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        35  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         6  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
 
-         5  "2017"
-         5  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+       588  "7"
+       294  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       285  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
 
-         5  "CHROME 35"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:134
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:129
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:90
+       577  "08"
+       577  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
 
-         4  "09"
-         4  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+       543  "07"
+       543  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
 
-         4  "12"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       521  "01"
+       521  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
 
-         4  "2016-09-01"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       499  "06"
+       499  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
 
-         4  "2016-09-15"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       492  "05"
+       492  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
 
-         4  "2016-10-21"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       472  "09"
+       472  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
 
-         4  "2016-10-23"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       449  "02"
+       449  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
 
-         4  "2016-11-11"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       417  "04"
+       417  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
 
-         4  "2016-11-25"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       405  "03"
+       405  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
 
-         4  "2016-12-20"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       404  "8"
+       201  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       191  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+        10  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
 
-         4  "2016-12-28"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       272  "13"
+       155  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        57  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        49  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         8  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         4  "2017-02-27"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       271  "27"
+       135  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        67  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        55  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+        12  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
 
-         4  "2017-03-28"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       264  "18"
+       140  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        62  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        52  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+        10  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
 
-         4  "2017-04-29"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       259  "19"
+       145  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        57  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        52  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         5  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
 
-         4  "2017-05-22"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       253  "28"
+       141  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        55  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        38  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+        17  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
 
-         4  "2017-09-27"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       252  "14"
+       127  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        60  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        50  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+        10  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         4  "2018-02-02"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       242  "21"
+       133  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        53  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        42  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+        11  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         4  "2018-09-21"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       239  "17"
+       133  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        53  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        43  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+        10  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
 
-         4  "28"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       239  "24"
+       152  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        42  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        37  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         5  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         4  "4"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       239  "25"
+       149  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        45  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        40  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         5  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
 
-         4  "6"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       239  "29"
+       124  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        55  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        48  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         4  "INTERNET EXPLORER 10"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:129
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:90
+       238  "20"
+       147  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        44  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        34  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+        10  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         4  "Internet Explorer 28"
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
-         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       235  "9"
+       116  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+       110  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         6  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         4  "SAFARI 17"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:129
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:134
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:90
+       228  "23"
+       135  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        44  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        34  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+        10  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
 
-         4  "SAFARI 29"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:129
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:134
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:90
+       225  "16"
+       123  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        51  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        32  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+        19  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
 
-         4  "SAFARI 49"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:129
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:134
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:90
+       225  "26"
+       129  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        48  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        39  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+
+       223  "15"
+       127  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        47  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        40  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         7  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+
+       223  "30"
+       121  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        48  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        39  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         4  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+
+       212  "31"
+       106  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        51  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        45  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         6  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+
+       203  "22"
+       122  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        40  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:52
+        34  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:27
+         6  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:17
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
 
 
 Retained String Report
 -----------------------------------
-         1  "('?[-+]?\\d+)-(\\d+)-('?-?\\d+)"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        35  "114 min."
+        33  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         1  "((?:\\d+\\s*:\\s*\\d+(?:\\s*:\\s*\\d+(?:[,.]\\d*)?)?|\\d+\\s*h(?:\\s*\\d+m?(?:\\s*\\d+s?)?)?)(?:\\s*[ap](?:m\\b|\\.m\\.))?|\\d+\\s*[ap](?:m\\b|\\.m\\.))(?:\\s*((?:gmt|utc?)?[-+]\\d+(?:[,.:]\\d+(?::\\d+)?)?|(?-i:[[:alpha:].\\s]+)"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        32  "117 min."
+        30  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         1  "116 min."
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+        31  "118 min."
+        31  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
 
-         1  "118 min."
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
-
-         1  "192 min."
+        30  "116 min."
+        29  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
          1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         1  "2016-09-01"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-
-         1  "2016-09-15"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-
-         1  "2016-10-21"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-
-         1  "2016-10-23"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-
-         1  "2016-11-11"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-
-         1  "2016-11-25"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-
-         1  "2016-12-20"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-
-         1  "2016-12-28"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-
-         1  "2017-02-27"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-
-         1  "2017-03-28"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-
-         1  "2017-04-29"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-
-         1  "2017-05-22"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-
-         1  "2017-09-27"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-
-         1  "2018-02-02"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-
-         1  "2018-09-21"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
-
-         1  "218 min."
+        29  "119 min."
+        28  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
          1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         1  "455 min."
+        28  "113 min."
+        28  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+
+        27  "108 min."
+        26  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
          1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         1  "85 min."
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+        27  "111 min."
+        24  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         3  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         1  "CHROME 13, CHROME 6, FIREFOX 32, INTERNET EXPLORER 10, SAFARI 17"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
+        24  "103 min."
+        22  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         1  "CHROME 13,CHROME 20,CHROME 35,CHROME 6,FIREFOX 12,FIREFOX 32,FIREFOX 47,INTERNET EXPLORER 10,INTERNET EXPLORER 28,INTERNET EXPLORER 35,SAFARI 17,SAFARI 29,SAFARI 39,SAFARI 49"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:93
+        24  "115 min."
+        23  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         1  "CHROME 20, CHROME 35, FIREFOX 47, SAFARI 49"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
+        23  "107 min."
+        22  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         1  "FIREFOX 12, INTERNET EXPLORER 28, INTERNET EXPLORER 28, INTERNET EXPLORER 35, SAFARI 29, SAFARI 39"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:124
+        23  "110 min."
+        23  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
 
-         1  "Gregory Santos"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:40
+        23  "112 min."
+        22  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         1  "Leida Cira"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:40
+        21  "109 min."
+        20  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         1  "Palmer Katrina"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:40
+        21  "98 min."
+        20  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         1  "[^-+',./:@[:alnum:]\\[\\]]+"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        20  "95 min."
+        16  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         4  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         1  "_bc"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        17  "100 min."
+        16  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
 
-         1  "_comp"
-         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+        17  "105 min."
+        16  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+
+        16  "101 min."
+        16  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+
+        16  "96 min."
+        14  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+
+        15  "106 min."
+        14  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+
+        15  "88 min."
+        11  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         4  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+
+        14  "92 min."
+        13  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+
+        14  "94 min."
+        12  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+
+        13  "104 min."
+         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         4  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+
+        13  "2016-08-03"
+        13  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+        13  "2018-05-27"
+        13  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+        13  "86 min."
+        12  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+
+        13  "87 min."
+         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         4  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+
+        12  "99 min."
+        12  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+
+        10  "2016-08-10"
+        10  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+        10  "2016-09-18"
+        10  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+        10  "2017-12-14"
+        10  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+        10  "2018-03-03"
+        10  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+        10  "2018-10-14"
+        10  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+        10  "2018-10-31"
+        10  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+        10  "2019-02-04"
+        10  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+        10  "81 min."
+         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+
+        10  "89 min."
+        10  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+
+        10  "90 min."
+         8  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         2  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+
+        10  "91 min."
+         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:119
+         1  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:114
+
+         9  "2016-05-30"
+         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+         9  "2016-07-29"
+         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+         9  "2016-08-20"
+         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+         9  "2017-01-29"
+         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+         9  "2017-02-06"
+         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+         9  "2017-02-11"
+         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+         9  "2017-02-19"
+         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+         9  "2017-03-29"
+         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
+         9  "2017-05-30"
+         9  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:139
+
 ```
 
 Он показался наиболее интересным, так как отрабатывает довольно быстро, но уже показывает проблемы, возникающие при большом объеме данных.
@@ -594,16 +721,128 @@ Retained String Report
 Вот какие проблемы удалось найти и решить:
 
 ### Ваша находка №1
-- какой отчёт показал главную точку роста
-- как вы решили её оптимизировать
-- как изменилась метрика
-- как изменился отчёт профилировщика
+- После добавления `frozen string literal = true` количество объектов-строк сократилось:
+- ни `fasterer`, ни `rubocop-performance` не оказались особо полезными в данном случае
+-  157242 -123304 = 33938. Однако в целом это не исправило ситуацию, хотя для "бесплатной" оптимизации, я считаю, не так уж и плохо.
 
 ### Ваша находка №2
-- какой отчёт показал главную точку роста
-- как вы решили её оптимизировать
-- как изменилась метрика
-- как изменился отчёт профилировщика
+- `MemoryProfiler` показал основную точку роста:
+```bash
+allocated memory by location
+-----------------------------------
+  71791240  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:56
+  26198352  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:102
+```
+Это строка:
+```ruby
+sessions += [parse_session(line)] if cols[0] == 'session'
+```
+- меняем на 
+```ruby
+sessions << parse_session(line) if cols[0] == 'session'
+```
+- результат:
+```bash
+MEMORY USAGE: 60 MB
+Total allocated: 45229277 bytes (181242 objects)
+Total retained:  4676 bytes (9 objects)
+
+allocated memory by gem
+-----------------------------------
+  45229277  other
+
+allocated memory by file
+-----------------------------------
+  45229277  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb
+
+allocated memory by location
+-----------------------------------
+  26198352  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:102
+   3854988  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:141
+```
+- Отчет показал следующую точку роста:
+```ruby
+  users.each do |user|
+    attributes = user
+    user_sessions = sessions.select { |session| session['user_id'] == user['id'] }
+    user_object = User.new(attributes: attributes, sessions: user_sessions)
+    users_objects += [user_object]
+  end
+  ```
+- меняем на 
+```ruby
+  users.each do |user|
+    attributes = user
+    user_object = User.new(attributes: attributes, sessions: sessions.select { |session| session['user_id'] == user['id'] })
+    users_objects += [user_object]
+  end
+```          
+- Результат не впечатляет:
+```bash
+MEMORY USAGE: 60 MB
+Total allocated: 45229277 bytes (181242 objects)
+Total retained:  4676 bytes (9 objects)
+
+allocated memory by gem
+-----------------------------------
+  45229277  other
+
+allocated memory by file
+-----------------------------------
+  45229277  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb
+
+allocated memory by location
+-----------------------------------
+  26359344  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:102
+   3854988  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:140
+```
+В отчете видно, что основные потребители памяти - массивы. 
+Решил перейти на файл 10_000 строк (так как 5000 строк уже уложились в бюджет).
+Выиграл 10 мб, переписав строку  55
+```ruby
+users += [parse_user(line)] if cols[0] == 'user'
+# на
+users << parse_user(line) if cols[0] == 'user'
+```
+        
+Следуя подсказке переписываем на процедурный стиль и избавляемся от массивов для хранения данных. Тут помог оверинжиниринг из первого задания. Вместо сохранения в массив сессий писал сразу в файл `result.json`. Ушло некоторое время, чтобы JSON стал валидным. Обработанного пользователя удалял из хэша сразу же, как сохранял его данные в отчет.
+
+Переписал чтение данных из файла таким образом:
+
+```ruby
+File.readlines(file_path).each do |line|
+    line.chomp!
+    cols = line.split(',')
+    users << parse_user(line) if cols[0] == 'user'
+    sessions << parse_session(line) if cols[0] == 'session'
+  end
+```
+Выигрыш - порядка 19 мб. Основной потребитель - все тот же класс Array.
+
+Замена `File.readlines` на `CSV` помогла выиграть еще 9 мегабайт:
+```bash
+MEMORY USAGE: 71 MB
+Total allocated: 131956234 bytes (208840 objects)
+Total retained:  112 bytes (2 objects)
+
+allocated memory by gem
+-----------------------------------
+ 124833472  other
+   7122762  csv-3.1.7
+
+allocated memory by file
+-----------------------------------
+ 124833472  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb
+   7109522  /home/theendcomplete/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/csv-3.1.7/lib/csv/parser.rb
+     13160  /home/theendcomplete/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/csv-3.1.7/lib/csv.rb
+        80  /home/theendcomplete/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/csv-3.1.7/lib/csv/fields_converter.rb
+
+allocated memory by location
+-----------------------------------
+ 104386560  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:99
+   9566160  /home/theendcomplete/Documents/projects/my/rails-optimization-task2/task-2.rb:100
+```         
+Далее осталось дело техники - добавил обход файла с данными через `foreach`.
 
 ### Ваша находка №X
 - какой отчёт показал главную точку роста
@@ -612,10 +851,20 @@ Retained String Report
 - как изменился отчёт профилировщика
 
 ## Результаты
-В результате проделанной оптимизации наконец удалось обработать файл с данными.
-Удалось улучшить метрику системы с *того, что у вас было в начале, до того, что получилось в конце* и уложиться в заданный бюджет.
+В результате проделанной оптимизации наконец удалось обработать файл с данными, уложившись в ограничение по памяти.
+Удалось улучшить потребление памяти и уложиться в заданный бюджет <70мб на всем протяжении работы программы.
+Ранее потребление памяти росло с количеством обработанных строк, теперь же не зависит от размера файла.
 
-*Какими ещё результами можете поделиться*
+До:
+![unoptimized_valgrind](https://github.com/theendcomplete/rails-optimization-task2/blob/task-2/case_study_media/valgrind_unoptimized.png?raw=true)
+После:
+![optimized_valgrind](https://github.com/theendcomplete/rails-optimization-task2/blob/task-2/case_study_media/valgrind_optimized.png?raw=true)
+
+
+- `jemalloc` оптимизированную программу еще больше оптимизировать не смог - потребление то же самое
+- в ходе оптимизации также заменил все строковые ключи на символы - это не сильно, но улучшило производительность (не стал включать в отчет)
+- волшебный коммент `frozen string literal = true` работает и дает бесплатную производительность. Нужно пользоваться.
+- самое сложное в оптимизации - вести записи и логи работы.
 
 ## Защита от регрессии производительности
 Для защиты от потери достигнутого прогресса при дальнейших изменениях программы *о performance-тестах, которые вы написали*

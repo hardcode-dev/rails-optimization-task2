@@ -1,16 +1,15 @@
 class FastReportBuilder
   USED_MEMORY_LIMIT_MB = 25
-  USER_STATS_FILE = 'fast_report.json'
 
   def call(source_filename, report_filename)
     puts "~ 🚅 Fast Report Builder ~"
 
-    File.open(USER_STATS_FILE, 'w') { |f| f.puts '{"userStats":{'}
+    File.open(report_filename, 'w') { |f| f.puts '{"usersStats":{'}
 
     # Build report without loading whole file to memory.
     build_report(source_filename, report_filename)
 
-    File.open(USER_STATS_FILE, 'a') { |f| f.puts '}'}
+    File.open(report_filename, 'a') { |f| f.puts '}'}
 
     puts "~ 🏁 Finished. MEMORY USAGE: #{memory_usage_mb} MB ~"
   end
@@ -22,7 +21,7 @@ class FastReportBuilder
     single_user[:sessions_count] = 0
     single_user[:total_time] = 0
     single_user[:longest_session] = 0
-    single_user[:browsers] = {}
+    single_user[:browsers] = []
     single_user[:used_ie] = false
     single_user[:always_chrome] = true
     single_user[:dates_arr] = []
@@ -33,20 +32,20 @@ class FastReportBuilder
       'sessionsCount' => single_user[:sessions_count],
       'totalTime' => single_user[:total_time].to_s + ' min.'.freeze,
       'longestSession' => single_user[:longest_session].to_s + ' min.'.freeze,
-      'browsers' => single_user[:browsers].keys.sort.join(', '),
+      'browsers' => single_user[:browsers].sort.join(', '),
       'usedIE' => single_user[:used_ie],
       'alwaysUsedChrome' => single_user[:always_chrome],
       'dates' => single_user[:dates_arr].sort.reverse
     }
   end
 
-  def write_previous_user(single_user, last_write = false)
+  def write_previous_user(report_filename, single_user, last_write = false)
     # puts " user: #{single_user[:name]}, sessions: #{single_user[:sessions_count]}, used_id: #{single_user[:used_ie]}"
 
     serialized_info = serialize_user(single_user)
     comma = last_write ? nil : ','
 
-    File.open(USER_STATS_FILE, "a") do |f|
+    File.open(report_filename, "a") do |f|
       f.puts "\"#{single_user[:name]}\": #{serialized_info.to_json}#{comma}"
     end
   end
@@ -59,7 +58,7 @@ class FastReportBuilder
     single_user[:sessions_count] += 1
     single_user[:total_time] += time
     single_user[:longest_session] = time if time > single_user[:longest_session]
-    single_user[:browsers][browser_name] = true
+    single_user[:browsers] << browser_name
 
     unless single_user[:used_ie]
       bool_ie = browser_name.upcase =~ /INTERNET EXPLORER/
@@ -90,7 +89,7 @@ class FastReportBuilder
       sessions_count: 0,
       total_time: 0,
       longest_session: 0,
-      browsers: {},
+      browsers: [],
       used_ie: false,
       always_chrome: true,
       dates: []
@@ -100,7 +99,7 @@ class FastReportBuilder
       cols = line.gsub("\n", '').split(',')
 
       if cols[0] == 'user'
-        write_previous_user(single_user) if single_user[:name] != '' # don't write first user, its empty anyway.
+        write_previous_user(report_filename, single_user) if single_user[:name] != '' # don't write first user, its empty anyway.
         reset_user(single_user)
 
         overall[:total_users] = cols[1]
@@ -121,7 +120,7 @@ class FastReportBuilder
     end
 
     # don't forget about last user.
-    write_previous_user(single_user, true)
+    write_previous_user(report_filename, single_user, true)
 
     serialized_overall = build_meta(overall[:total_users], overall[:total_sessions], overall[:browsers_dict])
 

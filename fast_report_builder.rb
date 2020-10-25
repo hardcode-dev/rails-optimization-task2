@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FastReportBuilder
   USED_MEMORY_LIMIT_MB = 70
 
@@ -97,8 +99,9 @@ class FastReportBuilder
       dates: []
     }
 
-    File.readlines("payloads/#{source_filename}").each do |line|
-      cols = line.gsub("\n", '').split(',')
+    # chomp: true <- doesn't add newline symbol to lines.
+    File.readlines("payloads/#{source_filename}", chomp: true).each do |line|
+      cols = line.split(',')
 
       if cols[0] == 'user'
         write_previous_user(report_file, single_user) if single_user[:name] != '' # don't write first user, its empty anyway.
@@ -140,7 +143,7 @@ class FastReportBuilder
     str = '},'
     serialized_overall.keys.each do |key|
       need_comma = true unless key == :allBrowsers
-      str << json_single_field(key, serialized_overall[key], need_comma)
+      str = str + json_single_field(key, serialized_overall[key], need_comma)
     end
 
     rf.puts str

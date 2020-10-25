@@ -29,6 +29,7 @@ if ENV['MEM_PROF'] == '1'
 
 else
   # Just run and measure time.
+  require_relative 'unit-test'
 
   time = Benchmark.realtime do
     FastReportBuilder.new.call(SOURCE_FILE, 'fast_report.json')

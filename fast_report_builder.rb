@@ -4,12 +4,16 @@ class FastReportBuilder
   def call(source_filename, report_filename)
     puts "~ 🚅 Fast Report Builder ~"
 
+    # Clear file and trying
     File.open(report_filename, 'w') { |f| f.puts '{"usersStats":{'}
 
-    # Build report without loading whole file to memory.
-    build_report(source_filename, report_filename)
+    File.open(report_filename, 'a') do |rf|
+      # Build report without loading whole file to memory.
+      build_report(source_filename, rf)
 
-    File.open(report_filename, 'a') { |f| f.puts '}'}
+      # put closing bracket.
+      rf.puts '}'
+    end
 
     puts "~ 🏁 Finished. MEMORY USAGE: #{memory_usage_mb} MB of #{USED_MEMORY_LIMIT_MB} MB~"
   end
@@ -39,15 +43,13 @@ class FastReportBuilder
     }
   end
 
-  def write_previous_user(report_filename, single_user, last_write = false)
+  def write_previous_user(rf, single_user, last_write = false)
     # puts " user: #{single_user[:name]}, sessions: #{single_user[:sessions_count]}, used_id: #{single_user[:used_ie]}"
 
     serialized_info = serialize_user(single_user)
     comma = last_write ? nil : ','
 
-    File.open(report_filename, "a") do |f|
-      f.puts "\"#{single_user[:name]}\": #{serialized_info.to_json}#{comma}"
-    end
+    rf.puts "\"#{single_user[:name]}\": #{serialized_info.to_json}#{comma}"
   end
 
   def populate_single_user(single_user, cols) # cols stands for 'session line cols'
@@ -76,7 +78,7 @@ class FastReportBuilder
     single_user[:dates_arr] << date
   end
 
-  def build_report(source_filename, report_filename)
+  def build_report(source_filename, report_file)
 
     overall = {
       total_users: 0,
@@ -99,7 +101,7 @@ class FastReportBuilder
       cols = line.gsub("\n", '').split(',')
 
       if cols[0] == 'user'
-        write_previous_user(report_filename, single_user) if single_user[:name] != '' # don't write first user, its empty anyway.
+        write_previous_user(report_file, single_user) if single_user[:name] != '' # don't write first user, its empty anyway.
         reset_user(single_user)
 
         overall[:total_users] = cols[1]
@@ -120,7 +122,7 @@ class FastReportBuilder
     end
 
     # don't forget about last user.
-    write_previous_user(report_filename, single_user, true)
+    write_previous_user(report_file, single_user, true)
 
     serialized_overall = build_meta(overall[:total_users], overall[:total_sessions], overall[:browsers_dict])
 
@@ -128,21 +130,20 @@ class FastReportBuilder
     # puts " #{JSON.pretty_generate(serialized_overall)}"
     # puts
 
-    append_overall(report_filename, serialized_overall)
+    append_overall(report_file, serialized_overall)
 
     # File.append(report_filename)
     # File.write(report_filename, "#{report.to_json}\n")
   end
 
-  def append_overall(report_filename, serialized_overall)
-    File.open(report_filename, 'a') do |f|
-      str = '},'
-      serialized_overall.keys.each do |key|
-        need_comma = true unless key == :allBrowsers
-        str << json_single_field(key, serialized_overall[key], need_comma)
-      end
-      f.puts str
+  def append_overall(rf, serialized_overall)
+    str = '},'
+    serialized_overall.keys.each do |key|
+      need_comma = true unless key == :allBrowsers
+      str << json_single_field(key, serialized_overall[key], need_comma)
     end
+
+    rf.puts str
   end
 
   # user,3,Kieth,Noble,20

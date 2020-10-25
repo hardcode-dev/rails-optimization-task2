@@ -5,8 +5,12 @@ class FastReportBuilder
   def call(source_filename, report_filename)
     puts "~ 🚅 Fast Report Builder ~"
 
+    File.open(USER_STATS_FILE, 'w') { |f| f.puts '{'}
+
     # Build report without loading whole file to memory.
     build_report(source_filename, report_filename)
+
+    File.open(USER_STATS_FILE, 'a') { |f| f.puts '}'}
 
     puts "~ 🏁 Finished. MEMORY USAGE: #{memory_usage_mb} MB ~"
   end
@@ -36,14 +40,15 @@ class FastReportBuilder
     }
   end
 
-  def write_previous_user(single_user)
+  def write_previous_user(single_user, last_write = false)
     # TODO: append to the end of file here.
     puts " user: #{single_user[:name]}, sessions: #{single_user[:sessions_count]}, used_id: #{single_user[:used_ie]}"
 
-    serialized = serialize_user(single_user)
+    serialized_info = serialize_user(single_user)
+    comma = last_write ? nil : ','
 
-    File.open(USER_STATS_FILE,"w") do |f|
-      f.puts serialized.to_json
+    File.open(USER_STATS_FILE, "a") do |f|
+      f.puts "\"#{single_user[:name]}\": #{serialized_info.to_json}#{comma}"
     end
   end
 
@@ -117,7 +122,7 @@ class FastReportBuilder
     end
 
     # don't forget about last user.
-    write_previous_user(single_user)
+    write_previous_user(single_user, true)
 
     report = build_meta(overall[:total_users], overall[:total_sessions], overall[:browsers_dict])
 

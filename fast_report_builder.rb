@@ -1,11 +1,11 @@
 class FastReportBuilder
   USED_MEMORY_LIMIT_MB = 25
-  USER_STATS_FILE = 'temp_user_stats.json'
+  USER_STATS_FILE = 'fast_report.json'
 
   def call(source_filename, report_filename)
     puts "~ 🚅 Fast Report Builder ~"
 
-    File.open(USER_STATS_FILE, 'w') { |f| f.puts '{'}
+    File.open(USER_STATS_FILE, 'w') { |f| f.puts '{"userStats":{'}
 
     # Build report without loading whole file to memory.
     build_report(source_filename, report_filename)
@@ -41,8 +41,7 @@ class FastReportBuilder
   end
 
   def write_previous_user(single_user, last_write = false)
-    # TODO: append to the end of file here.
-    puts " user: #{single_user[:name]}, sessions: #{single_user[:sessions_count]}, used_id: #{single_user[:used_ie]}"
+    # puts " user: #{single_user[:name]}, sessions: #{single_user[:sessions_count]}, used_id: #{single_user[:used_ie]}"
 
     serialized_info = serialize_user(single_user)
     comma = last_write ? nil : ','
@@ -124,13 +123,27 @@ class FastReportBuilder
     # don't forget about last user.
     write_previous_user(single_user, true)
 
-    report = build_meta(overall[:total_users], overall[:total_sessions], overall[:browsers_dict])
+    serialized_overall = build_meta(overall[:total_users], overall[:total_sessions], overall[:browsers_dict])
 
-    puts
-    puts " #{JSON.pretty_generate(report)}"
-    puts
+    # puts
+    # puts " #{JSON.pretty_generate(serialized_overall)}"
+    # puts
 
-    File.write(report_filename, "#{report.to_json}\n")
+    append_overall(report_filename, serialized_overall)
+
+    # File.append(report_filename)
+    # File.write(report_filename, "#{report.to_json}\n")
+  end
+
+  def append_overall(report_filename, serialized_overall)
+    File.open(report_filename, 'a') do |f|
+      str = '},'
+      serialized_overall.keys.each do |key|
+        need_comma = true unless key == :allBrowsers
+        str << json_single_field(key, serialized_overall[key], need_comma)
+      end
+      f.puts str
+    end
   end
 
   # user,3,Kieth,Noble,20
@@ -143,13 +156,13 @@ class FastReportBuilder
       totalUsers: total_users.to_i + 1,  # users in file counted from zero
       totalSessions: total_sessions,
       uniqueBrowsersCount: browsers_dict.keys.count,
-      allBrowsers: browser_list(browsers_dict),
-      userStats: {}
+      allBrowsers: browser_list(browsers_dict)
+      # userStats: {}
     }
   end
 
   def browser_list(browser_dict)
-    return "UNCOMMENT ME"
+    # return "UNCOMMENT ME"
 
     # TODO: optimize this method if needed.
     list_arr = browser_dict.keys
@@ -182,6 +195,15 @@ class FastReportBuilder
   #         "2016-08-22"
   #       ]
   #     },
+
+  def json_single_field(key, value, need_comma = true)
+    comma = need_comma ? ',' : nil
+
+    # quick and dirty fix for string without quotes.
+    value = "\"#{value}\"" if key == :allBrowsers
+
+    "\"#{key}\":#{value}#{comma}"
+  end
 
   def memory_usage_mb
     usage_mb = `ps -o rss= -p #{Process.pid}`.to_i / 1024

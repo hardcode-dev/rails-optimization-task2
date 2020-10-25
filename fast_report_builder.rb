@@ -1,5 +1,5 @@
 class FastReportBuilder
-  USED_MEMORY_LIMIT_MB = 25
+  USED_MEMORY_LIMIT_MB = 70
 
   def call(source_filename, report_filename)
     puts "~ 🚅 Fast Report Builder ~"
@@ -11,7 +11,7 @@ class FastReportBuilder
 
     File.open(report_filename, 'a') { |f| f.puts '}'}
 
-    puts "~ 🏁 Finished. MEMORY USAGE: #{memory_usage_mb} MB ~"
+    puts "~ 🏁 Finished. MEMORY USAGE: #{memory_usage_mb} MB of #{USED_MEMORY_LIMIT_MB} MB~"
   end
 
   private

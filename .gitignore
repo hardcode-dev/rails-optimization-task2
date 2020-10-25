@@ -3,3 +3,6 @@
 
 payloads/data_large.txt
 payloads/data_120000.txt
+
+fast_report.json
+slow_report.json

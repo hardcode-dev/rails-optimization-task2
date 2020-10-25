@@ -1,0 +1,18 @@
+{
+  "sessionsCount": 8,
+  "totalTime": "533 min.",
+  "longestSession": "104 min.",
+  "browsers": "CHROME 45, FIREFOX 18, INTERNET EXPLORER 20, INTERNET EXPLORER 23, INTERNET EXPLORER 25, INTERNET EXPLORER 37, SAFARI 46, SAFARI 48",
+  "usedIE": true,
+  "alwaysUsedChrome": false,
+  "dates": [
+    "2019-01-15",
+    "2018-09-24",
+    "2018-07-20",
+    "2017-12-13",
+    "2017-08-22",
+    "2017-07-26",
+    "2017-02-06",
+    "2016-09-24"
+  ]
+}

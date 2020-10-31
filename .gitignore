@@ -9,3 +9,5 @@ fast_report.json
 slow_report.json
 
 ruby_prof_reports/
+
+result-rspec.json

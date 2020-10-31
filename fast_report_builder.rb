@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'json'
+
 class FastReportBuilder
   USED_MEMORY_LIMIT_MB = 70
 

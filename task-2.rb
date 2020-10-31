@@ -17,6 +17,8 @@ require_relative 'fast_report_builder'
 # SlowReportBuilder.new.call('data_600.txt', 'slow_report.json')
 
 SOURCE_FILE = 'data_120000.txt'
+# SOURCE_FILE = 'data_500000.txt'
+# SOURCE_FILE = 'data_large.txt'
 
 if ENV['MEM_PROF'] == '1'
   puts "👮🏻 Run with memory profiler."

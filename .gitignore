@@ -3,6 +3,9 @@
 
 payloads/data_large.txt
 payloads/data_120000.txt
+payloads/data_500000.txt
 
 fast_report.json
 slow_report.json
+
+ruby_prof_reports/

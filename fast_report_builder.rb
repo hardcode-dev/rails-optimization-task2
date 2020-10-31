@@ -54,8 +54,8 @@ class FastReportBuilder
     rf.puts "\"#{single_user[:name]}\": #{serialized_info.to_json}#{comma}"
   end
 
-  def populate_single_user(single_user, cols) # cols stands for 'session line cols'
-    browser_name = cols[3].upcase
+  def populate_single_user(single_user, cols, browser_name) # cols stands for 'session line cols'
+    # browser_name = cols[3].upcase
     time = cols[4].to_i
     date = cols[5]
 
@@ -65,7 +65,7 @@ class FastReportBuilder
     single_user[:browsers] << browser_name
 
     unless single_user[:used_ie]
-      bool_ie = browser_name.upcase =~ /INTERNET EXPLORER/
+      bool_ie = browser_name =~ /INTERNET EXPLORER/
       if bool_ie
         single_user[:used_ie]= true
         single_user[:always_chrome] = false
@@ -73,7 +73,7 @@ class FastReportBuilder
     end
 
     if single_user[:always_chrome]
-      bool_chrome = browser_name.upcase =~ /CHROME/
+      bool_chrome = browser_name =~ /CHROME/
       single_user[:always_chrome] = false unless bool_chrome
     end
 
@@ -119,7 +119,7 @@ class FastReportBuilder
         overall[:browsers_dict][browser_name] = true
 
         # Save info related to current user.
-        populate_single_user(single_user, cols)
+        populate_single_user(single_user, cols, browser_name)
 
       end
     end

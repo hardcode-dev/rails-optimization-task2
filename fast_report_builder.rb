@@ -7,7 +7,7 @@ class FastReportBuilder
     puts "~ 🚅 Fast Report Builder ~"
 
     # Clear file and trying
-    File.open(report_filename, 'w') { |f| f.puts '{"usersStats":{'}
+    File.open(report_filename, 'w') { |f| f.puts '{"usersStats":{' }
 
     File.open(report_filename, 'a') do |rf|
       # Build report without loading whole file to memory.
@@ -100,7 +100,7 @@ class FastReportBuilder
     }
 
     # chomp: true <- doesn't add newline symbol to lines.
-    File.readlines("payloads/#{source_filename}", chomp: true).each do |line|
+    File.foreach("payloads/#{source_filename}", chomp: true).each do |line|
       cols = line.split(',')
 
       if cols[0] == 'user'

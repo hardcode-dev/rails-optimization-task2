@@ -1,97 +1,127 @@
 # frozen_string_literal: true
 
-require 'json'
-require 'pry'
-require 'date'
+require_relative 'task-2'
+require 'set'
 require 'oj'
-require 'benchmark'
+require 'pry'
 
-def parse_user(fields)
-  {
-    id: fields[1],
-    first_name: fields[2],
-    last_name: fields[3],
-    age: fields[4]
-  }
-end
-
-def parse_session(fields)
-  {
-    user_id: fields[1],
-    session_id: fields[2],
-    browser: fields[3],
-    browser_upcase: fields[3].upcase,
-    time: fields[4].to_i,
-    date: fields[5].chomp!
-  }
-end
-
-def parse_file(file)
-  report = {}
-  users = {}
-  report['totalUsers'] = 0
-  report['uniqueBrowsersCount'] = {}
-  report['totalSessions'] = 0
-  report['allBrowsers'] = {}
-  report['usersStats'] = {}
-
-  IO.foreach(file) do |line|
-    cols = line.split(',')
-    if cols[0] == 'user'
-      user = parse_user(cols)
-      report['totalUsers'] += 1
-      users[user[:id]] = user
-      user_key = "#{user[:first_name]} #{user[:last_name]}"
-      report['usersStats'][user_key] = {}
-
-      report['usersStats'][user_key]['sessionsCount'] = 0
-      report['usersStats'][user_key]['totalTime'] = []
-      report['usersStats'][user_key]['longestSession'] = []
-      report['usersStats'][user_key]['browsers'] = []
-      report['usersStats'][user_key]['usedIE'] = false
-      report['usersStats'][user_key]['alwaysUsedChrome'] = true
-      report['usersStats'][user_key]['dates'] = []
-    end
-
-    next unless cols[0] == 'session'
-
-    session = parse_session(cols)
-
-    report['totalSessions'] += 1
-    report['uniqueBrowsersCount'][session[:browser]] = true
-    report['allBrowsers'][session[:browser_upcase]] = true
-
-    user_key = "#{users[session[:user_id]][:first_name]} #{users[session[:user_id]][:last_name]}"
-    report['usersStats'][user_key]['sessionsCount'] += 1
-    report['usersStats'][user_key]['totalTime'] << session[:time]
-    report['usersStats'][user_key]['longestSession'] << session[:time]
-    report['usersStats'][user_key]['browsers'] << session[:browser_upcase]
-    unless report['usersStats'][user_key]['usedIE']
-      report['usersStats'][user_key]['usedIE'] = /INTERNET EXPLORER/.match?(session[:browser_upcase]) ? true : false
-    end
-    if report['usersStats'][user_key]['alwaysUsedChrome']
-      report['usersStats'][user_key]['alwaysUsedChrome'] = /CHROME/.match?(session[:browser_upcase]) ? true : false
-    end
-    report['usersStats'][user_key]['dates'] << session[:date]
+class ParseFile
+  def initialize(result_file_path: nil, data_file_path: nil)
+    @result_file_path = result_file_path || 'data/result.json'
+    @data_file_path = data_file_path || 'data/data_large.txt'
+    @temp_file = File.open('temp.txt', 'w')
   end
 
-  report['uniqueBrowsersCount'] = report['uniqueBrowsersCount'].count
-  report['allBrowsers'] = report['allBrowsers'].keys.sort.join(',')
+  def parse_full_name(cols)
+    cols.pop
+    second_name = cols.pop
+    first_name = cols.pop
 
-  report['usersStats'].each_key do |user_key|
-    report['usersStats'][user_key]['totalTime'] = "#{report['usersStats'][user_key]['totalTime'].sum} min."
-    report['usersStats'][user_key]['longestSession'] = "#{report['usersStats'][user_key]['longestSession'].max} min."
-    report['usersStats'][user_key]['browsers'] = report['usersStats'][user_key]['browsers'].sort.join(', ')
-    report['usersStats'][user_key]['dates'] = report['usersStats'][user_key]['dates'].sort!.reverse!
+    "#{first_name} #{second_name}"
   end
 
-  report
-end
+  def parse_session(cols)
+    date = cols.pop.chomp
+    time = cols.pop.to_i
+    browser = cols.pop.upcase
 
-def work(file = 'data/data.txt')
-  report = parse_file(file)
+    [date, time, browser]
+  end
 
-  result_file_name = File.basename(file, File.extname(file))
+  def work
+    unique_browsers = Set.new
+    total_users = 0
+    total_sessions = 0
+    user_full_name = nil
+    user_stats = init_user_stats
 
-  File.write("data/#{result_file_name}.json", "#{Oj.dump(report)}\n")
+    File.foreach(data_file_path) do |line|
+      cols = line.split(',')
+
+      if line.start_with?('user')
+        finish_recording_user_stats(user_stats, user_full_name) if user_full_name
+        user_full_name = parse_full_name(cols)
+        total_users += 1
+      else
+        date, time, browser = parse_session(cols)
+        unique_browsers << browser
+        update_user_stats(user_stats, date, time, browser)
+        total_sessions += 1
+      end
+    end
+
+    finish_recording_user_stats(user_stats, user_full_name, last_user: true)
+
+    report = {
+      totalUsers: total_users,
+      uniqueBrowsersCount: unique_browsers.count,
+      totalSessions: total_sessions,
+      allBrowsers: unique_browsers.sort.join(','),
+      usersStats: {}
+    }
+
+    write_report_file(report)
+  end
+
+  private
+
+  attr_reader :result_file_path, :data_file_path, :temp_file
+
+  def finish_recording_user_stats(user_stats, user_full_name, last_user: false)
+    user_stats['longestSession'] = "#{user_stats['longestSession']} min."
+    user_stats['totalTime'] = "#{user_stats['totalTime']} min."
+    user_stats['browsers'] = user_stats['browsers'].sort.join(', ')
+    user_stats['dates'] = user_stats['dates'].sort.reverse
+
+    write_to_temp_file(user_stats, user_full_name, last_user)
+    init_user_stats(user_stats)
+  end
+
+  def update_user_stats(user_stats, date, time, browser)
+    user_stats['sessionsCount'] += 1
+    user_stats['totalTime'] += time
+    user_stats['longestSession'] = time > user_stats['longestSession'] ? time : user_stats['longestSession']
+    user_stats['usedIE'] = browser.match?(/INTERNET EXPLORER/) unless user_stats['usedIE']
+    user_stats['alwaysUsedChrome'] = user_stats['alwaysUsedChrome'] && browser.match?(/CHROME/)
+    user_stats['browsers'] << browser
+    user_stats['dates'] << date
+  end
+
+  def init_user_stats(stats = {})
+    stats['sessionsCount'] = 0
+    stats['totalTime'] = 0
+    stats['longestSession'] = 0
+    stats['browsers'] = []
+    stats['usedIE'] = false
+    stats['alwaysUsedChrome'] = true
+    stats['dates'] = []
+
+    stats
+  end
+
+  def write_to_temp_file(user_stats, user_full_name, last_user)
+    json = Oj.dump(user_stats)
+    if last_user
+      temp_file.write("\"#{user_full_name}\":#{json}\n")
+    else
+      temp_file.write("\"#{user_full_name}\":#{json},\n")
+    end
+  end
+
+  def write_report_file(report)
+    temp_file.close
+
+    file_start_string = Oj.dump(report, mode: :compat).delete_suffix('}}')
+    File.open(result_file_path, 'w') do |file|
+      file.write(file_start_string)
+
+      File.foreach(temp_file.path) do |line|
+        file.write(line.chomp!)
+      end
+
+      file.write("}}\n")
+    end
+
+    File.delete(temp_file.path)
+  end
 end

@@ -40,8 +40,8 @@ session,2,3,Chrome 20,84,2016-11-25
     end
 
     it 'creates correct report' do
-      work(file_name)
-      expect(File.read('data/data.json')).to eq(expected_result)
+      ParseFile.new(data_file_path: file_name, result_file_path: 'data/result.json').work
+      expect(File.read('data/result.json')).to eq(expected_result)
     end
   end
 
@@ -49,20 +49,36 @@ session,2,3,Chrome 20,84,2016-11-25
     [1250, 2500, 5000, 10_000].each do |rows|
       it 'works under 100 ms' do
         expect do
-          work("data/data_#{rows}.txt")
+          ParseFile.new(data_file_path: "data/data_#{rows}.txt", result_file_path: 'data/result.json').work
         end.to perform_under(100).ms.warmup(2).times.sample(10).times
       end
     end
 
-    it 'works time with large file under 30 s' do
-      expect { work('data/data_large.txt') }.to perform_under(30).sec.warmup(2)
+    it 'works time with large file under 15 s' do
+      expect do
+        ParseFile.new(data_file_path: 'data/data_large.txt',
+                      result_file_path: 'data/result.json').work
+      end.to perform_under(15).sec.warmup(2)
     end
 
     it 'checks linear asymptotics' do
-      sizes = [100, 500, 1000, 10_000]
+      sizes = [100, 1000, 10_000]
       expect do |n, _i|
-        work("data/data_#{n}.txt")
+        ParseFile.new(data_file_path: "data/data_#{n}.txt", result_file_path: 'data/result.json').work
       end.to perform_linear.in_range(sizes)
     end
+  end
+
+  let(:task_memory_usage) do
+    usage_before = `ps -o rss= -p #{Process.pid}`.to_i / 1024
+    ParseFile.new(data_file_path: 'data/data_large.txt',
+                  result_file_path: 'data/result.json').work
+    usage_after = `ps -o rss= -p #{Process.pid}`.to_i / 1024
+
+    usage_after - usage_before
+  end
+
+  it 'uses less then 4 megabyte' do
+    expect(task_memory_usage).to be < 4
   end
 end

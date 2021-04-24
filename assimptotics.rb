@@ -5,7 +5,8 @@ FILENAME = 'data_assimpt.txt'
 
 log = ['Assimptotics results:']
 
-%w[1000 10000 20000].each do |num_rows|
+%w[300000
+].each do |num_rows|
   puts "Started #{num_rows}"
   if system("head -n #{num_rows} data_large.txt > #{FILENAME}") && (`wc -l < #{FILENAME}`.strip == num_rows)
     start_time = Time.now.to_i

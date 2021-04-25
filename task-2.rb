@@ -16,9 +16,9 @@ def parse_session(fields)
   parsed_result = {
     user_id: fields[1],
     session_id: fields[2],
-    browser: fields[3].upcase,
+    browser: fields[3].upcase!,
     time: fields[4].to_i,
-    date: fields[5].chomp
+    date: fields[5].chomp!
   }
 end
 
@@ -78,13 +78,13 @@ def work(filepath = 'data.txt')
     report[:usersStats][user_key][:dates] << session[:date]
   end
 
-  report[:uniqueBrowsersCount] = report[:uniqueBrowsersCount].uniq.size
-  report[:allBrowsers] = report[:allBrowsers].sort.uniq.join(',')
+  report[:uniqueBrowsersCount] = report[:uniqueBrowsersCount].uniq!.size
+  report[:allBrowsers] = report[:allBrowsers].sort!.uniq!.join(',')
 
   report[:usersStats].each_value do |user_hash|
     user_hash[:longestSession] = "#{user_hash[:longestSession]} min."
     user_hash[:totalTime] = "#{user_hash[:totalTime]} min."
-    user_hash[:browsers] = user_hash[:browsers].sort.join(', ')
+    user_hash[:browsers] = user_hash[:browsers].sort!.join(', ')
     user_hash[:dates] = user_hash[:dates].sort!.reverse!
   end
 

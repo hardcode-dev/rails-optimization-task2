@@ -3,18 +3,16 @@
 require 'json'
 require 'date'
 
-def parse_user(user)
-  fields = user.split(',')
+def parse_user(fields)
   parsed_result = {
     id: fields[1],
     first_name: fields[2],
     last_name: fields[3],
-    age: fields[4],
+    age: fields[4]
   }
 end
 
-def parse_session(session)
-  fields = session.split(',')
+def parse_session(fields)
   parsed_result = {
     user_id: fields[1],
     session_id: fields[2],
@@ -51,7 +49,7 @@ def work(filepath = 'data.txt')
   File.foreach(filepath) do |line|
     cols = line.split(',')
     if cols[0] == 'user'
-      user = parse_user(line)
+      user = parse_user(cols)
       user_key = "#{user[:first_name]}" + ' ' + "#{user[:last_name]}"
       report[:totalUsers] += 1
       report[:usersStats][user_key] = {
@@ -66,7 +64,7 @@ def work(filepath = 'data.txt')
     end
     next unless cols[0] == 'session'
 
-    session = parse_session(line)
+    session = parse_session(cols)
     report[:totalSessions] += 1
     report[:allBrowsers] << session[:browser]
     report[:uniqueBrowsersCount] << session[:browser]

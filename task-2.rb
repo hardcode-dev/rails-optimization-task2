@@ -1,25 +1,12 @@
 # frozen_string_literal: true
 
 require 'json'
-require 'date'
 
-def parse_user(fields)
-  parsed_result = {
-    id: fields[1],
-    first_name: fields[2],
-    last_name: fields[3],
-    age: fields[4]
-  }
-end
-
-def parse_session(fields)
-  parsed_result = {
-    user_id: fields[1],
-    session_id: fields[2],
-    browser: fields[3].upcase!,
-    time: fields[4].to_i,
-    date: fields[5].chomp!
-  }
+def parse_session!(fields)
+  fields[3].upcase!
+  fields[4] = fields[4].to_i
+  fields[5].chomp!
+  fields
 end
 
 # Отчёт в json
@@ -49,8 +36,8 @@ def work(filepath = 'data.txt')
   File.foreach(filepath) do |line|
     cols = line.split(',')
     if cols[0] == 'user'
-      user = parse_user(cols)
-      user_key = "#{user[:first_name]} #{user[:last_name]}"
+      user = cols
+      user_key = "#{user[2]} #{user[3]}"
       report[:totalUsers] += 1
       report[:usersStats][user_key] = {
         sessionsCount: 0,
@@ -64,18 +51,18 @@ def work(filepath = 'data.txt')
     end
     next unless cols[0] == 'session'
 
-    session = parse_session(cols)
+    session = parse_session!(cols)
     report[:totalSessions] += 1
-    report[:allBrowsers] << session[:browser]
-    report[:uniqueBrowsersCount] << session[:browser]
+    report[:allBrowsers] << session[3]
+    report[:uniqueBrowsersCount] << session[3]
 
     report[:usersStats][user_key][:sessionsCount] += 1
-    report[:usersStats][user_key][:totalTime] += session[:time]
-    report[:usersStats][user_key][:longestSession] = [report[:usersStats][user_key][:longestSession], session[:time]].max
-    report[:usersStats][user_key][:browsers] << session[:browser]
-    report[:usersStats][user_key][:usedIE] ||= session[:browser].match?(/INTERNET EXPLORER/)
-    report[:usersStats][user_key][:alwaysUsedChrome] &&= session[:browser].match?(/CHROME/)
-    report[:usersStats][user_key][:dates] << session[:date]
+    report[:usersStats][user_key][:totalTime] += session[4]
+    report[:usersStats][user_key][:longestSession] = [report[:usersStats][user_key][:longestSession], session[4]].max
+    report[:usersStats][user_key][:browsers] << session[3]
+    report[:usersStats][user_key][:usedIE] ||= session[3].match?(/INTERNET EXPLORER/)
+    report[:usersStats][user_key][:alwaysUsedChrome] &&= session[3].match?(/CHROME/)
+    report[:usersStats][user_key][:dates] << session[5]
   end
 
   report[:uniqueBrowsersCount] = report[:uniqueBrowsersCount].uniq!.size

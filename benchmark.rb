@@ -1,5 +1,4 @@
 require_relative 'task-2'
-require 'benchmark-malloc'
 
 def print_usage
   puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))

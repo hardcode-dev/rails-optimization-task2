@@ -1,12 +1,20 @@
 require 'ruby-prof'
 require_relative 'task-2'
 
-GC.disable
-RubyProf.measure_mode = RubyProf::WALL_TIME
+RubyProf.measure_mode = RubyProf::ALLOCATIONS
 
 result = RubyProf.profile do
   work('samples/10000.txt')
 end
 
-printer = RubyProf::CallTreePrinter.new(result)
-printer.print(:path => "reports", :profile => 'callgrind')
+printer = RubyProf::FlatPrinter.new(result)
+printer.print(File.open('reports/flat.txt', 'w+'))
+
+printer = RubyProf::DotPrinter.new(result)
+printer.print(File.open('reports/graphviz.dot', 'w+'))
+
+printer = RubyProf::GraphHtmlPrinter.new(result)
+printer.print(File.open('reports/graph.html', 'w+'))
+
+printer = RubyProf::CallStackPrinter.new(result)
+printer.print(File.open('reports/callstack.html', 'w+'))

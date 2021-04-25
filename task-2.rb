@@ -50,7 +50,7 @@ def work(filepath = 'data.txt')
     cols = line.split(',')
     if cols[0] == 'user'
       user = parse_user(cols)
-      user_key = "#{user[:first_name]}" + ' ' + "#{user[:last_name]}"
+      user_key = "#{user[:first_name]} #{user[:last_name]}"
       report[:totalUsers] += 1
       report[:usersStats][user_key] = {
         sessionsCount: 0,

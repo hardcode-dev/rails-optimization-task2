@@ -11,7 +11,7 @@ RSpec.describe 'Performance' do
 
   describe '10000.txt' do
     let(:file_path) { 'samples/10000.txt' }
-    it { is_expected.to be <= 3 }
+    it { is_expected.to be <= 2 }
   end
 
   # Опционально

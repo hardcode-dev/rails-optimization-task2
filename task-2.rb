@@ -2,6 +2,13 @@
 
 require 'json'
 
+def aggregate_user_stats!(usersStats)
+  usersStats[:longestSession] = "#{usersStats[:longestSession]} min."
+  usersStats[:totalTime] = "#{usersStats[:totalTime]} min."
+  usersStats[:browsers] = usersStats[:browsers].sort!.join(', ')
+  usersStats[:dates] = usersStats[:dates].sort!.reverse!
+end
+
 # Отчёт в json
 #   - Сколько всего юзеров +
 #   - Сколько всего уникальных браузеров +
@@ -22,20 +29,45 @@ def work(filepath = 'data.txt')
     uniqueBrowsersCount: [],
     totalSessions: 0,
     allBrowsers: [],
-    usersStats: {}
   }
-  user_key = ''
+
+  usersStats = {
+    sessionsCount: 0,
+    totalTime: 0,
+    longestSession: 0,
+    browsers: [],
+    usedIE: false,
+    alwaysUsedChrome: true,
+    dates: []
+  }
+
+  user_key = nil
   user_mode = nil
   session_mode = nil
   col = 0
+  output_file = File.open('result.json', 'w')
+  output_file.write('{"usersStats":{')
 
   File.foreach(filepath, chomp: true) do |line|
     line.split(',') do |val|
       col += 1
       if val == 'user'
+        if session_mode
+          aggregate_user_stats!(usersStats)
+          output_file.write("\"#{user_key}\":#{usersStats.to_json},")
+        end
         user_mode = true
         session_mode = false
-        user_key = ''
+        usersStats = {
+          sessionsCount: 0,
+          totalTime: 0,
+          longestSession: 0,
+          browsers: [],
+          usedIE: false,
+          alwaysUsedChrome: true,
+          dates: []
+        }
+        user_key = nil
         col = 0
         report[:totalUsers] += 1
         next
@@ -45,7 +77,7 @@ def work(filepath = 'data.txt')
         session_mode = true
         col = 0
         report[:totalSessions] += 1
-        report[:usersStats][user_key][:sessionsCount] += 1
+        usersStats[:sessionsCount] += 1
         next
       end
 
@@ -55,15 +87,6 @@ def work(filepath = 'data.txt')
           user_key = val
         when 3
           user_key = "#{user_key} #{val}"
-          report[:usersStats][user_key] = {
-            sessionsCount: 0,
-            totalTime: 0,
-            longestSession: 0,
-            browsers: [],
-            usedIE: false,
-            alwaysUsedChrome: true,
-            dates: []
-          }
         end
       end
 
@@ -72,14 +95,14 @@ def work(filepath = 'data.txt')
         when 3
           report[:allBrowsers] << val.upcase!
           report[:uniqueBrowsersCount] << val
-          report[:usersStats][user_key][:browsers] << val
-          report[:usersStats][user_key][:usedIE] ||= val.match?(/INTERNET EXPLORER/)
-          report[:usersStats][user_key][:alwaysUsedChrome] &&= val.match?(/CHROME/)
+          usersStats[:browsers] << val
+          usersStats[:usedIE] ||= val.match?(/INTERNET EXPLORER/)
+          usersStats[:alwaysUsedChrome] &&= val.match?(/CHROME/)
         when 4
-          report[:usersStats][user_key][:totalTime] += val.to_i
-          report[:usersStats][user_key][:longestSession] = [report[:usersStats][user_key][:longestSession], val.to_i].max
+          usersStats[:totalTime] += val.to_i
+          usersStats[:longestSession] = val.to_i if usersStats[:longestSession] < val.to_i
         when 5
-          report[:usersStats][user_key][:dates] << val
+          usersStats[:dates] << val
         end
       end
     end
@@ -88,12 +111,7 @@ def work(filepath = 'data.txt')
   report[:uniqueBrowsersCount] = report[:uniqueBrowsersCount].uniq!.size
   report[:allBrowsers] = report[:allBrowsers].sort!.uniq!.join(',')
 
-  report[:usersStats].each_value do |user_hash|
-    user_hash[:longestSession] = "#{user_hash[:longestSession]} min."
-    user_hash[:totalTime] = "#{user_hash[:totalTime]} min."
-    user_hash[:browsers] = user_hash[:browsers].sort!.join(', ')
-    user_hash[:dates] = user_hash[:dates].sort!.reverse!
-  end
-
-  File.write('result.json', "#{report.to_json}\n")
+  aggregate_user_stats!(usersStats)
+  output_file.write("\"#{user_key}\":#{usersStats.to_json}},#{report.to_json[1..-1]}")
+  output_file.close
 end

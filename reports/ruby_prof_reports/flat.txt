@@ -1,0 +1,66 @@
+Measure Mode: allocations
+Thread ID: 80
+Fiber ID: 60
+Total: 65944.000000
+Sort by: self_time
+
+ %self      total      self      wait     child     calls  name                           location
+ 51.90  34226.000 34226.000     0.000     0.000     5000   String#split                   
+  8.77  65875.000  5785.000     0.000 60090.000        2   <Class::IO>#foreach            
+  6.41   4226.000  4226.000     0.000     0.000     4226   String#upcase                  
+  6.41   4226.000  4226.000     0.000     0.000     4226   String#chomp                   
+  6.41  12678.000  4226.000     0.000  8452.000     4226   ParseFile#parse_session        /home/islam/Documents/rails-optimization-task2/task-2.rb:23
+  4.44   2930.000  2930.000     0.000     0.000     1548   Array#sort                     
+  2.35  11452.000  1552.000     0.000  9900.000      774   ParseFile#finish_recording_user_stats /home/islam/Documents/rails-optimization-task2/task-2.rb:70
+  2.35   1551.000  1551.000     0.000     0.000     1550   IO#write                       
+  2.35   1550.000  1550.000     0.000     0.000      775   ParseFile#init_user_stats      /home/islam/Documents/rails-optimization-task2/task-2.rb:90
+  2.35   1548.000  1548.000     0.000     0.000     1548   Integer#to_s                   
+  1.18    780.000   780.000     0.000     0.000      775   <Module::Oj>#dump              
+  1.18   2326.000   777.000     0.000  1549.000      774   ParseFile#write_to_temp_file   /home/islam/Documents/rails-optimization-task2/task-2.rb:102
+  1.18    775.000   775.000     0.000     0.000      775   Array#join                     
+  1.17    774.000   774.000     0.000     0.000      774   Array#reverse                  
+  1.17    774.000   774.000     0.000     0.000      774   ParseFile#parse_full_name      /home/islam/Documents/rails-optimization-task2/task-2.rb:15
+  0.30    200.000   200.000     0.000     0.000     4226   Set#<<                         /home/islam/.rvm/rubies/ruby-3.0.0/lib/ruby/3.0.0/set.rb:354
+  0.02  65938.000    13.000     0.000 65925.000        1   ParseFile#work                 /home/islam/Documents/rails-optimization-task2/task-2.rb:31
+  0.01   1572.000     6.000     0.000  1566.000        1   ParseFile#write_report_file    /home/islam/Documents/rails-optimization-task2/task-2.rb:111
+  0.01      5.000     5.000     0.000     0.000        2   Set#each                       /home/islam/.rvm/rubies/ruby-3.0.0/lib/ruby/3.0.0/set.rb:342
+  0.00      5.000     3.000     0.000     2.000        1   Enumerable#sort                
+  0.00   1558.000     3.000     0.000  1555.000        2   <Class::IO>#open               
+  0.00      5.000     3.000     0.000     2.000        3  *Class#new                      
+  0.00  65944.000     3.000     0.000 65941.000        1   [global]#                      report_generators/memory/ruby_prof.rb:12
+  0.00      2.000     2.000     0.000     0.000        2   File#path                      
+  0.00      5.000     2.000     0.000     3.000        1   Enumerable#count               
+  0.00      1.000     1.000     0.000     0.000        1   <Class::File>#delete           
+  0.00      1.000     1.000     0.000     0.000        1   String#delete_suffix           
+  0.00      1.000     1.000     0.000     0.000     4226   ParseFile#update_user_stats    /home/islam/Documents/rails-optimization-task2/task-2.rb:80
+  0.00      2.000     1.000     0.000     1.000        1   ParseFile#initialize           /home/islam/Documents/rails-optimization-task2/task-2.rb:9
+  0.00      0.000     0.000     0.000     0.000        1   IO#closed?                     
+  0.00      0.000     0.000     0.000     0.000      774   String#chomp!                  
+  0.00      0.000     0.000     0.000     0.000       31   Hash#has_key?                  
+  0.00      0.000     0.000     0.000     0.000        2   IO#close                       
+  0.00      0.000     0.000     0.000     0.000        2   Hash#each_key                  
+  0.00      0.000     0.000     0.000     0.000     3255   String#match?                  
+  0.00      0.000     0.000     0.000     0.000     4226   String#to_i                    
+  0.00      0.000     0.000     0.000     0.000    15000   Array#pop                      
+  0.00      0.000     0.000     0.000     0.000     5000   String#start_with?             
+  0.00      0.000     0.000     0.000     0.000        1   Hash#initialize                
+  0.00      1.000     0.000     0.000     1.000        1   Set#initialize                 /home/islam/.rvm/rubies/ruby-3.0.0/lib/ruby/3.0.0/set.rb:88
+  0.00      0.000     0.000     0.000     0.000        2   File#initialize                
+
+* recursively called methods
+
+Columns are:
+
+  %self     - The percentage of time spent in this method, derived from self_time/total_time.
+  total     - The time spent in this method and its children.
+  self      - The time spent in this method.
+  wait      - The amount of time this method waited for other threads.
+  child     - The time spent in this method's children.
+  calls     - The number of times this method was called.
+  name      - The name of the method.
+  location  - The location of the method.
+
+The interpretation of method names is:
+
+  * MyObject#test - An instance method "test" of the class "MyObject"
+  * <Object:MyObject>#test - The <> characters indicate a method on a singleton class.

@@ -26,7 +26,7 @@ end
 def work(filepath = 'data.txt')
   report = {
     totalUsers: 0,
-    uniqueBrowsersCount: [],
+    uniqueBrowsersCount: 0,
     totalSessions: 0,
     allBrowsers: [],
   }
@@ -42,7 +42,6 @@ def work(filepath = 'data.txt')
   }
 
   user_key = nil
-  user_mode = nil
   session_mode = nil
   col = 0
   output_file = File.open('result.json', 'w')
@@ -56,7 +55,6 @@ def work(filepath = 'data.txt')
           aggregate_user_stats!(usersStats)
           output_file.write("\"#{user_key}\":#{usersStats.to_json},")
         end
-        user_mode = true
         session_mode = false
         usersStats = {
           sessionsCount: 0,
@@ -73,7 +71,6 @@ def work(filepath = 'data.txt')
         next
       end
       if val == 'session'
-        user_mode = false
         session_mode = true
         col = 0
         report[:totalSessions] += 1
@@ -81,7 +78,7 @@ def work(filepath = 'data.txt')
         next
       end
 
-      if user_mode
+      unless session_mode
         case col
         when 2
           user_key = val
@@ -93,8 +90,10 @@ def work(filepath = 'data.txt')
       if session_mode
         case col
         when 3
-          report[:allBrowsers] << val.upcase!
-          report[:uniqueBrowsersCount] << val
+          unless report[:allBrowsers].include?(val.upcase!)
+            report[:allBrowsers] << val
+            report[:uniqueBrowsersCount] += 1
+          end
           usersStats[:browsers] << val
           usersStats[:usedIE] ||= val.match?(/INTERNET EXPLORER/)
           usersStats[:alwaysUsedChrome] &&= val.match?(/CHROME/)
@@ -108,8 +107,7 @@ def work(filepath = 'data.txt')
     end
   end
 
-  report[:uniqueBrowsersCount] = report[:uniqueBrowsersCount].uniq!.size
-  report[:allBrowsers] = report[:allBrowsers].sort!.uniq!.join(',')
+  report[:allBrowsers] = report[:allBrowsers].sort!.join(',')
 
   aggregate_user_stats!(usersStats)
   output_file.write("\"#{user_key}\":#{usersStats.to_json}},#{report.to_json[1..-1]}")

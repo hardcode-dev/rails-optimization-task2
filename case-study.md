@@ -21,10 +21,36 @@
 В начале будем использовать лимит во 20 000 строк.
 
 ### Итерация 1
-
 #### какой отчёт показал главную точку роста
+memory_profiler показал 1.68 Гб массивов и большое выделение объектов в `File.read ... .split`:
+```
+allocated memory by class
+-----------------------------------
+   1.68 GB  Array
+
+allocated objects by location
+-----------------------------------
+   3250943  /home/dave/dev/rails-optimization-task2/src/work.rb:43
+   
+```
 #### как вы решили её оптимизировать
+Перейти к построчному чтению файла.
 #### как изменилась метрика
+`492 MB` => `110 MB`
 #### как изменился отчёт профилировщика
+Потребление перенеслось в другую строку, теперь это наполнение массива `sessions`. Однако, массивов все еще много:
+```
+allocated objects by location
+-----------------------------------
+    221432  /home/dave/dev/rails-optimization-task2/src/work.rb:138
+
+ => { 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }
+
+allocated memory by class
+-----------------------------------
+   1.65 GB  Array
+```
+
+### Итерация 2
 
 > TODO

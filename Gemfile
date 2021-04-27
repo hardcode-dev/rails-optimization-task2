@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'awesome_print'
 gem 'irb'
 gem 'memory_profiler'
 gem 'minitest'

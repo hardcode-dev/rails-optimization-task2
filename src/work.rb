@@ -7,6 +7,7 @@ require 'pry'
 require 'date'
 
 require 'progress_bar'
+require 'awesome_print'
 
 require_relative 'user.rb'
 
@@ -40,14 +41,13 @@ def collect_stats_from_users(report, users_objects, &block)
 end
 
 def work(limit: nil, file_name: FILE_NAME)
-  file_lines = File.read(file_name).split("\n")
-
   users = []
   sessions = []
 
-  file_lines.each_with_index do |line, ix|
+  File.open(file_name).each_line.with_index do |line, ix|
     break if limit && ix >= limit
 
+    line.chop!
     cols = line.split(',')
     users = users + [parse_user(line)] if cols[0] == 'user'
     sessions = sessions + [parse_session(line)] if cols[0] == 'session'

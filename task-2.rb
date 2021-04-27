@@ -25,10 +25,6 @@ class User
     @always_used_chrome = true
   end
 
-  def uniq_browsers
-    @browsers.uniq
-  end
-
   def used_ie?
     @used_ie
   end
@@ -37,15 +33,15 @@ class User
     @always_used_chrome
   end
 
-  def process_session(session)
+  def process_session(attributes:)
     @sessions_count += 1
-    session_time = session[:time].to_i
+    session_time = attributes[:time].to_i
     @sessions_time += session_time
     @sessions_max = @sessions_max > session_time ? @sessions_max : session_time
-    @browsers << session[:browser]
-    @always_used_chrome = false unless /CHROME/.match?(session[:browser])
-    @used_ie = true if /INTERNET EXPLORER/.match?(session[:browser])
-    @sessions_dates << session[:date]
+    @browsers << attributes[:browser].upcase
+    @always_used_chrome = false unless /CHROME/.match?(@browsers.last)
+    @used_ie = true if /INTERNET EXPLORER/.match?(@browsers.last)
+    @sessions_dates << attributes[:date]
   end
 end
 
@@ -58,42 +54,14 @@ end
 
 def parse_session(fields)
   {
-    session_id: fields[2],
     browser: fields[3].upcase,
     time: fields[4],
     date: fields[5]
   }
 end
 
-def collect_stats_from_users(report, users_objects)
-  users_objects.each do |user|
-    report[USER_STATS][user.user_key] ||= {}
-    report[USER_STATS][user.user_key].merge!(yield(user))
-  end
-end
-
-def work(file_name)
-  users_objects = []
-  cols = []
-  total_sessions = 0
-  unique_browsers = SortedSet.new
-
-  File.foreach(file_name, chomp: true) do |file_line|
-    file_line.split(',') do |value|
-      cols << value
-    end
-
-    case cols[0]
-    when USER
-      user = parse_user(cols)
-      users_objects << User.new(attributes: user)
-    when SESSION
-      users_objects.last.process_session(parse_session(cols))
-      total_sessions += 1
-      unique_browsers.merge(users_objects.last.browsers)
-    end
-    cols.clear
-  end
+class Report
+  attr_accessor :total_sessions, :unique_browsers
 
   # Отчёт в json
   #   - Сколько всего юзеров +
@@ -110,25 +78,59 @@ def work(file_name)
   #     - Всегда использовал только Хром? +
   #     - даты сессий в порядке убывания через запятую +
 
-  report = {}
-
-  report[:totalUsers] = users_objects.count
-  report[:uniqueBrowsersCount] = unique_browsers.count
-  report[:totalSessions] = total_sessions
-  report[:allBrowsers] = unique_browsers.join(',')
-
-  report['usersStats'] = {}
-
-  # Собираем количество сессий по пользователям
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'sessionsCount' => user.sessions_count,
-      'totalTime' => "#{user.sessions_time} min.",
-      'longestSession' => "#{user.sessions_max} min.",
-      'browsers' => user.browsers.sort.join(', '),
-      'usedIE' => user.used_ie?,
-      'alwaysUsedChrome' => user.always_used_chrome?,
-      'dates' => user.sessions_dates.sort.reverse }
+  def initialize
+    @file = File.open('result.json', 'w')
+    @file.write('{"usersStats":{')
+    @total_sessions = 0
+    @total_users = 0
+    @unique_browsers = SortedSet.new
   end
 
-  File.write('result.json', "#{report.to_json}\n")
+  def collect_stats_from_user(user:, last: false)
+    @total_users += 1
+    @file.write("#{user.user_key.to_json}:")
+    user_report =
+      { sessionsCount: user.sessions_count,
+        totalTime: "#{user.sessions_time} min.",
+        longestSession: "#{user.sessions_max} min.",
+        browsers: user.browsers.sort.join(', '),
+        usedIE: user.used_ie?,
+        alwaysUsedChrome: user.always_used_chrome?,
+        dates: user.sessions_dates.sort.reverse }
+    @file.write(user_report.to_json)
+    @file.write(last ? '},' : ',')
+    finalize if last
+  end
+
+  private
+
+  def finalize
+    report = {}
+    report[:totalUsers] = @total_users
+    report[:uniqueBrowsersCount] = @unique_browsers.count
+    report[:totalSessions] = @total_sessions
+    report[:allBrowsers] = @unique_browsers.join(',')
+    @file.write("#{report.to_json.delete('{}')}}\n")
+    @file.close
+  end
+end
+
+def work(file_name)
+  user = nil
+  report = Report.new
+
+  File.foreach(file_name, chomp: true) do |file_line|
+    cols = file_line.split(',')
+
+    case cols[0]
+    when USER
+      report.collect_stats_from_user(user: user) if user
+      user = User.new(attributes: parse_user(cols))
+    when SESSION
+      user.process_session(attributes: parse_session(cols))
+      report.total_sessions += 1
+      report.unique_browsers.merge(user.browsers)
+    end
+  end
+  report.collect_stats_from_user(user: user, last: true) if user
 end

@@ -11,9 +11,11 @@ require 'awesome_print'
 
 require_relative 'user.rb'
 
+USER_SIGN = 'user'.ord
+
 def parse_user(user)
   fields = user.split(',')
-  parsed_result = {
+  {
     'id' => fields[1],
     'first_name' => fields[2],
     'last_name' => fields[3],
@@ -23,7 +25,7 @@ end
 
 def parse_session(session)
   fields = session.split(',')
-  parsed_result = {
+  {
     'user_id' => fields[1],
     'session_id' => fields[2],
     'browser' => fields[3],
@@ -48,9 +50,11 @@ def work(limit: nil, file_name: FILE_NAME)
     break if limit && ix >= limit
 
     line.chop!
-    cols = line.split(',')
-    users = users + [parse_user(line)] if cols[0] == 'user'
-    sessions = sessions + [parse_session(line)] if cols[0] == 'session'
+    if line.ord == USER_SIGN
+      users.push parse_user(line)
+    else
+      sessions.push parse_session(line)
+    end
   end
 
   # Отчёт в json

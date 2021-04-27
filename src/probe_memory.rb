@@ -66,5 +66,5 @@ end
 
 # memory_profiler
 # stackprof
-ruby_prof_alloc
-# ruby_prof_memory
+# ruby_prof_alloc
+ruby_prof_memory

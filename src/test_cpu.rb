@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require "minitest/autorun"
 require "minitest/benchmark"
 
 require_relative 'work.rb'
 
-class SortBenchmark < Minitest::Benchmark
+class TestCPU < Minitest::Benchmark
   EXPECTED_EXECUTION_TIME = {
     1000 => 0.0075,
     10_000 => 0.075,

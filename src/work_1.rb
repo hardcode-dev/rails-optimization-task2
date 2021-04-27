@@ -9,6 +9,12 @@ require 'date'
 require 'progress_bar'
 
 require_relative 'user.rb'
+# Deoptimized version of homework task
+
+require 'json'
+require 'pry'
+require 'date'
+require 'minitest/autorun'
 
 def parse_user(user)
   fields = user.split(',')
@@ -39,15 +45,13 @@ def collect_stats_from_users(report, users_objects, &block)
   end
 end
 
-def work(limit: nil, file_name: FILE_NAME)
-  file_lines = File.read(file_name).split("\n")
+def work
+  file_lines = File.read('data.txt').split("\n")
 
   users = []
   sessions = []
 
-  file_lines.each_with_index do |line, ix|
-    break if limit && ix >= limit
-
+  file_lines.each do |line|
     cols = line.split(',')
     users = users + [parse_user(line)] if cols[0] == 'user'
     sessions = sessions + [parse_session(line)] if cols[0] == 'session'
@@ -139,4 +143,5 @@ def work(limit: nil, file_name: FILE_NAME)
   end
 
   File.write('result.json', "#{report.to_json}\n")
+  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end

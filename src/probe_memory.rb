@@ -64,7 +64,7 @@ end
 # do_work(limit: NO_LIMIT)
 # do_work(limit: LIMIT)
 
-memory_profiler
+# memory_profiler
 # stackprof
-# ruby_prof_alloc
+ruby_prof_alloc
 # ruby_prof_memory

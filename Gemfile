@@ -1,0 +1,12 @@
+source 'https://rubygems.org'
+ruby '3.0.1'
+
+gem 'rubocop'
+gem 'rubocop-performance'
+gem 'rubocop-rspec'
+gem 'memory_profiler'
+gem 'ruby-prof'
+gem 'pry'
+gem 'sorted_set'
+gem 'rspec-benchmark'
+gem 'rspec'

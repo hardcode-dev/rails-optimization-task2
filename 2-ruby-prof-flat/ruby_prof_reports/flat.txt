@@ -1,0 +1,54 @@
+Measure Mode: allocations
+Thread ID: 80
+Fiber ID: 60
+Total: 3859453.000000
+Sort by: self_time
+
+ %self      total      self      wait     child     calls  name                           location
+ 45.44  1753884.000 1753884.000     0.000     0.000   300000   String#split                   
+ 13.16  507768.000 507768.000     0.000     0.000   507768   String#upcase                  
+ 13.14  1505532.000 507238.000     0.000 998294.000    46119  *Array#each                     
+  7.77  2353892.000 300008.000     0.000 2053884.000        1   <Class::IO>#foreach            
+  6.58  253884.000 253884.000     0.000     0.000   253884   Object#parse_session           /home/filonov/optim/rails-optimization-task2/task-2.rb:27
+  4.54  175086.000 175086.000     0.000     0.000    92233   Array#sort                     
+  2.39  92232.000 92232.000     0.000     0.000    92232   Integer#to_s                   
+  1.70  65506.000 65506.000     0.000     0.000    46116   Array#any?                     
+  1.19  46117.000 46117.000     0.000     0.000    46117   Array#join                     
+  1.19  46116.000 46116.000     0.000     0.000    46116   Array#reverse                  
+  1.19  46116.000 46116.000     0.000     0.000    46116   Class#new                      
+  1.19  46116.000 46116.000     0.000     0.000    46116   Object#parse_user              /home/filonov/optim/rails-optimization-task2/task-2.rb:18
+  0.50  19356.000 19356.000     0.000     0.000    46116   Array#all?                     
+  0.00  3859451.000    16.000     0.000 3859435.000        1   Object#work                    /home/filonov/optim/rails-optimization-task2/task-2.rb:48
+  0.00      4.000     4.000     0.000     0.000        1   <Class::IO>#write              
+  0.00      2.000     2.000     0.000     0.000        1   JSON::Ext::Generator::GeneratorMethods::Hash#to_json 
+  0.00      2.000     2.000     0.000     0.000        1   Array#uniq                     
+  0.00  3859453.000     2.000     0.000 3859451.000        1   [global]#                      ruby-prof-flat.rb:10
+  0.00      0.000     0.000     0.000     0.000        1   JSON::Ext::Generator::State#initialize 
+  0.00      0.000     0.000     0.000     0.000    46116   Hash#merge!                    
+  0.00      0.000     0.000     0.000     0.000    46116   Array#max                      
+  0.00      0.000     0.000     0.000     0.000    46116   Array#sum                      
+  0.00  1113298.000     0.000     0.000 1113298.000        1   Object#collect_stats_from_users /home/filonov/optim/rails-optimization-task2/task-2.rb:37
+  0.00      0.000     0.000     0.000     0.000    46119   Array#count                    
+  0.00      0.000     0.000     0.000     0.000    46116   Array#push                     
+  0.00      0.000     0.000     0.000     0.000    46116   User#initialize                /home/filonov/optim/rails-optimization-task2/task-2.rb:12
+  0.00      0.000     0.000     0.000     0.000   553884   String#to_i                    
+  0.00      0.000     0.000     0.000     0.000   300000   Array#clear                    
+  0.00      0.000     0.000     0.000     0.000   553884   String#===                     
+
+* recursively called methods
+
+Columns are:
+
+  %self     - The percentage of time spent in this method, derived from self_time/total_time.
+  total     - The time spent in this method and its children.
+  self      - The time spent in this method.
+  wait      - The amount of time this method waited for other threads.
+  child     - The time spent in this method's children.
+  calls     - The number of times this method was called.
+  name      - The name of the method.
+  location  - The location of the method.
+
+The interpretation of method names is:
+
+  * MyObject#test - An instance method "test" of the class "MyObject"
+  * <Object:MyObject>#test - The <> characters indicate a method on a singleton class.

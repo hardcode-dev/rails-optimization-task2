@@ -17,4 +17,5 @@ at_exit do
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
-do_work(limit: LIMIT)
+do_work(limit: NO_LIMIT)
+# do_work(limit: LIMIT)

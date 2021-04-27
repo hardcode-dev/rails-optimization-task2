@@ -21,6 +21,6 @@ class TestMemory < Minitest::Test
   private
 
   def perform
-    work(file_name: 'data_large.txt', progress_bar: false)
+    work(file_name: 'data_large.txt')
   end
 end

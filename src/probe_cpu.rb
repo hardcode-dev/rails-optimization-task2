@@ -23,7 +23,7 @@ LIMITS = [
 
 def do_work(limit: LIMIT, gc: nil, progress_bar: nil)
   gc_disabled = GC.disable unless gc
-  work(limit: limit, file_name: FILE_NAME_LARGE, progress_bar: progress_bar)
+  work(limit: limit, file_name: FILE_NAME_LARGE)
   GC.enable if gc_disabled
 end
 

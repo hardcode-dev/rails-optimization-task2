@@ -4,8 +4,8 @@ class User
   attr_reader :key
 
   def initialize(line)
-    fields = line.split(',')
-    @key = "#{fields[2]} #{fields[3]}"
+    line[/.*,([^,]+),([^,]+),\d+$/]
+    @key = "#{$1} #{$2}".freeze
 
     @browsers = []
     @dates = []
@@ -16,11 +16,11 @@ class User
     @always_chrome = nil
   end
 
-  def add_session(session)
+  def add_session(browser, time, date)
     @count += 1
-    add_time session['time'].to_i
-    add_browser session['browser']
-    add_date session['date']
+    add_browser browser
+    add_time time
+    add_date date
   end
 
   def add_time(time)
@@ -29,7 +29,6 @@ class User
   end
 
   def add_browser(browser)
-    browser.upcase!
     return if @browsers.include?(browser)
 
     @browsers.push browser
@@ -42,9 +41,7 @@ class User
   end
 
   def stats
-    @dates.sort!
-    @dates.reverse!
-
+    @dates.sort!.reverse!
     @browsers.sort!
 
     {

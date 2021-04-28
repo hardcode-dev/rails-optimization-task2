@@ -13,37 +13,35 @@ require_relative 'user.rb'
 
 USER_SIGN = 'user'.ord
 
-
-
 def parse_session(session)
-  fields = session.split(',')
-  {
-    'user_id' => fields[1],
-    'session_id' => fields[2],
-    'browser' => fields[3],
-    'time' => fields[4],
-    'date' => fields[5],
-  }
+  session[/,([^,]+),(\d+),([\d-]+)$/]
+  [(+$1).upcase!.freeze, $2.to_i, $3]
 end
 
 def work(limit: nil, file_name: FILE_NAME)
-  users = []
-  sessions = []
+  browsers = []
+  user_count = 0
+  session_count = 0
   user = nil
+  user_stats = {}
 
   File.open(file_name).each_line.with_index do |line, ix|
     break if limit && ix >= limit
 
     line.chop!
     if line.ord == USER_SIGN
+      user_stats[user.key] = user.stats unless user.nil?
       user = User.new(line)
-      users.push user
+      user_count += 1
     else
-      session = parse_session(line)
-      user.add_session session
-      sessions.push session
+      browser, time, date = parse_session(line)
+      browsers.push(browser) unless browsers.include?(browser)
+
+      user.add_session(browser, time, date)
+      session_count += 1
     end
   end
+  user_stats[user.key] = user.stats unless user.nil?
 
   # Отчёт в json
   #   - Сколько всего юзеров +
@@ -62,32 +60,17 @@ def work(limit: nil, file_name: FILE_NAME)
 
   report = {}
 
-  report[:totalUsers] = users.count
+  report[:totalUsers] = user_count
 
-  # Подсчёт количества уникальных браузеров
-  uniqueBrowsers = []
-  sessions.each do |session|
-    browser = session['browser']
-    uniqueBrowsers += [browser] if uniqueBrowsers.all? { |b| b != browser }
-  end
+  report['uniqueBrowsersCount'] = browsers.count
 
-  report['uniqueBrowsersCount'] = uniqueBrowsers.count
+  report['totalSessions'] = session_count
 
-  report['totalSessions'] = sessions.count
+  browsers.sort!.uniq!
 
-  report['allBrowsers'] =
-    sessions
-      .map { |s| s['browser'] }
-      .map { |b| b.upcase }
-      .sort
-      .uniq
-      .join(',')
+  report['allBrowsers'] = browsers.join(',')
 
-  report['usersStats'] = {}
-
-  users.each do |user|
-    report['usersStats'][user.key] = user.stats
-  end
+  report['usersStats'] = user_stats
 
   File.write('result.json', "#{report.to_json}\n")
 end

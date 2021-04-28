@@ -2,7 +2,7 @@
 
 FILE_NAME_LARGE = 'data_large.txt'
 REPORT_PATH = './report'
-LIMIT = 20_000
+LIMIT = 200_000
 NO_LIMIT = nil
 
 OPEN_CMD = RUBY_PLATFORM =~ /darwin/ ? 'open' : 'xdg-open'
@@ -64,7 +64,7 @@ end
 # do_work(limit: NO_LIMIT)
 # do_work(limit: LIMIT)
 
-# memory_profiler
+memory_profiler
 # stackprof
 # ruby_prof_alloc
-ruby_prof_memory
+# ruby_prof_memory

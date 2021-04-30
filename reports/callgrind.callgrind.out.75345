@@ -1,0 +1,298 @@
+events: allocations
+
+fl=
+fn=IO::write^
+0 3
+
+fl=
+fn=JSON/Ext/Generator/State::initialize_copy
+0 0
+
+fl=
+fn=Kernel::initialize_dup
+0 0
+cfl=
+cfn=JSON/Ext/Generator/State::initialize_copy
+calls=1 0
+0 0
+
+fl=
+fn=Kernel::dup
+0 2
+cfl=
+cfn=Kernel::initialize_dup
+calls=1 0
+0 0
+
+fl=
+fn=JSON/Ext/Generator/GeneratorMethods/Hash::to_json
+0 2
+cfl=
+cfn=Kernel::dup
+calls=1 0
+0 2
+
+fl=
+fn=Array::reverse
+0 390
+
+fl=
+fn=Array::any?
+0 520
+cfl=
+cfn=String::upcase
+calls=68510 131
+131 68510
+
+fl=
+fn=Array::max
+0 0
+
+fl=
+fn=String::+
+0 780
+
+fl=
+fn=Integer::to_s
+0 780
+
+fl=
+fn=Array::sum
+0 0
+
+fl=
+fn=String::to_i
+0 0
+
+fl=
+fn=Hash::merge
+0 2730
+
+fl=/Users/vitaliy.arnaut/Projects/ruby/profiling/homeworks/rails-optimization-task2/task-2.rb
+fn=Object::collect_stats_from_users
+39 0
+cfl=
+cfn=Array::each
+calls=7 40
+40 347114
+
+fl=/Users/vitaliy.arnaut/Projects/ruby/profiling/homeworks/rails-optimization-task2/task-2.rb
+fn=User::initialize
+12 0
+
+fl=
+fn=Class::new
+0 390
+cfl=/Users/vitaliy.arnaut/Projects/ruby/profiling/homeworks/rails-optimization-task2/task-2.rb
+cfn=User::initialize
+calls=390 0
+0 0
+
+fl=
+fn=Array::select
+0 390
+
+fl=
+fn=Array::join
+0 391
+
+fl=
+fn=Array::uniq
+0 2
+
+fl=
+fn=Array::sort
+0 1562
+
+fl=
+fn=String::upcase
+0 324480
+
+fl=
+fn=Array::map
+0 3512
+cfl=
+cfn=String::upcase
+calls=255450 92
+92 255450
+cfl=
+cfn=String::to_i
+calls=507000 116
+116 0
+
+fl=
+fn=Array::all?
+0 260
+cfl=
+cfn=String::upcase
+calls=520 136
+136 520
+
+fl=
+fn=Array::each
+0 14862
+cfl=
+cfn=Array::all?
+calls=2340 82
+82 780
+cfl=
+cfn=Array::select
+calls=390 102
+102 390
+cfl=
+cfn=Class::new
+calls=390 103
+103 390
+cfl=
+cfn=Array::count
+calls=390 111
+111 0
+cfl=
+cfn=Hash::merge
+calls=2730 111
+111 2730
+cfl=
+cfn=Array::map
+calls=3510 116
+116 257010
+cfl=
+cfn=Array::sum
+calls=390 116
+116 0
+cfl=
+cfn=Integer::to_s
+calls=780 116
+116 780
+cfl=
+cfn=String::+
+calls=780 116
+116 780
+cfl=
+cfn=Array::max
+calls=390 121
+121 0
+cfl=
+cfn=Array::sort
+calls=780 126
+126 1560
+cfl=
+cfn=Array::join
+calls=390 126
+126 390
+cfl=
+cfn=Array::any?
+calls=390 131
+131 69030
+cfl=
+cfn=Array::reverse
+calls=390 141
+141 390
+
+fl=
+fn=Array::count
+0 0
+
+fl=/Users/vitaliy.arnaut/Projects/ruby/profiling/homeworks/rails-optimization-task2/task-2.rb
+fn=Object::parse_session
+28 1950
+cfl=
+cfn=String::split
+calls=1950 29
+29 13650
+
+fl=/Users/vitaliy.arnaut/Projects/ruby/profiling/homeworks/rails-optimization-task2/task-2.rb
+fn=Object::parse_user
+18 390
+cfl=
+cfn=String::split
+calls=390 19
+19 2340
+
+fl=
+fn=String::split
+0 31980
+
+fl=
+fn=String::strip!
+0 0
+
+fl=
+fn=IO::foreach^
+0 7022
+cfl=
+cfn=String::strip!
+calls=2340 52
+52 0
+cfl=
+cfn=String::split
+calls=2340 54
+54 15990
+cfl=/Users/vitaliy.arnaut/Projects/ruby/profiling/homeworks/rails-optimization-task2/task-2.rb
+cfn=Object::parse_user
+calls=390 55
+55 2730
+cfl=/Users/vitaliy.arnaut/Projects/ruby/profiling/homeworks/rails-optimization-task2/task-2.rb
+cfn=Object::parse_session
+calls=1950 56
+56 15600
+
+fl=/Users/vitaliy.arnaut/Projects/ruby/profiling/homeworks/rails-optimization-task2/task-2.rb
+fn=Object::work
+47 8
+cfl=
+cfn=IO::foreach^
+calls=1 51
+51 41342
+cfl=
+cfn=Array::count
+calls=3 76
+76 0
+cfl=
+cfn=Array::each
+calls=2 80
+80 1978
+cfl=
+cfn=Array::map
+calls=2 89
+89 1952
+cfl=
+cfn=Array::sort
+calls=1 89
+89 2
+cfl=
+cfn=Array::uniq
+calls=1 89
+89 2
+cfl=
+cfn=Array::join
+calls=1 89
+89 1
+cfl=/Users/vitaliy.arnaut/Projects/ruby/profiling/homeworks/rails-optimization-task2/task-2.rb
+cfn=Object::collect_stats_from_users
+calls=7 110
+110 347114
+cfl=
+cfn=JSON/Ext/Generator/GeneratorMethods/Hash::to_json
+calls=1 144
+144 4
+cfl=
+cfn=IO::write^
+calls=1 144
+144 3
+
+fl=
+fn=Object::[]*
+0 1
+
+fl=/Users/vitaliy.arnaut/Projects/ruby/profiling/homeworks/rails-optimization-task2/profilers/rubyprof_calltree_profiler.rb
+fn=[global]::
+8 1
+cfl=
+cfn=Object::[]*
+calls=1 8
+8 1
+cfl=/Users/vitaliy.arnaut/Projects/ruby/profiling/homeworks/rails-optimization-task2/task-2.rb
+cfn=Object::work
+calls=1 8
+8 392406
+

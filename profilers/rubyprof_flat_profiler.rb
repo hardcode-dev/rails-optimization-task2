@@ -5,7 +5,7 @@ RubyProf.measure_mode = RubyProf::ALLOCATIONS
 
 RubyProf.start
 
-work(ENV['FILENAME'] || 'data.txt')
+ReportGenerate.new.work(ENV['FILENAME'] || 'data.txt')
 
 result = RubyProf.stop
 

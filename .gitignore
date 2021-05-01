@@ -1,0 +1,8 @@
+data_large.txt
+data_1K.txt
+data_10K.txt
+data_100K.txt
+data_1M.txt
+ruby_prof_reports/
+massif.out.*
+result.json

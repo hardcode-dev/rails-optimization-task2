@@ -1,16 +1,14 @@
-# Deoptimized version of homework task
-
 require 'json'
 require 'pry'
 require 'date'
 require 'minitest/autorun'
 
 class User
-  attr_reader :attributes, :sessions
+  attr_reader :attributes, :sessions_stats
 
-  def initialize(attributes:, sessions:)
+  def initialize(attributes:, sessions_stats:)
     @attributes = attributes
-    @sessions = sessions
+    @sessions_stats = sessions_stats
   end
 end
 
@@ -41,72 +39,113 @@ def collect_stats_from_user(report, user, &block)
   report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
 end
 
+def users_stats_initial
+  {
+    'sessionsCount' => 0,
+    'totalTime' => '0 min.',
+    'longestSession' => '0 min.',
+    'browsers' => '',
+    'usedIE' => false,
+    'alwaysUsedChrome' => true,
+    'dates' => []
+  }
+end
+
 def work(filename)
-  line_num = 0
   report = {}
-  report['usersStats'] = {}
   report[:totalUsers] = 0
   report['totalSessions'] = 0
-  uniqueBrowsers = []
   report['allBrowsers'] = ''
+  uniqueBrowsers = []
   user = 0
+
+  File.write('result.json', '{"usersStats":{')
 
   File.foreach(filename, "\n") do |line|
     cols = line.split(',')
+  
     if cols[0] == 'user'
-      user = User.new(attributes: parse_user(line), sessions: [])
+      if report['usersStats']
+        File.open('result.json', 'a') do |f|
+          f << ',' if report[:totalUsers] > 1
+          f << report['usersStats'].to_json[1..-2]
+        end
+      end
+      report['usersStats'] = {}
+
+      user = User.new(attributes: parse_user(line), sessions_stats: users_stats_initial)
       report[:totalUsers] += 1
     end
     if cols[0] == 'session'
       session = parse_session(line)
-      user.sessions << session
+
+      # Collect total stats
       report['totalSessions'] += 1
-    end    
-
-    collect_stats_from_user(report, user) do |user|
-      { 'sessionsCount' => user.sessions.count }
-    end
-  
-    # Собираем количество времени по пользователям
-    collect_stats_from_user(report, user) do |user|
-      { 'totalTime' => user.sessions.map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.' }
-    end
-  
-    # Выбираем самую длинную сессию пользователя
-    collect_stats_from_user(report, user) do |user|
-      { 'longestSession' => user.sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.' }
-    end
-  
-    # Браузеры пользователя через запятую
-    collect_stats_from_user(report, user) do |user|
-      { 'browsers' => user.sessions.map {|s| s['browser']}.map {|b| b.upcase}.sort.join(', ') }
-    end
-  
-    # Хоть раз использовал IE?
-    collect_stats_from_user(report, user) do |user|
-      { 'usedIE' => user.sessions.map{|s| s['browser']}.any? { |b| b.upcase =~ /INTERNET EXPLORER/ } }
-    end
-  
-    # Всегда использовал только Chrome?
-    collect_stats_from_user(report, user) do |user|
-      { 'alwaysUsedChrome' => user.sessions.map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ } }
-    end
-  
-    # Даты сессий через запятую в обратном порядке в формате iso8601
-    collect_stats_from_user(report, user) do |user|
-      { 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }
-    end
-
-    if session
       uniqueBrowsers += [session['browser']] if uniqueBrowsers.all? { |b| b != session['browser'] }
       report['uniqueBrowsersCount'] = uniqueBrowsers.count
     
       all_browsers = report['allBrowsers'].split(',') << session['browser'].upcase
       report['allBrowsers'] = all_browsers.sort.uniq.join(',')
+
+      #Collect user stats
+      collect_stats_from_user(report, user) do |user|
+        user.sessions_stats['sessionsCount'] = user.sessions_stats['sessionsCount'] + 1
+        user.sessions_stats
+      end
+    
+      # Собираем количество времени по пользователям
+      collect_stats_from_user(report, user) do |user|
+        user.sessions_stats['totalTime'] = (user.sessions_stats['totalTime'].gsub(/\D/, '').to_i + session['time'].to_i).to_s + ' min.'
+        user.sessions_stats
+      end
+    
+      # Выбираем самую длинную сессию пользователя
+      collect_stats_from_user(report, user) do |user|
+        if user.sessions_stats['longestSession'].gsub(/\D/, '').to_i < session['time'].to_i
+          user.sessions_stats['longestSession'] = session['time'].to_s + ' min.'
+        end
+        user.sessions_stats
+      end
+    
+      # Браузеры пользователя через запятую
+      collect_stats_from_user(report, user) do |user|
+        user.sessions_stats['browsers'] = (user.sessions_stats['browsers'].split(',').map(&:strip) << session['browser'].upcase).sort.join(', ')
+        user.sessions_stats
+      end
+    
+      # Хоть раз использовал IE?
+      unless user.sessions_stats['usedIE']
+        collect_stats_from_user(report, user) do |user|
+          user.sessions_stats['usedIE'] = session['browser'].upcase =~ /INTERNET EXPLORER/ ? true : false
+          user.sessions_stats
+        end
+      end
+    
+      # Всегда использовал только Chrome?
+      if user.sessions_stats['alwaysUsedChrome']
+        collect_stats_from_user(report, user) do |user|
+          user.sessions_stats['alwaysUsedChrome'] = session['browser'].upcase =~ /CHROME/ ? true : false
+          user.sessions_stats
+        end
+      end
+    
+      # Даты сессий через запятую в обратном порядке в формате iso8601
+      collect_stats_from_user(report, user) do |user|
+        date_list = user.sessions_stats['dates']&.map { |d| Date.parse(d) } || []
+        date_list << Date.parse(session['date'])
+        user.sessions_stats['dates'] = date_list.sort.reverse.map { |d| d.iso8601 }
+        user.sessions_stats
+      end
+      # puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
     end
-  
-    File.write('result.json', "#{report.to_json}\n")
-    # puts "Line #{line_num += 1} MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  end
+
+  File.open('result.json', 'a') do |f|
+    f << ',' if report[:totalUsers] > 1
+    f << report['usersStats'].to_json[1..-3] if report['usersStats'].any?
+    report.delete('usersStats')
+    f << '}},'
+    f << report.to_json[1..-1]
   end
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end

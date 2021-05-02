@@ -1,3 +1,5 @@
 .idea
-benchmarks/demo_data/data_large.txt
+benchmarks/demo_data/*.txt
+benchmarks/reports/ruby_prof/*
+!benchmarks/reports/ruby_prof/.keep
 result.json

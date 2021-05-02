@@ -1,111 +1,61 @@
 # frozen_string_literal: true
 
 require 'json'
-require 'date'
 
-class User
-  attr_reader :attributes, :sessions
-
-  def initialize(attributes:, sessions:)
-    @attributes = attributes
-    @sessions = sessions
-  end
-end
-
-def parse_user(user)
-  fields = user.split(',')
-  parsed_result = {
+def parse_user(fields)
+  {
     'id' => fields[1],
-    'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4],
+    'user_key' => "#{fields[2]} #{fields[3]}"
   }
 end
 
-def parse_session(session)
-  fields = session.split(',')
-  parsed_result = {
-    'user_id' => fields[1],
-    'session_id' => fields[2],
+def parse_session(fields)
+  {
     'browser' => fields[3],
-    'time' => fields[4],
-    'date' => fields[5],
+    'time' => fields[4].to_i,
+    'date' => fields[5]
   }
 end
 
 def work(file_name = 'data.txt')
-  file_lines = File.read(file_name).split("\n")
-
   users = []
   sessions = []
-
-  file_lines.each do |line|
-    cols = line.split(',')
-    users = users + [parse_user(line)] if cols[0] == 'user'
-    sessions = sessions + [parse_session(line)] if cols[0] == 'session'
-  end
-
-  # Отчёт в json
-  #   - Сколько всего юзеров +
-  #   - Сколько всего уникальных браузеров +
-  #   - Сколько всего сессий +
-  #   - Перечислить уникальные браузеры в алфавитном порядке через запятую и капсом +
-  #
-  #   - По каждому пользователю
-  #     - сколько всего сессий +
-  #     - сколько всего времени +
-  #     - самая длинная сессия +
-  #     - браузеры через запятую +
-  #     - Хоть раз использовал IE? +
-  #     - Всегда использовал только Хром? +
-  #     - даты сессий в порядке убывания через запятую +
-
   report = {}
+  report['totalUsers'] = 0
+  report['totalSessions'] = 0
+  unique_browsers = {}
 
-  report['totalUsers'] = users.count
-
-  # Подсчёт количества уникальных браузеров
-  uniqueBrowsers = []
-  sessions.each do |session|
-    browser = session['browser']
-    uniqueBrowsers += [browser] if uniqueBrowsers.all? { |b| b != browser }
+  IO.foreach(file_name) do |line|
+    cols = line.split(',')
+    if cols[0] == 'user'
+      users << parse_user(cols)
+      report['totalUsers'] += 1
+    else
+      cols[3].upcase
+      sessions << parse_session(cols)
+      report['totalSessions'] += 1
+      unique_browsers[cols[3]] = nil
+    end
   end
 
-  report['uniqueBrowsersCount'] = uniqueBrowsers.count
+  unique_browsers = unique_browsers.keys.sort
 
-  report['totalSessions'] = sessions.count
-
-  report['allBrowsers'] =
-    sessions
-      .map { |s| s['browser'] }
-      .map { |b| b.upcase }
-      .sort
-      .uniq
-      .join(',')
-
-  # Статистика по пользователям
-  users_objects = []
-
-  users.each do |user|
-    attributes = user
-    user_sessions = sessions.select { |session| session['user_id'] == user['id'] }
-    user_object = User.new(attributes: attributes, sessions: user_sessions)
-    users_objects = users_objects + [user_object]
-  end
-
+  report['unique_browsersCount'] = unique_browsers.count
+  report['allBrowsers'] = unique_browsers.join(',')
   report['usersStats'] = {}
 
-  users_objects.each do |user|
-    user_key = "#{user.attributes['first_name']} #{user.attributes['last_name']}"
+  users.each do |user|
+    user_sessions = sessions.select { |session| session['user_id'] == user['id'] }
+    user_key = "#{user['first_name']} #{user['last_name']}"
 
     report['usersStats'][user_key] = {
-      'sessionsCount' => user.sessions.count,
-      'totalTime' => user.sessions.map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.',
-      'longestSession' => user.sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.',
-      'browsers' => user.sessions.map {|s| s['browser']}.map {|b| b.upcase}.sort.join(', '),
-      'usedIE' => user.sessions.map{|s| s['browser']}.any? { |b| b.upcase =~ /INTERNET EXPLORER/ },
-      'alwaysUsedChrome' => user.sessions.map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ },
-      'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 }
+      'sessionsCount' => user_sessions.count,
+      'totalTime' => "#{user_sessions.map { |s| s['time'] }.sum} min.",
+      'longestSession' => "#{user_sessions.map { |s| s['time'] }.max} min.",
+      'browsers' => user_sessions.map { |s| s['browser'] }.join(', '),
+      'usedIE' => user_sessions.map { |s| s['browser'] }.any? { |b| b.upcase =~ /INTERNET EXPLORER/ },
+      'alwaysUsedChrome' => user_sessions.map { |s| s['browser'] }.all? { |b| b =~ /CHROME/ },
+      'dates' => user_sessions.map! { |s| s['date'] }
     }
   end
 

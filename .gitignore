@@ -2,4 +2,5 @@
 benchmarks/demo_data/*.txt
 benchmarks/reports/ruby_prof/*
 !benchmarks/reports/ruby_prof/.keep
+benchmarks/reports/stackprof/*.dump
 result.json

@@ -1,7 +1,13 @@
 .idea
 **/*/.DS_Store
+
 benchmarks/demo_data/*.txt
+
 benchmarks/reports/ruby_prof/*
 !benchmarks/reports/ruby_prof/.keep
+
 benchmarks/reports/stackprof/*.dump
+benchmarks/reports/stackprof/*.png
+benchmarks/reports/stackprof/*.dot
+
 result.json

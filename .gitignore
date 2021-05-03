@@ -1,4 +1,5 @@
 .idea
+**/*/.DS_Store
 benchmarks/demo_data/*.txt
 benchmarks/reports/ruby_prof/*
 !benchmarks/reports/ruby_prof/.keep

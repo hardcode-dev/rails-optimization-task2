@@ -261,6 +261,36 @@ String::split 11_130_920 (11_130_920)
 - String::split 6 679 640
 
 
+- MemoryProfiler
+allocated memory by file
+-----------------------------------
+  20.19 MB  /home/denio/thinknetika/rails-optimization-task2/task-2.rb
+
+allocated memory by class
+-----------------------------------
+   6.72 MB  String
+   4.30 MB  File
+
+allocated objects by class
+-----------------------------------
+    138519  String
+
+- просто чтоюы использовать заведом полезную оптимизацию `# frozen_string_literal: true`
+- Метрики не меняются значительно
+- MemoryProfiler
+allocated memory by file
+-----------------------------------
+  18.86 MB  /home/denio/thinknetika/rails-optimization-task2/task-2.rb
+
+  allocated memory by class
+-----------------------------------
+   5.38 MB  String
+   4.30 MB  File
+
+allocated objects by class
+-----------------------------------
+    105113  String
+
 ## Результаты
 В результате проделанной оптимизации наконец удалось обработать файл с данными.
 Удалось улучшить метрику системы с *того, что у вас было в начале, до того, что получилось в конце* и уложиться в заданный бюджет.

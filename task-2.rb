@@ -12,9 +12,8 @@ class User
   end
 end
 
-def parse_user(user)
-  fields = user.split(',')
-  parsed_result = {
+def parse_user(fields)
+  {
     'id' => fields[1],
     'first_name' => fields[2],
     'last_name' => fields[3],
@@ -22,9 +21,8 @@ def parse_user(user)
   }
 end
 
-def parse_session(session)
-  fields = session.split(',')
-  parsed_result = {
+def parse_session(fields)
+  {
     'user_id' => fields[1],
     'session_id' => fields[2],
     'browser' => fields[3],
@@ -82,12 +80,12 @@ def work(filename)
       end
       report['usersStats'] = {}
 
-      user = User.new(attributes: parse_user(line), sessions_stats: users_stats_initial)
+      user = User.new(attributes: parse_user(cols), sessions_stats: users_stats_initial)
       user_key = build_user_key(user)
       report[:totalUsers] += 1
     end
     if cols[0] == 'session'
-      session = parse_session(line)
+      session = parse_session(cols)
 
       # Collect total stats
       report['totalSessions'] += 1

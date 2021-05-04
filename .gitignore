@@ -9,3 +9,5 @@ memory-profiler.rb
 .DS_Store
 result.json
 stackprof.rb
+rspec.rb
+rspec-perf.rb

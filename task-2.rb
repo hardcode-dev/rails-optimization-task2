@@ -94,8 +94,8 @@ def work(filename)
       uniqueBrowsers += [session['browser']] if uniqueBrowsers.all? { |b| b != session['browser'] }
       report['uniqueBrowsersCount'] = uniqueBrowsers.count
     
-      all_browsers = report['allBrowsers'] << session['browser'].upcase
-      report['allBrowsers'] = all_browsers.sort.uniq
+      report['allBrowsers'] << session['browser'].upcase unless report['allBrowsers'].include?(session['browser'].upcase)  
+
       #Collect user stats
       collect_stats_from_user(report, user, user_key) do |user|
         user.sessions_stats['sessionsCount'] = user.sessions_stats['sessionsCount'] + 1
@@ -158,7 +158,7 @@ def work(filename)
     report.delete('usersStats')
     f << '}},'
 
-    report['allBrowsers'] = report['allBrowsers'].join(',')
+    report['allBrowsers'] = report['allBrowsers'].sort.join(',')
     f << report.to_json[1..-1]
   end
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)

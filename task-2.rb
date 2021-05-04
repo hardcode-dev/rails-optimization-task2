@@ -5,8 +5,7 @@ require 'pry'
 require 'date'
 # require 'minitest/autorun'
 
-def parse_user(user)
-  fields = user.split(',')
+def parse_user(fields)
   parsed_result = {
     id: fields[1],
     first_name: fields[2],
@@ -15,8 +14,7 @@ def parse_user(user)
   }
 end
 
-def parse_session(session)
-  fields = session.split(',')
+def parse_session(fields)
   parsed_result = {
     user_id: fields[1],
     session_id: fields[2],
@@ -53,7 +51,7 @@ def work(filepath = 'data-10000.txt')
   File.foreach(filepath) do |col|
     cols = col.split(',')
     if cols[0] == 'user'
-      user = parse_user(col)
+      user = parse_user(cols)
       user_key = "#{user[:first_name]}" + ' ' + "#{user[:last_name]}"
       report[:totalUsers] += 1
       report[:usersStats][user_key] = {

@@ -1,0 +1,20 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    memory_profiler (1.0.0)
+    ruby-prof (1.4.3)
+    stackprof (0.2.16)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  memory_profiler
+  ruby-prof
+  stackprof
+
+RUBY VERSION
+   ruby 2.7.3p183
+
+BUNDLED WITH
+   2.1.4

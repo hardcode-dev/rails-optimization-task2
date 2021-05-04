@@ -1,0 +1,13 @@
+README.md
+data_large.txt
+data.txt
+data-10000.txt
+Gemfile
+Gemfile.lock
+/tests
+memory-profiler.rb
+.DS_Store
+result.json
+stackprof.rb
+rspec.rb
+rspec-perf.rb

@@ -33,8 +33,17 @@ def parse_session(session)
   }
 end
 
+def build_user_key(user)
+  "#{user.attributes['first_name']}" + ' ' + "#{user.attributes['last_name']}"
+end
+
+def prepare_dates_for_report_json(report, user)
+  key = build_user_key(user)
+  report['usersStats'][key]['dates'] = report['usersStats'][key]['dates'].sort.reverse.map!(&:iso8601)
+end
+
 def collect_stats_from_user(report, user, &block)
-  user_key = "#{user.attributes['first_name']}" + ' ' + "#{user.attributes['last_name']}"
+  user_key = build_user_key(user)
   report['usersStats'][user_key] ||= {}
   report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
 end
@@ -68,6 +77,7 @@ def work(filename)
       if report['usersStats']
         File.open('result.json', 'a') do |f|
           f << ',' if report[:totalUsers] > 1
+          prepare_dates_for_report_json(report, user)
           f << report['usersStats'].to_json[1..-2]
         end
       end
@@ -130,9 +140,9 @@ def work(filename)
     
       # Даты сессий через запятую в обратном порядке в формате iso8601
       collect_stats_from_user(report, user) do |user|
-        date_list = user.sessions_stats['dates']&.map { |d| Date.parse(d) } || []
+        date_list = user.sessions_stats['dates'] || []
         date_list << Date.parse(session['date'])
-        user.sessions_stats['dates'] = date_list.sort.reverse.map { |d| d.iso8601 }
+        user.sessions_stats['dates'] = date_list
         user.sessions_stats
       end
       # puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
@@ -141,7 +151,10 @@ def work(filename)
 
   File.open('result.json', 'a') do |f|
     f << ',' if report[:totalUsers] > 1
-    f << report['usersStats'].to_json[1..-3] if report['usersStats'].any?
+    if report['usersStats'].any?
+      prepare_dates_for_report_json(report, user)
+      f << report['usersStats'].to_json[1..-3]
+    end
     report.delete('usersStats')
     f << '}},'
 

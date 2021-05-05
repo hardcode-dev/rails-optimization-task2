@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 # Deoptimized version of homework task
 
 require 'json'
-require 'pry'
-require 'date'
+# require 'pry'
 require 'set'
 
 def parse_user(user)
@@ -23,7 +24,7 @@ def parse_session(session)
     'session_id' => fields[2],
     'browser' => fields[3].upcase,
     'time' => fields[4].to_i,
-    'date' => fields[5],
+    'date' => fields[5]
   }
 end
 
@@ -36,7 +37,6 @@ def collect_stats_from_users(report, users_objects, &block)
 end
 
 def work(filename = 'data.txt')
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
   report = {
     'totalUsers' => 0,
     'usersStats' => {},
@@ -87,5 +87,5 @@ def work(filename = 'data.txt')
   end
 
   File.write('result.json', "#{report.to_json}\n")
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))
 end

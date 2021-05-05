@@ -32,13 +32,12 @@ def add_stasts sessions
     'sessionsCount' => sessions.count, 
   # Собираем количество времени по пользователям
     'totalTime' => sessions.map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.',
-
   # Выбираем самую длинную сессию пользователя
     'longestSession' => sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.',
   # Браузеры пользователя через запятую
-    'browsers' => sessions.map {|s| s['browser']}.map {|b| b.upcase}.sort.join(', '),
+    'browsers' => sessions.map {|s| s['browser']}.map {|b| b}.sort.join(', '),
   # Хоть раз использовал IE?
-    'usedIE' => sessions.map{|s| s['browser']}.any? { |b| b.upcase =~ /INTERNET EXPLORER/ },
+    'usedIE' => sessions.map{|s| s['browser']}.any? { |b| b =~ /INTERNET EXPLORER/ },
     'alwaysUsedChrome' => sessions.map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ },
     # Даты сессий через запятую в обратном порядке в формате iso8601
     'dates' => sessions.map{|s| s['date'].strip}.sort.reverse#.map{|d|d},

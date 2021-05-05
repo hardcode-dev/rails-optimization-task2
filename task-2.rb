@@ -7,8 +7,7 @@ require 'date'
 require 'json'
 
 
-def parse_user(user)
-  fields = user.split(',')
+def parse_user(fields)
   parsed_result = {
     'id' => fields[1],
     'first_name' => fields[2],
@@ -17,8 +16,7 @@ def parse_user(user)
   }
 end
 
-def parse_session(session)
-  fields = session.split(',')
+def parse_session(fields)
   parsed_result = {
     'user_id' => fields[1],
     'session_id' => fields[2],
@@ -42,7 +40,7 @@ def add_stasts sessions
   # Хоть раз использовал IE?
     'usedIE' => sessions.map{|s| s['browser']}.any? { |b| b.upcase =~ /INTERNET EXPLORER/ },
     'alwaysUsedChrome' => sessions.map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ },
-  # Даты сессий через запятую в обратном порядке в формате iso8601
+    # Даты сессий через запятую в обратном порядке в формате iso8601
     'dates' => sessions.map{|s| s['date'].strip}.sort.reverse#.map{|d|d},
   }
 
@@ -75,12 +73,12 @@ def work filename = 'data.txt', gc_disable=false
         File.write('result.json', ",", mode: 'a')
       end
       sessions = []
-      user = parse_user(line)
+      user = parse_user(cols)
     end
 
     if cols[0] == 'session'
       totalSessions += 1
-      ses = parse_session(line)
+      ses = parse_session(cols)
       sessions << ses
       all_browsers << ses['browser']
       
@@ -129,4 +127,4 @@ def work filename = 'data.txt', gc_disable=false
   puts ObjectSpace.count_objects
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
-#work('data/data50000.txt', true)
+work('data/data50000.txt', true) if ENV['DATA']

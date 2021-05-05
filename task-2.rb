@@ -34,6 +34,7 @@ def add_stasts sessions
     'sessionsCount' => sessions.count, 
   # Собираем количество времени по пользователям
     'totalTime' => sessions.map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.',
+
   # Выбираем самую длинную сессию пользователя
     'longestSession' => sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.',
   # Браузеры пользователя через запятую
@@ -42,11 +43,13 @@ def add_stasts sessions
     'usedIE' => sessions.map{|s| s['browser']}.any? { |b| b.upcase =~ /INTERNET EXPLORER/ },
     'alwaysUsedChrome' => sessions.map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ },
   # Даты сессий через запятую в обратном порядке в формате iso8601
-    'dates' => sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 },
+    'dates' => sessions.map{|s| s['date']}.sort.reverse
   }
+
 end 
 
-def work filename = 'data.txt'
+def work filename = 'data.txt', gc_disable=false
+  GC.disable if gc_disable
   puts "start work..."
   users = []
   sessions = []
@@ -91,7 +94,6 @@ def work filename = 'data.txt'
   File.write('result.json', "#{add_stats.to_json}\n", mode: 'a')
   File.write('result.json', "},\n\n\n", mode: 'a')
 
-  #p ObjectSpace.count_objects
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 
   # Отчёт в json
@@ -127,5 +129,4 @@ def work filename = 'data.txt'
   puts ObjectSpace.count_objects
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
-#work('data/data50000.txt')
-#work('data.txt')
+#work('data/data50000.txt', true)

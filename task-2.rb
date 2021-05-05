@@ -26,22 +26,20 @@ def parse_session(fields)
   }
 end
 
-
 def add_stasts sessions
   browsers_map = sessions.map {|s| s['browser']}
   time_map = sessions.map {|s| s['time'].to_i}
   { 
     'sessionsCount' => sessions.count, 
   # Собираем количество времени по пользователям
-    'totalTime' => time_map.sum.to_s + ' min.',
+    'totalTime' => time_map.sum.to_s << ' min.',
   # Выбираем самую длинную сессию пользователя
-    'longestSession' => time_map.max.to_s + ' min.',
+    'longestSession' => time_map.max.to_s << ' min.',
   # Хоть раз использовал IE?
     'usedIE' => browsers_map.any? { |b| b =~ /INTERNET EXPLORER/ },
     'alwaysUsedChrome' => browsers_map.all? { |b| b.upcase =~ /CHROME/ },    
   # Браузеры пользователя через запятую
     'browsers' => browsers_map.map! {|b| b}.sort.join(', '),
-
     # Даты сессий через запятую в обратном порядке в формате iso8601
     'dates' => sessions.map{|s| s['date']}.sort.reverse
   }

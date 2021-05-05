@@ -6,15 +6,9 @@ require 'json'
 # require 'pry'
 require 'set'
 
-def parse_user(user)
+def parse_username(user)
   fields = user.split(',')
-  {
-    'id' => fields[1],
-    'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4],
-    'full_name' => "#{fields[2]} #{fields[3]}"
-  }
+  "#{fields[2]} #{fields[3]}"
 end
 
 def parse_session(session)
@@ -28,30 +22,42 @@ def parse_session(session)
   }
 end
 
-def collect_stats_from_users(report, users_objects, &block)
-  users_objects.each do |user|
-    user_key = user.attributes['full_name']
-    report['usersStats'][user_key] ||= {}
-    report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
-  end
+def save_user_report(user_report, file)
+  save_username(user_report.delete('username'), file)
+  user_report['totalTime'] = "#{user_report['totalTime']} min."
+  user_report['longestSession'] = "#{user_report['longestSession']} min."
+  user_report['browsers'] = user_report['browsers'].sort.join(', ')
+  user_report['dates'] = user_report['dates'].sort.reverse
+  file.write(user_report.to_json)
+end
+
+def save_username(username, file)
+  file.write('"')
+  file.write(username)
+  file.write('":')
 end
 
 def work(filename = 'data.txt')
   report = {
     'totalUsers' => 0,
-    'usersStats' => {},
     'allBrowsers' => Set.new,
     'uniqueBrowsersCount' => 0,
     'totalSessions' => 0
   }
-  current_user = {}
+  user_report = nil
+  result_file = File.open('result.json', 'w')
+  result_file.write('{"usersStats":{')
 
   File.foreach(filename, "\n", chomp: true) do |line|
     cols = line.split(',')
     if cols[0] == 'user'
-      current_user = parse_user(line)
+      if user_report
+        save_user_report(user_report, result_file)
+        result_file.write(',')
+      end
       report['totalUsers'] += 1
-      report['usersStats'][current_user['full_name']] = {
+      user_report = {
+        'username' => parse_username(line),
         'sessionsCount' => 0,
         'totalTime' => 0,
         'longestSession' => 0,
@@ -66,26 +72,36 @@ def work(filename = 'data.txt')
     report['allBrowsers'].add(session['browser'])
     report['uniqueBrowsersCount'] = report['allBrowsers'].size
     report['totalSessions'] += 1
-    report['usersStats'][current_user['full_name']]['sessionsCount'] += 1
-    report['usersStats'][current_user['full_name']]['totalTime'] += session['time']
-    if session['time'] > report['usersStats'][current_user['full_name']]['longestSession']
-      report['usersStats'][current_user['full_name']]['longestSession'] = session['time']
-    end
-    report['usersStats'][current_user['full_name']]['browsers'].append(session['browser'])
-    report['usersStats'][current_user['full_name']]['usedIE'] = true if session['browser'] =~ /INTERNET EXPLORER/
-    report['usersStats'][current_user['full_name']]['alwaysUsedChrome'] = false unless session['browser'] =~ /CHROME/
-    report['usersStats'][current_user['full_name']]['dates'].append(session['date'])
+
+    user_report['sessionsCount'] += 1
+    user_report['totalTime'] += session['time']
+    user_report['longestSession'] = session['time'] if session['time'] > user_report['longestSession']
+    user_report['browsers'].append(session['browser'])
+    user_report['usedIE'] = true if session['browser'] =~ /INTERNET EXPLORER/
+    user_report['alwaysUsedChrome'] = false unless session['browser'] =~ /CHROME/
+    user_report['dates'].append(session['date'])
   end
 
-  # Сериализация данных
-  report['allBrowsers'] = report['allBrowsers'].to_a.sort!.join(',')
-  report['usersStats'].each_key do |user_name|
-    report['usersStats'][user_name]['totalTime'] = "#{report['usersStats'][user_name]['totalTime']} min."
-    report['usersStats'][user_name]['longestSession'] = "#{report['usersStats'][user_name]['longestSession']} min."
-    report['usersStats'][user_name]['browsers'] = report['usersStats'][user_name]['browsers'].sort.join(', ')
-    report['usersStats'][user_name]['dates'] = report['usersStats'][user_name]['dates'].sort.reverse
-  end
+  # end of usersStats
+  save_user_report(user_report, result_file) if user_report
+  result_file.write('}')
+  # totalUsers
+  result_file.write(',"totalUsers":')
+  result_file.write(report['totalUsers'])
+  # allBrowsers
+  result_file.write(',"allBrowsers":"')
+  result_file.write(report['allBrowsers'].to_a.sort!.join(','))
+  result_file.write('"')
+  # uniqueBrowsersCount
+  result_file.write(',"uniqueBrowsersCount":')
+  result_file.write(report['uniqueBrowsersCount'])
+  # totalSessions
+  result_file.write(',"totalSessions":')
+  result_file.write(report['totalSessions'])
+  # end of file
+  result_file.write('}')
 
-  File.write('result.json', "#{report.to_json}\n")
   puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))
+ensure
+  result_file.close
 end

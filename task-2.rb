@@ -39,9 +39,9 @@ def add_stasts sessions
     'usedIE' => browsers_map.any? { |b| b =~ /INTERNET EXPLORER/ },
     'alwaysUsedChrome' => browsers_map.all? { |b| b.upcase =~ /CHROME/ },    
   # Браузеры пользователя через запятую
-    'browsers' => browsers_map.map! {|b| b}.sort.join(', '),
+    'browsers' => browsers_map.map! {|b| b}.sort!.join(', '),
     # Даты сессий через запятую в обратном порядке в формате iso8601
-    'dates' => sessions.map{|s| s['date']}.sort.reverse
+    'dates' => sessions.map{|s| s['date']}.sort!.reverse!
   }
 
 end 

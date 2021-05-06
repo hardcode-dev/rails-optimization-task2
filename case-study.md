@@ -94,6 +94,17 @@ Array.map Отчет RubyProf(MEMORY mode) изменился add_stats 20.54% -
 - заменил методы на те же только с ! чтобы не создавалось дополнительных строк
 - ObjectSpace[:TOTAL] улучшилась 851_883 ->  773_220
 - из отчета stackprof parse_session ушло с первого места
+ Object#parse_session(15.2% -> 5.6%)
+
+### Ваша находка №7
+- Отчет RubyProf(graph mode) указывал по-прежнему на метод add_stats,
+В топе внутри метода был метод sort и неподалеку reverse
+- заменил методы на методы с bang!
+- ObjectSpace[:TOTAL] улучшилась 773_220 -> 743_866
+- sort и reverse исчезли из топа add_stats
+
+- продолжаем улучшать add_stats по отчету RubyProf(graph mode)
+сейчас в топе Array#map
 
 
 ### Ваша находка №X

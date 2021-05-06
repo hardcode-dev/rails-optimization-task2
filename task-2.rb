@@ -36,8 +36,8 @@ def add_stasts sessions
   # Выбираем самую длинную сессию пользователя
     'longestSession' => time_map.max.to_s << ' min.',
   # Хоть раз использовал IE?
-    'usedIE' => browsers_map.any? { |b| b =~ /INTERNET EXPLORER/ },
-    'alwaysUsedChrome' => browsers_map.all? { |b| b.upcase =~ /CHROME/ },    
+    'usedIE' => browsers_map.any? { |b| b.start_with?("INTERNET EXPLORER") },
+    'alwaysUsedChrome' => browsers_map.all? { |b| b.start_with?("CHROME") },    
   # Браузеры пользователя через запятую
     'browsers' => browsers_map.map! {|b| b}.sort!.join(', '),
     # Даты сессий через запятую в обратном порядке в формате iso8601

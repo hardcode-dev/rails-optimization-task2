@@ -102,10 +102,15 @@ Array.map Отчет RubyProf(MEMORY mode) изменился add_stats 20.54% -
 - заменил методы на методы с bang!
 - ObjectSpace[:TOTAL] улучшилась 773_220 -> 743_866
 - sort и reverse исчезли из топа add_stats
-
-- продолжаем улучшать add_stats по отчету RubyProf(graph mode)
-сейчас в топе Array#map
-
+### Ваша находка №8
+- Отчет RubyProf(graph mode) указывал по-прежнему на метод add_stats,
+в топе были Array#any? и Array#all?
+- попробовал заменил проверку по регулярному выражению 
+{ |b| b =~ /INTERNET EXPLORER/ } на b.start_with?("INTERNET EXPLORER"). 
+Оказалось, что при таком подходе не создается лишних объектов(T_MATCH)
+и строк тоже новых не создается так как "INTERNET EXPLORER" – замороженная строка
+- ObjectSpace[:TOTAL] улучшилась 743_866 -> 712_486
+- all? и any? ушли из топа отчета из метода add_stats
 
 ### Ваша находка №X
 - какой отчёт показал главную точку роста

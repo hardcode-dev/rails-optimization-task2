@@ -55,7 +55,6 @@ def work filename = 'data.txt', gc_disable=false
   totalSessions = 0
   totalUsers = 0
   report = {}
-  report['usersStats'] = {}
   user = nil
   File.write('result.json', '{"usersStats":{')
 

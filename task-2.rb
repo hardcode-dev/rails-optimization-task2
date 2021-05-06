@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# Deoptimized version of homework task
-
 require 'json'
 # require 'pry'
 require 'set'
@@ -100,8 +98,6 @@ def work(filename = 'data.txt')
   result_file.write(report['totalSessions'])
   # end of file
   result_file.write('}')
-
-  puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))
 ensure
   result_file.close
 end

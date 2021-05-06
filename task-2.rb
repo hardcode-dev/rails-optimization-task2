@@ -126,4 +126,6 @@ def work filename = 'data.txt', gc_disable=false
   puts ObjectSpace.count_objects
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
-work('data/data50000.txt', true) if ENV['DATA']
+gc_disable = false 
+gc_disable = true unless ENV['GC']
+work('data/data50000.txt', gc_disable) if ENV['DATA']

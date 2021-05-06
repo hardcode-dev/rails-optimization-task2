@@ -56,12 +56,14 @@ def work filename = 'data.txt', gc_disable=false
       totalUsers += 1
       unless sessions.empty?
 
-        user_key = "#{user[3]}" + ' ' + "#{user[4]}"
+        #user_key = "#{user[3]}" + ' ' + "#{user[4]}"
         add_stats = add_stasts(sessions, user_browser, user_time, user_date)
 
-        File.write('result.json', "\"#{user_key}\":", mode: 'a')
-        File.write('result.json', "#{add_stats.to_json}\n", mode: 'a')
-        File.write('result.json', ",", mode: 'a')
+        #File.write('result.json', "\"#{user_key}\":#{add_stats.to_json},", mode: 'a')
+        File.write('result.json', "\"#{user[3]} #{user[4]}\":#{add_stats.to_json},", mode: 'a')
+        #('result.json', "\"#{user_key}\":", mode: 'a')
+        #File.write('result.json', "#{add_stats.to_json}\n", mode: 'a')
+        #File.write('result.json', ",", mode: 'a')
       end
       sessions = []
       user = REGEXP_USER.match(line)
@@ -85,12 +87,13 @@ def work filename = 'data.txt', gc_disable=false
     end
   end
 
-  user_key = "#{user[3]}" + ' ' + "#{user[4]}"
+  #user_key = "#{user[3]}" + ' ' + "#{user[4]}"
   add_stats = add_stasts(sessions, user_browser, user_time, user_date)
 
-  File.write('result.json', "\"#{user_key}\":", mode: 'a')
-  File.write('result.json', "#{add_stats.to_json}\n", mode: 'a')
-  File.write('result.json', "},\n\n\n", mode: 'a')
+  File.write('result.json', "\"#{user[3]} #{user[4]}\":#{add_stats.to_json}},", mode: 'a')
+  #File.write('result.json', "\"#{user_key}\":", mode: 'a')
+  #File.write('result.json', "#{add_stats.to_json}\n", mode: 'a')
+  #File.write('result.json', "},", mode: 'a')
 
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 

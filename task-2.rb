@@ -18,11 +18,9 @@ end
 
 def parse_session(fields)
   parsed_result = {
-    'user_id' => fields[1],
-    'session_id' => fields[2],
-    'browser' => fields[3].upcase!,
-    'time' => fields[4],
-    'date' => fields[5].strip!,
+    'browser' => fields[4].upcase!,
+    'time' => fields[5],
+    'date' => fields[6],
   }
 end
 
@@ -47,6 +45,7 @@ def add_stasts sessions
 end 
 
 REGEXP_USER = Regexp.new('(\w+),(\d+),(\w+),(\w+),(\d+)') 
+REGEXP_SESSION = Regexp.new('(\w+),(\d+),(\d+),(.+),(\d+),([\w|-]+)')
 
 def work filename = 'data.txt', gc_disable=false
   GC.disable if gc_disable
@@ -75,11 +74,10 @@ def work filename = 'data.txt', gc_disable=false
       end
       sessions = []
       user = REGEXP_USER.match(line)
-      #user = parse_user(cols)
     end
 
-    if line.start_with?("session")#cols[0] == 'session'
-      cols = line.split(',')
+    if line.start_with?("session")
+      cols = REGEXP_SESSION.match(line)
       totalSessions += 1
       ses = parse_session(cols)
       sessions << ses

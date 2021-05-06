@@ -58,7 +58,7 @@ def work filename = 'data.txt', gc_disable=false
   user = nil
   File.write('result.json', '{"usersStats":{')
 
-  File.open(filename, :encoding => "ASCII").each_line do |line|
+  File.open(filename).each_line do |line|
     cols = line.split(',')
     if cols[0] == 'user'
       totalUsers += 1

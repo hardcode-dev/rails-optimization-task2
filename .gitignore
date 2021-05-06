@@ -1,0 +1,10 @@
+.idea
+
+# Data
+/data/*
+!/data/.keep
+
+# Test data
+/spec/test_data/*
+!/spec/test_data/.keep
+

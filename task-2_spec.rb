@@ -2,11 +2,6 @@
 
 require_relative 'task-2'
 require 'rspec'
-require 'rspec-benchmark'
-
-RSpec.configure do |config|
-  config.include RSpec::Benchmark::Matchers
-end
 
 RSpec.describe 'Task2' do
   context 'works correctly' do
@@ -61,23 +56,15 @@ RSpec.describe 'Task2' do
   end
 
   context 'works efficiently' do
-    let(:size) { 1_000 }
+    let(:size) { 10_000 }
     let(:filename) { "data#{size}.txt" }
-    let(:measurement_time_seconds) { 1 }
-    let(:warmup_seconds) { 0.2 }
 
-    it 'works under 5 ms' do
-      expect do
-        work(filename)
-      end.to perform_under(5).ms.warmup(2).times.sample(10).times
-    end
-
-    it 'consumes less then 1 mb RAM' do
+    it 'consumes less then 2 mb RAM' do
       memory_before = (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
-      work
+      work(filename)
       memory_after = (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
       consumed_memory = memory_after - memory_before
-      expect(consumed_memory).to be <= 1
+      expect(consumed_memory).to be <= 2
     end
   end
 end

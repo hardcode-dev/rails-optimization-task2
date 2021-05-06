@@ -46,6 +46,8 @@ def add_stasts sessions
 
 end 
 
+REGEXP_USER = Regexp.new('(\w+),(\d+),(\w+),(\w+),(\d+)') 
+
 def work filename = 'data.txt', gc_disable=false
   GC.disable if gc_disable
   puts "start work..."
@@ -59,12 +61,12 @@ def work filename = 'data.txt', gc_disable=false
   File.write('result.json', '{"usersStats":{')
 
   File.open(filename).each_line do |line|
-    cols = line.split(',')
-    if cols[0] == 'user'
+    
+    if line.start_with?("user")
       totalUsers += 1
       unless sessions.empty?
 
-        user_key = "#{user['first_name']}" + ' ' + "#{user['last_name']}"
+        user_key = "#{user[3]}" + ' ' + "#{user[4]}"
         add_stats = add_stasts(sessions)
 
         File.write('result.json', "\"#{user_key}\":", mode: 'a')
@@ -72,10 +74,12 @@ def work filename = 'data.txt', gc_disable=false
         File.write('result.json', ",", mode: 'a')
       end
       sessions = []
-      user = parse_user(cols)
+      user = REGEXP_USER.match(line)
+      #user = parse_user(cols)
     end
 
-    if cols[0] == 'session'
+    if line.start_with?("session")#cols[0] == 'session'
+      cols = line.split(',')
       totalSessions += 1
       ses = parse_session(cols)
       sessions << ses
@@ -84,7 +88,7 @@ def work filename = 'data.txt', gc_disable=false
     end
   end
 
-  user_key = "#{user['first_name']}" + ' ' + "#{user['last_name']}"
+  user_key = "#{user[3]}" + ' ' + "#{user[4]}"
   add_stats = add_stasts(sessions)
 
   File.write('result.json', "\"#{user_key}\":", mode: 'a')

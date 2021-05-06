@@ -6,27 +6,13 @@ require 'json'
 require 'date'
 require 'json'
 
+user_browser = []
+user_time = []
+user_date = []
 
-def parse_user(fields)
-  parsed_result = {
-    'id' => fields[1],
-    'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4],
-  }
-end
-
-def parse_session(fields)
-  parsed_result = {
-    'browser' => fields[4].upcase!,
-    'time' => fields[5],
-    'date' => fields[6],
-  }
-end
-
-def add_stasts sessions
-  browsers_map = sessions.map {|s| s['browser']}
-  time_map = sessions.map {|s| s['time'].to_i}
+def add_stasts sessions, user_browser, user_time, user_date
+  browsers_map = user_browser
+  time_map = user_time
   { 
     'sessionsCount' => sessions.count, 
   # Собираем количество времени по пользователям
@@ -39,7 +25,7 @@ def add_stasts sessions
   # Браузеры пользователя через запятую
     'browsers' => browsers_map.map! {|b| b}.sort!.join(', '),
     # Даты сессий через запятую в обратном порядке в формате iso8601
-    'dates' => sessions.map{|s| s['date']}.sort!.reverse!
+    'dates' => user_date.sort!.reverse!
   }
 
 end 
@@ -57,6 +43,11 @@ def work filename = 'data.txt', gc_disable=false
   totalUsers = 0
   report = {}
   user = nil
+
+  user_browser = []
+  user_time = []
+  user_date = []
+
   File.write('result.json', '{"usersStats":{')
 
   File.open(filename).each_line do |line|
@@ -66,7 +57,7 @@ def work filename = 'data.txt', gc_disable=false
       unless sessions.empty?
 
         user_key = "#{user[3]}" + ' ' + "#{user[4]}"
-        add_stats = add_stasts(sessions)
+        add_stats = add_stasts(sessions, user_browser, user_time, user_date)
 
         File.write('result.json', "\"#{user_key}\":", mode: 'a')
         File.write('result.json', "#{add_stats.to_json}\n", mode: 'a')
@@ -74,20 +65,28 @@ def work filename = 'data.txt', gc_disable=false
       end
       sessions = []
       user = REGEXP_USER.match(line)
+
+      user_browser = []
+      user_time = []
+      user_date = []
+      
     end
 
     if line.start_with?("session")
       cols = REGEXP_SESSION.match(line)
       totalSessions += 1
-      ses = parse_session(cols)
-      sessions << ses
-      all_browsers << ses['browser']
-      
+      sessions << cols
+      browser = cols[4].upcase!
+      all_browsers << browser
+
+      user_browser << browser
+      user_time << cols[5].to_i
+      user_date << cols[6]
     end
   end
 
   user_key = "#{user[3]}" + ' ' + "#{user[4]}"
-  add_stats = add_stasts(sessions)
+  add_stats = add_stasts(sessions, user_browser, user_time, user_date)
 
   File.write('result.json', "\"#{user_key}\":", mode: 'a')
   File.write('result.json', "#{add_stats.to_json}\n", mode: 'a')

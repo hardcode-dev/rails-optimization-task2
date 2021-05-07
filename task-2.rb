@@ -47,8 +47,7 @@ def work(filename = 'data.txt')
   result_file.write('{"usersStats":{')
 
   File.foreach(filename, "\n", chomp: true) do |line|
-    cols = line.split(',')
-    if cols[0] == 'user'
+    if line.start_with?('user')
       if user_report
         save_user_report(user_report, result_file)
         result_file.write(',')

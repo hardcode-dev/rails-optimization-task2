@@ -2,3 +2,7 @@
 /.idea
 /result.json
 /massif.out.*
+/graphviz.dot
+/graphviz.png
+/stackprof.dump
+/ruby_prof_reports/

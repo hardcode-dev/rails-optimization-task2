@@ -2,18 +2,18 @@
 
 require_relative 'task-2'
 require 'benchmark'
-require 'memory_profiler'
+# require 'memory_profiler'
 # require 'stackprof'
 # require 'ruby-prof'
 
-# time = Benchmark.realtime do
-#   work('data_large.txt')
-# end
-
-report = MemoryProfiler.report do
-  work('data10000.txt')
+time = Benchmark.realtime do
+  work('data_large.txt')
 end
-report.pretty_print(scale_bytes: true)
+
+# report = MemoryProfiler.report do
+#   work('data10000.txt')
+# end
+# report.pretty_print(scale_bytes: true)
 
 
 # StackProf.run(mode: :object, out: 'stackprof.dump', raw: true) do

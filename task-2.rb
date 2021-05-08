@@ -114,9 +114,12 @@ def work filename = 'data.txt', gc_disable=false
   writer.write("\"totalUsers\":#{totalUsers},\n")
   writer.write("\"uniqueBrowsersCount\":#{all_browsers.count},\n")
   writer.write("\"totalSessions\":#{totalSessions},\n")
+  
+  # Тут пробовал вариант с SortedSet – больше объектов создается :(
+  #allBrowsers = all_browsers.inject("".dup){ | r,i |  r << i << "," }.chop
   allBrowsers = all_browsers
-      .sort
-      .join(',')
+    .sort
+    .join(',')  
   writer.write("\"allBrowsers\":#{allBrowsers.to_json}\n")    
   writer.write("}")
 

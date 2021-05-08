@@ -4,6 +4,7 @@
 require 'json'
 require 'date'
 require 'json'
+require 'set'
 
 def add_stats user_sessions_count, user_browser, user_time, user_date
   browsers_map = user_browser
@@ -35,7 +36,7 @@ def work filename = 'data.txt', gc_disable=false
   puts "start work..."
   users = []
   sessions = []
-  all_browsers = [] 
+  all_browsers = Set.new
   totalSessions = 0
   totalUsers = 0
   report = {}
@@ -70,10 +71,7 @@ def work filename = 'data.txt', gc_disable=false
       totalSessions += 1
       user_sessions_count += 1
       browser = cols[4].upcase!
-      
-      #use set plz
-      all_browsers << browser unless all_browsers.include?(browser)
-
+      all_browsers << browser
       user_browser << browser
       user_time << cols[5].to_i
       user_date << cols[6]

@@ -23,7 +23,6 @@ def add_stats user_sessions_count, user_browser, user_time, user_date
     # Даты сессий через запятую в обратном порядке в формате iso8601
     'dates' => user_date.sort!.reverse!
   }
-
 end 
 
 class FileWriter
@@ -67,17 +66,17 @@ def work filename = 'data.txt', gc_disable=false
     
     if line.start_with?("user")
       totalUsers += 1
+      
       if user_sessions_count > 0
         add_stats = add_stats(user_sessions_count, user_browser, user_time, user_date)
         writer.write("\"#{user[3]} #{user[4]}\":#{add_stats.to_json},")
       end
-      user_sessions_count = 0
       user = REGEXP_USER.match(line)
 
+      user_sessions_count = 0
       user_browser = []
       user_time = []
       user_date = []
-      
     end
 
     if line.start_with?("session")
@@ -94,22 +93,6 @@ def work filename = 'data.txt', gc_disable=false
 
   add_stats = add_stats(user_sessions_count, user_browser, user_time, user_date)
   writer.write("\"#{user[3]} #{user[4]}\":#{add_stats.to_json}},")
-
-
-  # Отчёт в json
-  #   - Сколько всего юзеров +
-  #   - Сколько всего уникальных браузеров +
-  #   - Сколько всего сессий +
-  #   - Перечислить уникальные браузеры в алфавитном порядке через запятую и капсом +
-  #
-  #   - По каждому пользователю
-  #     - сколько всего сессий +
-  #     - сколько всего времени +
-  #     - самая длинная сессия +
-  #     - браузеры через запятую +
-  #     - Хоть раз использовал IE? +
-  #     - Всегда использовал только Хром? +
-  #     - даты сессий в порядке убывания через запятую +
 
   writer.write("\"totalUsers\":#{totalUsers},\n")
   writer.write("\"uniqueBrowsersCount\":#{all_browsers.count},\n")

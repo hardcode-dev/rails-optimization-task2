@@ -5,11 +5,11 @@ require 'json'
 require 'date'
 require 'json'
 
-def add_stats sessions, user_browser, user_time, user_date
+def add_stats user_sessions_count, user_browser, user_time, user_date
   browsers_map = user_browser
   time_map = user_time
   { 
-    'sessionsCount' => sessions.count, 
+    'sessionsCount' => user_sessions_count, 
   # Собираем количество времени по пользователям
     'totalTime' => time_map.sum.to_s << ' min.',
   # Выбираем самую длинную сессию пользователя
@@ -44,6 +44,7 @@ def work filename = 'data.txt', gc_disable=false
   user_browser = []
   user_time = []
   user_date = []
+  user_sessions_count = 0
 
   File.write('result.json', '{"usersStats":{')
 
@@ -51,15 +52,11 @@ def work filename = 'data.txt', gc_disable=false
     
     if line.start_with?("user")
       totalUsers += 1
-      unless sessions.empty?
-
-        #user_key = "#{user[3]}" + ' ' + "#{user[4]}"
-        add_stats = add_stats(sessions, user_browser, user_time, user_date)
-
-        #File.write('result.json', "\"#{user_key}\":#{add_stats.to_json},", mode: 'a')
+      if user_sessions_count > 0
+        add_stats = add_stats(user_sessions_count, user_browser, user_time, user_date)
         File.write('result.json', "\"#{user[3]} #{user[4]}\":#{add_stats.to_json},", mode: 'a')
       end
-      sessions = []
+      user_sessions_count = 0
       user = REGEXP_USER.match(line)
 
       user_browser = []
@@ -71,7 +68,7 @@ def work filename = 'data.txt', gc_disable=false
     if line.start_with?("session")
       cols = REGEXP_SESSION.match(line)
       totalSessions += 1
-      sessions << cols
+      user_sessions_count += 1
       browser = cols[4].upcase!
       
       #use set plz
@@ -83,7 +80,7 @@ def work filename = 'data.txt', gc_disable=false
     end
   end
 
-  add_stats = add_stats(sessions, user_browser, user_time, user_date)
+  add_stats = add_stats(user_sessions_count, user_browser, user_time, user_date)
   File.write('result.json', "\"#{user[3]} #{user[4]}\":#{add_stats.to_json}},", mode: 'a')
 
 

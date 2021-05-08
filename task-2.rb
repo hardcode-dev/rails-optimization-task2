@@ -2,15 +2,10 @@
 # frozen_string_literal: true
 
 require 'json'
-#require 'pry'
 require 'date'
 require 'json'
 
-user_browser = []
-user_time = []
-user_date = []
-
-def add_stasts sessions, user_browser, user_time, user_date
+def add_stats sessions, user_browser, user_time, user_date
   browsers_map = user_browser
   time_map = user_time
   { 
@@ -59,13 +54,10 @@ def work filename = 'data.txt', gc_disable=false
       unless sessions.empty?
 
         #user_key = "#{user[3]}" + ' ' + "#{user[4]}"
-        add_stats = add_stasts(sessions, user_browser, user_time, user_date)
+        add_stats = add_stats(sessions, user_browser, user_time, user_date)
 
         #File.write('result.json', "\"#{user_key}\":#{add_stats.to_json},", mode: 'a')
         File.write('result.json', "\"#{user[3]} #{user[4]}\":#{add_stats.to_json},", mode: 'a')
-        #('result.json', "\"#{user_key}\":", mode: 'a')
-        #File.write('result.json', "#{add_stats.to_json}\n", mode: 'a')
-        #File.write('result.json', ",", mode: 'a')
       end
       sessions = []
       user = REGEXP_USER.match(line)
@@ -91,15 +83,9 @@ def work filename = 'data.txt', gc_disable=false
     end
   end
 
-  #user_key = "#{user[3]}" + ' ' + "#{user[4]}"
-  add_stats = add_stasts(sessions, user_browser, user_time, user_date)
-
+  add_stats = add_stats(sessions, user_browser, user_time, user_date)
   File.write('result.json', "\"#{user[3]} #{user[4]}\":#{add_stats.to_json}},", mode: 'a')
-  #File.write('result.json', "\"#{user_key}\":", mode: 'a')
-  #File.write('result.json', "#{add_stats.to_json}\n", mode: 'a')
-  #File.write('result.json', "},", mode: 'a')
 
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 
   # Отчёт в json
   #   - Сколько всего юзеров +
@@ -116,15 +102,9 @@ def work filename = 'data.txt', gc_disable=false
   #     - Всегда использовал только Хром? +
   #     - даты сессий в порядке убывания через запятую +
 
-  #report[:totalUsers] = totalUsers
   File.write('result.json', "\"totalUsers\":#{totalUsers},\n", mode: 'a')
-  # Подсчёт количества уникальных браузеров
-  #report['uniqueBrowsersCount'] = all_browsers.uniq.count
   File.write('result.json', "\"uniqueBrowsersCount\":#{all_browsers.count},\n", mode: 'a')
-
-  #report['totalSessions'] = totalSessions
   File.write('result.json', "\"totalSessions\":#{totalSessions},\n", mode: 'a')
-  #report['allBrowsers'] =
   allBrowsers = all_browsers
       .sort
       .join(',')

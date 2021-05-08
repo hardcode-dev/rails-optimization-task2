@@ -26,6 +26,21 @@ def add_stats user_sessions_count, user_browser, user_time, user_date
 
 end 
 
+class FileWriter
+  def initialize file
+    @file = file
+  end
+
+  def write data
+    @file.write(data)
+  end
+
+  def finish
+    @file.close()
+  end
+end
+
+
 REGEXP_USER = Regexp.new('(\w+),(\d+),(\w+),(\w+),(\d+)') 
 REGEXP_SESSION = Regexp.new('(\w+),(\d+),(\d+),(.+),(\d+),([\w|-]+)')
 
@@ -34,12 +49,9 @@ def work filename = 'data.txt', gc_disable=false
 
   GC.disable if gc_disable
   puts "start work..."
-  users = []
-  sessions = []
   all_browsers = Set.new
   totalSessions = 0
   totalUsers = 0
-  report = {}
   user = nil
 
   user_browser = []
@@ -47,15 +59,17 @@ def work filename = 'data.txt', gc_disable=false
   user_date = []
   user_sessions_count = 0
 
-  File.write('result.json', '{"usersStats":{')
+  writer = FileWriter.new(File.open('result.json', mode: 'a'))
 
+  writer.write('{"usersStats":{')
+  
   File.open(filename).each_line do |line|
     
     if line.start_with?("user")
       totalUsers += 1
       if user_sessions_count > 0
         add_stats = add_stats(user_sessions_count, user_browser, user_time, user_date)
-        File.write('result.json', "\"#{user[3]} #{user[4]}\":#{add_stats.to_json},", mode: 'a')
+        writer.write("\"#{user[3]} #{user[4]}\":#{add_stats.to_json},")
       end
       user_sessions_count = 0
       user = REGEXP_USER.match(line)
@@ -79,7 +93,7 @@ def work filename = 'data.txt', gc_disable=false
   end
 
   add_stats = add_stats(user_sessions_count, user_browser, user_time, user_date)
-  File.write('result.json', "\"#{user[3]} #{user[4]}\":#{add_stats.to_json}},", mode: 'a')
+  writer.write("\"#{user[3]} #{user[4]}\":#{add_stats.to_json}},")
 
 
   # Отчёт в json
@@ -97,14 +111,16 @@ def work filename = 'data.txt', gc_disable=false
   #     - Всегда использовал только Хром? +
   #     - даты сессий в порядке убывания через запятую +
 
-  File.write('result.json', "\"totalUsers\":#{totalUsers},\n", mode: 'a')
-  File.write('result.json', "\"uniqueBrowsersCount\":#{all_browsers.count},\n", mode: 'a')
-  File.write('result.json', "\"totalSessions\":#{totalSessions},\n", mode: 'a')
+  writer.write("\"totalUsers\":#{totalUsers},\n")
+  writer.write("\"uniqueBrowsersCount\":#{all_browsers.count},\n")
+  writer.write("\"totalSessions\":#{totalSessions},\n")
   allBrowsers = all_browsers
       .sort
       .join(',')
-  File.write('result.json', "\"allBrowsers\":#{allBrowsers.to_json}\n", mode: 'a')    
-  File.write('result.json', "}", mode: 'a')
+  writer.write("\"allBrowsers\":#{allBrowsers.to_json}\n")    
+  writer.write("}")
+
+  writer.finish()
   puts ObjectSpace.count_objects
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end

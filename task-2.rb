@@ -34,6 +34,8 @@ REGEXP_USER = Regexp.new('(\w+),(\d+),(\w+),(\w+),(\d+)')
 REGEXP_SESSION = Regexp.new('(\w+),(\d+),(\d+),(.+),(\d+),([\w|-]+)')
 
 def work filename = 'data.txt', gc_disable=false
+  filename = ENV['DATA_FILE'] || filename
+
   GC.disable if gc_disable
   puts "start work..."
   users = []
@@ -79,7 +81,9 @@ def work filename = 'data.txt', gc_disable=false
       totalSessions += 1
       sessions << cols
       browser = cols[4].upcase!
-      all_browsers << browser
+      
+      #use set plz
+      all_browsers << browser unless all_browsers.include?(browser)
 
       user_browser << browser
       user_time << cols[5].to_i
@@ -116,14 +120,13 @@ def work filename = 'data.txt', gc_disable=false
   File.write('result.json', "\"totalUsers\":#{totalUsers},\n", mode: 'a')
   # Подсчёт количества уникальных браузеров
   #report['uniqueBrowsersCount'] = all_browsers.uniq.count
-  File.write('result.json', "\"uniqueBrowsersCount\":#{all_browsers.uniq.count},\n", mode: 'a')
+  File.write('result.json', "\"uniqueBrowsersCount\":#{all_browsers.count},\n", mode: 'a')
 
   #report['totalSessions'] = totalSessions
   File.write('result.json', "\"totalSessions\":#{totalSessions},\n", mode: 'a')
   #report['allBrowsers'] =
   allBrowsers = all_browsers
       .sort
-      .uniq
       .join(',')
   File.write('result.json', "\"allBrowsers\":#{allBrowsers.to_json}\n", mode: 'a')    
   File.write('result.json', "}", mode: 'a')

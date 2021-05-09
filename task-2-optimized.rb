@@ -48,14 +48,20 @@ class ParserOptimized
       file_lines = File.read(filename).split("\n")
 
       users = []
-      sessions = []
+      users_sessions = {}
 
       file_lines.each do |line|
         cols = line.split(',')
-        users = users + [parse_user(line)] if cols[0] == 'user'
-        sessions << parse_session(line) if cols[0] == 'session'
+        users << parse_user(line) if cols[0] == 'user'
+
+        if cols[0] == 'session'
+          session = parse_session(line)
+          users_sessions[session['user_id']] ||= []
+          users_sessions[session['user_id']] << session
+        end
       end
 
+      sessions = users_sessions.values.flatten
       # Отчёт в json
       #   - Сколько всего юзеров +
       #   - Сколько всего уникальных браузеров +
@@ -99,7 +105,7 @@ class ParserOptimized
 
       users.each do |user|
         attributes = user
-        user_sessions = sessions.select { |session| session['user_id'] == user['id'] }
+        user_sessions = users_sessions[user['id']]
         user_object = User.new(attributes: attributes, sessions: user_sessions)
         users_objects = users_objects + [user_object]
       end

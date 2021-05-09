@@ -23,22 +23,24 @@ class ParserOptimized
       CACHED_DATES[date] ||= Date.strptime(date, '%Y-%m-%d').iso8601
     end
 
-    def parse_user(fields)
+    def parse_user(line)
+      _, id, first_name, last_name, age = line.split(SEPARATOR)
       parsed_result = {
-        'id' => fields[1],
-        'first_name' => fields[2],
-        'last_name' => fields[3],
-        'age' => fields[4],
+        'id' => id,
+        'first_name' => first_name,
+        'last_name' => last_name,
+        'age' => age,
       }
     end
 
-    def parse_session(fields)
+    def parse_session(line)
+      _, user_id, session_id, browser, time, date = line.split(SEPARATOR)
       parsed_result = {
-        'user_id' => fields[1],
-        'session_id' => fields[2],
-        'browser' => fields[3],
-        'time' => fields[4],
-        'date' => parse_date(fields[5]),
+        'user_id' => user_id,
+        'session_id' => session_id,
+        'browser' => browser,
+        'time' => time,
+        'date' => parse_date(date),
       }
     end
 
@@ -55,11 +57,10 @@ class ParserOptimized
       users_sessions = {}
 
       File.foreach(filename) do |line|
-        cols = line.split(SEPARATOR)
-        users << parse_user(cols) if cols[0] == 'user'
+        users << parse_user(line) if line.start_with? 'user'
 
-        if cols[0] == 'session'
-          session = parse_session(cols)
+        if line.start_with? 'session'
+          session = parse_session(line)
           users_sessions[session['user_id']] ||= []
           users_sessions[session['user_id']] << session
         end

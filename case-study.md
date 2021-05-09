@@ -194,4 +194,22 @@ File.write('result.json', "\"#{user[3]} #{user[4]}\":#{add_stats.to_json},", mod
 
 Тесты проводились на Apple M1, 8Gb MEMORY
 ## Защита от регрессии производительности
-Для защиты от потери достигнутого прогресса при дальнейших изменениях программы *о performance-тестах, которые вы написали*
+Для защиты от потери достигнутого прогресса при дальнейших изменениях программы я написал пару тестов
+в первом проверяю метрику, по которой строил исследование – количество созданных объектов при выключенным GC не должно быть больше 500_000
+```
+    it 'create not more than 500_000 object with disable GC' do
+        work("data/data#{DATA_SIZE}.txt", true)
+        expect(ObjectSpace.count_objects[:TOTAL]).to be < MAX_TOTAL_OBJECTS
+    end
+```
+во втором проверяю что программа укладывается в заданный бюджет по памяти – меньше 70 mb
+```
+    it 'consumes not more than memory budget(70 mb)' do 
+        pid = Process.fork do
+            work("data/data#{DATA_SIZE}.txt", false)
+        end
+        expect(process_mem_mb(pid)).to be < MAX_MEMORY_MB 
+        Process.waitall
+    end
+    
+```

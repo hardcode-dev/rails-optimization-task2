@@ -120,4 +120,6 @@ def work(file_name, lines_count = nil, progressbar_enabled = false)
   end
 
   File.write('result.json', "#{report.to_json}\n")
+
+  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end

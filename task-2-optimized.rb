@@ -13,7 +13,7 @@ class User
   end
 end
 
-class Parser
+class ParserOptimized
   class << self
     def parse_user(user)
       fields = user.split(',')
@@ -44,8 +44,8 @@ class Parser
       end
     end
 
-    def work(file_name = 'data_large.txt')
-      file_lines = File.read(file_name).split("\n")
+    def work(filename = 'data_large.txt')
+      file_lines = File.read(filename).split("\n")
 
       users = []
       sessions = []

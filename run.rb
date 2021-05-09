@@ -10,7 +10,7 @@ require 'memory_profiler'
 # end
 
 report = MemoryProfiler.report do
-  ParserOptimized.work('data/data_10000.txt')
+  ParserOptimized.work('data_100000.txt')
 end
 
 report.pretty_print scale_bytes: true

@@ -15,14 +15,14 @@ end
 
 class ParserOptimized
   class << self
+    SEPARATOR = ','
     CACHED_DATES = { }
 
     def parse_date(date)
       CACHED_DATES[date] ||= Date.strptime(date, '%Y-%m-%d').iso8601
     end
 
-    def parse_user(user)
-      fields = user.split(',')
+    def parse_user(fields)
       parsed_result = {
         'id' => fields[1],
         'first_name' => fields[2],
@@ -31,8 +31,7 @@ class ParserOptimized
       }
     end
 
-    def parse_session(session)
-      fields = session.split(',')
+    def parse_session(fields)
       parsed_result = {
         'user_id' => fields[1],
         'session_id' => fields[2],
@@ -46,22 +45,20 @@ class ParserOptimized
       users_objects.each do |user|
         user_key = "#{user.attributes['first_name']}" + ' ' + "#{user.attributes['last_name']}"
         report['usersStats'][user_key] ||= {}
-        report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
+        report['usersStats'][user_key] = report['usersStats'][user_key].merge!(block.call(user))
       end
     end
 
     def work(filename = 'data_large.txt')
-      file_lines = File.read(filename).split("\n")
-
       users = []
       users_sessions = {}
 
-      file_lines.each do |line|
-        cols = line.split(',')
-        users << parse_user(line) if cols[0] == 'user'
+      File.foreach(filename) do |line|
+        cols = line.split(SEPARATOR)
+        users << parse_user(cols) if cols[0] == 'user'
 
         if cols[0] == 'session'
-          session = parse_session(line)
+          session = parse_session(cols)
           users_sessions[session['user_id']] ||= []
           users_sessions[session['user_id']] << session
         end
@@ -104,7 +101,7 @@ class ParserOptimized
           .map { |b| b.upcase }
           .sort
           .uniq
-          .join(',')
+          .join(SEPARATOR)
 
       # Статистика по пользователям
       users_objects = []

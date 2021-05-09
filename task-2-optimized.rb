@@ -15,6 +15,13 @@ end
 
 class ParserOptimized
   class << self
+    DATES = {}
+    def parse_date(date_string)
+      DATES[date_string] = Date.parse(date_string) unless DATES[date_string]
+
+      DATES[date_string]
+    end
+
     def parse_user(user)
       fields = user.split(',')
       parsed_result = {
@@ -32,7 +39,7 @@ class ParserOptimized
         'session_id' => fields[2],
         'browser' => fields[3],
         'time' => fields[4],
-        'date' => fields[5],
+        'date' => parse_date(fields[5]),
       }
     end
 
@@ -107,7 +114,7 @@ class ParserOptimized
         attributes = user
         user_sessions = users_sessions[user['id']]
         user_object = User.new(attributes: attributes, sessions: user_sessions)
-        users_objects = users_objects + [user_object]
+        users_objects << user_object
       end
 
       report['usersStats'] = {}
@@ -144,7 +151,7 @@ class ParserOptimized
 
       # Даты сессий через запятую в обратном порядке в формате iso8601
       collect_stats_from_users(report, users_objects) do |user|
-        { 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }
+        { 'dates' => user.sessions.map{|s| s['date']}.sort.reverse.map { |d| d.iso8601 } }
       end
 
       File.write('result.json', "#{report.to_json}\n")

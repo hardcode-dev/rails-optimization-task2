@@ -15,11 +15,10 @@ end
 
 class ParserOptimized
   class << self
-    DATES = {}
-    def parse_date(date_string)
-      DATES[date_string] = Date.parse(date_string) unless DATES[date_string]
+    CACHED_DATES = { }
 
-      DATES[date_string]
+    def parse_date(date)
+      CACHED_DATES[date] ||= Date.strptime(date, '%Y-%m-%d').iso8601
     end
 
     def parse_user(user)
@@ -151,7 +150,7 @@ class ParserOptimized
 
       # Даты сессий через запятую в обратном порядке в формате iso8601
       collect_stats_from_users(report, users_objects) do |user|
-        { 'dates' => user.sessions.map{|s| s['date']}.sort.reverse.map { |d| d.iso8601 } }
+        { 'dates' => user.sessions.map{ |s| s['date'] }.sort.reverse }
       end
 
       File.write('result.json', "#{report.to_json}\n")

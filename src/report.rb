@@ -6,12 +6,6 @@ require 'date'
 require 'ruby-progressbar'
 require_relative 'user'
 
-DATES = {}
-
-def parse_date(date)
-  DATES[date] ||= Date.strptime(date, '%Y-%m-%d').iso8601
-end
-
 def parse_user(fields)
   {
     'id' => fields[1],
@@ -25,15 +19,15 @@ def parse_session(fields)
   {
     'user_id' => fields[1],
     'session_id' => fields[2],
-    'browser' => fields[3].upcase,
+    'browser' => fields[3].upcase!,
     'time' => fields[4].to_i,
-    'date' => parse_date(fields[5])
+    'date' => fields[5].chomp!
   }
 end
 
 def collect_stats_from_users(report, users_objects, &block)
   users_objects.each do |user|
-    user_key = "#{user.attributes['first_name']}" + ' ' + "#{user.attributes['last_name']}"
+    user_key = "#{user.attributes['first_name']} #{user.attributes['last_name']}"
     report['usersStats'][user_key] ||= {}
     report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
   end

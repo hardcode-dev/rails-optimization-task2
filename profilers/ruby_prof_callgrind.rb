@@ -9,7 +9,7 @@ RubyProf.measure_mode = RubyProf::MEMORY
 
 GC.disable
 result = RubyProf.profile do
-  work('../data_16000.txt', disable_gc: false)
+  work('../data_64000.txt', disable_gc: false)
 end
 GC.enable
 

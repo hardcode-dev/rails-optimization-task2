@@ -4,16 +4,8 @@ require 'json'
 require 'pry'
 require 'date'
 require 'ruby-progressbar'
+require 'set'
 require_relative 'user'
-
-def parse_user(fields)
-  {
-    'id' => fields[1],
-    'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4]
-  }
-end
 
 def parse_session(fields)
   {
@@ -25,22 +17,19 @@ def parse_session(fields)
   }
 end
 
-def collect_stats_from_users(report, users_objects, &block)
-  users_objects.each do |user|
-    user_key = "#{user.attributes['first_name']} #{user.attributes['last_name']}"
-    report['usersStats'][user_key] ||= {}
-    report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
-  end
-end
-
 def work(file_name, lines_count = nil, progressbar_enabled = false)
   file_lines = File.read(file_name).split("\n") if progressbar_enabled
 
-  users = []
+  total_users = 0
+  total_sessions = 0
+  all_browsers = Set.new
   sessions = []
+  user = nil
 
   progressbar = ProgressBar.create(total: file_lines.count, format: '%a, %J, %E %B') if progressbar_enabled
 
+  report_file = File.open('result.json', 'w')
+  report_file.write('{"usersStats":{')
   i = 0
   File.foreach(file_name) do |line|
     i += 1
@@ -49,8 +38,31 @@ def work(file_name, lines_count = nil, progressbar_enabled = false)
     progressbar.increment if progressbar_enabled
 
     cols = line.split(',')
-    users.push(parse_user(cols)) if cols[0] == 'user'
-    sessions.push(parse_session(cols)) if cols[0] == 'session'
+    if cols[0] == 'user'
+      if user
+        user.calculate_parameters(sessions)
+        report_file.write("\"#{user.key}\":")
+        report_file.write(user.stats.to_json)
+        report_file.write(',')
+      end
+      user = User.new("#{cols[2]} #{cols[3]}")
+      sessions = []
+      total_users += 1
+    end
+
+    if cols[0] == 'session'
+      session = parse_session(cols)
+      sessions.push(session)
+      total_sessions += 1
+      all_browsers.add(session['browser'])
+    end
+  end
+
+  if user
+    user.calculate_parameters(sessions)
+    report_file.write("\"#{user.key}\":")
+    report_file.write(user.stats.to_json)
+    report_file.write('},')
   end
 
   # Отчёт в json
@@ -68,52 +80,15 @@ def work(file_name, lines_count = nil, progressbar_enabled = false)
   #     - Всегда использовал только Хром? +
   #     - даты сессий в порядке убывания через запятую +
 
-  report = {}
+  report = {
+    totalUsers: total_users,
+    uniqueBrowsersCount: all_browsers.count,
+    totalSessions: total_sessions,
+    allBrowsers: all_browsers.to_a.sort!.join(',')
+  }
 
-  report[:totalUsers] = users.count
-
-  # Подсчёт количества уникальных браузеров
-  uniqueBrowsers = sessions.map { |session| session['browser'] }.uniq
-  report['uniqueBrowsersCount'] = uniqueBrowsers.count
-
-  report['totalSessions'] = sessions.count
-
-  report['allBrowsers'] = uniqueBrowsers.sort.join(',')
-
-  # Статистика по пользователям
-  users_objects = []
-  sessions_by_user = sessions.group_by { |session| session['user_id'] }
-
-  users.each do |user|
-    attributes = user
-    user_sessions = sessions_by_user[user['id']] || []
-    user_object = User.new(attributes: attributes, sessions: user_sessions)
-    user_object.calculate_parameters
-    users_objects.push(user_object)
-  end
-
-  report['usersStats'] = {}
-
-  collect_stats_from_users(report, users_objects) do |user|
-    {
-      # Собираем количество сессий по пользователям
-      'sessionsCount' => user.sessions_count,
-      # Собираем количество времени по пользователям
-      'totalTime' => user.total_time.to_s + ' min.',
-      # Выбираем самую длинную сессию пользователя
-      'longestSession' => user.longest_session.to_s + ' min.',
-      # Браузеры пользователя через запятую
-      'browsers' => user.browsers.sort.join(', '),
-      # Хоть раз использовал IE?
-      'usedIE' => user.used_ie,
-      # Всегда использовал только Chrome?
-      'alwaysUsedChrome' => user.always_used_chrome,
-      # Даты сессий через запятую в обратном порядке в формате iso8601
-      'dates' => user.dates.sort.reverse
-    }
-  end
-
-  File.write('result.json', "#{report.to_json}\n")
+  report_file.write("#{report.to_json[1..-1]}\n")
+  report_file.close
 
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end

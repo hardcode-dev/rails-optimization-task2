@@ -10,6 +10,6 @@ Benchmark.bmbm do |x|
   # LINES_COUNTS.each do |lines|
   #   x.report("Lines: #{lines}") { work('data_large.txt', lines, true) }
   # end
-  x.report("Lines: #{16_000}") { work('data_16000.txt', nil, true) }
-  # x.report("Data large") { work('data_large.txt', nil, true) }
+  # x.report("Lines: #{16_000}") { work('data_16000.txt', nil, true) }
+  x.report("Data large") { work('data_large.txt', nil, true) }
 end

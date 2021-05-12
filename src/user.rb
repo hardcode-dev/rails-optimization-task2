@@ -1,16 +1,11 @@
 # frozen_string_literal: true
 
 class User
-  attr_reader :attributes, :sessions, :sessions_count, :total_time, :longest_session, :browsers, :used_ie, :always_used_chrome, :dates
+  attr_reader :key
 
-  def initialize(attributes:, sessions:)
-    @attributes = attributes
-    @sessions = sessions
+  def initialize(key)
+    @key = key
 
-    reset_parameters
-  end
-
-  def reset_parameters
     @sessions_count = 0
     @total_time = 0
     @longest_session = 0
@@ -20,13 +15,12 @@ class User
     @dates = []
   end
 
-  def calculate_parameters
-    reset_parameters
-    return unless @sessions.size
+  def calculate_parameters(sessions)
+    return unless sessions
 
     used_chrome = false
     used_another_browser = false
-    @sessions.each do |session|
+    sessions.each do |session|
       @sessions_count += 1
 
       time = session['time']
@@ -45,5 +39,17 @@ class User
       @dates.push(session['date'])
     end
     @always_used_chrome = used_chrome && !used_another_browser
+  end
+
+  def stats
+    {
+      sessionsCount: @sessions_count,
+      totalTime: "#{@total_time} min.",
+      longestSession: "#{@longest_session} min.",
+      browsers: @browsers.sort!.join(', '),
+      usedIE: @used_ie,
+      alwaysUsedChrome: @always_used_chrome,
+      dates: @dates.sort!.reverse!
+    }
   end
 end

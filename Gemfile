@@ -9,6 +9,8 @@ ruby '2.7.2'
 gem 'ruby-prof', '~> 1.4'
 gem 'stackprof', '~> 0.2.16'
 
+gem 'memory_profiler', '~> 0.9.6'
+
 gem 'rubocop', '~> 1.13', require: false
 gem 'rubocop-performance', '~> 1.11', require: false
 

@@ -4,7 +4,7 @@ require 'date'
 require_relative 'user'
 
 class Parser
-  def initializer(disable_gc: false)
+  def initialize(disable_gc: false)
     GC.disable if disable_gc
   end
 
@@ -38,6 +38,15 @@ class Parser
   end
 
   def work(file)
+    users = []
+    sessions = []
+
+    # File.readlines(file).each do |line|
+    #   cols = line.split(',')
+    #   users = users + [parse_user(line)] if cols[0] == 'user'
+    #   sessions = sessions + [parse_session(line)] if cols[0] == 'session'
+    # end
+
     file_lines = File.read(file).split("\n")
 
     users = []

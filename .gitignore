@@ -1,4 +1,5 @@
 .idea
+.ruby-gemset
 
 # Data
 /data/*
@@ -7,4 +8,5 @@
 # Test data
 /spec/test_data/*
 !/spec/test_data/.keep
+
 

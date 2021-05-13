@@ -2,7 +2,7 @@ require_relative '../parser.rb'
 
 describe 'Memory performance' do
   describe 'parsing' do
-    let(:metric_budget) { (55) * 1024 }
+    let(:metric_budget) { (46) * 1024 }
 
     describe '_protection of the metric from further degradation' do
       it '(expectations on the memory size(bytes))' do

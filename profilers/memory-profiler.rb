@@ -7,6 +7,6 @@ require 'benchmark'
 require 'memory_profiler'
 
 report = MemoryProfiler.report do
-  Parser.new(disable_gc: false).work('spec/test_data/data.txt')
+  Parser.new(disable_gc: false).work('data/data10_000.txt')
 end
 report.pretty_print(scale_bytes: true)

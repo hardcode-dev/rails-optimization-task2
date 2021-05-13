@@ -4,7 +4,7 @@ require_relative '../src/report'
 
 GC.disable
 report = MemoryProfiler.report do
-  work('../data_64000.txt')
+  work('../data_500000.txt')
 end
 GC.enable
 

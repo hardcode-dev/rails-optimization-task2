@@ -8,7 +8,7 @@ RubyProf.measure_mode = RubyProf::ALLOCATIONS
 
 GC.disable
 result = RubyProf.profile do
-  work('../data_64000.txt')
+  work('../data_500000.txt')
 end
 GC.enable
 

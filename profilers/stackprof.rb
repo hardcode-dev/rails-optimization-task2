@@ -19,7 +19,7 @@ GC.disable
 # end
 
 profile = StackProf.run(mode: :object, raw: true) do
-  work('../data_64000.txt')
+  work('../data_500000.txt')
 end
 File.write('../reports/stackprof.json', JSON.generate(profile))
 GC.enable

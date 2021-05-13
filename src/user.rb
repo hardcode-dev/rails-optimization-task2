@@ -23,11 +23,11 @@ class User
     sessions.each do |session|
       @sessions_count += 1
 
-      time = session['time']
+      time = session[:time]
       @total_time += time
       @longest_session = time if @longest_session < time
 
-      browser = session['browser']
+      browser = session[:browser]
       @browsers.push(browser)
       @used_ie = true if !@used_ie && browser =~ /INTERNET EXPLORER/
       if browser =~ /CHROME/
@@ -36,7 +36,7 @@ class User
         used_another_browser = true
       end
 
-      @dates.push(session['date'])
+      @dates.push(session[:date])
     end
     @always_used_chrome = used_chrome && !used_another_browser
   end

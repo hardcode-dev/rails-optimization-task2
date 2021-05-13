@@ -7,16 +7,6 @@ require 'ruby-progressbar'
 require 'set'
 require_relative 'user'
 
-def parse_session(fields)
-  {
-    'user_id' => fields[1],
-    'session_id' => fields[2],
-    'browser' => fields[3].upcase!,
-    'time' => fields[4].to_i,
-    'date' => fields[5].chomp!
-  }
-end
-
 def work(file_name, lines_count = nil, progressbar_enabled = false)
   file_lines = File.read(file_name).split("\n") if progressbar_enabled
 
@@ -37,7 +27,7 @@ def work(file_name, lines_count = nil, progressbar_enabled = false)
 
     progressbar.increment if progressbar_enabled
 
-    cols = line.split(',')
+    cols = line.chomp!.split(',')
     if cols[0] == 'user'
       if user
         user.calculate_parameters(sessions)
@@ -51,10 +41,10 @@ def work(file_name, lines_count = nil, progressbar_enabled = false)
     end
 
     if cols[0] == 'session'
-      session = parse_session(cols)
+      session = { browser: cols[3].upcase!, time: cols[4].to_i, date: cols[5] }
       sessions.push(session)
       total_sessions += 1
-      all_browsers.add(session['browser'])
+      all_browsers.add(session[:browser])
     end
   end
 

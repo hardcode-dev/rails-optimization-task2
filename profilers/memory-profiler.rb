@@ -2,9 +2,9 @@
 # allocated - total memory allocated during profiler run
 # retained - survived after MemoryProfiler finished
 
-require_relative '../parser'
 require 'benchmark'
 require 'memory_profiler'
+require_relative '../parser'
 
 report = MemoryProfiler.report do
   Parser.new(disable_gc: false).work('data/data10_000.txt')

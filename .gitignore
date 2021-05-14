@@ -9,4 +9,5 @@
 /spec/test_data/*
 !/spec/test_data/.keep
 
-
+# Reports
+/profilers/stackprof_reports

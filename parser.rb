@@ -32,21 +32,23 @@ class Parser
     @report_file << '{"usersStats":{'
 
     File.foreach(file, chomp: true) do |line|
-      line = line.split(',')
+      if line.start_with? 'user'
+        line = line[/([^,]+),([^,]+),\d/]
+        line = line.split(',')
 
-      if line[0] == 'user'
         @report['totalUsers'] += 1
 
         calculation_before_add(@user_stats)
-        @user = parse_user(line)
-        full_name = "\"#{@user['first_name']} #{@user['last_name']}\":"
+        full_name = "\"#{line[0]} #{line[1]}\":"
         @report_file << full_name
-
         @user_stats = set_user_stats_report_struct
+        next
       end
 
+      if line.start_with? 'session'
+        line = line[/([^,]+),(\d+),([\d-]+)$/]
+        line = line.split(',')
 
-      if line[0] == 'session' && line[1] == @user['id']
         session = parse_session(line)
 
         # Stats
@@ -60,7 +62,7 @@ class Parser
         @user_stats['browsers'] << session['browser']
         @user_stats['usedIE'] = true if /INTERNET EXPLORER/.match?(session['browser'])
         @user_stats['alwaysUsedChrome'] = false unless /CHROME/.match?(session['browser'])
-        @user_stats['dates'] << Date.strptime(session['date'], '%Y-%m-%d').iso8601
+        @user_stats['dates'] << session['date'] #Date.strptime(session['date'], '%Y-%m-%d').iso8601
       end
     end
     calculation_before_add(@user_stats, last: true)
@@ -111,21 +113,18 @@ class Parser
 
   def parse_user(user)
     {
-      'id' => user[1],
-      'first_name' => user[2],
-      'last_name' => user[3]
+      'first_name' => user[0],
+      'last_name' => user[1]
     }
   end
 
   def parse_session(session)
     {
-      'user_id' => session[1],
-      'session_id' => session[2],
-      'browser' => session[3],
-      'time' => session[4].to_i,
-      'date' => session[5]
+      'browser' => session[0],
+      'time' => session[1].to_i,
+      'date' => session[2]
     }
   end
 end
 
-# Parser.new.work('data/data.txt')
+# Parser.new.work('data/data500_000.txt')

@@ -14,5 +14,5 @@ require_relative '../parser'
 
 # Note mode: :object
 StackProf.run(mode: :object, out: 'profilers/stackprof_reports/stackprof.dump', raw: true) do
-  Parser.new(disable_gc: false).work('data/data10_000.txt')
+  Parser.new(disable_gc: false).work('data/data500_000.txt')
 end

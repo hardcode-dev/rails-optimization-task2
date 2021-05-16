@@ -7,6 +7,6 @@ require 'memory_profiler'
 require_relative '../parser'
 
 report = MemoryProfiler.report do
-  Parser.new(disable_gc: false).work('data/data10_000.txt')
+  Parser.new(disable_gc: false).work('data/data500_000.txt')
 end
 report.pretty_print(scale_bytes: true)

@@ -31,7 +31,6 @@ session,2,3,Chrome 20,84,2016-11-25
 
     it 'created correct report' do
       Parser.new.work('spec/test_data/data.txt')
-      # expect(result).to eq(expected_result)
       expect(JSON.parse(result)).to eq(JSON.parse(expected_result))
     end
   end

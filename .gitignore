@@ -12,3 +12,5 @@
 
 # Reports
 /profilers/stackprof_reports
+/profilers/ruby_prof_reports
+/profilers/docker-valgrind-massif

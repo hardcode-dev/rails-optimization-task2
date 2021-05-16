@@ -1,0 +1,16 @@
+.idea
+.ruby-gemset
+.byebug_history
+
+# Data
+/data/*
+!/data/.keep
+
+# Test data
+/spec/test_data/*
+!/spec/test_data/.keep
+
+# Reports
+/profilers/stackprof_reports
+/profilers/ruby_prof_reports
+/profilers/docker-valgrind-massif

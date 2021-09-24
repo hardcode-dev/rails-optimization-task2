@@ -10,6 +10,7 @@ gem 'minitest'
 
 gem 'ruby-prof'
 gem 'stackprof'
+gem 'memory_profiler'
 
 gem 'rubocop', require: false
 gem 'rubocop-performance', require: false

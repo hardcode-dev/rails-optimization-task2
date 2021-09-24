@@ -11,7 +11,7 @@ RSpec.describe 'Task №2' do
 
       it 'returns users data(in json)' do
         work('spec/fixtures/data18.txt')
-        expect(File.read('result.json')).to eq(result_data)
+        expect(JSON.parse(File.read('result.json'))).to eq(JSON.parse(result_data))
       end
     end
   end

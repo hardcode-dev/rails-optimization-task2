@@ -5,15 +5,6 @@ require 'json'
 require 'pry'
 require 'date'
 
-class User
-  attr_reader :attributes, :sessions
-
-  def initialize(attributes:, sessions:)
-    @attributes = attributes
-    @sessions = sessions
-  end
-end
-
 def parse_user(user)
   fields = user.split(',')
   parsed_result = {
@@ -39,7 +30,7 @@ def work(file_path)
   stats = {}
   allBrowsers = []
 
-  File.foreach(file_path) do |line|
+  File.foreach(file_path, chomp: true) do |line|
     cols = line.split(',')
     if cols[0] == 'user'
       user = parse_user(line)
@@ -93,7 +84,7 @@ def work(file_path)
     oj.push_value(data[:browsers].sort.join(', '), 'browsers')
     oj.push_value(data[:usedIE], 'usedIE')
     oj.push_value(data[:alwaysUsedChrome], 'alwaysUsedChrome')
-    oj.push_value(data[:dates].map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 }, 'dates')
+    oj.push_value(data[:dates].sort.reverse, 'dates')
     oj.pop
   end
   oj.pop

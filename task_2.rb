@@ -17,35 +17,35 @@ end
 
 def parse_user(fields)
   {
-    'id' => fields[1],
-    'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4]
+    id: fields[1],
+    first_name: fields[2],
+    last_name: fields[3],
+    age: fields[4]
   }
 end
 
 def parse_session(fields)
   {
-    'user_id' => fields[1],
-    'session_id' => fields[2],
-    'browser' => fields[3],
-    'time' => fields[4],
-    'date' => fields[5]
+    user_id: fields[1],
+    session_id: fields[2],
+    browser: fields[3],
+    time: fields[4],
+    date: fields[5]
   }
 end
 
 def collect_stats_from_users(report, users_objects, &block)
   users_objects.each do |user|
-    user_key = "#{user.attributes['first_name']} #{user.attributes['last_name']}"
-    report['usersStats'][user_key] ||= {}
-    report['usersStats'][user_key] = report['usersStats'][user_key].merge(yield(user))
+    user_key = "#{user.attributes[:first_name]} #{user.attributes[:last_name]}"
+    report[:usersStats][user_key] ||= {}
+    report[:usersStats][user_key] = report[:usersStats][user_key].merge(yield(user))
   end
 end
 
-def work(filename = '', disable_gc: true)
+def work(filename = '')
   puts 'Start work'
 
-  GC.disable if disable_gc
+  # GC.disable if disable_gc
 
   file_lines = File.read(filename).split("\n")
 
@@ -78,27 +78,27 @@ def work(filename = '', disable_gc: true)
   report[:totalUsers] = users.count
 
   # Подсчёт количества уникальных браузеров
-  unique_browsers = sessions.map { |s| s['browser'] }.uniq
+  unique_browsers = sessions.map { |s| s[:browser].upcase! }.uniq
 
-  report['uniqueBrowsersCount'] = unique_browsers.count
+  report[:uniqueBrowsersCount] = unique_browsers.count
 
-  report['totalSessions'] = sessions.count
+  report[:totalSessions] = sessions.count
 
-  report['allBrowsers'] = unique_browsers.map!(&:upcase).sort.join(',')
+  report[:allBrowsers] = unique_browsers.sort!.join(',')
 
   # Статистика по пользователям
   users_objects = []
 
-  sessions_by_user = sessions.group_by { |session| session['user_id'] }
+  sessions_by_user = sessions.group_by { |session| session[:user_id] }
 
   users.each do |user|
     attributes = user
-    user_sessions = sessions_by_user[user['id']] || []
+    user_sessions = sessions_by_user[user[:id]] || []
     user_object = User.new(attributes: attributes, sessions: user_sessions)
     users_objects << user_object
   end
 
-  report['usersStats'] = {}
+  report[:usersStats] = {}
 
   # Собираем количество сессий по пользователям
   # Собираем количество времени по пользователям
@@ -110,26 +110,26 @@ def work(filename = '', disable_gc: true)
   dates_array = []
   collect_stats_from_users(report, users_objects) do |user|
 
-    time = user.sessions.map { |s| s['time'] }
-    browsers = user.sessions.map { |s| s['browser'] }
-    dates = user.sessions.map! { |s| s['date'] }
+    time = user.sessions.map { |s| s[:time] }
+    browsers = user.sessions.map { |s| s[:browser] }
+    dates = user.sessions.map! { |s| s[:date] }
     
     dates_iso8601 = dates.each { |d| dates_array << Date.strptime(d, '%Y-%m-%d').iso8601 }
 
     {
-      'sessionsCount' => user.sessions.count,
-      'totalTime' => "#{time.map!(&:to_i).sum} min.",
-      'longestSession' => "#{time.map!(&:to_i).max} min.",
-      'browsers' => browsers.map!(&:upcase).sort.join(', '),
-      'usedIE' => browsers.any? { |b| b.upcase =~ /INTERNET EXPLORER/ },
-      'alwaysUsedChrome' => browsers.all? { |b| b.upcase =~ /CHROME/ },
-      'dates' => dates_iso8601.sort.reverse
+      sessionsCount: user.sessions.count,
+      totalTime: "#{time.map!(&:to_i).sum} min.",
+      longestSession: "#{time.map!(&:to_i).max} min.",
+      browsers: browsers.map!(&:upcase).sort.join(', '),
+      usedIE: browsers.any? { |b| b.upcase =~ /INTERNET EXPLORER/ },
+      alwaysUsedChrome: browsers.all? { |b| b.upcase =~ /CHROME/ },
+      dates: dates_iso8601.sort!.reverse!
     }
   end
 
   File.write('result.json', "#{report.to_json}\n")
 
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  puts 'MEMORY USAGE: %d MB' % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
 class TestMe < Minitest::Test
@@ -163,7 +163,6 @@ session,2,3,Chrome 20,84,2016-11-25
     assert_equal expected_result, File.read('result.json')
   end
 end
-
 
 
 

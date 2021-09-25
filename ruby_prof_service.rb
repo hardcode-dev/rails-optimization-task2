@@ -5,7 +5,7 @@ RubyProf.measure_mode = RubyProf::MEMORY
 # RubyProf.measure_mode = RubyProf::ALLOCATIONS
 
 result = RubyProf.profile do
-  work(filename: 'files/data_10_000.txt', disable_gc: true)
+  work(filename: 'files/data_1_000_000.txt', disable_gc: true)
 end
 
 printer = RubyProf::FlatPrinter.new(result)

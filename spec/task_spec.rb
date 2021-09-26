@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'json'
 require_relative '../task-2'
 
 RSpec.describe 'Task №2' do

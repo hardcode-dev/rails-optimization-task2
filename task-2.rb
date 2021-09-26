@@ -110,5 +110,3 @@ def work(file_path)
   io.close
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
-
-work('data_large.txt')

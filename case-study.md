@@ -33,7 +33,6 @@
 - memory_profiler
 - ruby-prof 
 - stackprof
-
 ### Предварительный анализ
 ![before](massif-visualizer/before.png)
 
@@ -42,6 +41,7 @@
 ### Ваша находка №1
 
 - Парсинг даты
+
 ```
 data[:dates].map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 }
 ```
@@ -94,4 +94,28 @@ oj.push_value(allBrowsers, 'allBrowsers')
 
 - исправленная проблема перестала быть главной точкой роста и мы уложились в бюдет
 
+## Результаты
+Удалось улучшить метрику системы и уложиться в заданный бюджет. Программа теперь не должна потреблять больше 70Мб памяти при обработке файла data_large в течение всей своей работы
+
+## Защита от регрессии производительности
+Для защиты от потери достигнутого прогресса при дальнейших изменениях программы были написыны тесты:
+
+```
+RSpec.shared_examples 'check speed' do |size, time|
+  context "when size == #{size}" do
+    let(:size) { size }
+
+    it 'works under 0.5 s' do
+      expect { work }.to perform_under(time)
+    end
+  end
+end
+
+context 'check execution speed' do
+  it_behaves_like 'check speed', 1500, 0.15
+  it_behaves_like 'check speed', 3000, 0.3
+  it_behaves_like 'check speed', 6000, 0.6
+  it_behaves_like 'check speed', 12000, 0.12
+end
+```
 

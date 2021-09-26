@@ -49,10 +49,49 @@ data[:dates].map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 }
 ```
 data[:dates].sort.reverse
 ```
-- потребление в пике памяти снизилось до 389мб
-![before](massif-visualizer/iteration _1.png)
+- потребление в пике памяти снизилось до 389мб, но характер роста остался прежним
+![before](massif-visualizer/iteration_1.png)
   
-- исправленная проблема перестала быть главной точкой роста
+- исправленная проблема перестала быть главной точкой роста(memory profiler)
 
+### Ваша находка №2
+
+- Общий список браузером, на большом объеме вставка в массив, сортировка и получение уникальных элементов
+```
+allBrowsers = []
+
+allBrowsers << session['browser'] 
+
+allBrowsers = allBrowsers.sort.uniq
+
+oj.push_value(allBrowsers.count, 'uniqueBrowsersCount')
+oj.push_value(allBrowsers.join(','), 'allBrowsers')
+```
+- Заменим Array на SortedSet
+```
+all_browsers = SortedSet.new
+
+all_browsers.add(session['browser'])
+
+allBrowsers = ''
+firstIteration = true
+all_browsers.each do |browser|
+  if firstIteration
+    allBrowsers = browser.dup
+  else
+    allBrowsers << ','
+    allBrowsers << browser.dup
+  end
+  firstIteration = false
+end
+
+oj.push_value(all_browsers.count, 'uniqueBrowsersCount')
+oj.push_value(allBrowsers, 'allBrowsers')
+ 
+```
+- потребление в пике памяти снизилось до 40мб, исчез роста памяти в зависимости от количества данных   
+  ![before](massif-visualizer/iteration_2.png)
+
+- исправленная проблема перестала быть главной точкой роста и мы уложились в бюдет
 
 

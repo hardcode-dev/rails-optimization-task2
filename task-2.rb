@@ -2,7 +2,7 @@
 
 require 'oj'
 require 'pry'
-require 'date'
+require 'set'
 
 class User
   attr_reader :id, :name
@@ -61,7 +61,7 @@ end
 def work(file_path)
   users_count = 0
   sessions_count = 0
-  allBrowsers = []
+  all_browsers = SortedSet.new
 
   io = File.new('result.json','w+')
   oj = Oj::StreamWriter.new(io)
@@ -83,21 +83,32 @@ def work(file_path)
         'date' => cols[5],
       }
       user.sessions << session
-      allBrowsers << session['browser']
+      all_browsers.add(session['browser'])
       sessions_count += 1
     end
   end
   UserStatsWriter.call(oj, user)
 
   oj.pop
-  allBrowsers = allBrowsers.sort.uniq
+
+  allBrowsers = ''
+  firstIteration = true
+  all_browsers.each do |browser|
+    if firstIteration
+      allBrowsers = browser.dup
+    else
+      allBrowsers << ','
+      allBrowsers << browser.dup
+    end
+    firstIteration = false
+  end
   oj.push_value(users_count, 'totalUsers')
-  oj.push_value(allBrowsers.count, 'uniqueBrowsersCount')
+  oj.push_value(all_browsers.count, 'uniqueBrowsersCount')
   oj.push_value(sessions_count, 'totalSessions')
-  oj.push_value(allBrowsers.join(','), 'allBrowsers')
+  oj.push_value(allBrowsers, 'allBrowsers')
   oj.pop
   io.close
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
-#work('data_large.txt')
+work('data_large.txt')

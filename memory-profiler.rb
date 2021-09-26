@@ -4,6 +4,6 @@ require_relative 'task-2.rb'
 require 'memory_profiler'
 
 report = MemoryProfiler.report do
-  work('data_12000.txt')
+  work('data300_000.txt')
 end
 report.pretty_print(scale_bytes: true)

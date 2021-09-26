@@ -5,24 +5,20 @@ require 'pry'
 require 'date'
 require 'minitest/autorun'
 require 'set'
+require 'dotenv/load'
 
 #=====================================================
 # MODELS
 #=====================================================
 
 class User
-  attr_reader :id, :first_name, :last_name, :stats
+  attr_reader :first_name, :last_name, :stats
 
-  def initialize(id, first_name, last_name)
-    @id = id.to_i
+  def initialize(first_name, last_name)
     @first_name = first_name
     @last_name = last_name
 
-    @stats = initial_parameters
-  end
-
-  def initial_parameters
-    {
+    @stats = {
       sessions_count: 0,
       total_time: 0,
       longest_session: 0,
@@ -53,12 +49,10 @@ class User
 end
 
 class Session
-  attr_reader :user_id, :session_id, :browser, :time, :date
+  attr_reader :browser, :time, :date
 
-  def initialize(user_id, session_id, browser, time, date)
-    @user_id = user_id.to_i
-    @session_id = session_id.to_i
-    @browser = browser.upcase
+  def initialize(browser, time, date)
+    @browser = browser.upcase!
     @time = time.to_i
     @date = date
   end
@@ -72,7 +66,6 @@ def work(filename = '')
   result_file = File.open('result.json', 'w')
   result_file.write('{"usersStats":{')
 
-  total_users = 0
   total_sessions = 0
   all_browsers = Set.new
   users = []
@@ -82,18 +75,17 @@ def work(filename = '')
     cols = line.chomp!.split(',')
 
     if cols[0] == 'user'
-      user = User.new(cols[1], cols[2], cols[3])
-      total_users += 1
+      user = User.new(cols[2], cols[3])
       users << user
     end
 
     if cols[0] == 'session'
-      session = Session.new(cols[1], cols[2], cols[3], cols[4], cols[5])
+      session = Session.new(cols[3], cols[4], cols[5])
 
       total_sessions += 1
       all_browsers << session.browser
 
-      user.calculation_parameters(session) if user.id == session.user_id
+      user.calculation_parameters(session)
     end
   end
 
@@ -119,7 +111,7 @@ def work(filename = '')
   #     - даты сессий в порядке убывания через запятую +
 
   report = {
-    totalUsers: total_users,
+    totalUsers: users.count,
     uniqueBrowsersCount: all_browsers.count,
     totalSessions: total_sessions,
     allBrowsers: all_browsers.join(',')

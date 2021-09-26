@@ -16,3 +16,5 @@ gem 'rubocop', require: false
 gem 'rubocop-performance', require: false
 
 gem 'rspec-benchmark'
+
+gem 'dotenv-rails'

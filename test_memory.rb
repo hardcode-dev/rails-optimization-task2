@@ -8,6 +8,6 @@ context 'Memory test' do
     memory = `ps -o rss= -p #{Process.pid}`.to_i / 1024
     work(data)
     memory_after = `ps -o rss= -p #{Process.pid}`.to_i / 1024
-    expect(memory_after - memory).to be <= 50
+    expect(memory_after - memory).to be <= 35
   end
 end

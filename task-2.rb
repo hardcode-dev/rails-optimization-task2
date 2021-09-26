@@ -53,7 +53,7 @@ class UserStatsWriter
     oj.push_value(stats[:browsers].sort.join(', '), 'browsers')
     oj.push_value(stats[:usedIE], 'usedIE')
     oj.push_value(stats[:alwaysUsedChrome], 'alwaysUsedChrome')
-    oj.push_value(stats[:dates].map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 }, 'dates')
+    oj.push_value(stats[:dates].sort.reverse, 'dates')
     oj.pop
   end
 end
@@ -99,3 +99,5 @@ def work(file_path)
   io.close
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
+
+#work('data_large.txt')

@@ -98,24 +98,11 @@ oj.push_value(allBrowsers, 'allBrowsers')
 Удалось улучшить метрику системы и уложиться в заданный бюджет. Программа теперь не должна потреблять больше 70Мб памяти при обработке файла data_large в течение всей своей работы
 
 ## Защита от регрессии производительности
-Для защиты от потери достигнутого прогресса при дальнейших изменениях программы были написыны тесты:
+Для защиты от потери достигнутого прогресса при дальнейших изменениях программы был написын тест:
 
 ```
-RSpec.shared_examples 'check speed' do |size, time|
-  context "when size == #{size}" do
-    let(:size) { size }
-
-    it 'works under 0.5 s' do
-      expect { work }.to perform_under(time)
-    end
-  end
-end
-
-context 'check execution speed' do
-  it_behaves_like 'check speed', 1500, 0.15
-  it_behaves_like 'check speed', 3000, 0.3
-  it_behaves_like 'check speed', 6000, 0.6
-  it_behaves_like 'check speed', 12000, 0.12
+it 'allocates less than 70MB in memory' do
+  expect { work('data_large.txt') }.to perform_allocation(70_000_00).bytes
 end
 ```
 

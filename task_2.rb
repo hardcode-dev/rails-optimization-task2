@@ -37,7 +37,7 @@ class User
   # Всегда использовал только Chrome?
   # Даты сессий через запятую в обратном порядке в формате iso8601
 
-  def calculation_parameters(session)
+  def calculation_params(session)
     stats[:sessions_count] += 1
     stats[:total_time] += session.time
     stats[:longest_session] = session.time if session.time > stats[:longest_session]
@@ -71,7 +71,7 @@ def work(filename = '')
   users = []
   user = nil
 
-  File.foreach(filename) do |line| 
+  File.foreach(filename) do |line|
     cols = line.chomp!.split(',')
 
     if cols[0] == 'user'
@@ -85,14 +85,14 @@ def work(filename = '')
       total_sessions += 1
       all_browsers << session.browser
 
-      user.calculation_parameters(session)
+      user.calculation_params(session)
     end
   end
 
-  users.each do |user|
-    result_file.write("\"#{user.first_name} #{user.last_name}\":")
-    result_file.write(user.stats.to_json)
-    result_file.write('},')    
+  users.each do |u|
+    result_file.write("\"#{u.first_name} #{u.last_name}\":")
+    result_file.write(u.stats.to_json)
+    result_file.write('},')
   end
 
   # Отчёт в json
@@ -114,7 +114,7 @@ def work(filename = '')
     totalUsers: users.count,
     uniqueBrowsersCount: all_browsers.count,
     totalSessions: total_sessions,
-    allBrowsers: all_browsers.join(',')
+    allBrowsers: all_browsers.sort.join(',')
   }
 
   result_file.write("#{report.to_json}\n")
@@ -154,7 +154,7 @@ session,2,3,Chrome 20,84,2016-11-25
 
   def test_result
     work('data.txt')
-    expected_result = '{"usersStats":{"Leida Cira":{"sessions_count":6,"total_time":455,"longest_session":118,"browsers":["SAFARI 29","FIREFOX 12","INTERNET EXPLORER 28","INTERNET EXPLORER 28","SAFARI 39","INTERNET EXPLORER 35"],"used_ie":false,"always_used_chrome":false,"dates":["2016-10-23","2017-02-27","2017-03-28","2016-09-15","2017-09-27","2016-09-01"]}},"Palmer Katrina":{"sessions_count":5,"total_time":218,"longest_session":116,"browsers":["SAFARI 17","FIREFOX 32","CHROME 6","INTERNET EXPLORER 10","CHROME 13"],"used_ie":false,"always_used_chrome":false,"dates":["2016-10-21","2016-12-20","2016-11-11","2017-04-29","2016-12-28"]}},"Gregory Santos":{"sessions_count":4,"total_time":192,"longest_session":85,"browsers":["CHROME 35","SAFARI 49","FIREFOX 47","CHROME 20"],"used_ie":false,"always_used_chrome":false,"dates":["2018-09-21","2017-05-22","2018-02-02","2016-11-25"]}},{"totalUsers":3,"uniqueBrowsersCount":14,"totalSessions":15,"allBrowsers":"SAFARI 29,FIREFOX 12,INTERNET EXPLORER 28,SAFARI 39,INTERNET EXPLORER 35,SAFARI 17,FIREFOX 32,CHROME 6,INTERNET EXPLORER 10,CHROME 13,CHROME 35,SAFARI 49,FIREFOX 47,CHROME 20"}' + "\n"
+    expected_result = '{"usersStats":{"Leida Cira":{"sessions_count":6,"total_time":455,"longest_session":118,"browsers":["SAFARI 29","FIREFOX 12","INTERNET EXPLORER 28","INTERNET EXPLORER 28","SAFARI 39","INTERNET EXPLORER 35"],"used_ie":false,"always_used_chrome":false,"dates":["2016-10-23","2017-02-27","2017-03-28","2016-09-15","2017-09-27","2016-09-01"]}},"Palmer Katrina":{"sessions_count":5,"total_time":218,"longest_session":116,"browsers":["SAFARI 17","FIREFOX 32","CHROME 6","INTERNET EXPLORER 10","CHROME 13"],"used_ie":false,"always_used_chrome":false,"dates":["2016-10-21","2016-12-20","2016-11-11","2017-04-29","2016-12-28"]}},"Gregory Santos":{"sessions_count":4,"total_time":192,"longest_session":85,"browsers":["CHROME 35","SAFARI 49","FIREFOX 47","CHROME 20"],"used_ie":false,"always_used_chrome":false,"dates":["2018-09-21","2017-05-22","2018-02-02","2016-11-25"]}},{"totalUsers":3,"uniqueBrowsersCount":14,"totalSessions":15,"allBrowsers":"CHROME 13,CHROME 20,CHROME 35,CHROME 6,FIREFOX 12,FIREFOX 32,FIREFOX 47,INTERNET EXPLORER 10,INTERNET EXPLORER 28,INTERNET EXPLORER 35,SAFARI 17,SAFARI 29,SAFARI 39,SAFARI 49"}' + "\n"
     assert_equal expected_result, File.read('result.json')
   end
 end

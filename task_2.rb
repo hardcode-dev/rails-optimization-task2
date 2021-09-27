@@ -63,6 +63,8 @@ end
 #=====================================================
 
 def work(filename = '')
+  # puts ENV["MALLOC_ARENA_MAX"]
+
   result_file = File.open('result.json', 'w')
   result_file.write('{"usersStats":{')
 
@@ -86,11 +88,12 @@ def work(filename = '')
       all_browsers << session.browser
 
       user.calculation_params(session)
-      user.stats[:dates].sort!.reverse!
     end
   end
 
   users.each do |u|
+    u.stats[:dates].sort!.reverse!
+
     result_file.write("\"#{u.first_name} #{u.last_name}\":")
     result_file.write(u.stats.to_json)
     result_file.write('},')

@@ -17,4 +17,4 @@ gem 'rubocop-performance', require: false
 
 gem 'rspec-benchmark'
 
-gem 'dotenv-rails'
+gem 'dotenv', '~> 2.7', '>= 2.7.6'

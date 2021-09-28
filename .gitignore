@@ -1,0 +1,5 @@
+/ruby_prof_reports/*
+/stackprof_reports/*
+/data_large.txt
+/data300_000.txt
+/result.json

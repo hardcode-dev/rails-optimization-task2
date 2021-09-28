@@ -1,5 +1,6 @@
 data_large.txt
+small.txt
 result.json
 
-docker-valgrind-massif/massif.out.1
-docker-valgrind-massif/small.txt
+docker-valgrind-massif/
+

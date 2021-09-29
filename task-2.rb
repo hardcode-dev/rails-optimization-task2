@@ -33,27 +33,33 @@ def parse_session(fields)
 end
 
 def work(file_name = 'data/data.txt')
-  file_lines = File.read(file_name).split("\n")
 
+  user = nil
   users = []
   sessions = []
+  report = {}
+  report['totalUsers'] = 0
+  report['usersStats'] = {}
+  browsers = []
 
-  file_lines.each do |line|
+  File.read(file_name).split("\n") do |line|
     cols = line.split(',')
     case cols[0]
     when 'user'
+      report['totalUsers'] += 1
+      if user
+        user_key = "#{user['first_name']} #{user['last_name']}"
+        report[user_key] = collect_stats_from_user(user_sessions)
+      end
       users << parse_user(cols)
     when 'session'
-      sessions << parse_session(cols)
+      session = parse_session(cols)
+      sessions << session
+      browsers << session['browser']
     end
   end
 
-  report = {}
-
-  report['totalUsers'] = users.count
-
-  # Подсчёт количества уникальных браузеров
-  browsers = sessions.map { |s| s['browser'] }.uniq.sort
+  browsers = browsers.uniq.sort
   report['uniqueBrowsersCount'] = browsers.count
   report['totalSessions'] = sessions.count
   report['allBrowsers'] = browsers.join(',')

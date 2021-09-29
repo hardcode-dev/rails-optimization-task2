@@ -4,9 +4,8 @@ require 'date'
 
 require_relative 'user.rb';
 
-def parse_user(user)
-  fields = user.split(',')
-  parsed_result = {
+def parse_user(fields)
+  {
     'id' => fields[1],
     'first_name' => fields[2],
     'last_name' => fields[3],
@@ -15,9 +14,8 @@ def parse_user(user)
   }
 end
 
-def parse_session(session)
-  fields = session.split(',')
-  parsed_result = {
+def parse_session(fields)
+  {
     'user_id' => fields[1],
     'session_id' => fields[2],
     'browser' => fields[3],
@@ -44,9 +42,9 @@ def work(filename:, disable_gc: false)
 
   file_lines.each do |line|
     cols = line.split(',')
-    users << parse_user(line) if cols[0] == 'user'
+    users << parse_user(cols) if cols[0] == 'user'
     if cols[0] == 'session'
-      session = parse_session(line)
+      session = parse_session(cols)
       sessions << session
       users.last['sessions'] << session
     end

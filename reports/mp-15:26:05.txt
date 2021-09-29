@@ -1,0 +1,434 @@
+Total allocated: 32.67 MB (413865 objects)
+Total retained:  0 B (0 objects)
+
+allocated memory by gem
+-----------------------------------
+  32.67 MB  other
+
+allocated memory by file
+-----------------------------------
+  32.67 MB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb
+   40.00 B  optimization/memory-profiler.rb
+
+allocated memory by location
+-----------------------------------
+   9.48 MB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+   2.85 MB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:25
+   2.56 MB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:38
+   1.99 MB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+   1.82 MB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:135
+ 957.75 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+ 852.88 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:29
+ 851.47 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:107
+ 851.43 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:112
+ 838.45 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:132
+ 813.83 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+ 800.00 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:45
+ 800.00 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:46
+ 633.57 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:30
+ 633.57 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:95
+ 563.30 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+ 511.73 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:101
+ 511.73 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:106
+ 511.73 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:111
+ 511.73 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:116
+ 511.73 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:121
+ 511.73 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:126
+ 511.73 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:131
+ 511.73 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:15
+ 464.40 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:13
+ 201.82 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:41
+ 176.75 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:76
+ 135.71 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:87
+ 135.67 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:85
+ 114.78 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:98
+  26.60 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:40
+  26.60 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:92
+   2.64 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:89
+   1.64 kB  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:88
+  560.00 B  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:31
+  168.00 B  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:68
+   40.00 B  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:73
+   40.00 B  optimization/memory-profiler.rb:7
+
+allocated memory by class
+-----------------------------------
+  15.42 MB  String
+   8.64 MB  Array
+   8.08 MB  Hash
+ 397.82 kB  MatchData
+ 121.84 kB  User
+   8.67 kB  File
+  560.00 B  Proc
+  224.00 B  JSON::Ext::Generator::State
+   72.00 B  Thread::Mutex
+
+allocated objects by gem
+-----------------------------------
+    413865  other
+
+allocated objects by file
+-----------------------------------
+    413864  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb
+         1  optimization/memory-profiler.rb
+
+allocated objects by location
+-----------------------------------
+    156954  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+     34922  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+     21322  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:29
+     20005  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:38
+     20000  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:45
+     20000  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:46
+     16955  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+     16954  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:25
+     15693  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+     15230  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:107
+     15229  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:112
+     11876  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:132
+      8699  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+      6092  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:30
+      6092  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:95
+      3046  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:101
+      3046  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:106
+      3046  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:111
+      3046  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:116
+      3046  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:121
+      3046  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:126
+      3046  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:13
+      3046  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:131
+      3046  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:15
+       400  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:76
+         8  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:135
+         7  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:31
+         2  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:87
+         2  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:89
+         1  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:40
+         1  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:41
+         1  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:68
+         1  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:73
+         1  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:85
+         1  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:88
+         1  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:92
+         1  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:98
+         1  optimization/memory-profiler.rb:7
+
+allocated objects by class
+-----------------------------------
+    295539  String
+     65484  Array
+     47417  Hash
+      3046  User
+      2368  MatchData
+         7  Proc
+         2  File
+         1  JSON::Ext::Generator::State
+         1  Thread::Mutex
+
+retained memory by gem
+-----------------------------------
+NO DATA
+
+retained memory by file
+-----------------------------------
+NO DATA
+
+retained memory by location
+-----------------------------------
+NO DATA
+
+retained memory by class
+-----------------------------------
+NO DATA
+
+retained objects by gem
+-----------------------------------
+NO DATA
+
+retained objects by file
+-----------------------------------
+NO DATA
+
+retained objects by location
+-----------------------------------
+NO DATA
+
+retained objects by class
+-----------------------------------
+NO DATA
+
+
+Allocated String Report
+-----------------------------------
+     36954  "session"
+     20000  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:46
+     16954  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+
+     23046  "user"
+     20000  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:45
+      3046  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+
+     20001  ","
+     20000  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+         1  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:89
+
+      6093  " min."
+      3047  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:112
+      3046  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:107
+
+      3229  "0"
+      3226  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+         2  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:107
+         1  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:112
+
+      3046  ", "
+      3046  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+
+      2940  "1"
+      2930  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+         5  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:107
+         5  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:112
+
+      2648  "2"
+      2638  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+         5  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:107
+         5  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:112
+
+      2327  "3"
+      2326  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+         1  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:112
+
+      2019  "4"
+      2017  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+         1  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:107
+         1  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:112
+
+      1725  "5"
+      1724  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+         1  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:107
+
+      1435  "6"
+      1431  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+         2  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:107
+         2  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:112
+
+      1147  "7"
+      1147  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+
+       822  "8"
+       812  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+         5  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:107
+         5  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:112
+
+       478  "9"
+       473  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+         3  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:112
+         2  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:107
+
+       333  "INTERNET EXPLORER 32"
+       114  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        98  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        96  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        25  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       329  "INTERNET EXPLORER 27"
+       108  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        98  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        98  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        25  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       327  "INTERNET EXPLORER 6"
+       118  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        92  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        92  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        25  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       324  "CHROME 17"
+       103  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+       101  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        62  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        58  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       320  "INTERNET EXPLORER 35"
+        99  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        98  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        97  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        26  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       312  "INTERNET EXPLORER 31"
+        98  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        98  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        97  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        19  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       307  "INTERNET EXPLORER 10"
+       102  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        96  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        93  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        16  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       306  "INTERNET EXPLORER 29"
+        98  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        94  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        94  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        20  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       306  "INTERNET EXPLORER 7"
+        98  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        93  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        91  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        24  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       302  "119"
+       153  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+       147  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:112
+         2  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:107
+
+       301  "INTERNET EXPLORER 33"
+       102  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        85  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        85  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        29  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       300  "117"
+       161  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+       134  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:112
+         5  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:107
+
+       300  "CHROME 12"
+       104  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+       100  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        50  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        46  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       299  "INTERNET EXPLORER 38"
+       100  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        95  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        82  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        22  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       298  "INTERNET EXPLORER 21"
+       100  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        87  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        86  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        25  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       298  "INTERNET EXPLORER 44"
+       102  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        86  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        86  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        24  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       296  "INTERNET EXPLORER 50"
+        95  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        92  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        92  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        17  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       293  "SAFARI 26"
+       102  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+       102  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        62  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        27  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       292  "114"
+       163  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:44
+       121  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:112
+         8  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:107
+
+       291  "INTERNET EXPLORER 30"
+        94  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        93  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        84  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        20  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       291  "INTERNET EXPLORER 48"
+        96  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        90  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        87  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        18  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       290  "FIREFOX 49"
+       105  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+       103  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        56  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        26  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       290  "INTERNET EXPLORER 40"
+        94  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        92  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        82  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        22  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       288  "CHROME 22"
+        92  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        91  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        56  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+        49  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+
+       286  "FIREFOX 12"
+       100  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        98  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        59  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        29  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       286  "INTERNET EXPLORER 11"
+        89  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        88  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        87  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        22  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       286  "INTERNET EXPLORER 16"
+        90  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        88  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        85  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        23  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       284  "INTERNET EXPLORER 2"
+        96  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        83  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        81  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        24  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       284  "INTERNET EXPLORER 43"
+        96  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        93  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        80  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        15  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       281  "CHROME 41"
+        99  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        97  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        47  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        38  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       281  "INTERNET EXPLORER 12"
+        88  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        88  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        86  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        19  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       280  "CHROME 26"
+        93  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        90  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        49  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        48  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       279  "FIREFOX 9"
+       101  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        98  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        55  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        25  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       279  "INTERNET EXPLORER 19"
+        90  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        90  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        82  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        17  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+
+       279  "INTERNET EXPLORER 34"
+        90  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:122
+        87  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:117
+        85  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:86
+        17  /Users/andrey/work/rails-optimization/rails-optimization-task2/work.rb:127
+

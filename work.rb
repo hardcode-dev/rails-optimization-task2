@@ -93,10 +93,8 @@ def work(filename:, disable_gc: false)
   # Статистика по пользователям
   users_objects = []
 
-  users.each do |user|
-    attributes = user
-    user_object = User.new(attributes: attributes)
-    users_objects = users_objects + [user_object]
+  users.each do |user_attrs|
+    users_objects << User.new(attributes: user_attrs)
   end
 
   report['usersStats'] = {}

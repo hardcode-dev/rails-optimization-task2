@@ -26,9 +26,10 @@ def work(filename:, disable_gc: false)
   result_file.write("\{\"usersStats\":\{")
 
   current_user = nil;
-  cols = nil
+  cols = [];
   File.foreach(filename).each do |line|
-    cols = line.chomp.split(',')
+    cols.clear
+    line.chomp.split(',') { |val| cols << val }
 
     if cols[0] == 'user'
       result_file.write(current_user.to_s + ',') if current_user

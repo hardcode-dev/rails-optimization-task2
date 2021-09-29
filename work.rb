@@ -44,7 +44,7 @@ def work(filename:, disable_gc: false)
 
   file_lines.each do |line|
     cols = line.split(',')
-    users = users + [parse_user(line)] if cols[0] == 'user'
+    users << parse_user(line) if cols[0] == 'user'
     if cols[0] == 'session'
       session = parse_session(line)
       sessions << session

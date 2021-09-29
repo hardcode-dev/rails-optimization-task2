@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 require_relative 'user'
+require_relative 'oj_helper'
 require 'json'
 require 'date'
+require 'set'
+require 'oj'
+
+include OjHelper
 
 IE_REGEXP = /INTERNET EXPLORER/
 CHROME_REGEXP = /CHROME/
@@ -25,29 +30,41 @@ SESSION = 'session'
 #     - даты сессий в порядке убывания через запятую +
 
 def work(filename = 'data.txt')
-  init_variables
-  collect_data(filename)
-  calculate_total_stats
-  File.write('result.json', "#{@report.to_json}\n")
+  File.open('result.json', 'w+') do |file|
+    init_variables
+    init_stream(file)
+    push_report_to_stream(filename)
+  end
 end
+
+private
 
 def init_variables
-  @unique_browsers = []
-  @report = {
-    totalUsers: 0,
-    uniqueBrowsersCount: 0,
-    totalSessions: 0,
-    allBrowsers: [],
-    usersStats: {}
-  }
+  @unique_browsers = Set.new
+  @users_count = 0
+  @sessions_count = 0
+  @current_user = nil
 end
 
-def collect_data(filename)
+def push_report_to_stream(filename)
+  push_object do
+    push_key('usersStats')
+    push_object do
+      push_users_stats(filename)
+    end
+    push_total_stats
+  end
+
+  flush
+end
+
+def push_users_stats(filename)
   File.foreach(filename, chomp: true) do |line|
     cols = line.split(',')
     case cols[0]
     when USER
-      calculate_current_user_stats if @current_user
+      # Do not push first time
+      push_current_user_stats if @current_user
       @current_user = User.new(attributes: parse_user(cols))
     when SESSION
       session = parse_session(cols)
@@ -55,15 +72,17 @@ def collect_data(filename)
     end
   end
 
-  calculate_current_user_stats
+  # Push last user
+  push_current_user_stats
 end
 
 def add_to_stats(session)
+  upcased_browser = session[:browser].upcase
+
   # For all users
-  @unique_browsers << session[:browser] unless @unique_browsers.include?(session[:browser])
+  @unique_browsers << upcased_browser
 
   # For current_user
-  upcased_browser = session[:browser].upcase
   @current_user.sessions_count += 1
   @current_user.total_time += session[:time]
   @current_user.longest_session = session[:time] if @current_user.longest_session < session[:time]
@@ -73,27 +92,27 @@ def add_to_stats(session)
   @current_user.dates << session[:date]
 end
 
-def calculate_total_stats
-  @report[:uniqueBrowsersCount] = @unique_browsers.size
-  @report[:allBrowsers] = @unique_browsers.map(&:upcase).sort.join(',')
+def push_total_stats
+  push_pair('totalUsers', @users_count)
+  push_pair('totalSessions', @sessions_count)
+  push_pair('uniqueBrowsersCount', @unique_browsers.size)
+  push_pair('allBrowsers', @unique_browsers.sort.join(','))
 end
 
-def calculate_current_user_stats
-  @report[:totalUsers] += 1
-  @report[:totalSessions] += @current_user.sessions_count
-  @report[:usersStats][@current_user.full_name] = current_user_stats
-end
+def push_current_user_stats
+  @users_count += 1
+  @sessions_count += @current_user.sessions_count
 
-def current_user_stats
-  {
-    sessionsCount: @current_user.sessions_count,
-    totalTime: "#{@current_user.total_time} min.",
-    longestSession: "#{@current_user.longest_session} min.",
-    browsers: @current_user.browsers.sort.join(', '),
-    usedIE: @current_user.used_ie,
-    alwaysUsedChrome: @current_user.used_only_chrome,
-    dates: @current_user.dates.sort!.reverse
-  }
+  push_key(@current_user.full_name)
+  push_object do
+    push_pair('sessionsCount', @current_user.sessions_count)
+    push_pair('totalTime', "#{@current_user.total_time} min.")
+    push_pair('longestSession', "#{@current_user.longest_session} min.")
+    push_pair('browsers', @current_user.browsers.sort.join(', '))
+    push_pair('usedIE', @current_user.used_ie)
+    push_pair('alwaysUsedChrome', @current_user.used_only_chrome)
+    push_pair('dates', @current_user.dates.sort!.reverse)
+  end
 end
 
 def parse_user(fields)

@@ -8,6 +8,6 @@ def allocated_objects
   ObjectSpace.count_objects
 end
 
-work('data100000.txt')
+work('data_large.txt')
 puts memory_usage
 puts allocated_objects

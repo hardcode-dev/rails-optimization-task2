@@ -4,6 +4,7 @@ GEM
     ast (2.4.2)
     benchmark (0.1.1)
     memory_profiler (1.0.0)
+    oj (3.13.8)
     parallel (1.20.1)
     parser (3.0.2.0)
       ast (~> 2.4.1)
@@ -36,6 +37,7 @@ PLATFORMS
 DEPENDENCIES
   benchmark
   memory_profiler
+  oj
   rubocop-performance
   ruby-prof
   stackprof

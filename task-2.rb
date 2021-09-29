@@ -35,51 +35,48 @@ end
 def work(file_name = 'data/data.txt')
 
   user = nil
-  users = []
   sessions = []
   report = {}
-  report['totalUsers'] = 0
-  report['usersStats'] = {}
+  total_users = 0
+  total_sessions = 0
   browsers = []
+  @f = File.open('result.json', 'w+')
+  @f.write('{"usersStats":{')
 
   File.read(file_name).split("\n") do |line|
     cols = line.split(',')
-    case cols[0]
-    when 'user'
-      report['totalUsers'] += 1
+    if cols[0].start_with?('u')
+      total_users += 1
       if user
-        user_key = "#{user['first_name']} #{user['last_name']}"
-        report[user_key] = collect_stats_from_user(user_sessions)
+        write_user_stats(user, sessions)
+        sessions = []
       end
-      users << parse_user(cols)
-    when 'session'
+      user = parse_user(cols)
+    else 'session'
       session = parse_session(cols)
+      total_sessions += 1
       sessions << session
       browsers << session['browser']
     end
   end
 
+  write_user_stats(user, sessions, '')
   browsers = browsers.uniq.sort
+  report['totalUsers'] = total_users
   report['uniqueBrowsersCount'] = browsers.count
-  report['totalSessions'] = sessions.count
+  report['totalSessions'] = total_sessions
   report['allBrowsers'] = browsers.join(',')
-
-  # Статистика по пользователям
-  sessions = sessions.group_by { |s| s['user_id'] }
-
-  report['usersStats'] = collect_user_objects(users, sessions)
-
-  File.write('result.json', "#{report.to_json}\n")
+  @f.write('},')
+  @f.write("#{report.to_json[1..-1]}")
+  @f.close
 end
 
-def collect_user_objects(users, sessions)
-  {}.tap do |report|
-    users.map do |user|
-      user_sessions = sessions[user['id']]
-      user_key = "#{user['first_name']} #{user['last_name']}"
-      report[user_key] = collect_stats_from_user(user_sessions)
-    end
-  end
+def write_user_stats(user, sessions, ending = ',')
+  report = { }
+  user_key = "#{user['first_name']} #{user['last_name']}"
+  report[user_key] = collect_stats_from_user(sessions)
+  s = report.to_json
+  @f.write("#{s[1..-2]}#{ending}")
 end
 
 def collect_stats_from_user(user_sessions)

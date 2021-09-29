@@ -1,54 +1,52 @@
 Measure Mode: allocations
-Thread ID: 70098836745760
-Fiber ID: 70098870625100
-Total: 1031.000000
+Thread ID: 70306760977920
+Fiber ID: 70306763835780
+Total: 260971.000000
 Sort by: self_time
 
  %self      total      self      wait     child     calls  name                           location
- 27.93    924.000   288.000     0.000   636.000       28  *Array#each                     
- 25.70    265.000   265.000     0.000     0.000       37   String#split                   
- 14.65    181.000   151.000     0.000    30.000       15   <Class::Date>#parse            
-  4.36     45.000    45.000     0.000     0.000       45   String#upcase                  
-  3.49     36.000    36.000     0.000     0.000        1   Kernel#`                       
-  3.49     46.000    36.000     0.000    10.000       18   Enumerable#all?                
-  3.39    261.000    35.000     0.000   226.000       35   Array#map                      
-  2.91    135.000    30.000     0.000   105.000       15   Object#parse_session           /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:27
-  2.91     30.000    30.000     0.000     0.000       30   Regexp#match                   
-  2.04     21.000    21.000     0.000     0.000       21   Hash#merge                     
-  1.55   1031.000    16.000     0.000  1015.000        1   Object#work                    /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:46
-  1.45     15.000    15.000     0.000     0.000       15   Date#iso8601                   
-  1.36     14.000    14.000     0.000     0.000        7   Array#sort                     
-  0.68      7.000     7.000     0.000     0.000        7   Integer#to_s                   
-  0.58      6.000     6.000     0.000     0.000        3   Class#new                      
-  0.58     24.000     6.000     0.000    18.000        3   Object#parse_user              /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:17
-  0.48     16.000     5.000     0.000    11.000        3   Array#any?                     
-  0.48      5.000     5.000     0.000     0.000        1   <Class::IO>#write              
-  0.39      4.000     4.000     0.000     0.000        4   Array#join                     
-  0.29      3.000     3.000     0.000     0.000        3   Array#reverse                  
-  0.29      3.000     3.000     0.000     0.000        3   Array#select                   
-  0.29      3.000     3.000     0.000     0.000        1   <Class::IO>#read               
-  0.19      2.000     2.000     0.000     0.000        1   JSON::Ext::Generator::GeneratorMethods::Hash#to_json 
-  0.19      2.000     2.000     0.000     0.000        1   String#%                       
-  0.19      2.000     2.000     0.000     0.000        1   Array#uniq                     
-  0.10      1.000     1.000     0.000     0.000        1   IO#write                       
+ 34.77  90750.000 90750.000     0.000     0.000    13254   String#split                   
+ 10.16  247381.000 26508.000     0.000 220873.000        1   Array#each                     
+  8.55  66727.000 22317.000     0.000 44410.000     2029   <Class::IO>#open               
+  7.77  20288.000 20288.000     0.000     0.000    18259   IO#write                       
+  5.08  13257.000 13257.000     0.000     0.000        1   <Class::IO>#readlines          
+  5.08  13254.000 13254.000     0.000     0.000    13254   String#chomp                   
+  4.38  11426.000 11426.000     0.000     0.000    11426   String#upcase                  
+  4.30  11226.000 11226.000     0.000     0.000    11226   User#add_session               /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:31
+  2.95   7692.000  7692.000     0.000     0.000     4057   Array#sort                     
+  2.95   7690.000  7690.000     0.000     0.000     4056   Array#uniq                     
+  2.33   6088.000  6088.000     0.000     0.000     6088   Integer#to_s                   
+  2.33  99615.000  6084.000     0.000 93531.000     2028   User#serialize                 /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:48
+  1.55   4056.000  4056.000     0.000     0.000     2028   JSON::Ext::Generator::GeneratorMethods::Array#to_json 
+  1.55   4056.000  4056.000     0.000     0.000     2028   User#initialize                /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:19
+  1.55   4054.000  4054.000     0.000     0.000     2028   Array#|                        
+  0.98   2561.000  2561.000     0.000     0.000     2561   FalseClass#to_s                
+  0.78   2029.000  2029.000     0.000     0.000     2029   Array#join                     
+  0.78   2029.000  2029.000     0.000     0.000     2029   File#initialize                
+  0.78  13455.000  2029.000     0.000 11426.000     2029   Array#map                      
+  0.78   6084.000  2028.000     0.000  4056.000     2028   Class#new                      
+  0.57   1495.000  1495.000     0.000     0.000     1495   TrueClass#to_s                 
+  0.01     37.000    37.000     0.000     0.000        1   Kernel#`                       
+  0.00  260971.000     9.000     0.000 260962.000        1   Object#work                    /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:97
+  0.00      5.000     5.000     0.000     0.000        1   <Class::IO>#write              
+  0.00      2.000     2.000     0.000     0.000        1   String#%                       
+  0.00      1.000     1.000     0.000     0.000        1   <Class::User>#clean_up         /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:71
   0.00      0.000     0.000     0.000     0.000        1   <Module::Process>#pid          
-  0.00      0.000     0.000     0.000     0.000        6   Array#count                    
   0.00      1.000     0.000     0.000     1.000        1   Kernel#puts                    
-  0.00      1.000     0.000     0.000     1.000        1   IO#puts                        
-  0.00      0.000     0.000     0.000     0.000       15   MatchData#end                  
-  0.00      0.000     0.000     0.000     0.000       15   MatchData#begin                
-  0.00      0.000     0.000     0.000     0.000       15   Integer#div                    
-  0.00      0.000     0.000     0.000     0.000       15   String#gsub!                   
-  0.00      0.000     0.000     0.000     0.000       23   Date#<=>                       
-  0.00      0.000     0.000     0.000     0.000        3   Array#max                      
-  0.00   1031.000     0.000     0.000  1031.000        1   [global]#                      optimization_tools/ruby-prof.rb:9
-  0.00      0.000     0.000     0.000     0.000        3   Array#sum                      
-  0.00      0.000     0.000     0.000     0.000       31   String#to_i                    
-  0.00    475.000     0.000     0.000   475.000        7   Object#collect_stats_from_users /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:38
-  0.00      0.000     0.000     0.000     0.000        3   User#initialize                /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:11
-  0.00      0.000     0.000     0.000     0.000        1   JSON::Ext::Generator::State#initialize 
+  0.00      0.000     0.000     0.000     0.000     2028   JSON::Ext::Generator::State#initialize 
+  0.00      0.000     0.000     0.000     0.000     2029   IO#closed?                     
+  0.00  20288.000     0.000     0.000 20288.000    18259   IO#puts                        
+  0.00      0.000     0.000     0.000     0.000     2029   IO#close                       
+  0.00      0.000     0.000     0.000     0.000        1   <Class::User>#count            /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:81
+  0.00      0.000     0.000     0.000     0.000        2   <Class::User>#unique_browsers  /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:89
+  0.00      0.000     0.000     0.000     0.000        1   Array#count                    
+  0.00      0.000     0.000     0.000     0.000        1   <Class::User>#total_session_count /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:85
+  0.00      0.000     0.000     0.000     0.000    13254   String#include?                
+  0.00      0.000     0.000     0.000     0.000    11227   String#to_i                    
+  0.00  260971.000     0.000     0.000 260971.000        1   [global]#                      optimization_tools/ruby-prof.rb:9
+  0.00      0.000     0.000     0.000     0.000    13255   <Class::User>#last             /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:77
   0.00      0.000     0.000     0.000     0.000        1   <Module::GC>#disable           
-  0.00      0.000     0.000     0.000     0.000       15   String#[]=                     
+  0.00      0.000     0.000     0.000     0.000    22896   String#<=>                     
 
 * recursively called methods
 

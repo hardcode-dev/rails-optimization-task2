@@ -7,4 +7,4 @@ report = MemoryProfiler.report do
   work(filename: 'data_test.txt', disable_gc: false)
 end
 
-report.pretty_print(scale_bytes: true)
+report.pretty_print(scale_bytes: true, to_file: "reports/mp-#{Time.now.to_s.split(' ')[1]}.txt")

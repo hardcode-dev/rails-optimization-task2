@@ -16,5 +16,6 @@ echo 'PROFILER:'
 echo '- - - - - - -'
 ruby 'optimization/memory-profiler.rb'
 ruby 'optimization/rubyprof-profiler.rb'
+echo 'Reports generated !'
 echo '- - - - - - -'
 echo

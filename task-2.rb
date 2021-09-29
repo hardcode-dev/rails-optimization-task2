@@ -29,7 +29,7 @@ SESSION = 'session'
 #     - Всегда использовал только Хром? +
 #     - даты сессий в порядке убывания через запятую +
 
-def work(filename = 'data.txt')
+def work(filename = 'data20000.txt')
   File.open('result.json', 'w+') do |file|
     init_variables
     init_stream(file)

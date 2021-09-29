@@ -92,5 +92,15 @@
 Удалось улучшить метрику системы с 115 mb для файла в 20_000 строк 
 до 23 mb при любом размере файла (вплоть до 3_250_000 строк) и уложиться в заданный бюджет.
 
+## Valgrind
+
+### 20k lines file
+
+![alt text](https://github.com/Exterm1nate/rails-optimization-task2/blob/master/valgrind_report_20k.jpg?raw=true)
+
+### 3_250k lines file (data_large.txt)
+
+![alt text](https://github.com/Exterm1nate/rails-optimization-task2/blob/master/valgrind_report_3m.jpg?raw=true)
+
 ## Защита от регрессии производительности
 Для защиты от потери достигнутого прогресса при дальнейших изменениях программы был написан автотест.

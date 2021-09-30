@@ -1,21 +1,11 @@
-require 'date'
+# frozen_string_literal: true
 
 class User
-  attr_reader :attributes
-  attr_accessor :sessions
+  attr_reader :key, :sessions
 
   def initialize(cols)
-    @attributes = {
-      'id' => cols[1],
-      'first_name' => cols[2],
-      'last_name' => cols[3],
-      'age' => cols[4],
-    }
+    @key = "#{cols[2]} #{cols[3]}"
     @sessions = []
-  end
-
-  def key
-   "#{attributes['first_name']} #{attributes['last_name']}"
   end
 
   def total_sessions_time
@@ -49,7 +39,7 @@ class User
   private
 
   def browsers
-    @browsers ||= sessions.map { |s| s['browser'].upcase }
+    @browsers ||= sessions.map { |s| s['browser'] }
   end
 
   def sessions_time

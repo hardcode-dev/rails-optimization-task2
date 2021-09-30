@@ -3,7 +3,7 @@ require 'rake/testtask'
 require 'benchmark'
 # require_relative 'benchmark/ruby-prof'
 
-task default: %i[test benchmark_spec processing_time memory_profiler]
+task default: %i[test benchmark_spec processing_time memory_profiler dummy_benchmark]
 
 task :benchmark_spec do
   RSpec::Core::RakeTask.new.run_task(false)
@@ -30,4 +30,8 @@ end
 
 task :memory_profiler do
   ruby 'profile/memory_profiler.rb'
+end
+
+task :dummy_benchmark do
+  ruby 'profile/dummy_benchmark.rb'
 end

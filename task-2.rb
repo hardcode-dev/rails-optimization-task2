@@ -3,6 +3,7 @@
 require 'json'
 require 'pry'
 require 'date'
+require 'set'
 
 class User
   attr_reader :attributes, :sessions
@@ -15,10 +16,8 @@ end
 
 def parse_user(fields)
   {
-    'id' => fields[1],
     'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4]
+    'last_name' => fields[3]
   }
 end
 
@@ -39,12 +38,13 @@ def work(file_name = 'data/data.txt')
   report = {}
   total_users = 0
   total_sessions = 0
+  #browsers = Set[]
   browsers = []
   @f = File.open('result.json', 'w+')
   @f.write('{"usersStats":{')
 
-  File.read(file_name).split("\n") do |line|
-    cols = line.split(',')
+  File.open(file_name,'r', chomp: true).each do |line|
+    cols = line.chomp.split(',')
     if cols[0].start_with?('u')
       total_users += 1
       if user
@@ -52,7 +52,7 @@ def work(file_name = 'data/data.txt')
         sessions = []
       end
       user = parse_user(cols)
-    else 'session'
+    else
       session = parse_session(cols)
       total_sessions += 1
       sessions << session

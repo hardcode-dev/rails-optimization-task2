@@ -2,3 +2,4 @@ result.json
 result_old.json
 
 data_large.txt
+docker-valgrind-massif

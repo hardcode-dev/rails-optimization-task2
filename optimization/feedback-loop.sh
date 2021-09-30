@@ -2,7 +2,7 @@ clear
 
 echo 'SPECS:'
 echo '- - - - - - -'
-rspec 'spec/work_spec.rb'
+rspec 'spec/'
 echo '- - - - - - -'
 echo
 

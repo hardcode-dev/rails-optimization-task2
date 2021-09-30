@@ -3,7 +3,7 @@ require 'benchmark'
 require_relative '../work.rb'
 
 time = Benchmark.realtime do
-  work(filename: 'data_test.txt', disable_gc: false)
+  work(filename: 'data_large.txt', disable_gc: false)
 end
 
 # GC.start(full_mark: true, immediate_sweep: true)

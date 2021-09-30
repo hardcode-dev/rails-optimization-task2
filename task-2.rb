@@ -25,7 +25,7 @@ def parse_session(fields)
   {
     'user_id' => fields[1],
     'session_id' => fields[2],
-    'browser' => fields[3].upcase,
+    'browser' => fields[3].upcase!,
     'time' => fields[4].to_i,
     'date' => fields[5]
   }
@@ -38,12 +38,11 @@ def work(file_name = 'data/data.txt')
   report = {}
   total_users = 0
   total_sessions = 0
-  #browsers = Set[]
-  browsers = []
+  browsers = Set[]
   @f = File.open('result.json', 'w+')
   @f.write('{"usersStats":{')
 
-  File.open(file_name,'r', chomp: true).each do |line|
+  File.open(file_name, 'r').each do |line|
     cols = line.chomp.split(',')
     if cols[0].start_with?('u')
       total_users += 1
@@ -61,7 +60,7 @@ def work(file_name = 'data/data.txt')
   end
 
   write_user_stats(user, sessions, '')
-  browsers = browsers.uniq.sort
+  browsers = browsers.sort
   report['totalUsers'] = total_users
   report['uniqueBrowsersCount'] = browsers.count
   report['totalSessions'] = total_sessions
@@ -72,7 +71,7 @@ def work(file_name = 'data/data.txt')
 end
 
 def write_user_stats(user, sessions, ending = ',')
-  report = { }
+  report = {}
   user_key = "#{user['first_name']} #{user['last_name']}"
   report[user_key] = collect_stats_from_user(sessions)
   s = report.to_json

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'set'
 
 require_relative 'user.rb';
 
@@ -15,7 +16,7 @@ def work(filename:, disable_gc: false)
 
   totalUsers = 0
   totalSessions = 0
-  browsers = []
+  browsers = Set.new
 
   result_file = File.open('result.json', 'w')
 
@@ -35,11 +36,10 @@ def work(filename:, disable_gc: false)
       session = parse_session(cols)
       current_user.sessions << session
       totalSessions += 1
-      browsers << session['browser']
+      browsers.add session['browser']
     end
   end
   result_file.write(current_user.to_s)
-  browsers.uniq!
 
   result_file.write('},')
   result_file.write("\"totalUsers\":#{totalUsers},\"uniqueBrowsersCount\":#{browsers.count},\"totalSessions\":#{totalSessions},\"allBrowsers\":\"#{browsers.sort.join(',')}\"\}")

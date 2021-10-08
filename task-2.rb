@@ -1,15 +1,23 @@
 # Deoptimized version of homework task
 
 require 'json'
-require 'pry'
-require 'date'
-require 'minitest/autorun'
 require 'oj'
 require 'set'
 
 COMMA = ','.freeze
 SPACE = ' '.freeze
 NULLSTRING = ''.freeze
+SESSION = 'session'.freeze
+USER = 'user'.freeze
+SESSIONCOUNT = 'sessionsCount'.freeze
+CHROME = 'Chrome'.freeze
+TOTALTIME = 'totalTime'.freeze
+LONGESTSESSION = 'longestSession'.freeze
+BROWSERS = 'browsers'.freeze
+USEDIE = 'usedIE'.freeze
+IE = 'INTERNET EXPLORER'.freeze
+ALWAYSCHROME = 'alwaysUsedChrome'.freeze
+DATES = 'dates'.freeze
 
 class User
   
@@ -31,7 +39,7 @@ class User
     @total_time = 0
     @longest_session = 0
     @browsers = SortedSet.new
-    @dates = SortedSet.new() 
+    @dates = SortedSet.new
     @always_chrome = true
     @@last = self
     @@count += 1
@@ -46,7 +54,7 @@ class User
     @longest_session = time if @longest_session < time
     browser = session[3]
     @browsers << browser
-    @always_chrome = false if !browser.include?('Chrome')
+    @always_chrome = false if !browser.include?(CHROME)
     @dates << session[5]
   end
 
@@ -55,13 +63,13 @@ class User
     @@total_session_count += @sessions_count
     @@unique_browsers += @browsers
     @@serializer.push_object(@name)
-    @@serializer.push_value(@sessions_count, 'sessionsCount')
-    @@serializer.push_value("#{@total_time} min.", 'totalTime')
-    @@serializer.push_value("#{@longest_session} min.", 'longestSession')
-    @@serializer.push_value(user_browsers, 'browsers')
-    @@serializer.push_value(user_browsers.include?('INTERNET EXPLORER'), 'usedIE')
-    @@serializer.push_value(@always_chrome, 'alwaysUsedChrome')
-    @@serializer.push_value(@dates.to_a.reverse, 'dates')
+    @@serializer.push_value(@sessions_count, SESSIONCOUNT)
+    @@serializer.push_value("#{@total_time} min.", TOTALTIME)
+    @@serializer.push_value("#{@longest_session} min.", LONGESTSESSION)
+    @@serializer.push_value(user_browsers, BROWSERS)
+    @@serializer.push_value(user_browsers.include?(IE), USEDIE)
+    @@serializer.push_value(@always_chrome, ALWAYSCHROME)
+    @@serializer.push_value(@dates.to_a.reverse, DATES)
     @@serializer.pop
 
     @@last = nil
@@ -80,8 +88,6 @@ class User
     @@total_session_count = 0
     @@unique_browsers = SortedSet.new
     @@file.close
-    @@file = nil
-    @@serializer = nil
   end
   
   def self.last
@@ -96,12 +102,12 @@ def work(file = 'small.txt')
 
   User.initialize_serializer
 
-  File.readlines(file).each do |line|
-    cols = line.chomp.split(COMMA)
-    if cols[0] == 'user'
+  File.foreach(file, chomp: true) do |line|
+    cols = line.split(COMMA)
+    if cols[0] == USER
       User.last&.serialize
       User.new("#{cols[2]} #{cols[3]}")
-    elsif cols[0] == 'session'
+    elsif cols[0] == SESSION
       User.last.add_session(cols)
     end
   end

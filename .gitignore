@@ -3,4 +3,5 @@ small.txt
 result.json
 
 docker-valgrind-massif/
+.byebug_history
 

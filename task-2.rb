@@ -5,6 +5,7 @@ require 'pry'
 require 'date'
 require 'minitest/autorun'
 require 'oj'
+require 'set'
 
 COMMA = ','.freeze
 SPACE = ' '.freeze
@@ -14,7 +15,7 @@ class User
   @@last = nil
   @@count = 0
   @@total_session_count = 0
-  @@unique_browsers = []
+  @@unique_browsers = SortedSet.new
 
   def self.initialize_serializer
     @@file = File.open('result.json','w')
@@ -28,8 +29,8 @@ class User
     @sessions_count = 0
     @total_time = 0
     @longest_session = 0
-    @browsers = []
-    @dates = []
+    @browsers = SortedSet.new
+    @dates = SortedSet.new
     @always_chrome = true
     @@last = self
     @@count += 1
@@ -49,7 +50,7 @@ class User
   end
 
   def serialize
-    user_browsers = @browsers.map{|user_browser| user_browser.upcase}.sort.join(', ')
+    user_browsers = @browsers.map{|user_browser| user_browser.upcase}.join(', ')
     @@total_session_count += @sessions_count
     @@unique_browsers = @@unique_browsers | @browsers.uniq
     @@serializer.push_object(@name)
@@ -59,7 +60,7 @@ class User
     @@serializer.push_value(user_browsers, 'browsers')
     @@serializer.push_value(user_browsers.include?('INTERNET EXPLORER'), 'usedIE')
     @@serializer.push_value(@always_chrome, 'alwaysUsedChrome')
-    @@serializer.push_value(@dates.uniq.sort{|a,b| b <=> a }, 'dates')
+    @@serializer.push_value(@dates.to_a.reverse, 'dates')
     @@serializer.pop
 
     @@last = nil
@@ -76,7 +77,7 @@ class User
     @@last = nil
     @@count = 0
     @@total_session_count = 0
-    @@unique_browsers = []
+    @@unique_browsers = SortedSet.new
     @@file.close
     @@file = nil
     @@serializer = nil

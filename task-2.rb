@@ -9,6 +9,7 @@ require 'set'
 
 COMMA = ','.freeze
 SPACE = ' '.freeze
+NULLSTRING = ''.freeze
 
 class User
   
@@ -30,7 +31,7 @@ class User
     @total_time = 0
     @longest_session = 0
     @browsers = SortedSet.new
-    @dates = SortedSet.new
+    @dates = SortedSet.new() 
     @always_chrome = true
     @@last = self
     @@count += 1
@@ -50,9 +51,9 @@ class User
   end
 
   def serialize
-    user_browsers = @browsers.map{|user_browser| user_browser.upcase}.join(', ')
+    user_browsers = @browsers.reduce(NULLSTRING){|sum, b| sum.empty? ? b.upcase : "#{sum}#{COMMA} #{b.upcase}"}
     @@total_session_count += @sessions_count
-    @@unique_browsers = @@unique_browsers | @browsers.uniq
+    @@unique_browsers += @browsers
     @@serializer.push_object(@name)
     @@serializer.push_value(@sessions_count, 'sessionsCount')
     @@serializer.push_value("#{@total_time} min.", 'totalTime')
@@ -72,7 +73,7 @@ class User
     @@serializer.push_value(@@count, 'totalUsers')
     @@serializer.push_value(@@unique_browsers.count, 'uniqueBrowsersCount')
     @@serializer.push_value(@@total_session_count, 'totalSessions')
-    @@serializer.push_value(@@unique_browsers.sort.map(&:upcase).join(", "), 'allBrowsers')
+    @@serializer.push_value(@@unique_browsers.reduce(NULLSTRING){|sum, b| sum.empty? ? b.upcase : "#{sum}#{COMMA} #{b.upcase}"}, 'allBrowsers')
     @@serializer.pop
     @@last = nil
     @@count = 0

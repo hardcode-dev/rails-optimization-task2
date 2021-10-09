@@ -98,7 +98,7 @@ class User
 end
 
 
-def work(file = 'small.txt')
+def work(file = 'data_medium.txt')
 
   User.initialize_serializer
 

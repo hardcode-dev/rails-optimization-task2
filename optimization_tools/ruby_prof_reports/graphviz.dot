@@ -1,0 +1,238 @@
+digraph "Profile" {
+labelloc=t;
+labeljust=l;
+subgraph "Thread 70306760977920" {
+70306832478040 [label="puts\n(0%)"];
+70306832478040 -> 70306832478040 [label="1/1" fontsize=10 fontcolor="#666666"];
+70306832478060 [label="%\n(0%)"];
+70306832478060 -> 70306832478060 [label="1/1" fontsize=10 fontcolor="#666666"];
+70306832478080 [label="`\n(0%)"];
+70306832478080 -> 70306832478080 [label="1/1" fontsize=10 fontcolor="#666666"];
+70306832478100 [label="pid\n(0%)"];
+70306832478100 -> 70306832478100 [label="1/1" fontsize=10 fontcolor="#666666"];
+70306832478120 [label="clean_up\n(0%)"];
+70306832478120 -> 70306832478120 [label="1/1" fontsize=10 fontcolor="#666666"];
+70306832478140 [label="total_session_count\n(0%)"];
+70306832478140 -> 70306832478140 [label="1/1" fontsize=10 fontcolor="#666666"];
+70306832478160 [label="count\n(0%)"];
+70306832478160 -> 70306832478160 [label="1/1" fontsize=10 fontcolor="#666666"];
+70306832478180 [label="unique_browsers\n(0%)"];
+70306832478180 -> 70306832478180 [label="2/2" fontsize=10 fontcolor="#666666"];
+70306832478200 [label="count\n(0%)"];
+70306832478200 -> 70306832478200 [label="1/1" fontsize=10 fontcolor="#666666"];
+70306832478220 [label="close\n(0%)"];
+70306832478220 -> 70306832478220 [label="2029/2029" fontsize=10 fontcolor="#666666"];
+70306832478240 [label="closed?\n(0%)"];
+70306832478240 -> 70306832478240 [label="2029/2029" fontsize=10 fontcolor="#666666"];
+70306832478260 [label="initialize\n(0%)"];
+70306832478260 -> 70306832478260 [label="2028/2028" fontsize=10 fontcolor="#666666"];
+70306832478280 [label="to_json\n(2%)"];
+70306832478280 -> 70306832478280 [label="2028/2028" fontsize=10 fontcolor="#666666"];
+70306832478300 [label="<=>\n(0%)"];
+70306832478300 -> 70306832478300 [label="22896/22896" fontsize=10 fontcolor="#666666"];
+70306832478320 [label="to_s\n(1%)"];
+70306832478320 -> 70306832478320 [label="2561/2561" fontsize=10 fontcolor="#666666"];
+70306832478340 [label="to_s\n(1%)"];
+70306832478340 -> 70306832478340 [label="1495/1495" fontsize=10 fontcolor="#666666"];
+70306832478360 [label="to_s\n(2%)"];
+70306832478360 -> 70306832478360 [label="6087/6088" fontsize=10 fontcolor="#666666"];
+70306832478360 -> 70306832478360 [label="1/6088" fontsize=10 fontcolor="#666666"];
+70306832478380 [label="write\n(8%)"];
+70306832478380 -> 70306832478380 [label="18259/18259" fontsize=10 fontcolor="#666666"];
+70306832478400 [label="puts\n(8%)"];
+70306832478400 -> 70306832478400 [label="18258/18259" fontsize=10 fontcolor="#666666"];
+70306832478400 -> 70306832478400 [label="1/18259" fontsize=10 fontcolor="#666666"];
+70306832478420 [label="initialize\n(1%)"];
+70306832478420 -> 70306832478420 [label="2029/2029" fontsize=10 fontcolor="#666666"];
+70306832478440 [label="open\n(26%)"];
+70306832478440 -> 70306832478440 [label="2028/2029" fontsize=10 fontcolor="#666666"];
+70306832478440 -> 70306832478440 [label="1/2029" fontsize=10 fontcolor="#666666"];
+70306832478460 [label="|\n(2%)"];
+70306832478460 -> 70306832478460 [label="2028/2028" fontsize=10 fontcolor="#666666"];
+70306832478480 [label="uniq\n(3%)"];
+70306832478480 -> 70306832478480 [label="2028/4056" fontsize=10 fontcolor="#666666"];
+70306832478480 -> 70306832478480 [label="2028/4056" fontsize=10 fontcolor="#666666"];
+70306832478500 [label="join\n(1%)"];
+70306832478500 -> 70306832478500 [label="2028/2029" fontsize=10 fontcolor="#666666"];
+70306832478500 -> 70306832478500 [label="1/2029" fontsize=10 fontcolor="#666666"];
+70306832478520 [label="sort\n(3%)"];
+70306832478520 -> 70306832478520 [label="2029/4057" fontsize=10 fontcolor="#666666"];
+70306832478520 -> 70306832478520 [label="2028/4057" fontsize=10 fontcolor="#666666"];
+70306832478540 [label="upcase\n(4%)"];
+70306832478540 -> 70306832478540 [label="11426/11426" fontsize=10 fontcolor="#666666"];
+70306832478560 [label="map\n(5%)"];
+70306832478560 -> 70306832478560 [label="2028/2029" fontsize=10 fontcolor="#666666"];
+70306832478560 -> 70306832478560 [label="1/2029" fontsize=10 fontcolor="#666666"];
+70306832478580 [label="serialize\n(38%)"];
+70306832478580 -> 70306832478580 [label="2027/2028" fontsize=10 fontcolor="#666666"];
+70306832478580 -> 70306832478580 [label="1/2028" fontsize=10 fontcolor="#666666"];
+70306832478600 [label="include?\n(0%)"];
+70306832478600 -> 70306832478600 [label="2028/13254" fontsize=10 fontcolor="#666666"];
+70306832478600 -> 70306832478600 [label="11226/13254" fontsize=10 fontcolor="#666666"];
+70306832478620 [label="to_i\n(0%)"];
+70306832478620 -> 70306832478620 [label="1/11227" fontsize=10 fontcolor="#666666"];
+70306832478620 -> 70306832478620 [label="11226/11227" fontsize=10 fontcolor="#666666"];
+70306832478640 [label="add_session\n(4%)"];
+70306832478640 -> 70306832478640 [label="11226/11226" fontsize=10 fontcolor="#666666"];
+70306832478660 [label="initialize\n(2%)"];
+70306832478660 -> 70306832478660 [label="2028/2028" fontsize=10 fontcolor="#666666"];
+70306832478680 [label="new\n(2%)"];
+70306832478680 -> 70306832478680 [label="2028/2028" fontsize=10 fontcolor="#666666"];
+70306832478700 [label="last\n(0%)"];
+70306832478700 -> 70306832478700 [label="1/13255" fontsize=10 fontcolor="#666666"];
+70306832478700 -> 70306832478700 [label="13254/13255" fontsize=10 fontcolor="#666666"];
+70306832478720 [label="split\n(35%)"];
+70306832478720 -> 70306832478720 [label="13254/13254" fontsize=10 fontcolor="#666666"];
+70306832478740 [label="chomp\n(5%)"];
+70306832478740 -> 70306832478740 [label="13254/13254" fontsize=10 fontcolor="#666666"];
+70306832478760 [label="each\n(95%)"];
+70306832478760 -> 70306832478760 [label="1/1" fontsize=10 fontcolor="#666666"];
+70306832478780 [label="readlines\n(5%)"];
+70306832478780 -> 70306832478780 [label="1/1" fontsize=10 fontcolor="#666666"];
+70306832478800 [label="write\n(0%)"];
+70306832478800 -> 70306832478800 [label="1/1" fontsize=10 fontcolor="#666666"];
+70306832478820 [label="work\n(100%)"];
+70306832478820 -> 70306832478820 [label="1/1" fontsize=10 fontcolor="#666666"];
+70306832478840 [label="disable\n(0%)"];
+70306832478840 -> 70306832478840 [label="1/1" fontsize=10 fontcolor="#666666"];
+70306832478860 [label="[global]\n(100%)"];
+}
+subgraph cluster_70306832557400 {
+label = "[global]";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+70306832478860;
+}
+subgraph cluster_70306760995440 {
+label = "GC";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+70306832478840;
+}
+subgraph cluster_70306761173860 {
+label = "Object";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+70306832478820;
+}
+subgraph cluster_70306761048000 {
+label = "IO";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+70306832478800;
+70306832478780;
+70306832478440;
+70306832478400;
+70306832478380;
+70306832478240;
+70306832478220;
+}
+subgraph cluster_70306761162440 {
+label = "Array";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+70306832478760;
+70306832478560;
+70306832478520;
+70306832478500;
+70306832478480;
+70306832478460;
+70306832478160;
+}
+subgraph cluster_70306761162520 {
+label = "String";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+70306832478740;
+70306832478720;
+70306832478620;
+70306832478600;
+70306832478540;
+70306832478300;
+70306832478060;
+}
+subgraph cluster_70306761582580 {
+label = "User";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+70306832478700;
+70306832478660;
+70306832478640;
+70306832478580;
+70306832478200;
+70306832478180;
+70306832478140;
+70306832478120;
+}
+subgraph cluster_70306761173720 {
+label = "Class";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+70306832478680;
+}
+subgraph cluster_70306761040680 {
+label = "File";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+70306832478420;
+}
+subgraph cluster_70306761162680 {
+label = "Integer";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+70306832478360;
+}
+subgraph cluster_70306761159500 {
+label = "TrueClass";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+70306832478340;
+}
+subgraph cluster_70306761159240 {
+label = "FalseClass";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+70306832478320;
+}
+subgraph cluster_70306762036180 {
+label = "JSON::Ext::Generator::GeneratorMethods::Array";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+70306832478280;
+}
+subgraph cluster_70306762037700 {
+label = "JSON::Ext::Generator::State";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+70306832478260;
+}
+subgraph cluster_70306760961720 {
+label = "Process";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+70306832478100;
+}
+subgraph cluster_70306761173480 {
+label = "Kernel";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+70306832478080;
+70306832478040;
+}
+}

@@ -1,0 +1,67 @@
+Measure Mode: allocations
+Thread ID: 70306760977920
+Fiber ID: 70306763835780
+Total: 260971.000000
+Sort by: self_time
+
+ %self      total      self      wait     child     calls  name                           location
+ 34.77  90750.000 90750.000     0.000     0.000    13254   String#split                   
+ 10.16  247381.000 26508.000     0.000 220873.000        1   Array#each                     
+  8.55  66727.000 22317.000     0.000 44410.000     2029   <Class::IO>#open               
+  7.77  20288.000 20288.000     0.000     0.000    18259   IO#write                       
+  5.08  13257.000 13257.000     0.000     0.000        1   <Class::IO>#readlines          
+  5.08  13254.000 13254.000     0.000     0.000    13254   String#chomp                   
+  4.38  11426.000 11426.000     0.000     0.000    11426   String#upcase                  
+  4.30  11226.000 11226.000     0.000     0.000    11226   User#add_session               /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:31
+  2.95   7692.000  7692.000     0.000     0.000     4057   Array#sort                     
+  2.95   7690.000  7690.000     0.000     0.000     4056   Array#uniq                     
+  2.33   6088.000  6088.000     0.000     0.000     6088   Integer#to_s                   
+  2.33  99615.000  6084.000     0.000 93531.000     2028   User#serialize                 /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:48
+  1.55   4056.000  4056.000     0.000     0.000     2028   JSON::Ext::Generator::GeneratorMethods::Array#to_json 
+  1.55   4056.000  4056.000     0.000     0.000     2028   User#initialize                /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:19
+  1.55   4054.000  4054.000     0.000     0.000     2028   Array#|                        
+  0.98   2561.000  2561.000     0.000     0.000     2561   FalseClass#to_s                
+  0.78   2029.000  2029.000     0.000     0.000     2029   Array#join                     
+  0.78   2029.000  2029.000     0.000     0.000     2029   File#initialize                
+  0.78  13455.000  2029.000     0.000 11426.000     2029   Array#map                      
+  0.78   6084.000  2028.000     0.000  4056.000     2028   Class#new                      
+  0.57   1495.000  1495.000     0.000     0.000     1495   TrueClass#to_s                 
+  0.01     37.000    37.000     0.000     0.000        1   Kernel#`                       
+  0.00  260971.000     9.000     0.000 260962.000        1   Object#work                    /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:97
+  0.00      5.000     5.000     0.000     0.000        1   <Class::IO>#write              
+  0.00      2.000     2.000     0.000     0.000        1   String#%                       
+  0.00      1.000     1.000     0.000     0.000        1   <Class::User>#clean_up         /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:71
+  0.00      0.000     0.000     0.000     0.000        1   <Module::Process>#pid          
+  0.00      1.000     0.000     0.000     1.000        1   Kernel#puts                    
+  0.00      0.000     0.000     0.000     0.000     2028   JSON::Ext::Generator::State#initialize 
+  0.00      0.000     0.000     0.000     0.000     2029   IO#closed?                     
+  0.00  20288.000     0.000     0.000 20288.000    18259   IO#puts                        
+  0.00      0.000     0.000     0.000     0.000     2029   IO#close                       
+  0.00      0.000     0.000     0.000     0.000        1   <Class::User>#count            /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:81
+  0.00      0.000     0.000     0.000     0.000        2   <Class::User>#unique_browsers  /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:89
+  0.00      0.000     0.000     0.000     0.000        1   Array#count                    
+  0.00      0.000     0.000     0.000     0.000        1   <Class::User>#total_session_count /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:85
+  0.00      0.000     0.000     0.000     0.000    13254   String#include?                
+  0.00      0.000     0.000     0.000     0.000    11227   String#to_i                    
+  0.00  260971.000     0.000     0.000 260971.000        1   [global]#                      optimization_tools/ruby-prof.rb:9
+  0.00      0.000     0.000     0.000     0.000    13255   <Class::User>#last             /Users/georgegavrilchik/development/rails-optimization-course/rails-optimization-task2/task-2.rb:77
+  0.00      0.000     0.000     0.000     0.000        1   <Module::GC>#disable           
+  0.00      0.000     0.000     0.000     0.000    22896   String#<=>                     
+
+* recursively called methods
+
+Columns are:
+
+  %self     - The percentage of time spent in this method, derived from self_time/total_time.
+  total     - The time spent in this method and its children.
+  self      - The time spent in this method.
+  wait      - The amount of time this method waited for other threads.
+  child     - The time spent in this method's children.
+  calls     - The number of times this method was called.
+  name      - The name of the method.
+  location  - The location of the method.
+
+The interpretation of method names is:
+
+  * MyObject#test - An instance method "test" of the class "MyObject"
+  * <Object:MyObject>#test - The <> characters indicate a method on a singleton class.

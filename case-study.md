@@ -1,5 +1,7 @@
 # Case-study оптимизации
 
+![valgrind report](memory.png 'Valgrind report')
+
 ## Актуальная проблема
 
 В нашем проекте возникла серьёзная проблема.

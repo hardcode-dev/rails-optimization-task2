@@ -15,7 +15,7 @@ class User
 end
 
 def parse_user(fields)
-  parsed_result = {
+  {
     'id' => fields[1],
     'first_name' => fields[2],
     'last_name' => fields[3],
@@ -23,9 +23,8 @@ def parse_user(fields)
   }
 end
 
-def parse_session(session)
-  fields = session.split(',')
-  parsed_result = {
+def parse_session(fields)
+  {
     'user_id' => fields[1],
     'session_id' => fields[2],
     'browser' => fields[3],
@@ -66,11 +65,11 @@ def work(file_name: 'data.txt')
     case cols[0]
     when 'user'
       add_user_stat(current_user, current_user_sessions, report) if current_user
-      current_user = parse_user(line)
+      current_user = parse_user(cols)
       report[:totalUsers] += 1
       current_user_sessions = []
     when 'session'
-      session = parse_session(line)
+      session = parse_session(cols)
       current_user_sessions << session
       report['totalSessions'] += 1
       all_browsers << session['browser'].upcase

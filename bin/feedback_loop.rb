@@ -6,7 +6,7 @@ require 'ruby-prof'
 
 require_relative '../task-2'
 
-def prepare_to_profile(gc_disable: true, dataset_size: 200_000)
+def prepare_to_profile(gc_disable: true, dataset_size: 400_000)
 	`head -n #{dataset_size} data_large.txt > data.txt`
 	# `cp data_large.txt data.txt`
 	GC.disable if gc_disable
@@ -34,8 +34,8 @@ def stackprof_profiler_dump
 	end
 end
 
-def rubyprof_profiler
-	RubyProf.measure_mode = RubyProf::ALLOCATIONS
+def rubyprof_profiler(mode: 'memory')
+	RubyProf.measure_mode = mode == 'memory' ? RubyProf::MEMORY : RubyProf::ALLOCATIONS
 	prepare_to_profile(gc_disable: true)
 	result = RubyProf.profile { work }
 
@@ -45,6 +45,8 @@ def rubyprof_profiler
 	RubyProf::GraphHtmlPrinter.new(result).print(File.open('tmp/reports/rubyprof/graph.html', 'w+'))
 	# open tmp/reports/rubyprof/callstack.html
 	RubyProf::CallStackPrinter.new(result).print(File.open('tmp/reports/rubyprof/callstack.html', 'w+'))
+	# qcachegrind tmp/reports/rubyprof/profile.
+	RubyProf::CallTreePrinter.new(result).print(path: 'tmp/reports/rubyprof', profile: 'profile')
 end
 
 def asymptotic_analysis(steps: 7, multiplicator: 2, start_amount: 10000)
@@ -59,6 +61,7 @@ end
 def run
 	prepare_to_profile(gc_disable: false)
 	puts "TIME: #{Benchmark.realtime { work } }"
+	puts GC.stat
 end
 
 # def show_object_space_stat
@@ -69,7 +72,8 @@ end
 #
 
 # memory_profiler_report
-# rubyprof_profiler
+# rubyprof_profiler(mode: 'allocations')
+# rubyprof_profiler(mode: 'memory')
 # stackprof_profiler_dump
 # asymptotic_analysis
-# run
+run

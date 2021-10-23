@@ -80,7 +80,7 @@ def work(file_name: 'data.txt')
   report = {}
   report[:totalUsers] = 0
   report[:totalSessions] = 0
-  all_browsers = []
+  all_browsers = SortedSet.new
   current_user = nil
   current_user_sessions = nil
 
@@ -105,7 +105,7 @@ def work(file_name: 'data.txt')
 
   uniq_browsers = all_browsers.uniq
   report['uniqueBrowsersCount'] = uniq_browsers.count
-  report['allBrowsers'] = uniq_browsers.uniq.sort.join(',')
+  report['allBrowsers'] = uniq_browsers.join(',')
 
   report.each do |k, v|
     @stream_writer.push_key(k.to_s)

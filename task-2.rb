@@ -1,9 +1,12 @@
 # Deoptimized version of homework task
-
+# frozen_string_literal: true
 require 'json'
 require 'pry'
 require 'date'
 require 'set'
+
+USER_COLUMNS = %w[_ id first_name last_name age].freeze
+SESSION_COLUMNS = %w[_ user_id session_id browser time date].freeze
 
 class User
   attr_reader :attributes, :sessions
@@ -14,23 +17,35 @@ class User
   end
 end
 
-def parse_user(fields)
-  {
-    'id' => fields[1],
-    'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4],
-  }
+def parse_user(line)
+  index = -1
+  result = {}
+
+  line.split(',') do |value|
+    index += 1
+    next if index == 0
+
+    result[USER_COLUMNS[index]] = value
+  end
+  result
 end
 
-def parse_session(fields)
-  {
-    'user_id' => fields[1],
-    'session_id' => fields[2],
-    'browser' => fields[3].upcase!,
-    'time' => fields[4],
-    'date' => fields[5],
-  }
+def parse_session(line)
+  index = -1
+  result = {}
+  line.split(',') do |value|
+    index += 1
+    next if index == 0
+
+    # upcase for browser field
+    if index == 3
+      result[SESSION_COLUMNS[index]] = value.upcase!
+      next
+    end
+
+    result[SESSION_COLUMNS[index]] = value
+  end
+  result
 end
 
 def mem_usage
@@ -61,15 +76,14 @@ def work(file_name: 'data.txt')
   current_user = nil
   current_user_sessions = nil
   File.new(file_name).each_line do |line|
-    cols = line.split(',')
-    case cols[0]
-    when 'user'
+    case line[0]
+    when 'u'
       add_user_stat(current_user, current_user_sessions, report) if current_user
-      current_user = parse_user(cols)
+      current_user = parse_user(line)
       report[:totalUsers] += 1
       current_user_sessions = []
-    when 'session'
-      session = parse_session(cols)
+    when 's'
+      session = parse_session(line)
       current_user_sessions << session
       report['totalSessions'] += 1
       all_browsers << session['browser']

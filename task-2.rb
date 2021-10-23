@@ -27,7 +27,7 @@ def parse_session(fields)
   {
     'user_id' => fields[1],
     'session_id' => fields[2],
-    'browser' => fields[3],
+    'browser' => fields[3].upcase!,
     'time' => fields[4],
     'date' => fields[5],
   }
@@ -46,9 +46,9 @@ def add_user_stat(user, user_sessions, report)
                                      .merge('sessionsCount' => user.sessions.count)
                                      .merge('totalTime' => user.sessions.map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.')
                                      .merge('longestSession' => user.sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.')
-                                     .merge('browsers' => user.sessions.map {|s| s['browser']}.map {|b| b.upcase}.sort.join(', '))
-                                     .merge('usedIE' => user.sessions.map{|s| s['browser']}.any? { |b| b.upcase =~ /INTERNET EXPLORER/ })
-                                     .merge('alwaysUsedChrome' => user.sessions.map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ })
+                                     .merge('browsers' => user.sessions.map {|s| s['browser'] }.sort.join(', '))
+                                     .merge('usedIE' => user.sessions.map{|s| s['browser']}.any? { |b| b =~ /INTERNET EXPLORER/ })
+                                     .merge('alwaysUsedChrome' => user.sessions.map{|s| s['browser']}.all? { |b| b =~ /CHROME/ })
                                      .merge('dates' => user.sessions.map{ |s| s['date'].chomp }.sort.reverse)
 end
 
@@ -72,7 +72,7 @@ def work(file_name: 'data.txt')
       session = parse_session(cols)
       current_user_sessions << session
       report['totalSessions'] += 1
-      all_browsers << session['browser'].upcase
+      all_browsers << session['browser']
     end
   end
   add_user_stat(current_user, current_user_sessions, report)

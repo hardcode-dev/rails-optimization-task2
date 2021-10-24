@@ -6,14 +6,14 @@ require 'ruby-prof'
 
 require_relative '../task-2'
 
-def prepare_to_profile(gc_disable: true, dataset_size: 400_000)
+def prepare_to_profile(gc_disable: true, dataset_size: 600_000)
 	`head -n #{dataset_size} data_large.txt > data.txt`
 	# `cp data_large.txt data.txt`
 	GC.disable if gc_disable
 end
 
 def memory_profiler_report
-	prepare_to_profile(gc_disable: true)
+	prepare_to_profile(gc_disable: false)
 	report = MemoryProfiler.report do
 		work(file_name: 'data.txt')
 	end
@@ -49,7 +49,7 @@ def rubyprof_profiler(mode: 'memory')
 	RubyProf::CallTreePrinter.new(result).print(path: 'tmp/reports/rubyprof', profile: 'profile')
 end
 
-def asymptotic_analysis(steps: 7, multiplicator: 2, start_amount: 10000)
+def asymptotic_analysis(steps: 10, multiplicator: 2, start_amount: 10000)
 	amount = start_amount
 	steps.times do
 		puts `bundle exec ruby bin/runner.rb #{amount}`

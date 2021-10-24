@@ -5,6 +5,7 @@ require 'pry'
 require 'date'
 require 'set'
 require 'oj'
+require 'sorted_set'
 
 USER_COLUMNS = %w[_ id first_name last_name age].freeze
 SESSION_COLUMNS = %w[_ user_id session_id browser time date].freeze
@@ -21,7 +22,6 @@ end
 def parse_user(line)
   index = -1
   result = {}
-
   line.split(',') do |value|
     index += 1
     next if index == 0
@@ -71,11 +71,11 @@ def add_user_stat(user, user_sessions, report)
     'browsers' => user.sessions.map {|s| s['browser'] }.sort.join(', '),
     'usedIE' => user.sessions.map{|s| s['browser']}.any? { |b| b =~ /INTERNET EXPLORER/ },
     'alwaysUsedChrome' => user.sessions.map{|s| s['browser']}.all? { |b| b =~ /CHROME/ },
-    'dates' => user.sessions.map{ |s| s['date'].chomp }.sort.reverse
+    'dates' => user.sessions.map{ |s| s['date'].delete_suffix("\n") }.sort.reverse
   )
 end
 
-def work(file_name: 'data.txt')
+def work(file_name: 'data.txt', return_memory_usage: false)
   initialize_stream_writer
   report = {}
   report[:totalUsers] = 0
@@ -112,7 +112,9 @@ def work(file_name: 'data.txt')
     @stream_writer.push_value(v)
   end
   @stream_writer.pop_all
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  used_memory = `ps -o rss= -p #{Process.pid}`.to_i / 1024
+  puts "MEMORY USAGE: %d MB" % (used_memory)
+  used_memory if return_memory_usage
 ensure
   @file.close
 end

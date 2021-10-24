@@ -1,0 +1,5 @@
+/tmp
+data_large.txt
+result.json
+*.dot
+massif.out.*

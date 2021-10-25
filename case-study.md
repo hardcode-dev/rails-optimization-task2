@@ -62,6 +62,7 @@ MEMORY USAGE: 70 MB
 
 ### 2. `RubyProf::CallStackPrinter (ALLOCATIONS mode)` показал, что `Array#map` генерирует много лишних объектов.
 (на 10_000)
+
 <img width="521" alt="Снимок экрана 2021-10-23 в 15 28 00" src="https://user-images.githubusercontent.com/8101357/138659031-39ddd9d1-a3c6-4072-8cce-6158263507b0.png">
 
 внутри блока

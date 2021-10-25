@@ -77,6 +77,7 @@ MEMORY USAGE: 70 MB
 а так же, парсинг даты здесь излишен, т.к. формат `2016-11-25` проще сортировать как есть, без парсинга в тип `Date`.
 
 <img width="524" alt="Снимок экрана 2021-10-23 в 15 29 24" src="https://user-images.githubusercontent.com/8101357/138659070-666ca9b4-34d7-41d8-bd11-f46af5320753.png">
+
 В итоге, влияние Array#map стало менее заметным:
 ```
 38.66% (38.66%) Object#collect_stats_from_users [7 calls, 7 total]
@@ -216,7 +217,6 @@ MEMORY USAGE: 20 MB
 
 
 ### 6. Использование Oj для уменьшения потребляемой памяти при генерации json.
-```
 stackProf
 ```
  439538   (17.2%) /  439538  (17.2%)  |   136  |         File.write(report_file, report.to_json[1...-1], mode: 'a')
@@ -227,6 +227,7 @@ stackProf
  169812    (7.7%) /  169812   (7.7%)  |   136  |         File.write(report_file, "#{ Oj.to_json(report, mode: :compat)[1...-1] }#{ ',' if line_no != file_lines_count-1 }\n", mode: 'a')
 MEMORY USAGE: 18 MB
 ```
+
 <img width="1468" alt="Снимок экрана 2021-10-25 в 09 56 59" src="https://user-images.githubusercontent.com/8101357/138659123-fddd30ff-57da-45e3-a4cc-bcbc12be9f04.png">
 
 

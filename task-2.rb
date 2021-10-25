@@ -1,4 +1,4 @@
-# 5
+# 6
 # frozen_string_literal: true
 
 require 'json'
@@ -11,6 +11,7 @@ require 'memory_profiler' if ENV['RACK_ENV'] == 'benchmark'
 require 'ruby-prof' if ENV['RACK_ENV'] == 'benchmark'
 require 'stackprof' if ENV['RACK_ENV'] == 'benchmark'
 require 'set'
+require 'oj'
 
 class User
   attr_reader :attributes, :sessions
@@ -50,6 +51,8 @@ end
 
 def work
   file_name = 'dataN.txt'
+  file_name = 'data_large.txt'
+  # file_name = 'data.txt'
   file_name = 'data.txt' if ENV['RACK_ENV'] == 'test'
   file_lines_count = `wc -l "#{file_name}"`.strip.split(' ')[0].to_i
   file_lines = File.foreach(file_name)
@@ -57,7 +60,7 @@ def work
   report_file = 'result.json'
 
   
-  File.write(report_file, '{"usersStats":{', mode: 'a')
+  File.write(report_file, '{"usersStats":{')
 
   current_user = nil
   user_sessions = []
@@ -132,10 +135,7 @@ def work
           { 'dates' => user.sessions.map! { |s| s['date'] }.sort.reverse }
         end
 
-
-
-        File.write(report_file, report.to_json[1...-1], mode: 'a')
-        File.write(report_file, ',', mode: 'a') if line_no != file_lines_count-1
+        File.write(report_file, "#{ Oj.to_json(report, mode: :compat)[1...-1] }#{ ',' if line_no != file_lines_count-1 }\n", mode: 'a')
         user_sessions = []
       end
 
@@ -207,14 +207,14 @@ session,2,3,Chrome 20,84,2016-11-25
     end
   end
 elsif ENV['RACK_ENV'] == 'benchmark'
-  report = MemoryProfiler.report do
-    work
-  end
-  report.pretty_print(scale_bytes: true)
+  # report = MemoryProfiler.report do
+  #   work
+  # end
+  # report.pretty_print(scale_bytes: true)
 
 
   # RubyProf.measure_mode = RubyProf::ALLOCATIONS
-  # # RubyProf.measure_mode = RubyProf::MEMORY
+  # RubyProf.measure_mode = RubyProf::MEMORY
   # result = RubyProf.profile do
   #   work
   # end

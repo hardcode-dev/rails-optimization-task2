@@ -1,4 +1,4 @@
-# 3
+# 4
 # frozen_string_literal: true
 
 require 'json'
@@ -41,7 +41,7 @@ end
 
 def collect_stats_from_users(report, users_objects, &block)
   users_objects.each do |user|
-    user_key = "#{user.attributes['first_name']}" + ' ' + "#{user.attributes['last_name']}"
+    user_key = "#{user.attributes['first_name']} #{user.attributes['last_name']}"
     report['usersStats'][user_key] ||= {}
     report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
   end
@@ -57,8 +57,8 @@ def work
 
   file_lines.each do |line|
     cols = line.split(',')
-    users = users + [parse_user(cols)] if cols[0] == 'user'
-    sessions = sessions + [parse_session(cols)] if cols[0] == 'session'
+    users << parse_user(cols) if cols[0] == 'user'
+    sessions << parse_session(cols) if cols[0] == 'session'
   end
 
   # Отчёт в json
@@ -106,7 +106,7 @@ def work
     attributes = user
     user_sessions = sessions.select { |session| session['user_id'] == user['id'] }
     user_object = User.new(attributes: attributes, sessions: user_sessions)
-    users_objects = users_objects + [user_object]
+    users_objects << user_object
   end
 
   report['usersStats'] = {}
@@ -183,13 +183,15 @@ session,2,3,Chrome 20,84,2016-11-25
     end
   end
 elsif ENV['RACK_ENV'] == 'benchmark'
-  # report = MemoryProfiler.report do
-  #   work
-  # end
-  # report.pretty_print(scale_bytes: true)
+  report = MemoryProfiler.report do
+    work
+  end
+  report.pretty_print(scale_bytes: true)
+
 
 
   # RubyProf.measure_mode = RubyProf::ALLOCATIONS
+  # # RubyProf.measure_mode = RubyProf::MEMORY
   # result = RubyProf.profile do
   #   work
   # end
@@ -202,18 +204,6 @@ elsif ENV['RACK_ENV'] == 'benchmark'
 
   # printer = RubyProf::CallStackPrinter.new(result)
   # printer.print(File.open('ruby_prof_reports/callstack.html', 'w+'))
-
-
-
-  # RubyProf.measure_mode = RubyProf::MEMORY
-
-  # result = RubyProf.profile do
-  #   work
-  # end
-
-  # printer = RubyProf::CallTreePrinter.new(result)
-  # printer.print(path: 'ruby_prof_reports', profile: 'profile')
-
 
 
   # StackProf.run(mode: :object, out: 'stackprof_reports/stackprof.dump', raw: true) do

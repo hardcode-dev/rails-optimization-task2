@@ -1,0 +1,11 @@
+source 'https://rubygems.org'
+
+gem 'json'
+gem 'pry'
+gem 'date'
+gem 'minitest'
+gem 'memory_profiler'
+gem 'ruby-prof'
+gem 'stackprof'
+gem 'set'
+gem 'oj'

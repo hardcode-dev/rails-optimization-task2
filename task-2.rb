@@ -1,4 +1,4 @@
-# 1
+# 2
 
 require 'json'
 require 'pry'
@@ -141,7 +141,7 @@ def work
 
   # Даты сессий через запятую в обратном порядке в формате iso8601
   collect_stats_from_users(report, users_objects) do |user|
-    { 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }
+    { 'dates' => user.sessions.map! { |s| s['date'] }.sort.reverse }
   end
 
   File.write('result.json', "#{report.to_json}\n")
@@ -192,17 +192,14 @@ elsif ENV['RACK_ENV'] == 'benchmark'
     work
   end
 
-  printer = RubyProf::FlatPrinter.new(result)
-  printer.print(File.open('ruby_prof_reports/flat.txt', 'w+'))
-
-  # printer = RubyProf::DotPrinter.new(result)
-  # printer.print(File.open('ruby_prof_reports/graphviz.dot', 'w+'))
+  # printer = RubyProf::FlatPrinter.new(result)
+  # printer.print(File.open('ruby_prof_reports/flat.txt', 'w+'))
 
   # printer = RubyProf::GraphHtmlPrinter.new(result)
   # printer.print(File.open('ruby_prof_reports/graph.html', 'w+'))
 
-  # printer = RubyProf::CallStackPrinter.new(result)
-  # printer.print(File.open('ruby_prof_reports/callstack.html', 'w+'))
+  printer = RubyProf::CallStackPrinter.new(result)
+  printer.print(File.open('ruby_prof_reports/callstack.html', 'w+'))
 
 
 
@@ -220,6 +217,8 @@ elsif ENV['RACK_ENV'] == 'benchmark'
   # StackProf.run(mode: :object, out: 'stackprof_reports/stackprof.dump', raw: true) do
   #   work
   # end
+  # # stackprof stackprof_reports/stackprof.dump
+  # # stackprof stackprof_reports/stackprof.dump --method 'Object#work'
 
   # profile = StackProf.run(mode: :object, raw: true) do
   #   work

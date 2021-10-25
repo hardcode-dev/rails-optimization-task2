@@ -62,7 +62,7 @@ MEMORY USAGE: 70 MB
 
 ### 2. `RubyProf::CallStackPrinter (ALLOCATIONS mode)` показал, что `Array#map` генерирует много лишних объектов.
 (на 10_000)
-см скрин
+<img width="521" alt="Снимок экрана 2021-10-23 в 15 28 00" src="https://user-images.githubusercontent.com/8101357/138659031-39ddd9d1-a3c6-4072-8cce-6158263507b0.png">
 
 внутри блока
 ```
@@ -75,6 +75,7 @@ MEMORY USAGE: 70 MB
 `Array#map` каждый раз создаёт большое количество лишних элементов в памяти,
 а так же, парсинг даты здесь излишен, т.к. формат `2016-11-25` проще сортировать как есть, без парсинга в тип `Date`.
 
+<img width="524" alt="Снимок экрана 2021-10-23 в 15 29 24" src="https://user-images.githubusercontent.com/8101357/138659070-666ca9b4-34d7-41d8-bd11-f46af5320753.png">
 В итоге, влияние Array#map стало менее заметным:
 ```
 38.66% (38.66%) Object#collect_stats_from_users [7 calls, 7 total]
@@ -225,6 +226,8 @@ stackProf
  169812    (7.7%) /  169812   (7.7%)  |   136  |         File.write(report_file, "#{ Oj.to_json(report, mode: :compat)[1...-1] }#{ ',' if line_no != file_lines_count-1 }\n", mode: 'a')
 MEMORY USAGE: 18 MB
 ```
+<img width="1468" alt="Снимок экрана 2021-10-25 в 09 56 59" src="https://user-images.githubusercontent.com/8101357/138659123-fddd30ff-57da-45e3-a4cc-bcbc12be9f04.png">
+
 
 
 ## Результаты

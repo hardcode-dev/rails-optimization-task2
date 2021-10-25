@@ -1,4 +1,5 @@
-# 2
+# 3
+# frozen_string_literal: true
 
 require 'json'
 require 'pry'
@@ -6,6 +7,7 @@ require 'date'
 require 'minitest'
 require 'minitest/autorun' if ENV['RACK_ENV'] == 'test'
 require 'minitest/benchmark' if ENV['RACK_ENV'] == 'test'
+require 'memory_profiler' if ENV['RACK_ENV'] == 'benchmark'
 require 'ruby-prof' if ENV['RACK_ENV'] == 'benchmark'
 require 'stackprof' if ENV['RACK_ENV'] == 'benchmark'
 
@@ -187,10 +189,10 @@ elsif ENV['RACK_ENV'] == 'benchmark'
   # report.pretty_print(scale_bytes: true)
 
 
-  RubyProf.measure_mode = RubyProf::ALLOCATIONS
-  result = RubyProf.profile do
-    work
-  end
+  # RubyProf.measure_mode = RubyProf::ALLOCATIONS
+  # result = RubyProf.profile do
+  #   work
+  # end
 
   # printer = RubyProf::FlatPrinter.new(result)
   # printer.print(File.open('ruby_prof_reports/flat.txt', 'w+'))
@@ -198,8 +200,8 @@ elsif ENV['RACK_ENV'] == 'benchmark'
   # printer = RubyProf::GraphHtmlPrinter.new(result)
   # printer.print(File.open('ruby_prof_reports/graph.html', 'w+'))
 
-  printer = RubyProf::CallStackPrinter.new(result)
-  printer.print(File.open('ruby_prof_reports/callstack.html', 'w+'))
+  # printer = RubyProf::CallStackPrinter.new(result)
+  # printer.print(File.open('ruby_prof_reports/callstack.html', 'w+'))
 
 
 

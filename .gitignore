@@ -1,0 +1,7 @@
+reports
+data_large.txt.gz
+data_large.txt
+result.json
+.idea
+.DS_Store
+.gitignore

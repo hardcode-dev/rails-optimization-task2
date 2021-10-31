@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'json'
 require 'date'
 
 # Отчёт в json

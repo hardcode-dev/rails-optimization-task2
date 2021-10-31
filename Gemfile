@@ -8,6 +8,7 @@ gem 'pry'
 gem 'ruby-prof'
 gem 'stackprof'
 gem 'memory_profiler'
+gem 'json'
 
 group :test do
   gem 'rspec'

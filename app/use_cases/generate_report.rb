@@ -23,26 +23,28 @@ class GenerateReport
     @uniq_browsers = []
 
     File.open('result.json', 'a') do |file|
-      file << '{"usersStats":{'
-    end
+      @file = file
+      @file << '{"usersStats":{'
+      
 
-    data_file = File.open(path)
+      data_file = File.open(path)
 
-    data_file.each do |line|
-      case line[0]
-      when 'u'
-        process_user(line)
-      when 's'
-        process_session(line)
-      else
-        next
+      data_file.each do |line|
+        case line[0]
+        when 'u'
+          process_user(line)
+        when 's'
+          process_session(line)
+        else
+          next
+        end
       end
+
+      data_file.close
+
+      fill_last_user_data
+      wrote_down_common_info
     end
-
-    data_file.close
-
-    fill_last_user_data
-    wrote_down_common_info
     
     puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
   end
@@ -58,9 +60,7 @@ class GenerateReport
   end
 
   def fill_user_data
-    File.open('result.json', 'a') do |file|
-      file << "#{form_user_stat}, "
-    end
+    @file << "#{form_user_stat}, "
   end
 
   def form_user_stat
@@ -127,16 +127,12 @@ class GenerateReport
   def fill_last_user_data
     last_stats = form_user_stat
 
-    File.open('result.json', 'a') do |file|
-      file << last_stats
-    end
+    @file << last_stats
   end
 
   def wrote_down_common_info
     common_info = " }, \"totalUsers\": #{@user_counter}, \"uniqueBrowsersCount\": #{@uniq_browsers.count}, \"totalSessions\": #{@sessions_counter}, \"allBrowsers\": \"#{@uniq_browsers.sort.join(',')}\" }"
 
-    File.open('result.json', 'a') do |file|
-      file << common_info
-    end
+    @file << common_info
   end
 end

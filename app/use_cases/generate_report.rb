@@ -73,7 +73,7 @@ class GenerateReport
     user_info["browsers"] = @sessions.map {|s| s['browser']}.sort.join(', ')
     user_info["usedIE"] = @sessions.map{|s| s['browser']}.any? { |b| b =~ /INTERNET EXPLORER/ }
     user_info["alwaysUsedChrome"] = @sessions.map{|s| s['browser']}.all? { |b| b =~ /CHROME/ }
-    user_info["dates"] = @sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 }
+    user_info["dates"] = @sessions.map{|s| s['date']}.sort!.reverse!
 
     "\"#{user_key}\": #{user_info.to_json}"
   end
@@ -107,7 +107,7 @@ class GenerateReport
       'session_id' => fields[2],
       'browser' => fields[3].upcase,
       'time' => fields[4].to_i,
-      'date' => fields[5],
+      'date' => fields[5].delete("\n"),
     }
   end
 

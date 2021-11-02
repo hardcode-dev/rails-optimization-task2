@@ -1,50 +1,54 @@
 Measure Mode: allocations
-Thread ID: 47376166246780
-Fiber ID: 47376173494420
-Total: 247170.000000
+Thread ID: 47222863911280
+Fiber ID: 47222869910600
+Total: 234184.000000
 Sort by: self_time
 
  %self      total      self      wait     child     calls  name                           location
- 44.33  109564.000 109564.000     0.000     0.000    16000   String#split                   
-  6.47  16000.000 16000.000     0.000     0.000    16000   String#[]                      
-  6.47  247113.000 16000.000     0.000 231113.000        1   IO#each                        
-  5.91  14616.000 14616.000     0.000     0.000    14616   Array#map                      
-  5.49  13564.000 13564.000     0.000     0.000    13564   String#delete                  
-  5.49  13564.000 13564.000     0.000     0.000    13564   String#upcase                  
-  5.49  135640.000 13564.000     0.000 122076.000    13564   GenerateReport#parse_session   /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:103
-  4.93  52700.000 12181.000     0.000 40519.000     2436   GenerateReport#form_user_stat  /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:66
-  2.39   5914.000  5914.000     0.000     0.000     2436   Array#any?                     
-  1.97   4876.000  4876.000     0.000     0.000     4876   Integer#to_s                   
-  1.97  59992.000  4874.000     0.000 55118.000     2439   <Class::IO>#open               
-  1.97   4872.000  4872.000     0.000     0.000     2436   JSON::Ext::Generator::GeneratorMethods::Hash#to_json 
-  1.87   4628.000  4628.000     0.000     0.000     2437   Array#sort                     
-  0.99   2439.000  2439.000     0.000     0.000     2439   IO#write                       
-  0.99   2437.000  2437.000     0.000     0.000     2437   Array#join                     
-  0.99  17052.000  2436.000     0.000 14616.000     2436   GenerateReport#parse_user      /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:85
-  0.99  79473.000  2436.000     0.000 77037.000     2436   GenerateReport#process_user    /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:52
-  0.89   2190.000  2190.000     0.000     0.000     2436   Array#sort!                    
-  0.40    993.000   993.000     0.000     0.000     2436   Array#all?                     
+ 46.79  109564.000 109564.000     0.000     0.000    16000   String#split                   
+  6.83  16000.000 16000.000     0.000     0.000    16000   String#[]                      
+  6.83  234130.000 16000.000     0.000 218130.000        1   IO#each                        
+  5.79  13564.000 13564.000     0.000     0.000    13564   String#delete                  
+  5.79  13564.000 13564.000     0.000     0.000    13564   String#upcase                  
+  5.79  135640.000 13564.000     0.000 122076.000    13564   GenerateReport#parse_session   /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:116
+  5.20  39714.000 12183.000     0.000 27531.000     2436   GenerateReport#form_user_stat  /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:66
+  3.12   7308.000  7308.000     0.000     0.000     7308   Array#map                      
+  2.08   4876.000  4876.000     0.000     0.000     4876   Integer#to_s                   
+  2.08  47009.000  4874.000     0.000 42135.000     2439   <Class::IO>#open               
+  2.08   4872.000  4872.000     0.000     0.000     2436   JSON::Ext::Generator::GeneratorMethods::Hash#to_json 
+  1.98   4628.000  4628.000     0.000     0.000     2437   Array#sort                     
+  1.04   2439.000  2439.000     0.000     0.000     2439   IO#write                       
+  1.04   2437.000  2437.000     0.000     0.000     2437   Array#join                     
+  1.04  17052.000  2436.000     0.000 14616.000     2436   GenerateReport#parse_user      /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:98
+  1.04  66490.000  2436.000     0.000 64054.000     2436   GenerateReport#process_user    /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:52
+  0.94   2190.000  2190.000     0.000     0.000     2436   Array#sort!                    
+  0.52   1226.000  1226.000     0.000     0.000      923   String#=~                      
   0.01     14.000    14.000     0.000     0.000        1   Kernel#`                       
-  0.00  247168.000     4.000     0.000 247164.000        1   GenerateReport#work            /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:20
+  0.00  234182.000     4.000     0.000 234178.000        1   GenerateReport#work            /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:20
   0.00      1.000     1.000     0.000     0.000        1   String#%                       
-  0.00      9.000     1.000     0.000     8.000        1   GenerateReport#wrote_down_common_info /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:122
+  0.00      9.000     1.000     0.000     8.000        1   GenerateReport#wrote_down_common_info /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:135
+  0.00   1227.000     1.000     0.000  1226.000     3133   Array#any?                     
   0.00      1.000     1.000     0.000     0.000        1   Class#new                      
-  0.00  247170.000     1.000     0.000 247169.000        1   [global]#                      rubyprof_prof.rb:6
+  0.00  234184.000     1.000     0.000 234183.000        1   [global]#                      rubyprof_prof.rb:6
   0.00      1.000     0.000     0.000     1.000        1   IO#puts                        
   0.00      1.000     0.000     0.000     1.000        1   Kernel#puts                    
   0.00      0.000     0.000     0.000     0.000        1   <Module::Process>#pid          
-  0.00     22.000     0.000     0.000    22.000        1   GenerateReport#fill_last_user_data /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:114
+  0.00     19.000     0.000     0.000    19.000        1   GenerateReport#fill_last_user_data /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:127
+  0.00   1226.000     0.000     0.000  1226.000      923   Kernel#!~                      
   0.00      0.000     0.000     0.000     0.000     2436   JSON::Ext::Generator::State#initialize 
   0.00      0.000     0.000     0.000     0.000     2436   Array#reverse!                 
+  0.00   1227.000     0.000     0.000  1227.000     2436   GenerateReport#only_chrome?    /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:88
+  0.00      0.000     0.000     0.000     0.000     7071   String#start_with?             
+  0.00      0.000     0.000     0.000     0.000     2436   GenerateReport#any_ie?         /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:84
   0.00      0.000     0.000     0.000     0.000     2436   Array#max                      
   0.00      0.000     0.000     0.000     0.000     2436   Array#sum                      
   0.00      0.000     0.000     0.000     0.000     2437   Array#count                    
-  0.00  59985.000     0.000     0.000 59985.000     2435   GenerateReport#fill_user_data  /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:60
+  0.00  47002.000     0.000     0.000 47002.000     2435   GenerateReport#fill_user_data  /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:60
   0.00      0.000     0.000     0.000     0.000    13564   Array#include?                 
-  0.00  135640.000     0.000     0.000 135640.000    13564   GenerateReport#process_session /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:95
+  0.00  135640.000     0.000     0.000 135640.000    13564   GenerateReport#process_session /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:108
   0.00      0.000     0.000     0.000     0.000    29565   String#to_i                    
   0.00      0.000     0.000     0.000     0.000     2436   Numeric#zero?                  
-  0.00      0.000     0.000     0.000     0.000     2436   GenerateReport#first_user?     /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:81
+  0.00      0.000     0.000     0.000     0.000     2436   GenerateReport#first_user?     /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:94
   0.00      0.000     0.000     0.000     0.000     2439   IO#close                       
   0.00      0.000     0.000     0.000     0.000     2438   IO#closed?                     
   0.00   2438.000     0.000     0.000  2438.000     2438   IO#<<                          

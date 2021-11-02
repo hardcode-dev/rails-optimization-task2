@@ -67,15 +67,28 @@ class GenerateReport
     user_info = {}
     user_key = "#{@user['first_name']} #{@user['last_name']}"
 
+    time = @sessions.map {|s| s['time']}
+    browsers = @sessions.map {|s| s['browser']}
+
     user_info["sessionsCount"] = @sessions.count
-    user_info["totalTime"] = @sessions.map {|s| s['time']}.sum.to_s + ' min.'
-    user_info["longestSession"] = @sessions.map {|s| s['time']}.max.to_s + ' min.'
-    user_info["browsers"] = @sessions.map {|s| s['browser']}.sort.join(', ')
-    user_info["usedIE"] = @sessions.map{|s| s['browser']}.any? { |b| b =~ /INTERNET EXPLORER/ }
-    user_info["alwaysUsedChrome"] = @sessions.map{|s| s['browser']}.all? { |b| b =~ /CHROME/ }
+    user_info["totalTime"] = "#{time.sum} min."
+    user_info["longestSession"] = "#{time.max} min."
+    user_info["browsers"] = browsers.sort.join(', ')
+    user_info["usedIE"] = any_ie?(browsers)
+    user_info["alwaysUsedChrome"] = only_chrome?(browsers)
     user_info["dates"] = @sessions.map{|s| s['date']}.sort!.reverse!
 
     "\"#{user_key}\": #{user_info.to_json}"
+  end
+
+  def any_ie?(browsers)
+    @ie = browsers.any? { |b| b.start_with?('INTERNET EXPLORER') }
+  end
+
+  def only_chrome?(browsers)
+    return false if @ie
+
+    !browsers.any? { |b| b !~ /CHROME/ }
   end
 
   def first_user?

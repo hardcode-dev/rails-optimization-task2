@@ -1,0 +1,74 @@
+Measure Mode: allocations
+Thread ID: 1280
+Fiber ID: 1260
+Total: 236651.000000
+Sort by: self_time
+
+ %self      total      self      wait     child     calls  name                           location
+ 46.30  109564.000 109564.000     0.000     0.000    16000   String#split                   
+  6.76  236583.000 16002.000     0.000 220581.000        1   IO#each                        
+  6.76  16000.000 16000.000     0.000     0.000    16000   String#[]                      
+  5.73  135641.000 13565.000     0.000 122076.000    13564   GenerateReport#parse_session   /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:116
+  5.73  13564.000 13564.000     0.000     0.000    13564   String#delete                  
+  5.73  13564.000 13564.000     0.000     0.000    13564   String#upcase                  
+  5.15  39723.000 12191.000     0.000 27532.000     2436   GenerateReport#form_user_stat  /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:66
+  3.09   7308.000  7308.000     0.000     0.000     7308   Array#map                      
+  2.06   4876.000  4876.000     0.000     0.000     4876   Integer#to_s                   
+  2.06   4876.000  4876.000     0.000     0.000     2439   IO#write                       
+  2.06  49457.000  4876.000     0.000 44581.000     2439   <Class::IO>#open               
+  2.06   4872.000  4872.000     0.000     0.000     2436   JSON::Ext::Generator::GeneratorMethods::Hash#to_json 
+  1.96   4628.000  4628.000     0.000     0.000     2437   Array#sort                     
+  1.03  68939.000  2439.000     0.000 66500.000     2436   GenerateReport#process_user    /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:52
+  1.03   2437.000  2437.000     0.000     0.000     2437   Array#join                     
+  1.03  17052.000  2436.000     0.000 14616.000     2436   GenerateReport#parse_user      /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:98
+  0.93   2190.000  2190.000     0.000     0.000     2436   Array#sort!                    
+  0.52   1226.000  1226.000     0.000     0.000      923   String#=~                      
+  0.01     15.000    15.000     0.000     0.000        1   Kernel#`                       
+  0.01  236647.000    12.000     0.000 236635.000        1   GenerateReport#work            /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:20
+  0.00  236651.000     3.000     0.000 236648.000        1   [global]#                      rubyprof_prof.rb:6
+  0.00   1228.000     2.000     0.000  1226.000     3133   Array#any?                     
+  0.00      1.000     1.000     0.000     0.000        1   String#%                       
+  0.00     10.000     1.000     0.000     9.000        1   GenerateReport#wrote_down_common_info /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:135
+  0.00  135642.000     1.000     0.000 135641.000    13564   GenerateReport#process_session /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:108
+  0.00      1.000     1.000     0.000     0.000     2436   GenerateReport#first_user?     /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:94
+  0.00      1.000     1.000     0.000     0.000        1   Class#new                      
+  0.00      1.000     0.000     0.000     1.000        1   IO#puts                        
+  0.00      1.000     0.000     0.000     1.000        1   Kernel#puts                    
+  0.00      0.000     0.000     0.000     0.000        1   <Module::Process>#pid          
+  0.00     20.000     0.000     0.000    20.000        1   GenerateReport#fill_last_user_data /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:127
+  0.00   1226.000     0.000     0.000  1226.000      923   Kernel#!~                      
+  0.00      0.000     0.000     0.000     0.000     2436   JSON::Ext::Generator::State#initialize 
+  0.00      0.000     0.000     0.000     0.000     2436   Array#reverse!                 
+  0.00   1228.000     0.000     0.000  1228.000     2436   GenerateReport#only_chrome?    /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:88
+  0.00      0.000     0.000     0.000     0.000     7071   String#start_with?             
+  0.00      0.000     0.000     0.000     0.000     2436   GenerateReport#any_ie?         /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:84
+  0.00      0.000     0.000     0.000     0.000     2436   Array#max                      
+  0.00      0.000     0.000     0.000     0.000     2436   Array#sum                      
+  0.00      0.000     0.000     0.000     0.000     2437   Array#count                    
+  0.00  49447.000     0.000     0.000 49447.000     2435   GenerateReport#fill_user_data  /home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:60
+  0.00      0.000     0.000     0.000     0.000    13564   Array#include?                 
+  0.00      0.000     0.000     0.000     0.000    29565   String#to_i                    
+  0.00      0.000     0.000     0.000     0.000     2436   Integer#zero?                  <internal:integer>:146
+  0.00      0.000     0.000     0.000     0.000     2439   IO#close                       
+  0.00      0.000     0.000     0.000     0.000     2438   IO#closed?                     
+  0.00   4875.000     0.000     0.000  4875.000     2438   IO#<<                          
+  0.00      0.000     0.000     0.000     0.000     2439   File#initialize                
+  0.00      0.000     0.000     0.000     0.000        1   BasicObject#initialize         
+
+* recursively called methods
+
+Columns are:
+
+  %self     - The percentage of time spent in this method, derived from self_time/total_time.
+  total     - The time spent in this method and its children.
+  self      - The time spent in this method.
+  wait      - The amount of time this method waited for other threads.
+  child     - The time spent in this method's children.
+  calls     - The number of times this method was called.
+  name      - The name of the method.
+  location  - The location of the method.
+
+The interpretation of method names is:
+
+  * MyObject#test - An instance method "test" of the class "MyObject"
+  * <Object:MyObject>#test - The <> characters indicate a method on a singleton class.

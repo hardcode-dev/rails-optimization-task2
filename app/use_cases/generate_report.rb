@@ -25,7 +25,6 @@ class GenerateReport
     File.open('result.json', 'a') do |file|
       @file = file
       @file << '{"usersStats":{'
-      
 
       data_file = File.open(path)
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../task-2'
+require_relative '../task_2'
 require 'benchmark'
 
 puts "Start"

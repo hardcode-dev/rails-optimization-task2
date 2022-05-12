@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'ruby-prof'
-require_relative '../task-2'
+require_relative '../task_2'
 
 RubyProf.measure_mode = RubyProf::ALLOCATIONS
 

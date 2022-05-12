@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rspec-benchmark'
-require_relative '../task-2'
+require_relative '../task_2'
 
 RSpec.configure do |config|
   config.include RSpec::Benchmark::Matchers

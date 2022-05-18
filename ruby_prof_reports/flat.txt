@@ -1,0 +1,74 @@
+Measure Mode: allocations
+Thread ID: 80
+Fiber ID: 60
+Total: 2603338.000000
+Sort by: self_time
+
+ %self      total      self      wait     child     calls  name                           location
+ 53.43  1391065.000 1391065.000     0.000     0.000   203184   String#split                   
+  9.00  2603319.000 234408.000     0.000 2368911.000        1   IO#each_line                   
+  6.61  172161.000 172161.000     0.000     0.000   172161   String#upcase                  
+  6.00  156123.000 156123.000     0.000     0.000    31225   <Class::IO>#write              
+  5.98  602168.000 155594.000     0.000 446574.000    31223   User#stats                     /Users/anymacstore/projects/rails-optimization-task2/models/user.rb:18
+  4.57  118897.000 118897.000     0.000     0.000    62646   Array#sort                     
+  3.60  265630.000 93669.000     0.000 171961.000    93669   Array#map                      
+  2.40  976843.000 62446.000     0.000 914397.000    31223   App#user_stats                 /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:57
+  2.40  62446.000 62446.000     0.000     0.000    31223   JSON::Ext::Generator::GeneratorMethods::Hash#to_json 
+  1.21  31423.000 31423.000     0.000     0.000    31423   Array#join                     
+  1.20  31226.000 31224.000     0.000     2.000    31224   Class#new                      
+  1.20  31223.000 31223.000     0.000     0.000    31223   Array#reverse                  
+  1.20  31223.000 31223.000     0.000     0.000    31223   User#full_name                 /Users/anymacstore/projects/rails-optimization-task2/models/user.rb:14
+  1.20  31222.000 31222.000     0.000     0.000    31222   String#+                       
+  0.01   1003.000   204.000     0.000   799.000   171961   App#session_stats              /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:68
+  0.00     10.000     5.000     0.000     5.000        1   App#save_report                /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:83
+  0.00      2.000     2.000     0.000     0.000        1   App#initialize                 /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:13
+  0.00  2603338.000     1.000     0.000 2603337.000        1   [global]#                      ruby_prof.rb:12
+  0.00  2603334.000     1.000     0.000 2603333.000        1   App#work                       /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:25
+  0.00  2603320.000     1.000     0.000 2603319.000        1   <Class::IO>#open               
+  0.00  31223.000     0.000     0.000 31223.000    62446   User#sessions_time             /Users/anymacstore/projects/rails-optimization-task2/models/user.rb:36
+  0.00      0.000     0.000     0.000     0.000   171961   String#to_i                    
+  0.00      0.000     0.000     0.000     0.000    62445   Array#any?                     
+  0.00      0.000     0.000     0.000     0.000   203184   Hash#[]=                       
+  0.00      0.000     0.000     0.000     0.000   203184   Integer#+                      
+  0.00      0.000     0.000     0.000     0.000   203188   Hash#[]                        
+  0.00      0.000     0.000     0.000     0.000      200   Hash#merge!                    
+  0.00      0.000     0.000     0.000     0.000    31223   Array#sum                      
+  0.00      0.000     0.000     0.000     0.000    31223   Array#max                      
+  0.00  262433.000     0.000     0.000 262433.000    93669   User#browsers                  /Users/anymacstore/projects/rails-optimization-task2/models/user.rb:32
+  0.00      0.000     0.000     0.000     0.000    31423   Array#count                    
+  0.00      0.000     0.000     0.000     0.000   203388   App#report                     
+  0.00      0.000     0.000     0.000     0.000   172161   Array#<<                       
+  0.00      0.000     0.000     0.000     0.000   171961   Array#include?                 
+  0.00      0.000     0.000     0.000     0.000   172561   App#browsers                   
+  0.00      0.000     0.000     0.000     0.000   191069   String#start_with?             
+  0.00      0.000     0.000     0.000     0.000   203184   IO#eof?                        
+  0.00      0.000     0.000     0.000     0.000   406368   String#==                      
+  0.00      0.000     0.000     0.000     0.000  1156858   Array#[]                       
+  0.00      0.000     0.000     0.000     0.000    31223   Array#all?                     
+  0.00      0.000     0.000     0.000     0.000   171961   String#strip!                  
+  0.00      0.000     0.000     0.000     0.000        1   File#initialize                
+  0.00      0.000     0.000     0.000     0.000        1   IO#closed?                     
+  0.00      0.000     0.000     0.000     0.000        1   App#file_name                  
+  0.00      0.000     0.000     0.000     0.000    31223   JSON::Ext::Generator::State#initialize 
+  0.00      0.000     0.000     0.000     0.000        1   IO#close                       
+  0.00      0.000     0.000     0.000     0.000   124892   User#sessions                  
+  0.00      0.000     0.000     0.000     0.000    62446   User#attributes                
+  0.00      0.000     0.000     0.000     0.000    31223   User#initialize                /Users/anymacstore/projects/rails-optimization-task2/models/user.rb:9
+
+* recursively called methods
+
+Columns are:
+
+  %self     - The percentage of time spent in this method, derived from self_time/total_time.
+  total     - The time spent in this method and its children.
+  self      - The time spent in this method.
+  wait      - The amount of time this method waited for other threads.
+  child     - The time spent in this method's children.
+  calls     - The number of times this method was called.
+  name      - The name of the method.
+  location  - The location of the method.
+
+The interpretation of method names is:
+
+  * MyObject#test - An instance method "test" of the class "MyObject"
+  * <Object:MyObject>#test - The <> characters indicate a method on a singleton class.

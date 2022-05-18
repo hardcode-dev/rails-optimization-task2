@@ -1,0 +1,5285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style media="all" type="text/css">
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background-color: #F5F7FB;
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+    }
+
+    table {
+      border-collapse: collapse;
+      /* border: 1px solid #E1E3E7; */
+      border: 1px solid #F3F9FE;
+      font-size: 14px;
+      line-height: normal;
+      width: 100%;
+    }
+
+    table:empty {
+      display: none;
+    }
+
+    th:first-child {
+      border-left: 0;
+    }
+
+    th {
+      text-align: center;
+      background: #F3F9FE;
+      padding: 1rem;
+      /* border-left: 1px solid #E1E3E7; */
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    tr.break td {
+      border: 0;
+      border-top: 1px solid #BDC3DD;
+      padding: 0;
+      margin: 0;
+    }
+
+    tr.method td {
+      font-weight: bold;
+    }
+
+    td {
+      padding: 0.5em;
+    }
+
+    td:first-child {
+      width: 190px;
+    }
+
+    tr > td > table {
+      box-shadow: 0px -2px 1px #F9FAFB, 0px 1px 1px #E4EEEE, 0px 1px 2px #EEF3F8;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    tr.break + tr > td.method_name {
+      font-weight: bold;
+    }
+
+    td {
+      /* I'm removing this border because I think it looks way cleaner without it but feel free to add it if you feel it's necessary */
+      /* border-left: 1px solid #E1E3E7; */
+      text-align: center;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .method_name {
+      text-align: left;
+    }
+
+    tfoot td {
+      text-align: left;
+    }
+
+    .report-header {
+      background-color: #0D2483;
+      color: white;
+      padding: 1.5rem 2rem;
+    }
+
+    .report-header > div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .report-header h1 {
+      margin-bottom: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    h6 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .table-header {
+      padding: 3rem 0 1rem;
+    }
+
+    .table-wrapper {
+      margin: 1rem auto;
+      max-width: 1440px;
+      padding: 4rem 5rem;
+      background: white;
+      border-radius: 0.5rem;
+    }
+
+    .center {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .layout-right {
+      margin-left: auto;
+    }
+
+    .text-right {
+      display: flex;
+      align-items: flex-end;
+      flex-direction: column;
+    }
+
+    .timestamp {
+      font-size: 12px;
+      margin-bottom: 1rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .logo {
+      width: 140px;
+      height: 30px;
+      opacity: 0.5;
+      background-repeat: no-repeat;
+      background-image: url("data:image/svg+xml,%3Csvg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 190 41'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:%23fff%7D%3C/style%3E%3C/defs%3E%3Cpath class='cls-1' d='M63.49 16.74c0-1.37-.91-2-2.26-2h-3.38v3.93h3.58c1.24.01 2.06-.56 2.06-1.93zM110.43 14.75h-3.6v5h3.6a2.32 2.32 0 0 0 2.5-2.49 2.34 2.34 0 0 0-2.5-2.51zM128.77 14.75h-3.53v4.94h3.53a2.28 2.28 0 0 0 2.47-2.45 2.3 2.3 0 0 0-2.47-2.49zM61.81 21.83h-4v4.32h3.91c1.44 0 2.45-.62 2.45-2.14s-.99-2.18-2.36-2.18zM21 14.75h-3.57v4.94H21a2.28 2.28 0 0 0 2.47-2.45A2.3 2.3 0 0 0 21 14.75z'/%3E%3Cpath class='cls-1' d='M184 .44H5.87A4.93 4.93 0 0 0 .94 5.37V35.5a4.94 4.94 0 0 0 4.93 4.94H184a4.94 4.94 0 0 0 4.94-4.94V5.37A4.94 4.94 0 0 0 184 .44zm-34.38 10.78c4.79 0 8.46 2.89 9.18 7.54h-3.86a5.48 5.48 0 0 0-10.68 0h-3.83c.71-4.65 4.36-7.54 9.19-7.54zM24 29.44L20.46 23h-3v6.46h-3.72v-18h7.68c3.41 0 5.78 2.07 5.78 5.76a5.34 5.34 0 0 1-2.88 5.14l3.82 7.06zm24.31-7.3c0 4.8-2.92 7.56-7.63 7.56S33 26.94 33 22.14V11.48h3.69v10.61c0 2.81 1.37 4.32 4 4.32s3.94-1.51 3.94-4.32V11.48h3.69zm13.92 7.3h-8v-18h7.52c3.24 0 5.59 1.61 5.59 5A4 4 0 0 1 65.51 20 4.22 4.22 0 0 1 68 24.21c0 3.43-2.4 5.23-5.81 5.23zm19.66-6.92v6.92h-3.7v-6.92l-6.81-11h4.29L80 18.85l4.34-7.37h4.32zm16-.5h-7.62v-3.26h7.59zm13 1h-4v6.39h-3.72v-18h7.77c3.41 0 5.79 2.09 5.79 5.79s-2.41 5.85-5.82 5.85zm20.86 6.39L128.26 23h-3v6.46h-3.72v-18h7.69c3.4 0 5.78 2.07 5.78 5.76a5.34 5.34 0 0 1-2.88 5.14l3.87 7.08zm17.85.26c-4.88 0-8.55-2.95-9.21-7.68h3.81A5.49 5.49 0 0 0 155 22h3.84c-.69 4.75-4.38 7.7-9.22 7.7zm18.4-.23h-3.72v-3.7H168zm6.36-7.54h-10.05v-3.26h10.08zm1.44-7.16h-11.49v-3.26h11.52z'/%3E%3C/svg%3E");
+    }
+  </style>
+</head>
+<body>
+<div class="report-header">
+  <div class="center">
+    <div class="layout-left">
+      <h6>Profile Report</h6>
+      <h1>Allocations</h1>
+    </div>
+    <div class="layout-right text-right">
+      <div class="timestamp">Friday, May 20 at  4:10:40 PM (EEST)</div>
+      <div class="logo"></div>
+    </div>
+  </div>
+</div>
+<div class="table-wrapper">
+  <table>
+    <tr>
+      <th>Thread ID</th>
+      <th>Fiber ID</th>
+      <th>Total</th>
+    </tr>
+    
+      <tr>
+        <td>80</td>
+        <td><a href="#60">60</a></td>
+        <td>2603338.0</td>
+      </tr>
+    
+  </table>
+
+  <!-- Methods Tables -->
+  
+    <h2><a name="60">Thread 80, Fiber: 60</a></h2>
+    <table>
+      <thead>
+      <tr>
+        <th>%Total</th>
+        <th>%Self</th>
+        <th>Total</th>
+        <th>Self</th>
+        <th>Wait</th>
+        <th>Child</th>
+        <th>Calls</th>
+        <th class="method_name">Name</th>
+        
+          <th>Allocations</th>
+        
+        <th>Line</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+
+        <!-- Parents -->
+        
+        <tr class="method">
+          <td>100.00%</td>
+          <td>0.00%</td>
+          <td>2603338.00</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>2603337.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="[global]__60">
+               [global]#
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                <a class="allocations" href="#[global]__60_allocations" %>1</a>
+              
+            </td>
+          
+
+          <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/ruby_prof.rb#12" title="/Users/anymacstore/projects/rails-optimization-task2/ruby_prof.rb:12">12</a></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="[global]__60_allocations" class="allocations" style="display: none">
+                
+                  <tr>
+                    <td>
+                      App
+                    </td>
+                    <td>
+                      1 (40 Bytes)
+                    </td>
+                    <td>
+                      ruby_prof.rb:12
+                    </td>
+                  </tr>
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2603334.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>2603333.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#App_work_60">App#work</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/ruby_prof.rb#12" title="/Users/anymacstore/projects/rails-optimization-task2/ruby_prof.rb:12">12</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>2.00</td>
+            <td>1/31224</td>
+            <td class="method_name"><a href="#Class_new_60">Class#new</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/ruby_prof.rb#12" title="/Users/anymacstore/projects/rails-optimization-task2/ruby_prof.rb:12">12</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2603334.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>2603333.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#[global]__60">[global]#</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/ruby_prof.rb#12" title="/Users/anymacstore/projects/rails-optimization-task2/ruby_prof.rb:12">12</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>100.00%</td>
+          <td>0.00%</td>
+          <td>2603334.00</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>2603333.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="App_work_60">
+               App#work
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                <a class="allocations" href="#App_work_60_allocations" %>1625477</a>
+              
+            </td>
+          
+
+          <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#25" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:25">25</a></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="App_work_60_allocations" class="allocations" style="display: none">
+                
+                  <tr>
+                    <td>
+                      Hash
+                    </td>
+                    <td>
+                      1 (40 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:26
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      File
+                    </td>
+                    <td>
+                      1 (40 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:26
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      Thread::Mutex
+                    </td>
+                    <td>
+                      1 (40 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:26
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      Array
+                    </td>
+                    <td>
+                      1 (40 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:29
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      File
+                    </td>
+                    <td>
+                      1 (40 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:31
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      String
+                    </td>
+                    <td>
+                      203184 (8127360 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:34
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      Array
+                    </td>
+                    <td>
+                      203184 (8127360 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:35
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      String
+                    </td>
+                    <td>
+                      1187881 (47515240 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:35
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      Array
+                    </td>
+                    <td>
+                      31223 (1248920 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:41
+                    </td>
+                  </tr>
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2603320.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>2603319.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__open_60">&lt;Class::IO&gt;#open</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#31" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:31">31</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>10.00</td>
+            <td>5.00</td>
+            <td>0.00</td>
+            <td>5.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#App_save_report_60">App#save_report</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#49" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:49">49</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>3.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/31225</td>
+            <td class="method_name"><a href="#_Class__IO__write_60">&lt;Class::IO&gt;#write</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#26" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:26">26</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#App_file_name_60">App#file_name</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#31" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:31">31</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2603320.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>2603319.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#App_work_60">App#work</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#31" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:31">31</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>100.00%</td>
+          <td>0.00%</td>
+          <td>2603320.00</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>2603319.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="_Class__IO__open_60">
+               &lt;Class::IO&gt;#open
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="_Class__IO__open_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2603319.00</td>
+            <td>234408.00</td>
+            <td>0.00</td>
+            <td>2368911.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#IO_each_line_60">IO#each_line</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#34" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:34">34</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#IO_close_60">IO#close</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#34" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:34">34</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#IO_closed__60">IO#closed?</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#34" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:34">34</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#File_initialize_60">File#initialize</a></td>
+            
+              <td>-</td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2603319.00</td>
+            <td>234408.00</td>
+            <td>0.00</td>
+            <td>2368911.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__open_60">&lt;Class::IO&gt;#open</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>100.00%</td>
+          <td>9.00%</td>
+          <td>2603319.00</td>
+          <td>234408.00</td>
+          <td>0.00</td>
+          <td>2368911.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="IO_each_line_60">
+               IO#each_line
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="IO_each_line_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1391065.00</td>
+            <td>1391065.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>203184/203184</td>
+            <td class="method_name"><a href="#String_split_60">String#split</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#35" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:35">35</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>976843.00</td>
+            <td>62446.00</td>
+            <td>0.00</td>
+            <td>914397.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#App_user_stats_60">App#user_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#38" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:38">38</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1003.00</td>
+            <td>204.00</td>
+            <td>0.00</td>
+            <td>799.00</td>
+            <td>171961/171961</td>
+            <td class="method_name"><a href="#App_session_stats_60">App#session_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#44" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:44">44</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>171961/172161</td>
+            <td class="method_name"><a href="#Array____60">Array#&lt;&lt;</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#44" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:44">44</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>203184/203184</td>
+            <td class="method_name"><a href="#IO_eof__60">IO#eof?</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#45" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:45">45</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>406368/406368</td>
+            <td class="method_name"><a href="#String____60">String#==</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#37" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:37">37</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>406368/1156858</td>
+            <td class="method_name"><a href="#Array_[]_60">Array#[]</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#37" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:37">37</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31222/62445</td>
+            <td class="method_name"><a href="#Array_any__60">Array#any?</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#38" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:38">38</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1391065.00</td>
+            <td>1391065.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>203184/203184</td>
+            <td class="method_name"><a href="#IO_each_line_60">IO#each_line</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>53.43%</td>
+          <td>53.43%</td>
+          <td>1391065.00</td>
+          <td>1391065.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>203184</td>
+          <td class="method_name">
+            <a name="String_split_60">
+               String#split
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="String_split_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>976843.00</td>
+            <td>62446.00</td>
+            <td>0.00</td>
+            <td>914397.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#IO_each_line_60">IO#each_line</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>37.52%</td>
+          <td>2.40%</td>
+          <td>976843.00</td>
+          <td>62446.00</td>
+          <td>0.00</td>
+          <td>914397.00</td>
+          <td>31223</td>
+          <td class="method_name">
+            <a name="App_user_stats_60">
+               App#user_stats
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                <a class="allocations" href="#App_user_stats_60_allocations" %>343452</a>
+              
+            </td>
+          
+
+          <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#57" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:57">57</a></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="App_user_stats_60_allocations" class="allocations" style="display: none">
+                
+                  <tr>
+                    <td>
+                      User
+                    </td>
+                    <td>
+                      31223 (1248920 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:58
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      JSON::Ext::Generator::State
+                    </td>
+                    <td>
+                      31223 (1248920 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:59
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      String
+                    </td>
+                    <td>
+                      62446 (2497840 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:59
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      String
+                    </td>
+                    <td>
+                      31222 (1248880 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:60
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      Hash
+                    </td>
+                    <td>
+                      93669 (3746760 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:63
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      IO
+                    </td>
+                    <td>
+                      31223 (1248920 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:63
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      [global]
+                    </td>
+                    <td>
+                      31223 (1248920 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:63
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      Thread::Mutex
+                    </td>
+                    <td>
+                      31223 (1248920 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:63
+                    </td>
+                  </tr>
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>602168.00</td>
+            <td>155594.00</td>
+            <td>0.00</td>
+            <td>446574.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#User_stats_60">User#stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#59" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:59">59</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>156115.00</td>
+            <td>156115.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31225</td>
+            <td class="method_name"><a href="#_Class__IO__write_60">&lt;Class::IO&gt;#write</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#63" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:63">63</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>62446.00</td>
+            <td>62446.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#JSON__Ext__Generator__GeneratorMethods__Hash_to_json_60">JSON::Ext::Generator::GeneratorMethods::Hash#to_json</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#59" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:59">59</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>31223.00</td>
+            <td>31223.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#User_full_name_60">User#full_name</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#59" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:59">59</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>31223.00</td>
+            <td>31223.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31224</td>
+            <td class="method_name"><a href="#Class_new_60">Class#new</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#58" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:58">58</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>31222.00</td>
+            <td>31222.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31222/31222</td>
+            <td class="method_name"><a href="#String_+_60">String#+</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#60" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:60">60</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/203184</td>
+            <td class="method_name"><a href="#Integer_+_60">Integer#+</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#65" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:65">65</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/203184</td>
+            <td class="method_name"><a href="#Hash_[]__60">Hash#[]=</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#65" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:65">65</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/203388</td>
+            <td class="method_name"><a href="#App_report_60">App#report</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#65" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:65">65</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/203188</td>
+            <td class="method_name"><a href="#Hash_[]_60">Hash#[]</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#65" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:65">65</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>602168.00</td>
+            <td>155594.00</td>
+            <td>0.00</td>
+            <td>446574.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#App_user_stats_60">App#user_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#59" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:59">59</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>23.13%</td>
+          <td>5.98%</td>
+          <td>602168.00</td>
+          <td>155594.00</td>
+          <td>0.00</td>
+          <td>446574.00</td>
+          <td>31223</td>
+          <td class="method_name">
+            <a name="User_stats_60">
+               User#stats
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                <a class="allocations" href="#User_stats_60_allocations" %>308512</a>
+              
+            </td>
+          
+
+          <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#18" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:18">18</a></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="User_stats_60_allocations" class="allocations" style="display: none">
+                
+                  <tr>
+                    <td>
+                      String
+                    </td>
+                    <td>
+                      30966 (1238640 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/models/user.rb:21
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      String
+                    </td>
+                    <td>
+                      62182 (2487280 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/models/user.rb:22
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      String
+                    </td>
+                    <td>
+                      62446 (2497840 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/models/user.rb:23
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      Array
+                    </td>
+                    <td>
+                      99813 (3992520 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/models/user.rb:26
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      [global]
+                    </td>
+                    <td>
+                      21882 (875280 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/models/user.rb:26
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      Hash
+                    </td>
+                    <td>
+                      31223 (1248920 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/models/user.rb:28
+                    </td>
+                  </tr>
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>262433.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>262433.00</td>
+            <td>93669/93669</td>
+            <td class="method_name"><a href="#User_browsers_60">User#browsers</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>59249.00</td>
+            <td>59249.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/62646</td>
+            <td class="method_name"><a href="#Array_sort_60">Array#sort</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>31223.00</td>
+            <td>31223.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/93669</td>
+            <td class="method_name"><a href="#Array_map_60">Array#map</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>31223.00</td>
+            <td>31223.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31423</td>
+            <td class="method_name"><a href="#Array_join_60">Array#join</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>31223.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223.00</td>
+            <td>62446/62446</td>
+            <td class="method_name"><a href="#User_sessions_time_60">User#sessions_time</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>31223.00</td>
+            <td>31223.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#Array_reverse_60">Array#reverse</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>62446/124892</td>
+            <td class="method_name"><a href="#User_sessions_60">User#sessions</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#Array_max_60">Array#max</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#Array_sum_60">Array#sum</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#Array_all__60">Array#all?</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/62445</td>
+            <td class="method_name"><a href="#Array_any__60">Array#any?</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31423</td>
+            <td class="method_name"><a href="#Array_count_60">Array#count</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>31223.00</td>
+            <td>31223.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/93669</td>
+            <td class="method_name"><a href="#User_sessions_time_60">User#sessions_time</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#37" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:37">37</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>31223.00</td>
+            <td>31223.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/93669</td>
+            <td class="method_name"><a href="#User_stats_60">User#stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>203184.00</td>
+            <td>31223.00</td>
+            <td>0.00</td>
+            <td>171961.00</td>
+            <td>31223/93669</td>
+            <td class="method_name"><a href="#User_browsers_60">User#browsers</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#33" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:33">33</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>10.20%</td>
+          <td>3.60%</td>
+          <td>265630.00</td>
+          <td>93669.00</td>
+          <td>0.00</td>
+          <td>171961.00</td>
+          <td>93669</td>
+          <td class="method_name">
+            <a name="Array_map_60">
+               Array#map
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Array_map_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>171961.00</td>
+            <td>171961.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>171961/172161</td>
+            <td class="method_name"><a href="#String_upcase_60">String#upcase</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#33" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:33">33</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>171961/171961</td>
+            <td class="method_name"><a href="#String_strip!_60">String#strip!</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#26" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:26">26</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>171961/171961</td>
+            <td class="method_name"><a href="#String_to_i_60">String#to_i</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#37" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:37">37</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>515883/1156858</td>
+            <td class="method_name"><a href="#Array_[]_60">Array#[]</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#37" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:37">37</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>262433.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>262433.00</td>
+            <td>93669/93669</td>
+            <td class="method_name"><a href="#User_stats_60">User#stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>10.08%</td>
+          <td>0.00%</td>
+          <td>262433.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>262433.00</td>
+          <td>93669</td>
+          <td class="method_name">
+            <a name="User_browsers_60">
+               User#browsers
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                <a class="allocations" href="#User_browsers_60_allocations" %>262433</a>
+              
+            </td>
+          
+
+          <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#32" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:32">32</a></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="User_browsers_60_allocations" class="allocations" style="display: none">
+                
+                  <tr>
+                    <td>
+                      Array
+                    </td>
+                    <td>
+                      68590 (2743600 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/models/user.rb:33
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      String
+                    </td>
+                    <td>
+                      171961 (6878440 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/models/user.rb:33
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      [global]
+                    </td>
+                    <td>
+                      21882 (875280 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/models/user.rb:33
+                    </td>
+                  </tr>
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>203184.00</td>
+            <td>31223.00</td>
+            <td>0.00</td>
+            <td>171961.00</td>
+            <td>31223/93669</td>
+            <td class="method_name"><a href="#Array_map_60">Array#map</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#33" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:33">33</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>59249.00</td>
+            <td>59249.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/62646</td>
+            <td class="method_name"><a href="#Array_sort_60">Array#sort</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#33" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:33">33</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/124892</td>
+            <td class="method_name"><a href="#User_sessions_60">User#sessions</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#33" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:33">33</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>200.00</td>
+            <td>200.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>200/172161</td>
+            <td class="method_name"><a href="#App_session_stats_60">App#session_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#72" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:72">72</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>171961.00</td>
+            <td>171961.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>171961/172161</td>
+            <td class="method_name"><a href="#Array_map_60">Array#map</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>6.61%</td>
+          <td>6.61%</td>
+          <td>172161.00</td>
+          <td>172161.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>172161</td>
+          <td class="method_name">
+            <a name="String_upcase_60">
+               String#upcase
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="String_upcase_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>3.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/31225</td>
+            <td class="method_name"><a href="#App_work_60">App#work</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#26" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:26">26</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>5.00</td>
+            <td>5.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/31225</td>
+            <td class="method_name"><a href="#App_save_report_60">App#save_report</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#93" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:93">93</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>156115.00</td>
+            <td>156115.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31225</td>
+            <td class="method_name"><a href="#App_user_stats_60">App#user_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#63" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:63">63</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>6.00%</td>
+          <td>6.00%</td>
+          <td>156123.00</td>
+          <td>156123.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>31225</td>
+          <td class="method_name">
+            <a name="_Class__IO__write_60">
+               &lt;Class::IO&gt;#write
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="_Class__IO__write_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>399.00</td>
+            <td>399.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>200/62646</td>
+            <td class="method_name"><a href="#App_session_stats_60">App#session_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#72" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:72">72</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>59249.00</td>
+            <td>59249.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/62646</td>
+            <td class="method_name"><a href="#User_browsers_60">User#browsers</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#33" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:33">33</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>59249.00</td>
+            <td>59249.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/62646</td>
+            <td class="method_name"><a href="#User_stats_60">User#stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>4.57%</td>
+          <td>4.57%</td>
+          <td>118897.00</td>
+          <td>118897.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>62646</td>
+          <td class="method_name">
+            <a name="Array_sort_60">
+               Array#sort
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Array_sort_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>62446.00</td>
+            <td>62446.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#App_user_stats_60">App#user_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#59" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:59">59</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>2.40%</td>
+          <td>2.40%</td>
+          <td>62446.00</td>
+          <td>62446.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>31223</td>
+          <td class="method_name">
+            <a name="JSON__Ext__Generator__GeneratorMethods__Hash_to_json_60">
+               JSON::Ext::Generator::GeneratorMethods::Hash#to_json
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="JSON__Ext__Generator__GeneratorMethods__Hash_to_json_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#JSON__Ext__Generator__State_initialize_60">JSON::Ext::Generator::State#initialize</a></td>
+            
+              <td>-</td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>200.00</td>
+            <td>200.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>200/31423</td>
+            <td class="method_name"><a href="#App_session_stats_60">App#session_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#72" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:72">72</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>31223.00</td>
+            <td>31223.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31423</td>
+            <td class="method_name"><a href="#User_stats_60">User#stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>1.21%</td>
+          <td>1.21%</td>
+          <td>31423.00</td>
+          <td>31423.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>31423</td>
+          <td class="method_name">
+            <a name="Array_join_60">
+               Array#join
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Array_join_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>2.00</td>
+            <td>1/31224</td>
+            <td class="method_name"><a href="#[global]__60">[global]#</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/ruby_prof.rb#12" title="/Users/anymacstore/projects/rails-optimization-task2/ruby_prof.rb:12">12</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>31223.00</td>
+            <td>31223.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31224</td>
+            <td class="method_name"><a href="#App_user_stats_60">App#user_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#58" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:58">58</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>1.20%</td>
+          <td>1.20%</td>
+          <td>31226.00</td>
+          <td>31224.00</td>
+          <td>0.00</td>
+          <td>2.00</td>
+          <td>31224</td>
+          <td class="method_name">
+            <a name="Class_new_60">
+               Class#new
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Class_new_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2.00</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#App_initialize_60">App#initialize</a></td>
+            
+              <td>-</td>
+            
+            <td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#User_initialize_60">User#initialize</a></td>
+            
+              <td>-</td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>31223.00</td>
+            <td>31223.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#App_user_stats_60">App#user_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#59" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:59">59</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>1.20%</td>
+          <td>1.20%</td>
+          <td>31223.00</td>
+          <td>31223.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>31223</td>
+          <td class="method_name">
+            <a name="User_full_name_60">
+               User#full_name
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                <a class="allocations" href="#User_full_name_60_allocations" %>31223</a>
+              
+            </td>
+          
+
+          <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#14" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:14">14</a></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="User_full_name_60_allocations" class="allocations" style="display: none">
+                
+                  <tr>
+                    <td>
+                      String
+                    </td>
+                    <td>
+                      31223 (1248920 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/models/user.rb:16
+                    </td>
+                  </tr>
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>62446/1156858</td>
+            <td class="method_name"><a href="#Array_[]_60">Array#[]</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#15" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:15">15</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>62446/62446</td>
+            <td class="method_name"><a href="#User_attributes_60">User#attributes</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#15" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:15">15</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>31223.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223.00</td>
+            <td>62446/62446</td>
+            <td class="method_name"><a href="#User_stats_60">User#stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>1.20%</td>
+          <td>0.00%</td>
+          <td>31223.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>31223.00</td>
+          <td>62446</td>
+          <td class="method_name">
+            <a name="User_sessions_time_60">
+               User#sessions_time
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                <a class="allocations" href="#User_sessions_time_60_allocations" %>31223</a>
+              
+            </td>
+          
+
+          <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#36" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:36">36</a></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="User_sessions_time_60_allocations" class="allocations" style="display: none">
+                
+                  <tr>
+                    <td>
+                      Array
+                    </td>
+                    <td>
+                      31223 (1248920 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/models/user.rb:37
+                    </td>
+                  </tr>
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>31223.00</td>
+            <td>31223.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/93669</td>
+            <td class="method_name"><a href="#Array_map_60">Array#map</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#37" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:37">37</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/124892</td>
+            <td class="method_name"><a href="#User_sessions_60">User#sessions</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#37" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:37">37</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>31223.00</td>
+            <td>31223.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#User_stats_60">User#stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>1.20%</td>
+          <td>1.20%</td>
+          <td>31223.00</td>
+          <td>31223.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>31223</td>
+          <td class="method_name">
+            <a name="Array_reverse_60">
+               Array#reverse
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Array_reverse_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>31222.00</td>
+            <td>31222.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31222/31222</td>
+            <td class="method_name"><a href="#App_user_stats_60">App#user_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#60" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:60">60</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>1.20%</td>
+          <td>1.20%</td>
+          <td>31222.00</td>
+          <td>31222.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>31222</td>
+          <td class="method_name">
+            <a name="String_+_60">
+               String#+
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="String_+_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1003.00</td>
+            <td>204.00</td>
+            <td>0.00</td>
+            <td>799.00</td>
+            <td>171961/171961</td>
+            <td class="method_name"><a href="#IO_each_line_60">IO#each_line</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.04%</td>
+          <td>0.01%</td>
+          <td>1003.00</td>
+          <td>204.00</td>
+          <td>0.00</td>
+          <td>799.00</td>
+          <td>171961</td>
+          <td class="method_name">
+            <a name="App_session_stats_60">
+               App#session_stats
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                <a class="allocations" href="#App_session_stats_60_allocations" %>999</a>
+              
+            </td>
+          
+
+          <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#68" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:68">68</a></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="App_session_stats_60_allocations" class="allocations" style="display: none">
+                
+                  <tr>
+                    <td>
+                      Array
+                    </td>
+                    <td>
+                      202 (8080 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:74
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      String
+                    </td>
+                    <td>
+                      400 (16000 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:74
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      Hash
+                    </td>
+                    <td>
+                      200 (8000 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:72
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      [global]
+                    </td>
+                    <td>
+                      197 (7880 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:74
+                    </td>
+                  </tr>
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>399.00</td>
+            <td>399.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>200/62646</td>
+            <td class="method_name"><a href="#Array_sort_60">Array#sort</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#72" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:72">72</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>200.00</td>
+            <td>200.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>200/172161</td>
+            <td class="method_name"><a href="#String_upcase_60">String#upcase</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#72" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:72">72</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>200.00</td>
+            <td>200.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>200/31423</td>
+            <td class="method_name"><a href="#Array_join_60">Array#join</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#72" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:72">72</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>200/200</td>
+            <td class="method_name"><a href="#Hash_merge!_60">Hash#merge!</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#72" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:72">72</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>171961/203184</td>
+            <td class="method_name"><a href="#Hash_[]__60">Hash#[]=</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#78" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:78">78</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>171961/203184</td>
+            <td class="method_name"><a href="#Integer_+_60">Integer#+</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#78" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:78">78</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>171961/203188</td>
+            <td class="method_name"><a href="#Hash_[]_60">Hash#[]</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#78" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:78">78</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>200/31423</td>
+            <td class="method_name"><a href="#Array_count_60">Array#count</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#72" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:72">72</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>172161/203388</td>
+            <td class="method_name"><a href="#App_report_60">App#report</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#72" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:72">72</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>200/172161</td>
+            <td class="method_name"><a href="#Array____60">Array#&lt;&lt;</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#70" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:70">70</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>171961/171961</td>
+            <td class="method_name"><a href="#Array_include__60">Array#include?</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#69" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:69">69</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>172161/1156858</td>
+            <td class="method_name"><a href="#Array_[]_60">Array#[]</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#69" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:69">69</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>172561/172561</td>
+            <td class="method_name"><a href="#App_browsers_60">App#browsers</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#69" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:69">69</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>10.00</td>
+            <td>5.00</td>
+            <td>0.00</td>
+            <td>5.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#App_work_60">App#work</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#49" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:49">49</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>10.00</td>
+          <td>5.00</td>
+          <td>0.00</td>
+          <td>5.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="App_save_report_60">
+               App#save_report
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                <a class="allocations" href="#App_save_report_60_allocations" %>10</a>
+              
+            </td>
+          
+
+          <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#83" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:83">83</a></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="App_save_report_60_allocations" class="allocations" style="display: none">
+                
+                  <tr>
+                    <td>
+                      String
+                    </td>
+                    <td>
+                      1 (40 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:86
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      String
+                    </td>
+                    <td>
+                      1 (40 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:87
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      String
+                    </td>
+                    <td>
+                      1 (40 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:88
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      String
+                    </td>
+                    <td>
+                      1 (40 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:84
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      Hash
+                    </td>
+                    <td>
+                      1 (40 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:94
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      Hash
+                    </td>
+                    <td>
+                      2 (80 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:93
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      IO
+                    </td>
+                    <td>
+                      1 (40 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:93
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      [global]
+                    </td>
+                    <td>
+                      1 (40 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:93
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      Thread::Mutex
+                    </td>
+                    <td>
+                      1 (40 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:93
+                    </td>
+                  </tr>
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>5.00</td>
+            <td>5.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/31225</td>
+            <td class="method_name"><a href="#_Class__IO__write_60">&lt;Class::IO&gt;#write</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#93" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:93">93</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>4/203188</td>
+            <td class="method_name"><a href="#Hash_[]_60">Hash#[]</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#84" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:84">84</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>4/203388</td>
+            <td class="method_name"><a href="#App_report_60">App#report</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#84" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:84">84</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2.00</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Class_new_60">Class#new</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>2.00</td>
+          <td>2.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="App_initialize_60">
+               App#initialize
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                <a class="allocations" href="#App_initialize_60_allocations" %>2</a>
+              
+            </td>
+          
+
+          <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#13" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:13">13</a></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="App_initialize_60_allocations" class="allocations" style="display: none">
+                
+                  <tr>
+                    <td>
+                      Array
+                    </td>
+                    <td>
+                      1 (40 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:15
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <td>
+                      Hash
+                    </td>
+                    <td>
+                      1 (40 Bytes)
+                    </td>
+                    <td>
+                      /Users/anymacstore/projects/rails-optimization-task2/task-2.rb:17
+                    </td>
+                  </tr>
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#App_work_60">App#work</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#31" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:31">31</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="App_file_name_60">
+               App#file_name
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="App_file_name_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__open_60">&lt;Class::IO&gt;#open</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="IO_closed__60">
+               IO#closed?
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="IO_closed__60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__open_60">&lt;Class::IO&gt;#open</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="IO_close_60">
+               IO#close
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="IO_close_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>171961/203188</td>
+            <td class="method_name"><a href="#App_session_stats_60">App#session_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#78" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:78">78</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/203188</td>
+            <td class="method_name"><a href="#App_user_stats_60">App#user_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#65" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:65">65</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>4/203188</td>
+            <td class="method_name"><a href="#App_save_report_60">App#save_report</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#84" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:84">84</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>203188</td>
+          <td class="method_name">
+            <a name="Hash_[]_60">
+               Hash#[]
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Hash_[]_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__open_60">&lt;Class::IO&gt;#open</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="File_initialize_60">
+               File#initialize
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="File_initialize_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>172161/203388</td>
+            <td class="method_name"><a href="#App_session_stats_60">App#session_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#72" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:72">72</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/203388</td>
+            <td class="method_name"><a href="#App_user_stats_60">App#user_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#65" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:65">65</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>4/203388</td>
+            <td class="method_name"><a href="#App_save_report_60">App#save_report</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#84" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:84">84</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>203388</td>
+          <td class="method_name">
+            <a name="App_report_60">
+               App#report
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="App_report_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>406368/406368</td>
+            <td class="method_name"><a href="#IO_each_line_60">IO#each_line</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>406368</td>
+          <td class="method_name">
+            <a name="String____60">
+               String#==
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="String____60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>203184/203184</td>
+            <td class="method_name"><a href="#IO_each_line_60">IO#each_line</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>203184</td>
+          <td class="method_name">
+            <a name="IO_eof__60">
+               IO#eof?
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="IO_eof__60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31222/62445</td>
+            <td class="method_name"><a href="#IO_each_line_60">IO#each_line</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/62445</td>
+            <td class="method_name"><a href="#User_stats_60">User#stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>62445</td>
+          <td class="method_name">
+            <a name="Array_any__60">
+               Array#any?
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Array_any__60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>118193/191069</td>
+            <td class="method_name"><a href="#String_start_with__60">String#start_with?</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#24" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:24">24</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>406368/1156858</td>
+            <td class="method_name"><a href="#IO_each_line_60">IO#each_line</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>172161/1156858</td>
+            <td class="method_name"><a href="#App_session_stats_60">App#session_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#69" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:69">69</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>62446/1156858</td>
+            <td class="method_name"><a href="#User_full_name_60">User#full_name</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#15" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:15">15</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>515883/1156858</td>
+            <td class="method_name"><a href="#Array_map_60">Array#map</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1156858</td>
+          <td class="method_name">
+            <a name="Array_[]_60">
+               Array#[]
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Array_[]_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>200/172161</td>
+            <td class="method_name"><a href="#App_session_stats_60">App#session_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#70" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:70">70</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>171961/172161</td>
+            <td class="method_name"><a href="#IO_each_line_60">IO#each_line</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>172161</td>
+          <td class="method_name">
+            <a name="Array____60">
+               Array#&lt;&lt;
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Array____60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>171961/203184</td>
+            <td class="method_name"><a href="#App_session_stats_60">App#session_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#78" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:78">78</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/203184</td>
+            <td class="method_name"><a href="#App_user_stats_60">App#user_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#65" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:65">65</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>203184</td>
+          <td class="method_name">
+            <a name="Integer_+_60">
+               Integer#+
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Integer_+_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>200/200</td>
+            <td class="method_name"><a href="#App_session_stats_60">App#session_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#72" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:72">72</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>200</td>
+          <td class="method_name">
+            <a name="Hash_merge!_60">
+               Hash#merge!
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Hash_merge!_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>171961/203184</td>
+            <td class="method_name"><a href="#App_session_stats_60">App#session_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#78" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:78">78</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/203184</td>
+            <td class="method_name"><a href="#App_user_stats_60">App#user_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#65" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:65">65</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>203184</td>
+          <td class="method_name">
+            <a name="Hash_[]__60">
+               Hash#[]=
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Hash_[]__60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>171961/171961</td>
+            <td class="method_name"><a href="#App_session_stats_60">App#session_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#69" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:69">69</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>171961</td>
+          <td class="method_name">
+            <a name="Array_include__60">
+               Array#include?
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Array_include__60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>200/31423</td>
+            <td class="method_name"><a href="#App_session_stats_60">App#session_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#72" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:72">72</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31423</td>
+            <td class="method_name"><a href="#User_stats_60">User#stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>31423</td>
+          <td class="method_name">
+            <a name="Array_count_60">
+               Array#count
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Array_count_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>172561/172561</td>
+            <td class="method_name"><a href="#App_session_stats_60">App#session_stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/task-2.rb#69" title="/Users/anymacstore/projects/rails-optimization-task2/task-2.rb:69">69</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>172561</td>
+          <td class="method_name">
+            <a name="App_browsers_60">
+               App#browsers
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="App_browsers_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>62446/124892</td>
+            <td class="method_name"><a href="#User_stats_60">User#stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/124892</td>
+            <td class="method_name"><a href="#User_sessions_time_60">User#sessions_time</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#37" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:37">37</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/124892</td>
+            <td class="method_name"><a href="#User_browsers_60">User#browsers</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#33" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:33">33</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>124892</td>
+          <td class="method_name">
+            <a name="User_sessions_60">
+               User#sessions
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="User_sessions_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#Class_new_60">Class#new</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>31223</td>
+          <td class="method_name">
+            <a name="User_initialize_60">
+               User#initialize
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#9" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:9">9</a></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="User_initialize_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>62446/62446</td>
+            <td class="method_name"><a href="#User_full_name_60">User#full_name</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#15" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:15">15</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>62446</td>
+          <td class="method_name">
+            <a name="User_attributes_60">
+               User#attributes
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="User_attributes_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#JSON__Ext__Generator__GeneratorMethods__Hash_to_json_60">JSON::Ext::Generator::GeneratorMethods::Hash#to_json</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>31223</td>
+          <td class="method_name">
+            <a name="JSON__Ext__Generator__State_initialize_60">
+               JSON::Ext::Generator::State#initialize
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="JSON__Ext__Generator__State_initialize_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#User_stats_60">User#stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>31223</td>
+          <td class="method_name">
+            <a name="Array_sum_60">
+               Array#sum
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Array_sum_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#User_stats_60">User#stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>31223</td>
+          <td class="method_name">
+            <a name="Array_max_60">
+               Array#max
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Array_max_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>31223/31223</td>
+            <td class="method_name"><a href="#User_stats_60">User#stats</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#20" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:20">20</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>31223</td>
+          <td class="method_name">
+            <a name="Array_all__60">
+               Array#all?
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="Array_all__60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>72876/191069</td>
+            <td class="method_name"><a href="#String_start_with__60">String#start_with?</a></td>
+            
+              <td>-</td>
+            
+            <td><a href="file:///Users/anymacstore/projects/rails-optimization-task2/models/user.rb#25" title="/Users/anymacstore/projects/rails-optimization-task2/models/user.rb:25">25</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>171961/171961</td>
+            <td class="method_name"><a href="#Array_map_60">Array#map</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>171961</td>
+          <td class="method_name">
+            <a name="String_strip!_60">
+               String#strip!
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="String_strip!_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>118193/191069</td>
+            <td class="method_name"><a href="#Array_any__60">Array#any?</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>72876/191069</td>
+            <td class="method_name"><a href="#Array_all__60">Array#all?</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>191069</td>
+          <td class="method_name">
+            <a name="String_start_with__60">
+               String#start_with?
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="String_start_with__60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>171961/171961</td>
+            <td class="method_name"><a href="#Array_map_60">Array#map</a></td>
+            
+              <td>-</td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>171961</td>
+          <td class="method_name">
+            <a name="String_to_i_60">
+               String#to_i
+            </a>
+          </td>
+
+          
+            <td>
+              
+              
+                0
+              
+            </td>
+          
+
+          <td></td>
+        </tr>
+
+        
+          <tr>
+            <td colspan="10">
+              <table id="String_to_i_60_allocations" class="allocations" style="display: none">
+                
+              </table>
+
+            </td>
+          </tr>
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="9">* indicates recursively called methods</td>
+      </tr>
+      </tfoot>
+    </table>
+  
+</div>
+
+<script type="application/javascript">
+  function toggleAllocations(element)
+  {
+    if (element.style.display == 'none')
+      element.style.display = 'block'
+    else
+      element.style.display = 'none'
+  }
+
+  function onClick(event)
+  {
+    if (event.target.tagName == 'A' && event.target.classList.contains('allocations'))
+    {
+      var url = new URL(event.target.href)
+      var element = document.querySelector(url.hash)
+      toggleAllocations(element)
+      event.preventDefault()
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', function(event)
+  {
+    document.addEventListener('click', onClick)
+  })
+
+</script>
+</body>
+</html>

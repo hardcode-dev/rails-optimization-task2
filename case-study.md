@@ -68,3 +68,22 @@ Total retained:  4.29 kB (9 objects)
     Total retained:  4.29 kB (9 objects)
 
 MEMORY USAGE не сильно изменился, но Total allocated как видно изменился
+
+### Ваша находка №3
+
+Следующей точкой роста была строка 106
+
+    MEMORY USAGE: 443 MB
+    Total allocated: 216.08 MB (1597184 objects)
+    Total retained:  4.29 kB (9 objects)
+    
+    99.70 MB  /Users/farid/projects/rails-optimization-task2/task-2.rb:106
+
+    users_objects = users_objects + [user_object]
+
+проблема такая же как находка №1, то есть конкантенация с использованием нового массива
+результат после внесения правки
+
+    MEMORY USAGE: 348 MB
+    Total allocated: 116.44 MB (1587220 objects)
+    Total retained:  4.29 kB (9 objects)

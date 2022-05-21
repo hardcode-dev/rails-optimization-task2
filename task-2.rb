@@ -103,7 +103,7 @@ def work(file_name:, disable_gc: false)
 
     user_sessions = session_by_user[user['id']]
     user_object = User.new(attributes: attributes, sessions: user_sessions)
-    users_objects = users_objects + [user_object]
+    users_objects << user_object
   end
 
   report['usersStats'] = {}

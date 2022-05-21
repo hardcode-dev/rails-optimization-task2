@@ -87,3 +87,23 @@ MEMORY USAGE не сильно изменился, но Total allocated как �
     MEMORY USAGE: 348 MB
     Total allocated: 116.44 MB (1587220 objects)
     Total retained:  4.29 kB (9 objects)
+
+
+### Ваша находка №3
+
+Следующей точкой роста была строка 143
+
+    MEMORY USAGE: 348 MB
+    Total allocated: 116.44 MB (1587220 objects)
+    Total retained:  4.29 kB (9 objects)
+
+    39.38 MB  /Users/farid/projects/rails-optimization-task2/task-2.rb:143
+
+    { 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }
+
+на этом шаге решено переписать метод collect_stats_from_users, так как блок выше используется именно в этом методе
+Результаты после оптимизации:
+
+    MEMORY USAGE: 179 MB
+    Total allocated: 54.87 MB (722709 objects)
+    Total retained:  40.00 B (1 objects)

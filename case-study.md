@@ -23,7 +23,7 @@
 Вот какие проблемы удалось найти и решить
 
 ### Ваша находка №1
-файл data_32509.txt (1% от файла data_large.txt) при помощи memory-profiler показал следующие данные
+файл data_32509.txt (1% от файла data_large.txt) показал следующие данные
 MEMORY USAGE: 3499 MB
 Total allocated: 4.44 GB (1657221 objects)
 Total retained:  4.29 kB (9 objects)
@@ -46,3 +46,25 @@ Total retained:  4.29 kB (9 objects)
     Total retained:  4.29 kB (9 objects)
 
 как видно по результатам, использование памяти уменьшилось почти в 8 раз
+
+### Ваша находка №2
+
+Следующей точкой роста была строка 102
+
+    MEMORY USAGE: 460 MB
+    Total allocated: 1.31 GB (1592203 objects)
+    Total retained:  4.29 kB (9 objects)
+
+    allocated memory by location
+    -----------------------------------
+    1.10 GB  /Users/farid/projects/rails-optimization-task2/task-2.rb:102
+    
+    user_sessions = sessions.select { |session| session['user_id'] == user['id'] }
+
+после изменения select на group_by по user_id (групировку по user_id)
+
+    MEMORY USAGE: 443 MB
+    Total allocated: 216.08 MB (1597184 objects)
+    Total retained:  4.29 kB (9 objects)
+
+MEMORY USAGE не сильно изменился, но Total allocated как видно изменился

@@ -5,10 +5,16 @@ GEM
     coderay (1.1.3)
     memory_profiler (1.0.0)
     method_source (1.0.0)
+    oj (3.13.13)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    rbtree (0.4.5)
     ruby-prof (1.4.3)
+    set (1.0.2)
+    sorted_set (1.0.3)
+      rbtree
+      set (~> 1.0)
     stackprof (0.2.19)
 
 PLATFORMS
@@ -17,8 +23,10 @@ PLATFORMS
 DEPENDENCIES
   benchmark
   memory_profiler
+  oj
   pry
   ruby-prof
+  sorted_set
   stackprof
 
 BUNDLED WITH

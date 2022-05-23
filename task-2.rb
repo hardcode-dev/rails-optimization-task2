@@ -1,71 +1,60 @@
 # frozen_string_literal: true
 
 # Optimized version of homework task
-
 require 'pry'
-require 'date'
-require 'json'
-
-class User
-  attr_reader :attributes, :sessions, :times, :browsers, :dates, :full_name
-
-  def initialize(attributes:, sessions:)
-    @attributes = attributes
-    @sessions = sessions
-    @times = []
-    @browsers = []
-    @dates = []
-    @full_name = "#{attributes['first_name']} #{attributes['last_name']}"
-    fill_fields
-  end
-
-  def fill_fields
-    sessions.each do |session|
-      @times << session['time']
-      @browsers << session['browser'].upcase
-      @dates << session['date']
-    end
-  end
-end
+require 'set'
+require 'oj'
 
 def parse_user(user)
-  fields = user.split(',')
-  parsed_result = {
-    'id' => fields[1],
-    'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4],
+  {
+    'id' => user[1],
+    'first_name' => user[2],
+    'last_name' => user[3],
+    'full_name' => "#{user[2]} #{user[3]}",
+    'age' => user[4],
   }
 end
 
 def parse_session(session)
-  fields = session.split(',')
-  parsed_result = {
-    'user_id' => fields[1],
-    'session_id' => fields[2],
-    'browser' => fields[3].upcase,
-    'time' => fields[4].to_i,
-    'date' => fields[5],
+  {
+    'user_id' => session[1],
+    'session_id' => session[2],
+    'browser' => session[3].upcase,
+    'time' => session[4].to_i,
+    'date' => session[5]
   }
-end
-
-def collect_stats_from_users(report, user, &block)
-  report['usersStats'][user.full_name] = block.call(user)
 end
 
 def work(file_name:, disable_gc: false)
   GC.disable if disable_gc
 
-  file_lines = File.foreach(file_name)
+  @user = nil
+  @user_session = []
+  @total_user_count = 0
+  @total_session_count = 0
+  @all_browsers = SortedSet.new
+  @report_file = File.new('result.json', 'w')
+  @report_file.write('{"usersStats":{')
 
-  users = []
-  sessions = []
-
-  file_lines.each do |line|
+  File.foreach(file_name, "\n", chomp: true) do |line|
     cols = line.split(',')
-    users << parse_user(line) if cols[0] == 'user'
-    sessions << parse_session(line) if cols[0] == 'session'
+
+    if cols[0] == 'user'
+      fill_user_data(user: @user, user_session: @user_session) if @user
+
+      @user = parse_user(cols)
+      @user_session = []
+      @total_user_count += 1
+    else
+      @user_session << parse_session(cols)
+      @total_session_count += 1
+
+      @all_browsers << @user_session.last['browser'] unless @all_browsers.include?(@user_session.last['browser'])
+    end
   end
+  fill_user_data(user: @user, user_session: @user_session, last_user: true)
+
+  last_report_data!
 
   # Отчёт в json
   #   - Сколько всего юзеров +
@@ -81,58 +70,41 @@ def work(file_name:, disable_gc: false)
   #     - Хоть раз использовал IE? +
   #     - Всегда использовал только Хром? +
   #     - даты сессий в порядке убывания через запятую +
-
-  report = {}
-
-  report[:totalUsers] = users.count
-
-  # Подсчёт количества уникальных браузеров
-  uniqueBrowsers = []
-  sessions.each do |session|
-    browser = session['browser']
-    uniqueBrowsers += [browser] if uniqueBrowsers.all? { |b| b != browser }
-  end
-
-  report['uniqueBrowsersCount'] = uniqueBrowsers.count
-
-  report['totalSessions'] = sessions.count
-
-  report['allBrowsers'] =
-    sessions
-      .map { |s| s['browser'] }
-      .map { |b| b.upcase }
-      .sort
-      .uniq
-      .join(',')
-
-  report['usersStats'] = {}
-
-  # Статистика по пользователям
-  session_by_user = sessions.group_by { |s| s['user_id'] }
-  users.each do |user|
-    user_sessions = session_by_user[user['id']]
-    user_object = User.new(attributes: user, sessions: user_sessions)
-
-    collect_stats_from_users(report, user_object) do |user|
-      {
-        # Собираем количество сессий по пользователям
-        'sessionsCount' => user.sessions.size,
-        # Собираем количество времени по пользователям
-        'totalTime' => "#{user.times.sum} min.",
-        # Выбираем самую длинную сессию пользователя
-        'longestSession' => "#{user.times.max} min.",
-        # Браузеры пользователя через запятую
-        'browsers' => user.browsers.sort.join(', '),
-        # Хоть раз использовал IE?
-        'usedIE' => user.browsers.any? { |b| b.upcase =~ /INTERNET EXPLORER/ },
-        # Всегда использовал только Chrome?
-        'alwaysUsedChrome' => user.browsers.all? { |b| b.upcase =~ /CHROME/ },
-        # Даты сессий через запятую в обратном порядке в формате iso8601
-        'dates' => user.dates.sort.reverse
-      }
-    end
-  end
-
-  File.write('result.json', "#{report.to_json}\n")
+  # File.write('result.json', "#{test_report.to_json}\n")
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+end
+
+def fill_user_data(user:, user_session:, last_user: false)
+  times = Set.new
+  browsers = [] # оставил массив, так как Set.new дает только уникальные записи
+  dates = SortedSet.new
+  user_session.each do |session|
+    times << session['time']
+    browsers << session['browser'].upcase
+    dates << session['date']
+  end
+
+  user_report = {
+    # Собираем количество сессий по пользователям
+    'sessionsCount' => user_session.size,
+    # Собираем количество времени по пользователям
+    'totalTime' => "#{times.sum} min.",
+    # Выбираем самую длинную сессию пользователя
+    'longestSession' => "#{times.max} min.",
+    # Браузеры пользователя через запятую
+    'browsers' => browsers.to_a.sort.join(', '),
+    # Хоть раз использовал IE?
+    'usedIE' => browsers.to_a.any? { |b| b =~ /INTERNET EXPLORER/ },
+    # Всегда использовал только Chrome?
+    'alwaysUsedChrome' => browsers.to_a.all? { |b| b =~ /CHROME/ },
+    # Даты сессий через запятую в обратном порядке в формате iso8601
+    'dates' => dates.to_a.reverse
+  }
+
+  @report_file.write("\"#{user['full_name']}\":#{Oj.dump user_report}")
+  @report_file.write(',') unless last_user
+end
+def last_report_data!
+  @report_file.write("},\"totalUsers\":#{@total_user_count},\"uniqueBrowsersCount\":#{@all_browsers.size},\"totalSessions\":#{@total_session_count},\"allBrowsers\":\"#{ @all_browsers.to_a.join(',')}\"}")
+  @report_file.close
 end

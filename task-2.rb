@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-# Deoptimized version of homework task
+# # Optimized version of homework task
 
-require 'progress_bar'
 require 'date'
 require 'oj'
 
 DEFAULT_PATH = ENV['DATA_FILE'] || 'data.txt'
+VERBOSE = ENV['VERBOSE'] == 'true'
 
 class SessionStats
   attr_reader :sessions
@@ -20,27 +20,27 @@ class SessionStats
   end
 
   def total_time
-    sessions.map { |s| s.time }.sum
+    sessions.reduce(0) { |summ, s| summ + s.time }
   end
 
   def longest_session
-    sessions.map { |s| s.time }.max
+    sessions.map(&:time).max
   end
 
   def browsers
-    sessions.map { |s| s.browser }.sort.join(', ')
+    sessions.map(&:browser).sort.join(', ')
   end
 
   def sessions_dates
-    sessions.map { |s| Date.strptime(s.date, '%Y-%m-%d') }.sort.reverse.map(&:iso8601)
+    sessions.map(&:date).sort.reverse
   end
 
   def always_used_chrome?
-    sessions.map { |s| s.browser }.all? { |b| b =~ /CHROME/ }
+    !sessions.detect { |s| s.browser !~ /CHROME/ }
   end
 
   def used_ie?
-    sessions.map { |s| s.browser }.any? { |b| b =~ /INTERNET EXPLORER/ }
+    !!sessions.detect { |s| s.browser =~ /INTERNET EXPLORER/ }
   end
 end
 
@@ -90,7 +90,7 @@ class SessionStatsRenderer
   end
 end
 
-def work(path = DEFAULT_PATH, disable_gc: false)
+def work(path = DEFAULT_PATH, verbose: VERBOSE, disable_gc: false)
   GC.disable if disable_gc
 
   total_sessions = 0
@@ -146,5 +146,6 @@ def work(path = DEFAULT_PATH, disable_gc: false)
     json_writer.flush
     output_file.rewind
   end
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+
+  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024) if verbose
 end

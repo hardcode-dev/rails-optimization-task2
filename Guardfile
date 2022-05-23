@@ -1,15 +1,13 @@
-# guard :shell do
-#   watch('task-1.rb') do |_m|
-#     system('ruby ./profiling/ruby-prof_graph.rb')
-#     system('ruby ./profiling/ruby-prof_callstack.rb')
-#     system('ruby ./benchmarking/bm.rb')
-#   end
-# end
-
 guard :minitest do
-  # with Minitest::Unit
   watch('test/task-2_test.rb')
   watch('task-2.rb') { |_m| 'test/task-2_test.rb' }
+end
+
+guard :shell do
+  watch('task-2.rb') do |_m|
+    system('DATA_FILE=data_large.txt VERBOSE=true ruby work.rb')
+    system('ruby benchmark/memory_profiler_bench.rb | head -n 20')
+  end
 end
 
 # guard :rspec, cmd: 'rspec -f doc' do

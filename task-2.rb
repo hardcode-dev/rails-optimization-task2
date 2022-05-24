@@ -2,7 +2,7 @@
 
 # # Optimized version of homework task
 
-require 'date'
+require 'set'
 require 'oj'
 
 DEFAULT_PATH = ENV['DATA_FILE'] || 'data.txt'
@@ -95,7 +95,7 @@ def work(path = DEFAULT_PATH, verbose: VERBOSE, disable_gc: false)
 
   total_sessions = 0
   total_users = 0
-  all_browsers = []
+  all_browsers = Set.new
 
   File.open('result.json', 'a') do |output_file|
     json_writer = Oj::StreamWriter.new(output_file)
@@ -113,7 +113,9 @@ def work(path = DEFAULT_PATH, verbose: VERBOSE, disable_gc: false)
         when ''
           current_user = User.new(cols[1..-1])
         when 'session'
+          session = Session.new(cols[1..-1])
           current_user.sessions << Session.new(cols[1..-1])
+          all_browsers << session.browser
         end
       end
 
@@ -122,7 +124,6 @@ def work(path = DEFAULT_PATH, verbose: VERBOSE, disable_gc: false)
         json_writer.push_value(SessionStatsRenderer.call(current_user))
         total_sessions += current_user.sessions.count
         total_users += 1
-        all_browsers |= current_user.sessions.map(&:browser)
       end
     end
 

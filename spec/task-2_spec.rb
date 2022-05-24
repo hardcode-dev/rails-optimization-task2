@@ -7,8 +7,8 @@ require_relative '../task-2.rb'
 RSpec.describe '#work' do
 
   describe 'used memory' do
-    let(:expected_metric_mb) { 17.75 }
-    let(:bytes) { expected_metric_mb * 1048576 }
+    let(:expected_metric_mb) { 16.72 }
+    let(:bytes) { expected_metric_mb * 1_048_576 }
 
     it 'corresponds to the limit while Ruby code execution' do
       expect {

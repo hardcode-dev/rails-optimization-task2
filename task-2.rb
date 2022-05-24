@@ -105,9 +105,8 @@ def work(path = DEFAULT_PATH, verbose: VERBOSE, disable_gc: false)
 
     File.foreach(path, 'user') do |chunk|
       current_user = nil
-      lines = chunk.split("\n")
-      until lines.empty?
-        cols = lines.shift.split(',')
+      chunk.split("\n") do |line|
+        cols = line.split(',')
         case cols[0]
         when 'user'
           next

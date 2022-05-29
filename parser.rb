@@ -79,9 +79,9 @@ class Parser
       'sessionsCount' => @user_sessions.count,
       'totalTime' => @user_sessions.map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.',
       'longestSession' => @user_sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.',
-      'browsers' => @user_sessions.map {|s| s['browser']}.map {|b| b.upcase}.sort.join(', '),
-      'usedIE' => @user_sessions.map{|s| s['browser']}.any? { |b| b.upcase =~ /INTERNET EXPLORER/ },
-      'alwaysUsedChrome' => @user_sessions.map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ },
+      'browsers' => @user_sessions.map {|s| s['browser']}.sort.join(', '),
+      'usedIE' => @user_sessions.map{|s| s['browser']}.any? { |b| b =~ /INTERNET EXPLORER/ },
+      'alwaysUsedChrome' => @user_sessions.map{|s| s['browser']}.all? { |b| b =~ /CHROME/ },
       'dates' => @user_sessions.map{|s| s['date']}.sort.reverse
     }
 

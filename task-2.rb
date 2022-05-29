@@ -1,4 +1,4 @@
-require_relative "work_method.rb"
+require_relative "parser.rb"
 
 class TestMe < Minitest::Test
   def setup

@@ -14,15 +14,13 @@ CR = 'C'
 
 def work(path)
   file = File.open(path)
-  @report_file = File.new('result.json', 'w')
-  @users_report_file = File.new('user_report.json', 'w')
-  @users_report_file.write(',"usersStats":{')
+  @report_file = File.open('result.json', 'w')
+  @report_file.write('{"usersStats":{')
   @user_report = {}
   @users_count = 0
   @sessions_count = 0
   @all_browsers = SortedSet.new
 
-  puts "rss before each_line: #{print_memory_usage}"
   file.each_line(chomp: true) do |line|
     cols = line.split(DELIMITER)
     if line.start_with?('u')
@@ -44,28 +42,8 @@ def work(path)
     end
   end
   write_user_report(true)
-  @report_file.write('{', summary_report.to_json[1..-2])
-  users_file = File.open(@users_report_file.path)
-  users_file.each_line do |line|
-    @report_file.write(line)
-  end
-  puts "rss after each_line: #{print_memory_usage}"
+  @report_file.write(DELIMITER, summary_report.to_json[1..-1])
   @report_file.close
-
-  # Отчёт в json
-  #   - Сколько всего юзеров +
-  #   - Сколько всего уникальных браузеров +
-  #   - Сколько всего сессий +
-  #   - Перечислить уникальные браузеры в алфавитном порядке через запятую и капсом +
-  #
-  #   - По каждому пользователю
-  #     - сколько всего сессий +
-  #     - сколько всего времени +
-  #     - самая длинная сессия +
-  #     - браузеры через запятую +
-  #     - Хоть раз использовал IE? +
-  #     - Всегда использовал только Хром? +
-  #     - даты сессий в порядке убывания через запятую +
 
   puts 'MEMORY USAGE: %d MB' % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
@@ -99,10 +77,9 @@ end
 def write_user_report(last)
   prepare_report
   if last
-    @users_report_file.write(@user_report.to_json[1..-2], '}}')
-    @users_report_file.close
+    @report_file.write(@user_report.to_json[1..-2], '}')
   else
-    @users_report_file.write(@user_report.to_json[1..-2], DELIMITER)
+    @report_file.write(@user_report.to_json[1..-2], DELIMITER)
   end
 end
 
@@ -120,10 +97,6 @@ def prepare_report
   @user_report[@user_name]['longestSession'] = "#{@user_report[@user_name]['longestSession']} min."
   @user_report[@user_name]['browsers'] = @user_report[@user_name]['browsers'].sort!.join(WITH_SPACE)
   @user_report[@user_name]['dates'] = @user_report[@user_name]['dates'].sort!.reverse!
-end
-
-def print_memory_usage
-  "%d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
 class TestMe < Minitest::Test

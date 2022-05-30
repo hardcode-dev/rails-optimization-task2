@@ -1,7 +1,7 @@
 # Deoptimized version of homework task
 
 require 'json'
-require 'date'
+require 'oj'
 require 'minitest/autorun'
 
 class User
@@ -66,55 +66,58 @@ end
 def work(file_name: 'data.txt', gc_disabled: false)
   GC.disable if gc_disabled
 
-  report = {
-    'usersStats' => {
-    }
-  }
+  filename = File.join(File.dirname(__FILE__), 'result.json')
+  File.open(filename, "w") do |f|
+    @streamer = Oj::StreamWriter.new(f, :indent => 0)
+    @streamer.push_object
+    @streamer.push_object("usersStats")
 
-  @sessions_count = 0
-  @users_count = 0
-  all_browsers = []
+    @sessions_count = 0
+    @users_count = 0
+    all_browsers = []
 
-  @user_sessions = []
-  File.foreach(file_name) do |line|
-    cols = line.strip.split(',')
-    subject = cols[0]
-    case subject
-    when 'user'
-      unless @user_sessions.empty?
-        user_stats = collect_stats_from_users(@parsed_user, @user_sessions)
-        @user_key = @parsed_user['first_name'] + ' ' + @parsed_user['last_name']
-        report['usersStats'][@user_key] = user_stats
-        @user_sessions = []
-      end
-
-      @parsed_user = parse_user(cols)
-      @users_count += 1
-    when 'session'
-      parsed_session = parse_session(cols)
-      all_browsers << parsed_session['browser'].upcase
-      @user_sessions << parsed_session
-      @sessions_count += 1
-    else
-      raise ArgumentError
-    end
-  end
-
-  unless @user_sessions.empty?
-    user_stats = collect_stats_from_users(@parsed_user, @user_sessions)
-    @user_key = @parsed_user['first_name'] + ' ' + @parsed_user['last_name']
-    report['usersStats'][@user_key] = user_stats
     @user_sessions = []
+    File.foreach(file_name) do |line|
+      cols = line.strip.split(',')
+      subject = cols[0]
+      case subject
+      when 'user'
+        unless @user_sessions.empty?
+          user_stats = collect_stats_from_users(@parsed_user, @user_sessions)
+          @user_key = @parsed_user['first_name'] + ' ' + @parsed_user['last_name']
+          @streamer.push_json(user_stats.to_json, @user_key)
+          @user_sessions = []
+        end
+
+        @parsed_user = parse_user(cols)
+        @users_count += 1
+      when 'session'
+        parsed_session = parse_session(cols)
+        all_browsers << parsed_session['browser'].upcase
+        @user_sessions << parsed_session
+        @sessions_count += 1
+      else
+        raise ArgumentError
+      end
+    end
+
+    unless @user_sessions.empty?
+      user_stats = collect_stats_from_users(@parsed_user, @user_sessions)
+      @user_key = @parsed_user['first_name'] + ' ' + @parsed_user['last_name']
+      @streamer.push_json(user_stats.to_json, @user_key)
+      @user_sessions = []
+    end
+    uniq_browsers = all_browsers.uniq
+
+    @streamer.pop
+    @streamer.push_json(@users_count.to_s, 'totalUsers')
+    @streamer.push_json(uniq_browsers.count.to_s, 'uniqueBrowsersCount')
+    @streamer.push_json(@sessions_count.to_s, 'totalSessions')
+    @streamer.push_json(uniq_browsers.sort.join(',').to_json, 'allBrowsers')
+    @streamer.pop_all
+
+    puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
   end
-
-  uniq_browsers = all_browsers.uniq
-  report['totalUsers'] = @users_count
-  report['uniqueBrowsersCount'] = uniq_browsers.count
-  report['totalSessions'] = @sessions_count
-  report['allBrowsers'] = uniq_browsers.sort.join(',')
-
-  File.write('result.json', "#{report.to_json}\n")
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
 class TestMe < Minitest::Test

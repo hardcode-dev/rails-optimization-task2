@@ -8,9 +8,11 @@ require 'set'
 require 'minitest/autorun'
 
 DELIMITER = ','
+WITH_SPACE = ', '
+IE = 'I'
+CR = 'C'
 
-def work(path, disable_gc: true)
-  GC.disable if disable_gc
+def work(path)
   file = File.open(path)
   @report_file = File.new('result.json', 'w')
   @users_report_file = File.new('user_report.json', 'w')
@@ -20,6 +22,7 @@ def work(path, disable_gc: true)
   @sessions_count = 0
   @all_browsers = SortedSet.new
 
+  puts "rss before each_line: #{print_memory_usage}"
   file.each_line(chomp: true) do |line|
     cols = line.split(DELIMITER)
     if line.start_with?('u')
@@ -27,18 +30,18 @@ def work(path, disable_gc: true)
       write_user_report(false) unless @user_report == {}
       @user_name = "#{cols[2]} #{cols[3]}"
       @user_report = {}
-      @user_report[@user_name] = user_report_structure
+      @user_report[@user_name] = initialize_user_report
     elsif line.start_with?('s')
       @sessions_count += 1
       @user_report[@user_name]['sessionsCount'] += 1
       @user_report[@user_name]['totalTime'] += cols[4].to_i
-      @user_report[@user_name]['longestSession'] = cols[4].to_i if @user_report[@user_name]['longestSession'] < cols[4].to_i
+      @user_report[@user_name]['longestSession'] = longest_session(cols[4].to_i)
       @user_report[@user_name]['browsers'] << cols[3].upcase!
-      @user_report[@user_name]['usedIE'] = true if cols[3].start_with?('I')
+      @user_report[@user_name]['usedIE'] = true if used_ie?(cols[3])
+      @user_report[@user_name]['alwaysUsedChrome'] = only_chrome?(@user_report[@user_name]['browsers'])
       @user_report[@user_name]['dates'] << cols[5]
       @all_browsers << cols[3]
     end
-    # @users_report_file.write(@user_report.to_json)
   end
   write_user_report(true)
   @report_file.write('{', summary_report.to_json[1..-2])
@@ -46,6 +49,7 @@ def work(path, disable_gc: true)
   users_file.each_line do |line|
     @report_file.write(line)
   end
+  puts "rss after each_line: #{print_memory_usage}"
   @report_file.close
 
   # Отчёт в json
@@ -64,10 +68,23 @@ def work(path, disable_gc: true)
   #     - даты сессий в порядке убывания через запятую +
 
   puts 'MEMORY USAGE: %d MB' % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
-  GC.enable if disable_gc
 end
 
-def user_report_structure
+def longest_session(time)
+  @user_report[@user_name]['longestSession'] < time ? time : @user_report[@user_name]['longestSession']
+end
+
+def used_ie?(browser)
+  browser.start_with?(IE)
+end
+
+def only_chrome?(browsers)
+  return false if @user_report[@user_name]['usedIE']
+
+  browsers.all? { |b| b.start_with?(CR) }
+end
+
+def initialize_user_report
   {
     'sessionsCount' => 0,
     'totalTime' => 0,
@@ -101,8 +118,12 @@ end
 def prepare_report
   @user_report[@user_name]['totalTime'] = "#{@user_report[@user_name]['totalTime']} min."
   @user_report[@user_name]['longestSession'] = "#{@user_report[@user_name]['longestSession']} min."
-  @user_report[@user_name]['browsers'] = @user_report[@user_name]['browsers'].sort!.join(', ')
+  @user_report[@user_name]['browsers'] = @user_report[@user_name]['browsers'].sort!.join(WITH_SPACE)
   @user_report[@user_name]['dates'] = @user_report[@user_name]['dates'].sort!.reverse!
+end
+
+def print_memory_usage
+  "%d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
 class TestMe < Minitest::Test

@@ -3,6 +3,7 @@
 require 'json'
 require 'oj'
 require 'minitest/autorun'
+require 'set'
 
 class User
   attr_reader :attributes, :sessions
@@ -34,7 +35,7 @@ def collect_stats_from_users(user, sessions)
   total_time = 0
   longest_session = 0
   browsers = []
-  dates_strings = []
+  dates_strings = SortedSet.new([])
   user['ie_user'] = false
   sessions.map do |session|
     time = session['time'].to_i
@@ -57,7 +58,7 @@ def collect_stats_from_users(user, sessions)
     'browsers' => browsers.sort.join(', '),
     'usedIE' => user['ie_user'],
     'alwaysUsedChrome' => always_use_chrome,
-    'dates' => dates_strings.sort_by{ |d| y,m,d = d.split('-') }.reverse
+    'dates' => dates_strings.to_a.reverse
   }
 end
 

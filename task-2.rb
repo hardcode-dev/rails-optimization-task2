@@ -60,12 +60,7 @@ def work(file_name: 'data.txt', gc_disabled: false)
     @user_sessions = []
     File.foreach(file_name) do |line|
       if line.start_with? 'u'
-        unless @user_sessions.empty?
-          user_stats = collect_stats_from_users(@parsed_user, @user_sessions)
-          @user_key = @parsed_user['first_name'] + ' ' + @parsed_user['last_name']
-          @streamer.push_json(user_stats.to_json, @user_key)
-          @user_sessions = []
-        end
+        write_sessions
 
         line.strip!
         user_attrs = []
@@ -89,12 +84,7 @@ def work(file_name: 'data.txt', gc_disabled: false)
       end
     end
 
-    unless @user_sessions.empty?
-      user_stats = collect_stats_from_users(@parsed_user, @user_sessions)
-      @user_key = "#{@parsed_user['first_name']} #{@parsed_user['last_name']}"
-      @streamer.push_json(user_stats.to_json, @user_key)
-      @user_sessions = []
-    end
+    write_sessions
 
     @streamer.pop
     @streamer.push_json(@users_count.to_s, 'totalUsers')
@@ -105,4 +95,14 @@ def work(file_name: 'data.txt', gc_disabled: false)
 
     puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
   end
+end
+
+
+def write_sessions
+  return if @user_sessions.empty?
+
+  user_stats = collect_stats_from_users(@parsed_user, @user_sessions)
+  @user_key = "#{@parsed_user['first_name']} #{@parsed_user['last_name']}"
+  @streamer.push_json(user_stats.to_json, @user_key)
+  @user_sessions = []
 end

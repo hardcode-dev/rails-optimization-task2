@@ -30,6 +30,7 @@
 Для того, чтобы найти "точки роста" для оптимизации я воспользовался:
 1. Гем memory_profiler
 2. Stackprof
+3. Ruby-prof в режиме graph
 
 Вот какие проблемы удалось найти и решить
 
@@ -45,11 +46,38 @@
 - как изменилась метрика: снизилась до 23 МБ
 - как изменился отчёт профилировщика: проблема перестала быть главной точкой роста
 
-### Ваша находка №X
-- какой отчёт показал главную точку роста
-- как вы решили её оптимизировать
-- как изменилась метрика
-- как изменился отчёт профилировщика
+### Выделение большого количества памяти при сборе данных о пользователе
+- какой отчёт показал главную точку роста: Ruby-prof в режиме graph
+- как вы решили её оптимизировать: изначально блок кода выглядел так:
+  ```
+  user_key = "#{@user['first_name']}" + ' ' + "#{@user['last_name']}"
+  user_data = {
+    'sessionsCount' => @user_sessions.count,
+    'totalTime' => @user_sessions.map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.',
+    'longestSession' => @user_sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.',
+    'browsers' => @user_sessions.map {|s| s['browser']}.sort.join(', '),
+    'usedIE' => @user_sessions.map{|s| s['browser']}.any? { |b| b =~ /INTERNET EXPLORER/ },
+    'alwaysUsedChrome' => @user_sessions.map{|s| s['browser']}.all? { |b| b =~ /CHROME/ },
+    'dates' => @user_sessions.map{|s| s['date']}.sort.reverse
+  }
+  ```
+  В нем я изменил конкатенацию строк, лишние приведения значений к типу int, использовал bang-методы, где это возможно. В результате данный блок кода стал выглядеть следующим образом:
+
+  ```
+    user_key = "#{@user['first_name']} #{@user['last_name']}"
+    user_data = {
+      'sessionsCount' => @user_sessions.count,
+      'totalTime' => @user_sessions.map {|s| s['time']}.sum.to_s + ' min.',
+      'longestSession' => @user_sessions.map {|s| s['time']}.max.to_s + ' min.',
+      'browsers' => @user_sessions.map {|s| s['browser']}.sort!.join(', '),
+      'usedIE' => @user_sessions.map{|s| s['browser']}.any? { |b| b =~ /INTERNET EXPLORER/ },
+      'alwaysUsedChrome' => @user_sessions.map{|s| s['browser']}.all? { |b| b =~ /CHROME/ },
+      'dates' => @user_sessions.map{|s| s['date']}.sort!.reverse!
+    }
+  ```
+
+- как изменилась метрика: снизилась до 18 МБ
+- как изменился отчёт профилировщика: главная проблема не является главной точкой роста
 
 ## Результаты
 В результате проделанной оптимизации наконец удалось обработать файл с данными.

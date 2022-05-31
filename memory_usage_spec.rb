@@ -12,9 +12,9 @@ RSpec.describe 'parser' do
   describe 'memory usage' do
     let(:expected_memory_usage) { ByteSize.mb(40).to_bytes }
 
-    it 'uses less than expected memory usage' do
+    it 'uses less than expected memory' do
       expect {
-        Parser.new.work(file_name: 'data20000.txt')
+        Parser.new.work(file_name: 'data_large.txt')
       }.to perform_allocation(expected_memory_usage).bytes
     end
   end

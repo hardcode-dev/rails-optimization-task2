@@ -1,4 +1,6 @@
 require_relative "parser.rb"
+require 'json'
+require 'minitest/autorun'
 
 class TestMe < Minitest::Test
   def setup

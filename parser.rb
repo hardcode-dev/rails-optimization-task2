@@ -1,8 +1,5 @@
-# Deoptimized version of homework task
+# frozen_string_literal: true
 
-require 'json'
-require 'pry'
-require 'minitest/autorun'
 require_relative 'json_writer'
 
 class Parser
@@ -17,15 +14,20 @@ class Parser
 
   def work(file_name: "data.txt", disable_gc: false)
     GC.disable if disable_gc
+    file = ENV['DATA_FILE'] || file_name
 
     File.open('result.json', 'a') do |output_file|
       @json_writer = JsonWriter.new(output_file)
       @json_writer.prepare_user_stats
 
-      File.readlines(file_name, chomp: true).each do |line|
+      File.readlines(file, chomp: true).each do |line|
         cols = line.split(',')
-        parse_user(cols) if cols[0] == 'user'
-        parse_session(cols) if cols[0] == 'session'
+        case cols[0]
+        when 'user'
+          parse_user(cols)
+        else
+          parse_session(cols)
+        end
       end
 
       collect_stats_for_previous_user
@@ -51,21 +53,18 @@ class Parser
 
     @user_sessions = []
     @user = {
-      'id' => fields[1],
       'first_name' => fields[2],
       'last_name' => fields[3],
-      'age' => fields[4],
     }
   end
 
   def parse_session(fields)
     @sessions_count += 1
+
     @user_sessions.push(
       {
-        'user_id' => fields[1],
-        'session_id' => fields[2],
-        'browser' => fields[3].upcase,
-        'time' => fields[4],
+        'browser' => fields[3].upcase!,
+        'time' => fields[4].to_i,
         'date' => fields[5],
       }
     )
@@ -74,16 +73,18 @@ class Parser
   def collect_stats_for_previous_user
     collect_unique_browsers
 
-    user_key = "#{@user['first_name']}" + ' ' + "#{@user['last_name']}"
+    user_key = "#{@user['first_name']} #{@user['last_name']}"
     user_data = {
       'sessionsCount' => @user_sessions.count,
-      'totalTime' => @user_sessions.map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.',
-      'longestSession' => @user_sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.',
-      'browsers' => @user_sessions.map {|s| s['browser']}.sort.join(', '),
+      'totalTime' => @user_sessions.map {|s| s['time']}.sum.to_s + ' min.',
+      'longestSession' => @user_sessions.map {|s| s['time']}.max.to_s + ' min.',
+      'browsers' => @user_sessions.map {|s| s['browser']}.sort!.join(', '),
       'usedIE' => @user_sessions.map{|s| s['browser']}.any? { |b| b =~ /INTERNET EXPLORER/ },
       'alwaysUsedChrome' => @user_sessions.map{|s| s['browser']}.all? { |b| b =~ /CHROME/ },
-      'dates' => @user_sessions.map{|s| s['date']}.sort.reverse
+      'dates' => @user_sessions.map{|s| s['date']}.sort!.reverse!
     }
+
+
 
     @json_writer.write_user_stats(user_key, user_data)
   end

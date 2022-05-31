@@ -13,22 +13,20 @@ class User
   end
 end
 
-def parse_user(user)
-  parsed_result = {
-    'id' => user[1],
-    'first_name' => user[2],
-    'last_name' => user[3],
-    'age' => user[4],
-  }
-end
+# def parse_user(user)
+#   parsed_result = {
+#     'id' => user[1],
+#     'first_name' => user[2],
+#     'last_name' => user[3],
+#     'age' => user[4],
+#   }
+# end
 
 def parse_session(session)
   parsed_result = {
-    'user_id' => session[1],
-    'session_id' => session[2],
-    'browser' => session[3],
-    'time' => session[4],
-    'date' => session[5],
+    'browser' => session[0],
+    'time' => session[1],
+    'date' => session[2],
   }
 end
 
@@ -78,10 +76,7 @@ def work(file_name: 'data.txt', gc_disabled: false)
 
     @user_sessions = []
     File.foreach(file_name) do |line|
-      cols = line.strip.split(',')
-      subject = cols[0]
-      case subject
-      when 'user'
+      if line.start_with? 'u'
         unless @user_sessions.empty?
           user_stats = collect_stats_from_users(@parsed_user, @user_sessions)
           @user_key = @parsed_user['first_name'] + ' ' + @parsed_user['last_name']
@@ -89,15 +84,29 @@ def work(file_name: 'data.txt', gc_disabled: false)
           @user_sessions = []
         end
 
-        @parsed_user = parse_user(cols)
+        line.strip!
+        user_attrs = []
+        line.split(',') do |col|
+          user_attrs << col if col.match /[[:upper:]]/
+        end
+        @parsed_user = {
+          'first_name' => user_attrs[0],
+          'last_name' => user_attrs[1]
+        }
+
         @users_count += 1
-      when 'session'
+      elsif line.start_with? 's'
+        line.strip!
+        line.gsub!(/\w*,\d,\d,/, '')
+
+        cols = []
+        line.split(',') do |str|
+          cols << str
+        end
         parsed_session = parse_session(cols)
         all_browsers << parsed_session['browser'].upcase
         @user_sessions << parsed_session
         @sessions_count += 1
-      else
-        raise ArgumentError
       end
     end
 

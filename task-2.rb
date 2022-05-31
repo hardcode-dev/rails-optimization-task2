@@ -55,7 +55,7 @@ def work(file_name: 'data.txt', gc_disabled: false)
 
     @sessions_count = 0
     @users_count = 0
-    all_browsers = []
+    all_browsers = Set[]
 
     @user_sessions = []
     File.foreach(file_name) do |line|
@@ -95,13 +95,12 @@ def work(file_name: 'data.txt', gc_disabled: false)
       @streamer.push_json(user_stats.to_json, @user_key)
       @user_sessions = []
     end
-    uniq_browsers = all_browsers.uniq
 
     @streamer.pop
     @streamer.push_json(@users_count.to_s, 'totalUsers')
-    @streamer.push_json(uniq_browsers.count.to_s, 'uniqueBrowsersCount')
+    @streamer.push_json(all_browsers.count.to_s, 'uniqueBrowsersCount')
     @streamer.push_json(@sessions_count.to_s, 'totalSessions')
-    @streamer.push_json(uniq_browsers.sort.join(',').to_json, 'allBrowsers')
+    @streamer.push_json(all_browsers.sort.join(',').to_json, 'allBrowsers')
     @streamer.pop_all
 
     puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)

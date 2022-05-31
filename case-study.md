@@ -41,11 +41,13 @@
 - memory_profiler на 30_000 строк показал результат 41 mb
 - String#split все еще на первом месте, но рядом уже sort_by по строкам дат
 
-### Ваша находка №X
+### Ваша находка №3
 - ruby prof c RubyProf.measure_mode = RubyProf::MEMORY показал главную точку роста в Enumerable#sort_by (31 процент)
 - использовал SortedSet
 - memory_profiler на 30_000 строк показал результат 41 mb
 - Enumerable#sort_by пропал из топа
+
+Еще добавил magic comment
 
 ## Результаты
 В результате проделанной оптимизации наконец удалось обработать файл с данными.

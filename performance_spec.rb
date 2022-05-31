@@ -8,9 +8,9 @@ end
 describe 'Performance' do
   let(:file_name) { '10_000.txt' }
 
-  it 'На обработку выделяется не более 10 MB памяти' do
+  it 'allocates less then 12mb' do
     expect do
       work(file_name: file_name)
-    end.to perform_allocation(15 * 1024 * 1024).memory
+    end.to perform_allocation(12 * 1024 * 1024).memory
   end
 end

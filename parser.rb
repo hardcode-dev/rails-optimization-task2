@@ -14,19 +14,23 @@ class Parser
 
   def work(file_name: "data.txt", disable_gc: false)
     GC.disable if disable_gc
-    file = ENV['DATA_FILE'] || file_name
+    file_path = ENV['DATA_FILE'] || file_name
 
     File.open('result.json', 'a') do |output_file|
       @json_writer = JsonWriter.new(output_file)
       @json_writer.prepare_user_stats
 
-      File.readlines(file, chomp: true).each do |line|
-        cols = line.split(',')
-        case cols[0]
-        when 'user'
-          parse_user(cols)
-        else
-          parse_session(cols)
+      File.foreach(file_path, 'user') do |chunk|
+        chunk.split("\n") do |line|
+          cols = line.split(',')
+          case cols[0]
+          when 'user'
+            next
+          when ''
+            parse_user(cols)
+          when 'session'
+            parse_session(cols)
+          end
         end
       end
 
@@ -83,8 +87,6 @@ class Parser
       'alwaysUsedChrome' => @user_sessions.map{|s| s['browser']}.all? { |b| b =~ /CHROME/ },
       'dates' => @user_sessions.map{|s| s['date']}.sort!.reverse!
     }
-
-
 
     @json_writer.write_user_stats(user_key, user_data)
   end

@@ -14,5 +14,5 @@ require_relative '../task-2.rb'
 
 # Note mode: :object
 StackProf.run(mode: :object, out: 'stackprof_reports/stackprof.dump', raw: true) do
-  work('../data/data8000.txt', disable_gc: false)
+  work('../data/data64000.txt')
 end

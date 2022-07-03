@@ -1,0 +1,67 @@
+Measure Mode: allocations
+Thread ID: 70212070350940
+Fiber ID: 70212063249880
+Total: 16210629.000000
+Sort by: self_time
+
+ %self      total      self      wait     child     calls  name                           location
+ 43.25  7010543.000 7010543.000     0.000     0.000  1024000   String#split                   
+ 18.95  16210558.000 3072004.000     0.000 13138554.000        1   <Class::IO>#foreach            
+ 10.68  4079834.000 1732026.000     0.000 2347808.000   157457   Object#write_user              /Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:63
+  5.35  1733086.000 866543.000     0.000 866543.000   866543   Object#parse_session           /Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:53
+  5.35  866543.000 866543.000     0.000     0.000   866543   String#upcase                  
+  3.69  598120.000 598120.000     0.000     0.000   314914   Array#sort                     
+  2.74  444376.000 444376.000     0.000     0.000   152164   Array#any?                     
+  1.94  314918.000 314918.000     0.000     0.000   314918   Integer#to_s                   
+  1.94  314917.000 314917.000     0.000     0.000   314916   IO#write                       
+  1.94  314914.000 314914.000     0.000     0.000   157457   Object#parse_user              /Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:43
+  1.25  203114.000 203114.000     0.000     0.000   157457   Array#all?                     
+  0.97  157458.000 157458.000     0.000     0.000   157458   Array#join                     
+  0.97  157457.000 157457.000     0.000     0.000   157457   <Module::Oj>#dump              
+  0.97  157457.000 157457.000     0.000     0.000   157457   Array#reverse                  
+  0.00    201.000   201.000     0.000     0.000   866543   Set#<<                         /Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb:348
+  0.00     14.000    14.000     0.000     0.000        1   Kernel#`                       
+  0.00  16210602.000     7.000     0.000 16210595.000        1   <Class::IO>#open               
+  0.00  16210628.000     6.000     0.000 16210622.000        1   Object#work                    /Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:9
+  0.00      5.000     3.000     0.000     2.000        1   Enumerable#sort                
+  0.00      2.000     2.000     0.000     0.000        1   Set#each                       /Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb:336
+  0.00      2.000     2.000     0.000     0.000        1   String#%                       
+  0.00      2.000     2.000     0.000     0.000        2  *Class#new                      
+  0.00      1.000     1.000     0.000     0.000        1   File#initialize                
+  0.00  16210629.000     1.000     0.000 16210628.000        1   [global]#                      ruby_prof.rb:10
+  0.00      0.000     0.000     0.000     0.000   157457   Array#each                     
+  0.00      0.000     0.000     0.000     0.000   157457   Array#sum                      
+  0.00      0.000     0.000     0.000     0.000   866543   Array#last                     
+  0.00      0.000     0.000     0.000     0.000   866544   String#to_i                    
+  0.00      0.000     0.000     0.000     0.000   157457   Array#max                      
+  0.00      0.000     0.000     0.000     0.000        1   Set#size                       /Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb:161
+  0.00      0.000     0.000     0.000     0.000        1   Hash#each_key                  
+  0.00      0.000     0.000     0.000     0.000        1   Array#to_a                     
+  0.00      0.000     0.000     0.000     0.000        1   IO#closed?                     
+  0.00      0.000     0.000     0.000     0.000        1   IO#close                       
+  0.00      1.000     0.000     0.000     1.000        1   IO#puts                        
+  0.00      0.000     0.000     0.000     0.000        1   <Module::Process>#pid          
+  0.00      0.000     0.000     0.000     0.000        1   NilClass#nil?                  
+  0.00      0.000     0.000     0.000     0.000        1   Hash#initialize                
+  0.00      1.000     0.000     0.000     1.000        1   Set#initialize                 /Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb:93
+  0.00      1.000     0.000     0.000     1.000        1   Kernel#puts                    
+  0.00      0.000     0.000     0.000     0.000   647490   String#start_with?             
+  0.00      0.000     0.000     0.000     0.000   157457   Array#count                    
+
+* recursively called methods
+
+Columns are:
+
+  %self     - The percentage of time spent in this method, derived from self_time/total_time.
+  total     - The time spent in this method and its children.
+  self      - The time spent in this method.
+  wait      - The amount of time this method waited for other threads.
+  child     - The time spent in this method's children.
+  calls     - The number of times this method was called.
+  name      - The name of the method.
+  location  - The location of the method.
+
+The interpretation of method names is:
+
+  * MyObject#test - An instance method "test" of the class "MyObject"
+  * <Object:MyObject>#test - The <> characters indicate a method on a singleton class.

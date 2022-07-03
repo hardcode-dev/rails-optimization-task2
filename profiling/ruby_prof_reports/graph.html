@@ -1,0 +1,2887 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style media="all" type="text/css">
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background-color: #F5F7FB;
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+    }
+
+    table {
+      border-collapse: collapse;
+      /* border: 1px solid #E1E3E7; */
+      border: 1px solid #F3F9FE;
+      font-size: 14px;
+      line-height: normal;
+      width: 100%;
+    }
+
+    table:empty {
+      display: none;
+    }
+
+    th:first-child {
+      border-left: 0;
+    }
+
+    th {
+      text-align: center;
+      background: #F3F9FE;
+      padding: 1rem;
+      /* border-left: 1px solid #E1E3E7; */
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    tr.break td {
+      border: 0;
+      border-top: 1px solid #BDC3DD;
+      padding: 0;
+      margin: 0;
+    }
+
+    tr.method td {
+      font-weight: bold;
+    }
+
+    td {
+      padding: 0.5em;
+    }
+
+    td:first-child {
+      width: 190px;
+    }
+
+    tr > td > table {
+      box-shadow: 0px -2px 1px #F9FAFB, 0px 1px 1px #E4EEEE, 0px 1px 2px #EEF3F8;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    tr.break + tr > td.method_name {
+      font-weight: bold;
+    }
+
+    td {
+      /* I'm removing this border because I think it looks way cleaner without it but feel free to add it if you feel it's necessary */
+      /* border-left: 1px solid #E1E3E7; */
+      text-align: center;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .method_name {
+      text-align: left;
+    }
+
+    tfoot td {
+      text-align: left;
+    }
+
+    .report-header {
+      background-color: #0D2483;
+      color: white;
+      padding: 1.5rem 2rem;
+    }
+
+    .report-header > div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .report-header h1 {
+      margin-bottom: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    h6 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .table-header {
+      padding: 3rem 0 1rem;
+    }
+
+    .table-wrapper {
+      margin: 1rem auto;
+      max-width: 1440px;
+      padding: 4rem 5rem;
+      background: white;
+      border-radius: 0.5rem;
+    }
+
+    .center {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .layout-right {
+      margin-left: auto;
+    }
+
+    .text-right {
+      display: flex;
+      align-items: flex-end;
+      flex-direction: column;
+    }
+
+    .timestamp {
+      font-size: 12px;
+      margin-bottom: 1rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .logo {
+      width: 140px;
+      height: 30px;
+      opacity: 0.5;
+      background-repeat: no-repeat;
+      background-image: url("data:image/svg+xml,%3Csvg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 190 41'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:%23fff%7D%3C/style%3E%3C/defs%3E%3Cpath class='cls-1' d='M63.49 16.74c0-1.37-.91-2-2.26-2h-3.38v3.93h3.58c1.24.01 2.06-.56 2.06-1.93zM110.43 14.75h-3.6v5h3.6a2.32 2.32 0 0 0 2.5-2.49 2.34 2.34 0 0 0-2.5-2.51zM128.77 14.75h-3.53v4.94h3.53a2.28 2.28 0 0 0 2.47-2.45 2.3 2.3 0 0 0-2.47-2.49zM61.81 21.83h-4v4.32h3.91c1.44 0 2.45-.62 2.45-2.14s-.99-2.18-2.36-2.18zM21 14.75h-3.57v4.94H21a2.28 2.28 0 0 0 2.47-2.45A2.3 2.3 0 0 0 21 14.75z'/%3E%3Cpath class='cls-1' d='M184 .44H5.87A4.93 4.93 0 0 0 .94 5.37V35.5a4.94 4.94 0 0 0 4.93 4.94H184a4.94 4.94 0 0 0 4.94-4.94V5.37A4.94 4.94 0 0 0 184 .44zm-34.38 10.78c4.79 0 8.46 2.89 9.18 7.54h-3.86a5.48 5.48 0 0 0-10.68 0h-3.83c.71-4.65 4.36-7.54 9.19-7.54zM24 29.44L20.46 23h-3v6.46h-3.72v-18h7.68c3.41 0 5.78 2.07 5.78 5.76a5.34 5.34 0 0 1-2.88 5.14l3.82 7.06zm24.31-7.3c0 4.8-2.92 7.56-7.63 7.56S33 26.94 33 22.14V11.48h3.69v10.61c0 2.81 1.37 4.32 4 4.32s3.94-1.51 3.94-4.32V11.48h3.69zm13.92 7.3h-8v-18h7.52c3.24 0 5.59 1.61 5.59 5A4 4 0 0 1 65.51 20 4.22 4.22 0 0 1 68 24.21c0 3.43-2.4 5.23-5.81 5.23zm19.66-6.92v6.92h-3.7v-6.92l-6.81-11h4.29L80 18.85l4.34-7.37h4.32zm16-.5h-7.62v-3.26h7.59zm13 1h-4v6.39h-3.72v-18h7.77c3.41 0 5.79 2.09 5.79 5.79s-2.41 5.85-5.82 5.85zm20.86 6.39L128.26 23h-3v6.46h-3.72v-18h7.69c3.4 0 5.78 2.07 5.78 5.76a5.34 5.34 0 0 1-2.88 5.14l3.87 7.08zm17.85.26c-4.88 0-8.55-2.95-9.21-7.68h3.81A5.49 5.49 0 0 0 155 22h3.84c-.69 4.75-4.38 7.7-9.22 7.7zm18.4-.23h-3.72v-3.7H168zm6.36-7.54h-10.05v-3.26h10.08zm1.44-7.16h-11.49v-3.26h11.52z'/%3E%3C/svg%3E");
+    }
+  </style>
+</head>
+<body>
+<div class="report-header">
+  <div class="center">
+    <div class="layout-left">
+      <h6>Profile Report</h6>
+      <h1>Allocations</h1>
+    </div>
+    <div class="layout-right text-right">
+      <div class="timestamp">Sunday, July 3 at  8:13:43 AM (MSK)</div>
+      <div class="logo"></div>
+    </div>
+  </div>
+</div>
+<div class="table-wrapper">
+  <table>
+    <tr>
+      <th>Thread ID</th>
+      <th>Fiber ID</th>
+      <th>Total</th>
+    </tr>
+    
+      <tr>
+        <td>70212070350940</td>
+        <td><a href="#70212063249880">70212063249880</a></td>
+        <td>16210629.0</td>
+      </tr>
+    
+  </table>
+
+  <!-- Methods Tables -->
+  
+    <h2><a name="70212063249880">Thread 70212070350940, Fiber: 70212063249880</a></h2>
+    <table>
+      <thead>
+      <tr>
+        <th>%Total</th>
+        <th>%Self</th>
+        <th>Total</th>
+        <th>Self</th>
+        <th>Wait</th>
+        <th>Child</th>
+        <th>Calls</th>
+        <th class="method_name">Name</th>
+        
+        <th>Line</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+
+        <!-- Parents -->
+        
+        <tr class="method">
+          <td>100.00%</td>
+          <td>0.00%</td>
+          <td>16210629.00</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>16210628.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="[global]__70212063249880">
+               [global]#
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/profiling/ruby_prof.rb#10" title="/Users/e.stashkovyan/projects/rails-optimization-task2/profiling/ruby_prof.rb:10">10</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>16210628.00</td>
+            <td>6.00</td>
+            <td>0.00</td>
+            <td>16210622.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Object_work_70212063249880">Object#work</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/profiling/ruby_prof.rb#10" title="/Users/e.stashkovyan/projects/rails-optimization-task2/profiling/ruby_prof.rb:10">10</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>16210628.00</td>
+            <td>6.00</td>
+            <td>0.00</td>
+            <td>16210622.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#[global]__70212063249880">[global]#</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/profiling/ruby_prof.rb#10" title="/Users/e.stashkovyan/projects/rails-optimization-task2/profiling/ruby_prof.rb:10">10</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>100.00%</td>
+          <td>0.00%</td>
+          <td>16210628.00</td>
+          <td>6.00</td>
+          <td>0.00</td>
+          <td>16210622.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Object_work_70212063249880">
+               Object#work
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#9" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:9">9</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>16210602.00</td>
+            <td>7.00</td>
+            <td>0.00</td>
+            <td>16210595.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__open_70212063249880">&lt;Class::IO&gt;#open</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#15" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:15">15</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>14.00</td>
+            <td>14.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Kernel_`_70212063249880">Kernel#`</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#40" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:40">40</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2.00</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#String_%_70212063249880">String#%</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#40" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:40">40</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/2</td>
+            <td class="method_name"><a href="#Class_new_70212063249880">Class#new</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#13" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:13">13</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/314918</td>
+            <td class="method_name"><a href="#Integer_to_s_70212063249880">Integer#to_s</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#40" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:40">40</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Kernel_puts_70212063249880">Kernel#puts</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#40" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:40">40</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Module__Process__pid_70212063249880">&lt;Module::Process&gt;#pid</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#40" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:40">40</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/866544</td>
+            <td class="method_name"><a href="#String_to_i_70212063249880">String#to_i</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#40" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:40">40</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>16210602.00</td>
+            <td>7.00</td>
+            <td>0.00</td>
+            <td>16210595.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Object_work_70212063249880">Object#work</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#15" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:15">15</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>100.00%</td>
+          <td>0.00%</td>
+          <td>16210602.00</td>
+          <td>7.00</td>
+          <td>0.00</td>
+          <td>16210595.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="_Class__IO__open_70212063249880">
+               &lt;Class::IO&gt;#open
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>16210558.00</td>
+            <td>3072004.00</td>
+            <td>0.00</td>
+            <td>13138554.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70212063249880">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#18" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:18">18</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>24.00</td>
+            <td>10.00</td>
+            <td>0.00</td>
+            <td>14.00</td>
+            <td>1/157457</td>
+            <td class="method_name"><a href="#Object_write_user_70212063249880">Object#write_user</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#34" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:34">34</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>5.00</td>
+            <td>3.00</td>
+            <td>0.00</td>
+            <td>2.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Enumerable_sort_70212063249880">Enumerable#sort</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#36" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:36">36</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>3.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2/314916</td>
+            <td class="method_name"><a href="#IO_write_70212063249880">IO#write</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#16" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:16">16</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>3.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>3/314918</td>
+            <td class="method_name"><a href="#Integer_to_s_70212063249880">Integer#to_s</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#36" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:36">36</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#File_initialize_70212063249880">File#initialize</a></td>
+            
+            <td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/157458</td>
+            <td class="method_name"><a href="#Array_join_70212063249880">Array#join</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#36" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:36">36</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#IO_closed__70212063249880">IO#closed?</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#36" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:36">36</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Array_to_a_70212063249880">Array#to_a</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#36" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:36">36</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Set_size_70212063249880">Set#size</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#36" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:36">36</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#IO_close_70212063249880">IO#close</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#36" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:36">36</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>16210558.00</td>
+            <td>3072004.00</td>
+            <td>0.00</td>
+            <td>13138554.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__open_70212063249880">&lt;Class::IO&gt;#open</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>100.00%</td>
+          <td>18.95%</td>
+          <td>16210558.00</td>
+          <td>3072004.00</td>
+          <td>0.00</td>
+          <td>13138554.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="_Class__IO__foreach_70212063249880">
+               &lt;Class::IO&gt;#foreach
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>7010543.00</td>
+            <td>7010543.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1024000/1024000</td>
+            <td class="method_name"><a href="#String_split_70212063249880">String#split</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#19" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:19">19</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>4079810.00</td>
+            <td>1732016.00</td>
+            <td>0.00</td>
+            <td>2347794.00</td>
+            <td>157456/157457</td>
+            <td class="method_name"><a href="#Object_write_user_70212063249880">Object#write_user</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#22" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:22">22</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1733086.00</td>
+            <td>866543.00</td>
+            <td>0.00</td>
+            <td>866543.00</td>
+            <td>866543/866543</td>
+            <td class="method_name"><a href="#Object_parse_session_70212063249880">Object#parse_session</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#27" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:27">27</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>314914.00</td>
+            <td>314914.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157457</td>
+            <td class="method_name"><a href="#Object_parse_user_70212063249880">Object#parse_user</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#24" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:24">24</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>201.00</td>
+            <td>201.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>866543/866543</td>
+            <td class="method_name"><a href="#Set____70212063249880">Set#&lt;&lt;</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#30" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:30">30</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>866543/866543</td>
+            <td class="method_name"><a href="#Array_last_70212063249880">Array#last</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#30" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:30">30</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>7010543.00</td>
+            <td>7010543.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1024000/1024000</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70212063249880">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>43.25%</td>
+          <td>43.25%</td>
+          <td>7010543.00</td>
+          <td>7010543.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1024000</td>
+          <td class="method_name">
+            <a name="String_split_70212063249880">
+               String#split
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>24.00</td>
+            <td>10.00</td>
+            <td>0.00</td>
+            <td>14.00</td>
+            <td>1/157457</td>
+            <td class="method_name"><a href="#_Class__IO__open_70212063249880">&lt;Class::IO&gt;#open</a></td>
+            
+            <td></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>4079810.00</td>
+            <td>1732016.00</td>
+            <td>0.00</td>
+            <td>2347794.00</td>
+            <td>157456/157457</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70212063249880">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>25.17%</td>
+          <td>10.68%</td>
+          <td>4079834.00</td>
+          <td>1732026.00</td>
+          <td>0.00</td>
+          <td>2347808.00</td>
+          <td>157457</td>
+          <td class="method_name">
+            <a name="Object_write_user_70212063249880">
+               Object#write_user
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#63" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:63">63</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>598120.00</td>
+            <td>598120.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>314914/314914</td>
+            <td class="method_name"><a href="#Array_sort_70212063249880">Array#sort</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#78" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:78">78</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>444376.00</td>
+            <td>444376.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>152164/152164</td>
+            <td class="method_name"><a href="#Array_any__70212063249880">Array#any?</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#90" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:90">90</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>314914.00</td>
+            <td>314914.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>314914/314918</td>
+            <td class="method_name"><a href="#Integer_to_s_70212063249880">Integer#to_s</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#78" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:78">78</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>314913.00</td>
+            <td>314913.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>314913/314916</td>
+            <td class="method_name"><a href="#IO_write_70212063249880">IO#write</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#99" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:99">99</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>203114.00</td>
+            <td>203114.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157457</td>
+            <td class="method_name"><a href="#Array_all__70212063249880">Array#all?</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#74" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:74">74</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>157457.00</td>
+            <td>157457.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157457</td>
+            <td class="method_name"><a href="#_Module__Oj__dump_70212063249880">&lt;Module::Oj&gt;#dump</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#99" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:99">99</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>157457.00</td>
+            <td>157457.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157457</td>
+            <td class="method_name"><a href="#Array_reverse_70212063249880">Array#reverse</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#90" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:90">90</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>157457.00</td>
+            <td>157457.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157458</td>
+            <td class="method_name"><a href="#Array_join_70212063249880">Array#join</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#78" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:78">78</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157457</td>
+            <td class="method_name"><a href="#Array_sum_70212063249880">Array#sum</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#78" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:78">78</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157457</td>
+            <td class="method_name"><a href="#Array_count_70212063249880">Array#count</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#78" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:78">78</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157457</td>
+            <td class="method_name"><a href="#Array_max_70212063249880">Array#max</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#78" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:78">78</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157457</td>
+            <td class="method_name"><a href="#Array_each_70212063249880">Array#each</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#68" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:68">68</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1733086.00</td>
+            <td>866543.00</td>
+            <td>0.00</td>
+            <td>866543.00</td>
+            <td>866543/866543</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70212063249880">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>10.69%</td>
+          <td>5.35%</td>
+          <td>1733086.00</td>
+          <td>866543.00</td>
+          <td>0.00</td>
+          <td>866543.00</td>
+          <td>866543</td>
+          <td class="method_name">
+            <a name="Object_parse_session_70212063249880">
+               Object#parse_session
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#53" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:53">53</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>866543.00</td>
+            <td>866543.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>866543/866543</td>
+            <td class="method_name"><a href="#String_upcase_70212063249880">String#upcase</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#55" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:55">55</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>866543/866544</td>
+            <td class="method_name"><a href="#String_to_i_70212063249880">String#to_i</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#55" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:55">55</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>866543.00</td>
+            <td>866543.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>866543/866543</td>
+            <td class="method_name"><a href="#Object_parse_session_70212063249880">Object#parse_session</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#55" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:55">55</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>5.35%</td>
+          <td>5.35%</td>
+          <td>866543.00</td>
+          <td>866543.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>866543</td>
+          <td class="method_name">
+            <a name="String_upcase_70212063249880">
+               String#upcase
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>598120.00</td>
+            <td>598120.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>314914/314914</td>
+            <td class="method_name"><a href="#Object_write_user_70212063249880">Object#write_user</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#78" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:78">78</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>3.69%</td>
+          <td>3.69%</td>
+          <td>598120.00</td>
+          <td>598120.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>314914</td>
+          <td class="method_name">
+            <a name="Array_sort_70212063249880">
+               Array#sort
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>444376.00</td>
+            <td>444376.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>152164/152164</td>
+            <td class="method_name"><a href="#Object_write_user_70212063249880">Object#write_user</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#90" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:90">90</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>2.74%</td>
+          <td>2.74%</td>
+          <td>444376.00</td>
+          <td>444376.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>152164</td>
+          <td class="method_name">
+            <a name="Array_any__70212063249880">
+               Array#any?
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>444376/647490</td>
+            <td class="method_name"><a href="#String_start_with__70212063249880">String#start_with?</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#90" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:90">90</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/314918</td>
+            <td class="method_name"><a href="#Object_work_70212063249880">Object#work</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#40" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:40">40</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>3.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>3/314918</td>
+            <td class="method_name"><a href="#_Class__IO__open_70212063249880">&lt;Class::IO&gt;#open</a></td>
+            
+            <td></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>314914.00</td>
+            <td>314914.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>314914/314918</td>
+            <td class="method_name"><a href="#Object_write_user_70212063249880">Object#write_user</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#78" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:78">78</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>1.94%</td>
+          <td>1.94%</td>
+          <td>314918.00</td>
+          <td>314918.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>314918</td>
+          <td class="method_name">
+            <a name="Integer_to_s_70212063249880">
+               Integer#to_s
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/314916</td>
+            <td class="method_name"><a href="#IO_puts_70212063249880">IO#puts</a></td>
+            
+            <td></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>3.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2/314916</td>
+            <td class="method_name"><a href="#_Class__IO__open_70212063249880">&lt;Class::IO&gt;#open</a></td>
+            
+            <td></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>314913.00</td>
+            <td>314913.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>314913/314916</td>
+            <td class="method_name"><a href="#Object_write_user_70212063249880">Object#write_user</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#99" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:99">99</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>1.94%</td>
+          <td>1.94%</td>
+          <td>314917.00</td>
+          <td>314917.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>314916</td>
+          <td class="method_name">
+            <a name="IO_write_70212063249880">
+               IO#write
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>314914.00</td>
+            <td>314914.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157457</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70212063249880">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>1.94%</td>
+          <td>1.94%</td>
+          <td>314914.00</td>
+          <td>314914.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>157457</td>
+          <td class="method_name">
+            <a name="Object_parse_user_70212063249880">
+               Object#parse_user
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#43" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:43">43</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>203114.00</td>
+            <td>203114.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157457</td>
+            <td class="method_name"><a href="#Object_write_user_70212063249880">Object#write_user</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#74" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:74">74</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>1.25%</td>
+          <td>1.25%</td>
+          <td>203114.00</td>
+          <td>203114.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>157457</td>
+          <td class="method_name">
+            <a name="Array_all__70212063249880">
+               Array#all?
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>203114/647490</td>
+            <td class="method_name"><a href="#String_start_with__70212063249880">String#start_with?</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#74" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:74">74</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/157458</td>
+            <td class="method_name"><a href="#_Class__IO__open_70212063249880">&lt;Class::IO&gt;#open</a></td>
+            
+            <td></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>157457.00</td>
+            <td>157457.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157458</td>
+            <td class="method_name"><a href="#Object_write_user_70212063249880">Object#write_user</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#78" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:78">78</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.97%</td>
+          <td>0.97%</td>
+          <td>157458.00</td>
+          <td>157458.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>157458</td>
+          <td class="method_name">
+            <a name="Array_join_70212063249880">
+               Array#join
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>157457.00</td>
+            <td>157457.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157457</td>
+            <td class="method_name"><a href="#Object_write_user_70212063249880">Object#write_user</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#90" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:90">90</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.97%</td>
+          <td>0.97%</td>
+          <td>157457.00</td>
+          <td>157457.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>157457</td>
+          <td class="method_name">
+            <a name="Array_reverse_70212063249880">
+               Array#reverse
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>157457.00</td>
+            <td>157457.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157457</td>
+            <td class="method_name"><a href="#Object_write_user_70212063249880">Object#write_user</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#99" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:99">99</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.97%</td>
+          <td>0.97%</td>
+          <td>157457.00</td>
+          <td>157457.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>157457</td>
+          <td class="method_name">
+            <a name="_Module__Oj__dump_70212063249880">
+               &lt;Module::Oj&gt;#dump
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>201.00</td>
+            <td>201.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>866543/866543</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70212063249880">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>201.00</td>
+          <td>201.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>866543</td>
+          <td class="method_name">
+            <a name="Set____70212063249880">
+               Set#&lt;&lt;
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb#348" title="/Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb:348">348</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>14.00</td>
+            <td>14.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Object_work_70212063249880">Object#work</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#40" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:40">40</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>14.00</td>
+          <td>14.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Kernel_`_70212063249880">
+               Kernel#`
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>5.00</td>
+            <td>3.00</td>
+            <td>0.00</td>
+            <td>2.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__open_70212063249880">&lt;Class::IO&gt;#open</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>5.00</td>
+          <td>3.00</td>
+          <td>0.00</td>
+          <td>2.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Enumerable_sort_70212063249880">
+               Enumerable#sort
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2.00</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Set_each_70212063249880">Set#each</a></td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2.00</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Object_work_70212063249880">Object#work</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#40" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:40">40</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>2.00</td>
+          <td>2.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="String_%_70212063249880">
+               String#%
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2</td>
+            <td class="method_name"><a href="#Set_initialize_70212063249880">Set#initialize</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb#94" title="/Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb:94">94</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/2</td>
+            <td class="method_name"><a href="#Object_work_70212063249880">Object#work</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#13" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:13">13</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>2.00</td>
+          <td>2.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2</td>
+          <td class="method_name">
+            <a name="Class_new_70212063249880">
+              *Class#new
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Set_initialize_70212063249880">Set#initialize</a></td>
+            
+            <td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Hash_initialize_70212063249880">Hash#initialize</a></td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2.00</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Enumerable_sort_70212063249880">Enumerable#sort</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>2.00</td>
+          <td>2.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Set_each_70212063249880">
+               Set#each
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb#336" title="/Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb:336">336</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Hash_each_key_70212063249880">Hash#each_key</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb#338" title="/Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb:338">338</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Object_work_70212063249880">Object#work</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#40" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:40">40</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Kernel_puts_70212063249880">
+               Kernel#puts
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#IO_puts_70212063249880">IO#puts</a></td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Class_new_70212063249880">Class#new</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Set_initialize_70212063249880">
+               Set#initialize
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb#93" title="/Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb:93">93</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2</td>
+            <td class="method_name"><a href="#Class_new_70212063249880">Class#new</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb#94" title="/Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb:94">94</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#NilClass_nil__70212063249880">NilClass#nil?</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb#96" title="/Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb:96">96</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Kernel_puts_70212063249880">Kernel#puts</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="IO_puts_70212063249880">
+               IO#puts
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/314916</td>
+            <td class="method_name"><a href="#IO_write_70212063249880">IO#write</a></td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__open_70212063249880">&lt;Class::IO&gt;#open</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>1.00</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="File_initialize_70212063249880">
+               File#initialize
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>866543/866544</td>
+            <td class="method_name"><a href="#Object_parse_session_70212063249880">Object#parse_session</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#55" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:55">55</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/866544</td>
+            <td class="method_name"><a href="#Object_work_70212063249880">Object#work</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#40" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:40">40</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>866544</td>
+          <td class="method_name">
+            <a name="String_to_i_70212063249880">
+               String#to_i
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Object_work_70212063249880">Object#work</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#40" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:40">40</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="_Module__Process__pid_70212063249880">
+               &lt;Module::Process&gt;#pid
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__open_70212063249880">&lt;Class::IO&gt;#open</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Set_size_70212063249880">
+               Set#size
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb#161" title="/Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb:161">161</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__open_70212063249880">&lt;Class::IO&gt;#open</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="IO_closed__70212063249880">
+               IO#closed?
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__open_70212063249880">&lt;Class::IO&gt;#open</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="IO_close_70212063249880">
+               IO#close
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Class__IO__open_70212063249880">&lt;Class::IO&gt;#open</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Array_to_a_70212063249880">
+               Array#to_a
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Set_initialize_70212063249880">Set#initialize</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb#96" title="/Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb:96">96</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="NilClass_nil__70212063249880">
+               NilClass#nil?
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157457</td>
+            <td class="method_name"><a href="#Object_write_user_70212063249880">Object#write_user</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#78" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:78">78</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>157457</td>
+          <td class="method_name">
+            <a name="Array_sum_70212063249880">
+               Array#sum
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157457</td>
+            <td class="method_name"><a href="#Object_write_user_70212063249880">Object#write_user</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#78" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:78">78</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>157457</td>
+          <td class="method_name">
+            <a name="Array_max_70212063249880">
+               Array#max
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>866543/866543</td>
+            <td class="method_name"><a href="#_Class__IO__foreach_70212063249880">&lt;Class::IO&gt;#foreach</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>866543</td>
+          <td class="method_name">
+            <a name="Array_last_70212063249880">
+               Array#last
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157457</td>
+            <td class="method_name"><a href="#Object_write_user_70212063249880">Object#write_user</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#68" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:68">68</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>157457</td>
+          <td class="method_name">
+            <a name="Array_each_70212063249880">
+               Array#each
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>157457/157457</td>
+            <td class="method_name"><a href="#Object_write_user_70212063249880">Object#write_user</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb#78" title="/Users/e.stashkovyan/projects/rails-optimization-task2/task-2.rb:78">78</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>157457</td>
+          <td class="method_name">
+            <a name="Array_count_70212063249880">
+               Array#count
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>203114/647490</td>
+            <td class="method_name"><a href="#Array_all__70212063249880">Array#all?</a></td>
+            
+            <td></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>444376/647490</td>
+            <td class="method_name"><a href="#Array_any__70212063249880">Array#any?</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>647490</td>
+          <td class="method_name">
+            <a name="String_start_with__70212063249880">
+               String#start_with?
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Class_new_70212063249880">Class#new</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Hash_initialize_70212063249880">
+               Hash#initialize
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Set_each_70212063249880">Set#each</a></td>
+            
+            <td><a href="file:///Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb#338" title="/Users/e.stashkovyan/.rbenv/versions/2.6.5/lib/ruby/2.6.0/set.rb:338">338</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Hash_each_key_70212063249880">
+               Hash#each_key
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="9">* indicates recursively called methods</td>
+      </tr>
+      </tfoot>
+    </table>
+  
+</div>
+
+<script type="application/javascript">
+  function toggleAllocations(element)
+  {
+    if (element.style.display == 'none')
+      element.style.display = 'block'
+    else
+      element.style.display = 'none'
+  }
+
+  function onClick(event)
+  {
+    if (event.target.tagName == 'A' && event.target.classList.contains('allocations'))
+    {
+      var url = new URL(event.target.href)
+      var element = document.querySelector(url.hash)
+      toggleAllocations(element)
+      event.preventDefault()
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', function(event)
+  {
+    document.addEventListener('click', onClick)
+  })
+
+</script>
+</body>
+</html>

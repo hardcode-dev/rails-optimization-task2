@@ -1,12 +1,9 @@
 # Deoptimized version of homework task
 
 require 'oj'
-require 'pry'
-require 'date'
 require 'set'
-require 'byebug'
 
-def work(path, disable_gc: false)
+def work(path = ENV['DATA_FILE'], disable_gc: false)
   @user = nil
   @total_users = 0
   @total_sessions = 0
@@ -36,7 +33,7 @@ def work(path, disable_gc: false)
     output.write("},\"totalUsers\":#{@total_users},\"uniqueBrowsersCount\":#{@all_browsers.size}," \
                  "\"totalSessions\":#{@total_sessions},\"allBrowsers\":\"#{ @all_browsers.sort.to_a.join(',')}\"}")
   end
-  
+
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 

@@ -55,17 +55,61 @@ MEMORY USAGE: 277 MB
 Total allocated: 878.67 MB (984694 objects)
 ```          
 
-### Ваша находка №2
-- какой отчёт показал главную точку роста
-- как вы решили её оптимизировать
-- как изменилась метрика
-- как изменился отчёт профилировщика
+### Сопоставление пользователей и сессий, метод .each
+Следующие точки роста, согласно отчету `memory_profiler`, находились в фрагменте кода, отвечающем за сопоставление пользователям их сессий:
+```ruby
+users.each do |user|
+  attributes = user
+  user_sessions = sessions.select { |session| session['user_id'] == user['id'] }
+  user_object = User.new(attributes: attributes, sessions: user_sessions)
+  users_objects = users_objects + [user_object]
+end
+```
+Я изменил данный фрагмент следующим образом:
+```ruby
+sessions_by_user = sessions.group_by { |k| k['user_id'] }
+users.each { |user| users_objects << User.new(attributes: user, sessions: sessions_by_user[user['id']] || []) }
+```
+Рефакторинг повлиял положительно — точка роста исчезла, показатели значительно улучшились:
+```
+MEMORY USAGE: 197 MB
+Total allocated: 72.22 MB (980605 objects)
+```  
 
-### Ваша находка №X
-- какой отчёт показал главную точку роста
-- как вы решили её оптимизировать
-- как изменилась метрика
-- как изменился отчёт профилировщика
+### Парсинг дат, метод .parse и три .map
+Следующей основной точкой роста отчет `memory_profiler` обозначил фрагмент кода, в котором осуществляется парсинг и сортировка дат пользовательских сессий:
+```ruby
+{ 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }
+```
+Поскольку в исходном файле даты хранятся в нужном нам формате, можно переработать этот фрагмент следующим образом:
+```ruby
+{ 'dates' => user.sessions.map{|s| s['date']}.sort.reverse }
+```
+Также я порефакторил сбор статистики — заменил множественные вызовы метода `collect_stats_from_users` на один и добавил цикл для сбора необходимых данных без использования `.map`: 
+```ruby
+collect_stats_from_users(report, users_objects) do |user|
+  user_time = []
+  user_browsers = []
+  user_dates = []
+  user.sessions.each do |session|
+    user_time << session['time'].to_i
+    user_browsers << session['browser'].upcase
+    user_dates << session['date']
+  end
+  { 'sessionsCount' => user.sessions.count,
+    'totalTime' => "#{user_time.sum} min.",
+    'longestSession' => "#{user_time.max} min.",
+    'browsers' => user_browsers.sort.join(', '),
+    'usedIE' => user_browsers.any? { |b| b =~ /INTERNET EXPLORER/ },
+    'alwaysUsedChrome' => user_browsers.all? { |b| b =~ /CHROME/ },
+    'dates' => user_dates.sort.reverse }
+end
+```
+Изменения принесли неплохой результат, примерно в два раза уменьшилось потребление памяти и количество объектов, также данный фрагмент перестал быть главной точкой роста:
+```
+MEMORY USAGE: 108 MB
+Total allocated: 37.53 MB (479412 objects)
+```
 
 ## Результаты
 В результате проделанной оптимизации наконец удалось обработать файл с данными.

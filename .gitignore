@@ -1,0 +1,13 @@
+.idea
+.ruby-gemset
+.ruby-version
+data*.*
+result.json
+ruby-prof_reports
+stackprof_reports
+valgrind_reports
+1-memory_profiler.rb
+2-stackprof.rb
+3-ruby-prof-allocations.rb
+4-ruby-prof-memory.rb
+5-valgrind.sh

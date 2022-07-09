@@ -1,5 +1,3 @@
-# Deoptimized version of homework task
-
 require 'json'
 require 'pry'
 require 'date'
@@ -14,9 +12,8 @@ class User
   end
 end
 
-def parse_user(user)
-  fields = user.split(',')
-  parsed_result = {
+def parse_user(fields)
+  {
     'id' => fields[1],
     'first_name' => fields[2],
     'last_name' => fields[3],
@@ -24,9 +21,8 @@ def parse_user(user)
   }
 end
 
-def parse_session(session)
-  fields = session.split(',')
-  parsed_result = {
+def parse_session(fields)
+  {
     'user_id' => fields[1],
     'session_id' => fields[2],
     'browser' => fields[3],
@@ -43,16 +39,19 @@ def collect_stats_from_users(report, users_objects, &block)
   end
 end
 
-def work
-  file_lines = File.read('data.txt').split("\n")
+def work(filename = 'data.txt', disable_gc: false)
+  GC.disable if disable_gc
+  filename = ENV['DATA_FILE'] || filename
+
+  file_lines = File.read(filename).split("\n")
 
   users = []
   sessions = []
 
   file_lines.each do |line|
     cols = line.split(',')
-    users = users + [parse_user(line)] if cols[0] == 'user'
-    sessions = sessions + [parse_session(line)] if cols[0] == 'session'
+    users << parse_user(cols) if cols[0] == 'user'
+    sessions << parse_session(cols) if cols[0] == 'session'
   end
 
   # Отчёт в json

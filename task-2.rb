@@ -1,124 +1,84 @@
-require 'json'
 require 'pry'
 require 'date'
 require 'minitest/autorun'
-
-class User
-  attr_reader :attributes, :sessions
-
-  def initialize(attributes:, sessions:)
-    @attributes = attributes
-    @sessions = sessions
-  end
-end
-
-def parse_user(fields)
-  {
-    'id' => fields[1],
-    'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4],
-  }
-end
-
-def parse_session(fields)
-  {
-    'user_id' => fields[1],
-    'session_id' => fields[2],
-    'browser' => fields[3],
-    'time' => fields[4],
-    'date' => fields[5],
-  }
-end
-
-def collect_stats_from_users(report, users_objects, &block)
-  users_objects.each do |user|
-    user_key = "#{user.attributes['first_name']}" + ' ' + "#{user.attributes['last_name']}"
-    report['usersStats'][user_key] ||= {}
-    report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
-  end
-end
+require 'oj'
 
 def work(filename = 'data.txt', disable_gc: false)
   GC.disable if disable_gc
   filename = ENV['DATA_FILE'] || filename
 
-  file_lines = File.read(filename).split("\n")
+  @outfile = File.new('result.json', 'w')
+  @outfile.write('{"usersStats":{')
 
-  users = []
-  sessions = []
+  user_key = nil
+  user_dates = []
+  user_time = []
+  user_browsers = []
+  user_sessions_count = 0
+  all_browsers = []
+  users_count = 0
+  sessions_count = 0
 
-  file_lines.each do |line|
+  File.foreach(ENV['DATA_FILE'] || filename, chomp: true) do |line|
     cols = line.split(',')
-    users << parse_user(cols) if cols[0] == 'user'
-    sessions << parse_session(cols) if cols[0] == 'session'
-  end
+    case cols[0]
+    when 'user'
+      if user_key
+        report = {
+          'sessionsCount' => user_sessions_count,
+          'totalTime' => "#{user_time.sum} min.",
+          'longestSession' => "#{user_time.max} min.",
+          'browsers' => user_browsers.sort.join(', '),
+          'usedIE' => user_browsers.any? { |b| b =~ /INTERNET EXPLORER/ },
+          'alwaysUsedChrome' => user_browsers.all? { |b| b =~ /CHROME/ },
+          'dates' => user_dates.sort.reverse
+        }
+        @outfile.write("\"#{user_key}\":")
+        @outfile.write(Oj.dump(report).to_s)
+        @outfile.write(',')
 
-  # Отчёт в json
-  #   - Сколько всего юзеров +
-  #   - Сколько всего уникальных браузеров +
-  #   - Сколько всего сессий +
-  #   - Перечислить уникальные браузеры в алфавитном порядке через запятую и капсом +
-  #
-  #   - По каждому пользователю
-  #     - сколько всего сессий +
-  #     - сколько всего времени +
-  #     - самая длинная сессия +
-  #     - браузеры через запятую +
-  #     - Хоть раз использовал IE? +
-  #     - Всегда использовал только Хром? +
-  #     - даты сессий в порядке убывания через запятую +
-
-  report = {}
-
-  report[:totalUsers] = users.count
-
-  # Подсчёт количества уникальных браузеров
-  uniqueBrowsers = []
-  sessions.each do |session|
-    browser = session['browser']
-    uniqueBrowsers += [browser] if uniqueBrowsers.all? { |b| b != browser }
-  end
-
-  report['uniqueBrowsersCount'] = uniqueBrowsers.count
-
-  report['totalSessions'] = sessions.count
-
-  report['allBrowsers'] =
-    sessions
-      .map { |s| s['browser'] }
-      .map { |b| b.upcase }
-      .sort
-      .uniq
-      .join(',')
-
-  # Статистика по пользователям
-  users_objects = []
-
-  sessions_by_user = sessions.group_by { |k| k['user_id'] }
-  users.each { |user| users_objects << User.new(attributes: user, sessions: sessions_by_user[user['id']] || []) }
-
-  report['usersStats'] = {}
-
-  collect_stats_from_users(report, users_objects) do |user|
-    user_time = []
-    user_browsers = []
-    user_dates = []
-    user.sessions.each do |session|
-      user_time << session['time'].to_i
-      user_browsers << session['browser'].upcase
-      user_dates << session['date']
+        all_browsers << user_browsers
+        user_dates = []
+        user_time = []
+        user_browsers = []
+        user_sessions_count = 0
+      end
+      user_key = "#{cols[2]} #{cols[3]}"
+      users_count += 1
+    when 'session'
+      user_dates << cols[5]
+      user_time << cols[4].to_i
+      user_browsers << cols[3].upcase
+      sessions_count += 1
+      user_sessions_count += 1
     end
-    { 'sessionsCount' => user.sessions.count,
-      'totalTime' => "#{user_time.sum} min.",
-      'longestSession' => "#{user_time.max} min.",
-      'browsers' => user_browsers.sort.join(', '),
-      'usedIE' => user_browsers.any? { |b| b =~ /INTERNET EXPLORER/ },
-      'alwaysUsedChrome' => user_browsers.all? { |b| b =~ /CHROME/ },
-      'dates' => user_dates.sort.reverse }
   end
 
-  File.write('result.json', "#{report.to_json}\n")
+  report = {
+    'sessionsCount' => user_sessions_count,
+    'totalTime' => "#{user_time.sum} min.",
+    'longestSession' => "#{user_time.max} min.",
+    'browsers' => user_browsers.sort.join(', '),
+    'usedIE' => user_browsers.any? { |b| b =~ /INTERNET EXPLORER/ },
+    'alwaysUsedChrome' => user_browsers.all? { |b| b =~ /CHROME/ },
+    'dates' => user_dates.sort.reverse
+  }
+  @outfile.write("\"#{user_key}\":")
+  @outfile.write(Oj.dump(report).to_s)
+  @outfile.write('},')
+
+  all_browsers << user_browsers
+
+  all_browsers = all_browsers.flatten.uniq.sort
+  report_summary = {
+    'totalUsers' => users_count,
+    'uniqueBrowsersCount' => all_browsers.count,
+    'totalSessions' => sessions_count,
+    'allBrowsers' => all_browsers.join(',')
+  }
+  @outfile.write(Oj.dump(report_summary).to_s[1..])
+  @outfile.close
+
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
@@ -149,7 +109,7 @@ session,2,3,Chrome 20,84,2016-11-25
 
   def test_result
     work
-    expected_result = JSON.parse('{"totalUsers":3,"uniqueBrowsersCount":14,"totalSessions":15,"allBrowsers":"CHROME 13,CHROME 20,CHROME 35,CHROME 6,FIREFOX 12,FIREFOX 32,FIREFOX 47,INTERNET EXPLORER 10,INTERNET EXPLORER 28,INTERNET EXPLORER 35,SAFARI 17,SAFARI 29,SAFARI 39,SAFARI 49","usersStats":{"Leida Cira":{"sessionsCount":6,"totalTime":"455 min.","longestSession":"118 min.","browsers":"FIREFOX 12, INTERNET EXPLORER 28, INTERNET EXPLORER 28, INTERNET EXPLORER 35, SAFARI 29, SAFARI 39","usedIE":true,"alwaysUsedChrome":false,"dates":["2017-09-27","2017-03-28","2017-02-27","2016-10-23","2016-09-15","2016-09-01"]},"Palmer Katrina":{"sessionsCount":5,"totalTime":"218 min.","longestSession":"116 min.","browsers":"CHROME 13, CHROME 6, FIREFOX 32, INTERNET EXPLORER 10, SAFARI 17","usedIE":true,"alwaysUsedChrome":false,"dates":["2017-04-29","2016-12-28","2016-12-20","2016-11-11","2016-10-21"]},"Gregory Santos":{"sessionsCount":4,"totalTime":"192 min.","longestSession":"85 min.","browsers":"CHROME 20, CHROME 35, FIREFOX 47, SAFARI 49","usedIE":false,"alwaysUsedChrome":false,"dates":["2018-09-21","2018-02-02","2017-05-22","2016-11-25"]}}}')
-    assert_equal expected_result, JSON.parse(File.read('result.json'))
+    expected_result = Oj.load('{"usersStats":{"Leida Cira":{"sessionsCount":6,"totalTime":"455 min.","longestSession":"118 min.","browsers":"FIREFOX 12, INTERNET EXPLORER 28, INTERNET EXPLORER 28, INTERNET EXPLORER 35, SAFARI 29, SAFARI 39","usedIE":true,"alwaysUsedChrome":false,"dates":["2017-09-27","2017-03-28","2017-02-27","2016-10-23","2016-09-15","2016-09-01"]},"Palmer Katrina":{"sessionsCount":5,"totalTime":"218 min.","longestSession":"116 min.","browsers":"CHROME 13, CHROME 6, FIREFOX 32, INTERNET EXPLORER 10, SAFARI 17","usedIE":true,"alwaysUsedChrome":false,"dates":["2017-04-29","2016-12-28","2016-12-20","2016-11-11","2016-10-21"]},"Gregory Santos":{"sessionsCount":4,"totalTime":"192 min.","longestSession":"85 min.","browsers":"CHROME 20, CHROME 35, FIREFOX 47, SAFARI 49","usedIE":false,"alwaysUsedChrome":false,"dates":["2018-09-21","2018-02-02","2017-05-22","2016-11-25"]}},"totalUsers":3,"uniqueBrowsersCount":14,"totalSessions":15,"allBrowsers":"CHROME 13,CHROME 20,CHROME 35,CHROME 6,FIREFOX 12,FIREFOX 32,FIREFOX 47,INTERNET EXPLORER 10,INTERNET EXPLORER 28,INTERNET EXPLORER 35,SAFARI 17,SAFARI 29,SAFARI 39,SAFARI 49"}')
+    assert_equal expected_result, Oj.load(File.read('result.json'))
   end
 end

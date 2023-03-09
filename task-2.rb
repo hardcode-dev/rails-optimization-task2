@@ -13,8 +13,7 @@ class User
   end
 end
 
-def parse_user(user)
-  fields = user.split(',')
+def parse_user(fields)
   parsed_result = {
     'id' => fields[1],
     'first_name' => fields[2],
@@ -23,8 +22,7 @@ def parse_user(user)
   }
 end
 
-def parse_session(session)
-  fields = session.split(',')
+def parse_session(fields)
   parsed_result = {
     'user_id' => fields[1],
     'session_id' => fields[2],
@@ -49,9 +47,9 @@ def work(file_name = 'data.txt')
   sessions = []
 
   file_lines.each do |line|
-    cols = line.split(',')
-    users << parse_user(line) if cols[0] == 'user'
-    sessions << parse_session(line) if cols[0] == 'session'
+    fields = line.split(',')
+    users << parse_user(fields) if fields[0] == 'user'
+    sessions << parse_session(fields) if fields[0] == 'session'
   end
 
   # Отчёт в json

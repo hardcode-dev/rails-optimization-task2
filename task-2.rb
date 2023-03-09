@@ -50,7 +50,7 @@ def work(file_name = 'data.txt')
 
   file_lines.each do |line|
     cols = line.split(',')
-    users = users + [parse_user(line)] if cols[0] == 'user'
+    users << parse_user(line) if cols[0] == 'user'
     sessions << parse_session(line) if cols[0] == 'session'
   end
 

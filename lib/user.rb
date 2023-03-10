@@ -12,15 +12,27 @@ class User
 end
 
 class StatCollector
-  attr_reader :browsers, :sessions_count
+  attr_reader :browsers, :users, :sessions_count
 
   def initialize
     @browsers = Set.new
+    @users = {}
     @sessions_count = 0
   end
 
   def add_browser(browser)
     @browsers << browser
+  end
+
+  def add_user(id)
+    @users[id] = {
+      sessions_count: 0,
+      browsers: Set.new
+    }
+  end
+
+  def increment_user_sessions_count!(user_id)
+    @users[user_id][:sessions_count] += 1
   end
 
   def increment_session_count!
@@ -67,10 +79,17 @@ def work(input_path:, output_path:)
 
   file_lines.each do |line|
     cols = line.split(',')
-    users << parse_user(line) if cols[0] == 'user'
+    if cols[0] == 'user'
+      user = parse_user(line)
+      users << user
+      stat.add_user(user['id'])
+    end
     if cols[0] == 'session'
-      sessions << parse_session(line) 
+      session = parse_session(line)
+      sessions << session
+      
       stat.increment_session_count!
+      stat.increment_user_sessions_count!(session['user_id'])
     end
   end
 
@@ -116,7 +135,7 @@ def work(input_path:, output_path:)
 
   # Собираем количество сессий по пользователям
   collect_stats_from_users(report, users_objects) do |user|
-    { 'sessionsCount' => user.sessions.count }
+    { 'sessionsCount' => stat.users[user.attributes['id']][:sessions_count].to_i}
   end
 
   # Собираем количество времени по пользователям

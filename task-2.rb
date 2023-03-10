@@ -3,11 +3,11 @@ require 'memory_profiler'
 require 'stackprof'
 require 'ruby-prof'
 
-# report = MemoryProfiler.report do
-#   work(input_path: "./data/data_sample.txt", output_path: "./result.json")
-# end
+report = MemoryProfiler.report do
+  work(input_path: "./data/data_sample.txt", output_path: "./result.json")
+end
 
-# report.pretty_print(scale_bytes: true)
+report.pretty_print(scale_bytes: true)
 
 # StackProf.run(mode: :object, out: 'reports/stackprof_memory.dump', raw: true) do
 #   work(input_path: "./data/data_sample.txt", output_path: "./result.json")
@@ -31,7 +31,7 @@ require 'ruby-prof'
 # printer = RubyProf::CallTreePrinter.new(result)
 # printer.print(path: './reports/', profile: 'profile')
 
-work(input_path: './data/data_sample.txt', output_path: './result.json')
+# work(input_path: './data/data_sample.txt', output_path: './result.json')
 
 # Allocated memory
 # Iteration 0: 3.78 GB

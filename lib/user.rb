@@ -27,8 +27,16 @@ class StatCollector
   def add_user(id)
     @users[id] = {
       sessions_count: 0,
-      browsers: Set.new
+      browsers: []
     }
+  end
+
+  def add_user_browser(user_id, browser)
+    @users[user_id][:browsers] << browser
+  end
+
+  def user_browsers(user_id)
+    @users[user_id][:browsers]
   end
 
   def increment_user_sessions_count!(user_id)
@@ -90,6 +98,7 @@ def work(input_path:, output_path:)
       
       stat.increment_session_count!
       stat.increment_user_sessions_count!(session['user_id'])
+      stat.add_user_browser(session['user_id'], session['browser'])
     end
   end
 
@@ -150,7 +159,7 @@ def work(input_path:, output_path:)
 
   # Браузеры пользователя через запятую
   collect_stats_from_users(report, users_objects) do |user|
-    { 'browsers' => user.sessions.map {|s| s['browser']}.map {|b| b.upcase}.sort.join(', ') }
+    { 'browsers' => stat.user_browsers(user.attributes['id']).map { |b| b.upcase }.sort.join(', ') }
   end
 
   # Хоть раз использовал IE?

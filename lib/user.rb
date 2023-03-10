@@ -12,14 +12,19 @@ class User
 end
 
 class StatCollector
-  attr_reader :browsers
+  attr_reader :browsers, :sessions_count
 
   def initialize
     @browsers = Set.new
+    @sessions_count = 0
   end
 
   def add_browser(browser)
     @browsers << browser
+  end
+
+  def increment_session_count!
+    @sessions_count += 1
   end
 end
 
@@ -63,7 +68,10 @@ def work(input_path:, output_path:)
   file_lines.each do |line|
     cols = line.split(',')
     users << parse_user(line) if cols[0] == 'user'
-    sessions << parse_session(line) if cols[0] == 'session'
+    if cols[0] == 'session'
+      sessions << parse_session(line) 
+      stat.increment_session_count!
+    end
   end
 
   # Отчёт в json
@@ -91,8 +99,7 @@ def work(input_path:, output_path:)
   end
 
   report['uniqueBrowsersCount'] = stat.browsers.count
-
-  report['totalSessions'] = sessions.count
+  report['totalSessions'] = stat.sessions_count
 
   report['allBrowsers'] =
     sessions

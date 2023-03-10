@@ -3,3 +3,6 @@
 
 /tmp/*
 !/tmp/.keep
+
+/reports/*
+!/reports/.keep

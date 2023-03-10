@@ -28,6 +28,6 @@ stand =
 loop = PerfAnalyzer::Loop.new(stand)
 
 loop
-  .analyze(:memory_profiler, :ruby_prof, :stackprof) { work('input/data_32k.txt') }
-  .benchmark(1, 32, ratio: 2) { |n| work("input/data_#{n}k.txt") }
+  .analyze(:memory_profiler, :ruby_prof, :stackprof) { work('input/data_256k.txt') }
+  .benchmark(1, 256, ratio: 2) { |n| work("input/data_#{n}k.txt") }
   .check_results

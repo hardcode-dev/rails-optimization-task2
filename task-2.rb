@@ -1,3 +1,3 @@
 require_relative "./lib/user.rb"
 
-work("./data/data_sample.txt")
+work(input_path: "./data/data_sample.txt", output_path: "./result.json")

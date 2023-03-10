@@ -40,8 +40,8 @@ def collect_stats_from_users(report, users_objects, &block)
   end
 end
 
-def work(file_path)
-  file_lines = File.read(file_path).split("\n")
+def work(input_path:, output_path:)
+  file_lines = File.read(input_path).split("\n")
 
   users = []
   sessions = []
@@ -137,6 +137,6 @@ def work(file_path)
     { 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }
   end
 
-  File.write('result.json', "#{report.to_json}\n")
+  File.write(output_path, "#{report.to_json}\n")
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end

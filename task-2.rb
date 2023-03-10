@@ -3,8 +3,6 @@
 # Deoptimized version of homework task
 
 require 'json'
-require 'pry'
-require 'date'
 
 class User
   attr_reader :attributes, :sessions

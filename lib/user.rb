@@ -11,6 +11,18 @@ class User
   end
 end
 
+class StatCollector
+  attr_reader :browsers
+
+  def initialize
+    @browsers = Set.new
+  end
+
+  def add_browser(browser)
+    @browsers << browser
+  end
+end
+
 def parse_user(user)
   fields = user.split(',')
   parsed_result = {
@@ -41,6 +53,8 @@ def collect_stats_from_users(report, users_objects, &block)
 end
 
 def work(input_path:, output_path:)
+  stat = StatCollector.new
+
   file_lines = File.read(input_path).split("\n")
 
   users = []
@@ -72,13 +86,11 @@ def work(input_path:, output_path:)
   report[:totalUsers] = users.count
 
   # Подсчёт количества уникальных браузеров
-  uniqueBrowsers = []
   sessions.each do |session|
-    browser = session['browser']
-    uniqueBrowsers += [browser] if uniqueBrowsers.all? { |b| b != browser }
+    stat.add_browser(session['browser'])
   end
 
-  report['uniqueBrowsersCount'] = uniqueBrowsers.count
+  report['uniqueBrowsersCount'] = stat.browsers.count
 
   report['totalSessions'] = sessions.count
 

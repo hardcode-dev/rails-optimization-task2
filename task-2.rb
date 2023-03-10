@@ -119,19 +119,16 @@ def work(file_name = 'data.txt')
     { 'longestSession' => user.sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.' }
   end
 
-  # Браузеры пользователя через запятую
   collect_stats_from_users(report, users_objects) do |user|
-    { 'browsers' => user.sessions.map {|s| s['browser']}.map {|b| b.upcase}.sort.join(', ') }
-  end
-
-  # Хоть раз использовал IE?
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'usedIE' => user.sessions.map{|s| s['browser']}.any? { |b| b.upcase =~ /INTERNET EXPLORER/ } }
-  end
-
-  # Всегда использовал только Chrome?
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'alwaysUsedChrome' => user.sessions.map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ } }
+    browsers = user.sessions.map { |s| s['browser'].upcase }
+    {
+      # Браузеры пользователя через запятую
+      'browsers' => browsers.sort.join(', '),
+      # Хоть раз использовал IE?
+      'usedIE' => browsers.any? { |b| b =~ /INTERNET EXPLORER/ },
+      # Всегда использовал только Chrome?
+      'alwaysUsedChrome' => browsers.all? { |b| b =~ /CHROME/ }
+    }
   end
 
   # Даты сессий через запятую в обратном порядке в формате iso8601

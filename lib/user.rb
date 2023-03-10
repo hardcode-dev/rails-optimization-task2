@@ -100,14 +100,7 @@ def work(input_path:, output_path:)
 
   report['uniqueBrowsersCount'] = stat.browsers.count
   report['totalSessions'] = stat.sessions_count
-
-  report['allBrowsers'] =
-    sessions
-      .map { |s| s['browser'] }
-      .map { |b| b.upcase }
-      .sort
-      .uniq
-      .join(',')
+  report['allBrowsers'] = stat.browsers.map { |b| b.upcase }.sort.join(',')
 
   # Статистика по пользователям
   users_objects = []

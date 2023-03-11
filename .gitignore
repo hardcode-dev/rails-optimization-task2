@@ -6,3 +6,5 @@
 
 /reports/*
 !/reports/.keep
+
+/results.json

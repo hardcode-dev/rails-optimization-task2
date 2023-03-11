@@ -2,6 +2,8 @@ require 'json'
 require 'pry'
 require 'date'
 
+LINE_DIVIDER = ','.freeze
+
 class User
   attr_reader :attributes, :sessions
 
@@ -75,17 +77,6 @@ class StatCollector
   end
 end
 
-def parse_session(session)
-  fields = session.split(',')
-  parsed_result = {
-    'user_id' => fields[1],
-    'session_id' => fields[2],
-    'browser' => fields[3],
-    'time' => fields[4],
-    'date' => fields[5],
-  }
-end
-
 def work(input_path:, output_path:)
   stat = StatCollector.new
 
@@ -95,13 +86,19 @@ def work(input_path:, output_path:)
   sessions = []
 
   file_lines.each do |line|
-    cols = line.split(',')
+    cols = line.split(LINE_DIVIDER)
     if cols[0] == 'user'
       stat.add_user(user_id: cols[1], first_name: cols[2], last_name: cols[3], age: cols[4])
       stat.increment_users_count!
     end
     if cols[0] == 'session'
-      session = parse_session(line)
+      session = {
+        'user_id' => cols[1],
+        'session_id' => cols[2],
+        'browser' => cols[3],
+        'time' => cols[4],
+        'date' =>cols[5],
+      }
       stat.add_user_session(session['user_id'], session)
       
       stat.increment_session_count!
@@ -140,7 +137,7 @@ def work(input_path:, output_path:)
 
   def collect_stats_from_users(report, stat, &block)
     stat.users.each do |user_id, attributes|
-      user_key = "#{attributes[:first_name]}" + ' ' + "#{attributes[:last_name]}"
+      user_key = "#{attributes[:first_name]} #{attributes[:last_name]}"
       report['usersStats'][user_key] ||= {}
       report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(attributes))
     end

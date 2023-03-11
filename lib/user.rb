@@ -3,6 +3,8 @@ require 'pry'
 require 'date'
 
 LINE_DIVIDER = ','.freeze
+USER = 'user'.freeze
+SESSION = 'session'.freeze
 
 class User
   attr_reader :attributes, :sessions
@@ -87,11 +89,11 @@ def work(input_path:, output_path:)
 
   file_lines.each do |line|
     cols = line.split(LINE_DIVIDER)
-    if cols[0] == 'user'
+    if cols[0] == USER
       stat.add_user(user_id: cols[1], first_name: cols[2], last_name: cols[3], age: cols[4])
       stat.increment_users_count!
     end
-    if cols[0] == 'session'
+    if cols[0] == SESSION
       session = {
         user_id: cols[1],
         session_id: cols[2],

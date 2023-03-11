@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rspec-benchmark'
+require 'json'
 require_relative 'task-2'
 
 describe 'parser' do

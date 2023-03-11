@@ -2,7 +2,7 @@
 
 # Deoptimized version of homework task
 
-require 'json'
+require 'oj'
 
 class User
   attr_reader :attributes, :sessions
@@ -35,10 +35,10 @@ def parse_session(fields)
   }
 end
 
-def collect_user_stat(report, user)
-  user_key = "#{user.attributes['first_name']} #{user.attributes['last_name']}"
-  browsers = user.sessions.map { |s| s['browser'].upcase }
-  report['usersStats'][user_key] = {
+def push_user_stats(browsers, oj_stream, user, user_key)
+  oj_push(
+    oj_stream,
+    user_key,
     # Собираем количество сессий по пользователям
     'sessionsCount' => user.sessions.count,
     # Собираем количество времени по пользователям
@@ -53,7 +53,18 @@ def collect_user_stat(report, user)
     'alwaysUsedChrome' => browsers.all? { |b| b =~ /CHROME/ },
     # Даты сессий через запятую в обратном порядке в формате iso8601
     'dates' => user.sessions.map { |s| s['date'] }.sort.reverse
-  }
+  )
+end
+
+def collect_user_stat(oj_stream, user)
+  user_key = "#{user.attributes['first_name']} #{user.attributes['last_name']}"
+  browsers = user.sessions.map { |s| s['browser'].upcase }
+  push_user_stats(browsers, oj_stream, user, user_key)
+end
+
+def oj_push(stream, key, value)
+  stream.push_key(key)
+  stream.push_value(value)
 end
 
 def work(file_name = 'data.txt')
@@ -78,42 +89,39 @@ def work(file_name = 'data.txt')
   #     - Всегда использовал только Хром? +
   #     - даты сессий в порядке убывания через запятую +
 
-  report = {
+  File.open('result.json', 'w') do |f|
+    oj_stream = Oj::StreamWriter.new(f)
     # Статистика по пользователям
-    'usersStats' => {}
-  }
+    oj_stream.push_object
+    oj_stream.push_key('usersStats')
+    oj_stream.push_object
 
-  File.foreach(file_name, chomp: true) do |line|
-    fields = line.split(',')
+    File.foreach(file_name, chomp: true) do |line|
+      fields = line.split(',')
 
-    case fields[0]
-    when 'user'
-      collect_user_stat(report, last_user) if last_user
-      last_user = parse_user(fields)
-      total_users_count += 1
-    when 'session'
-      session = parse_session(fields)
-      last_user.sessions << session
-      uniqueBrowsers << session['browser']
-      total_sessions_count += 1
+      case fields[0]
+      when 'user'
+        collect_user_stat(oj_stream, last_user) if last_user
+        last_user = parse_user(fields)
+        total_users_count += 1
+      when 'session'
+        session = parse_session(fields)
+        last_user.sessions << session
+        uniqueBrowsers << session['browser']
+        total_sessions_count += 1
+      end
     end
+
+    collect_user_stat(oj_stream, last_user) if last_user
+    oj_stream.pop
+
+    oj_push(oj_stream, 'totalUsers', total_users_count)
+    oj_push(oj_stream, 'uniqueBrowsersCount', uniqueBrowsers.count)
+    oj_push(oj_stream, 'totalSessions', total_sessions_count)
+    oj_push(oj_stream, 'allBrowsers', uniqueBrowsers.map(&:upcase).sort.uniq.join(','))
+
+    oj_stream.pop
   end
 
-  collect_user_stat(report, last_user) if last_user
-
-  report[:totalUsers] = total_users_count
-
-  report['uniqueBrowsersCount'] = uniqueBrowsers.count
-
-  report['totalSessions'] = total_sessions_count
-
-  report['allBrowsers'] =
-    uniqueBrowsers
-    .map(&:upcase)
-    .sort
-    .uniq
-    .join(',')
-
-  File.write('result.json', "#{report.to_json}\n")
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end

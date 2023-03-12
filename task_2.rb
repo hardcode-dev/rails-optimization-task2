@@ -13,8 +13,7 @@ end
 
 def parse_session(session)
   fields = session.chomp.split(',')
-  { 'session_id' => fields[2],
-    'browser' => fields[3],
+  { 'browser' => fields[3],
     'time' => fields[4],
     'date' => fields[5] }
 end
@@ -112,4 +111,9 @@ session,2,3,Chrome 20,84,2016-11-25
   end
 end
 
-work('data10000.txt')
+a = Time.now
+work('data80000.txt')
+b = Time.now
+p b - a
+pp GC.stat
+

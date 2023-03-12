@@ -18,7 +18,9 @@ def parse_session(session)
     'date' => fields[5] }
 end
 
-def work(file = 'data80000.txt')
+def work(file = 'data80000.txt', disable_gc: false)
+  GC.disable if disable_gc
+
   report = {}
   report['totalUsers'] = 0
   report['uniqueBrowsersCount'] = 0

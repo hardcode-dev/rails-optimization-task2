@@ -80,6 +80,7 @@ def work(file = 'data.txt')
       first_session = false
     end
   end
+  update_data_for_user(report, user)
   report['allBrowsers'] = report['allBrowsers'].sort.map(&:upcase).join(',')
 
   File.write('result.json', "#{report.to_json}\n")

@@ -1,6 +1,8 @@
 require_relative '../lib/user.rb'
+require 'rspec-benchmark'
 
 RSpec.configure do |config|
+  config.include RSpec::Benchmark::Matchers
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end

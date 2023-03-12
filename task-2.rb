@@ -34,7 +34,7 @@ require 'benchmark'
 
 
 Benchmark.bm(5) do |x|
-  x.report   { work(input_path: './data/data_large.txt', output_path: './tmp/result.json') }
+  x.report { work(input_path: './data/data_large.txt', output_path: './tmp/result.json') }
 end
 
 

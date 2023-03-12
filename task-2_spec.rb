@@ -13,6 +13,11 @@ describe 'parser' do
     JSON
   end
 
+  let(:megabytes) do
+    work('input/data_large.txt')
+    `ps -o rss= -p #{Process.pid}`.to_i / 1024
+  end
+
   it 'works' do
     work
     expect(JSON.parse(File.read('result.json'))).to eq(JSON.parse(expected_json))
@@ -20,6 +25,10 @@ describe 'parser' do
 
   it 'work faster than 30sec for large file' do
     expect { work('input/data_large.txt') }.to perform_under(30).sec.sample(5).times
+  end
+
+  it 'allocate under 70 MB of RAM for large file' do
+    expect(megabytes).to be < 70
   end
 
   it 'progress linear' do

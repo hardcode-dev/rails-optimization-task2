@@ -59,7 +59,7 @@ def work(file = 'data.txt')
     if line.start_with?('user')
       update_data_for_user(report, user) if user
       user = parse_user(line)
-      report[:totalUsers] += 1
+      report['totalUsers'] += 1
       first_session = true
     else
       full_name = "#{user['first_name']} #{user['last_name']}"

@@ -2,6 +2,7 @@ require_relative "./lib/user.rb"
 require 'memory_profiler'
 require 'stackprof'
 require 'ruby-prof'
+require 'benchmark'
 
 # report = MemoryProfiler.report do
 #  work(input_path: "./data/data_large.txt", output_path: "./tmp/result.json")
@@ -31,7 +32,12 @@ require 'ruby-prof'
 # printer = RubyProf::CallTreePrinter.new(result)
 # printer.print(path: './reports/', profile: 'profile')
 
-work(input_path: './data/data_large.txt', output_path: './tmp/result.json')
+
+Benchmark.bm(5) do |x|
+  x.report   { work(input_path: './data/data_large.txt', output_path: './tmp/result.json') }
+end
+
+
 
 # Allocated memory
 # Iteration 0: 3.78 GB

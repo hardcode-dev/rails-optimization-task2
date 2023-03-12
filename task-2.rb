@@ -63,7 +63,7 @@ def work(file = 'data.txt')
     else
       full_name = "#{user['first_name']} #{user['last_name']}"
       session = parse_session(line)
-      prepare_data_for_first_session(report, full_name) if first_session
+      prepare_data_for_first_session(report, user) if first_session
       report['totalSessions'] += 1
       unless report['allBrowsers'].include?(session['browser'])
         report['uniqueBrowsersCount'] += 1
@@ -80,14 +80,17 @@ def work(file = 'data.txt')
       first_session = false
     end
   end
-  update_data_for_user(report, user)
+  prepare_data_for_first_session(report, user) if first_session
+  update_data_for_user(report, user) if user
+
   report['allBrowsers'] = report['allBrowsers'].sort.map(&:upcase).join(',')
 
   File.write('result.json', "#{report.to_json}\n")
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
-def prepare_data_for_first_session(report, full_name)
+def prepare_data_for_first_session(report, user)
+  full_name = "#{user['first_name']} #{user['last_name']}"
   report['usersStats'][full_name] = {}
   report['usersStats'][full_name]['sessionsCount'] = 0
   report['usersStats'][full_name]['totalTime'] = 0

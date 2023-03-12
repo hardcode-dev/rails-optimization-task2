@@ -6,15 +6,6 @@ require 'date'
 require 'minitest/autorun'
 require 'debug'
 
-class User
-  attr_reader :attributes, :sessions
-
-  def initialize(attributes:, sessions:)
-    @attributes = attributes
-    @sessions = sessions
-  end
-end
-
 def parse_user(user)
   fields = user.split(',')
   "#{fields[2]} #{fields[3]}"
@@ -22,21 +13,10 @@ end
 
 def parse_session(session)
   fields = session.chomp.split(',')
-  parsed_result = {
-    'user_id' => fields[1],
-    'session_id' => fields[2],
+  { 'session_id' => fields[2],
     'browser' => fields[3],
     'time' => fields[4],
-    'date' => fields[5],
-  }
-end
-
-def collect_stats_from_users(report, users_objects, &block)
-  users_objects.each do |user|
-    user_key = "#{user.attributes['first_name']}" + ' ' + "#{user.attributes['last_name']}"
-    report['usersStats'][user_key] ||= {}
-    report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
-  end
+    'date' => fields[5] }
 end
 
 def work(file = 'data.txt')

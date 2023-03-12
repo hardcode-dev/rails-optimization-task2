@@ -57,6 +57,7 @@ def work(file = 'data.txt')
   first_session = true
   File.foreach(file) do |line|
     if line.start_with?('user')
+      update_data_for_user(report, user) if user
       user = parse_user(line)
       report[:totalUsers] += 1
       first_session = true
@@ -74,11 +75,9 @@ def work(file = 'data.txt')
       report['usersStats'][full_name]['longestSession'] = session['time'].to_i if report['usersStats'][full_name]['longestSession'] < session['time'].to_i
       report['usersStats'][full_name]['browsers'] << session['browser'].upcase
       report['usersStats'][full_name]['usedIE'] = true if session['browser'].match?(/INTERNET EXPLORER/i)
-      report['usersStats'][full_name]['alwaysUsedChrome'] = false unless session['browser'].match?(/CHROME/)
+      report['usersStats'][full_name]['alwaysUsedChrome'] = false unless session['browser'].match?(/CHROME/i)
       report['usersStats'][full_name]['dates'] << session['date']
 
-      report['usersStats'][full_name]['browsers'].sort!
-      report['usersStats'][full_name]['dates'].sort!
       first_session = false
     end
   end
@@ -95,6 +94,14 @@ def prepare_data_for_first_session(report, full_name)
   report['usersStats'][full_name]['browsers'] = []
   report['usersStats'][full_name]['usedIE'] = false
   report['usersStats'][full_name]['dates'] = []
+end
+
+def update_data_for_user(report, user)
+  full_name = "#{user['first_name']} #{user['last_name']}"
+  report['usersStats'][full_name]['browsers'] = report['usersStats'][full_name]['browsers'].sort.join(', ')
+  report['usersStats'][full_name]['dates'] = report['usersStats'][full_name]['dates'].sort.reverse
+  report['usersStats'][full_name]['totalTime'] = "#{report['usersStats'][full_name]['totalTime']} min."
+  report['usersStats'][full_name]['longestSession'] = "#{report['usersStats'][full_name]['longestSession']} min."
 end
 
 class TestMe < Minitest::Test

@@ -1,0 +1,10 @@
+/data/*
+!/data/.keep
+
+/tmp/*
+!/tmp/.keep
+
+/reports/*
+!/reports/.keep
+
+/results.json

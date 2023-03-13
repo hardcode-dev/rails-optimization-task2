@@ -1,4 +1,4 @@
-# Deoptimized version of homework task
+# frozen_string_literal: true
 
 require 'json'
 require 'pry'
@@ -26,59 +26,60 @@ def work(file = 'data80000.txt', disable_gc: false)
   report['uniqueBrowsersCount'] = 0
   report['totalSessions'] = 0
   report['allBrowsers'] = []
-  report['usersStats'] = {}
+  File.open('result.json', 'a') { |f| f.write '{ "usersStats": {' }
 
   user = nil
-  first_session = true
+  @user_data = nil
   File.foreach(file) do |line|
     if line.start_with?('user')
-      update_data_for_user(report, user) if user
+      write_user_data(report, user) if @user_data
       user = parse_user(line)
       report['totalUsers'] += 1
-      first_session = true
+      @user_data = nil
     else
       session = parse_session(line)
-      prepare_data_for_first_session(report, user) if first_session
+      prepare_data_for_first_session(user) unless @user_data
       report['totalSessions'] += 1
       unless report['allBrowsers'].include?(session['browser'])
         report['uniqueBrowsersCount'] += 1
         report['allBrowsers'] << session['browser']
       end
-      report['usersStats'][user]['sessionsCount'] += 1
-      report['usersStats'][user]['totalTime'] += session['time'].to_i
-      report['usersStats'][user]['longestSession'] = session['time'].to_i if report['usersStats'][user]['longestSession'] < session['time'].to_i
-      report['usersStats'][user]['browsers'] << session['browser'].upcase
-      report['usersStats'][user]['usedIE'] = true if session['browser'].match?(/INTERNET EXPLORER/i)
-      report['usersStats'][user]['alwaysUsedChrome'] = false unless session['browser'].match?(/CHROME/i)
-      report['usersStats'][user]['dates'] << session['date']
-
-      first_session = false
+      @user_data['sessionsCount'] += 1
+      @user_data['totalTime'] += session['time'].to_i
+      @user_data['longestSession'] = session['time'].to_i if @user_data['longestSession'] < session['time'].to_i
+      @user_data['browsers'] << session['browser'].upcase
+      @user_data['usedIE'] = true if session['browser'].match?(/INTERNET EXPLORER/i)
+      @user_data['alwaysUsedChrome'] = false unless session['browser'].match?(/CHROME/i)
+      @user_data['dates'] << session['date']
     end
   end
-  prepare_data_for_first_session(report, user) if first_session
-  update_data_for_user(report, user) if user
+  prepare_data_for_first_session(user) unless @user_data
+  write_user_data(report, user, '')
 
   report['allBrowsers'] = report['allBrowsers'].sort.map(&:upcase).join(',')
 
-  File.write('result.json', "#{report.to_json}\n")
+  File.open('result.json', 'a') { |f| f.write "},#{report.to_json[1..]}" }
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
-def prepare_data_for_first_session(report, user)
-  report['usersStats'][user] = {}
-  report['usersStats'][user]['sessionsCount'] = 0
-  report['usersStats'][user]['totalTime'] = 0
-  report['usersStats'][user]['longestSession'] = 0
-  report['usersStats'][user]['browsers'] = []
-  report['usersStats'][user]['usedIE'] = false
-  report['usersStats'][user]['dates'] = []
+def prepare_data_for_first_session(user)
+  @user_data = {}
+  @user_data['sessionsCount'] = 0
+  @user_data['totalTime'] = 0
+  @user_data['longestSession'] = 0
+  @user_data['browsers'] = []
+  @user_data['usedIE'] = false
+  @user_data['alwaysUsedChrome'] = true
+  @user_data['dates'] = []
 end
 
-def update_data_for_user(report, user)
-  report['usersStats'][user]['browsers'] = report['usersStats'][user]['browsers'].sort.join(', ')
-  report['usersStats'][user]['dates'] = report['usersStats'][user]['dates'].sort.reverse
-  report['usersStats'][user]['totalTime'] = "#{report['usersStats'][user]['totalTime']} min."
-  report['usersStats'][user]['longestSession'] = "#{report['usersStats'][user]['longestSession']} min."
+def write_user_data(report, user, symbol = ',')
+  @user_data['browsers'] = @user_data['browsers'].sort.join(', ')
+  @user_data['dates'] = @user_data['dates'].sort.reverse
+  @user_data['totalTime'] = "#{@user_data['totalTime']} min."
+  @user_data['longestSession'] = "#{@user_data['longestSession']} min."
+
+  File.open('result.json', 'a') { |f| f.write %("#{user}": #{@user_data.to_json}#{symbol}) }
 end
 
 class TestMe < Minitest::Test
@@ -114,8 +115,6 @@ session,2,3,Chrome 20,84,2016-11-25
 end
 
 a = Time.now
-work('data80000.txt')
+work
 b = Time.now
 p b - a
-pp GC.stat
-

@@ -21,15 +21,11 @@ end
 def work(file = 'data80000.txt', disable_gc: false)
   GC.disable if disable_gc
 
-  report = {}
-  report['totalUsers'] = 0
-  report['uniqueBrowsersCount'] = 0
-  report['totalSessions'] = 0
-  report['allBrowsers'] = []
-  File.open('result.json', 'a') { |f| f.write '{ "usersStats": {' }
-
+  report = initial_report
+  prepare_result_json
   user = nil
   @user_data = nil
+
   File.foreach(file) do |line|
     if line.start_with?('user')
       write_user_data(report, user) if @user_data
@@ -60,6 +56,17 @@ def work(file = 'data80000.txt', disable_gc: false)
 
   File.open('result.json', 'a') { |f| f.write "},#{report.to_json[1..]}" }
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+end
+
+def initial_report
+  { 'totalUsers' => 0,
+    'uniqueBrowsersCount' => 0,
+    'totalSessions' => 0,
+    'allBrowsers' => [] }
+end
+
+def prepare_result_json
+  File.open('result.json', 'a') { |f| f.write '{ "usersStats": {' }
 end
 
 def prepare_data_for_first_session(user)

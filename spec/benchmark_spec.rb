@@ -36,3 +36,11 @@ session,2,3,Chrome 20,84,2016-11-25
     expect(result).to eq(JSON.parse(File.read('result.json')))
   end
 end
+
+describe 'Performance' do
+  describe 'with 10000 rows' do
+    it 'allocate 10 MB of memory' do
+      expect { work(file: 'test_data.txt') }.to perform_allocation(10 * 1024 * 1024).bytes
+    end
+  end
+end

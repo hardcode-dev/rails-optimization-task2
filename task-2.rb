@@ -32,6 +32,7 @@ def work(file:)
   json_file.write('{"usersStats":{')
   File.foreach(file, chomp: true) do |line|
     cols = line.split(',')
+    # данные пользователей
     if cols[0] == 'user'
       if user_key
         data = {
@@ -60,6 +61,7 @@ def work(file:)
       next
     end
 
+    # данные сессий
     browser = cols[3].upcase
     time = cols[4].to_i
     user_browsers << browser

@@ -57,7 +57,12 @@ allocated memory by location
     
 sessions = sessions + [parse_session(line)] if cols[0] == 'session'
 ```
-- Как мы видим, здесь происходит
+- Переписываю этот конструкт на следующую строку
+```
+sessions = sessions.push(parse_session(line)) if cols[0] == 'session'
+```
+
+
 - как изменилась метрика
 - как изменился отчёт профилировщика
 

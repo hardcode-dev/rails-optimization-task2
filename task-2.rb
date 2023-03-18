@@ -1,7 +1,6 @@
 # Deoptimized version of homework task
 
 require 'json'
-require 'pry'
 require 'date'
 
 class User
@@ -50,8 +49,8 @@ def work(filename)
 
   file_lines.each do |line|
     cols = line.split(',')
-    users = users + [parse_user(line)] if cols[0] == 'user'
-    sessions = sessions + [parse_session(line)] if cols[0] == 'session'
+    users.push(parse_user(line)) if cols[0] == 'user'
+    sessions.push(parse_session(line)) if cols[0] == 'session'
   end
 
   # Отчёт в json

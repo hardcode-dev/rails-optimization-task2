@@ -14,3 +14,4 @@ gem 'stackprof'
 # Tests
 gem 'rspec'
 gem 'rspec-benchmark'
+gem 'minitest'

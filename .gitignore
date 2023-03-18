@@ -1,0 +1,10 @@
+data/
+
+ruby_prof_reports/
+stackprof_reports/
+
+ruby_prof.rb
+ruby_prof_grind.rb
+stackprof.rb
+stackprof_speedscope.rb
+memory_profiler.rb

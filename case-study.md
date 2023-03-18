@@ -59,12 +59,20 @@ sessions = sessions + [parse_session(line)] if cols[0] == 'session'
 ```
 - Переписываю этот конструкт на следующую строку
 ```
-sessions = sessions.push(parse_session(line)) if cols[0] == 'session'
+sessions.push(parse_session(line)) if cols[0] == 'session'
 ```
-
-
-- как изменилась метрика
-- как изменился отчёт профилировщика
+- Метрика немного улучшилась. 
+```
+Было
+MEMORY USAGE: 122 MB
+Completed in 5.732 ms
+```
+```
+Стало: 
+MEMORY USAGE: 95 MB
+Completed in 5.512 ms
+```
+- Точка роста поменялась, тесты проходят, поэтому меняю значения тестов для защиты от регресса и начинаю новый цикл.
 
 ### Ваша находка №2
 - какой отчёт показал главную точку роста

@@ -9,5 +9,5 @@ def time(&block)
   puts "Completed in #{time.round(3)} ms"
 end
 
-time { work("data/data_20000_lines.txt") }
+time { work("data/data_large.txt") }
 

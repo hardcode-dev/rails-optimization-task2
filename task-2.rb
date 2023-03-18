@@ -1,4 +1,7 @@
-# Deoptimized version of homework task
+COMMA = ','.freeze
+SPACE = ' '.freeze
+SESSION = 'session'.freeze
+USER = 'user'.freeze
 
 require 'json'
 require 'date'
@@ -73,13 +76,13 @@ def work(filename)
 
 
   file_lines.each do |line|
-    cols = line.split(',')
+    cols = line.split(COMMA)
 
-    if cols[0] == 'user'
+    if cols[0] == USER
       user = parse_user(cols)
       users << user
     end
-    if cols[0] == 'session'
+    if cols[0] == SESSION
       session = parse_session(cols)
       report[:totalSessions] += 1
       user[:sessions] << session
@@ -106,7 +109,7 @@ def work(filename)
 
   # Подсчёт количества уникальных браузеров
   report[:uniqueBrowsersCount] = unique_browsers.count
-  report[:allBrowsers] = unique_browsers.map(&:upcase).sort.join(',')
+  report[:allBrowsers] = unique_browsers.map(&:upcase).sort.join(COMMA)
 
   # Статистика по пользователям
   collect_stats_from_users(report, users)

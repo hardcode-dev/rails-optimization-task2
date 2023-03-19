@@ -59,14 +59,6 @@ def work(path = 'data.txt')
     sessions << parse_session(line) if cols[0] == 'session'
   end
 
-  # File.open(path, 'r') do |f|
-  #   f.each_line do |line|
-  #     cols = line.split(',')
-  #     users = users + [parse_user(line)] if cols[0] == 'user'
-  #     sessions = sessions + [parse_session(line)] if cols[0] == 'session'
-  #   end
-  # end
-
   # Отчёт в json
   #   - Сколько всего юзеров +
   #   - Сколько всего уникальных браузеров +
@@ -108,11 +100,14 @@ def work(path = 'data.txt')
   # Статистика по пользователям
   users_objects = []
 
+  session_objects = {}
+  sessions.each do |session|
+    session_objects[session['user_id']] ||= []
+    session_objects[session['user_id']] << session
+  end
   users.each do |user|
-    attributes = user
-    user_sessions = sessions.select { |session| session['user_id'] == user['id'] }
-    user_object = User.new(attributes: attributes, sessions: user_sessions)
-    users_objects = users_objects + [user_object]
+    user_object = User.new(attributes: user, sessions: session_objects[user['id']])
+    users_objects << user_object
   end
 
   report['usersStats'] = {}

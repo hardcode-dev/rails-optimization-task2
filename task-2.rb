@@ -7,8 +7,7 @@ require 'minitest/autorun'
 require 'memory_profiler'
 require 'set'
 
-def parse_user(user)
-  fields = user.split(',')
+def parse_user(fields)
   parsed_result = {
     'id' => fields[1],
     'first_name' => fields[2],
@@ -17,8 +16,7 @@ def parse_user(user)
   }
 end
 
-def parse_session(session)
-  fields = session.split(',')
+def parse_session(fields)
   parsed_result = {
     'user_id' => fields[1],
     'session_id' => fields[2],
@@ -45,13 +43,12 @@ def work(file)
   totalSessions = 0
 
   file_lines.each do |line|
-    cols = line.split(',')
+    fields = line.split(',')
 
-    if cols[0] == 'user'
-      user = parse_user(line)
-      users << parse_user(line)
+    if fields[0] == 'user'
+      users << parse_user(fields)
     else
-      session = parse_session(line)
+      session = parse_session(fields)
       sessions[session['user_id']] ||= []
       sessions[session['user_id']] << session
       uniqueBrowsers << session['browser']

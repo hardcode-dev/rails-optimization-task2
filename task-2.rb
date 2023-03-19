@@ -44,16 +44,30 @@ def collect_stats_from_users(report, users_objects, &block)
 end
 
 def work(path = 'data.txt')
-  file_lines = File.read(path).split("\n")
-
   users = []
   sessions = []
 
-  file_lines.each do |line|
+  # file_lines = File.read(path).split("\n")
+  #
+  # file_lines.each do |line|
+  #   cols = line.split(',')
+  #   users = users + [parse_user(line)] if cols[0] == 'user'
+  #   sessions = sessions + [parse_session(line)] if cols[0] == 'session'
+  # end
+
+  File.foreach(path) do |line|
     cols = line.split(',')
     users = users + [parse_user(line)] if cols[0] == 'user'
     sessions = sessions + [parse_session(line)] if cols[0] == 'session'
   end
+
+  # File.open(path, 'r') do |f|
+  #   f.each_line do |line|
+  #     cols = line.split(',')
+  #     users = users + [parse_user(line)] if cols[0] == 'user'
+  #     sessions = sessions + [parse_session(line)] if cols[0] == 'session'
+  #   end
+  # end
 
   # Отчёт в json
   #   - Сколько всего юзеров +
@@ -140,6 +154,6 @@ def work(path = 'data.txt')
     { 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }
   end
 
-  File.write('result.json', "#{report.to_json}\n")
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  File.write('result.json', "#{report.to_json}\n")
 end

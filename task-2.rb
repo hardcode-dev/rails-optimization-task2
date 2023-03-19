@@ -1,9 +1,7 @@
 # Deoptimized version of homework task
 
 require 'json'
-require 'pry'
 require 'date'
-require 'minitest/autorun'
 
 class User
   attr_reader :attributes, :sessions
@@ -20,7 +18,7 @@ def parse_user(user)
     'id' => fields[1],
     'first_name' => fields[2],
     'last_name' => fields[3],
-    'age' => fields[4],
+    'age' => fields[4]
   }
 end
 
@@ -31,7 +29,7 @@ def parse_session(session)
     'session_id' => fields[2],
     'browser' => fields[3],
     'time' => fields[4],
-    'date' => fields[5],
+    'date' => fields[5]
   }
 end
 
@@ -57,8 +55,8 @@ def work(path = 'data.txt')
 
   File.foreach(path) do |line|
     cols = line.split(',')
-    users = users + [parse_user(line)] if cols[0] == 'user'
-    sessions = sessions + [parse_session(line)] if cols[0] == 'session'
+    users << parse_user(line) if cols[0] == 'user'
+    sessions << parse_session(line) if cols[0] == 'session'
   end
 
   # File.open(path, 'r') do |f|

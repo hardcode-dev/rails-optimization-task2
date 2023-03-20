@@ -7,92 +7,63 @@ require 'minitest/autorun'
 require 'memory_profiler'
 require 'set'
 
-def parse_user(fields)
-  parsed_result = {
-    'id' => fields[1],
-    'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4],
-  }
-end
-
 def parse_session(fields)
   parsed_result = {
     'user_id' => fields[1],
     'session_id' => fields[2],
-    'browser' => fields[3].upcase,
-    'time' => fields[4],
+    'browser' => fields[3].upcase!,
+    'time' => fields[4].to_i,
     'date' => fields[5],
   }
 end
 
-def collect_stats_from_users(report, users_objects, &block)
-  users_objects.each do |user|
-    user_key = "#{user['first_name']} #{user['last_name']}"
-    report['usersStats'][user_key] ||= {}
-    report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
-  end
+def stats_for_user(sessions)
+  times = sessions.map { |s| s['time'] }
+  browsers = sessions.map { |s| s['browser'] }.sort
+
+  {
+    'sessionsCount' => sessions.count,
+    'totalTime' => "#{times.sum} min.",
+    'longestSession' => "#{times.max} min.",
+    'browsers' => browsers.join(', '),
+    'usedIE' => browsers.any? { |b| b =~ /INTERNET EXPLORER/ },
+    'alwaysUsedChrome' => browsers.all? { |b| b =~ /CHROME/ },
+    'dates' => sessions.map { |s| s['date'] }.sort.reverse
+  }
 end
 
 def work(file)
   file_lines = File.read(file).split("\n")
 
-  users = []
-  sessions = {}
+  report = { 'usersStats' => {} }
+  user_key = nil
+  user_sessions = nil
   uniqueBrowsers = Set.new
   totalSessions = 0
+  totalUsers = 0
 
   file_lines.each do |line|
     fields = line.split(',')
 
     if fields[0] == 'user'
-      users << parse_user(fields)
+      report['usersStats'][user_key] = stats_for_user(user_sessions) unless user_key.nil?
+
+      user_key = "#{fields[2]} #{fields[3]}"
+      user_sessions = []
+      totalUsers += 1
     else
       session = parse_session(fields)
-      sessions[session['user_id']] ||= []
-      sessions[session['user_id']] << session
+      user_sessions << session
       uniqueBrowsers << session['browser']
       totalSessions += 1
     end
   end
+  report['usersStats'][user_key] = stats_for_user(user_sessions)
 
-  # Отчёт в json
-  #   - Сколько всего юзеров +
-  #   - Сколько всего уникальных браузеров +
-  #   - Сколько всего сессий +
-  #   - Перечислить уникальные браузеры в алфавитном порядке через запятую и капсом +
-  #
-  #   - По каждому пользователю
-  #     - сколько всего сессий +
-  #     - сколько всего времени +
-  #     - самая длинная сессия +
-  #     - браузеры через запятую +
-  #     - Хоть раз использовал IE? +
-  #     - Всегда использовал только Хром? +
-  #     - даты сессий в порядке убывания через запятую +
-
-  report = {}
-
-  report[:totalUsers] = users.count
+  report['totalUsers'] = totalUsers
   report['uniqueBrowsersCount'] = uniqueBrowsers.count
   report['totalSessions'] = totalSessions
   report['allBrowsers'] = uniqueBrowsers.sort.join(',')
-  report['usersStats'] = {}
-
-  # Собираем количество сессий по пользователям
-  collect_stats_from_users(report, users) do |user|
-    user_sessions = sessions[user['id']]
-
-    {
-      'sessionsCount' => user_sessions.count,
-      'totalTime' => user_sessions.map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.',
-      'longestSession' => user_sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.',
-      'browsers' => user_sessions.map {|s| s['browser']}.map {|b| b}.sort.join(', '),
-      'usedIE' => user_sessions.map{|s| s['browser']}.any? { |b| b =~ /INTERNET EXPLORER/ },
-      'alwaysUsedChrome' => user_sessions.map{|s| s['browser']}.all? { |b| b =~ /CHROME/ },
-      'dates' => user_sessions.map { |s| s['date'] }.sort.reverse
-    }
-  end
 
   File.write('result.json', "#{report.to_json}\n")
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)

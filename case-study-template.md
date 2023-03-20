@@ -94,7 +94,7 @@ call_stack:
 в неприлично разбухающем количестве select-массивов при итерации юзеров. Поэтому заменил их промежуточным хэшем с одним проходом по sessions, из которого потом удобно формировать хэш юзеров.
 
 - как изменилась метрика
-# MEMORY USAGE: 64 MB: в 3 раза
+# MEMORY USAGE: 65 MB: в 3 раза
 # Finish in 0.38
 
 - как изменился отчёт профилировщика
@@ -107,10 +107,27 @@ allocated memory by class
 
 ### Ваша находка №3
 - какой отчёт показал главную точку роста
+Возвращаемся к отчетам ruby-prof, который теперь более показательные чем memory-profiler
+memory-profiler:
+48.05 MB - #map
+56% - Object#collect_stats_from_users
+  -> Array#each
+    -> Array#map
+      -> Date#parse
+call_stack:
+Array#map [67551 calls, 67553 total]
 
+Слишком много map
 - как вы решили её оптимизировать
-- как изменилась метрика
+Убираем лишние maps при вызовах Object#collect_stats_from_users, также уберем Date.parse
+
+- как изменилась метрика: меньше, чем хотелось бы
+MEMORY USAGE: 53 MB
+Finish in 0.25
+
 - как изменился отчёт профилировщика
+18% - Object#collect_stats_from_users
+Array#map [6141 calls, 12284 total]
 
 ### Ваша находка №4
 - какой отчёт показал главную точку роста

@@ -22,8 +22,12 @@ require_relative 'task-2'
 # Finish in 16.95
 
 # 2.
-# MEMORY USAGE: 63 MB
+# MEMORY USAGE: 65 MB
 # Finish in 0.39
+
+# 3.
+# MEMORY USAGE: 53 MB
+# Finish in 0.25
 
 time = Benchmark.realtime do |x|
   work('data/data_40k.txt')

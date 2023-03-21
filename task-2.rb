@@ -3,15 +3,6 @@
 require 'json'
 require 'date'
 
-class User
-  attr_reader :attributes, :sessions
-
-  def initialize(attributes:, sessions:)
-    @attributes = attributes
-    @sessions = sessions
-  end
-end
-
 def parse_user(user_data)
   {
     'id' => user_data[1],
@@ -66,57 +57,64 @@ def dates(sessions)
   sessions.map { |s| s['date'] }.sort.reverse
 end
 
-def collect_stats_from_users(report, users, sessions)
-  users.each do |user|
-    user_object = User.new(attributes: user, sessions: sessions[user['id']])
-    user_key = "#{user_object.attributes['first_name']}" + ' ' + "#{user_object.attributes['last_name']}"
-    user_sessions = user_object.sessions
-    # next unless user_sessions
-
-    browsers = user_sessions.map { |s| s['browser'] }
-    report['usersStats'][user_key] ||= {
-      'sessionsCount' => sessions_count(user_sessions),
-      'totalTime' => total_time(user_sessions),
-      'longestSession' => longest_session(user_sessions),
+def collect_stats_from_user(user_key, sessions)
+  browsers = sessions.map { |s| s['browser'] }
+  {
+    user_key => {
+      'sessionsCount' => sessions_count(sessions),
+      'totalTime' => total_time(sessions),
+      'longestSession' => longest_session(sessions),
       'browsers' => browsers(browsers),
       'usedIE' => used_ie(browsers),
       'alwaysUsedChrome' => always_used_chrome(browsers),
-      'dates' => dates(user_sessions)
+      'dates' => dates(sessions)
     }
-  end
+  }
 end
 
 def work(path = 'data.txt')
-  users = []
-  sessions = {}
+  sessions = []
+  user_key = ''
+
   unique_browsers = Set.new
   sessions_count = 0
-  report = {}
+  users_count = 0
+
+  File.write('result.json', '{"usersStats":{')
 
   File.foreach(path) do |line|
     data = line.chomp!.split(',')
     head = data.first
+
     if head == 'user'
-      users << parse_user(data)
+      if sessions.any?
+        user_data = collect_stats_from_user(user_key, sessions)
+        File.write('result.json', [user_data.to_json[1..-2], ','].join, mode: 'a')
+        sessions.clear
+      end
+
+      user = parse_user(data)
+      user_key = "#{user['first_name']} #{user['last_name']}"
+      users_count += 1
     elsif head == 'session'
       session = parse_session(data)
-      sessions[session['user_id']] ||= []
-      sessions[session['user_id']] << session
+      sessions << session
 
-      unique_browsers.add session['browser']
       sessions_count += 1
+      unique_browsers.add session['browser']
     end
   end
+  user_data = collect_stats_from_user(user_key, sessions)
+  File.write('result.json', [user_data.to_json[1..-2], '},'].join, mode: 'a') if sessions.any?
 
-  report['totalUsers'] = users.count
+  report = {}
+
+  report['totalUsers'] = users_count
   report['uniqueBrowsersCount'] = unique_browsers.count
   report['totalSessions'] = sessions_count
   report['allBrowsers'] = unique_browsers.sort.join(',')
 
-  report['usersStats'] = {}
-
-  collect_stats_from_users(report, users, sessions)
+  File.write('result.json', report.to_json[1...], mode: 'a')
 
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
-  File.write('result.json', "#{report.to_json}\n")
 end

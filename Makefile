@@ -1,9 +1,6 @@
 test:
 	ruby test_me.rb
 
-check:
-	rspec performance.rb
-
 bm:
 	ruby benchmarking.rb
 
@@ -24,14 +21,5 @@ prof-call_grind:
 
 prof-call_grind_read:
 	qcachegrind ruby_prof_reports/callgrind.out.${P}
-
-# stackprof:
-# 	ruby stackprof.rb
-#
-# stackprof_read:
-# 	cd stackprof_reports && stackprof stackprof.dump
-
-# stackprof_speedscope:
-# 	ruby stackprof_speedscope.rb
 
 .PHONY:	test

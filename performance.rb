@@ -7,22 +7,10 @@ RSpec.configure do |config|
 end
 
 describe 'basic work' do
-  let(:filepath) { 'data/data_40k.txt' }
+  let(:filepath) { 'data/data_test.txt' }
 
-  # start point: 15.48s
-  # end point: 0.1s
-
-  # it 'eats less than 400MB' do
-  #   bench_malloc = Benchmark::Malloc.new
-  #   stats = bench_malloc.run { work(filepath) }
-  #
-  #   expect(stats.allocated.total_memory).to eq 70_000_000
-  # end
-
-  it 'eats less than 70MB' do
+  it 'eats less than 30MB' do
     expect { work(filepath) }
-      .to perform_allocation(7_000_000_000).bytes
+      .to perform_allocation(30_000_000).bytes
   end
-  # 6_698_500_030
-  # 7_000_000
 end

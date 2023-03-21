@@ -187,5 +187,15 @@ Finish in 15.81
 *Какими ещё результами можете поделиться*
 String#split - тяжелый, Array#<< - эффективный, потоки хороши (как обычно), всегда смотри что оптимизруешь)
 
+Massif
+❯ ./profile.sh
+==1== Massif, a heap profiler
+==1== Copyright (C) 2003-2015, and GNU GPL'd, by Nicholas Nethercote
+==1== Using Valgrind-3.12.0.SVN and LibVEX; rerun with -h for copyright info
+==1== Command: ruby main.rb
+==1== 
+MEMORY USAGE: 52 MB (37 MB on Visualizer)
+==1== 
+
 ## Защита от регрессии производительности
 Для защиты от потери достигнутого прогресса при дальнейших изменениях программы *о performance-тестах, которые вы написали*: perormance.rb

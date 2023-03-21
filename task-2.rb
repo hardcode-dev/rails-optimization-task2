@@ -2,6 +2,7 @@
 
 require 'json'
 require 'date'
+require 'set'
 
 def parse_user(user_data)
   {

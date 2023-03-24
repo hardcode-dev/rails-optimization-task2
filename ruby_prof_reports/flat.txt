@@ -1,0 +1,61 @@
+Measure Mode: memory
+Thread ID: 1160
+Fiber ID: 1140
+Total: 386282000.000000
+Sort by: self_time
+
+ %self      total      self      wait     child     calls  name                           location
+ 70.89  273849200.000 273849200.000     0.000     0.000  1000000   String#split                   
+ 11.95  386280400.000 46150880.000     0.000 340129520.000        1   <Class::IO>#foreach            
+  7.93  47858440.000 30645400.000     0.000 17213040.000   153770   User#report_values             /opt/app/task-2.rb:45
+  3.18  12301680.000 12301680.000     0.000     0.000   153771   User#reset_values!             /opt/app/task-2.rb:14
+  2.86  11062280.000 11062280.000     0.000     0.000   307541   Array#sort!                    
+  1.59  6150840.000 6150840.000     0.000     0.000   153771   Array#join                     
+  1.58  6120640.000 6120640.000     0.000     0.000  1153772   Hash#[]=                       
+  0.00    480.000   480.000     0.000     0.000        1   Kernel#`                       
+  0.00  386281960.000   200.000     0.000 386281760.000        1   Object#work                    /opt/app/task-2.rb:70
+  0.00    160.000   160.000     0.000     0.000        1   <Class::IO>#write              
+  0.00     80.000    80.000     0.000     0.000        1   JSON::Ext::Generator::GeneratorMethods::Hash#to_json 
+  0.00     40.000    40.000     0.000     0.000        1   IO#write                       
+  0.00  386282000.000    40.000     0.000 386281960.000        1   [global]#                      task-2-ruby-prof.rb:8
+  0.00    120.000    40.000     0.000    80.000        1   Class#new                      
+  0.00     40.000    40.000     0.000     0.000        1   String#%                       
+  0.00      0.000     0.000     0.000     0.000   153770   Array#reverse!                 
+  0.00      0.000     0.000     0.000     0.000   639389   String#include?                
+  0.00      0.000     0.000     0.000     0.000   846230   User#add_session               /opt/app/task-2.rb:31
+  0.00      0.000     0.000     0.000     0.000  1692660   Array#<<                       
+  0.00      0.000     0.000     0.000     0.000   846230   Array#include?                 
+  0.00      0.000     0.000     0.000     0.000   846230   Array#[]=                      
+  0.00     40.000     0.000     0.000    40.000        1   IO#puts                        
+  0.00      0.000     0.000     0.000     0.000   846230   Integer#>                      
+  0.00      0.000     0.000     0.000     0.000   846230   String#upcase!                 
+  0.00      0.000     0.000     0.000     0.000  2692460   Integer#+                      
+  0.00      0.000     0.000     0.000     0.000  2000203   Hash#[]                        
+  0.00      0.000     0.000     0.000     0.000  7207791   Array#[]                       
+  0.00      0.000     0.000     0.000     0.000        1   <Module::Process>#pid          
+  0.00      0.000     0.000     0.000     0.000   846231   String#to_i                    
+  0.00      0.000     0.000     0.000     0.000  1000000   String#strip!                  
+  0.00      0.000     0.000     0.000     0.000  1846230   String#start_with?             
+  0.00      0.000     0.000     0.000     0.000        1   JSON::Ext::Generator::State#initialize 
+  0.00     80.000     0.000     0.000    80.000        1   User#initialize                /opt/app/task-2.rb:10
+  0.00      0.000     0.000     0.000     0.000        1   Array#size                     
+  0.00      0.000     0.000     0.000     0.000        1   Integer#/                      
+  0.00     40.000     0.000     0.000    40.000        1   Kernel#puts                    
+
+* recursively called methods
+
+Columns are:
+
+  %self     - The percentage of time spent in this method, derived from self_time/total_time.
+  total     - The time spent in this method and its children.
+  self      - The time spent in this method.
+  wait      - The amount of time this method waited for other threads.
+  child     - The time spent in this method's children.
+  calls     - The number of times this method was called.
+  name      - The name of the method.
+  location  - The location of the method.
+
+The interpretation of method names is:
+
+  * MyObject#test - An instance method "test" of the class "MyObject"
+  * <Object:MyObject>#test - The <> characters indicate a method on a singleton class.

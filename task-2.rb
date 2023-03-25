@@ -31,6 +31,8 @@ def stats_for_user(sessions)
 end
 
 def work(file)
+  puts "Start"
+
   uniqueBrowsers = Set.new
   totalSessions = 0
   totalUsers = 0
@@ -61,6 +63,7 @@ def work(file)
       totalSessions += 1
     end
   end
+
   writer.push_value(stats_for_user(user_sessions), user_key)
   writer.pop
 
@@ -73,4 +76,5 @@ def work(file)
   result_file.close
 
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  puts "Finish"
 end

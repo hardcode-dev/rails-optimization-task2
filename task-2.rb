@@ -6,8 +6,11 @@ require 'json'
 require 'pry'
 require 'date'
 require 'minitest/autorun'
-require 'memory_profiler'
 require 'set'
+require 'oj'
+
+require 'memory_profiler'
+require 'ruby-prof'
 
 def parse_session(fields)
   parsed_result = {
@@ -21,7 +24,7 @@ end
 
 def stats_for_user(sessions)
   times = sessions.map { |s| s['time'] }
-  browsers = sessions.map { |s| s['browser'] }.sort
+  browsers = sessions.map { |s| s['browser'] }.sort!
 
   {
     'sessionsCount' => sessions.count,
@@ -30,25 +33,30 @@ def stats_for_user(sessions)
     'browsers' => browsers.join(', '),
     'usedIE' => browsers.any? { |b| b =~ /INTERNET EXPLORER/ },
     'alwaysUsedChrome' => browsers.all? { |b| b =~ /CHROME/ },
-    'dates' => sessions.map { |s| s['date'] }.sort.reverse
+    'dates' => sessions.map { |s| s['date'] }.sort!.reverse!
   }
 end
 
 def work(file)
-  file_lines = File.read(file).split("\n")
-
-  report = { 'usersStats' => {} }
-  user_key = nil
-  user_sessions = nil
   uniqueBrowsers = Set.new
   totalSessions = 0
   totalUsers = 0
 
-  file_lines.each do |line|
+  user_key = nil
+  user_sessions = nil
+
+  result_file = File.open('result.json', 'a')
+
+  writer = Oj::StreamWriter.new(result_file)
+  writer.push_object
+  writer.push_key('usersStats')
+  writer.push_object
+
+  IO.foreach(file, chomp: true) do |line|
     fields = line.split(',')
 
     if fields[0] == 'user'
-      report['usersStats'][user_key] = stats_for_user(user_sessions) unless user_key.nil?
+      writer.push_value(stats_for_user(user_sessions), user_key) unless user_key.nil?
 
       user_key = "#{fields[2]} #{fields[3]}"
       user_sessions = []
@@ -60,14 +68,17 @@ def work(file)
       totalSessions += 1
     end
   end
-  report['usersStats'][user_key] = stats_for_user(user_sessions)
+  writer.push_value(stats_for_user(user_sessions), user_key)
+  writer.pop
 
-  report['totalUsers'] = totalUsers
-  report['uniqueBrowsersCount'] = uniqueBrowsers.count
-  report['totalSessions'] = totalSessions
-  report['allBrowsers'] = uniqueBrowsers.sort.join(',')
+  writer.push_value(totalUsers, 'totalUsers')
+  writer.push_value(uniqueBrowsers.count, 'uniqueBrowsersCount')
+  writer.push_value(totalSessions, 'totalSessions')
+  writer.push_value(uniqueBrowsers.sort.join(','), 'allBrowsers')
+  writer.pop
 
-  File.write('result.json', "#{report.to_json}\n")
+  result_file.close
+
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
@@ -104,10 +115,11 @@ session,2,3,Chrome 20,84,2016-11-25
   end
 
   def test_report
-    report = MemoryProfiler.report do
+    result = RubyProf.profile(measure_mode: RubyProf::MEMORY) do
       work("data_80k.txt")
     end
 
-    report.pretty_print
+    printer = RubyProf::GraphPrinter.new(result)
+    printer.print(STDOUT, {})
   end
 end

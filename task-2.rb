@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Deoptimized version of homework task
 
 require 'json'
@@ -103,7 +105,7 @@ session,2,3,Chrome 20,84,2016-11-25
 
   def test_report
     report = MemoryProfiler.report do
-      work("data_8k.txt")
+      work("data_80k.txt")
     end
 
     report.pretty_print

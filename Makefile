@@ -17,3 +17,9 @@ remove_data_files:
 
 test:
 	rspec specs
+
+work:
+	ruby work.rb
+
+work_with_progressbar:
+	ruby work_with_progressbar.rb

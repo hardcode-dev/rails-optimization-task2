@@ -1,3 +1,9 @@
+install:
+	bundle install
+
+install_imgcat:
+	brew install eddieantonio/eddieantonio/imgcat
+
 generate_data_files:
 	mkdir data
 	gzcat data_large.txt.gz > data/data_large.txt
@@ -23,3 +29,16 @@ work:
 
 work_with_progressbar:
 	ruby work_with_progressbar.rb
+
+# reports:
+
+profile_stackprof:
+	ruby reports/stackprof/profile.rb
+
+show_stackprof:
+	stackprof reports/stackprof/report.dump
+
+show_stackprof_graph:
+	stackprof --graphviz reports/stackprof/report.dump > reports/stackprof/graphviz.dot
+	dot -Tpng reports/stackprof/graphviz.dot > reports/stackprof/graphviz.png
+	imgcat reports/stackprof/graphviz.png

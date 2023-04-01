@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require 'json'
-require 'pry'
-require 'date'
 require 'ruby-progressbar'
 
 class User
@@ -13,6 +11,21 @@ class User
     @sessions = sessions
   end
 end
+
+# Отчёт в json
+#   - Сколько всего юзеров +
+#   - Сколько всего уникальных браузеров +
+#   - Сколько всего сессий +
+#   - Перечислить уникальные браузеры в алфавитном порядке через запятую и капсом +
+#
+#   - По каждому пользователю
+#     - сколько всего сессий +
+#     - сколько всего времени +
+#     - самая длинная сессия +
+#     - браузеры через запятую +
+#     - Хоть раз использовал IE? +
+#     - Всегда использовал только Хром? +
+#     - даты сессий в порядке убывания через запятую +
 
 def work(file: nil, disable_gc: false, progressbar_use: false)
   file ||= ENV['DATA_FILE'] || 'data.txt'
@@ -28,39 +41,27 @@ def work(file: nil, disable_gc: false, progressbar_use: false)
   @users = []
   @sessions = []
 
-  file_lines.each do |line|
-    cols = line.split(',')
+  File.open('data/result.json', 'w') do |json|
+    IO.foreach(file, chomp: true) do |line|
+      cols = line.split(',')
 
-    if cols[0] == 'user'
-      attributes = parse_user(cols)
-      @users << User.new(attributes: attributes, sessions: [])
-    else
-      session = parse_session(cols)
-      @users.last.sessions << session
-      @sessions << session
+      if cols[0] == 'user'
+        attributes = parse_user(cols)
+        @users << User.new(attributes: attributes, sessions: [])
+      else
+        session = parse_session(cols)
+        @users.last.sessions << session
+        @sessions << session
+      end
+
+      @progressbar.increment if progressbar_use
     end
 
-    @progressbar.increment if progressbar_use
+    collect_report_for_users
+
+    json.write(report.to_json)
   end
 
-  # Отчёт в json
-  #   - Сколько всего юзеров +
-  #   - Сколько всего уникальных браузеров +
-  #   - Сколько всего сессий +
-  #   - Перечислить уникальные браузеры в алфавитном порядке через запятую и капсом +
-  #
-  #   - По каждому пользователю
-  #     - сколько всего сессий +
-  #     - сколько всего времени +
-  #     - самая длинная сессия +
-  #     - браузеры через запятую +
-  #     - Хоть раз использовал IE? +
-  #     - Всегда использовал только Хром? +
-  #     - даты сессий в порядке убывания через запятую +
-
-  collect_report_for_users
-
-  File.write('data/result.json', "#{report.to_json}\n")
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
@@ -122,7 +123,7 @@ end
 
 def report
   @report ||= {
-    totalUsers: @users.count,
+    'totalUsers' => @users.count,
     'uniqueBrowsersCount' => uniqueBrowsers.count,
     'totalSessions' => @sessions.count,
     'allBrowsers' => all_browsers,

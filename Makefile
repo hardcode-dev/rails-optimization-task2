@@ -24,8 +24,8 @@ test:
 work:
 	ruby work.rb
 
-work_with_progressbar:
-	ruby work_with_progressbar.rb
+profile_memory_profiler:
+	ruby reports/memory-profiler/profile.rb
 
 # ========================= #
 # Stackprof
@@ -65,7 +65,7 @@ install_xquartz:
 
 valgrind_build:
 	export USER=$(id -un)
-	reports/docker-valgrind-massif/build-docker.sh
+	reports/docker-valgrind-massif/docker-build.sh
 
 run_socat:
 	socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\"

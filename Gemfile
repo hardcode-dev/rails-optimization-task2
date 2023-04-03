@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'json'
 gem 'ruby-progressbar'
+gem 'oj'
 
 # Profiles
 gem 'benchmark'

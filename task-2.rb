@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require 'json'
-require 'ruby-progressbar'
+require 'byebug'
+require 'oj'
 
 class User
   attr_reader :attributes, :sessions
@@ -9,6 +10,10 @@ class User
   def initialize(attributes:, sessions:)
     @attributes = attributes
     @sessions = sessions
+  end
+
+  def name
+    "#{attributes['first_name']} #{attributes['last_name']}"
   end
 end
 
@@ -27,57 +32,64 @@ end
 #     - Всегда использовал только Хром? +
 #     - даты сессий в порядке убывания через запятую +
 
-def work(file: nil, disable_gc: false, progressbar_use: false)
+def work(file: nil, disable_gc: false)
   file ||= ENV['DATA_FILE'] || 'data.txt'
 
   puts "Start work for file: #{file}"
 
   GC.disable if disable_gc
 
-  file_lines = File.read(file).split("\n")
-
-  progressbar_create(file_lines.count) if progressbar_use
-
-  @users = []
   @sessions = []
+  @uniq_browsers = Set.new
+  @total_users = 0
+  @total_sessions = 0
 
-  File.open('data/result.json', 'w') do |json|
-    IO.foreach(file, chomp: true) do |line|
-      cols = line.split(',')
+  result_file = File.open('data/result.json', 'w')
+  @result = Oj::StreamWriter.new(result_file)
 
-      if cols[0] == 'user'
-        attributes = parse_user(cols)
-        @users << User.new(attributes: attributes, sessions: [])
-      else
-        session = parse_session(cols)
-        @users.last.sessions << session
-        @sessions << session
+  @result.push_object
+  @result.push_key('usersStats')
+  @result.push_object
+
+  current_user = nil
+
+  IO.foreach(file, chomp: true) do |line|
+    cols = line.split(',')
+
+    if cols[0] == 'user'
+      if current_user != nil
+        data_for_user = collect_data_for_user(current_user)
+        @result.push_value(data_for_user, current_user.name)
+        current_user = nil
       end
 
-      @progressbar.increment if progressbar_use
+      attributes = parse_user(cols)
+      current_user = User.new(attributes: attributes, sessions: [])
+      @total_users += 1
+    else
+      session = parse_session(cols)
+      current_user.sessions << session
+      @uniq_browsers << session['browser'].upcase
+
+      @total_sessions += 1
     end
-
-    collect_report_for_users
-
-    json.write(report.to_json)
   end
+
+  @result.push_value(collect_data_for_user(current_user), current_user.name) # solution for last user
+  @result.pop
+
+  # write other keys
+  @result.push_value(@total_users, 'totalUsers')
+  @result.push_value(@total_sessions, 'totalSessions')
+  @result.push_value(@uniq_browsers.count, 'uniqueBrowsersCount')
+  @result.push_value(@uniq_browsers.sort.join(','), 'allBrowsers')
+  @result.pop
+
+  result_file.close
+
+  puts ObjectSpace.each_object(String).count # => 21197866
 
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
-end
-
-def progressbar_create(total_lines)
-  @progressbar = ProgressBar.create(
-    total: total_lines,
-    format: '%a, %J, %E %B'
-  )
-end
-
-def collect_stats_from_users(report, users_objects, &block)
-  users_objects.each do |user|
-    user_key = "#{user.attributes['first_name']}" + ' ' + "#{user.attributes['last_name']}"
-    report['usersStats'][user_key] ||= {}
-    report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
-  end
 end
 
 def parse_user(cols)
@@ -99,49 +111,16 @@ def parse_session(cols)
   }
 end
 
-def collect_report_for_users
-  @users.each do |user|
-    report['usersStats'][user_key(user)] = collect_data_for_user(user)
-  end
-end
-
-def user_key(user)
-  "#{user.attributes['first_name']} #{user.attributes['last_name']}"
-end
-
 def collect_data_for_user(user)
   {
-    sessionsCount: collect_sessions_count(user),
-    totalTime: collect_total_time(user),
-    longestSession: collect_longest_session(user),
-    browsers: collect_browsers(user),
-    usedIE: collect_used_ie(user),
-    alwaysUsedChrome: collect_always_used_chrome(user),
-    dates: collect_dates(user)
+    'sessionsCount' => collect_sessions_count(user),
+    'totalTime' => collect_total_time(user),
+    'longestSession' => collect_longest_session(user),
+    'browsers' => collect_browsers(user),
+    'usedIE' => collect_used_ie(user),
+    'alwaysUsedChrome' => collect_always_used_chrome(user),
+    'dates' => collect_dates(user)
   }
-end
-
-def report
-  @report ||= {
-    'totalUsers' => @users.count,
-    'uniqueBrowsersCount' => uniqueBrowsers.count,
-    'totalSessions' => @sessions.count,
-    'allBrowsers' => all_browsers,
-    'usersStats' => {}
-  }
-end
-
-def uniqueBrowsers
-  @uniqueBrowsers ||= @sessions.map { |s| s['browser'] }.uniq
-end
-
-def all_browsers
-  @sessions
-      .map { |s| s['browser'] }
-      .map { |b| b.upcase }
-      .sort
-      .uniq
-      .join(',')
 end
 
 def collect_sessions_count(user)

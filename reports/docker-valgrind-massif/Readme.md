@@ -47,7 +47,7 @@ docker run -d -ti --rm \
 ## Run
 
 ```bash
-./build-docker.sh # собрать докер-image по Dockerfile
+./docker-build.sh # собрать докер-image по Dockerfile
 ./profile.sh # выполнить профилирование в valgrind
 ./visualize.sh # открыть окно massif-visualizer, там открыть файл, полученный на шаге profile (massif.out.1)
 ```

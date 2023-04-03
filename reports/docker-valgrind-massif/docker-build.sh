@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build . -t maksimpw/valgrind
+docker build $(pwd)/reports/docker-valgrind-massif -t maksimpw/valgrind

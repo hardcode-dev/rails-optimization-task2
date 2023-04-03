@@ -34,7 +34,7 @@ session,2,3,Chrome 20,84,2016-11-25
     it 'works' do
       work
 
-      expect(expected_result).to eq JSON.parse(File.read('data/result.json'))
+      expect(expected_result).to eq (JSON.parse(File.read('data/result.json')))
     end
   end
 end

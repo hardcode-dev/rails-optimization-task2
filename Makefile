@@ -1,9 +1,6 @@
 install:
 	bundle install
 
-install_imgcat:
-	brew install eddieantonio/eddieantonio/imgcat
-
 generate_data_files:
 	mkdir data
 	gzcat data_large.txt.gz > data/data_large.txt
@@ -30,7 +27,9 @@ work:
 work_with_progressbar:
 	ruby work_with_progressbar.rb
 
-# reports:
+# ========================= #
+# Stackprof
+# ========================= #
 
 profile_stackprof:
 	ruby reports/stackprof/profile.rb
@@ -38,7 +37,41 @@ profile_stackprof:
 show_stackprof:
 	stackprof reports/stackprof/report.dump
 
+# перед запуском выполните make install_imgcat
 show_stackprof_graph:
 	stackprof --graphviz reports/stackprof/report.dump > reports/stackprof/graphviz.dot
 	dot -Tpng reports/stackprof/graphviz.dot > reports/stackprof/graphviz.png
 	imgcat reports/stackprof/graphviz.png
+
+install_imgcat:
+	brew install eddieantonio/eddieantonio/imgcat
+
+# ========================= #
+# Запуск valgrind профилировщика:
+# 1. Установите xquartz:
+# make install_xquartz
+# 2. Соберите докер образ:
+# make valgrind_build
+# 3. Запустите профилировщик:
+# make valgrind_profile
+# 4. Запустите socat:
+# make run_socat
+# 5. Запустите GUI valgrind для просмотра отчета профилировщика:
+# make valgrind_visualize
+# ========================= #
+
+install_xquartz:
+	brew install xquartz --cask
+
+valgrind_build:
+	export USER=$(id -un)
+	reports/docker-valgrind-massif/build-docker.sh
+
+run_socat:
+	socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\"
+
+valgrind_profile:
+	reports/docker-valgrind-massif/profile.sh
+
+valgrind_visualize:
+	reports/docker-valgrind-massif/visualize.sh

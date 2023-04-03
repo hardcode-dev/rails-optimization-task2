@@ -110,6 +110,28 @@ Total retained:  16.13 MB (229868 objects)
 
 По отчетам stackprof программа работать быстрее не стала, но теперь она выполнена в потоковом стиле.
 
+### Ваша находка №3
+
+#### Подготовка к профилированию
+Хотел убедиться и посмотреть сколько памяти аллоцируется в течение всей работы программы
+Для этого решил использовать valgrind
+
+Была ошибка при запуске build-docker.sh: `Current requires cgo or $USER set in environment`
+Решил ее, прописав явно `export USER=$(id -un)`
+
+Стандартным скриптом не получилось запустить massif-visualizer в контейнере, выдавало ошибку:
+
+```
+qt.qpa.xcb: could not connect to display
+qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+```
+
+При этом все разрешения в настройках XQuartz я выдавал
+
+В итоге нашел решение через запуск socat и использование DISPLAY=docker.for.mac.host.internal:0
+Решение: [Stackoverflow](https://stackoverflow.com/a/53548183)
+
 ## Результаты
 
 В результате проделанной оптимизации наконец удалось обработать файл с данными.

@@ -8,6 +8,7 @@ gem 'oj'
 gem 'benchmark'
 gem 'memory_profiler'
 gem 'stackprof'
+gem 'ruby-prof'
 
 # Test
 gem 'rspec'

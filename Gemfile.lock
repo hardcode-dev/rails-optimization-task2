@@ -28,6 +28,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
     rspec-support (3.12.0)
+    ruby-prof (1.6.1)
     ruby-progressbar (1.11.0)
     stackprof (0.2.23)
 
@@ -42,6 +43,7 @@ DEPENDENCIES
   oj
   rspec
   rspec-benchmark
+  ruby-prof
   ruby-progressbar
   stackprof
 

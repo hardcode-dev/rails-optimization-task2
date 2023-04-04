@@ -24,24 +24,56 @@ test:
 work:
 	ruby work.rb
 
+profile:
+	mkdir -p reports
+	mkdir -p reports/tmp
+	mkdir -p reports/tmp/stackprof
+	mkdir -p reports/tmp/memory-profiler
+	mkdir -p reports/tmp/valgrind
+	mkdir -p reports/tmp/ruby-prof
+
+	make profile_stackprof
+	make valgrind_profile
+	make profile_ruby_prof
+	make profile_memory_profiler
+
+show_reports:
+	make show_stackprof_graph
+	make valgrind_visualize
+	make show_ruby_prof
+
+mv_reports:
+	mv reports/tmp reports/${step}
+	mv massif.out.1 reports/valgrind/${step}
+
+# Profilers
+
+profile_ruby_prof:
+	ruby profilers/ruby-prof/profile.rb
+	ruby profilers/ruby-prof/profile_memory-callgrind.rb
+
+show_ruby_prof:
+	open reports/tmp/ruby-prof/callstack.html
+	qcachegrind reports/tmp/ruby-prof/callgrind.out.*
+
 profile_memory_profiler:
-	ruby reports/memory-profiler/profile.rb
+	ruby profilers/memory-profiler/profile.rb
 
 # ========================= #
 # Stackprof
 # ========================= #
 
 profile_stackprof:
-	ruby reports/stackprof/profile.rb
+	ruby profilers/stackprof/profile.rb
 
 show_stackprof:
-	stackprof reports/stackprof/report.dump
+	stackprof profilers/stackprof/report.dump
 
 # перед запуском выполните make install_imgcat
 show_stackprof_graph:
-	stackprof --graphviz reports/stackprof/report.dump > reports/stackprof/graphviz.dot
-	dot -Tpng reports/stackprof/graphviz.dot > reports/stackprof/graphviz.png
-	imgcat reports/stackprof/graphviz.png
+	stackprof --graphviz reports/tmp/stackprof/report.dump > reports/tmp/stackprof/graphviz.dot
+	dot -Tpng reports/tmp/stackprof/graphviz.dot > reports/tmp/stackprof/graphviz.png
+	imgcat reports/tmp/stackprof/graphviz.png
 
 install_imgcat:
 	brew install eddieantonio/eddieantonio/imgcat
@@ -65,13 +97,13 @@ install_xquartz:
 
 valgrind_build:
 	export USER=$(id -un)
-	reports/docker-valgrind-massif/docker-build.sh
+	profilers/docker-valgrind-massif/docker-build.sh
 
 run_socat:
 	socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\"
 
 valgrind_profile:
-	reports/docker-valgrind-massif/profile.sh
+	profilers/docker-valgrind-massif/profile.sh
 
 valgrind_visualize:
-	reports/docker-valgrind-massif/visualize.sh
+	profilers/docker-valgrind-massif/visualize.sh

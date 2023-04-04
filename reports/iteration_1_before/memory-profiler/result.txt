@@ -1,0 +1,577 @@
+Start work for file: data/data_32_500.txt
+MEMORY USAGE: 151 MB
+Total allocated: 46.84 MB (579519 objects)
+Total retained:  16.13 MB (229869 objects)
+
+allocated memory by gem
+-----------------------------------
+  46.84 MB  other
+
+allocated memory by file
+-----------------------------------
+  46.84 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+   80.00 B  reports/memory-profiler.rb
+
+allocated memory by location
+-----------------------------------
+  15.67 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+   4.62 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:99
+   4.18 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:24
+   3.92 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+   2.96 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:63
+   2.28 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+   1.80 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:36
+   1.67 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:171
+   1.59 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+   1.44 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+   1.44 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+   1.30 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:34
+ 836.64 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:121
+ 836.64 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:89
+ 621.16 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:167
+ 302.71 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:29
+ 229.64 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:124
+ 221.84 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:134
+ 220.24 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:141
+ 220.20 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+ 219.32 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:103
+ 215.30 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:109
+  39.89 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:28
+   2.64 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+   1.78 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:64
+   1.64 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:142
+  152.00 B  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:20
+   80.00 B  reports/memory-profiler.rb:6
+
+allocated memory by class
+-----------------------------------
+  24.62 MB  String
+  14.65 MB  Array
+   7.36 MB  Hash
+ 199.20 kB  User
+   8.69 kB  File
+  224.00 B  JSON::Ext::Generator::State
+  144.00 B  Thread::Mutex
+   40.00 B  IO
+   40.00 B  Process::Status
+
+allocated objects by gem
+-----------------------------------
+    579519  other
+
+allocated objects by file
+-----------------------------------
+    579518  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+         1  reports/memory-profiler.rb
+
+allocated objects by location
+-----------------------------------
+    255020  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+     56872  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+     33536  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+     32505  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:24
+     32500  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:34
+     27521  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+     27520  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:99
+     24900  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+     24900  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+     19392  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:171
+     14940  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:36
+      9960  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:167
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:103
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:109
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:121
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:89
+        10  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:64
+         8  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:63
+         2  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:124
+         2  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:134
+         2  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:141
+         2  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         2  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:20
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:142
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:28
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:29
+         1  reports/memory-profiler.rb:6
+
+allocated objects by class
+-----------------------------------
+    425914  String
+    106154  Array
+     42464  Hash
+      4980  User
+         2  File
+         2  Thread::Mutex
+         1  IO
+         1  JSON::Ext::Generator::State
+         1  Process::Status
+
+retained memory by gem
+-----------------------------------
+  16.13 MB  other
+
+retained memory by file
+-----------------------------------
+  16.13 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+
+retained memory by location
+-----------------------------------
+   6.57 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+   4.62 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:99
+ 958.88 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:36
+ 836.64 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:121
+ 836.64 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:89
+ 682.76 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+ 421.96 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:171
+ 302.71 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:29
+ 229.64 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:124
+ 219.32 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:103
+ 199.20 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+ 199.20 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+  39.89 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:28
+   2.60 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+   1.64 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:134
+   72.00 B  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:20
+   40.00 B  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+   40.00 B  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:64
+
+retained memory by class
+-----------------------------------
+   7.88 MB  String
+   6.53 MB  Hash
+   1.53 MB  Array
+ 199.20 kB  User
+   72.00 B  Thread::Mutex
+   40.00 B  Process::Status
+
+retained objects by gem
+-----------------------------------
+    229869  other
+
+retained objects by file
+-----------------------------------
+    229869  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+
+retained objects by location
+-----------------------------------
+    157520  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+     27520  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:99
+      9960  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:36
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:103
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:121
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:171
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:89
+         2  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:124
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:134
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:20
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:28
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:29
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:64
+
+retained objects by class
+-----------------------------------
+    177442  String
+     37482  Hash
+      9963  Array
+      4980  User
+         1  Process::Status
+         1  Thread::Mutex
+
+
+Allocated String Report
+-----------------------------------
+     37480  "user"
+     32500  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:34
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+     32501  ","
+     32500  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+
+     27520  "session"
+     27520  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+     14278  "INTERNET EXPLORER"
+     14278  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+      9960  " min."
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+
+      5273  "0"
+      5267  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+         3  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+         3  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+
+      4980  ", "
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+
+      4980  "CHROME"
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:167
+
+      4762  "1"
+      4750  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+         6  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+         6  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+
+      4315  "2"
+      4297  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+         9  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+         9  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+
+      3788  "3"
+      3787  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+
+      3258  "4"
+      3256  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+
+      2764  "5"
+      2763  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+
+      2277  "6"
+      2271  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+         3  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+         3  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+
+      1841  "7"
+      1839  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+
+      1351  "8"
+      1333  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+         9  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+         9  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+
+       805  "9"
+       792  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+         7  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+         6  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+
+       504  "119"
+       251  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+       242  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+        11  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+
+       458  "117"
+       243  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+       210  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+         5  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+
+       449  "116"
+       236  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+       206  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+         7  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+
+       436  "95"
+       330  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+        94  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+        12  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+
+       423  "113"
+       250  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+       168  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+         5  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+
+       422  "SAFARI 15"
+       164  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       162  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        96  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       419  "118"
+       220  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+       192  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+         7  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+
+       418  "114"
+       235  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+       174  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+         9  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+
+       417  "SAFARI 26"
+       160  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       159  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        98  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       413  "INTERNET EXPLORER 32"
+       166  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       163  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        84  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       411  "108"
+       264  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+       139  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+         8  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+
+       410  "INTERNET EXPLORER 31"
+       164  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       163  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        83  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       409  "CHROME 17"
+       160  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       157  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        92  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       408  "CHROME 12"
+       165  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       159  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        84  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       407  "INTERNET EXPLORER 34"
+       162  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       157  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        88  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       403  "CHROME 41"
+       165  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       162  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        76  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       402  "FIREFOX 43"
+       163  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       158  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        81  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       401  "101"
+       263  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+       127  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+        11  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+
+       400  "SAFARI 37"
+       161  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       155  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        84  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       399  "FIREFOX 49"
+       162  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       158  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        79  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       398  "FIREFOX 12"
+       157  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       151  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        90  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       397  "FIREFOX 24"
+       155  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       152  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        90  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       396  "FIREFOX 9"
+       157  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       154  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        85  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       396  "SAFARI 35"
+       158  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       154  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        84  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       395  "FIREFOX 34"
+       157  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       152  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        86  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       395  "SAFARI 11"
+       157  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       154  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        84  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       393  "FIREFOX 48"
+       155  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       151  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        87  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       393  "INTERNET EXPLORER 10"
+       159  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       155  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        79  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       391  "112"
+       224  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+       156  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:155
+        11  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+
+       391  "SAFARI 30"
+       158  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       156  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        77  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       390  "INTERNET EXPLORER 16"
+       156  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       150  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        84  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       388  "INTERNET EXPLORER 50"
+       154  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       150  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        84  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+       388  "SAFARI 8"
+       155  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:159
+       151  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:140
+        82  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:163
+
+
+Retained String Report
+-----------------------------------
+      5267  "0"
+      5267  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+      4750  "1"
+      4750  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+      4297  "2"
+      4297  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+      3787  "3"
+      3787  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+      3256  "4"
+      3256  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+      2763  "5"
+      2763  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+      2271  "6"
+      2271  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+      1839  "7"
+      1839  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+      1333  "8"
+      1333  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       792  "9"
+       792  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       330  "95"
+       330  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       319  "66"
+       319  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       318  "27"
+       318  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       313  "57"
+       313  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       312  "44"
+       312  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       309  "46"
+       309  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       308  "42"
+       308  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       308  "62"
+       308  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       308  "81"
+       308  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       307  "14"
+       307  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       306  "38"
+       306  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       305  "11"
+       305  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       305  "89"
+       305  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       303  "36"
+       303  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       303  "70"
+       303  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       303  "97"
+       303  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       302  "45"
+       302  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       301  "52"
+       301  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       300  "29"
+       300  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       300  "90"
+       300  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       299  "33"
+       299  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       299  "67"
+       299  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       297  "87"
+       297  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       296  "99"
+       296  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       295  "85"
+       295  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       294  "30"
+       294  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       294  "32"
+       294  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       294  "72"
+       294  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       294  "86"
+       294  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       294  "92"
+       294  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       292  "21"
+       292  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       292  "41"
+       292  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       292  "61"
+       292  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       291  "18"
+       291  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       291  "53"
+       291  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       291  "77"
+       291  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       290  "71"
+       290  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       290  "83"
+       290  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       289  "40"
+       289  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32
+
+       288  "17"
+       288  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:32

@@ -44,7 +44,7 @@ show_reports:
 
 mv_reports:
 	mv reports/tmp reports/${step}
-	mv massif.out.1 reports/valgrind/${step}
+	mv massif.out.1 reports/${step}/valgrind
 
 # Profilers
 

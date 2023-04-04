@@ -32,6 +32,7 @@ def work(file: nil, disable_gc: false)
   file ||= ENV['DATA_FILE'] || 'data.txt'
 
   puts "Start work for file: #{file}"
+  start_time = Time.now.utc
 
   GC.disable if disable_gc
 
@@ -64,6 +65,7 @@ def work(file: nil, disable_gc: false)
   result_file.close
 
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  puts "Finish work! Time: #{Time.now.utc - start_time}"
 end
 
 def process_user(line)

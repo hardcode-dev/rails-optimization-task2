@@ -264,6 +264,12 @@ allocated memory by class
 |Total allocated |46.84 MB (579519 objects) |31.83 MB (445255 objects) |
 |Total retained  |16.13 MB (229869 objects) |25.35 kB (276 objects)    |
 
+### Для файла data_large.txt
+
+При оптимизации памяти так же сократилось время исполнения программы
+Было: ~27 секунд
+Стало: ~12 секунд
+
 ### Заметки
 
 - С заранее подготовленными скриптами в Makefile для генерации data files стало намного проще работать

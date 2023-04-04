@@ -5,15 +5,11 @@ require 'byebug'
 require 'oj'
 
 class User
-  attr_reader :attributes, :sessions
+  attr_reader :name, :sessions
 
-  def initialize(attributes:, sessions:)
-    @attributes = attributes
+  def initialize(name:, sessions:)
+    @name = name
     @sessions = sessions
-  end
-
-  def name
-    "#{attributes['first_name']} #{attributes['last_name']}"
   end
 end
 
@@ -39,11 +35,14 @@ def work(file: nil, disable_gc: false)
 
   GC.disable if disable_gc
 
+  # prepare vars
   @sessions = []
   @uniq_browsers = Set.new
   @total_users = 0
   @total_sessions = 0
   @current_user = nil
+  @index = 0
+  @user_name = nil
 
   result_file = File.open('data/result.json', 'w')
   @result = Oj::StreamWriter.new(result_file)
@@ -53,12 +52,10 @@ def work(file: nil, disable_gc: false)
   @result.push_object
 
   IO.foreach(file, chomp: true) do |line|
-    cols = line.split(',')
-
     if line[0] == 'u'
-      process_user(cols)
+      process_user(line)
     else
-      process_session(cols)
+      process_session(line)
     end
   end
 
@@ -66,30 +63,27 @@ def work(file: nil, disable_gc: false)
   process_other_keys
   result_file.close
 
-  puts ObjectSpace.each_object(String).count # => 21197866
-  #puts ObjectSpace.each_object(String) { |s| puts s }
-
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
-def process_user(cols)
+def process_user(line)
   if @current_user != nil
     @result.push_value(collect_data_for_user(@current_user), @current_user.name)
     @current_user = nil
   end
 
-  attributes = parse_user(cols)
-  @current_user = User.new(attributes: attributes, sessions: [])
+  fetch_user_name(line)
+  @current_user = User.new(name: @user_name, sessions: [])
   @total_users += 1
 end
 
 def process_last_user
-  @result.push_value(collect_data_for_user(@current_user), @current_user.name) # solution for last user
+  @result.push_value(collect_data_for_user(@current_user), @current_user.name)
   @result.pop
 end
 
-def process_session(cols)
-  session = parse_session(cols)
+def process_session(line)
+  session = parse_session(line)
   @current_user.sessions << session
   @uniq_browsers << session['browser'].upcase
 
@@ -104,20 +98,25 @@ def process_other_keys
   @result.pop
 end
 
-def parse_user(cols)
-  {
-    'first_name' => cols[2],
-    'last_name' => cols[3],
-  }
+# упоролся в оптимизацию, такой код тяжело читать
+def fetch_user_name(line)
+  @index = 0
+  @user_name = nil
+
+  line.split(',') do |str|
+    @user_name = str if @index == 2
+    break @user_name << " #{str}" if @index == 3
+    @index += 1
+  end
 end
 
-def parse_session(cols)
+def parse_session(line)
+  cols = line.split(',')
+
   {
-    'user_id' => cols[1],
-    'session_id' => cols[2],
     'browser' => cols[3],
     'time' => cols[4],
-    'date' => cols[5],
+    'date' => cols[5]
   }
 end
 

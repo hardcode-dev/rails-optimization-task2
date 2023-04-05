@@ -1,0 +1,714 @@
+Total allocated: 36.23 MB (476912 objects)
+Total retained:  25.15 kB (271 objects)
+
+allocated memory by gem
+-----------------------------------
+  36.10 MB  other
+ 124.21 kB  set
+   3.89 kB  rubygems
+
+allocated memory by file
+-----------------------------------
+  36.10 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+ 124.21 kB  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb
+   1.58 kB  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb
+  888.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb
+  541.00 B  <internal:/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>
+  320.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/basic_specification.rb
+  200.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/core_ext/kernel_gem.rb
+  160.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems.rb
+  160.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/dependency.rb
+  120.00 B  profilers/memory-profiler/profile.rb
+   40.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/specification.rb
+
+allocated memory by location
+-----------------------------------
+  14.37 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+   4.62 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:112
+   3.72 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+   2.61 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:56
+   1.80 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:67
+   1.67 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+   1.37 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+   1.24 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+   1.24 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+   1.13 MB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+ 836.64 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:102
+ 836.64 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:124
+ 421.96 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:147
+ 215.30 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:17
+ 102.63 kB  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+  10.00 kB  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+   7.26 kB  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:246
+   5.00 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:85
+   3.84 kB  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:222
+   1.70 kB  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:92
+  624.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:407
+  432.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:385
+  408.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:406
+  408.00 B  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:90
+  400.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:860
+  368.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:105
+  320.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/basic_specification.rb:91
+  261.00 B  <internal:/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:85
+  248.00 B  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:47
+  240.00 B  <internal:/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:50
+  160.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/core_ext/kernel_gem.rb:56
+  160.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:109
+  152.00 B  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:38
+  120.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems.rb:829
+  120.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:68
+  120.00 B  profilers/memory-profiler/profile.rb:7
+  112.00 B  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:43
+   80.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:111
+   80.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:131
+   80.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:80
+   80.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:291
+   40.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems.rb:828
+   40.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/core_ext/kernel_gem.rb:42
+   40.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/dependency.rb:276
+   40.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/dependency.rb:278
+   40.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/dependency.rb:326
+   40.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/dependency.rb:56
+   40.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/specification.rb:2360
+   40.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:329
+   40.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:414
+
+allocated memory by class
+-----------------------------------
+  15.73 MB  String
+  13.13 MB  Array
+   7.14 MB  Hash
+ 199.20 kB  User
+   8.69 kB  File
+   8.48 kB  IO
+   3.84 kB  Class
+   1.04 kB  MatchData
+  408.00 B  Enumerator
+  160.00 B  Range
+  144.00 B  Thread::Mutex
+   80.00 B  Gem::Dependency
+   80.00 B  Gem::Requirement
+   80.00 B  UnboundMethod
+   40.00 B  Oj::StreamWriter
+   40.00 B  Process::Status
+   40.00 B  Set
+
+allocated objects by gem
+-----------------------------------
+    475331  other
+      1521  set
+        60  rubygems
+
+allocated objects by file
+-----------------------------------
+    475329  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+      1521  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb
+        22  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb
+        15  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb
+         9  <internal:/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>
+         4  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/core_ext/kernel_gem.rb
+         4  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/dependency.rb
+         3  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems.rb
+         2  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/basic_specification.rb
+         2  profilers/memory-profiler/profile.rb
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/specification.rb
+
+allocated objects by location
+-----------------------------------
+    222520  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+     51892  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+     32504  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:56
+     27520  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:112
+     27520  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+     19920  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+     19920  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+     19392  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:151
+     19258  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+     14940  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:67
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:102
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:124
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:147
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:17
+      1314  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+       200  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+         9  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:92
+         7  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:406
+         6  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:385
+         6  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:407
+         6  <internal:/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:50
+         4  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:109
+         4  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:90
+         3  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/core_ext/kernel_gem.rb:56
+         3  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:68
+         3  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:860
+         3  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:85
+         2  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems.rb:829
+         2  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/basic_specification.rb:91
+         2  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:105
+         2  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:111
+         2  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:131
+         2  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:80
+         2  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:222
+         2  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:38
+         2  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:43
+         2  <internal:/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:85
+         2  profilers/memory-profiler/profile.rb:7
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems.rb:828
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/core_ext/kernel_gem.rb:42
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/dependency.rb:276
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/dependency.rb:278
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/dependency.rb:326
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/dependency.rb:56
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/specification.rb:2360
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:329
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:414
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:415
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:246
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:291
+
+allocated objects by class
+-----------------------------------
+    323228  String
+    106210  Array
+     42466  Hash
+      4980  User
+         6  MatchData
+         4  Range
+         3  Enumerator
+         2  Class
+         2  File
+         2  Gem::Requirement
+         2  IO
+         2  Thread::Mutex
+         1  Gem::Dependency
+         1  Oj::StreamWriter
+         1  Process::Status
+         1  Set
+         1  UnboundMethod
+
+retained memory by gem
+-----------------------------------
+  24.46 kB  set
+  424.00 B  other
+  261.00 B  rubygems
+
+retained memory by file
+-----------------------------------
+  24.46 kB  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb
+  424.00 B  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+  101.00 B  <internal:/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>
+   80.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb
+   80.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb
+
+retained memory by location
+-----------------------------------
+  10.00 kB  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+   7.26 kB  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:246
+   3.84 kB  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:222
+   3.20 kB  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+  192.00 B  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:90
+  160.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:860
+  101.00 B  <internal:/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:85
+   72.00 B  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:38
+   40.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:131
+   40.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:68
+   40.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:385
+   40.00 B  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:406
+   40.00 B  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:42
+   40.00 B  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:43
+   40.00 B  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:48
+   40.00 B  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:92
+
+retained memory by class
+-----------------------------------
+  13.42 kB  String
+   7.46 kB  Hash
+   3.84 kB  Class
+  160.00 B  Array
+   72.00 B  Thread::Mutex
+   40.00 B  Gem::Requirement
+   40.00 B  Oj::StreamWriter
+   40.00 B  Process::Status
+   40.00 B  Range
+   40.00 B  Set
+
+retained objects by gem
+-----------------------------------
+       260  set
+         6  other
+         5  rubygems
+
+retained objects by file
+-----------------------------------
+       260  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb
+         6  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+         2  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb
+         2  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb
+         1  <internal:/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>
+
+retained objects by location
+-----------------------------------
+       200  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+        56  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+         2  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:222
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:131
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:68
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:385
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:406
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:246
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:860
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:38
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:42
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:43
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:48
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:90
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:92
+         1  <internal:/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:85
+
+retained objects by class
+-----------------------------------
+       257  String
+         4  Array
+         2  Class
+         2  Hash
+         1  Gem::Requirement
+         1  Oj::StreamWriter
+         1  Process::Status
+         1  Range
+         1  Set
+         1  Thread::Mutex
+
+
+Allocated String Report
+-----------------------------------
+     27520  "session"
+     27520  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+
+      5276  "0"
+      5267  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+         3  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+         3  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/requirement.rb:109
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:406
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:407
+
+      4980  "user"
+      4980  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+
+      4764  "1"
+      4750  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+         6  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+         6  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:406
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:407
+
+      4315  "2"
+      4297  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+         9  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+         9  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+
+      3790  "3"
+      3787  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:406
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/rubygems/version.rb:407
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+
+      3258  "4"
+      3256  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+
+      2764  "5"
+      2763  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+
+      2277  "6"
+      2271  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+         3  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+         3  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+
+      1841  "7"
+      1839  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+         1  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+
+      1351  "8"
+      1333  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+         9  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+         9  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+
+       805  "9"
+       792  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+         7  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+         6  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+
+       504  "119"
+       251  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+       242  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+        11  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+
+       458  "117"
+       243  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+       210  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+         5  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+
+       449  "116"
+       236  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+       206  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+         7  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+
+       436  "95"
+       330  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+        94  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+        12  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+
+       423  "113"
+       250  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+       168  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+         5  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+
+       423  "SAFARI 15"
+       164  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       162  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        96  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       419  "118"
+       220  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+       192  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+         7  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+
+       418  "114"
+       235  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+       174  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+         9  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+
+       418  "SAFARI 26"
+       160  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       159  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        98  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       414  "INTERNET EXPLORER 32"
+       166  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       163  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        84  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       411  "108"
+       264  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+       139  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+         8  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+
+       411  "INTERNET EXPLORER 31"
+       164  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       163  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        83  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       410  "CHROME 17"
+       160  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       157  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        92  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       409  "CHROME 12"
+       165  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       159  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        84  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       408  "INTERNET EXPLORER 34"
+       162  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       157  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        88  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       404  "CHROME 41"
+       165  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       162  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        76  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       403  "FIREFOX 43"
+       163  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       158  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        81  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       401  "101"
+       263  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+       127  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+        11  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+
+       401  "SAFARI 37"
+       161  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       155  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        84  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       400  "FIREFOX 49"
+       162  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       158  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        79  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       399  "FIREFOX 12"
+       157  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       151  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        90  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       398  "FIREFOX 24"
+       155  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       152  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        90  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       397  "FIREFOX 9"
+       157  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       154  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        85  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       397  "SAFARI 35"
+       158  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       154  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        84  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       396  "FIREFOX 34"
+       157  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       152  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        86  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       396  "SAFARI 11"
+       157  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       154  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        84  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       394  "FIREFOX 48"
+       155  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       151  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        87  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       394  "INTERNET EXPLORER 10"
+       159  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       155  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        79  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       392  "SAFARI 30"
+       158  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       156  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        77  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       391  "112"
+       224  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+       156  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+        11  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+
+       391  "INTERNET EXPLORER 16"
+       156  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       150  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        84  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       389  "INTERNET EXPLORER 50"
+       154  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       150  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        84  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       389  "SAFARI 8"
+       155  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       151  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        82  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       388  "99"
+       296  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+        82  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+        10  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+
+       386  "96"
+       281  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:57
+        89  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:135
+        16  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:131
+
+       386  "SAFARI 1"
+       154  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       150  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        81  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       384  "SAFARI 4"
+       153  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       148  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        82  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+       383  "CHROME 49"
+       154  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:139
+       151  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:72
+        77  /Users/maksimpw/work/study/rails-optimization-task2/task-2.rb:143
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+
+Retained String Report
+-----------------------------------
+         1  " is not implemented"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "CHROME 45"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 1"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 10"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 14"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 15"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 16"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 17"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 2"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 20"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 21"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 22"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 23"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 24"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 26"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 27"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 29"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 32"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 34"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 36"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 38"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 40"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 41"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 42"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 47"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 5"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "INTERNET EXPLORER 50"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:522
+
+         1  "block (2 levels) in divide"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "block in classify"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "block in collect!"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "block in delete_if"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "block in flatten!"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "block in flatten_merge"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "block in intersect?"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "block in keep_if"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "block in proper_subset?"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "block in proper_superset?"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "block in reject!"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "block in select!"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "block in subset?"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "block in subtract"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "block in superset?"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "can't modify frozen "
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "each_strongly_connected_component"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "pretty_print_cycle"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "proper_superset?"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "tried to flatten recursive Set"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "tsort_each_child"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "value must be a set"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+
+         1  "value must be enumerable"
+         1  /Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb:0
+

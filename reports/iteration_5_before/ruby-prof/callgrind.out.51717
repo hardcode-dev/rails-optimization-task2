@@ -1,0 +1,702 @@
+events: memory
+
+fl=
+fn=String::%
+0 160
+
+fl=
+fn=Integer::/
+0 0
+
+fl=
+fn=Kernel::`
+0 561
+
+fl=
+fn=Process::pid^
+0 0
+
+fl=
+fn=Integer::to_s
+0 40
+
+fl=
+fn=Enumerator::each
+0 0
+cfl=
+cfn=ObjectSpace::each_object^
+calls=1 0
+0 0
+
+fl=
+fn=ObjectSpace::each_object^
+0 80
+
+fl=
+fn=IO::close
+0 0
+
+fl=
+fn=Enumerable::sort
+0 80
+cfl=/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb
+cfn=Set::each
+calls=1 0
+0 0
+
+fl=
+fn=Hash::each_key
+0 0
+
+fl=/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb
+fn=Set::each
+509 0
+cfl=
+cfn=Hash::each_key
+calls=2 511
+511 0
+
+fl=
+fn=Enumerable::count
+0 0
+cfl=/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb
+cfn=Set::each
+calls=1 0
+0 0
+cfl=
+cfn=Enumerator::each
+calls=1 0
+0 0
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=Object::process_other_keys
+99 0
+cfl=
+cfn=Oj/StreamWriter::push_value
+calls=4 100
+100 0
+cfl=
+cfn=Enumerable::count
+calls=1 102
+102 0
+cfl=
+cfn=Enumerable::sort
+calls=1 103
+103 80
+cfl=
+cfn=Array::join
+calls=1 103
+103 41
+cfl=
+cfn=Oj/StreamWriter::pop
+calls=1 104
+104 0
+
+fl=
+fn=Oj/StreamWriter::pop
+0 0
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=Object::process_last_user
+86 0
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=Object::collect_data_for_user
+calls=1 87
+87 640
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=User::name
+calls=1 87
+87 40
+cfl=
+cfn=Oj/StreamWriter::push_value
+calls=1 87
+87 0
+cfl=
+cfn=Oj/StreamWriter::pop
+calls=1 88
+88 0
+
+fl=
+fn=Oj/StreamWriter::push_value
+0 0
+
+fl=
+fn=User::attributes
+0 0
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=User::name
+15 199200
+cfl=
+cfn=User::attributes
+calls=9960 16
+16 0
+cfl=
+cfn=Hash::[]
+calls=9960 16
+16 0
+
+fl=
+fn=Array::reverse
+0 421960
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=Object::collect_dates
+168 0
+cfl=
+cfn=User::sessions
+calls=4980 169
+169 0
+cfl=
+cfn=Array::map!
+calls=4980 169
+169 0
+cfl=
+cfn=Array::sort
+calls=4980 169
+169 822800
+cfl=
+cfn=Array::reverse
+calls=4980 169
+169 421960
+
+fl=
+fn=Array::all?
+0 0
+cfl=
+cfn=String::start_with?
+calls=6436 165
+165 0
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=Object::collect_always_used_chrome
+164 0
+cfl=
+cfn=Array::all?
+calls=4980 165
+165 0
+
+fl=
+fn=String::start_with?
+0 0
+
+fl=
+fn=Array::any?
+0 0
+cfl=
+cfn=String::start_with?
+calls=14278 161
+161 0
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=Object::collect_used_ie
+160 0
+cfl=
+cfn=Array::any?
+calls=4980 161
+161 0
+
+fl=
+fn=Array::join
+0 682801
+
+fl=
+fn=Array::sort
+0 1645600
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=Object::collect_browsers
+156 0
+cfl=
+cfn=Array::sort
+calls=4980 157
+157 822800
+cfl=
+cfn=Array::join
+calls=4980 157
+157 682760
+
+fl=
+fn=Array::max
+0 0
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/<internal:numeric>
+fn=Integer::to_i
+246 0
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=Object::collect_longest_session
+152 396840
+cfl=
+cfn=Array::map!
+calls=4980 153
+153 0
+cfl=
+cfn=Array::max
+calls=4980 153
+153 0
+
+fl=
+fn=Array::sum
+0 0
+
+fl=
+fn=String::to_i
+0 0
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=Object::collect_total_time
+148 396879
+cfl=
+cfn=Array::map!
+calls=4980 149
+149 0
+cfl=
+cfn=Array::sum
+calls=4980 149
+149 0
+
+fl=
+fn=Array::map!
+0 0
+cfl=
+cfn=String::upcase
+calls=27520 130
+130 1373320
+cfl=
+cfn=String::to_i
+calls=27520 149
+149 0
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/<internal:numeric>
+cfn=Integer::to_i
+calls=27520 153
+153 0
+cfl=
+cfn=Hash::[]
+calls=27520 169
+169 0
+
+fl=
+fn=Array::map
+0 843920
+cfl=
+cfn=Hash::[]
+calls=55040 129
+129 0
+
+fl=
+fn=Array::count
+0 0
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=Object::collect_sessions_count
+144 0
+cfl=
+cfn=User::sessions
+calls=4980 145
+145 0
+cfl=
+cfn=Array::count
+calls=4980 145
+145 0
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=Object::collect_data_for_user
+124 0
+cfl=
+cfn=Class::new
+calls=4980 125
+125 199200
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=Object::collect_sessions_count
+calls=4980 127
+127 0
+cfl=
+cfn=Hash::[]=
+calls=34860 127
+127 0
+cfl=
+cfn=User::sessions
+calls=9960 129
+129 0
+cfl=
+cfn=Array::map
+calls=9960 129
+129 843920
+cfl=
+cfn=Array::map!
+calls=4980 130
+130 1373320
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=Object::collect_total_time
+calls=4980 132
+132 396879
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=Object::collect_longest_session
+calls=4980 133
+133 396840
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=Object::collect_browsers
+calls=4980 135
+135 1505560
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=Object::collect_used_ie
+calls=4980 136
+136 0
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=Object::collect_always_used_chrome
+calls=4980 137
+137 0
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=Object::collect_dates
+calls=4980 139
+139 1244760
+
+fl=
+fn=Hash::[]=
+0 10000
+
+fl=/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb
+fn=Set::<<
+521 0
+cfl=
+cfn=Hash::[]=
+calls=27520 522
+522 10000
+
+fl=
+fn=String::upcase
+0 2746640
+
+fl=
+fn=Hash::[]
+0 0
+
+fl=
+fn=Array::<<
+0 0
+
+fl=
+fn=User::sessions
+0 0
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=Object::parse_session
+114 1100800
+cfl=
+cfn=Array::[]
+calls=137600 116
+116 0
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=Object::process_session
+91 0
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=Object::parse_session
+calls=27520 92
+92 1100800
+cfl=
+cfn=User::sessions
+calls=27520 93
+93 0
+cfl=
+cfn=Array::<<
+calls=27520 93
+93 0
+cfl=
+cfn=Hash::[]
+calls=27520 94
+94 0
+cfl=
+cfn=String::upcase
+calls=27520 94
+94 1373320
+cfl=/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb
+cfn=Set::<<
+calls=27520 94
+94 10000
+cfl=
+cfn=Integer::+
+calls=27520 96
+96 0
+
+fl=
+fn=Integer::+
+0 0
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=User::initialize
+10 0
+
+fl=
+fn=Array::[]
+0 0
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=Object::parse_user
+107 199200
+cfl=
+cfn=Array::[]
+calls=9960 109
+109 0
+
+fl=
+fn=BasicObject::==
+0 0
+
+fl=
+fn=BasicObject::!=
+0 0
+cfl=
+cfn=BasicObject::==
+calls=4980 0
+0 0
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=Object::process_user
+75 398400
+cfl=
+cfn=BasicObject::!=
+calls=4980 76
+76 0
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=Object::parse_user
+calls=4980 81
+81 199200
+cfl=
+cfn=Class::new
+calls=4980 82
+82 199200
+cfl=
+cfn=Integer::+
+calls=4980 83
+83 0
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=Object::collect_data_for_user
+calls=4979 77
+77 5959839
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=User::name
+calls=4979 77
+77 199160
+cfl=
+cfn=Oj/StreamWriter::push_value
+calls=4979 77
+77 0
+
+fl=
+fn=String::==
+0 0
+
+fl=
+fn=String::[]
+0 1300000
+
+fl=
+fn=String::split
+0 9173320
+
+fl=
+fn=IO::foreach^
+0 2597320
+cfl=
+cfn=String::split
+calls=32500 56
+56 9173320
+cfl=
+cfn=String::[]
+calls=32500 58
+58 1300000
+cfl=
+cfn=String::==
+calls=32500 58
+58 0
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=Object::process_user
+calls=4980 59
+59 6955799
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=Object::process_session
+calls=27520 61
+61 2484120
+
+fl=
+fn=Oj/StreamWriter::push_key
+0 0
+
+fl=
+fn=Oj/StreamWriter::push_object
+0 0
+
+fl=
+fn=IO::fileno
+0 0
+
+fl=
+fn=Oj/StreamWriter::new^
+0 40
+cfl=
+cfn=IO::fileno
+calls=1 0
+0 0
+
+fl=
+fn=File::initialize
+0 0
+
+fl=
+fn=IO::open^
+0 40
+cfl=
+cfn=File::initialize
+calls=1 0
+0 0
+
+fl=
+fn=NilClass::nil?
+0 0
+
+fl=
+fn=Hash::initialize
+0 0
+
+fl=/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb
+fn=Set::initialize
+245 0
+cfl=
+cfn=Class::new
+calls=1 246
+246 40
+cfl=
+cfn=NilClass::nil?
+calls=1 248
+248 0
+
+fl=
+fn=Class::new
+0 398480
+cfl=/Users/maksimpw/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0/set.rb
+cfn=Set::initialize
+calls=1 0
+0 40
+cfl=
+cfn=Hash::initialize
+calls=4981 0
+0 0
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=User::initialize
+calls=4980 0
+0 0
+
+fl=
+fn=IO::write
+0 240
+
+fl=
+fn=IO::puts
+0 40
+cfl=
+cfn=IO::write
+calls=3 0
+0 240
+cfl=
+cfn=Integer::to_s
+calls=1 0
+0 40
+
+fl=
+fn=Kernel::puts
+0 0
+cfl=
+cfn=IO::puts
+calls=3 0
+0 320
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+fn=Object::work
+35 240
+cfl=
+cfn=Kernel::puts
+calls=3 38
+38 320
+cfl=
+cfn=Class::new
+calls=1 43
+43 80
+cfl=
+cfn=IO::open^
+calls=1 48
+48 40
+cfl=
+cfn=Oj/StreamWriter::new^
+calls=1 49
+49 40
+cfl=
+cfn=Oj/StreamWriter::push_object
+calls=2 51
+51 0
+cfl=
+cfn=Oj/StreamWriter::push_key
+calls=1 52
+52 0
+cfl=
+cfn=IO::foreach^
+calls=1 55
+55 22510559
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=Object::process_last_user
+calls=1 65
+65 680
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=Object::process_other_keys
+calls=1 66
+66 121
+cfl=
+cfn=IO::close
+calls=1 67
+67 0
+cfl=
+cfn=ObjectSpace::each_object^
+calls=1 69
+69 80
+cfl=
+cfn=Enumerable::count
+calls=1 69
+69 0
+cfl=
+cfn=Process::pid^
+calls=1 72
+72 0
+cfl=
+cfn=Kernel::`
+calls=1 72
+72 561
+cfl=
+cfn=String::to_i
+calls=1 72
+72 0
+cfl=
+cfn=Integer::/
+calls=1 72
+72 0
+cfl=
+cfn=String::%
+calls=1 72
+72 160
+
+fl=
+fn=#<Class:0x0000000101673020>::fetch
+0 0
+
+fl=/Users/maksimpw/work/study/rails-optimization-task2/profilers/ruby-prof/profile_memory-callgrind.rb
+fn=[global]::
+11 120
+cfl=
+cfn=#<Class:0x0000000101673020>::fetch
+calls=1 11
+11 0
+cfl=/Users/maksimpw/work/study/rails-optimization-task2/task-2.rb
+cfn=Object::work
+calls=1 11
+11 22512881
+

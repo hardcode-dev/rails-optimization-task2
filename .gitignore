@@ -1,2 +1,6 @@
+data_large.txt
+data.txt
 result.json
-spec/fixtures/*/**
+spec/fixtures/**/*
+profiling/ruby_prof_reports/**/*
+profiling/stackprof_reports/**/*

@@ -81,37 +81,33 @@ def work(file_path = 'small.txt', disable_gc: false)
     end
 
     if line.start_with?('session')
-      Thread.new do
-        attributes = parse_session(line)
-        user_id, browser, time, date = attributes.fetch_values(*%w[user_id browser time date])
+      attributes = parse_session(line)
+      user_id, browser, time, date = attributes.fetch_values(*%w[user_id browser time date])
 
-        # global info
-        result_json[:totalSessions] += 1
-        result_json[:allBrowsers] << browser.upcase
+      # global info
+      result_json[:totalSessions] += 1
+      result_json[:allBrowsers] << browser.upcase
 
-        # user info
-        result_json[:usersStats][full_names_by_id[user_id]][:sessionsCount] += 1
-        result_json[:usersStats][full_names_by_id[user_id]][:totalTime] += time.to_i
-        if time.to_i > result_json[:usersStats][full_names_by_id[user_id]][:longestSession]
-          result_json[:usersStats][full_names_by_id[user_id]][:longestSession] = time.to_i
-        end
-        result_json[:usersStats][full_names_by_id[user_id]][:browsers] << browser.upcase
-        unique_browsers << browser.upcase
-        result_json[:usersStats][full_names_by_id[user_id]][:usedIE] = true if browser.upcase.include?('INTERNET EXPLORER')
-        result_json[:usersStats][full_names_by_id[user_id]][:dates] << date.chomp
-      end.join
+      # user info
+      result_json[:usersStats][full_names_by_id[user_id]][:sessionsCount] += 1
+      result_json[:usersStats][full_names_by_id[user_id]][:totalTime] += time.to_i
+      if time.to_i > result_json[:usersStats][full_names_by_id[user_id]][:longestSession]
+        result_json[:usersStats][full_names_by_id[user_id]][:longestSession] = time.to_i
+      end
+      result_json[:usersStats][full_names_by_id[user_id]][:browsers] << browser.upcase
+      unique_browsers << browser.upcase
+      result_json[:usersStats][full_names_by_id[user_id]][:usedIE] = true if browser.upcase.include?('INTERNET EXPLORER')
+      result_json[:usersStats][full_names_by_id[user_id]][:dates] << date.chomp
     end
   end
 
   result_json[:allBrowsers] = result_json[:allBrowsers].sort.join(',')
   result_json[:usersStats].keys.each do |name|
-    Thread.new do
-      result_json[:usersStats][name][:alwaysUsedChrome] = result_json[:usersStats][name][:browsers].all? { |b| b.include?('CHROME') }
-      result_json[:usersStats][name][:browsers] = result_json[:usersStats][name][:browsers].sort.join(', ')
-      result_json[:usersStats][name][:dates] = result_json[:usersStats][name][:dates].sort.reverse
-      result_json[:usersStats][name][:longestSession] = "#{result_json[:usersStats][name][:longestSession]} min."
-      result_json[:usersStats][name][:totalTime] = "#{result_json[:usersStats][name][:totalTime]} min."
-    end.join
+    result_json[:usersStats][name][:alwaysUsedChrome] = result_json[:usersStats][name][:browsers].all? { |b| b.include?('CHROME') }
+    result_json[:usersStats][name][:browsers] = result_json[:usersStats][name][:browsers].sort.join(', ')
+    result_json[:usersStats][name][:dates] = result_json[:usersStats][name][:dates].sort.reverse
+    result_json[:usersStats][name][:longestSession] = "#{result_json[:usersStats][name][:longestSession]} min."
+    result_json[:usersStats][name][:totalTime] = "#{result_json[:usersStats][name][:totalTime]} min."
   end
   result_json[:uniqueBrowsersCount] = unique_browsers.count
 

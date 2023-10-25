@@ -14,7 +14,7 @@ require_relative 'setup'
 # file = File.open(file_path, "w+")
 # printer.print(file)
 
-RubyProf.measure_mode = RubyProf::ALLOCATIONS
+RubyProf.measure_mode = RubyProf::MEMORY
 
 result = RubyProf.profile { work(Setup::FILE_PATH, disable_gc: true) }
 

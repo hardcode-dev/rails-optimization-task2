@@ -97,7 +97,7 @@ def work(file_path = 'small.txt', disable_gc: false, force_gc: false)
   unique_browsers = Set.new
   users_map = {}
 
-  required_memory = 50
+  required_memory = 40
 
   File.foreach(file_path) do |line|
     parse_user_line!(line, result_json, users_map) if line.start_with?(USER_LINE_START)
@@ -105,7 +105,7 @@ def work(file_path = 'small.txt', disable_gc: false, force_gc: false)
 
     if force_gc && memory_usage > required_memory
       GC.start(full_mark: true, immediate_sweep: true)
-      required_memory = memory_usage * 1.2
+      required_memory = memory_usage * 1.1
       # raise "Not good enough! Memory: #{memory_usage}" if memory_usage > 40
     end
   end

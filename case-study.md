@@ -84,38 +84,11 @@ allocated memory by class
 - как изменилась метрика
 
 теперь я смотрю 10к с GC (ограничение в 40MB, при достижении увеличиваем в 1.1)
-59 MB
+59 MB -> 50 MB
 
 - как изменился отчёт профилировщика
 
-Нагрузка на `String` сильно снизилась:
-```
-allocated memory by class
------------------------------------
- 134.19 MB  String
-  80.53 MB  Array
-  40.62 MB  Hash
-   1.23 MB  Symbol
-  16.86 kB  File
-  224.00 B  JSON::Ext::Generator::State
-  172.00 B  Time
-  160.00 B  Proc
-  144.00 B  Thread::Mutex
-   80.00 B  Set
-   40.00 B  Process::Status
-
-
-allocated memory by class
------------------------------------
-  15.27 MB  String
-   7.00 MB  Hash
-   2.44 MB  Array
-   1.24 MB  Symbol
-   8.00 kB  Browser
-  172.00 B  Time
-   72.00 B  Thread::Mutex
-   40.00 B  Set
-```
+повторения браузеров ушла, нагрузка на `String` сильно снизилась:
 
 ### Ваша находка №X
 - какой отчёт показал главную точку роста

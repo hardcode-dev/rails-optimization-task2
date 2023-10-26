@@ -36,16 +36,46 @@ def parse_session(session)
   }
 end
 
-def collect_stats_from_users(report, users_objects, &block)
-  users_objects.each do |user|
-    user_key = "#{user.attributes['first_name']}" + ' ' + "#{user.attributes['last_name']}"
-    report['usersStats'][user_key] ||= {}
-    report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
-  end
+def parse_user_line!(line, report, users_map)
+  attributes = parse_user(line)
+  id, first_name, last_name = attributes.fetch_values(*%w[id first_name last_name])
+  full_name = :"#{first_name} #{last_name}"
+  users_map[id] = full_name
+
+  report[:totalUsers] += 1
+  report[:usersStats][full_name] = {
+    sessionsCount: 0,
+    totalTime: 0,
+    longestSession: 0,
+    browsers: [],
+    usedIE: false,
+    alwaysUsedChrome: false, # to be defined on finish
+    dates: [] # to be sorted on finish
+  }
 end
 
+def parse_session_line!(line, report, users_map, unique_browsers)
+  attributes = parse_session(line)
+  user_id, browser, time, date = attributes.fetch_values(*%w[user_id browser time date])
+
+  # global info
+  report[:totalSessions] += 1
+  report[:allBrowsers] << browser.upcase
+
+  # user info
+  report[:usersStats][users_map[user_id]][:sessionsCount] += 1
+  report[:usersStats][users_map[user_id]][:totalTime] += time.to_i
+  if time.to_i > report[:usersStats][users_map[user_id]][:longestSession]
+    report[:usersStats][users_map[user_id]][:longestSession] = time.to_i
+  end
+  report[:usersStats][users_map[user_id]][:browsers] << browser.upcase
+  unique_browsers << browser.upcase
+  report[:usersStats][users_map[user_id]][:usedIE] = true if browser.upcase.include?('INTERNET EXPLORER')
+  report[:usersStats][users_map[user_id]][:dates] << date.chomp
+end
 
 def work(file_path = 'small.txt', disable_gc: false)
+  time_point = Time.now
   GC.disable if disable_gc
 
   users = {}
@@ -59,46 +89,13 @@ def work(file_path = 'small.txt', disable_gc: false)
   }
 
   unique_browsers = Set.new
-  full_names_by_id = {}
+  users_map = {}
 
   File.foreach(file_path) do |line|
-    if line.start_with?('user')
-      attributes = parse_user(line)
-      id, first_name, last_name = attributes.fetch_values(*%w[id first_name last_name])
-      full_name = :"#{first_name} #{last_name}"
-      full_names_by_id[id] = full_name
+    parse_user_line!(line, result_json, users_map) if line.start_with?('user')
+    parse_session_line!(line, result_json, users_map, unique_browsers) if line.start_with?('session')
 
-      result_json[:totalUsers] += 1
-      result_json[:usersStats][full_name] = {
-        sessionsCount: 0,
-        totalTime: 0,
-        longestSession: 0,
-        browsers: [],
-        usedIE: false,
-        alwaysUsedChrome: false, # to be defined on finish
-        dates: [] # to be sorted on finish
-      }
-    end
-
-    if line.start_with?('session')
-      attributes = parse_session(line)
-      user_id, browser, time, date = attributes.fetch_values(*%w[user_id browser time date])
-
-      # global info
-      result_json[:totalSessions] += 1
-      result_json[:allBrowsers] << browser.upcase
-
-      # user info
-      result_json[:usersStats][full_names_by_id[user_id]][:sessionsCount] += 1
-      result_json[:usersStats][full_names_by_id[user_id]][:totalTime] += time.to_i
-      if time.to_i > result_json[:usersStats][full_names_by_id[user_id]][:longestSession]
-        result_json[:usersStats][full_names_by_id[user_id]][:longestSession] = time.to_i
-      end
-      result_json[:usersStats][full_names_by_id[user_id]][:browsers] << browser.upcase
-      unique_browsers << browser.upcase
-      result_json[:usersStats][full_names_by_id[user_id]][:usedIE] = true if browser.upcase.include?('INTERNET EXPLORER')
-      result_json[:usersStats][full_names_by_id[user_id]][:dates] << date.chomp
-    end
+    GC.start if (`ps -o rss= -p #{Process.pid}`.to_i / 1024) > 35
   end
 
   result_json[:allBrowsers] = result_json[:allBrowsers].sort.join(',')
@@ -114,4 +111,5 @@ def work(file_path = 'small.txt', disable_gc: false)
   report = result_json
   File.write('result.json', "#{report.to_json}\n")
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  puts "It took #{Time.now - time_point} seconds"
 end

@@ -6,6 +6,47 @@ require 'json'
 require 'date'
 # require 'minitest/autorun'
 
+class Browser
+  CHROME = 'CHROME'.freeze
+  INTERNET_EXPLORER = 'INTERNET EXPLORER'.freeze
+
+  class << self
+    def all
+      @all ||= []
+    end
+
+    def find_by(name)
+      all.find { |b| b.name == name }
+    end
+
+    def find_or_initialize_by_name(name)
+      find_by(name) || Browser.new(name: name)
+    end
+
+    def add(browser)
+      @all << browser
+    end
+  end
+
+  attr_reader :name
+
+  def initialize(name:)
+    upcased = name.upcase # will be cleared by GC
+    @is_chrome = upcased.include?(CHROME)
+    @is_ie = upcased.include?(INTERNET_EXPLORER)
+    @name = upcased.to_sym
+    self.class.find_by(@name) || self.class.add(self)
+  end
+
+  def ie?
+    @is_ie
+  end
+
+  def chrome?
+    @is_chrome
+  end
+end
+
 class User
   attr_reader :attributes, :sessions
 
@@ -20,6 +61,8 @@ COMMA_WITH_SPACE = ', '.freeze
 MIN_POSTFIX = ' min.'.freeze
 SESSION_LINE_START = 'session'.freeze
 USER_LINE_START = 'user'.freeze
+MEMORY_COMMAND = 'ps -o rss= -p '.freeze
+PROCESS = Process.pid.freeze
 
 def parse_user(user)
   fields = user.split(COMMA)
@@ -60,13 +103,14 @@ def parse_user_line!(line, report, users_map)
   }
 end
 
-def parse_session_line!(line, report, users_map, unique_browsers)
+def parse_session_line!(line, report, users_map)
   attributes = parse_session(line)
   user_id, browser, time, date = attributes.fetch_values(*%i[user_id browser time date])
 
+  browser = Browser.find_or_initialize_by_name(browser)
   # global info
   report[:totalSessions] += 1
-  report[:allBrowsers] << browser.upcase
+  report[:allBrowsers] << browser
 
   # user info
   report[:usersStats][users_map[user_id]][:sessionsCount] += 1
@@ -74,13 +118,13 @@ def parse_session_line!(line, report, users_map, unique_browsers)
   if time.to_i > report[:usersStats][users_map[user_id]][:longestSession]
     report[:usersStats][users_map[user_id]][:longestSession] = time.to_i
   end
-  report[:usersStats][users_map[user_id]][:browsers] << browser.upcase
-  unique_browsers << browser.upcase
-  report[:usersStats][users_map[user_id]][:usedIE] = true if browser.upcase.include?('INTERNET EXPLORER')
+  report[:usersStats][users_map[user_id]][:browsers] << browser
+  # unique_browsers << browser
+  report[:usersStats][users_map[user_id]][:usedIE] = true if browser.ie?
   report[:usersStats][users_map[user_id]][:dates] << date.chomp
 end
 
-def work(file_path = 'small.txt', disable_gc: false, force_gc: false)
+def work(file_path = 'small.txt', disable_gc: false, force_gc: true, max_memory_usage: 40)
   time_point = Time.now
   GC.disable if disable_gc
 
@@ -97,35 +141,44 @@ def work(file_path = 'small.txt', disable_gc: false, force_gc: false)
   unique_browsers = Set.new
   users_map = {}
 
-  required_memory = 40
-
   File.foreach(file_path) do |line|
     parse_user_line!(line, result_json, users_map) if line.start_with?(USER_LINE_START)
-    parse_session_line!(line, result_json, users_map, unique_browsers) if line.start_with?(SESSION_LINE_START)
+    parse_session_line!(line, result_json, users_map) if line.start_with?(SESSION_LINE_START)
+    if force_gc && memory_usage > max_memory_usage
+      # binding.irb
 
-    if force_gc && memory_usage > required_memory
+      puts "Performing GC..."
+      time = Time.now
       GC.start(full_mark: true, immediate_sweep: true)
-      required_memory = memory_usage * 1.1
+      # required_memory = memory_usage * 1.1
       # raise "Not good enough! Memory: #{memory_usage}" if memory_usage > 40
+      puts "Done! it took: #{Time.now - time} sec."
+      # required_memory = memory_usage * 2
+      # puts "Not good enough! Memory: #{memory_usage}. Last line: #{line}"
+      if memory_usage > max_memory_usage
+        max_memory_usage *= 1.1
+      end
     end
   end
 
-  result_json[:allBrowsers] = result_json[:allBrowsers].sort.join(COMMA)
+  # result_json[:allBrowsers] = result_json[:allBrowsers].map(&:name).sort.join(COMMA)
+  result_json[:allBrowsers] = Browser.all.map(&:name).sort.join(COMMA)
   result_json[:usersStats].keys.each do |name|
-    result_json[:usersStats][name][:alwaysUsedChrome] = result_json[:usersStats][name][:browsers].all? { |b| b.include?('CHROME') }
-    result_json[:usersStats][name][:browsers] = result_json[:usersStats][name][:browsers].sort.join(COMMA_WITH_SPACE)
+    result_json[:usersStats][name][:alwaysUsedChrome] = result_json[:usersStats][name][:browsers].all?(&:chrome?)
+    result_json[:usersStats][name][:browsers] = result_json[:usersStats][name][:browsers].map(&:name).sort.join(COMMA_WITH_SPACE)
     result_json[:usersStats][name][:dates] = result_json[:usersStats][name][:dates].sort.reverse
     result_json[:usersStats][name][:longestSession] = "#{result_json[:usersStats][name][:longestSession]}#{MIN_POSTFIX}"
     result_json[:usersStats][name][:totalTime] = "#{result_json[:usersStats][name][:totalTime]}#{MIN_POSTFIX}"
   end
-  result_json[:uniqueBrowsersCount] = unique_browsers.count
+  result_json[:uniqueBrowsersCount] = Browser.all.count
 
   report = result_json
   File.write('result.json', "#{report.to_json}\n")
+
   puts "MEMORY USAGE: %d MB" % (memory_usage)
   puts "It took #{Time.now - time_point} seconds"
 end
 
 def memory_usage
-  `ps -o rss= -p #{Process.pid}`.to_i / 1024
+  `#{MEMORY_COMMAND}#{PROCESS}`.to_i / 1024
 end

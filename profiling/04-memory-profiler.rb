@@ -7,7 +7,7 @@ require_relative '../spec/spec_helper'
 require 'memory_profiler'
 require_relative 'setup'
 
-size = 10_000
+size = 3_000
 file_path = fixture(size)
 ensure_test_data_exists(size)
 

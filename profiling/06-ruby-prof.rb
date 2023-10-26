@@ -16,18 +16,16 @@ require_relative 'setup'
 
 RubyProf.measure_mode = RubyProf::MEMORY
 
-result = RubyProf.profile { work(Setup::FILE_PATH, disable_gc: true) }
+result = RubyProf.profile { work(Setup::FILE_PATH, disable_gc: false) }
 
-printer = RubyProf::FlatPrinter.new(result)
-file_path = File.join(Setup::REPORTS_PATH, 'flat.txt')
-file = File.open(file_path, 'w+')
-printer.print(file)
+# printer = RubyProf::FlatPrinter.new(result)
+# printer.print(File.open(File.join(Setup::REPORTS_PATH, 'flat.txt'), 'w+'))
 
 # printer = RubyProf::DotPrinter.new(result)
-# printer.print(File.open('profiling/ruby_prof_reports/graphviz.dot', 'w+'))
+# printer.print(File.open(File.join(Setup::REPORTS_PATH, 'graphviz.dot'), 'w+'))
 
 # printer = RubyProf::GraphHtmlPrinter.new(result)
-# printer.print(File.open('profiling/ruby_prof_reports/graph.html', 'w+'))
+# printer.print(File.open(File.join(Setup::REPORTS_PATH, 'graph.html'), 'w+'))
 
-# printer = RubyProf::CallStackPrinter.new(result)
-# printer.print(File.open('profiling/ruby_prof_reports/callstack.html', 'w+'))
+printer = RubyProf::CallStackPrinter.new(result)
+printer.print(File.open(File.join(Setup::REPORTS_PATH, 'callstack.html'), 'w+'))

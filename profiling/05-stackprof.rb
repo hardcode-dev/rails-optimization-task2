@@ -9,7 +9,8 @@
 # dot -Tpng graphviz.dot > graphviz.png
 # imgcat graphviz.png
 
-require_relative '../spec/spec_helper'
+require_relative 'setup'
+# require_relative '../spec/spec_helper'
 require 'stackprof'
 
 # size = 10_000
@@ -17,6 +18,6 @@ require 'stackprof'
 # ensure_test_data_exists(size)
 
 # Note mode: :object
-StackProf.run(mode: :object, out: File.expand_path('profiling/stackprof_reports/stackprof.dump'), raw: true) do
+StackProf.run(mode: :object, out: File.join(Setup::REPORTS_PATH, 'stackprof.dump'), raw: true) do
   work(Setup::FILE_PATH, disable_gc: false)
 end

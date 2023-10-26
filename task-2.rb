@@ -15,30 +15,36 @@ class User
   end
 end
 
+COMMA = ','.freeze
+COMMA_WITH_SPACE = ', '.freeze
+MIN_POSTFIX = ' min.'.freeze
+SESSION_LINE_START = 'session'.freeze
+USER_LINE_START = 'user'.freeze
+
 def parse_user(user)
-  fields = user.split(',')
+  fields = user.split(COMMA)
   parsed_result = {
-    'id' => fields[1],
-    'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4],
+    id: fields[1].to_i,
+    first_name: fields[2],
+    last_name: fields[3],
+    age: fields[4],
   }
 end
 
 def parse_session(session)
-  fields = session.split(',')
+  fields = session.split(COMMA)
   parsed_result = {
-    'user_id' => fields[1],
-    'session_id' => fields[2],
-    'browser' => fields[3],
-    'time' => fields[4],
-    'date' => fields[5],
+    user_id: fields[1].to_i,
+    session_id: fields[2].to_i,
+    browser: fields[3],
+    time: fields[4].to_i,
+    date: fields[5],
   }
 end
 
 def parse_user_line!(line, report, users_map)
   attributes = parse_user(line)
-  id, first_name, last_name = attributes.fetch_values(*%w[id first_name last_name])
+  id, first_name, last_name = attributes.fetch_values(*%i[id first_name last_name])
   full_name = :"#{first_name} #{last_name}"
   users_map[id] = full_name
 
@@ -56,7 +62,7 @@ end
 
 def parse_session_line!(line, report, users_map, unique_browsers)
   attributes = parse_session(line)
-  user_id, browser, time, date = attributes.fetch_values(*%w[user_id browser time date])
+  user_id, browser, time, date = attributes.fetch_values(*%i[user_id browser time date])
 
   # global info
   report[:totalSessions] += 1
@@ -74,7 +80,7 @@ def parse_session_line!(line, report, users_map, unique_browsers)
   report[:usersStats][users_map[user_id]][:dates] << date.chomp
 end
 
-def work(file_path = 'small.txt', disable_gc: false)
+def work(file_path = 'small.txt', disable_gc: false, force_gc: false)
   time_point = Time.now
   GC.disable if disable_gc
 
@@ -91,25 +97,35 @@ def work(file_path = 'small.txt', disable_gc: false)
   unique_browsers = Set.new
   users_map = {}
 
-  File.foreach(file_path) do |line|
-    parse_user_line!(line, result_json, users_map) if line.start_with?('user')
-    parse_session_line!(line, result_json, users_map, unique_browsers) if line.start_with?('session')
+  required_memory = 50
 
-    GC.start if (`ps -o rss= -p #{Process.pid}`.to_i / 1024) > 35
+  File.foreach(file_path) do |line|
+    parse_user_line!(line, result_json, users_map) if line.start_with?(USER_LINE_START)
+    parse_session_line!(line, result_json, users_map, unique_browsers) if line.start_with?(SESSION_LINE_START)
+
+    if force_gc && memory_usage > required_memory
+      GC.start(full_mark: true, immediate_sweep: true)
+      required_memory = memory_usage * 1.2
+      # raise "Not good enough! Memory: #{memory_usage}" if memory_usage > 40
+    end
   end
 
-  result_json[:allBrowsers] = result_json[:allBrowsers].sort.join(',')
+  result_json[:allBrowsers] = result_json[:allBrowsers].sort.join(COMMA)
   result_json[:usersStats].keys.each do |name|
     result_json[:usersStats][name][:alwaysUsedChrome] = result_json[:usersStats][name][:browsers].all? { |b| b.include?('CHROME') }
-    result_json[:usersStats][name][:browsers] = result_json[:usersStats][name][:browsers].sort.join(', ')
+    result_json[:usersStats][name][:browsers] = result_json[:usersStats][name][:browsers].sort.join(COMMA_WITH_SPACE)
     result_json[:usersStats][name][:dates] = result_json[:usersStats][name][:dates].sort.reverse
-    result_json[:usersStats][name][:longestSession] = "#{result_json[:usersStats][name][:longestSession]} min."
-    result_json[:usersStats][name][:totalTime] = "#{result_json[:usersStats][name][:totalTime]} min."
+    result_json[:usersStats][name][:longestSession] = "#{result_json[:usersStats][name][:longestSession]}#{MIN_POSTFIX}"
+    result_json[:usersStats][name][:totalTime] = "#{result_json[:usersStats][name][:totalTime]}#{MIN_POSTFIX}"
   end
   result_json[:uniqueBrowsersCount] = unique_browsers.count
 
   report = result_json
   File.write('result.json', "#{report.to_json}\n")
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  puts "MEMORY USAGE: %d MB" % (memory_usage)
   puts "It took #{Time.now - time_point} seconds"
+end
+
+def memory_usage
+  `ps -o rss= -p #{Process.pid}`.to_i / 1024
 end

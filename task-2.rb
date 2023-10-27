@@ -124,7 +124,7 @@ def parse_session_line!(line, report, users_map)
   report[:usersStats][users_map[user_id]][:dates] << date.chomp.to_sym
 end
 
-def work(file_path, disable_gc: false, force_gc: true)
+def work(file_path = 'data.txt', disable_gc: false, force_gc: true)
   file_path = ENV['DATA_FILE'] || file_path
 
   time_point = Time.now

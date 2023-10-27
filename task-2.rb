@@ -110,7 +110,7 @@ def parse_session_line!(line, report, users_map)
   browser = Browser.find_or_initialize_by_name(browser)
   # global info
   report[:totalSessions] += 1
-  report[:allBrowsers] << browser
+  # report[:allBrowsers] << browser
 
   # user info
   report[:usersStats][users_map[user_id]][:sessionsCount] += 1
@@ -121,7 +121,7 @@ def parse_session_line!(line, report, users_map)
   report[:usersStats][users_map[user_id]][:browsers] << browser
   # unique_browsers << browser
   report[:usersStats][users_map[user_id]][:usedIE] = true if browser.ie?
-  report[:usersStats][users_map[user_id]][:dates] << date.chomp
+  report[:usersStats][users_map[user_id]][:dates] << date.chomp.to_sym
 end
 
 def work(file_path = 'small.txt', disable_gc: false, force_gc: true)
@@ -134,7 +134,7 @@ def work(file_path = 'small.txt', disable_gc: false, force_gc: true)
     totalUsers: 0,
     uniqueBrowsersCount: 0, # to be defined on finish
     totalSessions: 0,
-    allBrowsers: Set.new,
+    allBrowsers: [],
     usersStats: {}
   }
 

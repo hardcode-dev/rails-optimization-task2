@@ -124,7 +124,7 @@ def parse_session_line!(line, report, users_map)
   report[:usersStats][users_map[user_id]][:dates] << date.chomp
 end
 
-def work(file_path = 'small.txt', disable_gc: false, force_gc: true, max_memory_usage: 40)
+def work(file_path = 'small.txt', disable_gc: false, force_gc: true)
   time_point = Time.now
   GC.disable if disable_gc
 
@@ -142,23 +142,11 @@ def work(file_path = 'small.txt', disable_gc: false, force_gc: true, max_memory_
   users_map = {}
 
   File.foreach(file_path) do |line|
-    parse_user_line!(line, result_json, users_map) if line.start_with?(USER_LINE_START)
-    parse_session_line!(line, result_json, users_map) if line.start_with?(SESSION_LINE_START)
-    if force_gc && memory_usage > max_memory_usage
-      # binding.irb
-
-      puts "Performing GC..."
-      time = Time.now
-      GC.start(full_mark: true, immediate_sweep: true)
-      # required_memory = memory_usage * 1.1
-      # raise "Not good enough! Memory: #{memory_usage}" if memory_usage > 40
-      puts "Done! it took: #{Time.now - time} sec."
-      # required_memory = memory_usage * 2
-      # puts "Not good enough! Memory: #{memory_usage}. Last line: #{line}"
-      if memory_usage > max_memory_usage
-        max_memory_usage *= 1.1
-      end
+    if line.start_with?(USER_LINE_START)
+      parse_user_line!(line, result_json, users_map)
+      GC.start
     end
+    parse_session_line!(line, result_json, users_map) if line.start_with?(SESSION_LINE_START)
   end
 
   # result_json[:allBrowsers] = result_json[:allBrowsers].map(&:name).sort.join(COMMA)

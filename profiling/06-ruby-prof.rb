@@ -14,12 +14,13 @@ require_relative 'setup'
 # file = File.open(file_path, "w+")
 # printer.print(file)
 
-RubyProf.measure_mode = RubyProf::MEMORY
+RubyProf.measure_mode = RubyProf::ALLOCATIONS
 
-result = RubyProf.profile { work(Setup::FILE_PATH, disable_gc: false) }
+file_path = 'spec/fixtures/data2000.txt'
+result = RubyProf.profile { work(file_path, disable_gc: false) }
 
-# printer = RubyProf::FlatPrinter.new(result)
-# printer.print(File.open(File.join(Setup::REPORTS_PATH, 'flat.txt'), 'w+'))
+printer = RubyProf::FlatPrinter.new(result)
+printer.print(File.open(File.join(Setup::REPORTS_PATH, 'flat.txt'), 'w+'))
 
 # printer = RubyProf::DotPrinter.new(result)
 # printer.print(File.open(File.join(Setup::REPORTS_PATH, 'graphviz.dot'), 'w+'))
@@ -27,5 +28,5 @@ result = RubyProf.profile { work(Setup::FILE_PATH, disable_gc: false) }
 # printer = RubyProf::GraphHtmlPrinter.new(result)
 # printer.print(File.open(File.join(Setup::REPORTS_PATH, 'graph.html'), 'w+'))
 
-printer = RubyProf::CallStackPrinter.new(result)
-printer.print(File.open(File.join(Setup::REPORTS_PATH, 'callstack.html'), 'w+'))
+# printer = RubyProf::CallStackPrinter.new(result)
+# printer.print(File.open(File.join(Setup::REPORTS_PATH, 'callstack.html'), 'w+'))

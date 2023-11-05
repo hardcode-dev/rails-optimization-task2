@@ -26,9 +26,6 @@ def work(filename = 'data.txt', disable_gc: false)
     'sessions' => []
   }
 
-  # create report template file to update it later in each iteration
-  # report_file = File.new('result.json', 'w')
-
   # stream the file line by line to keep memory usage under control
   file.each_line(chomp: true) do |line|
     cols = line.split(',')
@@ -89,7 +86,7 @@ def collect_stats_from_user(user)
     # Всегда использовал только Chrome?
     'alwaysUsedChrome' => user['sessions'].map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ },
     # Даты сессий через запятую в обратном порядке в формате iso8601
-    'dates' => user['sessions'].map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 }}
+    'dates' => user['sessions'].map{|s| s['date']}.sort.reverse }
 end
 
 class TestMe < Minitest::Test

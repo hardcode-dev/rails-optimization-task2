@@ -1,0 +1,58 @@
+Measure Mode: allocations
+Thread ID: 260
+Fiber ID: 240
+Total: 0.000000
+Sort by: self_time
+
+ %self      total      self      wait     child     calls  name                           location
+   NaN      0.000     0.000     0.000     0.000        1   [global]#                      profiler-2.rb:7
+   NaN      0.000     0.000     0.000     0.000        1   IO#puts                        
+   NaN      0.000     0.000     0.000     0.000        1   Kernel#puts                    
+   NaN      0.000     0.000     0.000     0.000        1   String#%                       
+   NaN      0.000     0.000     0.000     0.000        1   Kernel#`                       
+   NaN      0.000     0.000     0.000     0.000        1   <Module::Process>#pid          
+   NaN      0.000     0.000     0.000     0.000        1   <Class::IO>#write              
+   NaN      0.000     0.000     0.000     0.000        1   JSON::Ext::Generator::State#initialize 
+   NaN      0.000     0.000     0.000     0.000        1   JSON::Ext::Generator::GeneratorMethods::Hash#to_json 
+   NaN      0.000     0.000     0.000     0.000     1536   Array#reverse                  
+   NaN      0.000     0.000     0.000     0.000     1536   Array#all?                     
+   NaN      0.000     0.000     0.000     0.000     1536   Array#any?                     
+   NaN      0.000     0.000     0.000     0.000     1537   Array#join                     
+   NaN      0.000     0.000     0.000     0.000     3073   Array#sort                     
+   NaN      0.000     0.000     0.000     0.000     1536   Array#max                      
+   NaN      0.000     0.000     0.000     0.000     3072   String#+                       
+   NaN      0.000     0.000     0.000     0.000     3073   Integer#to_s                   
+   NaN      0.000     0.000     0.000     0.000     1536   Array#sum                      
+   NaN      0.000     0.000     0.000     0.000    16928   Integer#to_i                   
+   NaN      0.000     0.000     0.000     0.000    13824   Array#map                      
+   NaN      0.000     0.000     0.000     0.000     1536   Array#count                    
+   NaN      0.000     0.000     0.000     0.000     1536   Object#collect_stats_from_user /Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task2/task-2.rb:75
+   NaN      0.000     0.000     0.000     0.000     8465   String#to_i                    
+   NaN      0.000     0.000     0.000     0.000     8464   Array#include?                 
+   NaN      0.000     0.000     0.000     0.000    32063   String#upcase                  
+   NaN      0.000     0.000     0.000     0.000    10000   String#split                   
+   NaN      0.000     0.000     0.000     0.000        1   IO#each_line                   
+   NaN      0.000     0.000     0.000     0.000        1   File#initialize                
+   NaN      0.000     0.000     0.000     0.000        1   <Class::IO>#open               
+   NaN      0.000     0.000     0.000     0.000        1   <Module::GC>#disable           <internal:gc>:63
+   NaN      0.000     0.000     0.000     0.000        1   Object#work                    /Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task2/task-2.rb:8
+   NaN      0.000     0.000     0.000     0.000        1   IO#write                       
+
+* recursively called methods
+
+Columns are:
+
+  %self     - The percentage of time spent in this method, derived from self_time/total_time.
+  total     - The time spent in this method and its children.
+  self      - The time spent in this method.
+  wait      - The amount of time this method waited for other threads.
+  child     - The time spent in this method's children.
+  calls     - The number of times this method was called.
+  name      - The name of the method.
+  location  - The location of the method.
+
+The interpretation of method names is:
+
+  * MyObject#test - An instance method "test" of the class "MyObject"
+  * <Object:MyObject>#test - The <> characters indicate a method on a singleton class.
+

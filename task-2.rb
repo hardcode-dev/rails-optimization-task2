@@ -73,20 +73,34 @@ def work(filename = 'data.txt', disable_gc: false)
 end
 
 def collect_stats_from_user(user)
-  { # Собираем количество сессий по пользователям
-    'sessionsCount' => user['sessions'].count,
-    # Собираем количество времени по пользователям
-    'totalTime' => user['sessions'].map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.',
-    # Выбираем самую длинную сессию пользователя
-    'longestSession' => user['sessions'].map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.',
-    # Браузеры пользователя через запятую
-    'browsers' => user['sessions'].map {|s| s['browser']}.map {|b| b.upcase}.sort.join(', '),
-    # Хоть раз использовал IE?
-    'usedIE' => user['sessions'].map{|s| s['browser']}.any? { |b| b.upcase =~ /INTERNET EXPLORER/ },
-    # Всегда использовал только Chrome?
-    'alwaysUsedChrome' => user['sessions'].map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ },
-    # Даты сессий через запятую в обратном порядке в формате iso8601
-    'dates' => user['sessions'].map{|s| s['date']}.sort.reverse }
+  # create stats template to update it during each session iteration
+  result = {
+    'sessionsCount' => 0,
+    'totalTime' => 0,
+    'longestSession' => 0,
+    'browsers' => [],
+    'usedIE' => false,
+    'alwaysUsedChrome' => false,
+    'dates' => []
+  }
+  # replace maps with changes triggered by each session
+  user['sessions'].each do |session|
+    time = session['time']
+    result['totalTime'] += time
+    result['longestSession'] = time if time > result['longestSession']
+    browser = session['browser']
+    result['browsers'] << browser
+    result['usedIE'] = true if !(browser =~ /INTERNET EXPLORER/).nil?
+    result['alwaysUsedChrome'] = !(browser =~ /CHROME/).nil? && (result['sessionsCount'] == 0 || result['alwaysUsedChrome'])
+    result['dates'] << session['date']
+    result['sessionsCount'] += 1
+  end
+  # formatting
+  result['totalTime'] = result['totalTime'].to_s + ' min.'
+  result['longestSession'] = result['longestSession'].to_s + ' min.'
+  result['browsers'] = result['browsers'].sort.join(', ')
+  result['dates'] = result['dates'].sort.reverse
+  result
 end
 
 class TestMe < Minitest::Test

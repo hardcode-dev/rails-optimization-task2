@@ -8,4 +8,4 @@ result = profile.profile do
 end
 
 printer = RubyProf::CallTreePrinter.new(result)
-printer.print(path: 'ruby_prof_reports', profile: 'callgrind')
+printer.print(path: 'ruby_prof_reports', profile: 'profile')

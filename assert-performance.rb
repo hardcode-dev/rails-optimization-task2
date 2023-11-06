@@ -22,6 +22,11 @@ describe 'Performance' do
       expect { work('data10000.txt') }.to perform_under(33).ms.warmup(2).times.sample(10).times
     end
 
+    # 10000 lines memory allocation
+    it 'should allocate 129098 objects' do
+      expect { work('data10000.txt') }.to perform_allocation(129098).and_retain(129098)
+    end
+
     let(:measurement_time_seconds) { 1 }
     let(:warmup_time_seconds) { 0.2 }
     it 'works faster than 170 ips' do

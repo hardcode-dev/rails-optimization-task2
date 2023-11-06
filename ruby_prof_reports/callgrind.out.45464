@@ -1,0 +1,242 @@
+events: memory
+
+fl=
+fn=IO::puts
+0 0
+cfl=
+cfn=IO::write
+calls=1 0
+0 40
+
+fl=
+fn=Kernel::puts
+0 0
+cfl=
+cfn=IO::puts
+calls=1 0
+0 40
+
+fl=
+fn=String::%
+0 40
+
+fl=
+fn=Kernel::`
+0 480
+
+fl=
+fn=Process::pid^
+0 0
+
+fl=
+fn=IO::close
+0 0
+
+fl=
+fn=String::[]
+0 20000040
+
+fl=
+fn=JSON/Ext/Generator/State::initialize
+0 0
+
+fl=
+fn=JSON/Ext/Generator/GeneratorMethods/Hash::to_json
+0 40000080
+cfl=
+cfn=JSON/Ext/Generator/State::initialize
+calls=500001 0
+0 0
+
+fl=
+fn=Array::reverse!
+0 0
+
+fl=
+fn=Array::join
+0 20000040
+
+fl=
+fn=Array::sort!
+0 35979480
+
+fl=
+fn=String::+
+0 40000000
+
+fl=
+fn=Integer::to_s
+0 40000040
+
+fl=
+fn=Array::include?
+0 0
+
+fl=
+fn=Array::each
+0 104443320
+cfl=
+cfn=Array::include?
+calls=2750940 100
+100 0
+
+fl=/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task2/task-2.rb
+fn=Object::collect_stats_from_user
+83 60000000
+cfl=
+cfn=Array::each
+calls=500000 95
+95 104443320
+cfl=
+cfn=Integer::to_s
+calls=1000000 111
+111 40000000
+cfl=
+cfn=String::+
+calls=1000000 111
+111 40000000
+cfl=
+cfn=Array::sort!
+calls=1000000 113
+113 35979440
+cfl=
+cfn=Array::join
+calls=500000 113
+113 20000000
+cfl=
+cfn=Array::reverse!
+calls=500000 114
+114 0
+
+fl=
+fn=String::to_i
+0 0
+
+fl=
+fn=String::upcase
+0 110037600
+
+fl=
+fn=IO::write
+0 80
+
+fl=
+fn=String::split
+0 890263200
+
+fl=
+fn=IO::each_line
+0 320075160
+cfl=
+cfn=String::split
+calls=3250940 35
+35 890263200
+cfl=
+cfn=IO::write
+calls=500000 38
+38 40
+cfl=
+cfn=String::upcase
+calls=2750940 50
+50 110037600
+cfl=
+cfn=String::to_i
+calls=2750940 50
+50 0
+cfl=/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task2/task-2.rb
+cfn=Object::collect_stats_from_user
+calls=499999 40
+40 300422200
+cfl=
+cfn=JSON/Ext/Generator/GeneratorMethods/Hash::to_json
+calls=499999 41
+41 39999920
+cfl=
+cfn=String::[]
+calls=499999 41
+41 19999960
+
+fl=
+fn=File::initialize
+0 40
+
+fl=
+fn=IO::open^
+0 80
+cfl=
+cfn=File::initialize
+calls=2 0
+0 40
+
+fl=/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task2/task-2.rb
+fn=Object::work
+8 400
+cfl=
+cfn=IO::open^
+calls=2 12
+12 120
+cfl=
+cfn=IO::each_line
+calls=1 34
+34 1680798080
+cfl=/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task2/task-2.rb
+cfn=Object::collect_stats_from_user
+calls=1 58
+58 560
+cfl=
+cfn=JSON/Ext/Generator/GeneratorMethods/Hash::to_json
+calls=2 58
+58 160
+cfl=
+cfn=IO::write
+calls=2 58
+58 0
+cfl=
+cfn=Array::sort!
+calls=1 75
+75 40
+cfl=
+cfn=Array::join
+calls=1 75
+75 40
+cfl=
+cfn=String::[]
+calls=1 78
+78 80
+cfl=
+cfn=IO::close
+calls=1 79
+79 0
+cfl=
+cfn=Process::pid^
+calls=1 80
+80 0
+cfl=
+cfn=Integer::to_s
+calls=1 80
+80 40
+cfl=
+cfn=Kernel::`
+calls=1 80
+80 480
+cfl=
+cfn=String::to_i
+calls=1 80
+80 0
+cfl=
+cfn=String::%
+calls=1 80
+80 40
+cfl=
+cfn=Kernel::puts
+calls=1 80
+80 40
+
+fl=/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task2/profiler-3.rb
+fn=[global]::
+8 40
+cfl=/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task2/task-2.rb
+cfn=Object::work
+calls=1 8
+8 1680800080
+

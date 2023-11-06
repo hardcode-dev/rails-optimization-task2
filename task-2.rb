@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'json'
-require 'pry'
-require 'date'
+# require 'pry'
+# require 'date'
 require 'minitest/autorun'
 
 def work(filename = 'data.txt', disable_gc: false)
@@ -11,13 +11,15 @@ def work(filename = 'data.txt', disable_gc: false)
   # open file instead of full read into memory
   file = File.open(filename)
 
+  # create report file to append data for each user
+  @report_file = File.open('result.json', 'a')
+
   # create report template to update it later in each iteration
-  report = {
+  @report = {
     'totalUsers' => 0,
     'uniqueBrowsersCount' => 0,
     'totalSessions' => 0,
-    'allBrowsers' => [],
-    'usersStats' => {}
+    'allBrowsers' => []
   }
   # user object to collect sessions
   user = {
@@ -25,22 +27,26 @@ def work(filename = 'data.txt', disable_gc: false)
     'name' => '',
     'sessions' => []
   }
+  # individual user stats
+  user_stats = {}
 
   # stream the file line by line to keep memory usage under control
   file.each_line(chomp: true) do |line|
     cols = line.split(',')
     if cols[0] == 'user'
-      report['usersStats'][user['name']] = collect_stats_from_user(user) unless user['id'].nil?
+      if @report['totalUsers'] == 0
+        @report_file.write("{\"usersStats\":{")
+      else
+        user_stats[user['name']] = collect_stats_from_user(user)
+        @report_file.write("#{user_stats.to_json[1..-2]}", ',')
+        user_stats = {}
+      end
       user['id'] = cols[1]
       user['name'] = "#{cols[2]} #{cols[3]}"
       user['sessions'] = []
-      report['totalUsers'] += 1
+      @report['totalUsers'] += 1
     else
-      report['totalSessions'] += 1
-      unless report['allBrowsers'].include?(cols[3].upcase)
-        report['allBrowsers'] << cols[3].upcase
-        report['uniqueBrowsersCount'] += 1
-      end
+      @report['totalSessions'] += 1
       user['sessions'] << {
         'browser' => cols[3].upcase,
         'time' => cols[4].to_i,
@@ -49,7 +55,7 @@ def work(filename = 'data.txt', disable_gc: false)
     end
   end
   # last stats for last user's sessions
-  report['usersStats'][user['name']] = collect_stats_from_user(user)
+  @report_file.write("\"#{user['name']}\"", ':', "#{collect_stats_from_user(user).to_json}", '}')
 
   # Отчёт в json
   #   - Сколько всего юзеров +
@@ -66,9 +72,11 @@ def work(filename = 'data.txt', disable_gc: false)
   #     - Всегда использовал только Хром? +
   #     - даты сессий в порядке убывания через запятую +
 
-  report['allBrowsers'] = report['allBrowsers'].sort.join(',')
+  @report['allBrowsers'] = @report['allBrowsers'].sort!.join(',')
 
-  File.write('result.json', "#{report.to_json}\n")
+  # append total stats
+  @report_file.write(',', "#{@report.to_json[1..-1]}")
+  @report_file.close
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
@@ -89,6 +97,10 @@ def collect_stats_from_user(user)
     result['totalTime'] += time
     result['longestSession'] = time if time > result['longestSession']
     browser = session['browser']
+    unless @report['allBrowsers'].include?(browser)
+      @report['allBrowsers'] << browser
+      @report['uniqueBrowsersCount'] += 1
+    end
     result['browsers'] << browser
     result['usedIE'] = true if !(browser =~ /INTERNET EXPLORER/).nil?
     result['alwaysUsedChrome'] = !(browser =~ /CHROME/).nil? && (result['sessionsCount'] == 0 || result['alwaysUsedChrome'])
@@ -98,8 +110,8 @@ def collect_stats_from_user(user)
   # formatting
   result['totalTime'] = result['totalTime'].to_s + ' min.'
   result['longestSession'] = result['longestSession'].to_s + ' min.'
-  result['browsers'] = result['browsers'].sort.join(', ')
-  result['dates'] = result['dates'].sort.reverse
+  result['browsers'] = result['browsers'].sort!.join(', ')
+  result['dates'].sort!.reverse!
   result
 end
 

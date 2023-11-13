@@ -5,6 +5,7 @@ require 'json'
 # require 'pry'
 require 'date'
 # require 'minitest/autorun'
+require 'memory_profiler'
 
 class Browser
   CHROME = 'CHROME'.freeze
@@ -31,7 +32,7 @@ class Browser
   attr_reader :name
 
   def initialize(name:)
-    upcased = name.upcase # will be cleared by GC
+    upcased = name.upcase
     @is_chrome = upcased.include?(CHROME)
     @is_ie = upcased.include?(INTERNET_EXPLORER)
     @name = upcased.to_sym
@@ -81,7 +82,7 @@ def parse_session(session)
     session_id: fields[2].to_i,
     browser: fields[3],
     time: fields[4].to_i,
-    date: fields[5],
+    date: fields[5]
   }
 end
 
@@ -124,49 +125,50 @@ def parse_session_line!(line, report, users_map)
   report[:usersStats][users_map[user_id]][:dates] << date.chomp.to_sym
 end
 
-def work(file_path = 'data.txt', disable_gc: false, force_gc: true)
-  file_path = ENV['DATA_FILE'] || file_path
+def work(file_path = 'data.txt', _disable_gc: false)
+  report = MemoryProfiler.report do
+    file_path = ENV['DATA_FILE'] || file_path
 
-  time_point = Time.now
-  GC.disable if disable_gc
+    time_point = Time.now
 
-  users = {}
+    users = {}
 
-  result_json = {
-    totalUsers: 0,
-    uniqueBrowsersCount: 0, # to be defined on finish
-    totalSessions: 0,
-    allBrowsers: [],
-    usersStats: {}
-  }
+    result_json = {
+      totalUsers: 0,
+      uniqueBrowsersCount: 0, # to be defined on finish
+      totalSessions: 0,
+      allBrowsers: [],
+      usersStats: {}
+    }
 
-  unique_browsers = Set.new
-  users_map = {}
+    unique_browsers = Set.new
+    users_map = {}
 
-  File.foreach(file_path) do |line|
-    if line.start_with?(USER_LINE_START)
-      parse_user_line!(line, result_json, users_map)
-      GC.start
+    File.foreach(file_path) do |line|
+      if line.start_with?(USER_LINE_START)
+        parse_user_line!(line, result_json, users_map)
+      end
+      parse_session_line!(line, result_json, users_map) if line.start_with?(SESSION_LINE_START)
     end
-    parse_session_line!(line, result_json, users_map) if line.start_with?(SESSION_LINE_START)
+
+    # result_json[:allBrowsers] = result_json[:allBrowsers].map(&:name).sort.join(COMMA)
+    result_json[:allBrowsers] = Browser.all.map(&:name).sort.join(COMMA)
+    result_json[:usersStats].keys.each do |name|
+      result_json[:usersStats][name][:alwaysUsedChrome] = result_json[:usersStats][name][:browsers].all?(&:chrome?)
+      result_json[:usersStats][name][:browsers] = result_json[:usersStats][name][:browsers].map(&:name).sort.join(COMMA_WITH_SPACE)
+      result_json[:usersStats][name][:dates] = result_json[:usersStats][name][:dates].sort.reverse
+      result_json[:usersStats][name][:longestSession] = "#{result_json[:usersStats][name][:longestSession]}#{MIN_POSTFIX}"
+      result_json[:usersStats][name][:totalTime] = "#{result_json[:usersStats][name][:totalTime]}#{MIN_POSTFIX}"
+    end
+    result_json[:uniqueBrowsersCount] = Browser.all.count
+
+    report = result_json
+    File.write('result.json', "#{report.to_json}\n")
+
+    puts "MEMORY USAGE: %d MB" % (memory_usage)
+    puts "It took #{Time.now - time_point} seconds"
   end
-
-  # result_json[:allBrowsers] = result_json[:allBrowsers].map(&:name).sort.join(COMMA)
-  result_json[:allBrowsers] = Browser.all.map(&:name).sort.join(COMMA)
-  result_json[:usersStats].keys.each do |name|
-    result_json[:usersStats][name][:alwaysUsedChrome] = result_json[:usersStats][name][:browsers].all?(&:chrome?)
-    result_json[:usersStats][name][:browsers] = result_json[:usersStats][name][:browsers].map(&:name).sort.join(COMMA_WITH_SPACE)
-    result_json[:usersStats][name][:dates] = result_json[:usersStats][name][:dates].sort.reverse
-    result_json[:usersStats][name][:longestSession] = "#{result_json[:usersStats][name][:longestSession]}#{MIN_POSTFIX}"
-    result_json[:usersStats][name][:totalTime] = "#{result_json[:usersStats][name][:totalTime]}#{MIN_POSTFIX}"
-  end
-  result_json[:uniqueBrowsersCount] = Browser.all.count
-
-  report = result_json
-  File.write('result.json', "#{report.to_json}\n")
-
-  puts "MEMORY USAGE: %d MB" % (memory_usage)
-  puts "It took #{Time.now - time_point} seconds"
+  report.pretty_print(scale_bytes: true)
 end
 
 def memory_usage

@@ -44,18 +44,30 @@ def collect_stats_from_users(report, users_objects, &block)
   end
 end
 
+
+def build_user_hash(session, sessions_users)
+  if sessions_users[session['user_id']].nil?
+    sessions_users[session['user_id']] = [session]
+  else
+    sessions_users[session['user_id']] << session
+  end
+end
+
 def work(file_path = 'data.txt')
   file_lines = File.read(file_path).split("\n")
   
   users = []
   sessions = []
+  sessions_users = {}
 
   file_lines.each do |line|
     is_user = line.start_with?('user')
     if is_user
       users = users + [parse_user(line)]
     else
-      sessions << parse_session(line)
+      session = parse_session(line)
+      sessions << session
+      build_user_hash(session, sessions_users)
     end
   end
 
@@ -102,7 +114,7 @@ def work(file_path = 'data.txt')
 
   users.each do |user|
     attributes = user
-    user_sessions = sessions.select { |session| session['user_id'] == user['id'] }
+    user_sessions = sessions_users[user['id']]
     user_object = User.new(attributes: attributes, sessions: user_sessions)
     users_objects = users_objects + [user_object]
   end

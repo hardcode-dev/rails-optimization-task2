@@ -30,9 +30,9 @@ file_path = './datasets/data10_000.txt'
 
 ###############
 
-StackProf.run(mode: :object, out: 'stackprof_reports/stackprof.dump') do
-  work(file_path)
-end
+# StackProf.run(mode: :object, out: 'stackprof_reports/stackprof.dump') do
+#   work(file_path)
+# end
 
 
 # profile = StackProf.run(mode: :object, raw: true) do
@@ -43,7 +43,7 @@ end
 
 #####################
 
-# report = MemoryProfiler.report do
-#   work(file_path)
-# end
-# report.pretty_print(scale_bytes: true)
+report = MemoryProfiler.report do
+  work(file_path)
+end
+report.pretty_print(scale_bytes: true)

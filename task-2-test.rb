@@ -1,6 +1,7 @@
 # Deoptimized version of homework task
 
 require 'minitest/autorun'
+require_relative 'task-2'
 
 class TestMe < Minitest::Test
   def setup
@@ -33,3 +34,4 @@ session,2,3,Chrome 20,84,2016-11-25
     assert_equal expected_result, JSON.parse(File.read('result.json'))
   end
 end
+

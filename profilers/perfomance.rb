@@ -13,7 +13,7 @@ describe 'Task-2' do
     it do
       expect do
         work(file_name)
-      end.to perform_allocation(10_000).bytes
+      end.to perform_allocation(1000).bytes
     end
   end
 

@@ -14,7 +14,7 @@ class User
 end
 
 def parse_user(user)
-  fields = /(\w+),(\w+),(\w+),(\w+),(\w+)/.match(user)
+  fields = /(\w+),(\w+),(\w+),(\w+),(\w+)(\n)/.match(user)
 
   {
     'id' => fields[2],
@@ -25,7 +25,7 @@ def parse_user(user)
 end
 
 def parse_session(session)
-  fields = /(\w+),(\w+),(\w+),([a-zA-Z0-9_ ]+),(\w+),([0-9-]+)/.match(session)
+  fields = /(\w+),(\w+),(\w+),([a-zA-Z0-9_ ]+),(\w+),([0-9-]+)(\n)/.match(session)
 
   {
     'user_id' => fields[2],
@@ -53,15 +53,33 @@ def build_user_hash(session, sessions_users)
   end
 end
 
+USER = 'user'.freeze
+
 def work(file_path = 'data.txt')
-  file_lines = File.read(file_path).split("\n")
+  is_user = false
+  user_sessions = []
+  File.foreach(file_path) do |line|
+  
+  if line.start_with? USER
+    processor(user_sessions) if is_user
+    user_sessions << line
+    is_user = true
+  else  
+    user_sessions << line
+  end
+end
+puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+end
+
+def processor(lines)
+  file_lines = lines
   
   users = []
   sessions = []
   sessions_users = {}
 
   file_lines.each do |line|
-    is_user = line.start_with?('user')
+    is_user = line.start_with? USER
     if is_user
       users << parse_user(line)
     else
@@ -120,7 +138,7 @@ def work(file_path = 'data.txt')
   end
 
   report['usersStats'] = {}
-
+  
   collect_stats_from_users(report, users_objects) do |user|
     # Собираем количество сессий по пользователям
     { 'sessionsCount' => user.sessions.count,
@@ -139,6 +157,8 @@ def work(file_path = 'data.txt')
   end
 
 
-  File.write('result.json', "#{report.to_json}\n")
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  File.write('result.json', "#{report.to_json}\n", mode: 'a')
+  # GC.start(full_mark: true, immediate_sweep: true)
 end
+
+work('data_large.txt')

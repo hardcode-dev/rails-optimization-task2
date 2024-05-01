@@ -8,40 +8,34 @@ require 'memory_profiler'
 
 require_relative '../task-2'
 
-file_path = './datasets/data1000.txt'
+file_path = './datasets/data10_000.txt'
 
-RubyProf.measure_mode = RubyProf::MEMORY
-
-result = RubyProf.profile do
-  work(file_path)
-end
-
-printer = RubyProf::FlatPrinter.new(result)
-printer.print(File.open('ruby_prof_reports/flat.txt', 'w+'))
-
-printer = RubyProf::DotPrinter.new(result)
-printer.print(File.open('ruby_prof_reports/graphviz.dot', 'w+'))
-
-printer = RubyProf::GraphHtmlPrinter.new(result)
-printer.print(File.open('ruby_prof_reports/graph.html', 'w+'))
-
-printer = RubyProf::CallStackPrinter.new(result)
-printer.print(File.open('ruby_prof_reports/callstack.html', 'w+'))
-
-# ###############
-
-# RubyProf.measure_mode = RubyProf::WALL_TIME
+# RubyProf.measure_mode = RubyProf::MEMORY
 
 # result = RubyProf.profile do
-#   WorkV5.work(file_path)
+#   work(file_path)
 # end
+
+# printer = RubyProf::FlatPrinter.new(result)
+# printer.print(File.open('ruby_prof_reports/flat.txt', 'w+'))
+
+# printer = RubyProf::DotPrinter.new(result)
+# printer.print(File.open('ruby_prof_reports/graphviz.dot', 'w+'))
 
 # printer = RubyProf::GraphHtmlPrinter.new(result)
 # printer.print(File.open('ruby_prof_reports/graph.html', 'w+'))
 
+# printer = RubyProf::CallStackPrinter.new(result)
+# printer.print(File.open('ruby_prof_reports/callstack.html', 'w+'))
+
 ###############
 
-# profile = StackProf.run(mode: :wall, raw: true) do
+StackProf.run(mode: :object, out: 'stackprof_reports/stackprof.dump') do
+  work(file_path)
+end
+
+
+# profile = StackProf.run(mode: :object, raw: true) do
 #   work(file_path)
 # end
 

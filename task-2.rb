@@ -14,23 +14,25 @@ class User
 end
 
 def parse_user(user)
-  fields = user.split(',')
-  parsed_result = {
-    'id' => fields[1],
-    'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4],
+  fields = /(\w+),(\w+),(\w+),(\w+),(\w+)/.match(user)
+
+  {
+    'id' => fields[2],
+    'first_name' => fields[3],
+    'last_name' => fields[4],
+    'age' => fields[5]
   }
 end
 
 def parse_session(session)
-  fields = session.split(',')
-  parsed_result = {
-    'user_id' => fields[1],
-    'session_id' => fields[2],
-    'browser' => fields[3],
-    'time' => fields[4],
-    'date' => fields[5],
+  fields = /(\w+),(\w+),(\w+),([a-zA-Z0-9_ ]+),(\w+),([0-9-]+)/.match(session)
+
+  {
+    'user_id' => fields[2],
+    'session_id' => fields[3],
+    'browser' => fields[4].upcase,
+    'time' => fields[5],
+    'date' => fields[6]
   }
 end
 
@@ -49,9 +51,12 @@ def work(file_path = 'data.txt')
   sessions = []
 
   file_lines.each do |line|
-    cols = line.split(',')
-    users = users + [parse_user(line)] if cols[0] == 'user'
-    sessions << parse_session(line) if cols[0] == 'session'
+    is_user = line.start_with?('user')
+    if is_user
+      users = users + [parse_user(line)]
+    else
+      sessions << parse_session(line)
+    end
   end
 
   # Отчёт в json

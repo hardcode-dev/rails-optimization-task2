@@ -8,7 +8,7 @@ require 'memory_profiler'
 
 require_relative '../task-2'
 
-file_path = './datasets/data10_000.txt'
+file_path = './datasets/data30_000.txt'
 
 # RubyProf.measure_mode = RubyProf::MEMORY
 

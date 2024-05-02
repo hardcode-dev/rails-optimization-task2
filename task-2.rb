@@ -43,13 +43,13 @@ def collect_stats_from_users(report, users_objects, &block)
   end
 end
 
-def work
-  file_lines = File.read('data.txt').split("\n")
+def work(filename = 'data.txt')
+
 
   users = []
   sessions = []
 
-  file_lines.each do |line|
+  File.foreach(filename) do |line|
     cols = line.split(',')
     users = users + [parse_user(line)] if cols[0] == 'user'
     sessions = sessions + [parse_session(line)] if cols[0] == 'session'
@@ -175,3 +175,8 @@ session,2,3,Chrome 20,84,2016-11-25
     assert_equal expected_result, JSON.parse(File.read('result.json'))
   end
 end
+
+
+# work('data.txt')
+work('data10000.txt')
+# work('data40000.txt')

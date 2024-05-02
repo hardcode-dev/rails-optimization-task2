@@ -3,6 +3,7 @@
 require 'json'
 require 'pry'
 require 'date'
+require 'memory_profiler'
 require 'minitest/autorun'
 
 class User
@@ -44,15 +45,16 @@ def collect_stats_from_users(report, users_objects, &block)
 end
 
 def work(filename = 'data.txt')
-
-
   users = []
   sessions = []
 
   File.foreach(filename) do |line|
     cols = line.split(',')
     users = users + [parse_user(line)] if cols[0] == 'user'
-    sessions = sessions + [parse_session(line)] if cols[0] == 'session'
+
+    if cols[0] == 'session'
+      sessions << parse_session(line)
+    end
   end
 
   # Отчёт в json
@@ -180,3 +182,9 @@ end
 # work('data.txt')
 work('data10000.txt')
 # work('data40000.txt')
+
+### memory_profiler
+# report = MemoryProfiler.report do
+#   work('data10000.txt')
+# end
+# report.pretty_print(scale_bytes: true)

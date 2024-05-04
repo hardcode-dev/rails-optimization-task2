@@ -62,7 +62,7 @@ end
 USER = 'user'
 
 def user_file_report(string)
-  @user_report.write(string)
+  File.write('user_reports.txt', string, mode: 'a')
 end
 
 def call(user_sessions, report, last_line = false)
@@ -70,7 +70,7 @@ def call(user_sessions, report, last_line = false)
 
   if last_line
     string = "#{user_report["usersStats"].to_json[1..-2]}"
-    # File.write('user_reports.txt', "#{user_report["usersStats"].to_json[1..-2]}", mode: 'a')
+
     user_file_report(string)
   else
     string = "#{user_report["usersStats"].to_json[1..-2]},"
@@ -82,7 +82,6 @@ end
 def work(file_path = 'data.txt')
   File.write('result.json', '')
   File.write('user_reports.txt', '')
-  @user_report = File.open('user_reports.txt', 'a')
 
   is_user = false
   user_sessions = []
@@ -112,17 +111,15 @@ def work(file_path = 'data.txt')
   report['allBrowsers'] = all_browsers.sort.join(',')
   report.delete('uniq_browsers')
 
-  @user_report.close
-
   File.write('result.json', "#{report.to_json[..-2]},\"usersStats\":{")
 
+
   File.open("user_reports.txt", "r") do |f|
-    f.each_line do |line|
-      File.write('result.json', line, mode: 'a')
+    while record = f.read(256)
+      File.write('result.json', record, mode: 'a')
     end
   end
   File.write('result.json', "}}", mode: 'a')
-
 
   puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))
 end
@@ -195,10 +192,6 @@ def processor(lines, report)
   end
 
   [user_report, report]
-
-  # File.write('result.json', "#{report.to_json}\n", mode: 'a')
-  # puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))
-  # GC.start(full_mark: true, immediate_sweep: true)
 end
 
 work('data_large.txt')

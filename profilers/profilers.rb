@@ -49,15 +49,15 @@ file_path = './datasets/data100_000.txt'
 
 # File.write('stackprof_reports/stackprof.json', JSON.generate(profile))
 
-profile = StackProf.run(mode: :wall, raw: true) do
-  work(file_path)
-end
-
-File.write('stackprof_reports/stackprof.json', JSON.generate(profile))
+# profile = StackProf.run(mode: :wall, raw: true) do
+#   work(file_path)
+# end
+#
+# File.write('stackprof_reports/stackprof.json', JSON.generate(profile))
 
 #####################
 
-# report = MemoryProfiler.report do
-#   work(file_path)
-# end
-# report.pretty_print(color_output: true, scale_bytes: true)
+report = MemoryProfiler.report do
+  work(file_path)
+end
+report.pretty_print(color_output: true, scale_bytes: true)

@@ -1,8 +1,9 @@
-# Deoptimized version of homework task
+# Optimized version of homework task
 
 require 'json'
 require 'pry'
 require 'date'
+require 'stackprof'
 require 'memory_profiler'
 require 'minitest/autorun'
 
@@ -192,11 +193,17 @@ end
 
 
 # work('data.txt')
-work('data10000.txt')
+# work('data10000.txt')
 # work('data40000.txt')
+# work('data500000.txt')
 
 ### memory_profiler
 # report = MemoryProfiler.report do
 #   work('data10000.txt')
 # end
 # report.pretty_print(scale_bytes: true)
+
+### stackprof
+StackProf.run(mode: :object, out: 'stackprof_reports/stackprof.dump', raw: true) do
+  work('data10000.txt')
+end

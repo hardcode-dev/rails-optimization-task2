@@ -17,9 +17,8 @@ class User
   end
 end
 
-def parse_user(user)
-  fields = user.split(',')
-  parsed_result = {
+def parse_user(fields)
+  {
     'id' => fields[1],
     'first_name' => fields[2],
     'last_name' => fields[3],
@@ -27,9 +26,8 @@ def parse_user(user)
   }
 end
 
-def parse_session(session)
-  fields = session.split(',')
-  parsed_result = {
+def parse_session(fields)
+  {
     'user_id' => fields[1],
     'session_id' => fields[2],
     'browser' => fields[3],
@@ -58,7 +56,7 @@ def work(filename = 'data.txt')
     cols = line.split(',')
 
     if cols[0] == 'user'
-      user = parse_user(line)
+      user = parse_user(cols)
 
       prev_user = current_user
       current_user = user
@@ -72,7 +70,7 @@ def work(filename = 'data.txt')
     end
 
     if cols[0] == 'session'
-      session = parse_session(line)
+      session = parse_session(cols)
 
       user_sessions << session
       sessions << session
@@ -212,23 +210,23 @@ end
 ### ruby-prof
 # RubyProf.measure_mode = RubyProf::ALLOCATIONS
 # На этот раз профилируем не allocations, а объём памяти!
-RubyProf.measure_mode = RubyProf::MEMORY
-
-result = RubyProf.profile do
-  work('data10000.txt')
-end
-
-printer = RubyProf::FlatPrinter.new(result)
-printer.print(File.open('ruby_prof_reports/flat.txt', 'w+'))
-
-# printer = RubyProf::DotPrinter.new(result)
-# printer.print(File.open('ruby_prof_reports/graphviz.dot', 'w+'))
-
-printer = RubyProf::GraphHtmlPrinter.new(result)
-printer.print(File.open('ruby_prof_reports/graph.html', 'w+'))
-
-printer = RubyProf::CallStackPrinter.new(result)
-printer.print(File.open('ruby_prof_reports/callstack.html', 'w+'))
-
-printer = RubyProf::CallTreePrinter.new(result)
-printer.print(path: 'ruby_prof_reports', profile: 'profile')
+# RubyProf.measure_mode = RubyProf::MEMORY
+#
+# result = RubyProf.profile do
+#   work('data10000.txt')
+# end
+#
+# printer = RubyProf::FlatPrinter.new(result)
+# printer.print(File.open('ruby_prof_reports/flat.txt', 'w+'))
+#
+# # printer = RubyProf::DotPrinter.new(result)
+# # printer.print(File.open('ruby_prof_reports/graphviz.dot', 'w+'))
+#
+# printer = RubyProf::GraphHtmlPrinter.new(result)
+# printer.print(File.open('ruby_prof_reports/graph.html', 'w+'))
+#
+# printer = RubyProf::CallStackPrinter.new(result)
+# printer.print(File.open('ruby_prof_reports/callstack.html', 'w+'))
+#
+# # printer = RubyProf::CallTreePrinter.new(result)
+# # printer.print(path: 'ruby_prof_reports', profile: 'profile')

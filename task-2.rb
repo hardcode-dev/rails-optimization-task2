@@ -47,15 +47,37 @@ end
 def work(filename = 'data.txt')
   users = []
   sessions = []
+  users_objects = []
+  user_sessions = []
+  current_user = nil
+  prev_user = nil
 
   File.foreach(filename) do |line|
     cols = line.split(',')
-    users = users + [parse_user(line)] if cols[0] == 'user'
+
+    if cols[0] == 'user'
+      user = parse_user(line)
+
+      prev_user = current_user
+      current_user = user
+
+      if prev_user != nil
+        users_objects << User.new(attributes: prev_user, sessions: user_sessions)
+        user_sessions = []
+      end
+
+      users << user
+    end
 
     if cols[0] == 'session'
-      sessions << parse_session(line)
+      session = parse_session(line)
+
+      user_sessions << session
+      sessions << session
     end
   end
+
+  users_objects << User.new(attributes: current_user, sessions: user_sessions)
 
   # Отчёт в json
   #   - Сколько всего юзеров +
@@ -94,16 +116,6 @@ def work(filename = 'data.txt')
       .sort
       .uniq
       .join(',')
-
-  # Статистика по пользователям
-  users_objects = []
-
-  users.each do |user|
-    attributes = user
-    user_sessions = sessions.select { |session| session['user_id'] == user['id'] }
-    user_object = User.new(attributes: attributes, sessions: user_sessions)
-    users_objects = users_objects + [user_object]
-  end
 
   report['usersStats'] = {}
 

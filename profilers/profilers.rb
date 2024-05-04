@@ -8,10 +8,10 @@ require 'memory_profiler'
 
 require_relative '../task-2'
 
-file_path = './datasets/data2000.txt'
+file_path = './datasets/data100_000.txt'
 
 # RubyProf.measure_mode = RubyProf::MEMORY
-
+#
 # result = RubyProf.profile do
 #   work(file_path)
 # end
@@ -21,10 +21,19 @@ file_path = './datasets/data2000.txt'
 
 # printer = RubyProf::DotPrinter.new(result)
 # printer.print(File.open('ruby_prof_reports/graphviz.dot', 'w+'))
-
+#
 # printer = RubyProf::GraphHtmlPrinter.new(result)
 # printer.print(File.open('ruby_prof_reports/graph.html', 'w+'))
 
+# printer = RubyProf::CallStackPrinter.new(result)
+# printer.print(File.open('ruby_prof_reports/callstack.html', 'w+'))
+
+# RubyProf.measure_mode = RubyProf::WALL_TIME
+#
+# result = RubyProf.profile do
+#   work(file_path)
+# end
+#
 # printer = RubyProf::CallStackPrinter.new(result)
 # printer.print(File.open('ruby_prof_reports/callstack.html', 'w+'))
 
@@ -34,16 +43,21 @@ file_path = './datasets/data2000.txt'
 #   work(file_path)
 # end
 
-
 # profile = StackProf.run(mode: :object, raw: true) do
 #   work(file_path)
 # end
 
 # File.write('stackprof_reports/stackprof.json', JSON.generate(profile))
 
-#####################
-
-report = MemoryProfiler.report do
+profile = StackProf.run(mode: :wall, raw: true) do
   work(file_path)
 end
-report.pretty_print(scale_bytes: true)
+
+File.write('stackprof_reports/stackprof.json', JSON.generate(profile))
+
+#####################
+
+# report = MemoryProfiler.report do
+#   work(file_path)
+# end
+# report.pretty_print(color_output: true, scale_bytes: true)

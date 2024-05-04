@@ -40,22 +40,19 @@ def parse_session(session)
   }
 end
 
-def collect_stats_from_users(report, users_objects, &block)
-  users_objects.each do |user|
+def collect_stats_from_users(report, user, &block)
     user_key = "#{user.attributes['first_name']} #{user.attributes['last_name']}"
     report['usersStats'][user_key] ||= {}
     report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
-  end
 end
 
-def build_user_hash(session, sessions_users, user_uniq_browsers, uniq_browsers)
+def build_user_hash(session, sessions_users, uniq_browsers)
   if sessions_users[session['user_id']].nil?
     sessions_users[session['user_id']] = [session]
   else
     sessions_users[session['user_id']] << session
   end
 
-  user_uniq_browsers[session['browser']] = nil if user_uniq_browsers[session['browser']].nil?
   uniq_browsers[session['browser']] = nil if uniq_browsers[session['browser']].nil?
 end
 
@@ -135,7 +132,6 @@ def processor(lines, report)
   user = nil
   sessions = []
   sessions_users = {}
-  user_uniq_browsers = {}
 
   file_lines.each do |line|
     is_user = line.start_with? USER
@@ -145,7 +141,7 @@ def processor(lines, report)
     else
       session = parse_session(line)
       sessions << session
-      build_user_hash(session, sessions_users, user_uniq_browsers, report['uniq_browsers'])
+      build_user_hash(session, sessions_users, report['uniq_browsers'])
     end
   end
 
@@ -169,17 +165,14 @@ def processor(lines, report)
   report['totalSessions'] += sessions_users.values.first.count
 
   # Статистика по пользователю
-  users_objects = []
   attributes = user
   user_sessions = sessions_users[user['id']]
   user_object = User.new(attributes:, sessions: user_sessions)
-  users_objects << user_object
-
 
   user_report = {}
   user_report['usersStats'] = {}
 
-  collect_stats_from_users(user_report, users_objects) do |user|
+  collect_stats_from_users(user_report, user_object) do |user|
     # Собираем количество сессий по пользователям
     { 'sessionsCount' => user.sessions.count,
       # Собираем количество времени по пользователям

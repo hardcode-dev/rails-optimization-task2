@@ -62,7 +62,7 @@ end
 USER = 'user'
 
 def user_file_report(string)
-  File.write('user_reports.txt', string, mode: 'a')
+  @user_report.write(string)
 end
 
 def call(user_sessions, report, last_line = false)
@@ -82,6 +82,7 @@ end
 def work(file_path = 'data.txt')
   File.write('result.json', '')
   File.write('user_reports.txt', '')
+  @user_report =  File.open("user_reports.txt", "a")
 
   is_user = false
   user_sessions = []
@@ -111,15 +112,19 @@ def work(file_path = 'data.txt')
   report['allBrowsers'] = all_browsers.sort.join(',')
   report.delete('uniq_browsers')
 
-  File.write('result.json', "#{report.to_json[..-2]},\"usersStats\":{")
+  result = File.open('result.json', 'a')
+  result.write("#{report.to_json[..-2]},\"usersStats\":{")
 
-
+  @user_report.close
   File.open("user_reports.txt", "r") do |f|
     while record = f.read(256)
-      File.write('result.json', record, mode: 'a')
+      result.write(record)
     end
   end
-  File.write('result.json', "}}", mode: 'a')
+
+  result.write("}}")
+  result.close
+
 
   puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))
 end
@@ -194,4 +199,4 @@ def processor(lines, report)
   [user_report, report]
 end
 
-work('data_large.txt')
+# work('data_large.txt')

@@ -24,3 +24,4 @@ require_relative '../task-2'
 
 # > ruby task-2.rb
 # MEMORY USAGE: 40 MB
+

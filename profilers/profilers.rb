@@ -5,10 +5,11 @@ require 'stackprof'
 require 'ruby-prof'
 require 'benchmark'
 require 'memory_profiler'
+require 'vernier'
 
 require_relative '../task-2'
 
-file_path = './datasets/data100_000.txt'
+file_path = './datasets/data_large.txt'
 
 # RubyProf.measure_mode = RubyProf::MEMORY
 #
@@ -57,7 +58,13 @@ file_path = './datasets/data100_000.txt'
 
 #####################
 
-report = MemoryProfiler.report do
+# report = MemoryProfiler.report do
+#   work(file_path)
+# end
+# report.pretty_print(color_output: true, scale_bytes: true)
+
+################
+
+Vernier.run(out: 'time_profile.json') do
   work(file_path)
 end
-report.pretty_print(color_output: true, scale_bytes: true)

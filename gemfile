@@ -14,3 +14,5 @@ gem 'kalibera'
 gem 'benchmark-ips'
 gem 'rubocop-performance'
 gem 'memory_profiler'
+gem "benchmark-memory"
+gem "vernier", "~> 1.0"

@@ -7,30 +7,29 @@ require_relative '../task-2'
 describe 'Task-2' do
   include RSpec::Benchmark::Matchers
 
-  describe 'Performance' do
-    let(:file_name) { './datasets/data1000.txt' }
+  describe 'Memory allocation' do
+    let(:file_name) { './datasets/data3000.txt' }
 
     it do
       expect do
         work(file_name)
-      end.to perform_allocation(1000).bytes
+      end.to perform_allocation(5_000_000).bytes
+    end
+
+    it do
+      expect do
+        work(file_name)
+      end.to perform_under(87).ms.warmup(1).times.sample(5).times
     end
   end
 
-  # describe 'full data set' do
-  #   let(:file_name) { './data10_000.txt' }
+  describe 'Performance' do
+    let(:file_name) { './datasets/data100_000.txt' }
 
-  #   it 'works faster' do
-  #     expect { WorkV5.work(file_name) }.to perform_faster_than { InitWork.work(file_name) }.at_least(33).times
-  #   end
-  # end
-
-  # describe 'Complexity' do
-  #   let(:file_names) { %w[data1000.txt data2000.txt data4000.txt data8000.txt data16000.txt] }
-
-  #   it 'performs perform_power' do
-  #     expect { |_n, i| InitWork.work(file_names[i]) }.to perform_power.in_range(8, 32_768).ratio(8)
-  #     expect { |_n, i| WorkV5.work(file_names[i]) }.to perform_linear
-  #   end
-  # end
+    it do
+      expect do
+        work(file_name)
+      end.to perform_under(300).ms.warmup(1).times.sample(5).times
+    end
+  end
 end

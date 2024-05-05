@@ -122,7 +122,6 @@ def work(file_path = 'data.txt')
   result.write("}}")
   result.close
 
-
   puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))
 end
 

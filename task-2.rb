@@ -55,23 +55,32 @@ class User
   end
 end
 
-def parse_user(fields)
-  {
-    'id' => fields[1],
-    'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4],
-  }
+USER_COLUMNS = {
+  1 => 'id', 2 => 'first_name', 3 => 'last_name', 4 => 'age'
+}.freeze
+
+SESSION_COLUMNS = {
+  1 => 'user_id', 2 => 'session_id', 3 => 'browser', 4 => 'time', 5 => 'date'
+}.freeze
+
+def parse_user(line)
+  user = {}
+  line.split(',').each_with_index do |item, i|
+    next if i == 0
+
+    user[USER_COLUMNS[i]] = item
+  end
+  user
 end
 
-def parse_session(fields)
-  {
-    'user_id' => fields[1],
-    'session_id' => fields[2],
-    'browser' => fields[3],
-    'time' => fields[4],
-    'date' => fields[5],
-  }
+def parse_session(line)
+  session = {}
+  line.split(',').each_with_index do |item, i|
+    next if i == 0
+
+    session[SESSION_COLUMNS[i]] = item
+  end
+  session
 end
 
 def write_user_stat(file, user)
@@ -115,8 +124,6 @@ def work(filename = 'data.txt')
     totalUsers: 0,
     totalSessions: 0
   }
-  users = []
-  sessions = []
   user_sessions = []
   uniqueBrowsers = Hash.new(0)
   current_user = nil
@@ -127,11 +134,9 @@ def work(filename = 'data.txt')
     file.puts('"usersStats": {')
 
     File.foreach(filename) do |line|
-      cols = line.split(',')
-
-      if cols[0] == 'user'
+      if line.start_with?('user')
         report[:totalUsers] += 1
-        user = parse_user(cols)
+        user = parse_user(line)
 
         prev_user = current_user
         current_user = user
@@ -142,19 +147,16 @@ def work(filename = 'data.txt')
           file.puts(",")
           user_sessions = []
         end
-
-        users << user
       end
 
-      if cols[0] == 'session'
+      if line.start_with?('session')
         report[:totalSessions] += 1
-        session = parse_session(cols)
+        session = parse_session(line)
 
         browser = session['browser']
         uniqueBrowsers[browser] += 1
 
         user_sessions << session
-        sessions << session
       end
     end
 
@@ -219,7 +221,7 @@ end
 
 ### memory_profiler
 # report = MemoryProfiler.report do
-#   work('data10000.txt')
+#   work('data40000.txt')
 # end
 # report.pretty_print(scale_bytes: true)
 
@@ -234,7 +236,7 @@ end
 # RubyProf.measure_mode = RubyProf::MEMORY
 #
 # result = RubyProf.profile do
-#   work('data10000.txt')
+#   work('data40000.txt')
 # end
 #
 # printer = RubyProf::FlatPrinter.new(result)

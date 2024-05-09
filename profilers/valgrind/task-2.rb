@@ -3,7 +3,6 @@
 # Deoptimized version of homework task
 
 require 'json'
-require 'pry'
 require 'date'
 require 'oj'
 
@@ -207,4 +206,3 @@ def collect_stats(lines, report)
   [user_stats, report]
 end
 
-work('data_large.txt')

@@ -3,8 +3,8 @@
 # Deoptimized version of homework task
 
 require 'json'
-# require 'pry'
-# require 'date'
+require 'date'
+require 'oj'
 
 class User
   attr_reader :attributes, :sessions
@@ -12,6 +12,46 @@ class User
   def initialize(attributes:, sessions:)
     @attributes = attributes
     @sessions = sessions
+  end
+end
+
+class Report
+  attr_reader :stream, :file
+
+  def initialize
+    @file = File.open('result.json', 'a')
+    @stream = Oj::StreamWriter.new(file)
+    @stream.push_object
+    @stream.push_key('usersStats')
+    @stream.push_object
+  end
+
+  def add_user_stats(stats) # add_user_stats
+    @stream.push_key(stats.keys.first)
+    @stream.push_value(stats.values.first)
+  end
+
+  def add_global_stats(global_stats)
+    all_browsers = global_stats['uniq_browsers'].keys
+
+    @stream.pop
+
+    @stream.push_key('totalUsers')
+    @stream.push_value(global_stats['totalUsers'])
+
+    @stream.push_key('uniqueBrowsersCount')
+    @stream.push_value(all_browsers.count)
+
+    @stream.push_key('totalSessions')
+    @stream.push_value(global_stats['totalSessions'])
+
+    @stream.push_key('allBrowsers')
+    @stream.push_value(all_browsers.sort.join(','))
+  end
+
+  def close
+    @stream.pop
+    @file.close
   end
 end
 
@@ -42,8 +82,8 @@ end
 
 def collect_stats_from_users(report, user, &block)
     user_key = "#{user.attributes['first_name']} #{user.attributes['last_name']}"
-    report['usersStats'][user_key] ||= {}
-    report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
+    report[user_key] ||= {}
+    report[user_key] = report[user_key].merge(block.call(user))
 end
 
 def build_user_hash(session, sessions_users, uniq_browsers)
@@ -58,28 +98,13 @@ end
 
 USER = 'user'
 
-def user_file_report(string)
-  @user_report.write(string)
-end
-
-def call(user_sessions, report, last_line = false)
-  user_report, report = processor(user_sessions, report)
-
-  if last_line
-    string = "#{user_report["usersStats"].to_json[1..-2]}"
-
-    user_file_report(string)
-  else
-    string = "#{user_report["usersStats"].to_json[1..-2]},"
-    user_file_report(string)
-  end
-  report
+def user_sessions
+  @user_sessions ||= []
 end
 
 def work(file_path = 'data.txt')
   File.write('result.json', '')
-  File.write('user_reports.txt', '')
-  @user_report =  File.open("user_reports.txt", "a")
+  @report =  Report.new
 
   is_user = false
   user_sessions = []
@@ -92,40 +117,31 @@ def work(file_path = 'data.txt')
 
   File.foreach(file_path) do |line|
     if line.start_with? USER
-      report = call(user_sessions, report) if is_user
+      if is_user
+        user_stats, report = collect_stats(user_sessions, report)
+        @report.add_user_stats(user_stats)
 
-      user_sessions = [] if is_user # clear sessions for next user
+        user_sessions = [] if is_user # clear sessions for next user
+      end
       user_sessions << line
-      is_user = true # collect all session for first user
+      is_user = true # collect sessions for first user
     else
       user_sessions << line
     end
   end
 
-  report = call(user_sessions, report, true) if is_user # collect stats for last user
-
-  all_browsers = report['uniq_browsers'].keys
-  report['uniqueBrowsersCount'] = all_browsers.count
-  report['allBrowsers'] = all_browsers.sort.join(',')
-  report.delete('uniq_browsers')
-
-  result = File.open('result.json', 'a')
-  result.write("#{report.to_json[..-2]},\"usersStats\":{")
-
-  @user_report.close
-  File.open("user_reports.txt", "r") do |f|
-    while record = f.read(256)
-      result.write(record)
-    end
+  if is_user  # collect stats for last user
+    user_stats, report = collect_stats(user_sessions, report)
+    @report.add_user_stats(user_stats)
   end
 
-  result.write("}}")
-  result.close
+  @report.add_global_stats(report)
+  @report.close
 
   puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))
 end
 
-def processor(lines, report)
+def collect_stats(lines, report)
   file_lines = lines
 
   user = nil
@@ -168,10 +184,9 @@ def processor(lines, report)
   user_sessions = sessions_users[user['id']]
   user_object = User.new(attributes:, sessions: user_sessions)
 
-  user_report = {}
-  user_report['usersStats'] = {}
+  user_stats = {}
 
-  collect_stats_from_users(user_report, user_object) do |user|
+  collect_stats_from_users(user_stats, user_object) do |user|
     # Собираем количество сессий по пользователям
     { 'sessionsCount' => user.sessions.count,
       # Собираем количество времени по пользователям
@@ -188,7 +203,6 @@ def processor(lines, report)
       'dates' => user.sessions.map { |s| s['date'] }.sort.reverse }
   end
 
-  [user_report, report]
+  [user_stats, report]
 end
 
-# work('data_large.txt')

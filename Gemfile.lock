@@ -30,6 +30,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-support (3.13.1)
+    stackprof (0.2.26)
 
 PLATFORMS
   x86_64-darwin-21
@@ -40,6 +41,7 @@ DEPENDENCIES
   pry
   rspec
   rspec-benchmark
+  stackprof
 
 BUNDLED WITH
    2.4.20

@@ -1,5 +1,6 @@
 *.txt
 *.json
+stackprof_reports
 
 !data.txt
 !spec/fixtures/sample100_result.json

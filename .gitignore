@@ -2,6 +2,7 @@
 *.json
 stackprof_reports
 ruby_prof_reports
+callgrind.out.*
 
 !data.txt
 !spec/fixtures/sample100_result.json

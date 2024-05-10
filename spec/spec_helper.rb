@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'json'
 require 'bundler/setup'
 require 'rspec-benchmark'
 

@@ -29,7 +29,7 @@ describe 'Memory' do
       prepare_data(size) do |filename|
         expect {
           work(filename)
-        }.to perform_allocation(70 * 1024 * 1024).bytes
+        }.to perform_allocation(3 * 1024 * 1024).bytes
       end
     }
   end

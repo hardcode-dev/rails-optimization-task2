@@ -1,6 +1,7 @@
 *.txt
 *.json
 stackprof_reports
+ruby_prof_reports
 
 !data.txt
 !spec/fixtures/sample100_result.json

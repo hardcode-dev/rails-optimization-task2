@@ -1,2 +1,5 @@
-data_large.txt
-result.json
+*.txt
+*.json
+
+!data.txt
+!spec/fixtures/sample100_result.json

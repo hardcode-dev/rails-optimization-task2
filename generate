@@ -1,0 +1,5 @@
+#/bin/sh
+
+mkdir -p data
+head -n $1 data_large.txt > "data/sample_${1}.txt"
+echo "data/sample_${1}.txt"

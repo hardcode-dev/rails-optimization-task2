@@ -2,22 +2,24 @@
 
 require_relative 'task-2'
 
-# # ======== MEMORY PROFILER =========
-# require 'memory_profiler'
+puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 
-# report = MemoryProfiler.report do
-#   work(File.join(__dir__, ARGV.first))
-# end
-# report.pretty_print(scale_bytes: true)
-# # ==================
+# ======== MEMORY PROFILER =========
+require 'memory_profiler'
 
-# # ======== STACKPROF =========
-# require 'stackprof'
+report = MemoryProfiler.report do
+  work(File.join(__dir__, ARGV.first))
+end
+report.pretty_print(scale_bytes: true, to_file: 'memory_profiler_reports/report.txt')
+# ==================
 
-# StackProf.run(mode: :object, out: 'stackprof_reports/stackprof.dump', raw: true) do
-#   work(File.join(__dir__, ARGV.first))
-# end
-# # ==================
+# ======== STACKPROF =========
+require 'stackprof'
+
+StackProf.run(mode: :object, out: 'stackprof_reports/stackprof.dump', raw: true) do
+  work(File.join(__dir__, ARGV.first))
+end
+# ==================
 
 # # ======== RUBY_PROF =========
 require 'ruby-prof'

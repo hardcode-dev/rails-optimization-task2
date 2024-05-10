@@ -75,7 +75,7 @@ def handle_user_sessions(report, user_attributes, user_sessions)
 end
 
 def work(filename)
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  # puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
   user_attributes = nil
   user_sessions = []
 

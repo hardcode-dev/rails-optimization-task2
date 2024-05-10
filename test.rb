@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
-# frozen_string_literal: true
 
 require_relative 'task-2'
+require 'memory_profiler'
 
-work(File.join(__dir__, ARGV.first))
+report = MemoryProfiler.report do
+  work(File.join(__dir__, ARGV.first))
+end
+report.pretty_print(scale_bytes: true)

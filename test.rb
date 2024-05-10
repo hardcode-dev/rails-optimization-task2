@@ -1,10 +1,14 @@
 #!/usr/bin/env ruby
 
+
+
 require_relative 'task-2'
+require 'benchmark'
 
-puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
-
-work(File.join(__dir__, ARGV.first))
+# ======== Benchmark RUN =========
+Benchmark.bm do |x|
+  x.report { work(File.join(__dir__, ARGV.first)) }
+end
 
 # # ======== MEMORY PROFILER =========
 # require 'memory_profiler'

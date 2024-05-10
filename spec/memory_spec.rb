@@ -22,15 +22,15 @@ describe 'Memory' do
     }
   end
 
-  # context 'works on 1_000 lines within 70 MB' do
-  #   let(:size) { 1_000 }
+  context 'works on 1_000 lines within 13 MB' do
+    let(:size) { 1_000 }
 
-  #   xit {
-  #     prepare_data(size) do |filename|
-  #       expect {
-  #         work(filename)
-  #       }.to perform_allocation(3 * 1024 * 1024).bytes
-  #     end
-  #   }
-  # end
+    it {
+      prepare_data(size) do |filename|
+        expect {
+          work(filename)
+        }.to perform_allocation(13 * 1024 * 1024).bytes
+      end
+    }
+  end
 end

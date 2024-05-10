@@ -4,6 +4,7 @@ require 'pry'
 require 'date'
 # require 'minitest/autorun'
 require 'minitest'
+require 'ruby-progressbar'
 
 RESULT_FILE = 'result.json'
 
@@ -93,6 +94,14 @@ end
 #     - Всегда использовал только Хром? +
 #     - даты сессий в порядке убывания через запятую +
 def work(filename)
+  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+
+  # progressbar = ProgressBar.create(
+  #   total: `wc -l #{filename}`.to_i,
+  #   format: '%a, %J %E, %B', # elapsed time, percent complete, estimate, bar
+  #   # output: File.open(File::NULL, 'w') #for specs
+  # )
+
   user_attributes = nil
   user_sessions = []
   report = {
@@ -123,6 +132,7 @@ def work(filename)
     when 'session'
       user_sessions << parse_session(*fields)
     end
+    # progressbar.increment
   end
 
   handle_user_sessions(result_file, report, user_attributes, user_sessions, false)

@@ -1,0 +1,11 @@
+/ruby_prof_reports
+/stackprof_reports
+
+data_1k.txt
+data_large.txt
+data_large.txt.gz
+data_small.txt
+
+.ruby-version
+result.json
+

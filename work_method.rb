@@ -60,12 +60,7 @@ def work(filename = '', disable_gc: true)
   report[:totalUsers] = users.count
 
   # Подсчёт количества уникальных браузеров
-  uniqueBrowsers = []
-  sessions.each do |session|
-    browser = session['browser']
-    uniqueBrowsers += [browser] if uniqueBrowsers.all? { |b| b != browser }
-  end
-
+  uniqueBrowsers = sessions.map { |s| s['browser'] }.uniq
   report['uniqueBrowsersCount'] = uniqueBrowsers.count
 
   report['totalSessions'] = sessions.count
@@ -86,8 +81,7 @@ def work(filename = '', disable_gc: true)
   users.each do |user|
     attributes = user
     user_sessions = sessions_hash[user['id']] || []
-    user_object = User.new(attributes: attributes, sessions: user_sessions)  
-    users_objects = users_objects + [user_object]                                ## refactor this
+    users_objects << User.new(attributes: attributes, sessions: user_sessions)
   end
 
   report['usersStats'] = {}
@@ -124,7 +118,7 @@ def work(filename = '', disable_gc: true)
 
   # Даты сессий через запятую в обратном порядке в формате iso8601
   collect_stats_from_users(report, users_objects) do |user|
-    { 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }
+    { 'dates' => user.sessions.map { |session| session['date'] }.sort.reverse }
   end
 
   File.write('result.json', "#{report.to_json}\n")

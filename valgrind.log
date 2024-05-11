@@ -1,0 +1,80 @@
+==64848== Massif, a heap profiler
+==64848== Copyright (C) 2003-2017, and GNU GPL'd, by Nicholas Nethercote
+==64848== Using Valgrind-3.22.0-bd4db67b1d-20231031 and LibVEX; rerun with -h for copyright info
+==64848== Command: /home/aaz/.rbenv/shims/ruby work.rb
+==64848== Parent PID: 5927
+==64848== 
+--64848-- 
+--64848-- Valgrind options:
+--64848--    --tool=massif
+--64848--    --massif-out-file=massif.out
+--64848--    --log-file=valgrind.log
+--64848--    --ignore-fn=memalign
+--64848--    --ignore-fn=aligned_alloc
+--64848--    --verbose
+--64848-- Contents of /proc/version:
+--64848--   Linux version 6.5.0-28-generic (buildd@lcy02-amd64-098) (x86_64-linux-gnu-gcc-12 (Ubuntu 12.3.0-1ubuntu1~22.04) 12.3.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #29~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Apr  4 14:39:20 UTC 2
+--64848-- 
+--64848-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-ssse3-avx-f16c-rdrand
+--64848-- Page sizes: currently 4096, max supported 4096
+--64848-- Valgrind library directory: /snap/valgrind/160/usr/libexec/valgrind
+--64848-- Massif: alloc-fns:
+--64848-- Massif:   malloc
+--64848-- Massif:   __builtin_new
+--64848-- Massif:   operator new(unsigned)
+--64848-- Massif:   operator new(unsigned long)
+--64848-- Massif:   __builtin_vec_new
+--64848-- Massif:   operator new[](unsigned)
+--64848-- Massif:   operator new[](unsigned long)
+--64848-- Massif:   calloc
+--64848-- Massif:   realloc
+--64848-- Massif:   memalign
+--64848-- Massif:   posix_memalign
+--64848-- Massif:   valloc
+--64848-- Massif:   operator new(unsigned, std::nothrow_t const&)
+--64848-- Massif:   operator new[](unsigned, std::nothrow_t const&)
+--64848-- Massif:   operator new(unsigned long, std::nothrow_t const&)
+--64848-- Massif:   operator new[](unsigned long, std::nothrow_t const&)
+--64848-- Massif: ignore-fns:
+--64848-- Massif:   0: memalign
+--64848-- Massif:   1: aligned_alloc
+--64848-- Reading syms from /usr/bin/env
+--64848-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+--64848-- Reading syms from /snap/valgrind/160/usr/libexec/valgrind/massif-amd64-linux
+--64848--    object doesn't have a dynamic symbol table
+--64848-- Scheduler: using generic scheduler lock implementation.
+==64848== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-64848-by-aaz-on-???
+==64848== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-64848-by-aaz-on-???
+==64848== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-64848-by-aaz-on-???
+==64848== 
+==64848== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==64848== don't want to do, unless you know exactly what you're doing,
+==64848== or are doing some strange experiment):
+==64848==   /snap/valgrind/160/usr/libexec/valgrind/../../bin/vgdb --pid=64848 ...command...
+==64848== 
+==64848== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==64848==   /path/to/gdb /home/aaz/.rbenv/shims/ruby
+==64848== and then give GDB the following command
+==64848==   target remote | /snap/valgrind/160/usr/libexec/valgrind/../../bin/vgdb --pid=64848
+==64848== --pid is optional if only one valgrind process is running
+==64848== 
+--64848-- Reading syms from /snap/valgrind/160/usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--64848-- Reading syms from /snap/valgrind/160/usr/libexec/valgrind/vgpreload_massif-amd64-linux.so
+--64848-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
+--64848--   Considering /usr/lib/debug/.build-id/96/2015aa9d133c6cbcfb31ec300596d7f44d3348.debug ..
+--64848--   .. build-id is valid
+==64848== WARNING: new redirection conflicts with existing -- ignoring it
+--64848--     old: 0x050b4c60 (memalign            ) R-> (1011.0) 0x04e0abc4 memalign
+--64848--     new: 0x050b4c60 (memalign            ) R-> (1017.0) 0x04e0b341 aligned_alloc
+==64848== WARNING: new redirection conflicts with existing -- ignoring it
+--64848--     old: 0x050b4c60 (memalign            ) R-> (1011.0) 0x04e0abc4 memalign
+--64848--     new: 0x050b4c60 (memalign            ) R-> (1017.0) 0x04e0b1d5 aligned_alloc
+==64848== WARNING: new redirection conflicts with existing -- ignoring it
+--64848--     old: 0x050b4c60 (memalign            ) R-> (1011.0) 0x04e0abc4 memalign
+--64848--     new: 0x050b4c60 (memalign            ) R-> (1017.0) 0x04e0b341 aligned_alloc
+==64848== WARNING: new redirection conflicts with existing -- ignoring it
+--64848--     old: 0x050b4c60 (memalign            ) R-> (1011.0) 0x04e0abc4 memalign
+--64848--     new: 0x050b4c60 (memalign            ) R-> (1017.0) 0x04e0b1d5 aligned_alloc
+--64848-- REDIR: 0x50b40a0 (libc.so.6:malloc) redirected to 0x4e03103 (malloc)
+--64848-- REDIR: 0x50b43e0 (libc.so.6:free) redirected to 0x4e06379 (free)
+--64848-- REDIR: 0x50b5520 (libc.so.6:calloc) redirected to 0x4e0a70f (calloc)

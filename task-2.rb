@@ -14,14 +14,8 @@ class User
   end
 end
 
-def parse_user(fields)
-  {
-    'id' => fields[1],
-    'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4],
-  }
-end
+  USER_COLUMNS = %w[id first_name last_name age].freeze
+  SESSION_COLUMNS = %w[user_id session_id browser time date].freeze
 
 def parse_session(fields)
   {
@@ -53,6 +47,9 @@ def collect_stats_from_users(report:, user:, sessions:, report_file:, &block)
   report['totalUsers'] += 1
 
   sessions.each do |session|
+    session['time'] = session['time'].to_i
+    session['browser'].upcase!
+
     user_stats['sessionsCount'] += 1
     user_stats['totalTime'] += session['time']
     user_stats['browsers'] << session['browser']
@@ -61,15 +58,11 @@ def collect_stats_from_users(report:, user:, sessions:, report_file:, &block)
       user_stats['longestSession'] = session['time']
     end
 
-    unless report['allBrowsers'].include?(session['browser'])
-      report['allBrowsers'] << session['browser']
-    end
+    report['allBrowsers'] << session['browser']
     report['totalSessions'] += 1
 
     user_stats['usedIE'] ||= session['browser'].match?(/INTERNET EXPLORER/)
-
     user_stats['alwaysUsedChrome'] &&= session['browser'].match?(/CHROME/)
-
     user_stats['dates'] << session['date']
   end
 
@@ -88,31 +81,29 @@ def work(file_name: 'data.txt')
     'totalUsers' => 0,
     'uniqueBrowsersCount' => 0,
     'totalSessions' => 0,
-    'allBrowsers' => [],
+    'allBrowsers' => Set.new,
   }
 
   report_file = File.open('result.json', 'a')
 
-  user = nil
+  user = {}
   sessions = []
 
   report_file.write('{"usersStats":{' )
 
   File.foreach(file_name, chomp: true) do |line|
-    cols = line.split(',')
-
-    if cols[0] == 'session'
-      sessions << parse_session(cols)
+    if line.start_with?('session')
+      sessions << parse({}, SESSION_COLUMNS, line)
     else
       work_partial(user:, sessions:, report:, report_file:)
 
-      user = parse_user(cols)
+      parse(user, USER_COLUMNS, line)
     end
   end
 
   work_partial(user:, sessions:, report:, report_file:)
 
-  report['allBrowsers'].sort!
+  report['allBrowsers'] = report['allBrowsers'].to_a.sort!
   # Подсчёт количества уникальных браузеров
   report['uniqueBrowsersCount'] = report['allBrowsers'].size
   report['allBrowsers'] = report['allBrowsers'].join(',')
@@ -121,8 +112,21 @@ def work(file_name: 'data.txt')
   report_file.close
 end
 
+def parse(object, columns, line)
+  col_index = -2
+
+  line.split(',') do |col|
+    col_index += 1
+    next if col_index < 0
+
+    object[columns[col_index]] = col
+  end
+
+  object
+end
+
 def work_partial(user:, sessions:, report:, report_file: nil)
-  return unless user
+  return if user.empty?
   # Отчёт в json
   #   - Сколько всего юзеров +
   #   - Сколько всего уникальных браузеров +
@@ -142,5 +146,5 @@ def work_partial(user:, sessions:, report:, report_file: nil)
   collect_stats_from_users(report:, user:, sessions:, report_file:)
 
   sessions.clear
-  user = nil
+  user.clear
 end

@@ -1,0 +1,24 @@
+result.json
+data*.txt
+
+/tmp/*
+!/tmp/.keep
+
+/tmp/memory_profiler/*
+!/tmp/memory_profiler/
+!/tmp/memory_profiler/.keep
+
+/tmp/ruby_prof/*
+!/tmp/ruby_prof/
+!/tmp/ruby_prof/.keep
+
+/tmp/stackprof/*
+!/tmp/stackprof/
+!/tmp/stackprof/.keep
+
+/tmp/valgrind/*
+!/tmp/valgrind/
+!/tmp/valgrind/.keep
+
+# Ignore MacOS system files
+.DS_Store

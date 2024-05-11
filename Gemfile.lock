@@ -1,0 +1,42 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    benchmark-malloc (0.2.0)
+    benchmark-perf (0.6.0)
+    benchmark-trend (0.4.0)
+    diff-lcs (1.5.1)
+    memory_profiler (1.0.1)
+    rspec (3.13.0)
+      rspec-core (~> 3.13.0)
+      rspec-expectations (~> 3.13.0)
+      rspec-mocks (~> 3.13.0)
+    rspec-benchmark (0.6.0)
+      benchmark-malloc (~> 0.2)
+      benchmark-perf (~> 0.6)
+      benchmark-trend (~> 0.4)
+      rspec (>= 3.0)
+    rspec-core (3.13.0)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-support (3.13.1)
+    ruby-prof (1.7.0)
+    stackprof (0.2.26)
+
+PLATFORMS
+  arm64-darwin-23
+  ruby
+
+DEPENDENCIES
+  memory_profiler
+  rspec
+  rspec-benchmark
+  ruby-prof
+  stackprof
+
+BUNDLED WITH
+   2.5.4

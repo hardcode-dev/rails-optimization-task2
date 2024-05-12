@@ -72,7 +72,7 @@ def work
 
   write_start_stats(file)
 
-  File.foreach('data_10k.txt') do |line|
+  File.foreach('data.txt') do |line|
     line_type, *fields = line.chomp.split(',')
 
     case line_type

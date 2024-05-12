@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 
 class User
@@ -72,7 +74,7 @@ def work
 
   write_start_stats(file)
 
-  File.foreach('data.txt') do |line|
+  File.foreach('data_large.txt') do |line|
     line_type, *fields = line.chomp.split(',')
 
     case line_type
@@ -135,3 +137,4 @@ def write_end_stats(file, user, report)
   file.puts('}')
 end
 
+work

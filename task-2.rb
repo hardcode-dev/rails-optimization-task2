@@ -79,20 +79,22 @@ def write_stats_for(user, sessions, writer)
   writer.push_key('sessionsCount')
   writer.push_value(sessions.count)
 
+  times = sessions.map {|s| s['time']}.map! {|t| t.to_i}
   writer.push_key('totalTime')
-  writer.push_value(sessions.map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.')
+  writer.push_value(times.sum.to_s + ' min.')
 
   writer.push_key('longestSession')
-  writer.push_value(sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.')
+  writer.push_value(times.max.to_s + ' min.')
 
+  browsers = sessions.map {|s| s['browser']}.map! {|b| b.upcase}
   writer.push_key('browsers')
-  writer.push_value(sessions.map {|s| s['browser']}.map {|b| b.upcase}.sort.join(', '))
+  writer.push_value(browsers.sort.join(', '))
 
   writer.push_key('usedIE')
-  writer.push_value(sessions.map{|s| s['browser']}.any? { |b| b.upcase =~ /INTERNET EXPLORER/ })
+  writer.push_value(browsers.any? { |b| b =~ /INTERNET EXPLORER/ })
 
   writer.push_key('alwaysUsedChrome')
-  writer.push_value(sessions.map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ })
+  writer.push_value(browsers.all? { |b| b =~ /CHROME/ })
 
   dates = sessions.map{|s| s['date']}
   writer.push_key('dates')

@@ -1,5 +1,3 @@
-# Deoptimized version of homework task
-
 require 'json'
 require 'pry'
 require 'date'
@@ -96,9 +94,15 @@ def write_stats_for(user, sessions, writer)
   writer.push_key('alwaysUsedChrome')
   writer.push_value(sessions.map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ })
 
+  dates = sessions.map{|s| s['date']}
   writer.push_key('dates')
-  writer.push_value(sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 })
-
+  writer.push_value(dates
+                    .sort!
+                    .reverse!
+                    .map! do |d|
+                      ary = d.split('-')
+                      Date.new(ary[0].to_i, ary[1].to_i, ary[2].to_i).iso8601
+                    end)
   writer.pop
 end
 

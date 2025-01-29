@@ -1,0 +1,248 @@
+digraph "Profile" {
+labelloc=t;
+labeljust=l;
+subgraph "Thread 80" {
+100 [label="save_report\n(0%)"];
+100 -> 100 [label="1/1" fontsize=10 fontcolor="#666666"];
+120 [label="close\n(0%)"];
+120 -> 120 [label="1/1" fontsize=10 fontcolor="#666666"];
+140 [label="closed?\n(0%)"];
+140 -> 140 [label="1/1" fontsize=10 fontcolor="#666666"];
+160 [label="+\n(1%)"];
+160 -> 160 [label="31222/31222" fontsize=10 fontcolor="#666666"];
+180 [label="initialize\n(0%)"];
+180 -> 180 [label="31223/31223" fontsize=10 fontcolor="#666666"];
+200 [label="to_json\n(2%)"];
+200 -> 200 [label="31223/31223" fontsize=10 fontcolor="#666666"];
+220 [label="reverse\n(1%)"];
+220 -> 220 [label="31223/31223" fontsize=10 fontcolor="#666666"];
+240 [label="strip!\n(0%)"];
+240 -> 240 [label="171961/171961" fontsize=10 fontcolor="#666666"];
+260 [label="all?\n(0%)"];
+260 -> 260 [label="31223/31223" fontsize=10 fontcolor="#666666"];
+280 [label="start_with?\n(0%)"];
+280 -> 280 [label="72876/191069" fontsize=10 fontcolor="#666666"];
+280 -> 280 [label="118193/191069" fontsize=10 fontcolor="#666666"];
+300 [label="browsers\n(10%)"];
+300 -> 300 [label="93669/93669" fontsize=10 fontcolor="#666666"];
+320 [label="max\n(0%)"];
+320 -> 320 [label="31223/31223" fontsize=10 fontcolor="#666666"];
+340 [label="sum\n(0%)"];
+340 -> 340 [label="31223/31223" fontsize=10 fontcolor="#666666"];
+360 [label="to_i\n(0%)"];
+360 -> 360 [label="171961/171961" fontsize=10 fontcolor="#666666"];
+380 [label="map\n(10%)"];
+380 -> 380 [label="31223/93669" fontsize=10 fontcolor="#666666"];
+380 -> 380 [label="31223/93669" fontsize=10 fontcolor="#666666"];
+380 -> 380 [label="31223/93669" fontsize=10 fontcolor="#666666"];
+400 [label="sessions_time\n(1%)"];
+400 -> 400 [label="62446/62446" fontsize=10 fontcolor="#666666"];
+420 [label="sessions\n(0%)"];
+420 -> 420 [label="31223/124892" fontsize=10 fontcolor="#666666"];
+420 -> 420 [label="31223/124892" fontsize=10 fontcolor="#666666"];
+420 -> 420 [label="62446/124892" fontsize=10 fontcolor="#666666"];
+440 [label="stats\n(23%)"];
+440 -> 440 [label="31223/31223" fontsize=10 fontcolor="#666666"];
+460 [label="attributes\n(0%)"];
+460 -> 460 [label="62446/62446" fontsize=10 fontcolor="#666666"];
+480 [label="full_name\n(1%)"];
+480 -> 480 [label="31223/31223" fontsize=10 fontcolor="#666666"];
+500 [label="initialize\n(0%)"];
+500 -> 500 [label="31223/31223" fontsize=10 fontcolor="#666666"];
+520 [label="user_stats\n(38%)"];
+520 -> 520 [label="31223/31223" fontsize=10 fontcolor="#666666"];
+540 [label="any?\n(0%)"];
+540 -> 540 [label="31223/62445" fontsize=10 fontcolor="#666666"];
+540 -> 540 [label="31222/62445" fontsize=10 fontcolor="#666666"];
+560 [label="[]=\n(0%)"];
+560 -> 560 [label="31223/203184" fontsize=10 fontcolor="#666666"];
+560 -> 560 [label="171961/203184" fontsize=10 fontcolor="#666666"];
+580 [label="+\n(0%)"];
+580 -> 580 [label="31223/203184" fontsize=10 fontcolor="#666666"];
+580 -> 580 [label="171961/203184" fontsize=10 fontcolor="#666666"];
+600 [label="[]\n(0%)"];
+600 -> 600 [label="4/203188" fontsize=10 fontcolor="#666666"];
+600 -> 600 [label="31223/203188" fontsize=10 fontcolor="#666666"];
+600 -> 600 [label="171961/203188" fontsize=10 fontcolor="#666666"];
+620 [label="merge!\n(0%)"];
+620 -> 620 [label="200/200" fontsize=10 fontcolor="#666666"];
+640 [label="upcase\n(7%)"];
+640 -> 640 [label="171961/172161" fontsize=10 fontcolor="#666666"];
+640 -> 640 [label="200/172161" fontsize=10 fontcolor="#666666"];
+660 [label="join\n(1%)"];
+660 -> 660 [label="31223/31423" fontsize=10 fontcolor="#666666"];
+660 -> 660 [label="200/31423" fontsize=10 fontcolor="#666666"];
+680 [label="sort\n(5%)"];
+680 -> 680 [label="31223/62646" fontsize=10 fontcolor="#666666"];
+680 -> 680 [label="31223/62646" fontsize=10 fontcolor="#666666"];
+680 -> 680 [label="200/62646" fontsize=10 fontcolor="#666666"];
+700 [label="count\n(0%)"];
+700 -> 700 [label="31223/31423" fontsize=10 fontcolor="#666666"];
+700 -> 700 [label="200/31423" fontsize=10 fontcolor="#666666"];
+720 [label="report\n(0%)"];
+720 -> 720 [label="4/203388" fontsize=10 fontcolor="#666666"];
+720 -> 720 [label="31223/203388" fontsize=10 fontcolor="#666666"];
+720 -> 720 [label="172161/203388" fontsize=10 fontcolor="#666666"];
+740 [label="<<\n(0%)"];
+740 -> 740 [label="171961/172161" fontsize=10 fontcolor="#666666"];
+740 -> 740 [label="200/172161" fontsize=10 fontcolor="#666666"];
+760 [label="include?\n(0%)"];
+760 -> 760 [label="171961/171961" fontsize=10 fontcolor="#666666"];
+780 [label="browsers\n(0%)"];
+780 -> 780 [label="172561/172561" fontsize=10 fontcolor="#666666"];
+800 [label="session_stats\n(0%)"];
+800 -> 800 [label="171961/171961" fontsize=10 fontcolor="#666666"];
+820 [label="eof?\n(0%)"];
+820 -> 820 [label="203184/203184" fontsize=10 fontcolor="#666666"];
+840 [label="==\n(0%)"];
+840 -> 840 [label="406368/406368" fontsize=10 fontcolor="#666666"];
+860 [label="[]\n(0%)"];
+860 -> 860 [label="515883/1156858" fontsize=10 fontcolor="#666666"];
+860 -> 860 [label="62446/1156858" fontsize=10 fontcolor="#666666"];
+860 -> 860 [label="172161/1156858" fontsize=10 fontcolor="#666666"];
+860 -> 860 [label="406368/1156858" fontsize=10 fontcolor="#666666"];
+880 [label="split\n(53%)"];
+880 -> 880 [label="203184/203184" fontsize=10 fontcolor="#666666"];
+900 [label="each_line\n(100%)"];
+900 -> 900 [label="1/1" fontsize=10 fontcolor="#666666"];
+920 [label="initialize\n(0%)"];
+920 -> 920 [label="1/1" fontsize=10 fontcolor="#666666"];
+940 [label="open\n(100%)"];
+940 -> 940 [label="1/1" fontsize=10 fontcolor="#666666"];
+960 [label="file_name\n(0%)"];
+960 -> 960 [label="1/1" fontsize=10 fontcolor="#666666"];
+980 [label="write\n(6%)"];
+980 -> 980 [label="31223/31225" fontsize=10 fontcolor="#666666"];
+980 -> 980 [label="1/31225" fontsize=10 fontcolor="#666666"];
+980 -> 980 [label="1/31225" fontsize=10 fontcolor="#666666"];
+1000 [label="work\n(100%)"];
+1000 -> 1000 [label="1/1" fontsize=10 fontcolor="#666666"];
+1020 [label="initialize\n(0%)"];
+1020 -> 1020 [label="1/1" fontsize=10 fontcolor="#666666"];
+1040 [label="new\n(1%)"];
+1040 -> 1040 [label="31223/31224" fontsize=10 fontcolor="#666666"];
+1040 -> 1040 [label="1/31224" fontsize=10 fontcolor="#666666"];
+1060 [label="[global]\n(100%)"];
+}
+subgraph cluster_1080 {
+label = "[global]";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+1060;
+}
+subgraph cluster_1100 {
+label = "Class";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+1040;
+}
+subgraph cluster_1120 {
+label = "App";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+1020;
+1000;
+960;
+800;
+780;
+720;
+520;
+100;
+}
+subgraph cluster_1140 {
+label = "IO";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+980;
+940;
+900;
+820;
+140;
+120;
+}
+subgraph cluster_1160 {
+label = "File";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+920;
+}
+subgraph cluster_1180 {
+label = "String";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+880;
+840;
+640;
+360;
+280;
+240;
+160;
+}
+subgraph cluster_1200 {
+label = "Array";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+860;
+760;
+740;
+700;
+680;
+660;
+540;
+380;
+340;
+320;
+260;
+220;
+}
+subgraph cluster_1220 {
+label = "Hash";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+620;
+600;
+560;
+}
+subgraph cluster_1240 {
+label = "Integer";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+580;
+}
+subgraph cluster_1260 {
+label = "User";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+500;
+480;
+460;
+440;
+420;
+400;
+300;
+}
+subgraph cluster_1280 {
+label = "JSON::Ext::Generator::GeneratorMethods::Hash";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+200;
+}
+subgraph cluster_1300 {
+label = "JSON::Ext::Generator::State";
+fontcolor = "#666666";
+fontsize = 16;
+color = "#666666";
+180;
+}
+}

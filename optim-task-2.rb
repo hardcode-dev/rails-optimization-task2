@@ -1,6 +1,21 @@
+# Deoptimized version of homework task
+
+require 'json'
 require 'pry'
 require 'oj'
 # require 'minitest/autorun'
+
+def user_line?
+  @line_split[0] == 'user'
+end
+
+def session_line?
+  @line_split[0] == 'session'
+end
+
+def browser
+  @line_split[3]
+end
 
 def save_user_sessions(user_sessions)
   return if user_sessions.empty?
@@ -14,9 +29,9 @@ def save_user_sessions(user_sessions)
 
   user_browsers = user_sessions.map { |s| s[3] }
   user_browsers_uniq = user_browsers.uniq
-  user_stat['browsers'] = user_browsers.sort.join(', ').upcase!
+  user_stat['browsers'] = user_browsers.sort.join(', ').upcase
   user_stat['usedIE'] = !!user_browsers_uniq.find { |b| b =~ /Internet Explorer/ }
-  user_stat['alwaysUsedChrome'] = user_browsers_uniq.all? { |b| b.upcase! =~ /Chrome/ }
+  user_stat['alwaysUsedChrome'] = user_browsers_uniq.all? { |b| b.upcase =~ /Chrome/ }
 
   user_stat['dates'] = user_sessions.map { |s| s[5][0..9] }.sort!.reverse!
 
@@ -36,14 +51,14 @@ def work(filename = 'data_large.txt', disable_gc: false)
   user_name = nil
 
   File.write('result.json', '')
-  report_file = File.open('result.json', 'a')
+  report_file = File.open('result.json', "a")
   report_file.puts '{'
   report_file.puts '"usersStats":{'
 
   IO.foreach(filename) do |line|
-    line_split = line.split(',')
+    @line_split = line.split(',')
 
-    if line_split[0] == 'user'
+    if user_line?
       total_users += 1
 
       unless user_name.nil?
@@ -51,15 +66,14 @@ def work(filename = 'data_large.txt', disable_gc: false)
         report_file.puts "\"#{user_name}\": #{json},"
       end
 
-      user_name = "#{line_split[2]} #{line_split[3]}"
+      user_name = "#{@line_split[2]} #{@line_split[3]}"
       user_sessions = []
     end
 
-    if line_split[0] == 'session'
+    if session_line?
       total_sessions += 1
-      browser = line_split[3]
       unique_browsers << browser unless unique_browsers.include?(browser)
-      user_sessions << line_split
+      user_sessions << @line_split
     end
   end
 
@@ -76,7 +90,7 @@ def work(filename = 'data_large.txt', disable_gc: false)
   report['allBrowsers'] = unique_browsers.sort.join(',').upcase
 
   json = Oj.dump(report)
-  json[0] = '' # remove first { for total stats
+  json[0] = '' # remove first {
 
   report_file.puts json
   report_file.close

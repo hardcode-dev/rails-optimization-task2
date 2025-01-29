@@ -26,7 +26,7 @@
 В фидбек-лупе можно получать кол-во памяти *в конце* выполнения программы:
 
 ```ruby
-puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)"
+puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 ```
 
 ## Second thread

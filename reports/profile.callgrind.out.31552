@@ -1,0 +1,198 @@
+events: memory
+
+fl=
+fn=IO::close
+0 0
+
+fl=
+fn=Oj::dump^
+0 120
+
+fl=
+fn=Array::reverse
+0 120
+
+fl=
+fn=Array::join
+0 160
+
+fl=
+fn=Array::sort
+0 560
+
+fl=
+fn=Integer::to_s
+0 360
+
+fl=
+fn=Kernel::nil?
+0 0
+
+fl=
+fn=Array::all?
+0 0
+
+fl=
+fn=Regexp::~
+0 0
+
+fl=
+fn=String::upcase!
+0 0
+
+fl=
+fn=String::to_i
+0 0
+
+fl=
+fn=NilClass::nil?
+0 0
+
+fl=
+fn=String::initialize_copy
+0 0
+
+fl=
+fn=Kernel::initialize_dup
+0 0
+cfl=
+cfn=String::initialize_copy
+calls=105 0
+0 0
+
+fl=
+fn=Kernel::dup
+0 4200
+cfl=
+cfn=Kernel::initialize_dup
+calls=105 0
+0 0
+
+fl=
+fn=String::[]
+0 47640
+
+fl=
+fn=IO::foreach^
+0 2976
+cfl=
+cfn=String::[]
+calls=1191 40
+40 47640
+cfl=
+cfn=Kernel::dup
+calls=105 43
+43 4200
+cfl=
+cfn=NilClass::nil?
+calls=1 50
+50 0
+cfl=
+cfn=IO::write
+calls=5 75
+75 0
+cfl=
+cfn=String::to_i
+calls=15 80
+80 0
+cfl=
+cfn=String::upcase!
+calls=15 85
+85 0
+cfl=
+cfn=Regexp::~
+calls=3 89
+89 0
+cfl=
+cfn=Array::all?
+calls=15 92
+92 0
+cfl=
+cfn=Kernel::nil?
+calls=2 50
+50 0
+cfl=
+cfn=Integer::to_s
+calls=4 52
+52 160
+cfl=
+cfn=Array::sort
+calls=4 52
+52 320
+cfl=
+cfn=Array::join
+calls=2 52
+52 80
+cfl=
+cfn=Array::reverse
+calls=2 52
+52 80
+cfl=
+cfn=Oj::dump^
+calls=2 61
+61 80
+
+fl=
+fn=IO::write
+0 40
+
+fl=
+fn=File::initialize
+0 0
+
+fl=
+fn=IO::open^
+0 40
+cfl=
+cfn=File::initialize
+calls=1 0
+0 0
+
+fl=/home/smalew/Projects/Lessons/Thinknetica/rails-optimization-task2/task/optimization.rb
+fn=Object::work
+6 784
+cfl=
+cfn=IO::open^
+calls=1 7
+7 40
+cfl=
+cfn=IO::write
+calls=3 9
+9 40
+cfl=
+cfn=IO::foreach^
+calls=1 32
+32 55536
+cfl=
+cfn=Integer::to_s
+calls=5 102
+102 200
+cfl=
+cfn=Array::sort
+calls=3 102
+102 240
+cfl=
+cfn=Array::join
+calls=2 102
+102 80
+cfl=
+cfn=Array::reverse
+calls=1 102
+102 40
+cfl=
+cfn=Oj::dump^
+calls=1 111
+111 40
+cfl=
+cfn=IO::close
+calls=1 127
+127 0
+
+fl=/home/smalew/Projects/Lessons/Thinknetica/rails-optimization-task2/profilers/5.rubyprof_memory.rb
+fn=[global]::
+9 0
+cfl=/home/smalew/Projects/Lessons/Thinknetica/rails-optimization-task2/task/optimization.rb
+cfn=Object::work
+calls=1 9
+9 57000
+

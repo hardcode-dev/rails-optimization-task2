@@ -1,0 +1,1190 @@
+desc: (none)
+cmd: ruby task/optimization.rb
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=7445032
+mem_heap_B=35551618
+mem_heap_extra_B=298390
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=18686742
+mem_heap_B=36013009
+mem_heap_extra_B=363239
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=28504674
+mem_heap_B=36125957
+mem_heap_extra_B=407371
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=36460529
+mem_heap_B=36231487
+mem_heap_extra_B=425377
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=45645763
+mem_heap_B=36512990
+mem_heap_extra_B=499994
+mem_stacks_B=0
+heap_tree=detailed
+n5: 36512990 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 33554432 0x4F12E33: rb_aligned_malloc (gc.c:7916)
+  n1: 33554432 0x5076063: Init_TransientHeap (transient_heap.c:294)
+   n1: 33554432 0x4F27437: rb_call_inits (inits.c:20)
+    n1: 33554432 0x4EF9227: ruby_setup (eval.c:74)
+     n1: 33554432 0x4EFC337: ruby_init (eval.c:91)
+      n0: 33554432 0x108954: main (main.c:41)
+ n2: 1891728 0x4F15362: objspace_xmalloc0 (gc.c:8137)
+  n1: 1048576 0x5092620: Init_BareVM (vm.c:2428)
+   n1: 1048576 0x4EF91B5: ruby_setup (eval.c:67)
+    n1: 1048576 0x4EFC337: ruby_init (eval.c:91)
+     n0: 1048576 0x108954: main (main.c:41)
+  n0: 843152 in 89 places, all below massif's threshold (1.00%)
+ n2: 457632 0x4F11DCB: heap_assign_page (gc.c:7916)
+  n1: 392256 0x4F1218D: Init_heap (gc.c:1650)
+   n1: 392256 0x4EF91BA: ruby_setup (eval.c:68)
+    n1: 392256 0x4EFC337: ruby_init (eval.c:91)
+     n0: 392256 0x108954: main (main.c:41)
+  n0: 65376 in 2 places, all below massif's threshold (1.00%)
+ n1: 430120 0x4F18ABA: ruby_xcalloc (gc.c:8353)
+  n0: 430120 in 21 places, all below massif's threshold (1.00%)
+ n0: 179078 in 54 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=6
+#-----------
+time=59740568
+mem_heap_B=36790156
+mem_heap_extra_B=484684
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=76005220
+mem_heap_B=36730781
+mem_heap_extra_B=579171
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=90285643
+mem_heap_B=37201512
+mem_heap_extra_B=671152
+mem_stacks_B=0
+heap_tree=detailed
+n5: 37201512 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 33554432 0x4F12E33: rb_aligned_malloc (gc.c:7916)
+  n1: 33554432 0x5076063: Init_TransientHeap (transient_heap.c:294)
+   n1: 33554432 0x4F27437: rb_call_inits (inits.c:20)
+    n1: 33554432 0x4EF9227: ruby_setup (eval.c:74)
+     n1: 33554432 0x4EFC337: ruby_init (eval.c:91)
+      n0: 33554432 0x108954: main (main.c:41)
+ n2: 2151600 0x4F15362: objspace_xmalloc0 (gc.c:8137)
+  n0: 1103024 in 92 places, all below massif's threshold (1.00%)
+  n1: 1048576 0x5092620: Init_BareVM (vm.c:2428)
+   n1: 1048576 0x4EF91B5: ruby_setup (eval.c:67)
+    n1: 1048576 0x4EFC337: ruby_init (eval.c:91)
+     n0: 1048576 0x108954: main (main.c:41)
+ n1: 705343 0x4F18ABA: ruby_xcalloc (gc.c:8353)
+  n0: 705343 in 22 places, all below massif's threshold (1.00%)
+ n2: 555696 0x4F11DCB: heap_assign_page (gc.c:7916)
+  n1: 392256 0x4F1218D: Init_heap (gc.c:1650)
+   n1: 392256 0x4EF91BA: ruby_setup (eval.c:68)
+    n1: 392256 0x4EFC337: ruby_init (eval.c:91)
+     n0: 392256 0x108954: main (main.c:41)
+  n0: 163440 in 3 places, all below massif's threshold (1.00%)
+ n0: 234441 in 67 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=9
+#-----------
+time=98489853
+mem_heap_B=37115584
+mem_heap_extra_B=700160
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=111001676
+mem_heap_B=37423999
+mem_heap_extra_B=763705
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=119402555
+mem_heap_B=37503080
+mem_heap_extra_B=767408
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=130634039
+mem_heap_B=37415908
+mem_heap_extra_B=737692
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=139498826
+mem_heap_B=37566144
+mem_heap_extra_B=748840
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=154787555
+mem_heap_B=37687231
+mem_heap_extra_B=839817
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=165188170
+mem_heap_B=37985038
+mem_heap_extra_B=944746
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=176357391
+mem_heap_B=38229524
+mem_heap_extra_B=1212820
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=190676280
+mem_heap_B=38280701
+mem_heap_extra_B=1312499
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=198112943
+mem_heap_B=38088844
+mem_heap_extra_B=1252076
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=19
+#-----------
+time=207133046
+mem_heap_B=38266712
+mem_heap_extra_B=1324280
+mem_stacks_B=0
+heap_tree=detailed
+n5: 38266712 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 33554432 0x4F12E33: rb_aligned_malloc (gc.c:7916)
+  n1: 33554432 0x5076063: Init_TransientHeap (transient_heap.c:294)
+   n1: 33554432 0x4F27437: rb_call_inits (inits.c:20)
+    n1: 33554432 0x4EF9227: ruby_setup (eval.c:74)
+     n1: 33554432 0x4EFC337: ruby_init (eval.c:91)
+      n0: 33554432 0x108954: main (main.c:41)
+ n4: 2572495 0x4F15362: objspace_xmalloc0 (gc.c:8137)
+  n1: 1048576 0x5092620: Init_BareVM (vm.c:2428)
+   n1: 1048576 0x4EF91B5: ruby_setup (eval.c:67)
+    n1: 1048576 0x4EFC337: ruby_init (eval.c:91)
+     n0: 1048576 0x108954: main (main.c:41)
+  n0: 573407 in 101 places, all below massif's threshold (1.00%)
+  n2: 502560 0x501D3B1: st_init_table_with_size (st.c:605)
+   n1: 412992 0x501D6D5: rebuild_table (st.c:780)
+    n0: 412992 in 4 places, all below massif's threshold (1.00%)
+   n0: 89568 in 31 places, all below massif's threshold (1.00%)
+  n2: 447952 0x4EB1FAB: iseq_setup (compile.c:2119)
+   n1: 447496 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 447496 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n1: 442216 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n0: 442216 in 9 places, all below massif's threshold (1.00%)
+     n0: 5280 in 5 places, all below massif's threshold (1.00%)
+   n0: 456 in 1 place, below massif's threshold (1.00%)
+ n1: 996399 0x4F18ABA: ruby_xcalloc (gc.c:8353)
+  n0: 996399 in 23 places, all below massif's threshold (1.00%)
+ n1: 751824 0x4F11DCB: heap_assign_page (gc.c:7916)
+  n0: 751824 in 4 places, all below massif's threshold (1.00%)
+ n0: 391562 in 91 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=20
+#-----------
+time=219668387
+mem_heap_B=38201280
+mem_heap_extra_B=1338296
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=227271266
+mem_heap_B=38312258
+mem_heap_extra_B=1385254
+mem_stacks_B=0
+heap_tree=detailed
+n5: 38312258 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 33554432 0x4F12E33: rb_aligned_malloc (gc.c:7916)
+  n1: 33554432 0x5076063: Init_TransientHeap (transient_heap.c:294)
+   n1: 33554432 0x4F27437: rb_call_inits (inits.c:20)
+    n1: 33554432 0x4EF9227: ruby_setup (eval.c:74)
+     n1: 33554432 0x4EFC337: ruby_init (eval.c:91)
+      n0: 33554432 0x108954: main (main.c:41)
+ n4: 2624595 0x4F15362: objspace_xmalloc0 (gc.c:8137)
+  n1: 1048576 0x5092620: Init_BareVM (vm.c:2428)
+   n1: 1048576 0x4EF91B5: ruby_setup (eval.c:67)
+    n1: 1048576 0x4EFC337: ruby_init (eval.c:91)
+     n0: 1048576 0x108954: main (main.c:41)
+  n0: 601131 in 101 places, all below massif's threshold (1.00%)
+  n2: 529728 0x501D3B1: st_init_table_with_size (st.c:605)
+   n1: 439104 0x501D6D5: rebuild_table (st.c:780)
+    n0: 439104 in 4 places, all below massif's threshold (1.00%)
+   n0: 90624 in 31 places, all below massif's threshold (1.00%)
+  n2: 445160 0x4EB1FAB: iseq_setup (compile.c:2119)
+   n1: 444704 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 444704 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n1: 439360 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n0: 439360 in 9 places, all below massif's threshold (1.00%)
+     n0: 5344 in 5 places, all below massif's threshold (1.00%)
+   n0: 456 in 1 place, below massif's threshold (1.00%)
+ n1: 995059 0x4F18ABA: ruby_xcalloc (gc.c:8353)
+  n0: 995059 in 23 places, all below massif's threshold (1.00%)
+ n1: 751824 0x4F11DCB: heap_assign_page (gc.c:7916)
+  n0: 751824 in 4 places, all below massif's threshold (1.00%)
+ n0: 386348 in 92 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=22
+#-----------
+time=240041082
+mem_heap_B=38258405
+mem_heap_extra_B=1399019
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=250690348
+mem_heap_B=38663001
+mem_heap_extra_B=1879487
+mem_stacks_B=0
+heap_tree=detailed
+n5: 38663001 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 33554432 0x4F12E33: rb_aligned_malloc (gc.c:7916)
+  n1: 33554432 0x5076063: Init_TransientHeap (transient_heap.c:294)
+   n1: 33554432 0x4F27437: rb_call_inits (inits.c:20)
+    n1: 33554432 0x4EF9227: ruby_setup (eval.c:74)
+     n1: 33554432 0x4EFC337: ruby_init (eval.c:91)
+      n0: 33554432 0x108954: main (main.c:41)
+ n4: 2690232 0x4F15362: objspace_xmalloc0 (gc.c:8137)
+  n1: 1048576 0x5092620: Init_BareVM (vm.c:2428)
+   n1: 1048576 0x4EF91B5: ruby_setup (eval.c:67)
+    n1: 1048576 0x4EFC337: ruby_init (eval.c:91)
+     n0: 1048576 0x108954: main (main.c:41)
+  n0: 631760 in 106 places, all below massif's threshold (1.00%)
+  n2: 571584 0x501D3B1: st_init_table_with_size (st.c:605)
+   n1: 466560 0x501D6D5: rebuild_table (st.c:780)
+    n0: 466560 in 4 places, all below massif's threshold (1.00%)
+   n0: 105024 in 32 places, all below massif's threshold (1.00%)
+  n2: 438312 0x4EB1FAB: iseq_setup (compile.c:2119)
+   n1: 437856 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 437856 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n1: 432608 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n0: 432608 in 9 places, all below massif's threshold (1.00%)
+     n0: 5248 in 6 places, all below massif's threshold (1.00%)
+   n0: 456 in 1 place, below massif's threshold (1.00%)
+ n1: 1043144 0x4F18ABA: ruby_xcalloc (gc.c:8353)
+  n0: 1043144 in 26 places, all below massif's threshold (1.00%)
+ n2: 915264 0x4F11DCB: heap_assign_page (gc.c:7916)
+  n0: 506664 in 3 places, all below massif's threshold (1.00%)
+  n1: 408600 0x4F16FC2: newobj_slowpath_wb_protected (gc.c:1718)
+   n0: 408600 in 12 places, all below massif's threshold (1.00%)
+ n0: 459929 in 97 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=24
+#-----------
+time=266756692
+mem_heap_B=38635939
+mem_heap_extra_B=1988285
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=279368000
+mem_heap_B=38851974
+mem_heap_extra_B=2061634
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=289327055
+mem_heap_B=39482321
+mem_heap_extra_B=2180615
+mem_stacks_B=0
+heap_tree=detailed
+n5: 39482321 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 33554432 0x4F12E33: rb_aligned_malloc (gc.c:7916)
+  n1: 33554432 0x5076063: Init_TransientHeap (transient_heap.c:294)
+   n1: 33554432 0x4F27437: rb_call_inits (inits.c:20)
+    n1: 33554432 0x4EF9227: ruby_setup (eval.c:74)
+     n1: 33554432 0x4EFC337: ruby_init (eval.c:91)
+      n0: 33554432 0x108954: main (main.c:41)
+ n4: 3291057 0x4F15362: objspace_xmalloc0 (gc.c:8137)
+  n1: 1048576 0x5092620: Init_BareVM (vm.c:2428)
+   n1: 1048576 0x4EF91B5: ruby_setup (eval.c:67)
+    n1: 1048576 0x4EFC337: ruby_init (eval.c:91)
+     n0: 1048576 0x108954: main (main.c:41)
+  n2: 971136 0x501D3B1: st_init_table_with_size (st.c:605)
+   n2: 863040 0x501D6D5: rebuild_table (st.c:780)
+    n1: 682752 0x501E23F: st_add_direct_with_hash (st.c:1142)
+     n2: 682752 0x501F5FE: st_update (st.c:1515)
+      n1: 589824 0x5025BE3: register_fstring (string.c:344)
+       n0: 589824 in 2 places, all below massif's threshold (1.00%)
+      n0: 92928 in 2 places, all below massif's threshold (1.00%)
+    n0: 180288 in 3 places, all below massif's threshold (1.00%)
+   n0: 108096 in 33 places, all below massif's threshold (1.00%)
+  n0: 764337 in 110 places, all below massif's threshold (1.00%)
+  n2: 507008 0x4EB1FAB: iseq_setup (compile.c:2119)
+   n1: 506328 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 506328 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n1: 494176 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n0: 494176 in 9 places, all below massif's threshold (1.00%)
+     n0: 12152 in 6 places, all below massif's threshold (1.00%)
+   n0: 680 in 1 place, below massif's threshold (1.00%)
+ n1: 1174595 0x4F18ABA: ruby_xcalloc (gc.c:8353)
+  n0: 1174595 in 27 places, all below massif's threshold (1.00%)
+ n2: 1029672 0x4F11DCB: heap_assign_page (gc.c:7916)
+  n1: 523008 0x4F16FC2: newobj_slowpath_wb_protected (gc.c:1718)
+   n0: 523008 in 13 places, all below massif's threshold (1.00%)
+  n0: 506664 in 3 places, all below massif's threshold (1.00%)
+ n0: 432565 in 99 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=27
+#-----------
+time=302702554
+mem_heap_B=39223834
+mem_heap_extra_B=2166854
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=310292013
+mem_heap_B=39511799
+mem_heap_extra_B=2184425
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=320480885
+mem_heap_B=39550874
+mem_heap_extra_B=2255102
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=333337210
+mem_heap_B=39962650
+mem_heap_extra_B=2303718
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=349634707
+mem_heap_B=39971776
+mem_heap_extra_B=2343096
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=359967362
+mem_heap_B=40152555
+mem_heap_extra_B=2360221
+mem_stacks_B=0
+heap_tree=detailed
+n5: 40152555 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 33554432 0x4F12E33: rb_aligned_malloc (gc.c:7916)
+  n1: 33554432 0x5076063: Init_TransientHeap (transient_heap.c:294)
+   n1: 33554432 0x4F27437: rb_call_inits (inits.c:20)
+    n1: 33554432 0x4EF9227: ruby_setup (eval.c:74)
+     n1: 33554432 0x4EFC337: ruby_init (eval.c:91)
+      n0: 33554432 0x108954: main (main.c:41)
+ n4: 3558901 0x4F15362: objspace_xmalloc0 (gc.c:8137)
+  n1: 1048576 0x5092620: Init_BareVM (vm.c:2428)
+   n1: 1048576 0x4EF91B5: ruby_setup (eval.c:67)
+    n1: 1048576 0x4EFC337: ruby_init (eval.c:91)
+     n0: 1048576 0x108954: main (main.c:41)
+  n0: 933125 in 111 places, all below massif's threshold (1.00%)
+  n2: 921408 0x501D3B1: st_init_table_with_size (st.c:605)
+   n2: 815424 0x501D6D5: rebuild_table (st.c:780)
+    n1: 487680 0x501E23F: st_add_direct_with_hash (st.c:1142)
+     n1: 487680 0x501F5FE: st_update (st.c:1515)
+      n0: 487680 in 3 places, all below massif's threshold (1.00%)
+    n0: 327744 in 3 places, all below massif's threshold (1.00%)
+   n0: 105984 in 35 places, all below massif's threshold (1.00%)
+  n2: 655792 0x4EB1FAB: iseq_setup (compile.c:2119)
+   n1: 654392 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 654392 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n1: 643712 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n0: 643712 in 10 places, all below massif's threshold (1.00%)
+     n0: 10680 in 6 places, all below massif's threshold (1.00%)
+   n0: 1400 in 1 place, below massif's threshold (1.00%)
+ n2: 1533894 0x4F18ABA: ruby_xcalloc (gc.c:8353)
+  n0: 1012638 in 26 places, all below massif's threshold (1.00%)
+  n2: 521256 0x4F485CA: rb_iseq_new_with_opt (iseq.c:361)
+   n1: 515928 0x4E9BDDB: new_child_iseq (compile.c:1224)
+    n0: 515928 in 10 places, all below massif's threshold (1.00%)
+   n0: 5328 in 6 places, all below massif's threshold (1.00%)
+ n2: 1029672 0x4F11DCB: heap_assign_page (gc.c:7916)
+  n1: 523008 0x4F16FC2: newobj_slowpath_wb_protected (gc.c:1718)
+   n0: 523008 in 13 places, all below massif's threshold (1.00%)
+  n0: 506664 in 3 places, all below massif's threshold (1.00%)
+ n0: 475656 in 103 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=33
+#-----------
+time=368679058
+mem_heap_B=40121086
+mem_heap_extra_B=2377474
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=380321495
+mem_heap_B=40281558
+mem_heap_extra_B=2449346
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=388780781
+mem_heap_B=40611965
+mem_heap_extra_B=2525803
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=36
+#-----------
+time=397788233
+mem_heap_B=40855730
+mem_heap_extra_B=2666614
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=411645607
+mem_heap_B=41281504
+mem_heap_extra_B=2880600
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=38
+#-----------
+time=422251121
+mem_heap_B=41535065
+mem_heap_extra_B=2992159
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=437755744
+mem_heap_B=41342045
+mem_heap_extra_B=2959499
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=448618269
+mem_heap_B=41564784
+mem_heap_extra_B=3324320
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=41
+#-----------
+time=456132363
+mem_heap_B=41813979
+mem_heap_extra_B=3408205
+mem_stacks_B=0
+heap_tree=detailed
+n5: 41813979 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 33554432 0x4F12E33: rb_aligned_malloc (gc.c:7916)
+  n1: 33554432 0x5076063: Init_TransientHeap (transient_heap.c:294)
+   n1: 33554432 0x4F27437: rb_call_inits (inits.c:20)
+    n1: 33554432 0x4EF9227: ruby_setup (eval.c:74)
+     n1: 33554432 0x4EFC337: ruby_init (eval.c:91)
+      n0: 33554432 0x108954: main (main.c:41)
+ n4: 4062850 0x4F15362: objspace_xmalloc0 (gc.c:8137)
+  n0: 1166098 in 112 places, all below massif's threshold (1.00%)
+  n1: 1048576 0x5092620: Init_BareVM (vm.c:2428)
+   n1: 1048576 0x4EF91B5: ruby_setup (eval.c:67)
+    n1: 1048576 0x4EFC337: ruby_init (eval.c:91)
+     n0: 1048576 0x108954: main (main.c:41)
+  n2: 945792 0x501D3B1: st_init_table_with_size (st.c:605)
+   n2: 821376 0x501D6D5: rebuild_table (st.c:780)
+    n1: 490752 0x501E23F: st_add_direct_with_hash (st.c:1142)
+     n1: 490752 0x501F5FE: st_update (st.c:1515)
+      n0: 490752 in 3 places, all below massif's threshold (1.00%)
+    n0: 330624 in 3 places, all below massif's threshold (1.00%)
+   n0: 124416 in 36 places, all below massif's threshold (1.00%)
+  n2: 902384 0x4EB1FAB: iseq_setup (compile.c:2119)
+   n1: 900696 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 900696 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n2: 887192 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n2: 510744 0x4EA6D83: iseq_compile_each0 (compile.c:7112)
+       n2: 468280 0x4EA2905: iseq_compile_each0 (compile.c:5925)
+        n1: 462800 0x4EB3BF9: rb_iseq_compile_node (compile.c:671)
+         n1: 462800 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+          n1: 462800 0x4E9BDDB: new_child_iseq (compile.c:1224)
+           n0: 462800 in 3 places, all below massif's threshold (1.00%)
+        n0: 5480 in 2 places, all below massif's threshold (1.00%)
+       n0: 42464 in 7 places, all below massif's threshold (1.00%)
+      n0: 376448 in 10 places, all below massif's threshold (1.00%)
+     n0: 13504 in 7 places, all below massif's threshold (1.00%)
+   n0: 1688 in 1 place, below massif's threshold (1.00%)
+ n2: 2028809 0x4F18ABA: ruby_xcalloc (gc.c:8353)
+  n0: 1305385 in 26 places, all below massif's threshold (1.00%)
+  n2: 723424 0x4F485CA: rb_iseq_new_with_opt (iseq.c:361)
+   n1: 704184 0x4E9BDDB: new_child_iseq (compile.c:1224)
+    n0: 704184 in 11 places, all below massif's threshold (1.00%)
+   n0: 19240 in 7 places, all below massif's threshold (1.00%)
+ n2: 1503648 0x4F11DCB: heap_assign_page (gc.c:7916)
+  n2: 980640 0x4F16FC2: newobj_slowpath_wb_protected (gc.c:1718)
+   n1: 523008 0x5025EB3: str_new0 (string.c:724)
+    n0: 523008 in 4 places, all below massif's threshold (1.00%)
+   n0: 457632 in 16 places, all below massif's threshold (1.00%)
+  n0: 523008 in 3 places, all below massif's threshold (1.00%)
+ n0: 664240 in 104 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=42
+#-----------
+time=471658631
+mem_heap_B=41455047
+mem_heap_extra_B=3408553
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=479421115
+mem_heap_B=41586356
+mem_heap_extra_B=3540588
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=491070884
+mem_heap_B=41831952
+mem_heap_extra_B=3695784
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=45
+#-----------
+time=502758275
+mem_heap_B=41487099
+mem_heap_extra_B=3486869
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=510514993
+mem_heap_B=41632930
+mem_heap_extra_B=3589990
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=47
+#-----------
+time=526052420
+mem_heap_B=41412833
+mem_heap_extra_B=3549135
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=48
+#-----------
+time=538522420
+mem_heap_B=41619360
+mem_heap_extra_B=3607768
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=546515236
+mem_heap_B=41694725
+mem_heap_extra_B=3636131
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=553952577
+mem_heap_B=41756067
+mem_heap_extra_B=3654469
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=51
+#-----------
+time=563479427
+mem_heap_B=41870036
+mem_heap_extra_B=3678132
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=52
+#-----------
+time=570917684
+mem_heap_B=41667251
+mem_heap_extra_B=3228373
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=53
+#-----------
+time=578358076
+mem_heap_B=41834150
+mem_heap_extra_B=3282218
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=54
+#-----------
+time=585801234
+mem_heap_B=42048521
+mem_heap_extra_B=3315535
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=55
+#-----------
+time=593238248
+mem_heap_B=42175352
+mem_heap_extra_B=3368456
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=56
+#-----------
+time=595673119
+mem_heap_B=42274461
+mem_heap_extra_B=3403459
+mem_stacks_B=0
+heap_tree=detailed
+n5: 42274461 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 33554432 0x4F12E33: rb_aligned_malloc (gc.c:7916)
+  n1: 33554432 0x5076063: Init_TransientHeap (transient_heap.c:294)
+   n1: 33554432 0x4F27437: rb_call_inits (inits.c:20)
+    n1: 33554432 0x4EF9227: ruby_setup (eval.c:74)
+     n1: 33554432 0x4EFC337: ruby_init (eval.c:91)
+      n0: 33554432 0x108954: main (main.c:41)
+ n4: 4236100 0x4F15362: objspace_xmalloc0 (gc.c:8137)
+  n0: 1184148 in 113 places, all below massif's threshold (1.00%)
+  n1: 1048576 0x5092620: Init_BareVM (vm.c:2428)
+   n1: 1048576 0x4EF91B5: ruby_setup (eval.c:67)
+    n1: 1048576 0x4EFC337: ruby_init (eval.c:91)
+     n0: 1048576 0x108954: main (main.c:41)
+  n2: 1045776 0x4EB1FAB: iseq_setup (compile.c:2119)
+   n1: 1043752 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 1043752 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n2: 1031296 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n2: 612240 0x4EA6D83: iseq_compile_each0 (compile.c:7112)
+       n2: 551040 0x4EA2905: iseq_compile_each0 (compile.c:5925)
+        n1: 544208 0x4EB3BF9: rb_iseq_compile_node (compile.c:671)
+         n1: 544208 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+          n1: 544208 0x4E9BDDB: new_child_iseq (compile.c:1224)
+           n0: 544208 in 3 places, all below massif's threshold (1.00%)
+        n0: 6832 in 4 places, all below massif's threshold (1.00%)
+       n0: 61200 in 7 places, all below massif's threshold (1.00%)
+      n0: 419056 in 10 places, all below massif's threshold (1.00%)
+     n0: 12456 in 7 places, all below massif's threshold (1.00%)
+   n0: 2024 in 1 place, below massif's threshold (1.00%)
+  n2: 957600 0x501D3B1: st_init_table_with_size (st.c:605)
+   n2: 823104 0x501D6D5: rebuild_table (st.c:780)
+    n1: 492480 0x501E23F: st_add_direct_with_hash (st.c:1142)
+     n1: 492480 0x501F5FE: st_update (st.c:1515)
+      n0: 492480 in 3 places, all below massif's threshold (1.00%)
+    n0: 330624 in 3 places, all below massif's threshold (1.00%)
+   n0: 134496 in 36 places, all below massif's threshold (1.00%)
+ n3: 2300407 0x4F18ABA: ruby_xcalloc (gc.c:8353)
+  n0: 935654 in 25 places, all below massif's threshold (1.00%)
+  n2: 853664 0x4F485CA: rb_iseq_new_with_opt (iseq.c:361)
+   n2: 839752 0x4E9BDDB: new_child_iseq (compile.c:1224)
+    n1: 470936 0x4EA6D83: iseq_compile_each0 (compile.c:7112)
+     n0: 470936 in 8 places, all below massif's threshold (1.00%)
+    n0: 368816 in 10 places, all below massif's threshold (1.00%)
+   n0: 13912 in 7 places, all below massif's threshold (1.00%)
+  n2: 511089 0x4EB204C: iseq_setup (compile.c:2126)
+   n1: 511012 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 511012 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n1: 504038 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n0: 504038 in 11 places, all below massif's threshold (1.00%)
+     n0: 6974 in 7 places, all below massif's threshold (1.00%)
+   n0: 77 in 1 place, below massif's threshold (1.00%)
+ n2: 1552680 0x4F11DCB: heap_assign_page (gc.c:7916)
+  n2: 1013328 0x4F16FC2: newobj_slowpath_wb_protected (gc.c:1718)
+   n1: 555696 0x5025EB3: str_new0 (string.c:724)
+    n0: 555696 in 4 places, all below massif's threshold (1.00%)
+   n0: 457632 in 16 places, all below massif's threshold (1.00%)
+  n0: 539352 in 3 places, all below massif's threshold (1.00%)
+ n0: 630842 in 105 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=57
+#-----------
+time=603109817
+mem_heap_B=42516994
+mem_heap_extra_B=3467846
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=58
+#-----------
+time=606672268
+mem_heap_B=42632380
+mem_heap_extra_B=3528172
+mem_stacks_B=0
+heap_tree=detailed
+n5: 42632380 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 33554432 0x4F12E33: rb_aligned_malloc (gc.c:7916)
+  n1: 33554432 0x5076063: Init_TransientHeap (transient_heap.c:294)
+   n1: 33554432 0x4F27437: rb_call_inits (inits.c:20)
+    n1: 33554432 0x4EF9227: ruby_setup (eval.c:74)
+     n1: 33554432 0x4EFC337: ruby_init (eval.c:91)
+      n0: 33554432 0x108954: main (main.c:41)
+ n4: 4374841 0x4F15362: objspace_xmalloc0 (gc.c:8137)
+  n0: 1269217 in 113 places, all below massif's threshold (1.00%)
+  n2: 1094072 0x4EB1FAB: iseq_setup (compile.c:2119)
+   n1: 1092048 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 1092048 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n2: 1079400 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n2: 645656 0x4EA6D83: iseq_compile_each0 (compile.c:7112)
+       n2: 584456 0x4EA2905: iseq_compile_each0 (compile.c:5925)
+        n1: 577624 0x4EB3BF9: rb_iseq_compile_node (compile.c:671)
+         n1: 577624 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+          n1: 577624 0x4E9BDDB: new_child_iseq (compile.c:1224)
+           n0: 577624 in 3 places, all below massif's threshold (1.00%)
+        n0: 6832 in 4 places, all below massif's threshold (1.00%)
+       n0: 61200 in 7 places, all below massif's threshold (1.00%)
+      n0: 433744 in 10 places, all below massif's threshold (1.00%)
+     n0: 12648 in 7 places, all below massif's threshold (1.00%)
+   n0: 2024 in 1 place, below massif's threshold (1.00%)
+  n1: 1048576 0x5092620: Init_BareVM (vm.c:2428)
+   n1: 1048576 0x4EF91B5: ruby_setup (eval.c:67)
+    n1: 1048576 0x4EFC337: ruby_init (eval.c:91)
+     n0: 1048576 0x108954: main (main.c:41)
+  n2: 962976 0x501D3B1: st_init_table_with_size (st.c:605)
+   n2: 823104 0x501D6D5: rebuild_table (st.c:780)
+    n1: 492480 0x501E23F: st_add_direct_with_hash (st.c:1142)
+     n1: 492480 0x501F5FE: st_update (st.c:1515)
+      n0: 492480 in 3 places, all below massif's threshold (1.00%)
+    n0: 330624 in 3 places, all below massif's threshold (1.00%)
+   n0: 139872 in 36 places, all below massif's threshold (1.00%)
+ n3: 2383367 0x4F18ABA: ruby_xcalloc (gc.c:8353)
+  n0: 959406 in 25 places, all below massif's threshold (1.00%)
+  n2: 886816 0x4F485CA: rb_iseq_new_with_opt (iseq.c:361)
+   n2: 872016 0x4E9BDDB: new_child_iseq (compile.c:1224)
+    n1: 489584 0x4EA6D83: iseq_compile_each0 (compile.c:7112)
+     n0: 489584 in 8 places, all below massif's threshold (1.00%)
+    n0: 382432 in 10 places, all below massif's threshold (1.00%)
+   n0: 14800 in 7 places, all below massif's threshold (1.00%)
+  n2: 537145 0x4EB204C: iseq_setup (compile.c:2126)
+   n1: 537068 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 537068 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n1: 530091 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n0: 530091 in 11 places, all below massif's threshold (1.00%)
+     n0: 6977 in 7 places, all below massif's threshold (1.00%)
+   n0: 77 in 1 place, below massif's threshold (1.00%)
+ n2: 1667088 0x4F11DCB: heap_assign_page (gc.c:7916)
+  n2: 1127736 0x4F16FC2: newobj_slowpath_wb_protected (gc.c:1718)
+   n1: 604728 0x5025EB3: str_new0 (string.c:724)
+    n0: 604728 in 4 places, all below massif's threshold (1.00%)
+   n0: 523008 in 18 places, all below massif's threshold (1.00%)
+  n0: 539352 in 3 places, all below massif's threshold (1.00%)
+ n0: 652652 in 105 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=59
+#-----------
+time=614115042
+mem_heap_B=42833918
+mem_heap_extra_B=3652154
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=60
+#-----------
+time=616821055
+mem_heap_B=42937848
+mem_heap_extra_B=3688992
+mem_stacks_B=0
+heap_tree=detailed
+n5: 42937848 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 33554432 0x4F12E33: rb_aligned_malloc (gc.c:7916)
+  n1: 33554432 0x5076063: Init_TransientHeap (transient_heap.c:294)
+   n1: 33554432 0x4F27437: rb_call_inits (inits.c:20)
+    n1: 33554432 0x4EF9227: ruby_setup (eval.c:74)
+     n1: 33554432 0x4EFC337: ruby_init (eval.c:91)
+      n0: 33554432 0x108954: main (main.c:41)
+ n4: 4451896 0x4F15362: objspace_xmalloc0 (gc.c:8137)
+  n0: 1293760 in 113 places, all below massif's threshold (1.00%)
+  n2: 1135928 0x4EB1FAB: iseq_setup (compile.c:2119)
+   n1: 1133904 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 1133904 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n2: 1119936 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n2: 667688 0x4EA6D83: iseq_compile_each0 (compile.c:7112)
+       n2: 606488 0x4EA2905: iseq_compile_each0 (compile.c:5925)
+        n1: 599656 0x4EB3BF9: rb_iseq_compile_node (compile.c:671)
+         n1: 599656 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+          n2: 599656 0x4E9BDDB: new_child_iseq (compile.c:1224)
+           n1: 474184 0x4EA3493: iseq_compile_each0 (compile.c:7182)
+            n0: 474184 in 3 places, all below massif's threshold (1.00%)
+           n0: 125472 in 2 places, all below massif's threshold (1.00%)
+        n0: 6832 in 4 places, all below massif's threshold (1.00%)
+       n0: 61200 in 7 places, all below massif's threshold (1.00%)
+      n0: 452248 in 10 places, all below massif's threshold (1.00%)
+     n0: 13968 in 7 places, all below massif's threshold (1.00%)
+   n0: 2024 in 1 place, below massif's threshold (1.00%)
+  n1: 1048576 0x5092620: Init_BareVM (vm.c:2428)
+   n1: 1048576 0x4EF91B5: ruby_setup (eval.c:67)
+    n1: 1048576 0x4EFC337: ruby_init (eval.c:91)
+     n0: 1048576 0x108954: main (main.c:41)
+  n2: 973632 0x501D3B1: st_init_table_with_size (st.c:605)
+   n2: 824640 0x501D6D5: rebuild_table (st.c:780)
+    n1: 493248 0x501E23F: st_add_direct_with_hash (st.c:1142)
+     n1: 493248 0x501F5FE: st_update (st.c:1515)
+      n0: 493248 in 3 places, all below massif's threshold (1.00%)
+    n0: 331392 in 3 places, all below massif's threshold (1.00%)
+   n0: 148992 in 36 places, all below massif's threshold (1.00%)
+ n3: 2476878 0x4F18ABA: ruby_xcalloc (gc.c:8353)
+  n0: 988404 in 25 places, all below massif's threshold (1.00%)
+  n2: 929144 0x4F485CA: rb_iseq_new_with_opt (iseq.c:361)
+   n2: 911976 0x4E9BDDB: new_child_iseq (compile.c:1224)
+    n1: 508824 0x4EA6D83: iseq_compile_each0 (compile.c:7112)
+     n0: 508824 in 8 places, all below massif's threshold (1.00%)
+    n0: 403152 in 10 places, all below massif's threshold (1.00%)
+   n0: 17168 in 7 places, all below massif's threshold (1.00%)
+  n2: 559330 0x4EB204C: iseq_setup (compile.c:2126)
+   n1: 559253 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 559253 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n1: 551910 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n0: 551910 in 11 places, all below massif's threshold (1.00%)
+     n0: 7343 in 7 places, all below massif's threshold (1.00%)
+   n0: 77 in 1 place, below massif's threshold (1.00%)
+ n2: 1781496 0x4F11DCB: heap_assign_page (gc.c:7916)
+  n2: 1242144 0x4F16FC2: newobj_slowpath_wb_protected (gc.c:1718)
+   n1: 686448 0x5025EB3: str_new0 (string.c:724)
+    n0: 686448 in 4 places, all below massif's threshold (1.00%)
+   n0: 555696 in 20 places, all below massif's threshold (1.00%)
+  n0: 539352 in 3 places, all below massif's threshold (1.00%)
+ n0: 673146 in 105 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=61
+#-----------
+time=623948852
+mem_heap_B=43353166
+mem_heap_extra_B=3797426
+mem_stacks_B=0
+heap_tree=detailed
+n5: 43353166 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 33554432 0x4F12E33: rb_aligned_malloc (gc.c:7916)
+  n1: 33554432 0x5076063: Init_TransientHeap (transient_heap.c:294)
+   n1: 33554432 0x4F27437: rb_call_inits (inits.c:20)
+    n1: 33554432 0x4EF9227: ruby_setup (eval.c:74)
+     n1: 33554432 0x4EFC337: ruby_init (eval.c:91)
+      n0: 33554432 0x108954: main (main.c:41)
+ n4: 4712870 0x4F15362: objspace_xmalloc0 (gc.c:8137)
+  n0: 1319182 in 113 places, all below massif's threshold (1.00%)
+  n2: 1180320 0x501D3B1: st_init_table_with_size (st.c:605)
+   n2: 1022208 0x501D6D5: rebuild_table (st.c:780)
+    n0: 528960 in 3 places, all below massif's threshold (1.00%)
+    n1: 493248 0x501E23F: st_add_direct_with_hash (st.c:1142)
+     n1: 493248 0x501F5FE: st_update (st.c:1515)
+      n0: 493248 in 3 places, all below massif's threshold (1.00%)
+   n0: 158112 in 36 places, all below massif's threshold (1.00%)
+  n2: 1164792 0x4EB1FAB: iseq_setup (compile.c:2119)
+   n1: 1162768 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 1162768 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n2: 1148224 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n2: 684592 0x4EA6D83: iseq_compile_each0 (compile.c:7112)
+       n2: 623392 0x4EA2905: iseq_compile_each0 (compile.c:5925)
+        n1: 616560 0x4EB3BF9: rb_iseq_compile_node (compile.c:671)
+         n1: 616560 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+          n2: 616560 0x4E9BDDB: new_child_iseq (compile.c:1224)
+           n1: 491088 0x4EA3493: iseq_compile_each0 (compile.c:7182)
+            n0: 491088 in 3 places, all below massif's threshold (1.00%)
+           n0: 125472 in 2 places, all below massif's threshold (1.00%)
+        n0: 6832 in 4 places, all below massif's threshold (1.00%)
+       n0: 61200 in 7 places, all below massif's threshold (1.00%)
+      n0: 463632 in 10 places, all below massif's threshold (1.00%)
+     n0: 14544 in 7 places, all below massif's threshold (1.00%)
+   n0: 2024 in 1 place, below massif's threshold (1.00%)
+  n1: 1048576 0x5092620: Init_BareVM (vm.c:2428)
+   n1: 1048576 0x4EF91B5: ruby_setup (eval.c:67)
+    n1: 1048576 0x4EFC337: ruby_init (eval.c:91)
+     n0: 1048576 0x108954: main (main.c:41)
+ n3: 2543927 0x4F18ABA: ruby_xcalloc (gc.c:8353)
+  n0: 1007595 in 25 places, all below massif's threshold (1.00%)
+  n2: 959928 0x4F485CA: rb_iseq_new_with_opt (iseq.c:361)
+   n2: 940096 0x4E9BDDB: new_child_iseq (compile.c:1224)
+    n1: 524216 0x4EA6D83: iseq_compile_each0 (compile.c:7112)
+     n0: 524216 in 8 places, all below massif's threshold (1.00%)
+    n0: 415880 in 10 places, all below massif's threshold (1.00%)
+   n0: 19832 in 7 places, all below massif's threshold (1.00%)
+  n2: 576404 0x4EB204C: iseq_setup (compile.c:2126)
+   n1: 576327 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 576327 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n1: 568975 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n0: 568975 in 11 places, all below massif's threshold (1.00%)
+     n0: 7352 in 7 places, all below massif's threshold (1.00%)
+   n0: 77 in 1 place, below massif's threshold (1.00%)
+ n2: 1846872 0x4F11DCB: heap_assign_page (gc.c:7916)
+  n2: 1307520 0x4F16FC2: newobj_slowpath_wb_protected (gc.c:1718)
+   n1: 719136 0x5025EB3: str_new0 (string.c:724)
+    n0: 719136 in 4 places, all below massif's threshold (1.00%)
+   n0: 588384 in 20 places, all below massif's threshold (1.00%)
+  n0: 539352 in 3 places, all below massif's threshold (1.00%)
+ n0: 695065 in 105 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=62
+#-----------
+time=631405974
+mem_heap_B=43517495
+mem_heap_extra_B=3887921
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=63
+#-----------
+time=636150572
+mem_heap_B=43655224
+mem_heap_extra_B=3967288
+mem_stacks_B=0
+heap_tree=detailed
+n5: 43655224 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 33554432 0x4F12E33: rb_aligned_malloc (gc.c:7916)
+  n1: 33554432 0x5076063: Init_TransientHeap (transient_heap.c:294)
+   n1: 33554432 0x4F27437: rb_call_inits (inits.c:20)
+    n1: 33554432 0x4EF9227: ruby_setup (eval.c:74)
+     n1: 33554432 0x4EFC337: ruby_init (eval.c:91)
+      n0: 33554432 0x108954: main (main.c:41)
+ n4: 4728712 0x4F15362: objspace_xmalloc0 (gc.c:8137)
+  n0: 1377704 in 114 places, all below massif's threshold (1.00%)
+  n2: 1204768 0x4EB1FAB: iseq_setup (compile.c:2119)
+   n1: 1202744 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 1202744 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n2: 1187432 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n2: 706928 0x4EA6D83: iseq_compile_each0 (compile.c:7112)
+       n2: 645728 0x4EA2905: iseq_compile_each0 (compile.c:5925)
+        n1: 638896 0x4EB3BF9: rb_iseq_compile_node (compile.c:671)
+         n1: 638896 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+          n2: 638896 0x4E9BDDB: new_child_iseq (compile.c:1224)
+           n1: 511560 0x4EA3493: iseq_compile_each0 (compile.c:7182)
+            n0: 511560 in 3 places, all below massif's threshold (1.00%)
+           n0: 127336 in 2 places, all below massif's threshold (1.00%)
+        n0: 6832 in 4 places, all below massif's threshold (1.00%)
+       n0: 61200 in 7 places, all below massif's threshold (1.00%)
+      n0: 480504 in 10 places, all below massif's threshold (1.00%)
+     n0: 15312 in 7 places, all below massif's threshold (1.00%)
+   n0: 2024 in 1 place, below massif's threshold (1.00%)
+  n2: 1097664 0x501D3B1: st_init_table_with_size (st.c:605)
+   n2: 925632 0x501D6D5: rebuild_table (st.c:780)
+    n1: 493248 0x501E23F: st_add_direct_with_hash (st.c:1142)
+     n1: 493248 0x501F5FE: st_update (st.c:1515)
+      n0: 493248 in 3 places, all below massif's threshold (1.00%)
+    n0: 432384 in 3 places, all below massif's threshold (1.00%)
+   n0: 172032 in 37 places, all below massif's threshold (1.00%)
+  n1: 1048576 0x5092620: Init_BareVM (vm.c:2428)
+   n1: 1048576 0x4EF91B5: ruby_setup (eval.c:67)
+    n1: 1048576 0x4EFC337: ruby_init (eval.c:91)
+     n0: 1048576 0x108954: main (main.c:41)
+ n3: 2632385 0x4F18ABA: ruby_xcalloc (gc.c:8353)
+  n0: 1035296 in 25 places, all below massif's threshold (1.00%)
+  n2: 996928 0x4F485CA: rb_iseq_new_with_opt (iseq.c:361)
+   n2: 973544 0x4E9BDDB: new_child_iseq (compile.c:1224)
+    n2: 540792 0x4EA6D83: iseq_compile_each0 (compile.c:7112)
+     n2: 487808 0x4EA2905: iseq_compile_each0 (compile.c:5925)
+      n1: 485440 0x4EB3BF9: rb_iseq_compile_node (compile.c:671)
+       n1: 485440 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+        n1: 485440 0x4E9BDDB: new_child_iseq (compile.c:1224)
+         n0: 485440 in 3 places, all below massif's threshold (1.00%)
+      n0: 2368 in 4 places, all below massif's threshold (1.00%)
+     n0: 52984 in 7 places, all below massif's threshold (1.00%)
+    n0: 432752 in 10 places, all below massif's threshold (1.00%)
+   n0: 23384 in 7 places, all below massif's threshold (1.00%)
+  n2: 600161 0x4EB204C: iseq_setup (compile.c:2126)
+   n1: 600084 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 600084 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n1: 592720 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n0: 592720 in 11 places, all below massif's threshold (1.00%)
+     n0: 7364 in 7 places, all below massif's threshold (1.00%)
+   n0: 77 in 1 place, below massif's threshold (1.00%)
+ n2: 1993968 0x4F11DCB: heap_assign_page (gc.c:7916)
+  n2: 1454616 0x4F16FC2: newobj_slowpath_wb_protected (gc.c:1718)
+   n1: 784512 0x5025EB3: str_new0 (string.c:724)
+    n0: 784512 in 4 places, all below massif's threshold (1.00%)
+   n0: 670104 in 21 places, all below massif's threshold (1.00%)
+  n0: 539352 in 3 places, all below massif's threshold (1.00%)
+ n0: 745727 in 105 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=64
+#-----------
+time=643587674
+mem_heap_B=43542888
+mem_heap_extra_B=3959056
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=65
+#-----------
+time=651028644
+mem_heap_B=43208132
+mem_heap_extra_B=3885108
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=66
+#-----------
+time=658466601
+mem_heap_B=43382966
+mem_heap_extra_B=3947858
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=67
+#-----------
+time=665905275
+mem_heap_B=43587746
+mem_heap_extra_B=3997502
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=68
+#-----------
+time=673342017
+mem_heap_B=43736532
+mem_heap_extra_B=4037300
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=69
+#-----------
+time=680781322
+mem_heap_B=43976572
+mem_heap_extra_B=4087444
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=70
+#-----------
+time=683700572
+mem_heap_B=44003179
+mem_heap_extra_B=4096141
+mem_stacks_B=0
+heap_tree=peak
+n5: 44003179 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 33554432 0x4F12E33: rb_aligned_malloc (gc.c:7916)
+  n1: 33554432 0x5076063: Init_TransientHeap (transient_heap.c:294)
+   n1: 33554432 0x4F27437: rb_call_inits (inits.c:20)
+    n1: 33554432 0x4EF9227: ruby_setup (eval.c:74)
+     n1: 33554432 0x4EFC337: ruby_init (eval.c:91)
+      n0: 33554432 0x108954: main (main.c:41)
+ n4: 4823522 0x4F15362: objspace_xmalloc0 (gc.c:8137)
+  n0: 1442114 in 114 places, all below massif's threshold (1.00%)
+  n2: 1238912 0x4EB1FAB: iseq_setup (compile.c:2119)
+   n1: 1236872 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 1236872 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n2: 1223976 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n2: 769680 0x4EA6D83: iseq_compile_each0 (compile.c:7112)
+       n2: 708552 0x4EA2905: iseq_compile_each0 (compile.c:5925)
+        n1: 701168 0x4EB3BF9: rb_iseq_compile_node (compile.c:671)
+         n1: 701168 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+          n2: 701168 0x4E9BDDB: new_child_iseq (compile.c:1224)
+           n2: 573832 0x4EA3493: iseq_compile_each0 (compile.c:7182)
+            n1: 528920 0x4EA2905: iseq_compile_each0 (compile.c:5925)
+             n0: 528920 in 2 places, all below massif's threshold (1.00%)
+            n0: 44912 in 2 places, all below massif's threshold (1.00%)
+           n0: 127336 in 2 places, all below massif's threshold (1.00%)
+        n0: 7384 in 4 places, all below massif's threshold (1.00%)
+       n0: 61128 in 7 places, all below massif's threshold (1.00%)
+      n0: 454296 in 10 places, all below massif's threshold (1.00%)
+     n0: 12896 in 7 places, all below massif's threshold (1.00%)
+   n0: 2040 in 1 place, below massif's threshold (1.00%)
+  n2: 1093920 0x501D3B1: st_init_table_with_size (st.c:605)
+   n2: 934464 0x501D6D5: rebuild_table (st.c:780)
+    n1: 494784 0x501E23F: st_add_direct_with_hash (st.c:1142)
+     n1: 494784 0x501F5FE: st_update (st.c:1515)
+      n0: 494784 in 3 places, all below massif's threshold (1.00%)
+    n0: 439680 in 3 places, all below massif's threshold (1.00%)
+   n0: 159456 in 37 places, all below massif's threshold (1.00%)
+  n1: 1048576 0x5092620: Init_BareVM (vm.c:2428)
+   n1: 1048576 0x4EF91B5: ruby_setup (eval.c:67)
+    n1: 1048576 0x4EFC337: ruby_init (eval.c:91)
+     n0: 1048576 0x108954: main (main.c:41)
+ n3: 2684608 0x4F18ABA: ruby_xcalloc (gc.c:8353)
+  n0: 1030547 in 25 places, all below massif's threshold (1.00%)
+  n2: 1025344 0x4F485CA: rb_iseq_new_with_opt (iseq.c:361)
+   n2: 1012616 0x4E9BDDB: new_child_iseq (compile.c:1224)
+    n2: 586672 0x4EA6D83: iseq_compile_each0 (compile.c:7112)
+     n2: 533984 0x4EA2905: iseq_compile_each0 (compile.c:5925)
+      n1: 530728 0x4EB3BF9: rb_iseq_compile_node (compile.c:671)
+       n1: 530728 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+        n1: 530728 0x4E9BDDB: new_child_iseq (compile.c:1224)
+         n0: 530728 in 3 places, all below massif's threshold (1.00%)
+      n0: 3256 in 4 places, all below massif's threshold (1.00%)
+     n0: 52688 in 7 places, all below massif's threshold (1.00%)
+    n0: 425944 in 10 places, all below massif's threshold (1.00%)
+   n0: 12728 in 7 places, all below massif's threshold (1.00%)
+  n2: 628717 0x4EB204C: iseq_setup (compile.c:2126)
+   n1: 628639 0x4EB39A0: rb_iseq_compile_node (compile.c:738)
+    n2: 628639 0x4F48640: rb_iseq_new_with_opt (iseq.c:728)
+     n1: 622326 0x4E9BDDB: new_child_iseq (compile.c:1224)
+      n0: 622326 in 11 places, all below massif's threshold (1.00%)
+     n0: 6313 in 7 places, all below massif's threshold (1.00%)
+   n0: 78 in 1 place, below massif's threshold (1.00%)
+ n2: 2026656 0x4F11DCB: heap_assign_page (gc.c:7916)
+  n2: 1487304 0x4F16FC2: newobj_slowpath_wb_protected (gc.c:1718)
+   n1: 800856 0x5025EB3: str_new0 (string.c:724)
+    n0: 800856 in 5 places, all below massif's threshold (1.00%)
+   n0: 686448 in 21 places, all below massif's threshold (1.00%)
+  n0: 539352 in 3 places, all below massif's threshold (1.00%)
+ n0: 913961 in 105 places, all below massif's threshold (1.00%)

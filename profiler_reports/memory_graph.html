@@ -1,0 +1,3449 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style media="all" type="text/css">
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background-color: #F5F7FB;
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+    }
+
+    table {
+      border-collapse: collapse;
+      /* border: 1px solid #E1E3E7; */
+      border: 1px solid #F3F9FE;
+      font-size: 14px;
+      line-height: normal;
+      width: 100%;
+    }
+
+    table:empty {
+      display: none;
+    }
+
+    th:first-child {
+      border-left: 0;
+    }
+
+    th {
+      text-align: center;
+      background: #F3F9FE;
+      padding: 1rem;
+      /* border-left: 1px solid #E1E3E7; */
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    tr.break td {
+      border: 0;
+      border-top: 1px solid #BDC3DD;
+      padding: 0;
+      margin: 0;
+    }
+
+    tr.method td {
+      font-weight: bold;
+    }
+
+    td {
+      padding: 0.5em;
+    }
+
+    td:first-child {
+      width: 190px;
+    }
+
+    tr > td > table {
+      box-shadow: 0px -2px 1px #F9FAFB, 0px 1px 1px #E4EEEE, 0px 1px 2px #EEF3F8;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    tr.break + tr > td.method_name {
+      font-weight: bold;
+    }
+
+    td {
+      /* I'm removing this border because I think it looks way cleaner without it but feel free to add it if you feel it's necessary */
+      /* border-left: 1px solid #E1E3E7; */
+      text-align: center;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .method_name {
+      text-align: left;
+    }
+
+    tfoot td {
+      text-align: left;
+    }
+
+    .report-header {
+      background-color: #0D2483;
+      color: white;
+      padding: 1.5rem 2rem;
+    }
+
+    .report-header > div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .report-header h1 {
+      margin-bottom: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    h6 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .table-header {
+      padding: 3rem 0 1rem;
+    }
+
+    .table-wrapper {
+      margin: 1rem auto;
+      max-width: 1440px;
+      padding: 4rem 5rem;
+      background: white;
+      border-radius: 0.5rem;
+    }
+
+    .center {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .layout-right {
+      margin-left: auto;
+    }
+
+    .text-right {
+      display: flex;
+      align-items: flex-end;
+      flex-direction: column;
+    }
+
+    .timestamp {
+      font-size: 12px;
+      margin-bottom: 1rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .logo {
+      width: 140px;
+      height: 30px;
+      opacity: 0.5;
+      background-repeat: no-repeat;
+      background-image: url("data:image/svg+xml,%3Csvg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 190 41'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:%23fff%7D%3C/style%3E%3C/defs%3E%3Cpath class='cls-1' d='M63.49 16.74c0-1.37-.91-2-2.26-2h-3.38v3.93h3.58c1.24.01 2.06-.56 2.06-1.93zM110.43 14.75h-3.6v5h3.6a2.32 2.32 0 0 0 2.5-2.49 2.34 2.34 0 0 0-2.5-2.51zM128.77 14.75h-3.53v4.94h3.53a2.28 2.28 0 0 0 2.47-2.45 2.3 2.3 0 0 0-2.47-2.49zM61.81 21.83h-4v4.32h3.91c1.44 0 2.45-.62 2.45-2.14s-.99-2.18-2.36-2.18zM21 14.75h-3.57v4.94H21a2.28 2.28 0 0 0 2.47-2.45A2.3 2.3 0 0 0 21 14.75z'/%3E%3Cpath class='cls-1' d='M184 .44H5.87A4.93 4.93 0 0 0 .94 5.37V35.5a4.94 4.94 0 0 0 4.93 4.94H184a4.94 4.94 0 0 0 4.94-4.94V5.37A4.94 4.94 0 0 0 184 .44zm-34.38 10.78c4.79 0 8.46 2.89 9.18 7.54h-3.86a5.48 5.48 0 0 0-10.68 0h-3.83c.71-4.65 4.36-7.54 9.19-7.54zM24 29.44L20.46 23h-3v6.46h-3.72v-18h7.68c3.41 0 5.78 2.07 5.78 5.76a5.34 5.34 0 0 1-2.88 5.14l3.82 7.06zm24.31-7.3c0 4.8-2.92 7.56-7.63 7.56S33 26.94 33 22.14V11.48h3.69v10.61c0 2.81 1.37 4.32 4 4.32s3.94-1.51 3.94-4.32V11.48h3.69zm13.92 7.3h-8v-18h7.52c3.24 0 5.59 1.61 5.59 5A4 4 0 0 1 65.51 20 4.22 4.22 0 0 1 68 24.21c0 3.43-2.4 5.23-5.81 5.23zm19.66-6.92v6.92h-3.7v-6.92l-6.81-11h4.29L80 18.85l4.34-7.37h4.32zm16-.5h-7.62v-3.26h7.59zm13 1h-4v6.39h-3.72v-18h7.77c3.41 0 5.79 2.09 5.79 5.79s-2.41 5.85-5.82 5.85zm20.86 6.39L128.26 23h-3v6.46h-3.72v-18h7.69c3.4 0 5.78 2.07 5.78 5.76a5.34 5.34 0 0 1-2.88 5.14l3.87 7.08zm17.85.26c-4.88 0-8.55-2.95-9.21-7.68h3.81A5.49 5.49 0 0 0 155 22h3.84c-.69 4.75-4.38 7.7-9.22 7.7zm18.4-.23h-3.72v-3.7H168zm6.36-7.54h-10.05v-3.26h10.08zm1.44-7.16h-11.49v-3.26h11.52z'/%3E%3C/svg%3E");
+    }
+  </style>
+</head>
+<body>
+<div class="report-header">
+  <div class="center">
+    <div class="layout-left">
+      <h6>Profile Report</h6>
+      <h1>Allocations</h1>
+    </div>
+    <div class="layout-right text-right">
+      <div class="timestamp">Tuesday, November 2 at  4:26:38 AM (MSK)</div>
+      <div class="logo"></div>
+    </div>
+  </div>
+</div>
+<div class="table-wrapper">
+  <table>
+    <tr>
+      <th>Thread ID</th>
+      <th>Fiber ID</th>
+      <th>Total</th>
+    </tr>
+    
+      <tr>
+        <td>1280</td>
+        <td><a href="#1260">1260</a></td>
+        <td>236651.0</td>
+      </tr>
+    
+  </table>
+
+  <!-- Methods Tables -->
+  
+    <h2><a name="1260">Thread 1280, Fiber: 1260</a></h2>
+    <table>
+      <thead>
+      <tr>
+        <th>%Total</th>
+        <th>%Self</th>
+        <th>Total</th>
+        <th>Self</th>
+        <th>Wait</th>
+        <th>Child</th>
+        <th>Calls</th>
+        <th class="method_name">Name</th>
+        
+        <th>Line</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+
+        <!-- Parents -->
+        
+        <tr class="method">
+          <td>100.00%</td>
+          <td>0.00%</td>
+          <td>236651.00</td>
+          <td>3.00</td>
+          <td>0.00</td>
+          <td>236648.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="[global]__1260">
+               [global]#
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/rubyprof_prof.rb#6" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/rubyprof_prof.rb:6">6</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>236647.00</td>
+            <td>12.00</td>
+            <td>0.00</td>
+            <td>236635.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#GenerateReport_work_1260">GenerateReport#work</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/rubyprof_prof.rb#6" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/rubyprof_prof.rb:6">6</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Class_new_1260">Class#new</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/rubyprof_prof.rb#6" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/rubyprof_prof.rb:6">6</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>236647.00</td>
+            <td>12.00</td>
+            <td>0.00</td>
+            <td>236635.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#[global]__1260">[global]#</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/rubyprof_prof.rb#6" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/rubyprof_prof.rb:6">6</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>100.00%</td>
+          <td>0.01%</td>
+          <td>236647.00</td>
+          <td>12.00</td>
+          <td>0.00</td>
+          <td>236635.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="GenerateReport_work_1260">
+               GenerateReport#work
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#20" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:20">20</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>236583.00</td>
+            <td>16002.00</td>
+            <td>0.00</td>
+            <td>220581.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#IO_each_1260">IO#each</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#31" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:31">31</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>20.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>20.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#GenerateReport_fill_last_user_data_1260">GenerateReport#fill_last_user_data</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#44" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:44">44</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>15.00</td>
+            <td>15.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Kernel_`_1260">Kernel#`</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#47" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:47">47</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>10.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>9.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#GenerateReport_wrote_down_common_info_1260">GenerateReport#wrote_down_common_info</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#45" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:45">45</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>4.00</td>
+            <td>3.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>2/2439</td>
+            <td class="method_name"><a href="#_Class__IO__open_1260">&lt;Class::IO&gt;#open</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#25" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:25">25</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Kernel_puts_1260">Kernel#puts</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#47" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:47">47</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#String_%_1260">String#%</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#47" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:47">47</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/4876</td>
+            <td class="method_name"><a href="#Integer_to_s_1260">Integer#to_s</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#47" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:47">47</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/29565</td>
+            <td class="method_name"><a href="#String_to_i_1260">String#to_i</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#47" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:47">47</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#_Module__Process__pid_1260">&lt;Module::Process&gt;#pid</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#47" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:47">47</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2439</td>
+            <td class="method_name"><a href="#IO_close_1260">IO#close</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#42" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:42">42</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>236583.00</td>
+            <td>16002.00</td>
+            <td>0.00</td>
+            <td>220581.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#GenerateReport_work_1260">GenerateReport#work</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#31" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:31">31</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>99.97%</td>
+          <td>6.76%</td>
+          <td>236583.00</td>
+          <td>16002.00</td>
+          <td>0.00</td>
+          <td>220581.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="IO_each_1260">
+               IO#each
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>135642.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>135641.00</td>
+            <td>13564/13564</td>
+            <td class="method_name"><a href="#GenerateReport_process_session_1260">GenerateReport#process_session</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#36" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:36">36</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>68939.00</td>
+            <td>2439.00</td>
+            <td>0.00</td>
+            <td>66500.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#GenerateReport_process_user_1260">GenerateReport#process_user</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#34" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:34">34</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>16000.00</td>
+            <td>16000.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>16000/16000</td>
+            <td class="method_name"><a href="#String_[]_1260">String#[]</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#32" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:32">32</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>135642.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>135641.00</td>
+            <td>13564/13564</td>
+            <td class="method_name"><a href="#IO_each_1260">IO#each</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>57.32%</td>
+          <td>0.00%</td>
+          <td>135642.00</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>135641.00</td>
+          <td>13564</td>
+          <td class="method_name">
+            <a name="GenerateReport_process_session_1260">
+               GenerateReport#process_session
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#108" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:108">108</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>135641.00</td>
+            <td>13565.00</td>
+            <td>0.00</td>
+            <td>122076.00</td>
+            <td>13564/13564</td>
+            <td class="method_name"><a href="#GenerateReport_parse_session_1260">GenerateReport#parse_session</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#109" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:109">109</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>13564/13564</td>
+            <td class="method_name"><a href="#Array_include__1260">Array#include?</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#112" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:112">112</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>135641.00</td>
+            <td>13565.00</td>
+            <td>0.00</td>
+            <td>122076.00</td>
+            <td>13564/13564</td>
+            <td class="method_name"><a href="#GenerateReport_process_session_1260">GenerateReport#process_session</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#109" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:109">109</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>57.32%</td>
+          <td>5.73%</td>
+          <td>135641.00</td>
+          <td>13565.00</td>
+          <td>0.00</td>
+          <td>122076.00</td>
+          <td>13564</td>
+          <td class="method_name">
+            <a name="GenerateReport_parse_session_1260">
+               GenerateReport#parse_session
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#116" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:116">116</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>94948.00</td>
+            <td>94948.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>13564/16000</td>
+            <td class="method_name"><a href="#String_split_1260">String#split</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#117" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:117">117</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>13564.00</td>
+            <td>13564.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>13564/13564</td>
+            <td class="method_name"><a href="#String_delete_1260">String#delete</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#119" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:119">119</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>13564.00</td>
+            <td>13564.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>13564/13564</td>
+            <td class="method_name"><a href="#String_upcase_1260">String#upcase</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#119" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:119">119</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>27128/29565</td>
+            <td class="method_name"><a href="#String_to_i_1260">String#to_i</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#119" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:119">119</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>14616.00</td>
+            <td>14616.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/16000</td>
+            <td class="method_name"><a href="#GenerateReport_parse_user_1260">GenerateReport#parse_user</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#99" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:99">99</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>94948.00</td>
+            <td>94948.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>13564/16000</td>
+            <td class="method_name"><a href="#GenerateReport_parse_session_1260">GenerateReport#parse_session</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#117" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:117">117</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>46.30%</td>
+          <td>46.30%</td>
+          <td>109564.00</td>
+          <td>109564.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>16000</td>
+          <td class="method_name">
+            <a name="String_split_1260">
+               String#split
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>68939.00</td>
+            <td>2439.00</td>
+            <td>0.00</td>
+            <td>66500.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#IO_each_1260">IO#each</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>29.13%</td>
+          <td>1.03%</td>
+          <td>68939.00</td>
+          <td>2439.00</td>
+          <td>0.00</td>
+          <td>66500.00</td>
+          <td>2436</td>
+          <td class="method_name">
+            <a name="GenerateReport_process_user_1260">
+               GenerateReport#process_user
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#52" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:52">52</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>49447.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>49447.00</td>
+            <td>2435/2435</td>
+            <td class="method_name"><a href="#GenerateReport_fill_user_data_1260">GenerateReport#fill_user_data</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#53" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:53">53</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>17052.00</td>
+            <td>2436.00</td>
+            <td>0.00</td>
+            <td>14616.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#GenerateReport_parse_user_1260">GenerateReport#parse_user</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#55" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:55">55</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#GenerateReport_first_user__1260">GenerateReport#first_user?</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#53" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:53">53</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>2.00</td>
+            <td>1/2439</td>
+            <td class="method_name"><a href="#GenerateReport_fill_last_user_data_1260">GenerateReport#fill_last_user_data</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#130" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:130">130</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>2.00</td>
+            <td>1/2439</td>
+            <td class="method_name"><a href="#GenerateReport_wrote_down_common_info_1260">GenerateReport#wrote_down_common_info</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#138" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:138">138</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>4.00</td>
+            <td>3.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>2/2439</td>
+            <td class="method_name"><a href="#GenerateReport_work_1260">GenerateReport#work</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#25" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:25">25</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>49447.00</td>
+            <td>4871.00</td>
+            <td>0.00</td>
+            <td>44576.00</td>
+            <td>2435/2439</td>
+            <td class="method_name"><a href="#GenerateReport_fill_user_data_1260">GenerateReport#fill_user_data</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#61" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:61">61</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>20.90%</td>
+          <td>2.06%</td>
+          <td>49457.00</td>
+          <td>4876.00</td>
+          <td>0.00</td>
+          <td>44581.00</td>
+          <td>2439</td>
+          <td class="method_name">
+            <a name="_Class__IO__open_1260">
+               &lt;Class::IO&gt;#open
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>39706.00</td>
+            <td>12186.00</td>
+            <td>0.00</td>
+            <td>27520.00</td>
+            <td>2435/2436</td>
+            <td class="method_name"><a href="#GenerateReport_form_user_stat_1260">GenerateReport#form_user_stat</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#62" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:62">62</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>4875.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>4875.00</td>
+            <td>2438/2438</td>
+            <td class="method_name"><a href="#IO____1260">IO#&lt;&lt;</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#26" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:26">26</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2438/2439</td>
+            <td class="method_name"><a href="#IO_close_1260">IO#close</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#26" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:26">26</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2438/2438</td>
+            <td class="method_name"><a href="#IO_closed__1260">IO#closed?</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#26" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:26">26</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2439/2439</td>
+            <td class="method_name"><a href="#File_initialize_1260">File#initialize</a></td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>49447.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>49447.00</td>
+            <td>2435/2435</td>
+            <td class="method_name"><a href="#GenerateReport_process_user_1260">GenerateReport#process_user</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#53" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:53">53</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>20.89%</td>
+          <td>0.00%</td>
+          <td>49447.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>49447.00</td>
+          <td>2435</td>
+          <td class="method_name">
+            <a name="GenerateReport_fill_user_data_1260">
+               GenerateReport#fill_user_data
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#60" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:60">60</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>49447.00</td>
+            <td>4871.00</td>
+            <td>0.00</td>
+            <td>44576.00</td>
+            <td>2435/2439</td>
+            <td class="method_name"><a href="#_Class__IO__open_1260">&lt;Class::IO&gt;#open</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#61" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:61">61</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>17.00</td>
+            <td>5.00</td>
+            <td>0.00</td>
+            <td>12.00</td>
+            <td>1/2436</td>
+            <td class="method_name"><a href="#GenerateReport_fill_last_user_data_1260">GenerateReport#fill_last_user_data</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#128" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:128">128</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>39706.00</td>
+            <td>12186.00</td>
+            <td>0.00</td>
+            <td>27520.00</td>
+            <td>2435/2436</td>
+            <td class="method_name"><a href="#_Class__IO__open_1260">&lt;Class::IO&gt;#open</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>16.79%</td>
+          <td>5.15%</td>
+          <td>39723.00</td>
+          <td>12191.00</td>
+          <td>0.00</td>
+          <td>27532.00</td>
+          <td>2436</td>
+          <td class="method_name">
+            <a name="GenerateReport_form_user_stat_1260">
+               GenerateReport#form_user_stat
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#66" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:66">66</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>7308.00</td>
+            <td>7308.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>7308/7308</td>
+            <td class="method_name"><a href="#Array_map_1260">Array#map</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#70" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:70">70</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>4872.00</td>
+            <td>4872.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#JSON__Ext__Generator__GeneratorMethods__Hash_to_json_1260">JSON::Ext::Generator::GeneratorMethods::Hash#to_json</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#81" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:81">81</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>4872.00</td>
+            <td>4872.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>4872/4876</td>
+            <td class="method_name"><a href="#Integer_to_s_1260">Integer#to_s</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#74" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:74">74</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>4626.00</td>
+            <td>4626.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2437</td>
+            <td class="method_name"><a href="#Array_sort_1260">Array#sort</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#76" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:76">76</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2436.00</td>
+            <td>2436.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2437</td>
+            <td class="method_name"><a href="#Array_join_1260">Array#join</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#76" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:76">76</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2190.00</td>
+            <td>2190.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#Array_sort!_1260">Array#sort!</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#79" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:79">79</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1228.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1228.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#GenerateReport_only_chrome__1260">GenerateReport#only_chrome?</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#78" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:78">78</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#Array_reverse!_1260">Array#reverse!</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#79" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:79">79</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#GenerateReport_any_ie__1260">GenerateReport#any_ie?</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#77" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:77">77</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#Array_max_1260">Array#max</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#75" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:75">75</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#Array_sum_1260">Array#sum</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#74" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:74">74</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2437</td>
+            <td class="method_name"><a href="#Array_count_1260">Array#count</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#73" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:73">73</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>17052.00</td>
+            <td>2436.00</td>
+            <td>0.00</td>
+            <td>14616.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#GenerateReport_process_user_1260">GenerateReport#process_user</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#55" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:55">55</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>7.21%</td>
+          <td>1.03%</td>
+          <td>17052.00</td>
+          <td>2436.00</td>
+          <td>0.00</td>
+          <td>14616.00</td>
+          <td>2436</td>
+          <td class="method_name">
+            <a name="GenerateReport_parse_user_1260">
+               GenerateReport#parse_user
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#98" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:98">98</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>14616.00</td>
+            <td>14616.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/16000</td>
+            <td class="method_name"><a href="#String_split_1260">String#split</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#99" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:99">99</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/29565</td>
+            <td class="method_name"><a href="#String_to_i_1260">String#to_i</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#101" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:101">101</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>16000.00</td>
+            <td>16000.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>16000/16000</td>
+            <td class="method_name"><a href="#IO_each_1260">IO#each</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>6.76%</td>
+          <td>6.76%</td>
+          <td>16000.00</td>
+          <td>16000.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>16000</td>
+          <td class="method_name">
+            <a name="String_[]_1260">
+               String#[]
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>13564.00</td>
+            <td>13564.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>13564/13564</td>
+            <td class="method_name"><a href="#GenerateReport_parse_session_1260">GenerateReport#parse_session</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#119" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:119">119</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>5.73%</td>
+          <td>5.73%</td>
+          <td>13564.00</td>
+          <td>13564.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>13564</td>
+          <td class="method_name">
+            <a name="String_upcase_1260">
+               String#upcase
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>13564.00</td>
+            <td>13564.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>13564/13564</td>
+            <td class="method_name"><a href="#GenerateReport_parse_session_1260">GenerateReport#parse_session</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#119" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:119">119</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>5.73%</td>
+          <td>5.73%</td>
+          <td>13564.00</td>
+          <td>13564.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>13564</td>
+          <td class="method_name">
+            <a name="String_delete_1260">
+               String#delete
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>7308.00</td>
+            <td>7308.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>7308/7308</td>
+            <td class="method_name"><a href="#GenerateReport_form_user_stat_1260">GenerateReport#form_user_stat</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#70" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:70">70</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>3.09%</td>
+          <td>3.09%</td>
+          <td>7308.00</td>
+          <td>7308.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>7308</td>
+          <td class="method_name">
+            <a name="Array_map_1260">
+               Array#map
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/4876</td>
+            <td class="method_name"><a href="#GenerateReport_work_1260">GenerateReport#work</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#47" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:47">47</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>3.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>3/4876</td>
+            <td class="method_name"><a href="#GenerateReport_wrote_down_common_info_1260">GenerateReport#wrote_down_common_info</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#136" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:136">136</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>4872.00</td>
+            <td>4872.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>4872/4876</td>
+            <td class="method_name"><a href="#GenerateReport_form_user_stat_1260">GenerateReport#form_user_stat</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#74" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:74">74</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>2.06%</td>
+          <td>2.06%</td>
+          <td>4876.00</td>
+          <td>4876.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>4876</td>
+          <td class="method_name">
+            <a name="Integer_to_s_1260">
+               Integer#to_s
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2439</td>
+            <td class="method_name"><a href="#IO_puts_1260">IO#puts</a></td>
+            
+            <td></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>4875.00</td>
+            <td>4875.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2438/2439</td>
+            <td class="method_name"><a href="#IO____1260">IO#&lt;&lt;</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>2.06%</td>
+          <td>2.06%</td>
+          <td>4876.00</td>
+          <td>4876.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2439</td>
+          <td class="method_name">
+            <a name="IO_write_1260">
+               IO#write
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>4875.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>4875.00</td>
+            <td>2438/2438</td>
+            <td class="method_name"><a href="#_Class__IO__open_1260">&lt;Class::IO&gt;#open</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>2.06%</td>
+          <td>0.00%</td>
+          <td>4875.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>4875.00</td>
+          <td>2438</td>
+          <td class="method_name">
+            <a name="IO____1260">
+               IO#&lt;&lt;
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>4875.00</td>
+            <td>4875.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2438/2439</td>
+            <td class="method_name"><a href="#IO_write_1260">IO#write</a></td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>4872.00</td>
+            <td>4872.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#GenerateReport_form_user_stat_1260">GenerateReport#form_user_stat</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#81" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:81">81</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>2.06%</td>
+          <td>2.06%</td>
+          <td>4872.00</td>
+          <td>4872.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2436</td>
+          <td class="method_name">
+            <a name="JSON__Ext__Generator__GeneratorMethods__Hash_to_json_1260">
+               JSON::Ext::Generator::GeneratorMethods::Hash#to_json
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#JSON__Ext__Generator__State_initialize_1260">JSON::Ext::Generator::State#initialize</a></td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2.00</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2437</td>
+            <td class="method_name"><a href="#GenerateReport_wrote_down_common_info_1260">GenerateReport#wrote_down_common_info</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#136" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:136">136</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>4626.00</td>
+            <td>4626.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2437</td>
+            <td class="method_name"><a href="#GenerateReport_form_user_stat_1260">GenerateReport#form_user_stat</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#76" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:76">76</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>1.96%</td>
+          <td>1.96%</td>
+          <td>4628.00</td>
+          <td>4628.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2437</td>
+          <td class="method_name">
+            <a name="Array_sort_1260">
+               Array#sort
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2437</td>
+            <td class="method_name"><a href="#GenerateReport_wrote_down_common_info_1260">GenerateReport#wrote_down_common_info</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#136" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:136">136</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2436.00</td>
+            <td>2436.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2437</td>
+            <td class="method_name"><a href="#GenerateReport_form_user_stat_1260">GenerateReport#form_user_stat</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#76" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:76">76</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>1.03%</td>
+          <td>1.03%</td>
+          <td>2437.00</td>
+          <td>2437.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2437</td>
+          <td class="method_name">
+            <a name="Array_join_1260">
+               Array#join
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2190.00</td>
+            <td>2190.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#GenerateReport_form_user_stat_1260">GenerateReport#form_user_stat</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#79" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:79">79</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.93%</td>
+          <td>0.93%</td>
+          <td>2190.00</td>
+          <td>2190.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2436</td>
+          <td class="method_name">
+            <a name="Array_sort!_1260">
+               Array#sort!
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1228.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1228.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#GenerateReport_form_user_stat_1260">GenerateReport#form_user_stat</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#78" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:78">78</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.52%</td>
+          <td>0.00%</td>
+          <td>1228.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1228.00</td>
+          <td>2436</td>
+          <td class="method_name">
+            <a name="GenerateReport_only_chrome__1260">
+               GenerateReport#only_chrome?
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#88" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:88">88</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1228.00</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>1226.00</td>
+            <td>697/3133</td>
+            <td class="method_name"><a href="#Array_any__1260">Array#any?</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#91" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:91">91</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/3133</td>
+            <td class="method_name"><a href="#GenerateReport_any_ie__1260">GenerateReport#any_ie?</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#85" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:85">85</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1228.00</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>1226.00</td>
+            <td>697/3133</td>
+            <td class="method_name"><a href="#GenerateReport_only_chrome__1260">GenerateReport#only_chrome?</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#91" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:91">91</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.52%</td>
+          <td>0.00%</td>
+          <td>1228.00</td>
+          <td>2.00</td>
+          <td>0.00</td>
+          <td>1226.00</td>
+          <td>3133</td>
+          <td class="method_name">
+            <a name="Array_any__1260">
+               Array#any?
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1226.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1226.00</td>
+            <td>923/923</td>
+            <td class="method_name"><a href="#Kernel_!~_1260">Kernel#!~</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#91" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:91">91</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>7071/7071</td>
+            <td class="method_name"><a href="#String_start_with__1260">String#start_with?</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#85" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:85">85</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1226.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1226.00</td>
+            <td>923/923</td>
+            <td class="method_name"><a href="#Array_any__1260">Array#any?</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.52%</td>
+          <td>0.00%</td>
+          <td>1226.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1226.00</td>
+          <td>923</td>
+          <td class="method_name">
+            <a name="Kernel_!~_1260">
+               Kernel#!~
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1226.00</td>
+            <td>1226.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>923/923</td>
+            <td class="method_name"><a href="#String__~_1260">String#=~</a></td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1226.00</td>
+            <td>1226.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>923/923</td>
+            <td class="method_name"><a href="#Kernel_!~_1260">Kernel#!~</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.52%</td>
+          <td>0.52%</td>
+          <td>1226.00</td>
+          <td>1226.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>923</td>
+          <td class="method_name">
+            <a name="String__~_1260">
+               String#=~
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>20.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>20.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#GenerateReport_work_1260">GenerateReport#work</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#44" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:44">44</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.01%</td>
+          <td>0.00%</td>
+          <td>20.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>20.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="GenerateReport_fill_last_user_data_1260">
+               GenerateReport#fill_last_user_data
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#127" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:127">127</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>17.00</td>
+            <td>5.00</td>
+            <td>0.00</td>
+            <td>12.00</td>
+            <td>1/2436</td>
+            <td class="method_name"><a href="#GenerateReport_form_user_stat_1260">GenerateReport#form_user_stat</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#128" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:128">128</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>2.00</td>
+            <td>1/2439</td>
+            <td class="method_name"><a href="#_Class__IO__open_1260">&lt;Class::IO&gt;#open</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#130" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:130">130</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>15.00</td>
+            <td>15.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#GenerateReport_work_1260">GenerateReport#work</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#47" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:47">47</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.01%</td>
+          <td>0.01%</td>
+          <td>15.00</td>
+          <td>15.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Kernel_`_1260">
+               Kernel#`
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>10.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>9.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#GenerateReport_work_1260">GenerateReport#work</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#45" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:45">45</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>10.00</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>9.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="GenerateReport_wrote_down_common_info_1260">
+               GenerateReport#wrote_down_common_info
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#135" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:135">135</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>2.00</td>
+            <td>1/2439</td>
+            <td class="method_name"><a href="#_Class__IO__open_1260">&lt;Class::IO&gt;#open</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#138" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:138">138</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>3.00</td>
+            <td>3.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>3/4876</td>
+            <td class="method_name"><a href="#Integer_to_s_1260">Integer#to_s</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#136" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:136">136</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>2.00</td>
+            <td>2.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2437</td>
+            <td class="method_name"><a href="#Array_sort_1260">Array#sort</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#136" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:136">136</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2437</td>
+            <td class="method_name"><a href="#Array_join_1260">Array#join</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#136" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:136">136</a>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2437</td>
+            <td class="method_name"><a href="#Array_count_1260">Array#count</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#136" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:136">136</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#[global]__1260">[global]#</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/rubyprof_prof.rb#6" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/rubyprof_prof.rb:6">6</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>1.00</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Class_new_1260">
+               Class#new
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#BasicObject_initialize_1260">BasicObject#initialize</a></td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#GenerateReport_work_1260">GenerateReport#work</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#47" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:47">47</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>1.00</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="String_%_1260">
+               String#%
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#GenerateReport_work_1260">GenerateReport#work</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#47" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:47">47</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="Kernel_puts_1260">
+               Kernel#puts
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#IO_puts_1260">IO#puts</a></td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Kernel_puts_1260">Kernel#puts</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="IO_puts_1260">
+               IO#puts
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2439</td>
+            <td class="method_name"><a href="#IO_write_1260">IO#write</a></td>
+            
+            <td>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>1.00</td>
+            <td>1.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#GenerateReport_process_user_1260">GenerateReport#process_user</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#53" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:53">53</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>1.00</td>
+          <td>1.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2436</td>
+          <td class="method_name">
+            <a name="GenerateReport_first_user__1260">
+               GenerateReport#first_user?
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#94" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:94">94</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#Integer_zero__1260">Integer#zero?</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#95" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:95">95</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/29565</td>
+            <td class="method_name"><a href="#GenerateReport_parse_user_1260">GenerateReport#parse_user</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#101" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:101">101</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>27128/29565</td>
+            <td class="method_name"><a href="#GenerateReport_parse_session_1260">GenerateReport#parse_session</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#119" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:119">119</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/29565</td>
+            <td class="method_name"><a href="#GenerateReport_work_1260">GenerateReport#work</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#47" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:47">47</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>29565</td>
+          <td class="method_name">
+            <a name="String_to_i_1260">
+               String#to_i
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2438/2439</td>
+            <td class="method_name"><a href="#_Class__IO__open_1260">&lt;Class::IO&gt;#open</a></td>
+            
+            <td></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2439</td>
+            <td class="method_name"><a href="#GenerateReport_work_1260">GenerateReport#work</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#42" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:42">42</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2439</td>
+          <td class="method_name">
+            <a name="IO_close_1260">
+               IO#close
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#Class_new_1260">Class#new</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="BasicObject_initialize_1260">
+               BasicObject#initialize
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/1</td>
+            <td class="method_name"><a href="#GenerateReport_work_1260">GenerateReport#work</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#47" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:47">47</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>1</td>
+          <td class="method_name">
+            <a name="_Module__Process__pid_1260">
+               &lt;Module::Process&gt;#pid
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2438/2438</td>
+            <td class="method_name"><a href="#_Class__IO__open_1260">&lt;Class::IO&gt;#open</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2438</td>
+          <td class="method_name">
+            <a name="IO_closed__1260">
+               IO#closed?
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2439/2439</td>
+            <td class="method_name"><a href="#_Class__IO__open_1260">&lt;Class::IO&gt;#open</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2439</td>
+          <td class="method_name">
+            <a name="File_initialize_1260">
+               File#initialize
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2437</td>
+            <td class="method_name"><a href="#GenerateReport_form_user_stat_1260">GenerateReport#form_user_stat</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#73" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:73">73</a></td>
+          </tr>
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>1/2437</td>
+            <td class="method_name"><a href="#GenerateReport_wrote_down_common_info_1260">GenerateReport#wrote_down_common_info</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#136" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:136">136</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2437</td>
+          <td class="method_name">
+            <a name="Array_count_1260">
+               Array#count
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#GenerateReport_form_user_stat_1260">GenerateReport#form_user_stat</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#77" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:77">77</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2436</td>
+          <td class="method_name">
+            <a name="GenerateReport_any_ie__1260">
+               GenerateReport#any_ie?
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#84" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:84">84</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/3133</td>
+            <td class="method_name"><a href="#Array_any__1260">Array#any?</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#85" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:85">85</a>
+          </tr>
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#GenerateReport_form_user_stat_1260">GenerateReport#form_user_stat</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#74" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:74">74</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2436</td>
+          <td class="method_name">
+            <a name="Array_sum_1260">
+               Array#sum
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#GenerateReport_form_user_stat_1260">GenerateReport#form_user_stat</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#79" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:79">79</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2436</td>
+          <td class="method_name">
+            <a name="Array_reverse!_1260">
+               Array#reverse!
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#GenerateReport_form_user_stat_1260">GenerateReport#form_user_stat</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#75" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:75">75</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2436</td>
+          <td class="method_name">
+            <a name="Array_max_1260">
+               Array#max
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>13564/13564</td>
+            <td class="method_name"><a href="#GenerateReport_process_session_1260">GenerateReport#process_session</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#112" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:112">112</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>13564</td>
+          <td class="method_name">
+            <a name="Array_include__1260">
+               Array#include?
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#JSON__Ext__Generator__GeneratorMethods__Hash_to_json_1260">JSON::Ext::Generator::GeneratorMethods::Hash#to_json</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2436</td>
+          <td class="method_name">
+            <a name="JSON__Ext__Generator__State_initialize_1260">
+               JSON::Ext::Generator::State#initialize
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>2436/2436</td>
+            <td class="method_name"><a href="#GenerateReport_first_user__1260">GenerateReport#first_user?</a></td>
+            
+            <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb#95" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/app/use_cases/generate_report.rb:95">95</a></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>2436</td>
+          <td class="method_name">
+            <a name="Integer_zero__1260">
+               Integer#zero?
+            </a>
+          </td>
+
+          
+
+          <td><a href="file:///home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/&lt;internal:integer&gt;#146" title="/home/artur/Thinknetica/optimization/lesson-02/rails-optimization-task2/&lt;internal:integer&gt;:146">146</a></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+
+        <!-- Parents -->
+        
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>0.00</td>
+            <td>7071/7071</td>
+            <td class="method_name"><a href="#Array_any__1260">Array#any?</a></td>
+            
+            <td></td>
+          </tr>
+        
+        <tr class="method">
+          <td>0.00%</td>
+          <td>0.00%</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>7071</td>
+          <td class="method_name">
+            <a name="String_start_with__1260">
+               String#start_with?
+            </a>
+          </td>
+
+          
+
+          <td></td>
+        </tr>
+
+        
+
+        <!-- Children -->
+        
+
+        <!-- Create divider row -->
+        <tr class="break">
+          <td colspan="10"></td>
+        </tr>
+      
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="9">* indicates recursively called methods</td>
+      </tr>
+      </tfoot>
+    </table>
+  
+</div>
+
+<script type="application/javascript">
+  function toggleAllocations(element)
+  {
+    if (element.style.display == 'none')
+      element.style.display = 'block'
+    else
+      element.style.display = 'none'
+  }
+
+  function onClick(event)
+  {
+    if (event.target.tagName == 'A' && event.target.classList.contains('allocations'))
+    {
+      var url = new URL(event.target.href)
+      var element = document.querySelector(url.hash)
+      toggleAllocations(element)
+      event.preventDefault()
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', function(event)
+  {
+    document.addEventListener('click', onClick)
+  })
+
+</script>
+</body>
+</html>

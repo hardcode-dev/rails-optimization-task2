@@ -1,0 +1,6 @@
+data_large.txt
+data_large.txt.gz
+data_assimpt.txt
+data_*.txt
+result.json
+.idea

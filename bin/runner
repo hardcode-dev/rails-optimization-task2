@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/reporter"
+
+work('fixtures/data_large.txt', 'result.json', { watcher_enable: true })

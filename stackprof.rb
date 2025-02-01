@@ -7,7 +7,7 @@
 require 'stackprof'
 require_relative 'task-2-with-argument.rb'
 
-`head -n #{8000} data_large.txt > data_small.txt`
+`head -n #{16000} data_large.txt > data_small.txt`
 
 StackProf.run(mode: :object, out: 'stackprof_reports/stackprof.dump', interval: 1000) do
   work("data_small.txt")

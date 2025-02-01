@@ -32,15 +32,39 @@
 Вот как я построил `feedback_loop`: *как вы построили feedback_loop*
 
 ## Вникаем в детали системы, чтобы найти главные точки роста
-Для того, чтобы найти "точки роста" для оптимизации я воспользовался *инструментами, которыми вы воспользовались*
+Для того, чтобы найти "точки роста" для оптимизации я воспользовалась memory_profiler, а так же falt, graph и callstack от ruby-prof и cli stackprof
 
 Вот какие проблемы удалось найти и решить
 
-### Ваша находка №1
-- какой отчёт показал главную точку роста
-- как вы решили её оптимизировать
-- как изменилась метрика
-- как изменился отчёт профилировщика
+Первые отчеты показывали разные точки роста.
+# stackprof:
+118  (31.6%)         118  (31.6%)     String#split
+# rubyprof :
+31.40  117541.000 117541.000     0.000     0.000    16001   String#split
+# memory-profiler
+ 184.23 MB  /home/iris/learning/optimization/rails-optimization-task2/task-2-with-argument.rb:55
+ `sessions = sessions + [parse_session(line)] if cols[0] == 'session'`
+ /home/iris/learning/optimization/rails-optimization-task2/task-2-with-argument.rb:140
+`{ 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }`
+
+Я решила на первых этапах пользоваться результатами отчета по количеству памяти от memory-profiler, т.к. он показывает не только аллокации, но и потребляему память
+Кроме того, т.к. первые находки соотвествуют тем, что были в прошлых заданиях, я не буду подробно их расписывать. Исправляю по очереди, когда меняется главная точка роста.
+
+### Находки №1-5
+184.23 MB  `sessions = sessions + [parse_session(line)] if cols[0] == 'session'`
+66.67 MB   `user_sessions = sessions.select { |session| session['user_id'] == user['id'] }`
+6.48 MB  `users = users + [parse_user(line)] if cols[0] == 'user'`
+6.25 MB  `{ 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }`
+6.16 MB  `users_objects = users_objects + [user_object]`
+
+## Находка 6
+3.86 MB и 62770 `cols = line.split(',')` - в данной версии программы особо не изменить, пропускаю пока что
+
+## Находки 7-8
+3.32 MB  `fields = session.split(',')`
+1.75 MB  `user_key = "#{user.attributes['first_name']}" + ' ' + "#{user.attributes['last_name']}"`
+К моменту исправления восьмой проблемы на 16000 строк в конце программы MEMORY USAGE: 46 MB и 85 MB с отключенным GC
+Изменения на этом этапе не значительные, поэтому исходя из находки №6 решаю переписать программу на поточный алгоритм.
 
 ### Ваша находка №2
 - какой отчёт показал главную точку роста

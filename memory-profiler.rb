@@ -6,6 +6,8 @@ require 'benchmark'
 require 'memory_profiler'
 require_relative 'task-2-with-argument.rb'
 
+`head -n #{8000} data_large.txt > data_small.txt`
+
 report = MemoryProfiler.report do
   work('data_small.txt')
 end

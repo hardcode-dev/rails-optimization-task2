@@ -5,7 +5,7 @@ require 'ruby-prof'
 require_relative 'task-2-with-argument.rb'
 
 RubyProf.measure_mode = RubyProf::ALLOCATIONS
-`head -n #{8000} data_large.txt > data_small.txt`
+`head -n #{16000} data_large.txt > data_small.txt`
 
 result = RubyProf.profile do
   work("data_small.txt")

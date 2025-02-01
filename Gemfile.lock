@@ -1,0 +1,23 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    json-write-stream (2.0.0)
+      json_pure (~> 1.8.0)
+    json_pure (1.8.6)
+    minitest (5.25.4)
+    ruby-prof (1.7.1)
+
+PLATFORMS
+  ruby
+  x86_64-linux
+
+DEPENDENCIES
+  json-write-stream
+  minitest
+  ruby-prof
+
+RUBY VERSION
+   ruby 3.3.6p108
+
+BUNDLED WITH
+   2.5.22

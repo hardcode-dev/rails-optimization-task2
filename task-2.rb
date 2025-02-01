@@ -2,7 +2,6 @@
 
 require 'json'
 require 'pry'
-require 'date'
 require 'minitest/autorun'
 
 class User
@@ -35,29 +34,73 @@ def parse_session(cols)
   }
 end
 
-def work(filename = 'data.txt')
+def write_user_to_json(file, user, first_user: false)
+  # cached_dates = {}
+
+  user_key = "#{user.attributes['first_name']} #{user.attributes['last_name']}"
+
+  times = user.sessions.map { |s| s['time'].to_i }
+  browsers = user.sessions.map { |s| s['browser'].upcase }
+
+  dates = user.sessions.map { |s| s['date'] }
+
+  File.open file, "a" do |f|
+    f.write ',' unless first_user
+    str = <<-JSON
+      \"#{user_key}\": {
+          \"sessionsCount\": #{user.sessions.count},
+          \"totalTime\": "#{times.sum.to_s} min.",
+          \"longestSession\": "#{times.max.to_s} min.",
+          \"browsers\": "#{browsers.sort.join(', ')}",
+          \"usedIE\": #{browsers.any? { |b| b =~ /INTERNET EXPLORER/ }},
+          \"alwaysUsedChrome\": #{browsers.all? { |b| b =~ /CHROME/ }},
+          \"dates\": #{dates.sort.reverse}
+        }
+    JSON
+
+    f.write str
+  end
+
+end
+
+def work(filename = 'data.txt', gc: true, result: 'result.json')
+  GC.disable unless gc
+
   report = {}
 
   current_user = nil
   uniqueBrowsers = Set.new
   totalSessions = 0
   user_object = nil
-  users_objects = []
+  totalUsers = 0
+  # to see if we need a comma
+  first_user = true
+
+  File.open(result, 'a') { |file| file.write("{ \"usersStats\":{") }
 
   File.readlines(filename, chomp: true).each do |line|
     cols = line.split(',')
     if cols[0] == 'user'
-      current_user = parse_user(line)
-      user_object = User.new(attributes: current_user, sessions: [])
-      users_objects.push user_object
+      # write previous user
+      if current_user
+        write_user_to_json(result, current_user, first_user: first_user)
+        first_user = false
+      end
+      parsed_user = parse_user(line)
+      current_user = User.new(attributes: parsed_user, sessions: [])
+      totalUsers += 1
     elsif cols[0] == 'session'
       session = parse_session(line)
-      user_object.sessions.push session
+      current_user.sessions.push session
 
       totalSessions += 1
       uniqueBrowsers.add(session['browser'].upcase)
     end
   end
+
+  write_user_to_json(result, current_user, first_user: false)
+
+  File.open(result, 'a') { |file| file.write("},") }
 
   # Отчёт в json
   #   - Сколько всего юзеров +
@@ -74,43 +117,26 @@ def work(filename = 'data.txt')
   #     - Всегда использовал только Хром? +
   #     - даты сессий в порядке убывания через запятую +
 
-  report['totalUsers'] = users_objects.count
-
   # Подсчёт количества уникальных браузеров
-  report['uniqueBrowsersCount'] = uniqueBrowsers.count
-  report['totalSessions'] = totalSessions
-  report['allBrowsers'] = uniqueBrowsers.sort.join(',')
 
-  report['usersStats'] = {}
-
-  cached_dates = {}
-
-  users_objects.each do |user|
-    user_key = "#{user.attributes['first_name']} #{user.attributes['last_name']}"
-
-    times = user.sessions.map { |s| s['time'].to_i }
-    browsers = user.sessions.map { |s| s['browser'].upcase }
-
-    dates = user.sessions.map do |session|
-      cached_dates[session['date']] ||= Date.parse(session['date'])
-      cached_dates[session['date']]
-    end
-
-    report['usersStats'][user_key] = {
-      'sessionsCount' => user.sessions.count,
-      'totalTime' => "#{times.sum.to_s} min.",
-      'longestSession' => "#{times.max.to_s} min.",
-      'browsers' => browsers.sort.join(', '),
-      'usedIE' => browsers.any? { |b| b =~ /INTERNET EXPLORER/ },
-      'alwaysUsedChrome' =>  browsers.all? { |b| b =~ /CHROME/ },
-      'dates' => dates.sort.reverse.map { |d| d.iso8601 }
-    }
+  File.open result, "a" do |f|
+    f.write "\"uniqueBrowsersCount\": #{uniqueBrowsers.count},"
+    f.write "\"totalSessions\": #{totalSessions},"
+    f.write "\"allBrowsers\": \"#{uniqueBrowsers.sort.join(',')}\","
+    f.write "\"totalUsers\": #{totalUsers}"
+    f.write("}")
   end
-
-  File.write('result.json', "#{report.to_json}\n")
 end
 
-work('data_large.txt')
+time = Time.now
+
+work('data_large.txt', gc: true)
+
+after = Time.now
+
+p after - time
+
+puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 
 class TestMe < Minitest::Test
   def setup
@@ -140,8 +166,7 @@ session,2,3,Chrome 20,84,2016-11-25
   def test_result
     work
     expected_result = JSON.parse('{"totalUsers":3,"uniqueBrowsersCount":14,"totalSessions":15,"allBrowsers":"CHROME 13,CHROME 20,CHROME 35,CHROME 6,FIREFOX 12,FIREFOX 32,FIREFOX 47,INTERNET EXPLORER 10,INTERNET EXPLORER 28,INTERNET EXPLORER 35,SAFARI 17,SAFARI 29,SAFARI 39,SAFARI 49","usersStats":{"Leida Cira":{"sessionsCount":6,"totalTime":"455 min.","longestSession":"118 min.","browsers":"FIREFOX 12, INTERNET EXPLORER 28, INTERNET EXPLORER 28, INTERNET EXPLORER 35, SAFARI 29, SAFARI 39","usedIE":true,"alwaysUsedChrome":false,"dates":["2017-09-27","2017-03-28","2017-02-27","2016-10-23","2016-09-15","2016-09-01"]},"Palmer Katrina":{"sessionsCount":5,"totalTime":"218 min.","longestSession":"116 min.","browsers":"CHROME 13, CHROME 6, FIREFOX 32, INTERNET EXPLORER 10, SAFARI 17","usedIE":true,"alwaysUsedChrome":false,"dates":["2017-04-29","2016-12-28","2016-12-20","2016-11-11","2016-10-21"]},"Gregory Santos":{"sessionsCount":4,"totalTime":"192 min.","longestSession":"85 min.","browsers":"CHROME 20, CHROME 35, FIREFOX 47, SAFARI 49","usedIE":false,"alwaysUsedChrome":false,"dates":["2018-09-21","2018-02-02","2017-05-22","2016-11-25"]}}}')
+    res = JSON.parse(File.read('result.json'))
     assert_equal expected_result, JSON.parse(File.read('result.json'))
   end
 end
-
-puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)

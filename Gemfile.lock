@@ -1,0 +1,22 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    memory_profiler (1.1.0)
+    minitest (5.25.4)
+    ruby-prof (1.6.3)
+    ruby-progressbar (1.13.0)
+    stackprof (0.2.27)
+
+PLATFORMS
+  arm64-darwin-23
+  ruby
+
+DEPENDENCIES
+  memory_profiler
+  minitest
+  ruby-prof
+  ruby-progressbar
+  stackprof
+
+BUNDLED WITH
+   2.4.10

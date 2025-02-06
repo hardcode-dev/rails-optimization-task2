@@ -39,7 +39,7 @@ class SessionsProcessor
   attr_reader :user
 
   def process_line(line)
-    type, *info = line.strip.split(LINE_SEPARATOR)
+    type, *info = line.strip!.split(LINE_SEPARATOR)
 
     if type == USER_TYPE
       update_totals

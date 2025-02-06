@@ -102,3 +102,60 @@ allocated memory by class
 ```
 
 ### Ваша находка №2
+- для большей наглядности повысим файл нагрузки до 20_000  (SIZE=20000 make all_reports)
+- 
+замеры через benchmark и сисемный замер памяти
+```
+SIZE  20000
+MEMORY USAGE: 95 MB
+6.934339999977965
+```
+
+замеры через memory_profiler.rb
+```
+MEMORY USAGE: 207 MB
+Total allocated: 476.27 MB (887788 objects)
+Total retained:  4.14 kB (9 objects)
+
+413.26 MB  rails-optimization-task2/work.rb:102
+
+allocated memory by class
+-----------------------------------
+ 425.92 MB  Array
+  30.41 MB  String
+```
+подозреваем 102 строку `user_sessions = sessions.select { |session| session['user_id'] == user['id'] }`, тут происходит работа с select
+в оффициальной документации
+```
+select () - Returns a new array containing all elements of 
+```
+
+- как решение вводим HASH и ищем через него.
+```
+sessions_by_users = sessions.group_by { |session| session['user_id'] }
+
+users.each do |user|
+  attributes = user
+  user_object = User.new(attributes: attributes, sessions: sessions_by_users[user['id']] || [])
+  users_objects << user_object
+end
+```
+- смотрим на результат, память потребляемя уменьшилась не не сильно с 95 до 84 MB
+```
+SIZE  20000
+MEMORY USAGE: 84 MB
+0.3854719999944791
+```
+
+но потребляемая память в конкретном месте уменьшилась до
+```
+ 700.82 kB  rails-optimization-task2/work.rb:100
+ 633.61 kB  rails-optimization-task2/work.rb:103
+
+allocated memory by class
+-----------------------------------
+  30.53 MB  String
+  14.24 MB  Hash
+```
+
+### Ваша находка №3

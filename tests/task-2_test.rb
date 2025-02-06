@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../task-2'
+require_relative '../task-2-flow'
 
 class TestMe < Minitest::Test
   def setup

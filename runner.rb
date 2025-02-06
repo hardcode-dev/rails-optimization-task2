@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'task-2'
+require_relative 'task-2-flow'
 require 'benchmark'
 require 'memory_profiler'
 require 'stackprof'
@@ -55,6 +55,8 @@ def run_profiler(profiler)
 end
 
 def run_memory_monitor
+  puts format('INITIAL MEMORY USAGE: %d MB', memory_usage)
+
   monitor_thread = Thread.new do
     while true
       puts format('MEMORY USAGE: %d MB', memory_usage)

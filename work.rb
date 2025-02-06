@@ -43,17 +43,17 @@ def collect_stats_from_users(report, users_objects, &block)
   end
 end
 
-def work(file, disable_gc: false)
+def work(file, disable_gc: true)
+  GC.disable if [true, 'true'].include?(disable_gc)
   file_lines = File.read(file).split("\n")
-
-  GC.disable if disable_gc
+  
   users = []
   sessions = []
 
   file_lines.each do |line|
     cols = line.split(',')
-    users = users + [parse_user(line)] if cols[0] == 'user'
-    sessions = sessions + [parse_session(line)] if cols[0] == 'session'
+    users << parse_user(line) if cols[0] == 'user'
+    sessions << parse_session(line) if cols[0] == 'session'
   end
 
   # Отчёт в json
@@ -101,7 +101,7 @@ def work(file, disable_gc: false)
     attributes = user
     user_sessions = sessions.select { |session| session['user_id'] == user['id'] }
     user_object = User.new(attributes: attributes, sessions: user_sessions)
-    users_objects = users_objects + [user_object]
+    users_objects << user_object
   end
 
   report['usersStats'] = {}

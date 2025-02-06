@@ -3,6 +3,6 @@ require_relative 'work'
 
 
 report = MemoryProfiler.report do
-  work('data/data20000.txt', disable_gc: true)
+  work("data/data#{ENV['SIZE']}.txt", disable_gc: ENV['GB'] || true)
 end
 report.pretty_print(scale_bytes: true)

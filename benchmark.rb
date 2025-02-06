@@ -1,4 +1,5 @@
 require_relative 'work'
 require 'benchmark'
 
-puts Benchmark.realtime { work('data/data20000.txt', disable_gc: true) }
+puts "SIZE  #{ENV['SIZE']}"
+puts Benchmark.realtime { work("data/data#{ENV['SIZE']}.txt", disable_gc: ENV['GB'] || true) }

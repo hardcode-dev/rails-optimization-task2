@@ -4,7 +4,7 @@ require_relative 'work'
 profile = RubyProf::Profile.new(measure_mode: RubyProf::ALLOCATIONS)
 
 result = profile.profile do
-  work('data/data20000.txt', disable_gc: true)
+  work("data/data#{ENV['SIZE']}.txt", disable_gc: ENV['GB'] || true)
 end
 
 printer = RubyProf::FlatPrinter.new(result)

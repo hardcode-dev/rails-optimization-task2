@@ -246,6 +246,41 @@ Total allocated: 112.82 MB (1646193 objects)
 Total allocated: 104.38 MB (1477055 objects)
 ```
 
+### 7
+
+Сделала один split:
+
+```
+Total allocated: 97.00 MB (1292486 objects)
+```
+### 8
+
+Увидела много объектов `','`, завела константу `DELIMITER = ','` (omg, чем я занимаюсь)
+
+```
+Total allocated: 92.38 MB (1177056 objects)
+# и ещё одну
+Total allocated: 91.76 MB (1161626 objects)
+```
+
+### 9
+
+Сделала `user_or_session.shift` для получения первого эл-та массива:
+Ну такое:
+
+```
+Total allocated: 91.15 MB (1155726 objects)
+```
+
+
+### 10
+
+Убрала `Struct`, сделала обычный класс
+
+```
+Total allocated: 88.68 MB (1140295 objects)s
+```
+
 
 
 

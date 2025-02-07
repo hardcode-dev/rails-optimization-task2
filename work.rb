@@ -1,20 +1,34 @@
-OptimizedUser = Struct.new(:full_name, :sessions, keyword_init: true)
+# OptimizedUser = .new(:full_name, :sessions, keyword_init: true)
+
+class OptimizedUser
+  def initialize(full_name, sessions = [])
+    @full_name = full_name
+    @sessions = sessions
+  end
+
+  attr_accessor :full_name, :sessions
+end
+
+DELIMITER = ','.freeze
+COMMA = ', '.freeze
 
 def write_user_to_json(f, user, first_user: false)
-  times = user.sessions.map { |s| s[4].to_i }
-  browsers = user.sessions.map { |s| s[3] }
-  dates = user.sessions.map { |s| s[5] }
+  times = user.sessions.map { |s| s[3].to_i }
+  browsers = user.sessions.map { |s| s[2] }
+  dates = user.sessions.map { |s| s[4] }
+  ie = browsers.any? { |b| b =~ /INTERNET EXPLORER/ }
+  chrome = !ie && browsers.all? { |b| b =~ /CHROME/ }
 
   # File.open file, "a" do |f|
-    f.write ',' unless first_user
+    f.write DELIMITER unless first_user
     f.write <<-JSON
       \"#{user.full_name}\": {
           \"sessionsCount\": #{user.sessions.count},
           \"totalTime\": "#{times.sum.to_s} min.",
           \"longestSession\": "#{times.max.to_s} min.",
-          \"browsers\": "#{browsers.sort.join(', ')}",
-          \"usedIE\": #{browsers.any? { |b| b =~ /INTERNET EXPLORER/ }},
-          \"alwaysUsedChrome\": #{browsers.all? { |b| b =~ /CHROME/ }},
+          \"browsers\": "#{browsers.sort.join(COMMA)}",
+          \"usedIE\": #{ie},
+          \"alwaysUsedChrome\": #{chrome},
           \"dates\": #{dates.sort.reverse}
         }
     JSON
@@ -37,8 +51,11 @@ def work(filename = 'data.txt', gc: true, result: 'result.json')
     f.write("{ \"usersStats\":{")
 
     File.readlines(filename, chomp: true).each do |line|
-      if line[0,4] == user_label
-        _, _, first_name, last_name, _ = line.split(',')
+      session_or_user = line.split(DELIMITER)
+      line_type = session_or_user.shift
+
+      if line_type == user_label
+        full_name = "#{session_or_user[1]} #{session_or_user[2]}"
 
         # write previous user
         if current_user
@@ -46,30 +63,13 @@ def work(filename = 'data.txt', gc: true, result: 'result.json')
           first_user = false
         end
 
-        current_user = OptimizedUser.new(full_name: "#{first_name} #{last_name}", sessions: [])
+        current_user = OptimizedUser.new(full_name)
         totalUsers += 1
-      elsif line[0,7] == session_label
-        # _, user_id, session_id, browser, time, date = line.split(',')
-
-        # OptimizedSession.new(user_id: user_id, session_id: session_id, browser: browser, time:)
-
-        session =  line.split(',')
-        session[3].upcase!
-        # session = {
-        #   'user_id' => user_id,
-        #   'session_id' => session_id,
-        #   'browser' => browser.upcase,
-        #   'time' => time,
-        #   'date' => date,
-        # }
-
-        # session = parse_session(cols)
-        current_user.sessions.push session
-
+      elsif line_type == session_label
+        session_or_user[2].upcase!
+        current_user.sessions.push session_or_user
         totalSessions += 1
-        # uniqueBrowsers.add(session['browser'])
-        uniqueBrowsers.add(session[3])
-
+        uniqueBrowsers.add(session_or_user[2])
       end
     end
     write_user_to_json(f, current_user, first_user: false)
@@ -78,7 +78,7 @@ def work(filename = 'data.txt', gc: true, result: 'result.json')
 
     f.write "\"uniqueBrowsersCount\": #{uniqueBrowsers.count},"
     f.write "\"totalSessions\": #{totalSessions},"
-    f.write "\"allBrowsers\": \"#{uniqueBrowsers.sort.join(',')}\","
+    f.write "\"allBrowsers\": \"#{uniqueBrowsers.sort.join(DELIMITER)}\","
     f.write "\"totalUsers\": #{totalUsers}"
     f.write("}")
   end
@@ -99,12 +99,4 @@ def work(filename = 'data.txt', gc: true, result: 'result.json')
   #     - даты сессий в порядке убывания через запятую +
 
   # Подсчёт количества уникальных браузеров
-
-  # File.open result, "a" do |f|
-  #   f.write "\"uniqueBrowsersCount\": #{uniqueBrowsers.count},"
-  #   f.write "\"totalSessions\": #{totalSessions},"
-  #   f.write "\"allBrowsers\": \"#{uniqueBrowsers.sort.join(',')}\","
-  #   f.write "\"totalUsers\": #{totalUsers}"
-  #   f.write("}")
-  # end
 end

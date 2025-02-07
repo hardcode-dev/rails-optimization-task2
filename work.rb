@@ -1,45 +1,14 @@
-class User
-  attr_reader :attributes, :sessions
-
-  def initialize(attributes:, sessions:)
-    @attributes = attributes
-    @sessions = sessions
-  end
-end
-
-# def parse_user(cols)
-#   # _, id, first_name, last_name, age = cols.split(',')
-#   {
-#     'id' => cols[1],
-#     'first_name' => cols[2],
-#     'last_name' => cols[3],
-#     'age' => cols[4],
-#   }
-# end
-
-# def parse_session(cols)
-#   # _, user_id, session_id, browser, time, date = cols.split(',')
-#   {
-#     'user_id' => cols[1],
-#     'session_id' => cols[2],
-#     'browser' => cols[3],
-#     'time' => cols[4],
-#     'date' => cols[5],
-#   }
-# end
+OptimizedUser = Struct.new(:full_name, :sessions, keyword_init: true)
 
 def write_user_to_json(f, user, first_user: false)
-  user_key = "#{user.attributes['first_name']} #{user.attributes['last_name']}"
-
-  times = user.sessions.map { |s| s['time'].to_i }
-  browsers = user.sessions.map { |s| s['browser'].upcase }
-
-  dates = user.sessions.map { |s| s['date'] }
+  times = user.sessions.map { |s| s[4].to_i }
+  browsers = user.sessions.map { |s| s[3] }
+  dates = user.sessions.map { |s| s[5] }
 
   # File.open file, "a" do |f|
     f.write ',' unless first_user
     f.write <<-JSON
-      \"#{user_key}\": {
+      \"#{user.full_name}\": {
           \"sessionsCount\": #{user.sessions.count},
           \"totalTime\": "#{times.sum.to_s} min.",
           \"longestSession\": "#{times.max.to_s} min.",
@@ -61,45 +30,46 @@ def work(filename = 'data.txt', gc: true, result: 'result.json')
   totalUsers = 0
   # to see if we need a comma
   first_user = true
+  user_label = 'user'.freeze
+  session_label = 'session'.freeze
 
   File.open(result, 'a') do |f|
     f.write("{ \"usersStats\":{")
 
     File.readlines(filename, chomp: true).each do |line|
-      if line[0,4] == 'user'
-        _, id, first_name, last_name, age = line.split(',')
+      if line[0,4] == user_label
+        _, _, first_name, last_name, _ = line.split(',')
 
         # write previous user
         if current_user
           write_user_to_json(f, current_user, first_user: first_user)
           first_user = false
         end
-        # parsed_user = parse_user(cols)
-        parsed_user = {
-          'id' => id,
-          'first_name' => first_name,
-          'last_name' => last_name,
-          'age' => age,
-        }
 
-        current_user = User.new(attributes: parsed_user, sessions: [])
+        current_user = OptimizedUser.new(full_name: "#{first_name} #{last_name}", sessions: [])
         totalUsers += 1
-      elsif line[0,6] == 'session'
-        _, user_id, session_id, browser, time, date = cols.split(',')
+      elsif line[0,7] == session_label
+        # _, user_id, session_id, browser, time, date = line.split(',')
 
-        session = {
-          'user_id' => user_id,
-          'session_id' => session_id,
-          'browser' => browser,
-          'time' => time,
-          'date' => date,
-        }
+        # OptimizedSession.new(user_id: user_id, session_id: session_id, browser: browser, time:)
+
+        session =  line.split(',')
+        session[3].upcase!
+        # session = {
+        #   'user_id' => user_id,
+        #   'session_id' => session_id,
+        #   'browser' => browser.upcase,
+        #   'time' => time,
+        #   'date' => date,
+        # }
 
         # session = parse_session(cols)
         current_user.sessions.push session
 
         totalSessions += 1
-        uniqueBrowsers.add(session['browser'].upcase)
+        # uniqueBrowsers.add(session['browser'])
+        uniqueBrowsers.add(session[3])
+
       end
     end
     write_user_to_json(f, current_user, first_user: false)
@@ -112,8 +82,6 @@ def work(filename = 'data.txt', gc: true, result: 'result.json')
     f.write "\"totalUsers\": #{totalUsers}"
     f.write("}")
   end
-
-
 
   # Отчёт в json
   #   - Сколько всего юзеров +

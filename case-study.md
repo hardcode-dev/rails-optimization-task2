@@ -281,12 +281,61 @@ Total allocated: 91.15 MB (1155726 objects)
 Total allocated: 88.68 MB (1140295 objects)s
 ```
 
+### 11
+
+Убрала объект `User` - тут не особо что-то изменилось.
+
+```
+Total allocated: 88.32 MB (1124864 objects)
+```
+
+### 12
+
+Поменяла режим записи в файл:
+
+```
+Total allocated: 87.90 MB (1124625 objects)
+```
+
+### Тупик
+
+Далее тупик, остальные ухищрения делают только хуже.
+
+При этом, при замере на большом файле использование памяти практически не изменилось (после замены на потоковую обработку):
+
+```
+MEMORY USAGE: 27 MB
+MEMORY USAGE: 334 MB
+MEMORY USAGE: 334 MB
+MEMORY USAGE: 334 MB
+MEMORY USAGE: 334 MB
+MEMORY USAGE: 334 MB
+MEMORY USAGE: 334 MB
+MEMORY USAGE: 334 MB
+MEMORY USAGE: 334 MB
+MEMORY USAGE: 334 MB
+MEMORY USAGE: 334 MB
+10.641142708
+```
+
+Проблемные места:
+
+```ruby
+line = line.split(DELIMITER)
+
+dates.sort.reverse
+
+File.readlines
+```
+
+Много строк "session" создаётся при `split` + много строк типа "0", "1" и т.д.
+
+Посмотрела stackprof, примерно то же показывает.
 
 
 
 
 
-Упс, тест надо вернуть!
 
 
 - какой отчёт показал главную точку роста

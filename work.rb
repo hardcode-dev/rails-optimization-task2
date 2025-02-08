@@ -1,38 +1,26 @@
-# OptimizedUser = .new(:full_name, :sessions, keyword_init: true)
-
-class OptimizedUser
-  def initialize(full_name, sessions = [])
-    @full_name = full_name
-    @sessions = sessions
-  end
-
-  attr_accessor :full_name, :sessions
-end
-
 DELIMITER = ','.freeze
 COMMA = ', '.freeze
 
 def write_user_to_json(f, user, first_user: false)
-  times = user.sessions.map { |s| s[3].to_i }
-  browsers = user.sessions.map { |s| s[2] }
-  dates = user.sessions.map { |s| s[4] }
+  name = user.shift
+  times = user.map { |s| s[3].to_i }
+  browsers = user.map { |s| s[2] }
+  dates = user.map { |s| s[4] }
   ie = browsers.any? { |b| b =~ /INTERNET EXPLORER/ }
   chrome = !ie && browsers.all? { |b| b =~ /CHROME/ }
 
-  # File.open file, "a" do |f|
-    f.write DELIMITER unless first_user
-    f.write <<-JSON
-      \"#{user.full_name}\": {
-          \"sessionsCount\": #{user.sessions.count},
-          \"totalTime\": "#{times.sum.to_s} min.",
-          \"longestSession\": "#{times.max.to_s} min.",
-          \"browsers\": "#{browsers.sort.join(COMMA)}",
-          \"usedIE\": #{ie},
-          \"alwaysUsedChrome\": #{chrome},
-          \"dates\": #{dates.sort.reverse}
-        }
-    JSON
-  # end
+  f.write DELIMITER unless first_user
+  f.write <<-JSON
+    \"#{name}\": {
+        \"sessionsCount\": #{user.count},
+        \"totalTime\": "#{times.sum} min.",
+        \"longestSession\": "#{times.max} min.",
+        \"browsers\": "#{browsers.sort.join(COMMA)}",
+        \"usedIE\": #{ie},
+        \"alwaysUsedChrome\": #{chrome},
+        \"dates\": #{dates.sort.reverse}
+      }
+  JSON
 end
 
 def work(filename = 'data.txt', gc: true, result: 'result.json')
@@ -47,30 +35,31 @@ def work(filename = 'data.txt', gc: true, result: 'result.json')
   user_label = 'user'.freeze
   session_label = 'session'.freeze
 
-  File.open(result, 'a') do |f|
+  File.open(result, 'w') do |f|
     f.write("{ \"usersStats\":{")
 
     File.readlines(filename, chomp: true).each do |line|
-      session_or_user = line.split(DELIMITER)
-      line_type = session_or_user.shift
+      line = line.split(DELIMITER)
+      line_type = line.shift
 
       if line_type == user_label
-        full_name = "#{session_or_user[1]} #{session_or_user[2]}"
-
+        full_name = "#{line[1]} #{line[2]}"
         # write previous user
         if current_user
           write_user_to_json(f, current_user, first_user: first_user)
           first_user = false
         end
-
-        current_user = OptimizedUser.new(full_name)
+        current_user = [full_name]
         totalUsers += 1
       elsif line_type == session_label
-        session_or_user[2].upcase!
-        current_user.sessions.push session_or_user
+        line[2].upcase!
+        current_user << line
         totalSessions += 1
-        uniqueBrowsers.add(session_or_user[2])
+        uniqueBrowsers.add(line[2])
       end
+      # if totalUsers % 50000 == 0
+      #   puts "записали 50000 юзеров"
+      # end
     end
     write_user_to_json(f, current_user, first_user: false)
 

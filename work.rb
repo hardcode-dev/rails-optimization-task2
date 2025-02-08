@@ -1,20 +1,11 @@
 DELIMITER = ','.freeze
 COMMA = ', '.freeze
 
-def write_user_to_json(f, user, first_user: false)
-  name = user.shift
-  times = user.map { |s| s[3].to_i }
-  browsers = user.map { |s| s[2] }
-  dates = user.map { |s| s[4] }
-  ie = browsers.any? { |b| b =~ /INTERNET EXPLORER/ }
-  chrome = !ie && browsers.all? { |b| b =~ /CHROME/ }
-
-  f.write DELIMITER unless first_user
+def write_sessions(f, cnt, time_sum, time_max, browsers, dates, ie, chrome)
   f.write <<-JSON
-    \"#{name}\": {
-        \"sessionsCount\": #{user.count},
-        \"totalTime\": "#{times.sum} min.",
-        \"longestSession\": "#{times.max} min.",
+        \"sessionsCount\": #{cnt},
+        \"totalTime\": "#{time_sum} min.",
+        \"longestSession\": "#{time_max} min.",
         \"browsers\": "#{browsers.sort.join(COMMA)}",
         \"usedIE\": #{ie},
         \"alwaysUsedChrome\": #{chrome},
@@ -26,7 +17,6 @@ end
 def work(filename = 'data.txt', gc: true, result: 'result.json')
   GC.disable unless gc
 
-  current_user = nil
   uniqueBrowsers = Set.new
   totalSessions = 0
   totalUsers = 0
@@ -35,36 +25,60 @@ def work(filename = 'data.txt', gc: true, result: 'result.json')
   user_label = 'user'.freeze
   session_label = 'session'.freeze
 
+  time_sum = 0
+  time_max = 0
+  browsers = []
+  dates = []
+  ie = false
+  chrome = true
+  sessions_cnt = 0
+
   File.open(result, 'w') do |f|
     f.write("{ \"usersStats\":{")
 
-    File.readlines(filename, chomp: true).each do |line|
-      line = line.split(DELIMITER)
-      line_type = line.shift
+    File.foreach(filename, chomp: true).each do |line|
+      line_type, _, second, third, fourth, fifth = line.split(DELIMITER)
 
       if line_type == user_label
-        full_name = "#{line[1]} #{line[2]}"
-        # write previous user
-        if current_user
-          write_user_to_json(f, current_user, first_user: first_user)
-          first_user = false
+        unless first_user
+          write_sessions(f, sessions_cnt, time_sum, time_max, browsers, dates, ie, chrome)
+          f.write DELIMITER
         end
-        current_user = [full_name]
+
+        f.write "\"#{second} #{third}\": {"
+        first_user = false
+
+        time_sum = 0
+        time_max = 0
+        browsers = []
+        dates = []
+        ie = false
+        chrome = true
+        sessions_cnt = 0
+
         totalUsers += 1
       elsif line_type == session_label
-        line[2].upcase!
-        current_user << line
+        third.upcase! # browser
+        ctime = fourth.to_i
+
+        time_sum += ctime
+        time_max = ctime if ctime > time_max
+        browsers << third
+        unless ie
+          ie = true if third =~ /INTERNET EXPLORER/
+        end
+        if chrome
+          chrome = false unless third =~ /CHROME/
+        end
+        dates << fifth
+        sessions_cnt += 1
         totalSessions += 1
-        uniqueBrowsers.add(line[2])
+        uniqueBrowsers.add(third)
       end
-      # if totalUsers % 50000 == 0
-      #   puts "записали 50000 юзеров"
-      # end
     end
-    write_user_to_json(f, current_user, first_user: false)
+    write_sessions(f, sessions_cnt, time_sum, time_max, browsers, dates, ie, chrome)
 
     f.write("},")
-
     f.write "\"uniqueBrowsersCount\": #{uniqueBrowsers.count},"
     f.write "\"totalSessions\": #{totalSessions},"
     f.write "\"allBrowsers\": \"#{uniqueBrowsers.sort.join(DELIMITER)}\","

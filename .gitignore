@@ -1,0 +1,12 @@
+.idea
+.idea/
+.vscode/
+
+# ignore file data
+data_*
+data.json
+result.json
+
+# ignore directory
+ruby_prof_reports
+stackprof_reports

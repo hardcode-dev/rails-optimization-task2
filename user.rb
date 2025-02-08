@@ -23,7 +23,7 @@ class User
     @dates << date
   end
 
-  def as_json
+  def sessions_stats
     {
       sessionsCount: sessions_count,
       totalTime: "#{total_time} min.",

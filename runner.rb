@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'task-2-flow'
+require_relative 'task-2'
 require 'benchmark'
 require 'memory_profiler'
 require 'stackprof'
@@ -55,19 +55,20 @@ def run_profiler(profiler)
 end
 
 def run_memory_monitor
-  puts format('INITIAL MEMORY USAGE: %d MB', memory_usage)
-
+  io = File.open('memory_usage.txt', 'w')
+  io << format('INITIAL MEMORY USAGE: %d MB', memory_usage)
   monitor_thread = Thread.new do
     while true
-      puts format('MEMORY USAGE: %d MB', memory_usage)
+      io << format('MEMORY USAGE: %d MB', memory_usage)
       sleep(1)
     end
   ensure
-    puts format('FINAL MEMORY USAGE: %d MB', memory_usage)
+    io << format('FINAL MEMORY USAGE: %d MB', memory_usage)
   end
 
   work(FILENAME)
   monitor_thread.kill
+  io.close
 end
 
 run_memory_monitor if mode == 'memory'

@@ -1,4 +1,5 @@
 # Deoptimized version of homework task
+# frozen_string_literal: true
 
 require 'json'
 require 'pry'
@@ -10,11 +11,16 @@ require 'memory_profiler'
 require 'stackprof'
 require 'ruby-prof'
 
-USER_FIELD = 'user'.freeze
+USER_FIELD = 'user'
 
 # FILE_NAME = "data_large.txt"
-FILE_NAME = "data_small.txt"
-# FILE_NAME = "data.txt"
+FILE_NAME = "data.txt"
+
+SAVE_FILE = "result.json"
+SAVE_TYPE = "a"
+COMMON = ","
+USER_STATS_STR = '{"usersStats":{'
+USER_STATS_CLOSE = '}}'
 
 class Parser
   attr_reader :user_stats, :users, :common_info, :user, :report
@@ -25,45 +31,53 @@ class Parser
     @common_info = {
       total_users: 0,
       total_sessions: 0,
-      all_browsers: []
+      all_browsers: Set.new
     }
+
+    File.write('result.json', USER_STATS_STR)
   end
 
   def process
-    File.foreach(FILE_NAME) do |line|
-      fields = line.chomp.split(',')
+    File.open(SAVE_FILE, SAVE_TYPE) do |file|
+      File.foreach(FILE_NAME) do |line|
+        fields = line.chomp.split(COMMON)
 
-      if fields[0] == USER_FIELD && user_stats[user]
-        prepare_data(user)
 
-        @user_stats = {}
+        if fields[0] == USER_FIELD && user_stats[user]
+          prepare_data(user)
+          save_data(file)
+          @users = {}
+          @user_stats = {}
 
-        common_info[:total_users] += 1
+          common_info[:total_users] += 1
 
-        @user = "#{fields[2]} #{fields[3]}"
+          @user = "#{fields[2]} #{fields[3]}"
 
-        user_stats[user] = {}
+          user_stats[user] = {}
 
-        next
+          next
+        end
+
+        if fields[0] == USER_FIELD
+          common_info[:total_users] += 1
+
+          @user = "#{fields[2]} #{fields[3]}"
+
+          user_stats[user] = {}
+
+          next
+        end
+
+        process_sessions(fields)
       end
 
-      if fields[0] == USER_FIELD
-        common_info[:total_users] += 1
+      prepare_data(user)
+      save_data(file)
+      @users = {}
+      @user_stats = {}
 
-        @user = "#{fields[2]} #{fields[3]}"
-
-        user_stats[user] = {}
-
-        next
-      end
-
-      process_sessions(fields)
+      save_finally_report_data(file)
     end
-
-    prepare_data(user)
-    prepare_finally_data
-
-    File.write('result.json', "#{report.to_json}\n")
   end
 
   def process_sessions(fields)
@@ -72,13 +86,16 @@ class Parser
     date = fields[5]
 
     common_info[:total_sessions] += 1
-    common_info[:all_browsers].append(browser)
+    common_info[:all_browsers] << browser
 
     user_stats[:sessions_count] ||= 0
     user_stats[:sessions_count] += 1
 
-    user_stats[:time] ||= []
-    user_stats[:time].append(time)
+    user_stats[:total_time] ||= 0
+    user_stats[:total_time] += time
+
+    user_stats[:longest_session] ||= 0
+    user_stats[:longest_session] = [user_stats[:longest_session], time].max
 
     user_stats[:browsers] ||= []
     user_stats[:browsers].append(browser)
@@ -90,8 +107,8 @@ class Parser
   def prepare_data(user)
     users[user] = {
       sessionsCount: user_stats[:sessions_count],
-      totalTime: "#{user_stats[:time].sum} min.",
-      longestSession: "#{user_stats[:time].max} min.",
+      totalTime: "#{user_stats[:total_time]} min.",
+      longestSession: "#{user_stats[:longest_session]} min.",
       browsers: user_stats[:browsers].sort.join(', '),
       usedIE: user_stats[:browsers].any? { |b| b =~ /INTERNET EXPLORER/ },
       alwaysUsedChrome: user_stats[:browsers].all? { |b| b =~ /CHROME/ },
@@ -99,14 +116,23 @@ class Parser
     }
   end
 
-  def prepare_finally_data
-    @report = {
-      totalUsers: common_info[:total_users],
-      uniqueBrowsersCount: common_info[:all_browsers].uniq.count,
-      totalSessions: common_info[:total_sessions],
-      allBrowsers: common_info[:all_browsers].sort.uniq.join(','),
-      usersStats: users
-    }
+  def save_data(file)
+    file.write "#{user.to_json}:#{users[user].to_json}"
+    file.write COMMON
+  end
+
+  def save_finally_report_data(file)
+    file.write "\"totalUsers\":#{common_info[:total_users].to_json}"
+    file.write COMMON
+
+    file.write "\"uniqueBrowsersCount\":#{common_info[:all_browsers].count.to_json}"
+    file.write COMMON
+
+    file.write "\"totalSessions\":#{common_info[:total_sessions].to_json}"
+    file.write COMMON
+
+    file.write "\"allBrowsers\":#{common_info[:all_browsers].sort.join(',').to_json}"
+    file.write USER_STATS_CLOSE
   end
 end
 
@@ -149,19 +175,19 @@ session,2,3,Chrome 20,84,2016-11-25
 ')
   end
 
-  # def test_result
-  #   work
-  #   expected_result = JSON.parse('{"totalUsers":3,"uniqueBrowsersCount":14,"totalSessions":15,"allBrowsers":"CHROME 13,CHROME 20,CHROME 35,CHROME 6,FIREFOX 12,FIREFOX 32,FIREFOX 47,INTERNET EXPLORER 10,INTERNET EXPLORER 28,INTERNET EXPLORER 35,SAFARI 17,SAFARI 29,SAFARI 39,SAFARI 49","usersStats":{"Leida Cira":{"sessionsCount":6,"totalTime":"455 min.","longestSession":"118 min.","browsers":"FIREFOX 12, INTERNET EXPLORER 28, INTERNET EXPLORER 28, INTERNET EXPLORER 35, SAFARI 29, SAFARI 39","usedIE":true,"alwaysUsedChrome":false,"dates":["2017-09-27","2017-03-28","2017-02-27","2016-10-23","2016-09-15","2016-09-01"]},"Palmer Katrina":{"sessionsCount":5,"totalTime":"218 min.","longestSession":"116 min.","browsers":"CHROME 13, CHROME 6, FIREFOX 32, INTERNET EXPLORER 10, SAFARI 17","usedIE":true,"alwaysUsedChrome":false,"dates":["2017-04-29","2016-12-28","2016-12-20","2016-11-11","2016-10-21"]},"Gregory Santos":{"sessionsCount":4,"totalTime":"192 min.","longestSession":"85 min.","browsers":"CHROME 20, CHROME 35, FIREFOX 47, SAFARI 49","usedIE":false,"alwaysUsedChrome":false,"dates":["2018-09-21","2018-02-02","2017-05-22","2016-11-25"]}}}')
-  #   assert_equal expected_result, JSON.parse(File.read('result.json'))
-  # end
-
-  def test_memory_profiler
-    report = MemoryProfiler.report do
-      work
-    end
-
-    report.pretty_print(scale_bytes: true)
+  def test_result
+    work
+    expected_result = JSON.parse('{"usersStats":{"Leida Cira":{"sessionsCount":6,"totalTime":"455 min.","longestSession":"118 min.","browsers":"FIREFOX 12, INTERNET EXPLORER 28, INTERNET EXPLORER 28, INTERNET EXPLORER 35, SAFARI 29, SAFARI 39","usedIE":true,"alwaysUsedChrome":false,"dates":["2017-09-27","2017-03-28","2017-02-27","2016-10-23","2016-09-15","2016-09-01"]},"Palmer Katrina":{"sessionsCount":5,"totalTime":"218 min.","longestSession":"116 min.","browsers":"CHROME 13, CHROME 6, FIREFOX 32, INTERNET EXPLORER 10, SAFARI 17","usedIE":true,"alwaysUsedChrome":false,"dates":["2017-04-29","2016-12-28","2016-12-20","2016-11-11","2016-10-21"]},"Gregory Santos":{"sessionsCount":4,"totalTime":"192 min.","longestSession":"85 min.","browsers":"CHROME 20, CHROME 35, FIREFOX 47, SAFARI 49","usedIE":false,"alwaysUsedChrome":false,"dates":["2018-09-21","2018-02-02","2017-05-22","2016-11-25"]},"totalUsers":3,"uniqueBrowsersCount":14,"totalSessions":15,"allBrowsers":"CHROME 13,CHROME 20,CHROME 35,CHROME 6,FIREFOX 12,FIREFOX 32,FIREFOX 47,INTERNET EXPLORER 10,INTERNET EXPLORER 28,INTERNET EXPLORER 35,SAFARI 17,SAFARI 29,SAFARI 39,SAFARI 49"}}')
+    assert_equal expected_result, JSON.parse(File.read('result.json'))
   end
+
+  # def test_memory_profiler
+  #   report = MemoryProfiler.report do
+  #     work
+  #   end
+  #
+  #   report.pretty_print(scale_bytes: true)
+  # end
 
   # def test_stackprof
   #   StackProf.run(mode: :object, out: 'stackprof_reports/stackprof.dump', raw: true) do

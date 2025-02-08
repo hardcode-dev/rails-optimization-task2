@@ -3,9 +3,8 @@
 .vscode/
 
 # ignore file data
-data_large.txt
+data_*
 data.json
-data_small.txt
 result.json
 
 # ignore directory

@@ -159,3 +159,17 @@ allocated memory by class
 ```
 
 ### Ваша находка №3
+- исходя из отчетов большую часть памяти занимает цикл, когда мы проходим по всем строкам файла. Посмотрев через qcachegrind, и memory_profiler находим новуб точку роста это split 
+```
+  MEMORY USAGE: 84 MB
+
+  9.48 MB  rails-optimization-task2/work.rb:54
+  8.14 MB  rails-optimization-task2/work.rb:28
+```
+- заменяб сохранение после split не в массив, а в переннеыю
+`type, user_id, second, third, fourth, fifth = line.split(',')`, так же `parse_user` и `parse_session` убрал split и пользуюсь уже готовыми переменными.
+- Резульатты улучшения появились, уменьшенеие но не крититчно всег она 14 MB
+```
+SIZE  20000
+MEMORY USAGE: 70 MB
+```

@@ -14,30 +14,28 @@ class User
   end
 end
 
-def parse_user(user)
-  fields = user.split(',')
-  parsed_result = {
-    'id' => fields[1],
-    'first_name' => fields[2],
-    'last_name' => fields[3],
-    'age' => fields[4],
+def parse_user(user_id, first_name, last_name, age)
+  {
+    'id' => user_id,
+    'first_name' => first_name,
+    'last_name' => last_name,
+    'age' => age
   }
 end
 
-def parse_session(session)
-  fields = session.split(',')
-  parsed_result = {
-    'user_id' => fields[1],
-    'session_id' => fields[2],
-    'browser' => fields[3],
-    'time' => fields[4],
-    'date' => fields[5],
+def parse_session(user_id, session_id, browser, time, date)
+  {
+    'user_id' => user_id,
+    'session_id' => session_id,
+    'browser' => browser,
+    'time' => time,
+    'date' => date
   }
 end
 
 def collect_stats_from_users(report, users_objects, &block)
   users_objects.each do |user|
-    user_key = "#{user.attributes['first_name']}" + ' ' + "#{user.attributes['last_name']}"
+    user_key = "#{user.attributes['first_name']} #{user.attributes['last_name']}"
     report['usersStats'][user_key] ||= {}
     report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
   end
@@ -51,9 +49,10 @@ def work(file, disable_gc: true)
   sessions = []
 
   file_lines.each do |line|
-    cols = line.split(',')
-    users << parse_user(line) if cols[0] == 'user'
-    sessions << parse_session(line) if cols[0] == 'session'
+    type, user_id, second, third, fourth, fifth = line.split(',')
+
+    users << parse_user(user_id, second, third, fourth) if type == 'user'
+    sessions << parse_session(user_id, second, third, fourth, fifth) if type == 'session'
   end
 
   # Отчёт в json

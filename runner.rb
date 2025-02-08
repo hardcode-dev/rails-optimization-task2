@@ -56,19 +56,19 @@ end
 
 def run_memory_monitor
   io = File.open('memory_usage.txt', 'w')
-  io << format('INITIAL MEMORY USAGE: %d MB', memory_usage)
+  io << format("INITIAL MEMORY USAGE: %d MB\n", memory_usage)
   monitor_thread = Thread.new do
     while true
-      io << format('MEMORY USAGE: %d MB', memory_usage)
+      io << format("MEMORY USAGE: %d MB\n", memory_usage)
       sleep(1)
     end
   ensure
-    io << format('FINAL MEMORY USAGE: %d MB', memory_usage)
+    io << format("FINAL MEMORY USAGE: %d MB\n", memory_usage)
+    io.close
   end
 
   work(FILENAME)
   monitor_thread.kill
-  io.close
 end
 
 run_memory_monitor if mode == 'memory'

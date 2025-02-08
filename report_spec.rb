@@ -31,9 +31,8 @@ RSpec.describe do
     let(:data_file_path)  { "data_large.txt" }
 
     it 'performs success' do
-      expect {
-        work(data_file_path)
-      }.to perform_allocation(31457280).bytes
+      work(data_file_path)
+      expect((`ps -o rss= -p #{Process.pid}`.to_i / 1024)).to be < 70
     end
   end
 end

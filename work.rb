@@ -5,6 +5,8 @@ require 'pry'
 require 'date'
 require 'set'
 
+# DELIMITER = ','.freeze
+
 def build_user_stat(user)
   "\"#{user[:name]}\":{" \
   "\"sessionsCount\":#{user[:s_count]}," \
@@ -17,7 +19,7 @@ def build_user_stat(user)
   '}'
 end
 
-def work(file, disable_gc: true)
+def work(file, disable_gc: false)
   GC.disable if [true, 'true'].include?(disable_gc)
 
   File.open('result.json', 'w') do |result_file|
@@ -67,6 +69,8 @@ def work(file, disable_gc: true)
         uniq_browsers.add(browser)
         total_sessions += 1
       end
+
+      # puts "MEMORY IN PROCESS USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
     end
     result_file.write(build_user_stat(user))
     result_file.write('},')
@@ -76,6 +80,7 @@ def work(file, disable_gc: true)
     result_file.write("\"totalSessions\":#{total_sessions},")
     result_file.write("\"allBrowsers\":\"#{uniq_browsers.sort.join(',')}\"")
     result_file.write('}')
+    puts "MEMORY USAGE RESULT: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
   end
 
   puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)

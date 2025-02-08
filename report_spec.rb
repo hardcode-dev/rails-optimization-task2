@@ -31,10 +31,9 @@ RSpec.describe do
     let(:data_file_path)  { "data_large.txt" }
 
     it 'performs success' do
-      skip
       expect {
         work(data_file_path)
-      }.to perform_allocation(70_000).bytes
+      }.to perform_allocation(31457280).bytes
     end
   end
 end

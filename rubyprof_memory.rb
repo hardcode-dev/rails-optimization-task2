@@ -4,7 +4,7 @@ require_relative 'work'
 profile = RubyProf::Profile.new(measure_mode: RubyProf::MEMORY)
 
 result = profile.profile do
-  work("data/data#{ENV['SIZE']}.txt", disable_gc: ENV['GB'] || true)
+  work("data/data#{ENV['SIZE']}.txt", disable_gc: ENV['GB'] || false)
 end
 
 printer = RubyProf::FlatPrinter.new(result)

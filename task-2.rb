@@ -4,15 +4,6 @@ require 'json'
 require 'pry'
 require 'date'
 
-class User
-  attr_reader :attributes, :sessions
-
-  def initialize(attributes:, sessions:)
-    @attributes = attributes
-    @sessions = sessions
-  end
-end
-
 def parse_user(user)
   fields = user.split(',')
   parsed_result = {
@@ -34,28 +25,7 @@ def parse_session(session)
   }
 end
 
-def collect_stats_from_users(report, users_objects, &block)
-  users_objects.each do |user|
-    user_key = "#{user.attributes['first_name']}" + ' ' + "#{user.attributes['last_name']}"
-    report['usersStats'][user_key] ||= {}
-    report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
-  end
-end
-
 def work(file_name: 'data.txt')
-  puts "Start"
-  file_lines = File.read(file_name).split("\n")
-  puts "Readed file"
-
-  users = []
-  sessions = []
-
-  file_lines.each do |line|
-    users = users + [parse_user(line)] if line.start_with?('user')
-    sessions = sessions + [parse_session(line)] if line.start_with?('session')
-  end
-  puts "Split dada"
-
   # Отчёт в json
   #   - Сколько всего юзеров +
   #   - Сколько всего уникальных браузеров +
@@ -70,79 +40,71 @@ def work(file_name: 'data.txt')
   #     - Хоть раз использовал IE? +
   #     - Всегда использовал только Хром? +
   #     - даты сессий в порядке убывания через запятую +
+  File.open('result.json', 'w') do |file_result|
+    file_result.write('{"usersStats":{')
 
-  report = {}
+    File.open(file_name, 'r') do |file|
+      user = nil
+      sessions = []
+      total_users = 0
+      total_sessions = 0
+      unique_browsers = Set.new
 
-  report[:totalUsers] = users.count
+      file.each_line do |line|
+        if line.start_with?('user')
+          unless user.nil?
+            save_user(file_result, user:, sessions:)
+            file_result.write(',')
+          end
 
-  # Подсчёт количества уникальных браузеров
-  uniqueBrowsers = []
-  sessions.each do |session|
-    browser = session['browser']
-    uniqueBrowsers += [browser] if uniqueBrowsers.all? { |b| b != browser }
-  end
-  puts "Fetch unique browsers"
+          user = parse_user(line)
 
-  report['uniqueBrowsersCount'] = uniqueBrowsers.count
+          sessions = []
+          total_users += 1
+        else
+          session = parse_session(line)
 
-  report['totalSessions'] = sessions.count
+          sessions << session
+          total_sessions += 1
+          unique_browsers << session['browser'].upcase
+        end
+      end
 
-  report['allBrowsers'] =
-    sessions
-      .map { |s| s['browser'] }
-      .map { |b| b.upcase }
-      .sort
-      .uniq
-      .join(',')
+      # Запись последнего пользователя и общей статистики
+      unless user.nil?
+        save_user(file_result, user:, sessions:)
+        file_result.write('},') # usersStats
 
-  # Статистика по пользователям
-  users_objects = []
+        save_common(file_result, total_users:, total_sessions:, unique_browsers:)
 
-  users.each do |user|
-    attributes = user
-    user_sessions = sessions.select { |session| session['user_id'] == user['id'] }
-    user_object = User.new(attributes: attributes, sessions: user_sessions)
-    users_objects = users_objects + [user_object]
-  end
-  puts "Fetch Users"
-
-  report['usersStats'] = {}
-
-  # Собираем количество сессий по пользователям
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'sessionsCount' => user.sessions.count }
-  end
-
-  # Собираем количество времени по пользователям
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'totalTime' => user.sessions.map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.' }
+        file_result.write("}\n") # JSON
+      end
+    end
   end
 
-  # Выбираем самую длинную сессию пользователя
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'longestSession' => user.sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.' }
-  end
+  memory = (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  puts "MEMORY USAGE: #{memory} MB"
+  memory
+end
 
-  # Браузеры пользователя через запятую
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'browsers' => user.sessions.map {|s| s['browser']}.map {|b| b.upcase}.sort.join(', ') }
-  end
+def save_user(file_result, user:, sessions:)
+  file_result.write("\"#{user['first_name']} #{user['last_name']}\":")
+  file_result.write(JSON.dump(
+    {
+      'sessionsCount' => sessions.count,
+      'totalTime' => (sessions.map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.'),
+      'longestSession' => (sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.'),
+      'browsers' => sessions.map {|s| s['browser']}.map {|b| b.upcase}.sort.join(', '),
+      'usedIE' => sessions.map{|s| s['browser']}.any? { |b| b.upcase =~ /INTERNET EXPLORER/ },
+      'alwaysUsedChrome' => sessions.map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ },
+      'dates' => sessions.map{|s| s['date']}.map {|d| Date.strptime(d)}.sort.reverse.map { |d| d.iso8601 }
+    }
+  ))
+end
 
-  # Хоть раз использовал IE?
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'usedIE' => user.sessions.map{|s| s['browser']}.any? { |b| b.upcase =~ /INTERNET EXPLORER/ } }
-  end
-
-  # Всегда использовал только Chrome?
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'alwaysUsedChrome' => user.sessions.map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ } }
-  end
-
-  # Даты сессий через запятую в обратном порядке в формате iso8601
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.strptime(d)}.sort.reverse.map { |d| d.iso8601 } }
-  end
-
-  File.write('result.json', "#{report.to_json}\n")
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+def save_common(file_result, total_users:, total_sessions:, unique_browsers:)
+  file_result.write("\"totalUsers\":#{total_users},")
+  file_result.write("\"uniqueBrowsersCount\":#{unique_browsers.count},")
+  file_result.write("\"totalSessions\":#{total_sessions},")
+  file_result.write("\"allBrowsers\":\"#{unique_browsers.sort.join(',')}\"")
 end

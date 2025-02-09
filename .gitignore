@@ -1,0 +1,7 @@
+.DS_Store
+data_large.txt
+data_prof.txt
+result.json
+tmp/
+memory_profiler/
+stackprof_reports/

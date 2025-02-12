@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Deoptimized version of homework task
 
 require 'json'
@@ -37,22 +38,25 @@ end
 
 def collect_stats_from_users(report, users_objects, &block)
   users_objects.each do |user|
-    user_key = "#{user.attributes['first_name']}" + ' ' + "#{user.attributes['last_name']}"
+    user_key = "#{user.attributes['first_name']} #{user.attributes['last_name']}"
     report['usersStats'][user_key] ||= {}
     report['usersStats'][user_key] = report['usersStats'][user_key].merge(block.call(user))
   end
 end
 
-def work
-  file_lines = File.read('data.txt').split("\n")
+def work(path = 'data.txt')
+  file_lines = File.read(path).split("\n")
 
   users = []
   sessions = []
 
   file_lines.each do |line|
     cols = line.split(',')
-    users = users + [parse_user(line)] if cols[0] == 'user'
-    sessions = sessions + [parse_session(line)] if cols[0] == 'session'
+    if cols[0] == 'user'
+      users << parse_user(line)
+    elsif cols[0] == 'session'
+      sessions << parse_session(line)
+    end
   end
 
   # Отчёт в json
@@ -96,12 +100,14 @@ def work
   # Статистика по пользователям
   users_objects = []
 
+  user_sessions = sessions.group_by { |session| session['user_id'] }
+
   users.each do |user|
     attributes = user
-    user_sessions = sessions.select { |session| session['user_id'] == user['id'] }
-    user_object = User.new(attributes: attributes, sessions: user_sessions)
-    users_objects = users_objects + [user_object]
+    user_object = User.new(attributes: attributes, sessions: user_sessions[user['id']] || [])
+    users_objects << user_object
   end
+
 
   report['usersStats'] = {}
 
@@ -137,11 +143,10 @@ def work
 
   # Даты сессий через запятую в обратном порядке в формате iso8601
   collect_stats_from_users(report, users_objects) do |user|
-    { 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }
+    { 'dates' => user.sessions.map { |s| s['date'] }.sort.reverse }
   end
 
   File.write('result.json', "#{report.to_json}\n")
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
 class TestMe < Minitest::Test

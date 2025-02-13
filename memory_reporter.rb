@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MemoryReporter
-  DEFAULT_LIMIT_MB = 7000
+  DEFAULT_LIMIT_MB = 700
   DEFAULT_INTERVAL = 1
   DEFAULT_LOG_FILE = 'reports/memory_usage.log'.freeze
 

@@ -6,7 +6,7 @@ require_relative 'task-2'
 
 # path = "data/data#{ARGV[0] || 50000}.txt"
 path = 'data_large.txt'
-report_memory = ARGV[1] == '--report-memory'
+report_memory = ARGV[0] == '--report-memory'
 
 if report_memory
   reporter = MemoryReporter.new

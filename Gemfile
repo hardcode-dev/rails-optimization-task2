@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+gem "ruby-prof"
+gem "rspec-benchmark"
+gem "minitest"
+gem "memory_profiler"
+gem "stackprof"

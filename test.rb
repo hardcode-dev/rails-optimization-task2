@@ -1,4 +1,5 @@
 require 'minitest/autorun'
+require 'json'
 require_relative 'task-2.rb'
 
 class TestMe < Minitest::Test

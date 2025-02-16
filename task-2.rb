@@ -1,7 +1,5 @@
 #frozen_string_literal: true
 
-require 'json'
-require 'date'
 require_relative 'memory_watcher'
 
 def write_sessions(file, user_sessions_count, user_total_time, user_longest_session, user_browsers, user_dates, ie, chrome)

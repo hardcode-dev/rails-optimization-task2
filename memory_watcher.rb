@@ -8,6 +8,7 @@ class MemoryWatcher
     @thread = Thread.new do
       until @should_stop
         current_memory = `ps -o rss= -p #{Process.pid}`.to_i / 1024
+        puts "MEMORY USAGE: #{current_memory} MB"
         if current_memory > @memory_limit_mb
           puts "Memory limit exceeded: #{current_memory}MB > #{@memory_limit_mb}MB"
           puts "Killing process..."

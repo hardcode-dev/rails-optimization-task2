@@ -129,11 +129,65 @@ allocated memory by location
 - В целом, кажется что главная точка роста исправлена со 117 мб удалось получить 62 мб. Коммит и переход к следующей.
 
 
-### Ваша находка №X
-- какой отчёт показал главную точку роста
-- как вы решили её оптимизировать
+### Ваша находка №3
+- Использую data_20000.txt, memory-profiler указал на главную точку роста, а именно:
+```
+MEMORY USAGE: 186 MB
+allocated memory by location
+-----------------------------------
+   15.44 MB  /home/alex/documents/studies/rails-optimization-task2/task-2.rb:139
+
+   
+   Строка 139:
+   collect_stats_from_users(report, users_objects) do |user|
+     { 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }
+   end
+```
+- Тут видется проблема неоптимального использования метода collect_stats_from_users.
+  Оптимизировал, а именно избавился от collect_stats_from_users и начал подготавливать данные для отчета за один проход.
+```
+  users_objects.each do |user|
+    user_key = "#{user.attributes['first_name']} #{user.attributes['last_name']}"
+
+    # Подготовим данные для сессий
+    sessions = user.sessions
+    times = sessions.map { |s| s['time'].to_i }
+    browsers = sessions.map { |s| s['browser'].upcase }
+
+    report['usersStats'][user_key] = {
+      # Количество сессий
+      'sessionsCount' => sessions.count,
+      # Общее время
+      'totalTime' => "#{times.sum} min.",
+      # Самая длинная сессия
+      'longestSession' => "#{times.max} min.",
+      # Браузеры через запятую
+      'browsers' => browsers.sort.join(', '),
+      # Хоть раз использовал IE?
+      'usedIE' => browsers.any? { |b| b.include?('INTERNET EXPLORER') },
+      # Всегда использовал только Chrome?
+      'alwaysUsedChrome' => browsers.all? { |b| b.include?('CHROME') },
+      # Даты сессий через запятую в обратном порядке в формате iso8601
+      'dates' => user.sessions.map { |s| s['date'] }.sort.reverse
+    }
+  end
+```
 - как изменилась метрика
+```
+GC disabled MEMORY USAGE: 75 MB
+GС enabled MEMORY USAGE: 59 MB
+```
 - как изменился отчёт профилировщика
+```
+MEMORY USAGE: 116 MB
+allocated memory by location
+-----------------------------------
+    121.84 kB  /home/alex/documents/studies/rails-optimization-task2/task-2.rb:108
+    242.98 kB  /home/alex/documents/studies/rails-optimization-task2/task-2.rb:112
+     921.14 kB  /home/alex/documents/studies/rails-optimization-task2/task-2.rb:113
+     633.57 kB  /home/alex/documents/studies/rails-optimization-task2/task-2.rb:115
+```
+- Главная точка роста исправлена со 62 мб удалось получить 59 мб. Коммит и переход к следующей.
 
 ## Результаты
 В результате проделанной оптимизации наконец удалось обработать файл с данными.

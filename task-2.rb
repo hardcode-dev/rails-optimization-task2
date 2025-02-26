@@ -104,39 +104,30 @@ def work(file_path, disable_gc: {})
 
   report['usersStats'] = {}
 
-  # Собираем количество сессий по пользователям
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'sessionsCount' => user.sessions.count }
-  end
+  users_objects.each do |user|
+    user_key = "#{user.attributes['first_name']} #{user.attributes['last_name']}"
 
-  # Собираем количество времени по пользователям
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'totalTime' => user.sessions.map {|s| s['time']}.map {|t| t.to_i}.sum.to_s + ' min.' }
-  end
+    # Подготовим данные для сессий
+    sessions = user.sessions
+    times = sessions.map { |s| s['time'].to_i }
+    browsers = sessions.map { |s| s['browser'].upcase }
 
-  # Выбираем самую длинную сессию пользователя
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'longestSession' => user.sessions.map {|s| s['time']}.map {|t| t.to_i}.max.to_s + ' min.' }
-  end
-
-  # Браузеры пользователя через запятую
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'browsers' => user.sessions.map {|s| s['browser']}.map {|b| b.upcase}.sort.join(', ') }
-  end
-
-  # Хоть раз использовал IE?
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'usedIE' => user.sessions.map{|s| s['browser']}.any? { |b| b.upcase =~ /INTERNET EXPLORER/ } }
-  end
-
-  # Всегда использовал только Chrome?
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'alwaysUsedChrome' => user.sessions.map{|s| s['browser']}.all? { |b| b.upcase =~ /CHROME/ } }
-  end
-
-  # Даты сессий через запятую в обратном порядке в формате iso8601
-  collect_stats_from_users(report, users_objects) do |user|
-    { 'dates' => user.sessions.map{|s| s['date']}.map {|d| Date.parse(d)}.sort.reverse.map { |d| d.iso8601 } }
+    report['usersStats'][user_key] = {
+      # Количество сессий
+      'sessionsCount' => sessions.count,
+      # Общее время
+      'totalTime' => "#{times.sum} min.",
+      # Самая длинная сессия
+      'longestSession' => "#{times.max} min.",
+      # Браузеры через запятую
+      'browsers' => browsers.sort.join(', '),
+      # Хоть раз использовал IE?
+      'usedIE' => browsers.any? { |b| b.include?('INTERNET EXPLORER') },
+      # Всегда использовал только Chrome?
+      'alwaysUsedChrome' => browsers.all? { |b| b.include?('CHROME') },
+      # Даты сессий через запятую в обратном порядке в формате iso8601
+      'dates' => user.sessions.map { |s| s['date'] }.sort.reverse
+    }
   end
 
   File.write('spec/fixtures/files/result.json', "#{report.to_json}\n")

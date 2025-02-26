@@ -22,7 +22,7 @@ describe 'task-1' do
 
     it 'performs success with data_20000.txt' do
       work(data_file_path)
-      expect((`ps -o rss= -p #{Process.pid}`.to_i / 1024)).to be < 118
+      expect((`ps -o rss= -p #{Process.pid}`.to_i / 1024)).to be < 65
     end
   end
 end

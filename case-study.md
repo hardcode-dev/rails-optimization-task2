@@ -94,10 +94,40 @@ allocated memory by location
 - В целом, кажется что главная точка роста исправлена со 146 мб удалось получить 117 мб. Коммит и переход к следующей.
 
 ### Ваша находка №2
-- какой отчёт показал главную точку роста
-- как вы решили её оптимизировать
-- как изменилась метрика
+- Использую data_20000.txt, memory-profiler указал на главную точку роста, а именно:
+```
+MEMORY USAGE: 197 MB
+allocated memory by location
+-----------------------------------
+   413.26 MB  /home/alex/documents/studies/rails-optimization-task2/task-2.rb:103
+
+   
+   Строка 103:
+   user_sessions = sessions.select { |session| session['user_id'] == user['id'] }
+```
+- Как и в первой домашней работе заменил перебор всех сессий на хэш с группированные данных по user_id. В данном конкретном месте алгоритмическая сложность с O(n) изменилась на O(1).
+```
+  user_sessions = sessions.group_by { |session| session['user_id'] }
+  users_objects = users.map do |user|
+    User.new(attributes: user, sessions: user_sessions[user['id']] || [])
+  end
+```
+-- как изменилась метрика
+```
+GC disabled MEMORY USAGE: 105 MB
+GС enabled MEMORY USAGE: 62 MB
+```
 - как изменился отчёт профилировщика
+```
+MEMORY USAGE: 186 MB
+allocated memory by location
+-----------------------------------
+    700.74 kB  /home/alex/documents/studies/rails-optimization-task2/task-2.rb:100
+    536.14 kB  /home/alex/documents/studies/rails-optimization-task2/task-2.rb:101
+    121.88 kB  /home/alex/documents/studies/rails-optimization-task2/task-2.rb:102
+```
+- В целом, кажется что главная точка роста исправлена со 117 мб удалось получить 62 мб. Коммит и переход к следующей.
+
 
 ### Ваша находка №X
 - какой отчёт показал главную точку роста

@@ -189,6 +189,51 @@ allocated memory by location
 ```
 - Главная точка роста исправлена со 62 мб удалось получить 59 мб. Коммит и переход к следующей.
 
+### Ваша находка №4
+- Перешел на использование data_40000.txt, профайлеры указал на главную точку роста, а именно:
+```
+MEMORY USAGE: 206 MB
+allocated memory by file
+-----------------------------------
+    18.95 MB  /home/alex/documents/studies/rails-optimization-task2/task-2.rb:55
+    16.25 MB  /home/alex/documents/studies/rails-optimization-task2/task-2.rb:28
+
+    Строка 28:
+    fields = session.split(',')
+
+    Строка 55:
+    cols = line.split(',')
+```
+Так же удалось поставить kcachegrind на ubuntu. Были проблемы с зависимостями.
+
+- Тут проблема неоптимального использования метода split.
+  Оптимизировал, а именно избавился от избыточного использования split. Перешел на использование переменных.
+```
+def parse_session(user_id, session_id, browser, time, date)
+  {
+    'user_id' => user_id,
+    'session_id' => session_id,
+    'browser' => browser,
+    'time' => time,
+    'date' => date,
+  }
+end
+```
+- как изменилась метрика
+```
+GC disabled MEMORY USAGE: 66 MB
+GС enabled MEMORY USAGE: 58 MB
+```
+- как изменился отчёт профилировщика
+```
+MEMORY USAGE: 156 MB
+allocated memory by file
+-----------------------------------
+    18.95 MB  /home/alex/documents/studies/rails-optimization-task2/task-2.rb:53
+    1.03 MB  /home/alex/documents/studies/rails-optimization-task2/task-2.rb:24
+```
+- Главная точка роста исправлена со 59 мб удалось получить 58 мб. Коммит и переход к следующей.
+
 ## Результаты
 В результате проделанной оптимизации наконец удалось обработать файл с данными.
 Удалось улучшить метрику системы с *того, что у вас было в начале, до того, что получилось в конце* и уложиться в заданный бюджет.

@@ -4,7 +4,7 @@ require_relative 'task-2'
 RubyProf.measure_mode = RubyProf::ALLOCATIONS
 
 result = RubyProf::Profile.profile do
-  work("spec/fixtures/files/data_20000.txt", disable_gc: true)
+  work("spec/fixtures/files/data_40000.txt", disable_gc: true)
 end
 
 printer = RubyProf::FlatPrinter.new(result)

@@ -1,0 +1,143 @@
+Total allocated: 19320 bytes (29 objects)
+Total retained:  80 bytes (1 objects)
+
+allocated memory by gem
+-----------------------------------
+     19160  other
+       160  set
+
+allocated memory by file
+-----------------------------------
+     18600  /home/nikita/rails_optimization/task_2/main.rb
+       560  /home/nikita/rails_optimization/task_2/profiler.rb
+       160  /usr/share/rvm/rubies/ruby-3.3.0/lib/ruby/3.3.0/set.rb
+
+allocated memory by location
+-----------------------------------
+      8680  /home/nikita/rails_optimization/task_2/main.rb:28
+      8560  /home/nikita/rails_optimization/task_2/main.rb:25
+       728  /home/nikita/rails_optimization/task_2/main.rb:18
+       560  /home/nikita/rails_optimization/task_2/profiler.rb:48
+       280  /home/nikita/rails_optimization/task_2/main.rb:46
+       160  /home/nikita/rails_optimization/task_2/main.rb:20
+       160  /usr/share/rvm/rubies/ruby-3.3.0/lib/ruby/3.3.0/set.rb:244
+       112  /home/nikita/rails_optimization/task_2/main.rb:26
+        40  /home/nikita/rails_optimization/task_2/main.rb:23
+        40  /home/nikita/rails_optimization/task_2/main.rb:5
+
+allocated memory by class
+-----------------------------------
+     16880  File
+       960  Hash
+       720  String
+       248  IO
+       160  Enumerator
+        80  Array
+        80  Main
+        80  Process::Status
+        72  Thread::Mutex
+        40  Set
+
+allocated objects by gem
+-----------------------------------
+        28  other
+         1  set
+
+allocated objects by file
+-----------------------------------
+        24  /home/nikita/rails_optimization/task_2/main.rb
+         4  /home/nikita/rails_optimization/task_2/profiler.rb
+         1  /usr/share/rvm/rubies/ruby-3.3.0/lib/ruby/3.3.0/set.rb
+
+allocated objects by location
+-----------------------------------
+         7  /home/nikita/rails_optimization/task_2/main.rb:18
+         4  /home/nikita/rails_optimization/task_2/main.rb:25
+         4  /home/nikita/rails_optimization/task_2/main.rb:28
+         4  /home/nikita/rails_optimization/task_2/main.rb:46
+         4  /home/nikita/rails_optimization/task_2/profiler.rb:48
+         2  /home/nikita/rails_optimization/task_2/main.rb:26
+         1  /home/nikita/rails_optimization/task_2/main.rb:20
+         1  /home/nikita/rails_optimization/task_2/main.rb:23
+         1  /home/nikita/rails_optimization/task_2/main.rb:5
+         1  /usr/share/rvm/rubies/ruby-3.3.0/lib/ruby/3.3.0/set.rb:244
+
+allocated objects by class
+-----------------------------------
+        13  String
+         6  Hash
+         2  Array
+         2  File
+         1  Enumerator
+         1  IO
+         1  Main
+         1  Process::Status
+         1  Set
+         1  Thread::Mutex
+
+retained memory by gem
+-----------------------------------
+        80  other
+
+retained memory by file
+-----------------------------------
+        80  /home/nikita/rails_optimization/task_2/main.rb
+
+retained memory by location
+-----------------------------------
+        80  /home/nikita/rails_optimization/task_2/main.rb:18
+
+retained memory by class
+-----------------------------------
+        80  Process::Status
+
+retained objects by gem
+-----------------------------------
+         1  other
+
+retained objects by file
+-----------------------------------
+         1  /home/nikita/rails_optimization/task_2/main.rb
+
+retained objects by location
+-----------------------------------
+         1  /home/nikita/rails_optimization/task_2/main.rb:18
+
+retained objects by class
+-----------------------------------
+         1  Process::Status
+
+
+Allocated String Report
+-----------------------------------
+         2  ""
+         1  /home/nikita/rails_optimization/task_2/main.rb:18
+         1  /home/nikita/rails_optimization/task_2/main.rb:46
+
+         2  "head -n 50000 data_large.txt > dataN.txt"
+         2  /home/nikita/rails_optimization/task_2/main.rb:18
+
+         2  "result.json"
+         2  /home/nikita/rails_optimization/task_2/main.rb:25
+
+         1  ","
+         1  /home/nikita/rails_optimization/task_2/main.rb:46
+
+         1  "50000"
+         1  /home/nikita/rails_optimization/task_2/main.rb:18
+
+         1  "dataN.txt"
+         1  /home/nikita/rails_optimization/task_2/main.rb:28
+
+         1  "data_large.txt"
+         1  /home/nikita/rails_optimization/task_2/main.rb:5
+
+         1  "w"
+         1  /home/nikita/rails_optimization/task_2/main.rb:25
+
+         1  "{\"usersStats\":{"
+         1  /home/nikita/rails_optimization/task_2/main.rb:26
+
+         1  "},\"totalUsers\":0,\"uniqueBrowsersCount\":0,\"totalSessions\":0,\"allBrowsers\":\"\"}\n"
+         1  /home/nikita/rails_optimization/task_2/main.rb:46
+

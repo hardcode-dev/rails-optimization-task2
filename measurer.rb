@@ -4,7 +4,7 @@ class Measurer
   MEMORY_USAGE_LIMIT_MB = 70
   CHECK_USAGE_INTERVAL_SEC = 1
 
-  def initialize(count_lines)
+  def initialize(count_lines: nil)
     @count_lines = count_lines
   end
 
@@ -20,11 +20,13 @@ class Measurer
     sleep CHECK_USAGE_INTERVAL_SEC
     current_memory_usage_mb = `ps -o rss= -p #{Process.pid}`.to_i / 1024
     if current_memory_usage_mb > MEMORY_USAGE_LIMIT_MB
-      puts "MEMORY USAGE: #{current_memory_usage_mb} MB, BUT LIMIT: #{MEMORY_USAGE_LIMIT_MB}"
+      puts "MEMORY USAGE: #{current_memory_usage_mb} MB, BUT LIMIT: #{MEMORY_USAGE_LIMIT_MB}. TERMINATING."
       exit
+    else
+      puts "MEMORY USAGE: #{current_memory_usage_mb} MB"
     end
   end
 end
 
 # Zero iteration:
-# 15_000 lines: 103 MB
+# 15_000 lines: 57 MB (optimizing users and sessions collecting)

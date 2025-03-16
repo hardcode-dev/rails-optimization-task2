@@ -112,8 +112,6 @@ class Main
     end
   
     File.write('result.json', "#{report.to_json}\n")
-
-    puts "MEMORY USAGE: #{(`ps -o rss= -p #{Process.pid}`.to_i / 1024)} MB" if is_print_memory_usage
   end
 
   def parse_user(user)

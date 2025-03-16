@@ -46,10 +46,10 @@ puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)"
 - файл `case-study.md` с описанием проделанной оптимизации;
 
 ## Checklist
-- [ ] Потренироваться с `memory_profiler`
-- [ ] Потренироваться с `ruby-prof` в режиме `CallTree` c визуализацией в `QCachegrind`;
-- [ ] Потренироваться с `stackprof` + `CLI` и `Speedscope`
-- [ ] Потренироваться со вторым тредом для мониторинга памяти
+- [x] Потренироваться с `memory_profiler`
+- [x] Потренироваться с `ruby-prof` в режиме `CallTree` c визуализацией в `QCachegrind`;
+- [x] Потренироваться с `stackprof` + `CLI` и `Speedscope`
+- [x] Потренироваться со вторым тредом для мониторинга памяти
 
 ## Формат шагов case-study
 Каждый шаг оптимизации в `case-study` должен содержать четыре составляющих:

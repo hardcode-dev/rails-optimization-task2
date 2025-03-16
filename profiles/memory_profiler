@@ -1,506 +1,143 @@
-Total allocated: 3791101592 bytes (1471886 objects)
-Total retained:  4249 bytes (9 objects)
+Total allocated: 19320 bytes (29 objects)
+Total retained:  80 bytes (1 objects)
 
 allocated memory by gem
 -----------------------------------
-3791101592  other
+     19160  other
+       160  set
 
 allocated memory by file
 -----------------------------------
-3791101032  /home/nikita/rails_optimization/task_2/main.rb
+     18600  /home/nikita/rails_optimization/task_2/main.rb
        560  /home/nikita/rails_optimization/task_2/profiler.rb
+       160  /usr/share/rvm/rubies/ruby-3.3.0/lib/ruby/3.3.0/set.rb
 
 allocated memory by location
 -----------------------------------
-2585606480  /home/nikita/rails_optimization/task_2/main.rb:26
- 933571968  /home/nikita/rails_optimization/task_2/main.rb:72
-  85937936  /home/nikita/rails_optimization/task_2/main.rb:25
-  84737936  /home/nikita/rails_optimization/task_2/main.rb:74
-  29275553  /home/nikita/rails_optimization/task_2/main.rb:111
-  14467200  /home/nikita/rails_optimization/task_2/main.rb:24
-  12446720  /home/nikita/rails_optimization/task_2/main.rb:130
-   6559560  /home/nikita/rails_optimization/task_2/main.rb:142
-   5143600  /home/nikita/rails_optimization/task_2/main.rb:144
-   4351680  /home/nikita/rails_optimization/task_2/main.rb:96
-   4065280  /home/nikita/rails_optimization/task_2/main.rb:131
-   3882366  /home/nikita/rails_optimization/task_2/main.rb:18
-   3623624  /home/nikita/rails_optimization/task_2/main.rb:101
-   2731036  /home/nikita/rails_optimization/task_2/main.rb:114
-   2197240  /home/nikita/rails_optimization/task_2/main.rb:106
-   2063760  /home/nikita/rails_optimization/task_2/main.rb:86
-   2063760  /home/nikita/rails_optimization/task_2/main.rb:91
-   2020480  /home/nikita/rails_optimization/task_2/main.rb:120
-   1653120  /home/nikita/rails_optimization/task_2/main.rb:73
-   1470504  /home/nikita/rails_optimization/task_2/main.rb:62
-    937080  /home/nikita/rails_optimization/task_2/main.rb:143
-    734720  /home/nikita/rails_optimization/task_2/main.rb:121
-    734720  /home/nikita/rails_optimization/task_2/main.rb:81
-    229536  /home/nikita/rails_optimization/task_2/main.rb:77
-    203344  /home/nikita/rails_optimization/task_2/main.rb:63
-    203304  /home/nikita/rails_optimization/task_2/main.rb:61
-    183152  /home/nikita/rails_optimization/task_2/main.rb:52
-      2645  /home/nikita/rails_optimization/task_2/main.rb:65
-      1640  /home/nikita/rails_optimization/task_2/main.rb:64
-       728  /home/nikita/rails_optimization/task_2/main.rb:17
+      8680  /home/nikita/rails_optimization/task_2/main.rb:28
+      8560  /home/nikita/rails_optimization/task_2/main.rb:25
+       728  /home/nikita/rails_optimization/task_2/main.rb:18
        560  /home/nikita/rails_optimization/task_2/profiler.rb:48
-       160  /home/nikita/rails_optimization/task_2/main.rb:44
-        40  /home/nikita/rails_optimization/task_2/main.rb:20
-        40  /home/nikita/rails_optimization/task_2/main.rb:21
-        40  /home/nikita/rails_optimization/task_2/main.rb:49
+       280  /home/nikita/rails_optimization/task_2/main.rb:46
+       160  /home/nikita/rails_optimization/task_2/main.rb:20
+       160  /usr/share/rvm/rubies/ruby-3.3.0/lib/ruby/3.3.0/set.rb:244
+       112  /home/nikita/rails_optimization/task_2/main.rb:26
+        40  /home/nikita/rails_optimization/task_2/main.rb:23
         40  /home/nikita/rails_optimization/task_2/main.rb:5
-        40  /home/nikita/rails_optimization/task_2/main.rb:68
 
 allocated memory by class
 -----------------------------------
-3706736736  Array
-  47273903  String
-  21586016  Hash
-  13478424  MatchData
-   1829376  Date
-    183680  User
-      8688  File
-      3609  Regexp
-       560  Proc
+     16880  File
+       960  Hash
+       720  String
        248  IO
-       120  JSON::Ext::Generator::State
+       160  Enumerator
+        80  Array
         80  Main
         80  Process::Status
         72  Thread::Mutex
+        40  Set
 
 allocated objects by gem
 -----------------------------------
-   1471886  other
+        28  other
+         1  set
 
 allocated objects by file
 -----------------------------------
-   1471882  /home/nikita/rails_optimization/task_2/main.rb
+        24  /home/nikita/rails_optimization/task_2/main.rb
          4  /home/nikita/rails_optimization/task_2/profiler.rb
+         1  /usr/share/rvm/rubies/ruby-3.3.0/lib/ruby/3.3.0/set.rb
 
 allocated objects by location
 -----------------------------------
-    387380  /home/nikita/rails_optimization/task_2/main.rb:111
-    235408  /home/nikita/rails_optimization/task_2/main.rb:24
-    203264  /home/nikita/rails_optimization/task_2/main.rb:130
-    160720  /home/nikita/rails_optimization/task_2/main.rb:142
-     80816  /home/nikita/rails_optimization/task_2/main.rb:26
-     57062  /home/nikita/rails_optimization/task_2/main.rb:96
-     39184  /home/nikita/rails_optimization/task_2/main.rb:25
-     38868  /home/nikita/rails_optimization/task_2/main.rb:101
-     32151  /home/nikita/rails_optimization/task_2/main.rb:144
-     32144  /home/nikita/rails_optimization/task_2/main.rb:120
-     30005  /home/nikita/rails_optimization/task_2/main.rb:18
-     27552  /home/nikita/rails_optimization/task_2/main.rb:86
-     27552  /home/nikita/rails_optimization/task_2/main.rb:91
-     25409  /home/nikita/rails_optimization/task_2/main.rb:62
-     25408  /home/nikita/rails_optimization/task_2/main.rb:131
-     22611  /home/nikita/rails_optimization/task_2/main.rb:106
-     13776  /home/nikita/rails_optimization/task_2/main.rb:73
-      9184  /home/nikita/rails_optimization/task_2/main.rb:143
-      9184  /home/nikita/rails_optimization/task_2/main.rb:74
-      4592  /home/nikita/rails_optimization/task_2/main.rb:121
-      4592  /home/nikita/rails_optimization/task_2/main.rb:72
-      4592  /home/nikita/rails_optimization/task_2/main.rb:81
-       400  /home/nikita/rails_optimization/task_2/main.rb:52
-         8  /home/nikita/rails_optimization/task_2/main.rb:114
-         7  /home/nikita/rails_optimization/task_2/main.rb:17
+         7  /home/nikita/rails_optimization/task_2/main.rb:18
+         4  /home/nikita/rails_optimization/task_2/main.rb:25
+         4  /home/nikita/rails_optimization/task_2/main.rb:28
+         4  /home/nikita/rails_optimization/task_2/main.rb:46
          4  /home/nikita/rails_optimization/task_2/profiler.rb:48
-         2  /home/nikita/rails_optimization/task_2/main.rb:63
-         2  /home/nikita/rails_optimization/task_2/main.rb:65
+         2  /home/nikita/rails_optimization/task_2/main.rb:26
          1  /home/nikita/rails_optimization/task_2/main.rb:20
-         1  /home/nikita/rails_optimization/task_2/main.rb:21
-         1  /home/nikita/rails_optimization/task_2/main.rb:44
-         1  /home/nikita/rails_optimization/task_2/main.rb:49
+         1  /home/nikita/rails_optimization/task_2/main.rb:23
          1  /home/nikita/rails_optimization/task_2/main.rb:5
-         1  /home/nikita/rails_optimization/task_2/main.rb:61
-         1  /home/nikita/rails_optimization/task_2/main.rb:64
-         1  /home/nikita/rails_optimization/task_2/main.rb:68
-         1  /home/nikita/rails_optimization/task_2/main.rb:77
+         1  /usr/share/rvm/rubies/ruby-3.3.0/lib/ruby/3.3.0/set.rb:244
 
 allocated objects by class
 -----------------------------------
-   1006313  String
-    206678  Array
-    133479  Hash
-     95399  MatchData
-     25408  Date
-      4592  User
-         7  Proc
-         3  Regexp
+        13  String
+         6  Hash
+         2  Array
          2  File
+         1  Enumerator
          1  IO
-         1  JSON::Ext::Generator::State
          1  Main
          1  Process::Status
+         1  Set
          1  Thread::Mutex
 
 retained memory by gem
 -----------------------------------
-      4249  other
+        80  other
 
 retained memory by file
 -----------------------------------
-      4249  /home/nikita/rails_optimization/task_2/main.rb
+        80  /home/nikita/rails_optimization/task_2/main.rb
 
 retained memory by location
 -----------------------------------
-      4169  /home/nikita/rails_optimization/task_2/main.rb:111
-        80  /home/nikita/rails_optimization/task_2/main.rb:17
+        80  /home/nikita/rails_optimization/task_2/main.rb:18
 
 retained memory by class
 -----------------------------------
-      3609  Regexp
-       560  String
         80  Process::Status
 
 retained objects by gem
 -----------------------------------
-         9  other
+         1  other
 
 retained objects by file
 -----------------------------------
-         9  /home/nikita/rails_optimization/task_2/main.rb
+         1  /home/nikita/rails_optimization/task_2/main.rb
 
 retained objects by location
 -----------------------------------
-         8  /home/nikita/rails_optimization/task_2/main.rb:111
-         1  /home/nikita/rails_optimization/task_2/main.rb:17
+         1  /home/nikita/rails_optimization/task_2/main.rb:18
 
 retained objects by class
 -----------------------------------
-         5  String
-         3  Regexp
          1  Process::Status
 
 
 Allocated String Report
 -----------------------------------
-    133776  " "
-    101632  /home/nikita/rails_optimization/task_2/main.rb:111
-     32144  /home/nikita/rails_optimization/task_2/main.rb:142
+         2  ""
+         1  /home/nikita/rails_optimization/task_2/main.rb:18
+         1  /home/nikita/rails_optimization/task_2/main.rb:46
 
-     80816  "session"
-     30000  /home/nikita/rails_optimization/task_2/main.rb:26
-     25408  /home/nikita/rails_optimization/task_2/main.rb:130
-     25408  /home/nikita/rails_optimization/task_2/main.rb:24
+         2  "head -n 50000 data_large.txt > dataN.txt"
+         2  /home/nikita/rails_optimization/task_2/main.rb:18
 
-     60001  ","
-     30000  /home/nikita/rails_optimization/task_2/main.rb:24
-     25408  /home/nikita/rails_optimization/task_2/main.rb:130
-      4592  /home/nikita/rails_optimization/task_2/main.rb:120
-         1  /home/nikita/rails_optimization/task_2/main.rb:65
+         2  "result.json"
+         2  /home/nikita/rails_optimization/task_2/main.rb:25
 
-     39184  "user"
-     30000  /home/nikita/rails_optimization/task_2/main.rb:25
-      4592  /home/nikita/rails_optimization/task_2/main.rb:120
-      4592  /home/nikita/rails_optimization/task_2/main.rb:24
+         1  ","
+         1  /home/nikita/rails_optimization/task_2/main.rb:46
 
-      9702  "0"
-      4849  /home/nikita/rails_optimization/task_2/main.rb:24
-      4808  /home/nikita/rails_optimization/task_2/main.rb:130
-        41  /home/nikita/rails_optimization/task_2/main.rb:120
-         2  /home/nikita/rails_optimization/task_2/main.rb:86
-         2  /home/nikita/rails_optimization/task_2/main.rb:91
+         1  "50000"
+         1  /home/nikita/rails_optimization/task_2/main.rb:18
 
-      9414  "2017"
-      9400  /home/nikita/rails_optimization/task_2/main.rb:111
-         7  /home/nikita/rails_optimization/task_2/main.rb:24
-         6  /home/nikita/rails_optimization/task_2/main.rb:130
-         1  /home/nikita/rails_optimization/task_2/main.rb:120
+         1  "dataN.txt"
+         1  /home/nikita/rails_optimization/task_2/main.rb:28
 
-      9194  "2018"
-      9172  /home/nikita/rails_optimization/task_2/main.rb:111
-        11  /home/nikita/rails_optimization/task_2/main.rb:24
-        10  /home/nikita/rails_optimization/task_2/main.rb:130
-         1  /home/nikita/rails_optimization/task_2/main.rb:120
+         1  "data_large.txt"
+         1  /home/nikita/rails_optimization/task_2/main.rb:5
 
-      9184  " min."
-      4592  /home/nikita/rails_optimization/task_2/main.rb:86
-      4592  /home/nikita/rails_optimization/task_2/main.rb:91
+         1  "w"
+         1  /home/nikita/rails_optimization/task_2/main.rb:25
 
-      8770  "1"
-      4379  /home/nikita/rails_optimization/task_2/main.rb:24
-      4332  /home/nikita/rails_optimization/task_2/main.rb:130
-        47  /home/nikita/rails_optimization/task_2/main.rb:120
-         6  /home/nikita/rails_optimization/task_2/main.rb:86
-         6  /home/nikita/rails_optimization/task_2/main.rb:91
+         1  "{\"usersStats\":{"
+         1  /home/nikita/rails_optimization/task_2/main.rb:26
 
-      7946  "2"
-      3965  /home/nikita/rails_optimization/task_2/main.rb:24
-      3908  /home/nikita/rails_optimization/task_2/main.rb:130
-        57  /home/nikita/rails_optimization/task_2/main.rb:120
-         8  /home/nikita/rails_optimization/task_2/main.rb:86
-         8  /home/nikita/rails_optimization/task_2/main.rb:91
-
-      6993  "3"
-      3496  /home/nikita/rails_optimization/task_2/main.rb:24
-      3447  /home/nikita/rails_optimization/task_2/main.rb:130
-        49  /home/nikita/rails_optimization/task_2/main.rb:120
-         1  /home/nikita/rails_optimization/task_2/main.rb:91
-
-      6014  "4"
-      3006  /home/nikita/rails_optimization/task_2/main.rb:24
-      2955  /home/nikita/rails_optimization/task_2/main.rb:130
-        51  /home/nikita/rails_optimization/task_2/main.rb:120
-         1  /home/nikita/rails_optimization/task_2/main.rb:86
-         1  /home/nikita/rails_optimization/task_2/main.rb:91
-
-      5762  "2016"
-      5754  /home/nikita/rails_optimization/task_2/main.rb:111
-         4  /home/nikita/rails_optimization/task_2/main.rb:24
-         3  /home/nikita/rails_optimization/task_2/main.rb:130
-         1  /home/nikita/rails_optimization/task_2/main.rb:120
-
-      5113  "5"
-      2556  /home/nikita/rails_optimization/task_2/main.rb:24
-      2513  /home/nikita/rails_optimization/task_2/main.rb:130
-        43  /home/nikita/rails_optimization/task_2/main.rb:120
-         1  /home/nikita/rails_optimization/task_2/main.rb:86
-
-      4592  ", "
-      4592  /home/nikita/rails_optimization/task_2/main.rb:96
-
-      4216  "6"
-      2105  /home/nikita/rails_optimization/task_2/main.rb:24
-      2061  /home/nikita/rails_optimization/task_2/main.rb:130
-        44  /home/nikita/rails_optimization/task_2/main.rb:120
-         3  /home/nikita/rails_optimization/task_2/main.rb:86
-         3  /home/nikita/rails_optimization/task_2/main.rb:91
-
-      3741  "12"
-      3208  /home/nikita/rails_optimization/task_2/main.rb:111
-       258  /home/nikita/rails_optimization/task_2/main.rb:24
-       205  /home/nikita/rails_optimization/task_2/main.rb:130
-        53  /home/nikita/rails_optimization/task_2/main.rb:120
-         9  /home/nikita/rails_optimization/task_2/main.rb:86
-         8  /home/nikita/rails_optimization/task_2/main.rb:91
-
-      3656  "11"
-      3068  /home/nikita/rails_optimization/task_2/main.rb:111
-       282  /home/nikita/rails_optimization/task_2/main.rb:24
-       245  /home/nikita/rails_optimization/task_2/main.rb:130
-        37  /home/nikita/rails_optimization/task_2/main.rb:120
-        12  /home/nikita/rails_optimization/task_2/main.rb:86
-        12  /home/nikita/rails_optimization/task_2/main.rb:91
-
-      3655  "10"
-      3135  /home/nikita/rails_optimization/task_2/main.rb:111
-       256  /home/nikita/rails_optimization/task_2/main.rb:24
-       209  /home/nikita/rails_optimization/task_2/main.rb:130
-        47  /home/nikita/rails_optimization/task_2/main.rb:120
-         4  /home/nikita/rails_optimization/task_2/main.rb:86
-         4  /home/nikita/rails_optimization/task_2/main.rb:91
-
-      3422  "7"
-      1711  /home/nikita/rails_optimization/task_2/main.rb:24
-      1663  /home/nikita/rails_optimization/task_2/main.rb:130
-        48  /home/nikita/rails_optimization/task_2/main.rb:120
-
-      3283  "08"
-      3283  /home/nikita/rails_optimization/task_2/main.rb:111
-
-      3276  "07"
-      3276  /home/nikita/rails_optimization/task_2/main.rb:111
-
-      3226  "01"
-      3226  /home/nikita/rails_optimization/task_2/main.rb:111
-
-      3129  "06"
-      3129  /home/nikita/rails_optimization/task_2/main.rb:111
-
-      3113  "09"
-      3113  /home/nikita/rails_optimization/task_2/main.rb:111
-
-      2736  "05"
-      2736  /home/nikita/rails_optimization/task_2/main.rb:111
-
-      2535  "02"
-      2535  /home/nikita/rails_optimization/task_2/main.rb:111
-
-      2474  "8"
-      1229  /home/nikita/rails_optimization/task_2/main.rb:24
-      1189  /home/nikita/rails_optimization/task_2/main.rb:130
-        40  /home/nikita/rails_optimization/task_2/main.rb:120
-         8  /home/nikita/rails_optimization/task_2/main.rb:86
-         8  /home/nikita/rails_optimization/task_2/main.rb:91
-
-      2386  "03"
-      2386  /home/nikita/rails_optimization/task_2/main.rb:111
-
-      2378  "04"
-      2378  /home/nikita/rails_optimization/task_2/main.rb:111
-
-      1473  "9"
-       730  /home/nikita/rails_optimization/task_2/main.rb:24
-       683  /home/nikita/rails_optimization/task_2/main.rb:130
-        47  /home/nikita/rails_optimization/task_2/main.rb:120
-         7  /home/nikita/rails_optimization/task_2/main.rb:91
-         6  /home/nikita/rails_optimization/task_2/main.rb:86
-
-      1413  "14"
-       819  /home/nikita/rails_optimization/task_2/main.rb:111
-       287  /home/nikita/rails_optimization/task_2/main.rb:24
-       242  /home/nikita/rails_optimization/task_2/main.rb:130
-        45  /home/nikita/rails_optimization/task_2/main.rb:120
-        11  /home/nikita/rails_optimization/task_2/main.rb:91
-         9  /home/nikita/rails_optimization/task_2/main.rb:86
-
-      1411  "20"
-       898  /home/nikita/rails_optimization/task_2/main.rb:111
-       253  /home/nikita/rails_optimization/task_2/main.rb:24
-       199  /home/nikita/rails_optimization/task_2/main.rb:130
-        54  /home/nikita/rails_optimization/task_2/main.rb:120
-         5  /home/nikita/rails_optimization/task_2/main.rb:91
-         2  /home/nikita/rails_optimization/task_2/main.rb:86
-
-      1411  "27"
-       816  /home/nikita/rails_optimization/task_2/main.rb:111
-       293  /home/nikita/rails_optimization/task_2/main.rb:24
-       241  /home/nikita/rails_optimization/task_2/main.rb:130
-        52  /home/nikita/rails_optimization/task_2/main.rb:120
-         6  /home/nikita/rails_optimization/task_2/main.rb:91
-         3  /home/nikita/rails_optimization/task_2/main.rb:86
-
-      1406  "29"
-       814  /home/nikita/rails_optimization/task_2/main.rb:111
-       281  /home/nikita/rails_optimization/task_2/main.rb:24
-       241  /home/nikita/rails_optimization/task_2/main.rb:130
-        40  /home/nikita/rails_optimization/task_2/main.rb:120
-        17  /home/nikita/rails_optimization/task_2/main.rb:91
-        13  /home/nikita/rails_optimization/task_2/main.rb:86
-
-      1401  "24"
-       892  /home/nikita/rails_optimization/task_2/main.rb:111
-       250  /home/nikita/rails_optimization/task_2/main.rb:24
-       202  /home/nikita/rails_optimization/task_2/main.rb:130
-        48  /home/nikita/rails_optimization/task_2/main.rb:120
-         6  /home/nikita/rails_optimization/task_2/main.rb:91
-         3  /home/nikita/rails_optimization/task_2/main.rb:86
-
-      1398  "25"
-       858  /home/nikita/rails_optimization/task_2/main.rb:111
-       265  /home/nikita/rails_optimization/task_2/main.rb:24
-       228  /home/nikita/rails_optimization/task_2/main.rb:130
-        37  /home/nikita/rails_optimization/task_2/main.rb:120
-         6  /home/nikita/rails_optimization/task_2/main.rb:91
-         4  /home/nikita/rails_optimization/task_2/main.rb:86
-
-      1385  "19"
-       847  /home/nikita/rails_optimization/task_2/main.rb:111
-       266  /home/nikita/rails_optimization/task_2/main.rb:24
-       221  /home/nikita/rails_optimization/task_2/main.rb:130
-        45  /home/nikita/rails_optimization/task_2/main.rb:120
-         3  /home/nikita/rails_optimization/task_2/main.rb:86
-         3  /home/nikita/rails_optimization/task_2/main.rb:91
-
-      1373  "21"
-       822  /home/nikita/rails_optimization/task_2/main.rb:111
-       270  /home/nikita/rails_optimization/task_2/main.rb:24
-       226  /home/nikita/rails_optimization/task_2/main.rb:130
-        44  /home/nikita/rails_optimization/task_2/main.rb:120
-         6  /home/nikita/rails_optimization/task_2/main.rb:91
-         5  /home/nikita/rails_optimization/task_2/main.rb:86
-
-      1369  "26"
-       823  /home/nikita/rails_optimization/task_2/main.rb:111
-       268  /home/nikita/rails_optimization/task_2/main.rb:24
-       224  /home/nikita/rails_optimization/task_2/main.rb:130
-        44  /home/nikita/rails_optimization/task_2/main.rb:120
-         6  /home/nikita/rails_optimization/task_2/main.rb:86
-         4  /home/nikita/rails_optimization/task_2/main.rb:91
-
-      1363  "18"
-       813  /home/nikita/rails_optimization/task_2/main.rb:111
-       271  /home/nikita/rails_optimization/task_2/main.rb:24
-       229  /home/nikita/rails_optimization/task_2/main.rb:130
-        42  /home/nikita/rails_optimization/task_2/main.rb:120
-         4  /home/nikita/rails_optimization/task_2/main.rb:86
-         4  /home/nikita/rails_optimization/task_2/main.rb:91
-
-      1356  "28"
-       833  /home/nikita/rails_optimization/task_2/main.rb:111
-       257  /home/nikita/rails_optimization/task_2/main.rb:24
-       208  /home/nikita/rails_optimization/task_2/main.rb:130
-        49  /home/nikita/rails_optimization/task_2/main.rb:120
-         7  /home/nikita/rails_optimization/task_2/main.rb:91
-         2  /home/nikita/rails_optimization/task_2/main.rb:86
-
-      1345  "16"
-       817  /home/nikita/rails_optimization/task_2/main.rb:111
-       261  /home/nikita/rails_optimization/task_2/main.rb:24
-       198  /home/nikita/rails_optimization/task_2/main.rb:130
-        63  /home/nikita/rails_optimization/task_2/main.rb:120
-         3  /home/nikita/rails_optimization/task_2/main.rb:86
-         3  /home/nikita/rails_optimization/task_2/main.rb:91
-
-      1343  "22"
-       853  /home/nikita/rails_optimization/task_2/main.rb:111
-       239  /home/nikita/rails_optimization/task_2/main.rb:24
-       193  /home/nikita/rails_optimization/task_2/main.rb:130
-        46  /home/nikita/rails_optimization/task_2/main.rb:120
-         8  /home/nikita/rails_optimization/task_2/main.rb:91
-         4  /home/nikita/rails_optimization/task_2/main.rb:86
-
-      1337  "17"
-       801  /home/nikita/rails_optimization/task_2/main.rb:111
-       267  /home/nikita/rails_optimization/task_2/main.rb:24
-       228  /home/nikita/rails_optimization/task_2/main.rb:130
-        39  /home/nikita/rails_optimization/task_2/main.rb:120
-         1  /home/nikita/rails_optimization/task_2/main.rb:86
-         1  /home/nikita/rails_optimization/task_2/main.rb:91
-
-      1317  "13"
-       774  /home/nikita/rails_optimization/task_2/main.rb:111
-       266  /home/nikita/rails_optimization/task_2/main.rb:24
-       218  /home/nikita/rails_optimization/task_2/main.rb:130
-        48  /home/nikita/rails_optimization/task_2/main.rb:120
-         7  /home/nikita/rails_optimization/task_2/main.rb:91
-         4  /home/nikita/rails_optimization/task_2/main.rb:86
-
-      1316  "30"
-       749  /home/nikita/rails_optimization/task_2/main.rb:111
-       276  /home/nikita/rails_optimization/task_2/main.rb:24
-       232  /home/nikita/rails_optimization/task_2/main.rb:130
-        44  /home/nikita/rails_optimization/task_2/main.rb:120
-         8  /home/nikita/rails_optimization/task_2/main.rb:91
-         7  /home/nikita/rails_optimization/task_2/main.rb:86
-
-      1314  "23"
-       778  /home/nikita/rails_optimization/task_2/main.rb:111
-       264  /home/nikita/rails_optimization/task_2/main.rb:24
-       214  /home/nikita/rails_optimization/task_2/main.rb:130
-        50  /home/nikita/rails_optimization/task_2/main.rb:120
-         4  /home/nikita/rails_optimization/task_2/main.rb:86
-         4  /home/nikita/rails_optimization/task_2/main.rb:91
-
-      1308  "15"
-       817  /home/nikita/rails_optimization/task_2/main.rb:111
-       241  /home/nikita/rails_optimization/task_2/main.rb:24
-       193  /home/nikita/rails_optimization/task_2/main.rb:130
-        48  /home/nikita/rails_optimization/task_2/main.rb:120
-         5  /home/nikita/rails_optimization/task_2/main.rb:86
-         4  /home/nikita/rails_optimization/task_2/main.rb:91
-
-      1090  "2019"
-      1082  /home/nikita/rails_optimization/task_2/main.rb:111
-         4  /home/nikita/rails_optimization/task_2/main.rb:24
-         3  /home/nikita/rails_optimization/task_2/main.rb:130
-         1  /home/nikita/rails_optimization/task_2/main.rb:120
-
-
-Retained String Report
------------------------------------
-         1  "('?[-+]?(?<!\\d)\\d+)-(\\d+)-('?-?\\d+)"
-         1  /home/nikita/rails_optimization/task_2/main.rb:111
-
-         1  "((?<!\\d)\\d+\\s*(?:(?::\\s*\\d+(?:\\s*:\\s*\\d+(?:[,.]\\d*)?)?|h(?:\\s*\\d+m?(?:\\s*\\d+s?)?)?)(?:\\s*[ap](?:m\\b|\\.m\\.))?|[ap](?:m\\b|\\.m\\.)))(?:\\s*((?:gmt|utc?)?[-+]\\d+(?:[,.:]\\d+(?::\\d+)?)?|(?-i:[[:alpha:].\\s]+)("
-         1  /home/nikita/rails_optimization/task_2/main.rb:111
-
-         1  "[^-+',./:@[:alnum:]\\[\\]]+"
-         1  /home/nikita/rails_optimization/task_2/main.rb:111
-
-         1  "_bc"
-         1  /home/nikita/rails_optimization/task_2/main.rb:111
-
-         1  "_comp"
-         1  /home/nikita/rails_optimization/task_2/main.rb:111
+         1  "},\"totalUsers\":0,\"uniqueBrowsersCount\":0,\"totalSessions\":0,\"allBrowsers\":\"\"}\n"
+         1  /home/nikita/rails_optimization/task_2/main.rb:46
 

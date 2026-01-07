@@ -1,57 +1,56 @@
-# Case-study оптимизации
+# Case-study optimization
 
-## Актуальная проблема
-В нашем проекте возникла серьёзная проблема.
+## The Problem
+A serious problem arose in our project.
 
-Необходимо было обработать файл с данными, чуть больше ста мегабайт.
+We needed to process a data file, just over a hundred megabytes.
 
-У нас уже была программа на `ruby`, которая умела делать нужную обработку.
+We already had a `ruby` program that could perform the required processing.
 
-Она успешно работала на файлах размером пару мегабайт, но для большого файла она работала слишком долго, и не было понятно, закончит ли она вообще работу за какое-то разумное время.
+It worked successfully on files a couple of megabytes in size, but for the large file it was taking too long, and it wasn't clear whether it would finish at all within a reasonable time.
 
-Я решил исправить эту проблему, оптимизировав эту программу.
+I decided to fix this problem by optimizing this program.
 
-## Формирование метрики
-Для того, чтобы понимать, дают ли мои изменения положительный эффект на быстродействие программы я придумал использовать такую метрику: потребление памяти
+## Metric Formation
+To understand whether my changes have a positive effect on program performance, I decided to use this metric: memory consumption
 
-## Гарантия корректности работы оптимизированной программы
-Программа поставлялась с тестом. Выполнение этого теста в фидбек-лупе позволяет не допустить изменения логики программы при оптимизации.
+## Ensuring Correctness of the Optimized Program
+The program came with a test. Running this test in the feedback loop prevents changes to the program logic during optimization.
 
 ## Feedback-Loop
-Для того, чтобы иметь возможность быстро проверять гипотезы я выстроил эффективный `feedback-loop`, который позволил мне получать обратную связь по эффективности сделанных изменений за ~ 3 секунд
+To be able to quickly test hypotheses, I built an effective `feedback-loop` that allowed me to get feedback on the effectiveness of changes in about 3 seconds
 
-Вот как я построил `feedback_loop`: я создал файл на 10 тысяч строк для быстрой проверки результата моих изменений к коде
+Here's how I built the `feedback_loop`: I created a file with 10 thousand lines for quick verification of my code changes
 
-## Вникаем в детали системы, чтобы найти главные точки роста
-Для того, чтобы найти "точки роста" для оптимизации я в основном использовал memory_profiler и stackprof
+## Understanding System Details to Find Main Growth Points
+To find "growth points" for optimization, I mainly used memory_profiler and stackprof
 
-Вот какие проблемы удалось найти и решить
+Here are the problems that were found and solved
 
 
-### Ваша находка №1
-Обновил Ruby до версии 3.0.0
-изменений не замечено
+### Finding #1
+Updated Ruby to version 3.0.0
+no changes noticed
 
-### Ваша находка №2
-Использовал jemalloc
-изменений не замечено
+### Finding #2
+Used jemalloc
+no changes noticed
 
-### Ваша находка №3
+### Finding #3
 MALLOC_ARENA_MAX=2
-изменений не замечено
+no changes noticed
 
-### Ваша находка №4
-- по совету из readme решил перевести программу на потоковое выполнение(честно пришлось подсмотреть у других ребят как реализована технически потоковая запись файла(не хватило времени) но концепт я понимал)
-- valgrind показал что за все время исполнения скрипта после перевода на потокое чтение файла
- на пике использовалось не более ~41.3мб памяти что укладывается в бюджет
+### Finding #4
+- following the advice from the readme, I decided to convert the program to streaming execution (I honestly had to peek at how other people technically implemented streaming file writing (didn't have enough time) but I understood the concept)
+- valgrind showed that throughout the entire script execution after converting to streaming file reading, at peak no more than ~41.3mb of memory was used, which fits within the budget
 
-## Результаты
-В результате проделанной оптимизации наконец удалось обработать файл с данными.
-Удалось улучшить метрику системы с 500мб до ~41.3мб и уложиться в заданный бюджет.
-Использовал все инструменты показанные в скринкастах и теперь хочу применить это на рабочем проекте где есть проблемы с памятью
+## Results
+As a result of the optimization work, we were finally able to process the data file.
+We managed to improve the system metric from 500mb to ~41.3mb and fit within the given budget.
+I used all the tools shown in the screencasts and now want to apply this to a work project where there are memory issues
 
-бонусом стало что время исполнения скрипта уменьшилось вдвое, и по сути скрипт теперь способен переварить любой объем данных
+As a bonus, the script execution time was cut in half, and essentially the script can now handle any amount of data
 
-## Защита от регрессии производительности
-Для защиты от потери достигнутого прогресса при дальнейших изменениях программы были обновлены тесты по скорости исполнения
-и написан тест для проверки памяти до выполнения и после выполнения скрипта и их разница
+## Protection Against Performance Regression
+To protect the achieved progress from being lost during further program changes, performance tests were updated
+and a test was written to check memory before and after script execution and their difference
